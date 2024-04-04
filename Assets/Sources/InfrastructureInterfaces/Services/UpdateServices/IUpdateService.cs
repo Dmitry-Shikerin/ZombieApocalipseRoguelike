@@ -5,7 +5,7 @@ using Sources.InfrastructureInterfaces.Services.Updates;
 
 namespace Sources.InfrastructureInterfaces.Services.UpdateServices
 {
-    public interface IUpdateService : IUpdateRegister, IAllUnregister
+    public interface IUpdateService : IUpdatable, IAllUnregister
     {
     }
 }
