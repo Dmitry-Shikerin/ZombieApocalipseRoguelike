@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Sources.Infrastructure.StateMachines.SceneStateMachines;
 using Sources.InfrastructureInterfaces.Services.SceneServices;
 
 namespace Sources.Infrastructure.Services.SceneServices
@@ -9,8 +10,9 @@ namespace Sources.Infrastructure.Services.SceneServices
     {
         private readonly List<Func<string, UniTask>> _enteringHandlers = new List<Func<string, UniTask>>();
         private readonly List<Func<UniTask>> _exitingHandlers = new List<Func<UniTask>>();
-        
-        private readonly 
+
+        private readonly SceneStateMachine _stateMachine;
+        // private readonly IReadOnlyDictionary<string, Func<object, Sce>>
         
         public void Update(float deltaTime)
         {
