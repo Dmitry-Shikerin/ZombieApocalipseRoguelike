@@ -22,7 +22,6 @@ namespace Sources.Infrastructure.Services.InputServices
 
         private void OnAttack(InputAction.CallbackContext obj)
         {
-            Debug.Log("Attack");
         }
 
         public InputData InputData { get; }

@@ -27,7 +27,6 @@ namespace Sources.Controllers.Scenes
         public void Enter(object payload = null)
         {
             _gameplaySceneViewFactory.Create();
-            Debug.Log($"Enter {nameof(GameplayScene)}");
         }
 
         public void Exit()
