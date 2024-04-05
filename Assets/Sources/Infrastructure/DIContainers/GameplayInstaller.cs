@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel;
 using Assets.Sources.Infrastructure.Services.Forms;
 using Sirenix.OdinInspector;
+using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
+using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.Weapons;
@@ -34,6 +36,7 @@ namespace Sources.Infrastructure.DIContainers
             BindCharacters();
             BindFormFactories();
             BindWeapons();
+            BindBear();
         }
 
         private void BindServices()
@@ -59,6 +62,12 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<CharacterAttackerPresenterFactory>().AsSingle();
             Container.Bind<CharacterAttackerViewFactory>().AsSingle();
+        }
+
+        private void BindBear()
+        {
+            Container.Bind<BearPresenterFactory>().AsSingle();
+            Container.Bind<BearViewFactory>().AsSingle();
         }
 
         private void BindWeapons()
