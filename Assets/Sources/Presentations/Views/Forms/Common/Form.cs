@@ -1,7 +1,6 @@
 ﻿using System;
-using Assets.Sources.PresentationsInterfaces.Views.Forms.Common;
-using JetBrains.Annotations;
 using Sources.ControllersInterfaces;
+using Sources.PresentationsInterfaces.Views.Forms.Common;
 using UnityEngine;
 
 namespace Sources.Presentations.Views.Forms.Common
@@ -9,7 +8,6 @@ namespace Sources.Presentations.Views.Forms.Common
     public class Form<TFormView, TFormPresenter> : IForm
         where TFormView : FormBase<TFormPresenter>
         where TFormPresenter : IPresenter
-
     {
         private readonly TFormView _formView;
 

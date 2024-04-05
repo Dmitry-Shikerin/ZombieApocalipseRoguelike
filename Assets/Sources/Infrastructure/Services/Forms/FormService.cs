@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sources.Presentations.Views;
+using Sources.PresentationsInterfaces.Views.Forms.Common;
 
 namespace Assets.Sources.Infrastructure.Services.Forms
 {

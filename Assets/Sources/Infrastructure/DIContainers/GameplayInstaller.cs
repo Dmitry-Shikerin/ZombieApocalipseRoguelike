@@ -1,26 +1,50 @@
-﻿using Sources.Infrastructure.Factories.Controllers.Characters;
+﻿using System.ComponentModel;
+using Assets.Sources.Infrastructure.Services.Forms;
+using Sirenix.OdinInspector;
+using Sources.Infrastructure.Factories.Controllers.Characters;
+using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
+using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Characters;
+using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Services.InputServices;
 using Sources.Infrastructure.Services.UpdateServices;
+using Sources.Presentations.UI.Huds;
+using Sources.Presentations.Views;
+using UnityEngine;
 using Zenject;
 
 namespace Sources.Infrastructure.DIContainers
 {
     public class GameplayInstaller : MonoInstaller
     {
+        [Required][SerializeField] private GameplayHud _gameplayHud;
+        [Required] [SerializeField] private ContainerView _containerView;
+        
         public override void InstallBindings()
         {
+            Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
+            Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
+            Container.Bind<GameplaySceneViewFactory>().AsSingle();
             
             BindServices();
             BindCharacters();
+            BindFormFactories();
         }
 
         private void BindServices()
         {
             Container.BindInterfacesAndSelfTo<UpdateService>().AsSingle();
             Container.BindInterfacesAndSelfTo<NewInputService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
+        }
+
+        private void BindFormFactories()
+        {
+            Container.Bind<GameplayFormServiceFactory>().AsSingle();
+            Container.Bind<PauseFormPresenterFactory>().AsSingle();
+            Container.Bind<HudFormPresenterFactory>().AsSingle();
         }
 
         private void BindCharacters()

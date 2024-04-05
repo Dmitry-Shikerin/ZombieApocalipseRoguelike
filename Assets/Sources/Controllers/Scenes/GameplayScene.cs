@@ -1,5 +1,7 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Sources.ControllersInterfaces.Scenes;
+using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using UnityEngine;
@@ -10,17 +12,21 @@ namespace Sources.Controllers.Scenes
     {
         private readonly IUpdateService _updateService;
         private readonly IInputServiceUpdater _inputServiceUpdater;
+        private readonly GameplaySceneViewFactory _gameplaySceneViewFactory;
 
-        public GameplayScene(
-            IUpdateService updateService, 
-            IInputServiceUpdater inputServiceUpdater)
+        public GameplayScene(IUpdateService updateService,
+            IInputServiceUpdater inputServiceUpdater,
+            GameplaySceneViewFactory gameplaySceneViewFactory)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
+            _gameplaySceneViewFactory = gameplaySceneViewFactory ?? 
+                                        throw new ArgumentNullException(nameof(gameplaySceneViewFactory));
         }
 
         public void Enter(object payload = null)
         {
+            _gameplaySceneViewFactory.Create();
             Debug.Log($"Enter {nameof(GameplayScene)}");
         }
 
