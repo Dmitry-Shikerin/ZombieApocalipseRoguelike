@@ -298,12 +298,12 @@ namespace Sources.Infrastructure.Factories.Controllers.Characters
             backwardState.AddTransition(toIdleTransition);
             backwardRightState.AddTransition(toIdleTransition);
             backwardLeftState.AddTransition(toIdleTransition);
-
             
             return new CharacterMovementPresenter(
                 characterMovement, 
                 characterMovementView, 
-                _updateRegister, 
+                _updateRegister,
+                _inputService,
                 idleState);
         }
     }

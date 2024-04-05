@@ -28,7 +28,7 @@ namespace Sources.Controllers.Characters.Movements.States
 
         public override void Enter(object payload = null)
         {
-            _characterAnimationView.PlayBackwardRight();
+            _characterAnimationView.PlayForward();
         }
 
         public override void Exit()
@@ -44,7 +44,7 @@ namespace Sources.Controllers.Characters.Movements.States
             _characterMovement.Speed = Mathf.MoveTowards(
                 _characterMovement.Speed, targetSpeed, 0.01f);
             
-            _characterMovement.Direction = _characterMovement.Speed * 3 *
+            _characterMovement.Direction = _characterMovement.Speed * 4 *
                                            deltaTime * _inputService.InputData.MoveDirection.normalized;
             
             if(_inputService.InputData.LookPosition == Vector3.zero)

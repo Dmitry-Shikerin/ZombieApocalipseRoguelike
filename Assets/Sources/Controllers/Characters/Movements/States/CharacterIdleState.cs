@@ -29,6 +29,7 @@ namespace Sources.Controllers.Characters.Movements.States
 
         public override void Enter(object payload = null)
         {
+            // Debug.Log($"Character Idle State");
             _characterAnimationView.PlayIdle();
         }
 
