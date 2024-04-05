@@ -37,15 +37,11 @@ namespace Sources.Infrastructure.Services.InputServices
             Vector2 input = _inputManager.Gameplay.Movement.ReadValue<Vector2>();
             float speed = _inputManager.Gameplay.Run.ReadValue<float>();
             
-            Debug.Log(input);
-            
             Vector3 lookDirection = Vector3.zero;
             
             if (TryGetLook(out Vector3 look))
-            {
                 lookDirection = look;
-            }
-            
+
             InputData.MoveDirection = new Vector3(input.x, 0, input.y);
             InputData.LookPosition = lookDirection;
             InputData.Speed = speed;
