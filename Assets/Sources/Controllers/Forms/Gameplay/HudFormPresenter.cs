@@ -7,24 +7,24 @@ using Sources.PresentationsInterfaces.Views.Forms.Gameplay;
 
 namespace Sources.Controllers.Forms.Gameplay
 {
-    public class PauseFormPresenter : PresenterBase
+    public class HudFormPresenter : PresenterBase
     {
         private readonly IFormService _formService;
-        private readonly IPauseFormView _pauseFormView;
+        private readonly IHudFormView _hudFormView;
 
-        public PauseFormPresenter(IFormService formService, IPauseFormView pauseFormView)
+        public HudFormPresenter(IFormService formService, IHudFormView hudFormView)
         {
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
-            _pauseFormView = pauseFormView ?? throw new ArgumentNullException(nameof(pauseFormView));
+            _hudFormView = hudFormView ?? throw new ArgumentNullException(nameof(hudFormView));
         }
 
         public override void Enable() =>
-            _pauseFormView.HudButtonView.AddClickListener(ShowHudForm);
+            _hudFormView.PauseButtonView.AddClickListener(ShowPauseForm);
 
         public override void Disable() =>
-            _pauseFormView.HudButtonView.RemoveClickListener(ShowHudForm);
+            _hudFormView.PauseButtonView.RemoveClickListener(ShowPauseForm);
 
-        private void ShowHudForm() =>
-            _formService.Show<HudFormView>();
+        private void ShowPauseForm() =>
+            _formService.Show<PauseFormView>();
     }
 }

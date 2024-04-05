@@ -8,10 +8,10 @@ using UnityEngine;
 
 namespace Sources.Presentations.Views.Forms.Gameplay
 {
-    public class PauseFormView : FormBase<PauseFormPresenter>, IPauseFormView
+    public class HudFormView : FormBase<HudFormPresenter>, IHudFormView
     {
-        [Required] [SerializeField] private ButtonView _hudButtonView;
-
-        public IButtonView HudButtonView => _hudButtonView;
+        [Required] [SerializeField] private ButtonView _pauseButtonView;
+        
+        public IButtonView PauseButtonView => _pauseButtonView;
     }
 }
