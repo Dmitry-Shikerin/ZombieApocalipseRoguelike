@@ -28,7 +28,7 @@ namespace Sources.Controllers.Characters.Movements.States
 
         public override void Enter(object payload = null)
         {
-            _characterAnimationView.PlayForward();
+            // _characterAnimationView.PlayForward();
         }
 
         public override void Exit()
@@ -53,9 +53,21 @@ namespace Sources.Controllers.Characters.Movements.States
             var lookDirection = _inputService.InputData.LookPosition - _characterMovementView.Position;
             lookDirection.y = _characterMovementView.Position.y;
             float distance = lookDirection.magnitude;
-            
+
             float angle = Vector3.SignedAngle(Vector3.forward, lookDirection, Vector3.up);
             
+            Vector3 direction = Quaternion.Euler(0, -angle, 0) * _inputService.InputData.MoveDirection;
+
+            Vector2 direction2 = new Vector2(direction.x, direction.z).normalized;
+            _characterMovement.AnimationDirection = 
+                Vector2.MoveTowards(
+                    _characterMovement.AnimationDirection,
+                    direction2, 
+                    _characterMovement.AnimationDirectionSpeed * deltaTime);
+            
+            _characterAnimationView.SetDirection(_characterMovement.AnimationDirection);
+
+
             if(distance < 0.7f)
                 return;
             

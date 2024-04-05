@@ -15,7 +15,7 @@ namespace Sources.Presentations.Views.Characters
         public void SetLookRotation(float angle)
         {
             transform.rotation = Quaternion.RotateTowards(
-                transform.rotation, Quaternion.Euler(0, angle, 0), 3f);
+                transform.rotation, Quaternion.Euler(0, angle, 0), 4f);
         }
 
         public void Move(Vector3 direction) =>
