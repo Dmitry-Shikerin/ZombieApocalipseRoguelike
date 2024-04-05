@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Assets.Sources.Presentations.Views;
+using Sirenix.OdinInspector;
 using Sources.PresentationsInterfaces.Views.Character;
 using UnityEngine;
 

@@ -1,7 +1,7 @@
 ﻿using Assets.Sources.PresentationsInterfaces.Views;
 using UnityEngine;
 
-namespace Assets.Sources.Presentations.Views
+namespace Sources.Presentations.Views
 {
     public abstract class View : MonoBehaviour, IView
     {
