@@ -4,9 +4,11 @@ using Sirenix.OdinInspector;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
+using Sources.Infrastructure.Factories.Controllers.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.InputServices;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Presentations.UI.Huds;
@@ -31,6 +33,7 @@ namespace Sources.Infrastructure.DIContainers
             BindServices();
             BindCharacters();
             BindFormFactories();
+            BindWeapons();
         }
 
         private void BindServices()
@@ -53,6 +56,15 @@ namespace Sources.Infrastructure.DIContainers
             
             Container.Bind<CharacterMovementPresenterFactory>().AsSingle();
             Container.Bind<CharacterMovementViewFactory>().AsSingle();
+
+            Container.Bind<CharacterAttackerPresenterFactory>().AsSingle();
+            Container.Bind<CharacterAttackerViewFactory>().AsSingle();
+        }
+
+        private void BindWeapons()
+        {
+            Container.Bind<MiniGunPresenterFactory>().AsSingle();
+            Container.Bind<MiniGunViewFactory>().AsSingle();
         }
     }
 }
