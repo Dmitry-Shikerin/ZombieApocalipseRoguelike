@@ -1,7 +1,7 @@
-﻿using Sources.PresentationsInterfaces.Views;
+﻿using Assets.Sources.PresentationsInterfaces.Views;
 using UnityEngine;
 
-namespace Sources.Presentations.Views
+namespace Assets.Sources.Presentations.Views
 {
     public abstract class View : MonoBehaviour, IView
     {
@@ -10,5 +10,8 @@ namespace Sources.Presentations.Views
 
         public void Hide() =>
             gameObject.SetActive(false);
+
+        public void SetParent(Transform parent) =>
+            gameObject.transform.SetParent(parent);
     }
 }
