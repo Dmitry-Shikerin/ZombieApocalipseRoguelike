@@ -300,7 +300,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Characters
             backwardLeftState.AddTransition(toIdleTransition);
 
             
-            return new CharacterMovementPresenter(characterMovement, characterMovementView, _updateRegister, idleState);
+            return new CharacterMovementPresenter(
+                characterMovement, 
+                characterMovementView, 
+                _updateRegister, 
+                idleState);
         }
     }
 }
