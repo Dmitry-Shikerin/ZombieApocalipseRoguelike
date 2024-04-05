@@ -1,7 +1,6 @@
 ﻿using Assets.Sources.PresentationsInterfaces.Views;
-using Sources.Presentations.Views;
 
-namespace Assets.Sources.Presentations.Views
+namespace Sources.Presentations.Views
 {
     public class ContainerView : View
     {

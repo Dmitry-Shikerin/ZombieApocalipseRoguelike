@@ -1,13 +1,38 @@
-﻿using Assets.Sources.PresentationsInterfaces.Views.Forms.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Assets.Sources.PresentationsInterfaces.Views.Forms.Common;
+using JetBrains.Annotations;
+using Sources.ControllersInterfaces;
+using UnityEngine;
 
-namespace Assets.Sources.Presentations.Views.Forms.Common
+namespace Sources.Presentations.Views.Forms.Common
 {
-    public class Form
+    public class Form<TFormView, TFormPresenter> : IForm
+        where TFormView : FormBase<TFormPresenter>
+        where TFormPresenter : IPresenter
+
     {
+        private readonly TFormView _formView;
+
+        public Form(Func<TFormView, TFormPresenter> presenterFactory, TFormView formView)
+        {
+            _formView = formView ? formView : throw new ArgumentNullException(nameof(formView));
+
+            var formPresenter = presenterFactory.Invoke(_formView);
+
+            _formView.Construct(formPresenter);
+
+            Name = _formView.GetType().Name;
+        }
+
+        public string Name { get; }
+
+        public void Show() =>
+            _formView.Show();
+
+        public void Hide() =>
+            _formView.Hide();
+
+        public void SetParent(Transform parent) =>
+            _formView.SetParent(parent);
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Assets.Sources.InfastructureInterfaces.Services.Forms;
 using Assets.Sources.PresentationsInterfaces.Views.Forms.Common;
-using Assets.Sources.Presentations.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sources.Presentations.Views;
 
 namespace Assets.Sources.Infrastructure.Services.Forms
 {
