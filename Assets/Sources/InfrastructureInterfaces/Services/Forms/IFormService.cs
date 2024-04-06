@@ -1,6 +1,6 @@
-using Assets.Sources.PresentationsInterfaces.Views.Forms.Common;
+using Sources.PresentationsInterfaces.Views.Forms.Common;
 
-namespace Assets.Sources.InfastructureInterfaces.Services.Forms
+namespace Sources.InfrastructureInterfaces.Services.Forms
 {
     public interface IFormService
     {

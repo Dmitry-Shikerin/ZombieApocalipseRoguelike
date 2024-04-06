@@ -1,12 +1,11 @@
-﻿using Assets.Sources.InfastructureInterfaces.Services.Forms;
-using Assets.Sources.PresentationsInterfaces.Views.Forms.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
 
-namespace Assets.Sources.Infrastructure.Services.Forms
+namespace Sources.Infrastructure.Services.Forms
 {
     public class FormService : IFormService
     {

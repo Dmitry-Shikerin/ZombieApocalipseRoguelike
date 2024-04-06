@@ -28,6 +28,9 @@ namespace Sources.Infrastructure.Factories.App
             sceneFactories["Gameplay"] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
 
+            sceneFactories["MainMenu"] = (payload, sceneContext) =>
+                sceneContext.Container.Resolve<MainMenuSceneFactory>().Create(payload);
+
             sceneService.AddBeforeSceneChangeHandler(async sceneName => 
                 await projectContext.Container.Resolve<ISceneLoaderService>().LoadSceneAsync(sceneName));
             

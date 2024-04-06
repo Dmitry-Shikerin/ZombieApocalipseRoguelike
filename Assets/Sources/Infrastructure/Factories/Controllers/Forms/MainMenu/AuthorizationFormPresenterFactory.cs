@@ -6,21 +6,21 @@ using Sources.PresentationsInterfaces.Views.Forms.MainMenu;
 
 namespace Sources.Infrastructure.Factories.Controllers.Forms.MainMenu
 {
-    public class SettingsFormPresenterFactory
+    public class AuthorizationFormPresenterFactory
     {
         private readonly IFormService _formService;
 
-        public SettingsFormPresenterFactory(IFormService formService)
+        public AuthorizationFormPresenterFactory(IFormService formService)
         {
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
-        public SettingsFormPresenter Create(ISettingsFormView settingsFormView)
+        public AuthorizationFormPresenter Create(IAuthorizationFormView authorizationFormView)
         {
-            if (settingsFormView == null)
-                throw new ArgumentNullException(nameof(settingsFormView));
+            if (authorizationFormView == null)
+                throw new ArgumentNullException(nameof(authorizationFormView));
 
-            return new SettingsFormPresenter(_formService, settingsFormView);
+            return new AuthorizationFormPresenter(_formService, authorizationFormView);
         }
     }
 }

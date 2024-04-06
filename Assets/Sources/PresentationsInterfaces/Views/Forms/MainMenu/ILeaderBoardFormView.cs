@@ -2,7 +2,7 @@
 
 namespace Sources.PresentationsInterfaces.Views.Forms.MainMenu
 {
-    public interface ISettingsFormView
+    public interface ILeaderBoardFormView
     {
         IButtonView MainMenuHudButtonView { get; }
     }
