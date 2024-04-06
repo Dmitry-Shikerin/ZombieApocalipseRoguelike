@@ -13,6 +13,8 @@ namespace Sources.Presentations.UI.Huds
         private PauseFormView _pauseFormView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
         private HudFormView _hudFormView;
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private UpgradeFormView _upgradeFormView;
         
         [Button(ButtonSizes.Large)] 
         [FoldoutGroup("Camera")] [Required] [SerializeField]
@@ -21,6 +23,7 @@ namespace Sources.Presentations.UI.Huds
 
         public PauseFormView PauseFormView => _pauseFormView;
         public HudFormView HudFormView => _hudFormView;
+        public UpgradeFormView UpgradeFormView => _upgradeFormView;
         
         public CinemachineCameraService CinemachineCameraService => _cinemachineCameraService;
     }

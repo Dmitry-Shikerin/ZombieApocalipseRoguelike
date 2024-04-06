@@ -11,7 +11,9 @@ namespace Sources.Presentations.Views.Forms.Gameplay
     public class HudFormView : FormBase<HudFormPresenter>, IHudFormView
     {
         [Required] [SerializeField] private ButtonView _pauseButtonView;
-        
+        [Required] [SerializeField] private ButtonView _upgradeButtonView;
+
         public IButtonView PauseButtonView => _pauseButtonView;
+        public IButtonView UpgradeButtonView => _upgradeButtonView;
     }
 }

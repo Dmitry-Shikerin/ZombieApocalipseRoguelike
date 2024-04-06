@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using Sirenix.OdinInspector;
+using Sources.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
@@ -55,6 +56,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<GameplayFormServiceFactory>().AsSingle();
             Container.Bind<PauseFormPresenterFactory>().AsSingle();
             Container.Bind<HudFormPresenterFactory>().AsSingle();
+            Container.Bind<UpgradeFormPresenterFactory>().AsSingle();
         }
 
         private void BindCharacters()
