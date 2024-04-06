@@ -7,22 +7,23 @@ using Sources.PresentationsInterfaces.Views.Forms.MainMenu;
 
 namespace Sources.Controllers.Forms.MainMenu
 {
-    public class SettingsFormPresenter : PresenterBase
+    public class AuthorizationFormPresenter : PresenterBase
     {
-        private readonly ISettingsFormView _settingsFormView;
         private readonly IFormService _formService;
+        private readonly IAuthorizationFormView _authorizationFormView;
 
-        public SettingsFormPresenter(IFormService formService, ISettingsFormView settingsFormView)
+        public AuthorizationFormPresenter(IFormService formService, IAuthorizationFormView authorizationFormView)
         {
-            _settingsFormView = settingsFormView ?? throw new ArgumentNullException(nameof(settingsFormView));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _authorizationFormView = authorizationFormView ??
+                                     throw new ArgumentNullException(nameof(authorizationFormView));
         }
 
         public override void Enable() =>
-            _settingsFormView.MainMenuHudButtonView.AddClickListener(ShowMainMenuHudForm);
+            _authorizationFormView.MainMenuHudButtonView.AddClickListener(ShowMainMenuHudForm);
 
         public override void Disable() =>
-            _settingsFormView.MainMenuHudButtonView.RemoveClickListener(ShowMainMenuHudForm);
+            _authorizationFormView.MainMenuHudButtonView.RemoveClickListener(ShowMainMenuHudForm);
 
         private void ShowMainMenuHudForm() =>
             _formService.Show<MainMenuHudFormView>();

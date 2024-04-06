@@ -11,11 +11,14 @@ namespace Sources.Presentations.UI.Huds
         [Button(ButtonSizes.Large)]
         [FoldoutGroup("Forms")] [Required] [SerializeField]
         private MainMenuHudFormView _mainMenuHudFormView;
-
         [FoldoutGroup("Forms")] [Required] [SerializeField]
         private SettingsFormView _settingsFormView;
 
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private AuthorizationFormView _authorizationFormView;
+
         public MainMenuHudFormView MainMenuHudFormView => _mainMenuHudFormView;
         public SettingsFormView SettingsFormView => _settingsFormView;
+        public AuthorizationFormView AuthorizationFormView => _authorizationFormView;
     }
 }

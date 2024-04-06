@@ -8,10 +8,9 @@ using UnityEngine;
 
 namespace Sources.Presentations.Views.Forms.MainMenu
 {
-    public class SettingsFormView : FormBase<SettingsFormPresenter>, ISettingsFormView
+    public class AuthorizationFormView : FormBase<AuthorizationFormPresenter>, IAuthorizationFormView
     {
-        [Required] [SerializeField] private ButtonView _mainMenuHudFormButtonView;
-
-        public IButtonView MainMenuHudButtonView => _mainMenuHudFormButtonView;
+        [Required] [SerializeField] private ButtonView _mainMenuHudButtonView;
+        public IButtonView MainMenuHudButtonView => _mainMenuHudButtonView;
     }
 }
