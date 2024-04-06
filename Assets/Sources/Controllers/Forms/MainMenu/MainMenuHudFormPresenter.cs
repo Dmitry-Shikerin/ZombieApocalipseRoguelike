@@ -4,6 +4,7 @@ using Sources.Controllers.Common;
 using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.Presentations.Views.Forms.MainMenu;
 using Sources.PresentationsInterfaces.Views.Forms.MainMenu;
+using UnityEngine;
 
 namespace Sources.Controllers.Forms.MainMenu
 {
@@ -24,7 +25,10 @@ namespace Sources.Controllers.Forms.MainMenu
         public override void Disable() =>
             _mainMenuHudFormView.SettingsButtonView.RemoveClickListener(ShowSettingsForm);
 
-        private void ShowSettingsForm() =>
+        private void ShowSettingsForm()
+        {
+            Debug.Log("showSettingFormView");
             _formService.Show<SettingsFormView>();
+        }
     }
 }
