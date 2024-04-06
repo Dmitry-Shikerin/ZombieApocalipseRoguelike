@@ -68,7 +68,7 @@ namespace Sources.Presentations.Views.Bears
             _animator.SetBool("IsAttack", false);
         }
         
-        [UsedImplicitly]
+        // [UsedImplicitly]
         private void OnAttack() =>
             Attacking?.Invoke();
 

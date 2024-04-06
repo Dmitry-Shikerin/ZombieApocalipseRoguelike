@@ -38,7 +38,7 @@ namespace Sources.Presentations.Views.Enemies
         {
             ExceptAnimation(StopDie);
             
-            _animator.SetBool("IsDie", true);
+            _animator.SetBool("IsDeath", true);
         }
 
         public void PlayAttack()
@@ -77,10 +77,10 @@ namespace Sources.Presentations.Views.Enemies
         
         private void StopDie()
         {
-            if(_animator.GetBool("IsDie") == false)
+            if(_animator.GetBool("IsDeath") == false)
                 return;
             
-            _animator.SetBool("IsDie", false);
+            _animator.SetBool("IsDeath", false);
         }
         
         private void ExceptAnimation(Action exceptAnimation)

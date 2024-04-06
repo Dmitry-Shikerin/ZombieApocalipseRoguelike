@@ -15,6 +15,7 @@ namespace Sources.Domain.Enemies
         }
 
         public event Action HealthChanged;
+        
         public float MaxHealth { get; }
         public float CurrentHealth
         {

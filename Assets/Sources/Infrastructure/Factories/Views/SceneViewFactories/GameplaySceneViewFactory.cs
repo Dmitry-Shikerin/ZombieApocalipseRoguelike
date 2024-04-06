@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Bears.Attacks;
 using Sources.Controllers.Characters.Attackers;
+using Sources.Domain.Abilities;
 using Sources.Domain.Bears;
 using Sources.Domain.Characters;
 using Sources.Domain.Enemies;
@@ -25,14 +26,14 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly GameplayFormServiceFactory _gameplayFormServiceFactory;
         private readonly CharacterViewFactory _characterViewFactory;
         private readonly BearViewFactory _bearViewFactory;
-        private readonly EnemyViewFactory _enemyViewFactory;
+        private readonly EnemyCommonViewFactory _enemyCommonViewFactory;
 
         public GameplaySceneViewFactory(
             GameplayHud gameplayHud,
             GameplayFormServiceFactory gameplayFormServiceFactory,
             CharacterViewFactory characterViewFactory,
             BearViewFactory bearViewFactory,
-            EnemyViewFactory enemyViewFactory)
+            EnemyCommonViewFactory enemyCommonViewFactory)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ?? 
@@ -40,7 +41,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _characterViewFactory = characterViewFactory
                                     ?? throw new ArgumentNullException(nameof(characterViewFactory));
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
-            _enemyViewFactory = enemyViewFactory ?? throw new ArgumentNullException(nameof(enemyViewFactory));
+            _enemyCommonViewFactory = enemyCommonViewFactory ?? throw new ArgumentNullException(nameof(enemyCommonViewFactory));
         }
 
         public void Create()
@@ -53,7 +54,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             Character character = new Character(
                 new CharacterMovement(),
                 new CharacterAttacker(minigun),
-                minigun);
+                minigun,
+                new SawLauncherAbility());
             CharacterView characterView = Object.FindObjectOfType<CharacterView>();
             Debug.Log(characterView);
             _characterViewFactory.Create(character, characterView);
@@ -69,7 +71,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             EnemyHealth enemyHealth = new EnemyHealth(100);
             Enemy enemy = new Enemy(enemyHealth);
             EnemyView enemyView = Object.FindObjectOfType<EnemyView>();
-            _enemyViewFactory.Create(enemy, enemyView);
+            _enemyCommonViewFactory.Create(enemy, enemyView);
             enemyView.SetTargetFollow(characterView.CharacterMovementView);
             
             //CinemachineService

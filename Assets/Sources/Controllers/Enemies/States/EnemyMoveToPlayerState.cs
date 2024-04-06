@@ -10,11 +10,7 @@ namespace Sources.Controllers.Enemies.States
         private readonly Enemy _enemy;
         private readonly IEnemyView _enemyView;
         private readonly IEnemyAnimation _enemyAnimation;
-
-        public EnemyMoveToPlayerState()
-        {
-        }
-
+        
         public EnemyMoveToPlayerState(Enemy enemy, IEnemyView enemyView, IEnemyAnimation enemyAnimation)
         {
             _enemy = enemy ?? throw new ArgumentNullException(nameof(enemy));

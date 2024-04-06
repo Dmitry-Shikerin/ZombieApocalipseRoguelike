@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using Sirenix.OdinInspector;
 using Sources.Controllers.Forms.Gameplay;
+using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Common;
@@ -9,6 +10,7 @@ using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
+using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Commons;
@@ -22,6 +24,7 @@ using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
+using Sources.Presentations.Views.Abilities;
 using UnityEngine;
 using Zenject;
 
@@ -85,6 +88,12 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.Bind<MiniGunPresenterFactory>().AsSingle();
             Container.Bind<MiniGunViewFactory>().AsSingle();
+
+            Container.Bind<SawLauncherAbilityPresenterFactory>().AsSingle();
+            Container.Bind<SawLauncherAbilityViewFactory>().AsSingle();
+
+            Container.Bind<SawLauncherPresenterFactory>().AsSingle();
+            Container.Bind<SawLauncherViewFactory>().AsSingle();
         }
 
         private void BindEnemy()

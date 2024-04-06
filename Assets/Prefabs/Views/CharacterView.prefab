@@ -5338,6 +5338,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1788783627214367913}
   - {fileID: 4896732166499068291}
   - {fileID: 6221864157187644393}
   - {fileID: 5476254577862450323}
@@ -5460,6 +5461,7 @@ MonoBehaviour:
   _characterAnimationView: {fileID: 3627538472808909562}
   _miniGunView: {fileID: 6811509851766475089}
   _characterAttackerView: {fileID: 5733416953993833345}
+  _sawLauncherAbilityView: {fileID: 8461207128245780509}
 --- !u!114 &5733416953993833345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6311,3 +6313,76 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7010007463527802280, guid: 2bff5bc9f5ee0ee459a60be1dc60c2df, type: 3}
   m_PrefabInstance: {fileID: 3241392650235023256}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6350499645021712284
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7974092813699229618}
+    m_Modifications:
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416095239632680535, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_Name
+      value: SawLauncherAbility
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+--- !u!4 &1788783627214367913 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+  m_PrefabInstance: {fileID: 6350499645021712284}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8461207128245780509 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3264475080206626689, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+  m_PrefabInstance: {fileID: 6350499645021712284}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df0d720da2741748e775101fb851ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
