@@ -1,77 +1,88 @@
 ﻿using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using Sirenix.OdinInspector;
-using Sources.PresentationsInterfaces.Views.Bears;
+using Sources.PresentationsInterfaces.Views.Enemies;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Sources.Presentations.Views.Bears
+namespace Sources.Presentations.Views.Enemies
 {
-    public class BearAnimationView : View, IBearAnimationView
+    public class EnemyAnimation : View, IEnemyAnimation
     {
         [Required] [SerializeField] private Animator _animator;
         
         private readonly List<Action> _stoppingAnimations = new List<Action>();
-        
-        public event Action Attacking;
 
         private void Awake()
         {
-            _stoppingAnimations.Add(StopPlayWalk);
-            _stoppingAnimations.Add(StopPlayIdle);
-            _stoppingAnimations.Add(StopPlayAttack);
+            _stoppingAnimations.Add(StopIdle);
+            _stoppingAnimations.Add(StopAttack);
+            _stoppingAnimations.Add(StopDie);
+            _stoppingAnimations.Add(StopWalk);
         }
 
         public void PlayWalk()
         {
-            ExceptAnimation(StopPlayWalk);
+            ExceptAnimation(StopWalk);
             
             _animator.SetBool("IsWalk", true);
         }
 
         public void PlayIdle()
         {
-            ExceptAnimation(StopPlayIdle);
+            ExceptAnimation(StopIdle);
             
             _animator.SetBool("IsIdle", true);
         }
 
+        public void PlayDie()
+        {
+            ExceptAnimation(StopDie);
+            
+            _animator.SetBool("IsDie", true);
+        }
+
         public void PlayAttack()
         {
-            ExceptAnimation(StopPlayAttack);
+            ExceptAnimation(StopAttack);
             
             _animator.SetBool("IsAttack", true);
         }
-        
-        private void StopPlayWalk()
+
+        private void StopWalk()
         {
             if(_animator.GetBool("IsWalk") == false)
                 return;
             
             _animator.SetBool("IsWalk", false);
+
         }
-        
-        private void StopPlayIdle()
+
+        private void StopIdle()
         {
             if(_animator.GetBool("IsIdle") == false)
                 return;
             
             _animator.SetBool("IsIdle", false);
+
         }
-        
-        private void StopPlayAttack()
+
+        private void StopAttack()
         {
             if(_animator.GetBool("IsAttack") == false)
                 return;
             
             _animator.SetBool("IsAttack", false);
+
         }
         
-        [UsedImplicitly]
-        private void OnAttack() =>
-            Attacking?.Invoke();
-
+        private void StopDie()
+        {
+            if(_animator.GetBool("IsDie") == false)
+                return;
+            
+            _animator.SetBool("IsDie", false);
+        }
+        
         private void ExceptAnimation(Action exceptAnimation)
         {
             foreach (Action animation in _stoppingAnimations)

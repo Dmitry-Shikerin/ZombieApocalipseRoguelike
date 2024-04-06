@@ -13,10 +13,11 @@ namespace Sources.Presentations.Views.Enemies
         [Required] [SerializeField] private NavMeshAgent _navMeshAgent;
         [Required] [SerializeField] private EnemyHealthView _healthView;
         [Required] [SerializeField] private HealthUi _healthUi;
+        [Required] [SerializeField] private EnemyAnimation _enemyAnimation;
         
         public EnemyHealthView EnemyHealthView => _healthView;
         public HealthUi HealthUi => _healthUi;
-
+        public EnemyAnimation EnemyAnimation => _enemyAnimation;
         public ICharacterMovementView CharacterMovementView { get; private set; }
 
         public void Move(Vector3 direction) =>

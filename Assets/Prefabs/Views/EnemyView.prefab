@@ -5044,7 +5044,6 @@ GameObject:
   - component: {fileID: 8095431424784772652}
   - component: {fileID: 8239792531479493806}
   - component: {fileID: 5334769087053075594}
-  - component: {fileID: 5311379254529355437}
   - component: {fileID: 2842103806497104236}
   m_Layer: 11
   m_Name: EnemyView
@@ -5131,7 +5130,7 @@ Animator:
   m_GameObject: {fileID: 4215192577888365168}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b20a3c10714a6ac439af479e3273de65, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b13277657888a214c8eda6f101c47364, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -5166,24 +5165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3535d0f8388c4b2fbd42e614db098743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _navMeshAgent: {fileID: 0}
-  _healthView: {fileID: 8239792531479493806}
-  _healthUi: {fileID: 6401533301322976467}
---- !u!114 &5311379254529355437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4215192577888365168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3535d0f8388c4b2fbd42e614db098743, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _navMeshAgent: {fileID: 2842103806497104236}
   _healthView: {fileID: 8239792531479493806}
-  _healthUi: {fileID: 7744730115658791665}
+  _healthUi: {fileID: 6401533301322976467}
 --- !u!195 &2842103806497104236
 NavMeshAgent:
   m_ObjectHideFlags: 0
