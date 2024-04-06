@@ -25,11 +25,12 @@ namespace Sources.Infrastructure.Factories.App
             SceneService sceneService = new SceneService(sceneFactories);
             projectContext.Container.BindInterfacesAndSelfTo<SceneService>().FromInstance(sceneService);
 
-            sceneFactories["Gameplay"] = (payload, sceneContext) =>
-                sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
-
             sceneFactories["MainMenu"] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<MainMenuSceneFactory>().Create(payload);
+            sceneFactories["Gameplay"] = (payload, sceneContext) =>
+                sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
+            sceneFactories["TestGameplay"] = (payload, sceneContext) =>
+                sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
 
             sceneService.AddBeforeSceneChangeHandler(async sceneName => 
                 await projectContext.Container.Resolve<ISceneLoaderService>().LoadSceneAsync(sceneName));
