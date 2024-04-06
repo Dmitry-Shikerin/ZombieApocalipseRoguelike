@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Sources.PresentationsInterfaces.Views
+namespace Sources.PresentationsInterfaces.Views
 {
     public interface IView
     {

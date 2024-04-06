@@ -1,4 +1,4 @@
-﻿using Assets.Sources.PresentationsInterfaces.Views;
+﻿using Sources.PresentationsInterfaces.Views;
 
 namespace Sources.Presentations.Views
 {

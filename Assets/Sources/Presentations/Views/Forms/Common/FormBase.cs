@@ -1,5 +1,5 @@
-﻿using Assets.Sources.PresentationsInterfaces.Views.Forms.Common;
-using Sources.ControllersInterfaces;
+﻿using Sources.ControllersInterfaces;
+using Sources.PresentationsInterfaces.Views.Forms.Common;
 
 namespace Sources.Presentations.Views.Forms.Common
 {

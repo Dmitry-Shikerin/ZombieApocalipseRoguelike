@@ -2,25 +2,26 @@
 using JetBrains.Annotations;
 using Sources.Controllers.Forms.MainMenu;
 using Sources.InfrastructureInterfaces.Services.Forms;
+using Sources.Presentations.Views.Forms.MainMenu;
 using Sources.PresentationsInterfaces.Views.Forms.MainMenu;
 
 namespace Sources.Infrastructure.Factories.Controllers.Forms.MainMenu
 {
-    public class AuthorizationFormPresenterFactory
+    public class LeaderBoardFormPresenterFactory
     {
         private readonly IFormService _formService;
 
-        public AuthorizationFormPresenterFactory(IFormService formService)
+        public LeaderBoardFormPresenterFactory(IFormService formService)
         {
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
-        public AuthorizationFormPresenter Create(IAuthorizationFormView authorizationFormView)
+        public LeaderBoardFormPresenter Create(ILeaderBoardFormView leaderBoardFormView)
         {
-            if (authorizationFormView == null)
-                throw new ArgumentNullException(nameof(authorizationFormView));
+            if (leaderBoardFormView == null)
+                throw new ArgumentNullException(nameof(leaderBoardFormView));
 
-            return new AuthorizationFormPresenter(_formService, authorizationFormView);
+            return new LeaderBoardFormPresenter(_formService, leaderBoardFormView);
         }
     }
 }
