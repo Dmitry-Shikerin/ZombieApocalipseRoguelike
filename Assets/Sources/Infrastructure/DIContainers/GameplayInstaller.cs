@@ -1,12 +1,16 @@
 ﻿using System.ComponentModel;
 using Assets.Sources.Infrastructure.Services.Forms;
 using Sirenix.OdinInspector;
+using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
+using Sources.Infrastructure.Factories.Controllers.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
+using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.InputServices;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Presentations.UI.Huds;
@@ -31,6 +35,8 @@ namespace Sources.Infrastructure.DIContainers
             BindServices();
             BindCharacters();
             BindFormFactories();
+            BindWeapons();
+            BindBear();
         }
 
         private void BindServices()
@@ -53,6 +59,21 @@ namespace Sources.Infrastructure.DIContainers
             
             Container.Bind<CharacterMovementPresenterFactory>().AsSingle();
             Container.Bind<CharacterMovementViewFactory>().AsSingle();
+
+            Container.Bind<CharacterAttackerPresenterFactory>().AsSingle();
+            Container.Bind<CharacterAttackerViewFactory>().AsSingle();
+        }
+
+        private void BindBear()
+        {
+            Container.Bind<BearPresenterFactory>().AsSingle();
+            Container.Bind<BearViewFactory>().AsSingle();
+        }
+
+        private void BindWeapons()
+        {
+            Container.Bind<MiniGunPresenterFactory>().AsSingle();
+            Container.Bind<MiniGunViewFactory>().AsSingle();
         }
     }
 }

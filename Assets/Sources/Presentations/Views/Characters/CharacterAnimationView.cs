@@ -7,7 +7,13 @@ namespace Sources.Presentations.Views.Characters
     public class CharacterAnimationView : View, ICharacterAnimationView
     {
         [Required] [SerializeField] private Animator _animator;
-        
+
+        public void SetDirection(Vector2 position)
+        {
+            _animator.SetFloat("PositionX", position.x);
+            _animator.SetFloat("PositionZ", position.y);
+        }
+
         public void PlayIdle() =>
             _animator.Play("Idle");
 

@@ -1,4 +1,6 @@
-﻿namespace Sources.PresentationsInterfaces.Views.Character
+﻿using UnityEngine;
+
+namespace Sources.PresentationsInterfaces.Views.Character
 {
     public interface ICharacterAnimationView
     {
@@ -11,5 +13,6 @@
         void PlayForwardLeft();
         void PlayBackwardRight();
         void PlayBackwardLeft();
+        void SetDirection(Vector2 position);
     }
 }
