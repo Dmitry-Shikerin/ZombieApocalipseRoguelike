@@ -18,13 +18,22 @@ namespace Sources.Controllers.Forms.Gameplay
             _hudFormView = hudFormView ?? throw new ArgumentNullException(nameof(hudFormView));
         }
 
-        public override void Enable() =>
+        public override void Enable()
+        {
             _hudFormView.PauseButtonView.AddClickListener(ShowPauseForm);
+            _hudFormView.UpgradeButtonView.AddClickListener(ShowUpgradeForm);
+        }
 
-        public override void Disable() =>
+        public override void Disable()
+        {
             _hudFormView.PauseButtonView.RemoveClickListener(ShowPauseForm);
+            _hudFormView.UpgradeButtonView.RemoveClickListener(ShowUpgradeForm);
+        }
 
         private void ShowPauseForm() =>
             _formService.Show<PauseFormView>();
+
+        private void ShowUpgradeForm() =>
+            _formService.Show<UpgradeFormView>();
     }
 }

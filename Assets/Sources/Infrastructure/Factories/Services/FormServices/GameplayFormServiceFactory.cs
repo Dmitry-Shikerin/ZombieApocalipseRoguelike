@@ -16,12 +16,14 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
         private readonly GameplayHud _gameplayHud;
         private readonly PauseFormPresenterFactory _pauseFormPresenterFactory;
         private readonly HudFormPresenterFactory _hudFormPresenterFactory;
+        private readonly UpgradeFormPresenterFactory _upgradeFormPresenterFactory;
 
         public GameplayFormServiceFactory(
             FormService formService,
             GameplayHud gameplayHud,
             PauseFormPresenterFactory pauseFormPresenterFactory,
-            HudFormPresenterFactory hudFormPresenterFactory)
+            HudFormPresenterFactory hudFormPresenterFactory,
+            UpgradeFormPresenterFactory upgradeFormPresenterFactory)
         {
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
@@ -29,6 +31,8 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
                                          throw new ArgumentNullException(nameof(pauseFormPresenterFactory));
             _hudFormPresenterFactory = hudFormPresenterFactory ?? 
                                        throw new ArgumentNullException(nameof(hudFormPresenterFactory));
+            _upgradeFormPresenterFactory = upgradeFormPresenterFactory ??
+                                           throw new ArgumentNullException(nameof(upgradeFormPresenterFactory));
         }
 
         public IFormService Create()
@@ -36,12 +40,20 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             Form<PauseFormView, PauseFormPresenter> pauseForm = 
                 new Form<PauseFormView, PauseFormPresenter>(
                     _pauseFormPresenterFactory.Create, _gameplayHud.PauseFormView);
+            
             _formService.Add(pauseForm);
 
             Form<HudFormView, HudFormPresenter> hudForm =
                 new Form<HudFormView, HudFormPresenter>(
                     _hudFormPresenterFactory.Create, _gameplayHud.HudFormView);
+            
             _formService.Add(hudForm);
+
+            Form<UpgradeFormView, UpgradeFormPresenter> upgradeForm =
+                new Form<UpgradeFormView, UpgradeFormPresenter>(
+                    _upgradeFormPresenterFactory.Create, _gameplayHud.UpgradeFormView);
+            
+            _formService.Add(upgradeForm);
             
             return _formService;
         }

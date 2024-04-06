@@ -2,9 +2,8 @@
 
 namespace Sources.PresentationsInterfaces.Views.Forms.Gameplay
 {
-    public interface IHudFormView
+    public interface IUpgradeFormView
     {
-        IButtonView PauseButtonView { get; }
-        IButtonView UpgradeButtonView { get; }
+        IButtonView HudButtonView { get; }
     }
 }
