@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Controllers.Bears.Attacks;
 using Sources.Controllers.Characters.Attackers;
 using Sources.Domain.Bears;
 using Sources.Domain.Characters;
@@ -50,9 +51,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _characterViewFactory.Create(character, characterView);
             
             //Bear
-            Bear bear = new Bear();
+            BearAttacker bearAttacker = new BearAttacker();
+            Bear bear = new Bear(bearAttacker);
             BearView bearView = Object.FindObjectOfType<BearView>();
             _bearViewFactory.Create(bear, bearView);
+            bearView.SetTargetFollow(characterView.CharacterMovementView);
             
             //CinemachineService
             _gameplayHud.CinemachineCameraService.Follow(characterView.transform);

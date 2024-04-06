@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 4603748151993997541}
   - component: {fileID: 653579714808713966}
   - component: {fileID: 879649388404847782}
+  - component: {fileID: 3731260077768425307}
   m_Layer: 0
   m_Name: CameraService
   m_TagString: Untagged
@@ -176,3 +177,16 @@ MonoBehaviour:
   m_Offset: {x: 0, y: -2, z: 0}
   m_ApplyAfter: 1
   m_PreserveComposition: 0
+--- !u!114 &3731260077768425307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6689227545655940683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 131a4bb313ba40d1ba08eec1c173b11a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cinemachineVirtualCamera: {fileID: 653579714808713966}
