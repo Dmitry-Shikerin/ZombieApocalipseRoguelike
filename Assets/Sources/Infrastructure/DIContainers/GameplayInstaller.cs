@@ -3,12 +3,16 @@ using Sirenix.OdinInspector;
 using Sources.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Characters;
+using Sources.Infrastructure.Factories.Controllers.Common;
+using Sources.Infrastructure.Factories.Controllers.Enemies;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Characters;
+using Sources.Infrastructure.Factories.Views.Commons;
+using Sources.Infrastructure.Factories.Views.Enemies;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.Forms;
@@ -40,6 +44,7 @@ namespace Sources.Infrastructure.DIContainers
             BindFormFactories();
             BindWeapons();
             BindBear();
+            BindEnemy();
         }
 
         private void BindServices()
@@ -80,6 +85,18 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.Bind<MiniGunPresenterFactory>().AsSingle();
             Container.Bind<MiniGunViewFactory>().AsSingle();
+        }
+
+        private void BindEnemy()
+        {
+            Container.Bind<HealthUiPresenterFactory>().AsSingle();
+            Container.Bind<HealthUiFactory>().AsSingle();
+            
+            Container.Bind<EnemyCommonViewFactory>().AsSingle();
+            Container.Bind<EnemyHealthPresenterFactory>().AsSingle();
+            Container.Bind<EnemyHealthViewFactory>().AsSingle();
+            Container.Bind<EnemyPresenterFactory>().AsSingle();
+            Container.Bind<EnemyViewFactory>().AsSingle();
         }
     }
 }

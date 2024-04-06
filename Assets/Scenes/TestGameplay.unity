@@ -738,6 +738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pauseButtonView: {fileID: 1387096237}
+  _upgradeButtonView: {fileID: 0}
 --- !u!224 &1115249921
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1142,6 +1143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hudButtonView: {fileID: 371021384}
+  _mainMenuButtonView: {fileID: 0}
 --- !u!1001 &1511078918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1194,11 +1196,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyView
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5334769087053075594, guid: dd08d27eb5c0a84478b89048bea25e6c, type: 3}
+      propertyPath: _navMeshAgent
+      value: 
+      objectReference: {fileID: 1511078921}
+    m_RemovedComponents:
+    - {fileID: 5311379254529355437, guid: dd08d27eb5c0a84478b89048bea25e6c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd08d27eb5c0a84478b89048bea25e6c, type: 3}
+--- !u!195 &1511078921 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 2842103806497104236, guid: dd08d27eb5c0a84478b89048bea25e6c, type: 3}
+  m_PrefabInstance: {fileID: 1511078918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1544637942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1711,6 +1723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseFormView: {fileID: 1432739128}
   _hudFormView: {fileID: 1115249920}
+  _upgradeFormView: {fileID: 0}
   _cinemachineCameraService: {fileID: 1843874980}
 --- !u!224 &2089583380
 RectTransform:
