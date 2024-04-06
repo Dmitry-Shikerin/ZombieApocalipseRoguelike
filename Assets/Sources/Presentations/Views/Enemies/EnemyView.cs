@@ -1,6 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Controllers.Enemies;
 using Sources.Presentations.Views.Common;
+using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.Enemies;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,8 +16,15 @@ namespace Sources.Presentations.Views.Enemies
         
         public EnemyHealthView EnemyHealthView => _healthView;
         public HealthUi HealthUi => _healthUi;
-        
+
+        public ICharacterMovementView CharacterMovementView { get; private set; }
+
         public void Move(Vector3 direction) =>
             _navMeshAgent.SetDestination(direction);
+
+        public void SetTargetFollow(ICharacterMovementView target)
+        {
+            CharacterMovementView = target;
+        }
     }
 }

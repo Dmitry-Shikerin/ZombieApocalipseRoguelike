@@ -3,14 +3,18 @@ using Sources.Controllers.Bears.Attacks;
 using Sources.Controllers.Characters.Attackers;
 using Sources.Domain.Bears;
 using Sources.Domain.Characters;
+using Sources.Domain.Enemies;
 using Sources.Domain.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Characters;
+using Sources.Infrastructure.Factories.Views.Enemies;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Characters;
+using Sources.Presentations.Views.Enemies;
 using Sources.Presentations.Views.Forms.Gameplay;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
@@ -21,12 +25,14 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly GameplayFormServiceFactory _gameplayFormServiceFactory;
         private readonly CharacterViewFactory _characterViewFactory;
         private readonly BearViewFactory _bearViewFactory;
+        private readonly EnemyViewFactory _enemyViewFactory;
 
         public GameplaySceneViewFactory(
             GameplayHud gameplayHud,
             GameplayFormServiceFactory gameplayFormServiceFactory,
             CharacterViewFactory characterViewFactory,
-            BearViewFactory bearViewFactory)
+            BearViewFactory bearViewFactory,
+            EnemyViewFactory enemyViewFactory)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ?? 
@@ -34,6 +40,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _characterViewFactory = characterViewFactory
                                     ?? throw new ArgumentNullException(nameof(characterViewFactory));
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
+            _enemyViewFactory = enemyViewFactory ?? throw new ArgumentNullException(nameof(enemyViewFactory));
         }
 
         public void Create()
@@ -48,6 +55,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
                 new CharacterAttacker(minigun),
                 minigun);
             CharacterView characterView = Object.FindObjectOfType<CharacterView>();
+            Debug.Log(characterView);
             _characterViewFactory.Create(character, characterView);
             
             //Bear
@@ -56,6 +64,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             BearView bearView = Object.FindObjectOfType<BearView>();
             _bearViewFactory.Create(bear, bearView);
             bearView.SetTargetFollow(characterView.CharacterMovementView);
+            
+            //Enemy
+            EnemyHealth enemyHealth = new EnemyHealth(100);
+            Enemy enemy = new Enemy(enemyHealth);
+            EnemyView enemyView = Object.FindObjectOfType<EnemyView>();
+            _enemyViewFactory.Create(enemy, enemyView);
+            enemyView.SetTargetFollow(characterView.CharacterMovementView);
             
             //CinemachineService
             _gameplayHud.CinemachineCameraService.Follow(characterView.transform);
