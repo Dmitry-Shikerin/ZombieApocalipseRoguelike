@@ -12,6 +12,8 @@ using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.InputServices;
+using Sources.Infrastructure.Services.Linecasts;
+using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
@@ -44,6 +46,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.BindInterfacesAndSelfTo<UpdateService>().AsSingle();
             Container.BindInterfacesAndSelfTo<NewInputService>().AsSingle();
             Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
+            Container.Bind<LinecastService>().AsSingle();
+            Container.Bind<OverlapService>().AsSingle();
         }
 
         private void BindFormFactories()
