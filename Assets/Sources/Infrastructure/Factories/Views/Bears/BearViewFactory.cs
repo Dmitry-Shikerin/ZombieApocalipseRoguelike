@@ -1,8 +1,10 @@
 ﻿using System;
 using Sources.Controllers.Bears;
+using Sources.Controllers.Bears.Movements;
 using Sources.Domain.Bears;
 using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Presentations.Views.Bears;
+using Sources.PresentationsInterfaces.Views.Bears;
 
 namespace Sources.Infrastructure.Factories.Views.Bears
 {
@@ -18,7 +20,7 @@ namespace Sources.Infrastructure.Factories.Views.Bears
 
         public IBearView Create(Bear bear, BearView bearView)
         {
-            BearPresenter bearPresenter = _bearPresenterFactory.Create(bear, bearView);
+            BearPresenter bearPresenter = _bearPresenterFactory.Create(bear, bearView, bearView.BearAnimationView);
             
             bearView.Construct(bearPresenter);
             

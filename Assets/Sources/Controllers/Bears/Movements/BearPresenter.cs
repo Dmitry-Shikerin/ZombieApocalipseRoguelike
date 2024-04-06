@@ -1,11 +1,10 @@
 ﻿using System;
-using Sources.Controllers.Common;
 using Sources.ControllersInterfaces;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 
-namespace Sources.Controllers.Bears
+namespace Sources.Controllers.Bears.Movements
 {
     public class BearPresenter : FiniteStateMachine, IPresenter
     {

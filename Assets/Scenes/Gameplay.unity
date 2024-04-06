@@ -140,6 +140,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d5d8771cf3418bb1c7280124b74ce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _navMeshAgent: {fileID: 0}
+  _bearAnimationView: {fileID: 0}
+--- !u!195 &26865644
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26865640}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &120803660
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,6 +1596,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5938893430079916056, guid: 4d9c58aa20d199943a06805dad28cf79, type: 3}
       insertIndex: -1
       addedObject: {fileID: 26865643}
+    - targetCorrespondingSourceObject: {fileID: 5938893430079916056, guid: 4d9c58aa20d199943a06805dad28cf79, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 26865644}
   m_SourcePrefab: {fileID: 100100000, guid: 4d9c58aa20d199943a06805dad28cf79, type: 3}
 --- !u!1001 &316416172648280495
 PrefabInstance:
