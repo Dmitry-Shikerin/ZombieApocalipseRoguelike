@@ -3,6 +3,7 @@ using Sources.Infrastructure.Factories.Controllers.Forms.MainMenu;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Services.Forms;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
 using UnityEngine;
@@ -22,7 +23,13 @@ namespace Sources.Infrastructure.DIContainers
             Container.BindInterfacesAndSelfTo<MainMenuSceneFactory>().AsSingle();
             Container.Bind<MainMenuSceneViewFactory>().AsSingle();
             
+            BindServices();
             BindFormFactories();
+        }
+
+        private void BindServices()
+        {
+            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
         }
 
         private void BindFormFactories()

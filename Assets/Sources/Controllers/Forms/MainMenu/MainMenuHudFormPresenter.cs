@@ -1,10 +1,8 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Sources.Controllers.Common;
 using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.Presentations.Views.Forms.MainMenu;
 using Sources.PresentationsInterfaces.Views.Forms.MainMenu;
-using UnityEngine;
 
 namespace Sources.Controllers.Forms.MainMenu
 {
@@ -19,16 +17,27 @@ namespace Sources.Controllers.Forms.MainMenu
             _mainMenuHudFormView = mainMenuHudFormView ?? throw new ArgumentNullException(nameof(mainMenuHudFormView));
         }
 
-        public override void Enable() =>
-            _mainMenuHudFormView.SettingsButtonView.AddClickListener(ShowSettingsForm);
-
-        public override void Disable() =>
-            _mainMenuHudFormView.SettingsButtonView.RemoveClickListener(ShowSettingsForm);
-
-        private void ShowSettingsForm()
+        public override void Enable()
         {
-            Debug.Log("showSettingFormView");
-            _formService.Show<SettingsFormView>();
+            _mainMenuHudFormView.SettingsButtonView.AddClickListener(ShowSettingsForm);
+            _mainMenuHudFormView.AuthorizationButtonView.AddClickListener(ShowAuthorizationForm);
+            _mainMenuHudFormView.LeaderBoardButtonView.AddClickListener(ShowLeaderBoardForm);
         }
+
+        public override void Disable()
+        {
+            _mainMenuHudFormView.SettingsButtonView.RemoveClickListener(ShowSettingsForm);
+            _mainMenuHudFormView.AuthorizationButtonView.RemoveClickListener(ShowAuthorizationForm);
+            _mainMenuHudFormView.LeaderBoardButtonView.RemoveClickListener(ShowLeaderBoardForm);
+        }
+
+        private void ShowSettingsForm() =>
+            _formService.Show<SettingsFormView>();
+
+        private void ShowAuthorizationForm() =>
+            _formService.Show<AuthorizationFormView>();
+
+        private void ShowLeaderBoardForm() =>
+            _formService.Show<LeaderBoardFormView>();
     }
 }
