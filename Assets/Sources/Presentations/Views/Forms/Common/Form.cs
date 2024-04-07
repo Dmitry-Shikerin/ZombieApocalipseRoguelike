@@ -32,5 +32,11 @@ namespace Sources.Presentations.Views.Forms.Common
 
         public void SetParent(Transform parent) =>
             _formView.SetParent(parent);
+
+        public void SetLocalePosition(Vector3 position) =>
+            _formView.SetLocalePosition(position);
+
+        public void SetPosition(Vector3 position) =>
+            _formView.SetPosition(position);
     }
 }

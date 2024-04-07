@@ -16,24 +16,18 @@ namespace Sources.Infrastructure.Services.InputServices
             _inputManager = new InputManager();
             _inputManager.Enable();
             InputData = new InputData();
-
-            //TODO сделать отписку
-            _inputManager.Gameplay.Attack.performed += OnAttack;
         }
         
-        public event Action Attacked;
-
-        private void OnAttack(InputAction.CallbackContext obj)
-        {
-            Attacked?.Invoke();
-        }
-
         public InputData InputData { get; }
 
         public void Update(float deltaTime)
         {
             UpdateMovement();
+            UpdateAttack();
         }
+
+        private void UpdateAttack() =>
+            InputData.IsAttacking = _inputManager.Gameplay.Attack.IsPressed();
 
         private void UpdateMovement()
         {

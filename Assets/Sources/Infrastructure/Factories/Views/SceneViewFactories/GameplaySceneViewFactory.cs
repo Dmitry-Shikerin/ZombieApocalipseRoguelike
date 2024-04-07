@@ -56,17 +56,18 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _gameplayFormServiceFactory.Create().Show<HudFormView>();
 
             //Upgrades
-            Upgrader sawAbilityUpgrader = new Upgrader(2, 3, 0, 2);
+            Upgrader sawLauncherUpgrader = new Upgrader(2, 3, 0, 2);
+            Upgrader sawLauncherAbilityUpgrader = new Upgrader(0, 3, 2, 0);
             // _upgradeViewFactory.Create(sawAbilityUpgrader, )
-            CharacterUpgraders characterUpgraders = new CharacterUpgraders(sawAbilityUpgrader);
+            CharacterUpgraders characterUpgraders = new CharacterUpgraders(sawLauncherUpgrader);
             
             //Character
-            MiniGun minigun = new MiniGun(2, 0.5f);
+            MiniGun minigun = new MiniGun(2, 0.1f);
             Character character = new Character(
                 new CharacterMovement(),
                 new CharacterAttacker(minigun),
                 minigun,
-                new SawLauncherAbility());
+                new SawLauncherAbility(sawLauncherAbilityUpgrader));
             CharacterView characterView = Object.FindObjectOfType<CharacterView>();
             Debug.Log(characterView);
             _characterViewFactory.Create(character, characterView);

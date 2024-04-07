@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using Sources.Presentations.Triggers;
 using Sources.PresentationsInterfaces.Views.Bullets;
 using Sources.PresentationsInterfaces.Views.Enemies;
+using Sources.PresentationsInterfaces.Views.ObjectPools;
 using Sources.PresentationsInterfaces.Views.Weapons;
 using UnityEngine;
 
@@ -20,10 +21,25 @@ namespace Sources.Presentations.Views.Bullets
         private void OnDisable() =>
             _enemyHealthParticleCollision.Entered -= OnEntered;
 
+        //TODO исправить ротейшн у пулек
         private void OnParticleSystemStopped()
         {
-            Debug.Log($"Particle system stopped");
+            if (TryGetComponent(out PoolableObject poolableObject) == false)
+            {
+                Destroy(gameObject);
+                
+                return;
+            }
+            
+            poolableObject.ReturnToPool();
+            
+            Hide();
         }
+        
+        public void SetRotation(Vector3 rotation) =>
+            transform.rotation = Quaternion.Euler(rotation);
+        public void SetRotation(Quaternion rotation) =>
+            transform.rotation = rotation;
 
         public void Construct(IMiniGunView miniGunView) =>
             _miniGunView = miniGunView ?? throw new ArgumentNullException(nameof(miniGunView));

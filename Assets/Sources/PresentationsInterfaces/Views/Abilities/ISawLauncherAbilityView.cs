@@ -9,5 +9,7 @@ namespace Sources.PresentationsInterfaces.Views.Abilities
         IReadOnlyList<SawLauncherView> SawLauncherViews { get; }
         
         void Rotate(Vector3 euler);
+        void Follow();
+        void SetTargetFollow(Transform targetTransform);
     }
 }

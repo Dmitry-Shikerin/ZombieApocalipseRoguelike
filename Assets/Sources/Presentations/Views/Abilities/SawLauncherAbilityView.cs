@@ -11,6 +11,8 @@ namespace Sources.Presentations.Views.Abilities
         ISawLauncherAbilityView, ISelfValidator
     {
         [SerializeField] private List<SawLauncherView> _sawLauncherViews;
+        
+        private Transform _targetTransform;
 
         public IReadOnlyList<SawLauncherView> SawLauncherViews => _sawLauncherViews;
 
@@ -20,9 +22,13 @@ namespace Sources.Presentations.Views.Abilities
                 result.AddError($"SawLauncherViews count should be more than 3, but {_sawLauncherViews.Count}");
         }
 
-        public void Rotate(Vector3 euler)
-        {
+        public void Rotate(Vector3 euler) =>
             transform.Rotate(euler);
-        }
+
+        public void Follow() =>
+            transform.position = _targetTransform.position;
+
+        public void SetTargetFollow(Transform targetTransform) =>
+            _targetTransform = targetTransform;
     }
 }

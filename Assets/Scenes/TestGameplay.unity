@@ -272,40 +272,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8068678763604255979, guid: 163f5164baf1d70488d9ef0fc73b9820, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 213496914}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 163f5164baf1d70488d9ef0fc73b9820, type: 3}
---- !u!114 &213496912 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4739084747817422764, guid: 163f5164baf1d70488d9ef0fc73b9820, type: 3}
-  m_PrefabInstance: {fileID: 213496911}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 213496913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cf41feb6f0b4ca091de3b147bb4d924, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &213496913 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8068678763604255979, guid: 163f5164baf1d70488d9ef0fc73b9820, type: 3}
-  m_PrefabInstance: {fileID: 213496911}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &213496914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 213496913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2281a03082004578bf81195133eae0bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyHealthParticleCollision: {fileID: 213496912}
 --- !u!1 &371021382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1344,6 +1312,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyView
       objectReference: {fileID: 0}
+    - target: {fileID: 4215192577888365168, guid: dd08d27eb5c0a84478b89048bea25e6c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6923487665919907864, guid: dd08d27eb5c0a84478b89048bea25e6c, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -1956,6 +1928,67 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1001 &3535573339812801609
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2130702986431978763, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679953581252985653, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416095239632680535, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
+      propertyPath: m_Name
+      value: SawLauncherAbilityView
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb4f11ffd3be46a46be86f370af731bf, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1966,6 +1999,7 @@ SceneRoots:
   - {fileID: 2089583380}
   - {fileID: 1051364753}
   - {fileID: 1773826385}
+  - {fileID: 3535573339812801609}
   - {fileID: 213496911}
   - {fileID: 1511078918}
   - {fileID: 1843874979}

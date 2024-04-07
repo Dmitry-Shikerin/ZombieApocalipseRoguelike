@@ -3,6 +3,7 @@ using System.Threading;
 using Sources.Controllers.Common;
 using Sources.Domain.Characters.Attackers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
+using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Character;
 
 namespace Sources.Controllers.Characters.Attackers
@@ -12,32 +13,39 @@ namespace Sources.Controllers.Characters.Attackers
         private readonly CharacterAttacker _characterAttacker;
         private readonly ICharacterAttackerView _characterAttackerView;
         private readonly IInputService _inputService;
+        private readonly IUpdateRegister _updateRegister;
+
+        private CancellationTokenSource _cancellationTokenSource;
 
         public CharacterAttackerPresenter(
             CharacterAttacker characterAttacker,
             ICharacterAttackerView characterAttackerView,
-            IInputService inputService)
+            IInputService inputService,
+            IUpdateRegister updateRegister)
         {
             _characterAttacker = characterAttacker ?? throw new ArgumentNullException(nameof(characterAttacker));
-            _characterAttackerView = characterAttackerView ?? 
+            _characterAttackerView = characterAttackerView ??
                                      throw new ArgumentNullException(nameof(characterAttackerView));
             _inputService = inputService ?? throw new ArgumentNullException(nameof(inputService));
+            _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
         }
 
         public override void Enable()
         {
-             _inputService.Attacked += OnAttack;
+            _cancellationTokenSource = new CancellationTokenSource();
+
+            _updateRegister.Register(OnUpdate);
         }
 
         public override void Disable()
         {
-            _inputService.Attacked -= OnAttack;
+            _cancellationTokenSource.Cancel();
         }
 
-        private void OnAttack()
+        private void OnUpdate(float deltaTime)
         {
-            //TODO поменять эту заглушку
-            _characterAttacker.Attack(new CancellationToken());
+            if (_inputService.InputData.IsAttacking)
+                _characterAttacker.Attack(_cancellationTokenSource.Token);
         }
     }
 }

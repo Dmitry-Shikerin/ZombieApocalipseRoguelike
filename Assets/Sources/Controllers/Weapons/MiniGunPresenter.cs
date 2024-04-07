@@ -38,7 +38,7 @@ namespace Sources.Controllers.Weapons
         private void OnAttack()
         {
             _bulletSpawner.Spawn(_miniGunView);
-            Debug.Log($"MiniGun attack");
+            _miniGunView.PlayFireParticles();
         }
 
         public void DealDamage(IEnemyHealthView enemyHealthView) =>

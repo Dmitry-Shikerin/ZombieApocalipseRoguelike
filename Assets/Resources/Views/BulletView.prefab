@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7402967106085234241}
   - component: {fileID: 7958154409793907496}
   - component: {fileID: 377531491371242156}
+  - component: {fileID: -6792060378632914076}
   m_Layer: 0
   m_Name: BulletView
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3098593134809676267}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.171, z: 1.455}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,7 +45,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4862,3 +4863,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf41feb6f0b4ca091de3b147bb4d924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6792060378632914076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3098593134809676267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2281a03082004578bf81195133eae0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyHealthParticleCollision: {fileID: 377531491371242156}

@@ -28,27 +28,49 @@ namespace Sources.Controllers.Abilities
         public override void Enable()
         {
             HideSawLauncherViews();
-            
+            OnSawLauncherViewsEnable();
+
+            _sawLauncherAbility.Upgrader.LevelChanged += OnSawLauncherViewsEnable;
             _updateRegister.Register(OnUpdate);
         }
 
         public override void Disable()
         {
+            _sawLauncherAbility.Upgrader.LevelChanged -= OnSawLauncherViewsEnable;
             _updateRegister.UnRegister(OnUpdate);
         }
 
-        
-        
-        //TODO возможно инстанциировать и фолловить за персонажем
         private void OnUpdate(float deltaTime)
         {
             _sawLauncherAbilityView.Rotate(new Vector3(0, 1, 0));
+            _sawLauncherAbilityView.Follow();
+        }
+
+        //TODO порефакторить проэкт и вынести логику в сервисы
+        private void OnSawLauncherViewsEnable()
+        {
+            int sawLauncherCount = _sawLauncherAbility.Upgrader.CurrentLevel switch
+            {
+                0 => 0,
+                1 => 1,
+                2 => 2,
+                3 => 4,
+                _ => throw new ArgumentOutOfRangeException(nameof(_sawLauncherAbility.Upgrader.CurrentLevel))
+            };
+            
+            ShowSawLauncherViews(sawLauncherCount);
         }
 
         private void HideSawLauncherViews()
         {
             foreach (SawLauncherView sawLauncherView in _sawLauncherAbilityView.SawLauncherViews)
                 sawLauncherView.Hide();
+        }
+
+        private void ShowSawLauncherViews(int count)
+        {
+            for (int i = 0; i < count; i++) 
+                _sawLauncherAbilityView.SawLauncherViews[i].Show();
         }
     }
 }

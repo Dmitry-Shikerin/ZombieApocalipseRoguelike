@@ -6,6 +6,7 @@ using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Presentations.Views.Abilities;
 using Sources.Presentations.Views.Characters;
+using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.Characters
 {
@@ -16,7 +17,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
         private readonly MiniGunViewFactory _miniGunViewFactory;
         private readonly SawLauncherAbilityViewFactory _sawLauncherAbilityViewFactory;
         private readonly SawLauncherViewFactory _sawLauncherViewFactory;
-
+        
         public CharacterViewFactory(
             CharacterMovementViewFactory characterMovementViewFactory,
             CharacterAttackerViewFactory characterAttackerViewFactory,
@@ -43,9 +44,14 @@ namespace Sources.Infrastructure.Factories.Views.Characters
                 characterView.CharacterAnimationView);
             _characterAttackerViewFactory.Create(character.CharacterAttacker, characterView.CharacterAttackerView);
             _miniGunViewFactory.Create(character.MiniGun, characterView.MiniGunView);
-            _sawLauncherAbilityViewFactory.Create(character.SawLauncherAbility, characterView.SawLauncherAbilityView);
-            foreach (SawLauncherView sawLauncherView in characterView.SawLauncherAbilityView.SawLauncherViews)
+
+            SawLauncherAbilityView sawLauncherAbilityView = Object.FindObjectOfType<SawLauncherAbilityView>();
+            sawLauncherAbilityView.SetTargetFollow(characterView.transform);
+
+            foreach (SawLauncherView sawLauncherView in sawLauncherAbilityView.SawLauncherViews)
                 _sawLauncherViewFactory.Create(new SawLauncher(), sawLauncherView);
+            
+            _sawLauncherAbilityViewFactory.Create(character.SawLauncherAbility, sawLauncherAbilityView);
 
             return characterView;
         }

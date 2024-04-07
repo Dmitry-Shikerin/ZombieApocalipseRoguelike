@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4679953581252985653}
   - component: {fileID: 3264475080206626689}
   m_Layer: 0
-  m_Name: SawLauncherAbility
+  m_Name: SawLauncherAbilityView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,6 +113,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5122156478361512282}
   m_SourcePrefab: {fileID: 100100000, guid: 1435e8741ee53bf47a2f0e16e68addd2, type: 3}
+--- !u!114 &864286230081903843 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 45986696099973756, guid: 1435e8741ee53bf47a2f0e16e68addd2, type: 3}
+  m_PrefabInstance: {fileID: 819073590608909983}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a265f48a8ea845709b1651ac0d593c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6875246942285690246 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6067518293212832537, guid: 1435e8741ee53bf47a2f0e16e68addd2, type: 3}
@@ -135,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff035c29a4374e8595a55de37bab66e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyHealthTrigger: {fileID: 864286230081903843}
 --- !u!1001 &1207216701692526197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -195,6 +207,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5511965821228706076}
   m_SourcePrefab: {fileID: 100100000, guid: 1435e8741ee53bf47a2f0e16e68addd2, type: 3}
+--- !u!114 &1180934422197957641 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 45986696099973756, guid: 1435e8741ee53bf47a2f0e16e68addd2, type: 3}
+  m_PrefabInstance: {fileID: 1207216701692526197}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a265f48a8ea845709b1651ac0d593c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4963973722173334054 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6062820354513886291, guid: 1435e8741ee53bf47a2f0e16e68addd2, type: 3}
@@ -212,6 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff035c29a4374e8595a55de37bab66e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyHealthTrigger: {fileID: 1180934422197957641}
 --- !u!4 &4968810196394548588 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6067518293212832537, guid: 1435e8741ee53bf47a2f0e16e68addd2, type: 3}
@@ -299,6 +323,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff035c29a4374e8595a55de37bab66e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyHealthTrigger: {fileID: 5265219541012859684}
+--- !u!114 &5265219541012859684 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 45986696099973756, guid: 1435e8741ee53bf47a2f0e16e68addd2, type: 3}
+  m_PrefabInstance: {fileID: 5310502549536276824}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a265f48a8ea845709b1651ac0d593c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8335274176783022303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -376,8 +412,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff035c29a4374e8595a55de37bab66e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyHealthTrigger: {fileID: 8291046768050549411}
 --- !u!4 &2853294307052477382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6067518293212832537, guid: 1435e8741ee53bf47a2f0e16e68addd2, type: 3}
   m_PrefabInstance: {fileID: 8335274176783022303}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8291046768050549411 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 45986696099973756, guid: 1435e8741ee53bf47a2f0e16e68addd2, type: 3}
+  m_PrefabInstance: {fileID: 8335274176783022303}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a265f48a8ea845709b1651ac0d593c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

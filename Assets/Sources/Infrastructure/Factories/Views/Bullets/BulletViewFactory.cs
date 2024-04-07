@@ -30,7 +30,9 @@ namespace Sources.Infrastructure.Factories.Views.Bullets
         public IBulletView Create(BulletView bulletView, IMiniGunView miniGunView)
         {
             bulletView.Construct(miniGunView);
-            bulletView.SetParent(miniGunView.BulletSpawnPoint.Transform);
+            bulletView.SetParent(null);
+            bulletView.SetPosition(miniGunView.BulletSpawnPoint.Transform.position);
+            bulletView.SetRotation(miniGunView.BulletSpawnPoint.Transform.rotation);
             
             return bulletView;
         }
