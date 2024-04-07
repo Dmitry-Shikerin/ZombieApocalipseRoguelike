@@ -6,6 +6,7 @@ using Sources.ControllersInterfaces.Scenes;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Factories.Controllers.Scenes;
 using Sources.InfrastructureInterfaces.Services.InputServices;
+using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 
 namespace Sources.Infrastructure.Factories.Controllers.Scenes
@@ -15,16 +16,19 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
         private readonly IUpdateService _updateService;
         private readonly IInputServiceUpdater _inputServiceUpdater;
         private readonly GameplaySceneViewFactory _gameplaySceneViewFactory;
+        private readonly ILocalizationService _localizationService;
 
         public GameplaySceneFactory(
             IUpdateService updateService,
             IInputServiceUpdater inputServiceUpdater,
-            GameplaySceneViewFactory gameplaySceneViewFactory)
+            GameplaySceneViewFactory gameplaySceneViewFactory,
+            ILocalizationService localizationService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
             _gameplaySceneViewFactory = gameplaySceneViewFactory ??
                                         throw new ArgumentNullException(nameof(gameplaySceneViewFactory));
+            _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
         }
 
         public async UniTask<IScene> Create(object payload)
@@ -32,7 +36,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
             return new GameplayScene(
                 _updateService,
                 _inputServiceUpdater,
-                _gameplaySceneViewFactory);
+                _gameplaySceneViewFactory,
+                _localizationService);
         }
     }
 }

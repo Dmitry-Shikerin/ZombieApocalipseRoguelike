@@ -10,7 +10,7 @@ namespace Sources.Presentations.Views.Abilities
 {
     public class SawLauncherView : PresentableView<SawLauncherPresenter>, ISawLauncherView
     {
-        [FormerlySerializedAs("_enemyTrigger")] [Required] [SerializeField] private EnemyHealthTrigger _enemyHealthTrigger;
+        [Required] [SerializeField] private EnemyHealthTrigger _enemyHealthTrigger;
 
         protected override void OnAfterEnable()
         {

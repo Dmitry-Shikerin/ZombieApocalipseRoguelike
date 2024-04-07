@@ -1,6 +1,4 @@
 ﻿using System;
-using Sources.Controllers.Characters.Attackers;
-using Sources.Domain.Abilities;
 using Sources.Domain.Characters;
 using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Weapons;
@@ -48,9 +46,9 @@ namespace Sources.Infrastructure.Factories.Views.Characters
             SawLauncherAbilityView sawLauncherAbilityView = Object.FindObjectOfType<SawLauncherAbilityView>();
             sawLauncherAbilityView.SetTargetFollow(characterView.transform);
 
-            foreach (SawLauncherView sawLauncherView in sawLauncherAbilityView.SawLauncherViews)
-                _sawLauncherViewFactory.Create(new SawLauncher(), sawLauncherView);
-            
+            for (int i = 0; i < sawLauncherAbilityView.SawLauncherViews.Count; i++)
+                _sawLauncherViewFactory.Create(character.SawLaunchers[i], sawLauncherAbilityView.SawLauncherViews[i]);
+
             _sawLauncherAbilityViewFactory.Create(character.SawLauncherAbility, sawLauncherAbilityView);
 
             return characterView;

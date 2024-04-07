@@ -17,7 +17,6 @@ namespace Sources.Domain.Weapons
         
         public float Damage { get; }
         public float AttackSpeed { get; }
-        
         public bool IsReady { get; private set; } = true;
 
         public async void AttackAsync(CancellationToken cancellationToken)

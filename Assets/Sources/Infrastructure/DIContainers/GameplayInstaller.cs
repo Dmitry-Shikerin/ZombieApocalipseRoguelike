@@ -21,16 +21,21 @@ using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.InputServices;
 using Sources.Infrastructure.Services.Linecasts;
+using Sources.Infrastructure.Services.Localizations;
+using Sources.Infrastructure.Services.Localizations.Translates;
 using Sources.Infrastructure.Services.ObjectPools;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.Services.Spawners;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.Factories.Views.Bullets;
+using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Bullets;
+using Sources.Presentations.Views.Localizations;
+using Sources.PresentationsInterfaces.Views.Localizations;
 using UnityEngine;
 using Zenject;
 
@@ -40,11 +45,13 @@ namespace Sources.Infrastructure.DIContainers
     {
         [Required][SerializeField] private GameplayHud _gameplayHud;
         [Required] [SerializeField] private ContainerView _containerView;
+        [Required] [SerializeField] private LocalizationView _localizationView;
         
         public override void InstallBindings()
         {
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
+            Container.Bind<ILocalizationView>().FromInstance(_localizationView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
             Container.Bind<GameplaySceneViewFactory>().AsSingle();
             
@@ -66,6 +73,10 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<OverlapService>().AsSingle();
             Container.Bind<IObjectPool<BulletView>>().To<ObjectPool<BulletView>>().AsSingle();
             Container.Bind<IBulletSpawner>().To<BulletSpawner>().AsSingle();
+            Container.Bind<ILocalizationService>().To<LocalizationService>().AsSingle();
+            Container.Bind<ITurkishTranslateService>().To<TurkishTranslateService>().AsSingle();
+            Container.Bind<IEnglishTranslateService>().To<EnglishTranslateService>().AsSingle();
+            Container.Bind<IRussianTranslateService>().To<RussianTranslateService>().AsSingle();
         }
 
         private void BindFormFactories()

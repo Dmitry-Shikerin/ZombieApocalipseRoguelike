@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sources.Controllers.Bears.Attacks;
 using Sources.Controllers.Characters.Attackers;
 using Sources.Domain.Abilities;
@@ -67,7 +68,14 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
                 new CharacterMovement(),
                 new CharacterAttacker(minigun),
                 minigun,
-                new SawLauncherAbility(sawLauncherAbilityUpgrader));
+                new SawLauncherAbility(sawLauncherAbilityUpgrader),
+                new List<SawLauncher>()
+                {
+                    new SawLauncher(sawLauncherUpgrader),
+                    new SawLauncher(sawLauncherUpgrader),
+                    new SawLauncher(sawLauncherUpgrader),
+                    new SawLauncher(sawLauncherUpgrader),
+                });
             CharacterView characterView = Object.FindObjectOfType<CharacterView>();
             Debug.Log(characterView);
             _characterViewFactory.Create(character, characterView);

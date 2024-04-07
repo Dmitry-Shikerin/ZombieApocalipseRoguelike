@@ -24,17 +24,12 @@ namespace Sources.Controllers.Weapons
             _bulletSpawner = bulletSpawner ?? throw new ArgumentNullException(nameof(bulletSpawner));
         }
 
-        public override void Enable()
-        {
+        public override void Enable() =>
             _miniGun.Attacked += OnAttack;
-        }
 
-        public override void Disable()
-        {
+        public override void Disable() =>
             _miniGun.Attacked -= OnAttack;
-        }
 
-        //TODO как сделать грамотнее?
         private void OnAttack()
         {
             _bulletSpawner.Spawn(_miniGunView);
