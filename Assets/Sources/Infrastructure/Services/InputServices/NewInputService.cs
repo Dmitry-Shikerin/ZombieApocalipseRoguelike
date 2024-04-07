@@ -1,4 +1,5 @@
-﻿using Sources.Domain.Inputs;
+﻿using System;
+using Sources.Domain.Inputs;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,9 +20,12 @@ namespace Sources.Infrastructure.Services.InputServices
             //TODO сделать отписку
             _inputManager.Gameplay.Attack.performed += OnAttack;
         }
+        
+        public event Action Attacked;
 
         private void OnAttack(InputAction.CallbackContext obj)
         {
+            Attacked?.Invoke();
         }
 
         public InputData InputData { get; }

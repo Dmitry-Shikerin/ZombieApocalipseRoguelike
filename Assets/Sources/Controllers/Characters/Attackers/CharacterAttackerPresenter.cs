@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading;
 using Sources.Controllers.Common;
+using Sources.Domain.Characters.Attackers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.PresentationsInterfaces.Views.Character;
 
@@ -24,12 +26,18 @@ namespace Sources.Controllers.Characters.Attackers
 
         public override void Enable()
         {
-            base.Enable(); 
+             _inputService.Attacked += OnAttack;
         }
 
         public override void Disable()
         {
-            base.Disable();
+            _inputService.Attacked -= OnAttack;
+        }
+
+        private void OnAttack()
+        {
+            //TODO поменять эту заглушку
+            _characterAttacker.Attack(new CancellationToken());
         }
     }
 }

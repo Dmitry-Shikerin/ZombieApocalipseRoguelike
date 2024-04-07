@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Characters.Attackers;
 using Sources.Domain.Abilities;
+using Sources.Domain.Characters.Attackers;
 using Sources.Domain.Weapons;
 
 namespace Sources.Domain.Characters

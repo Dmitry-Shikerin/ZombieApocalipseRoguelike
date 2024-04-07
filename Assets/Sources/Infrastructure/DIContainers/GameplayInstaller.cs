@@ -11,6 +11,7 @@ using Sources.Infrastructure.Factories.Controllers.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Bears;
+using Sources.Infrastructure.Factories.Views.Bullets;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.Infrastructure.Factories.Views.Enemies;
@@ -20,10 +21,16 @@ using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.InputServices;
 using Sources.Infrastructure.Services.Linecasts;
+using Sources.Infrastructure.Services.ObjectPools;
 using Sources.Infrastructure.Services.Overlaps;
+using Sources.Infrastructure.Services.Spawners;
 using Sources.Infrastructure.Services.UpdateServices;
+using Sources.InfrastructureInterfaces.Factories.Views.Bullets;
+using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
+using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
+using Sources.Presentations.Views.Bullets;
 using UnityEngine;
 using Zenject;
 
@@ -57,6 +64,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
             Container.Bind<LinecastService>().AsSingle();
             Container.Bind<OverlapService>().AsSingle();
+            Container.Bind<IObjectPool<BulletView>>().To<ObjectPool<BulletView>>().AsSingle();
+            Container.Bind<IBulletSpawner>().To<BulletSpawner>().AsSingle();
         }
 
         private void BindFormFactories()
@@ -88,6 +97,8 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.Bind<MiniGunPresenterFactory>().AsSingle();
             Container.Bind<MiniGunViewFactory>().AsSingle();
+
+            Container.Bind<IBulletViewFactory>().To<BulletViewFactory>().AsSingle();
 
             Container.Bind<SawLauncherAbilityPresenterFactory>().AsSingle();
             Container.Bind<SawLauncherAbilityViewFactory>().AsSingle();

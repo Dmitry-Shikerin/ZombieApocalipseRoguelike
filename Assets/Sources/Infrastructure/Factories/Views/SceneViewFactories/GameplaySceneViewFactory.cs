@@ -4,6 +4,7 @@ using Sources.Controllers.Characters.Attackers;
 using Sources.Domain.Abilities;
 using Sources.Domain.Bears;
 using Sources.Domain.Characters;
+using Sources.Domain.Characters.Attackers;
 using Sources.Domain.Enemies;
 using Sources.Domain.Upgrades;
 using Sources.Domain.Weapons;
