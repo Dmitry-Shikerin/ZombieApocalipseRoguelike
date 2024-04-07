@@ -1,10 +1,11 @@
 ﻿using System;
 using Sources.Presentations.Views;
+using Sources.PresentationsInterfaces.Triggers;
 using UnityEngine;
 
-namespace Sources.Presentations.Triggers
+namespace Sources.Presentations.Triggers.Common
 {
-    public abstract class TriggerBase<T> : View
+    public abstract class TriggerBase<T> : View, ITrigger<T>
     {
         public event Action<T> Entered;
         public event Action<T> Exited;

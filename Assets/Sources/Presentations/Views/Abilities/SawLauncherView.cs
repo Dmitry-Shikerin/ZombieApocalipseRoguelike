@@ -4,23 +4,24 @@ using Sources.Presentations.Triggers;
 using Sources.PresentationsInterfaces.Views.Abilities;
 using Sources.PresentationsInterfaces.Views.Enemies;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sources.Presentations.Views.Abilities
 {
     public class SawLauncherView : PresentableView<SawLauncherPresenter>, ISawLauncherView
     {
-        [Required] [SerializeField] private EnemyTrigger _enemyTrigger;
+        [FormerlySerializedAs("_enemyTrigger")] [Required] [SerializeField] private EnemyHealthTrigger _enemyHealthTrigger;
 
         protected override void OnAfterEnable()
         {
-            _enemyTrigger.Entered += OnEnter;
-            _enemyTrigger.Exited += OnExit;
+            _enemyHealthTrigger.Entered += OnEnter;
+            _enemyHealthTrigger.Exited += OnExit;
         }
 
         protected override void OnAfterDisable()
         {
-            _enemyTrigger.Entered -= OnEnter;
-            _enemyTrigger.Exited -= OnExit;
+            _enemyHealthTrigger.Entered -= OnEnter;
+            _enemyHealthTrigger.Exited -= OnExit;
         }
 
         private void OnEnter(IEnemyHealthView enemy) =>
