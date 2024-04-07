@@ -43,6 +43,7 @@ namespace Sources.Controllers.Bears.Movements.States
         {
         }
 
+        //TODO вынести в MVC и сервис или чисто в сервис
         private void OnAttack()
         {
             _bearView.TargetEnemyHealth.TakeDamage(_bearAttacker.Damage);

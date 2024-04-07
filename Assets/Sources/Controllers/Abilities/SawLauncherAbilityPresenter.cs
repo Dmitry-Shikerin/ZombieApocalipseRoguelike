@@ -27,6 +27,8 @@ namespace Sources.Controllers.Abilities
 
         public override void Enable()
         {
+            HideSawLauncherViews();
+            
             _updateRegister.Register(OnUpdate);
         }
 
@@ -35,10 +37,18 @@ namespace Sources.Controllers.Abilities
             _updateRegister.UnRegister(OnUpdate);
         }
 
+        
+        
         //TODO возможно инстанциировать и фолловить за персонажем
         private void OnUpdate(float deltaTime)
         {
             _sawLauncherAbilityView.Rotate(new Vector3(0, 1, 0));
+        }
+
+        private void HideSawLauncherViews()
+        {
+            foreach (SawLauncherView sawLauncherView in _sawLauncherAbilityView.SawLauncherViews)
+                sawLauncherView.Hide();
         }
     }
 }

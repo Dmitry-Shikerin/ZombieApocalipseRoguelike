@@ -2,6 +2,6 @@
 {
     public class SawLauncher
     {
-        
+        public float Damage { get; } = 2f;
     }
 }

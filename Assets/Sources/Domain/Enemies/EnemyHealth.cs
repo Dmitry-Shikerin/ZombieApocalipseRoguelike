@@ -30,6 +30,7 @@ namespace Sources.Domain.Enemies
 
         public void TakeDamage(float damage)
         {
+            Debug.Log($"Enemy took damage {damage}");
             CurrentHealth -= damage;
         }
     }

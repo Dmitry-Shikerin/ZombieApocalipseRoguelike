@@ -3,6 +3,7 @@ using Sources.Controllers.Common;
 using Sources.Domain.Abilities;
 using Sources.Presentations.Views.Abilities;
 using Sources.PresentationsInterfaces.Views.Abilities;
+using Sources.PresentationsInterfaces.Views.Enemies;
 
 namespace Sources.Controllers.Abilities
 {
@@ -18,5 +19,8 @@ namespace Sources.Controllers.Abilities
             _sawLauncher = sawLauncher ?? throw new ArgumentNullException(nameof(sawLauncher));
             _sawLauncherView = sawLauncherView ?? throw new ArgumentNullException(nameof(sawLauncherView));
         }
+
+        public void DealDamage(IEnemyHealthView enemy) =>
+            enemy.TakeDamage(_sawLauncher.Damage);
     }
 }

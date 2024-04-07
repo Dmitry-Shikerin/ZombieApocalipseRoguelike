@@ -5,11 +5,13 @@ using Sources.Domain.Abilities;
 using Sources.Domain.Bears;
 using Sources.Domain.Characters;
 using Sources.Domain.Enemies;
+using Sources.Domain.Upgrades;
 using Sources.Domain.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Enemies;
+using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Characters;
@@ -27,13 +29,15 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly CharacterViewFactory _characterViewFactory;
         private readonly BearViewFactory _bearViewFactory;
         private readonly EnemyCommonViewFactory _enemyCommonViewFactory;
+        private readonly UpgradeViewFactory _upgradeViewFactory;
 
         public GameplaySceneViewFactory(
             GameplayHud gameplayHud,
             GameplayFormServiceFactory gameplayFormServiceFactory,
             CharacterViewFactory characterViewFactory,
             BearViewFactory bearViewFactory,
-            EnemyCommonViewFactory enemyCommonViewFactory)
+            EnemyCommonViewFactory enemyCommonViewFactory,
+            UpgradeViewFactory upgradeViewFactory)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ?? 
@@ -42,6 +46,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
                                     ?? throw new ArgumentNullException(nameof(characterViewFactory));
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
             _enemyCommonViewFactory = enemyCommonViewFactory ?? throw new ArgumentNullException(nameof(enemyCommonViewFactory));
+            _upgradeViewFactory = upgradeViewFactory ?? throw new ArgumentNullException(nameof(upgradeViewFactory));
         }
 
         public void Create()
@@ -49,6 +54,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             //FormService
             _gameplayFormServiceFactory.Create().Show<HudFormView>();
 
+            //Upgrades
+            Upgrader sawAbilityUpgrader = new Upgrader(2, 3, 0, 2);
+            // _upgradeViewFactory.Create(sawAbilityUpgrader, )
+            CharacterUpgraders characterUpgraders = new CharacterUpgraders(sawAbilityUpgrader);
+            
             //Character
             MiniGun minigun = new MiniGun(20, 0.5f);
             Character character = new Character(

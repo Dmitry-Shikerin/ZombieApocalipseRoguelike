@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using Sirenix.OdinInspector;
-using Sources.Controllers.Forms.Gameplay;
+﻿using Sirenix.OdinInspector;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Characters;
@@ -8,6 +6,7 @@ using Sources.Infrastructure.Factories.Controllers.Common;
 using Sources.Infrastructure.Factories.Controllers.Enemies;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
+using Sources.Infrastructure.Factories.Controllers.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Abilities;
@@ -16,6 +15,7 @@ using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.Infrastructure.Factories.Views.Enemies;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.InputServices;
@@ -24,7 +24,6 @@ using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
-using Sources.Presentations.Views.Abilities;
 using UnityEngine;
 using Zenject;
 
@@ -48,6 +47,7 @@ namespace Sources.Infrastructure.DIContainers
             BindWeapons();
             BindBear();
             BindEnemy();
+            BindUpgrades();
         }
 
         private void BindServices()
@@ -106,6 +106,15 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<EnemyHealthViewFactory>().AsSingle();
             Container.Bind<EnemyPresenterFactory>().AsSingle();
             Container.Bind<EnemyViewFactory>().AsSingle();
+        }
+
+        private void BindUpgrades()
+        {
+            Container.Bind<UpgradePresenterFactory>().AsSingle();
+            Container.Bind<UpgradeViewFactory>().AsSingle();
+
+            Container.Bind<UpgradeUiPresenterFactory>().AsSingle();
+            Container.Bind<UpgradeUiFactory>().AsSingle();
         }
     }
 }
