@@ -22,7 +22,7 @@ namespace Sources.Presentations.Views.Bullets
 
         private void OnParticleSystemStopped()
         {
-            
+            Debug.Log($"Particle system stopped");
         }
 
         public void Construct(IMiniGunView miniGunView) =>
