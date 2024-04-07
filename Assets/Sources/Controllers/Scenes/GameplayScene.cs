@@ -32,7 +32,7 @@ namespace Sources.Controllers.Scenes
         public void Enter(object payload = null)
         {
             _gameplaySceneViewFactory.Create();
-            _localizationService.Translate("en");
+            _localizationService.Translate();
         }
 
         public void Exit()

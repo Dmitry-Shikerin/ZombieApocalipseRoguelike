@@ -1,26 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sources.InfrastructureInterfaces.Services.Localizations;
+using Sources.InfrastructureInterfaces.Services.Localizations.Translates.Common;
+using Sources.PresentationsInterfaces.UI.Texts;
 
 namespace Sources.Infrastructure.Services.Localizations.Translates.Common
 {
     public abstract class TranslateServiceBase : ITranslateService
     {
-        protected Dictionary<string, string> Translates = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _translates = new Dictionary<string, string>();
 
         protected TranslateServiceBase()
         {
-            FillTranslates();
+            FillTranslates(_translates);
         }
 
-        public string GetTranslate(string key)
+        public void Translate(ITextView textView)
         {
-            if(Translates.ContainsKey(key) == false)
+            if(_translates.ContainsKey(textView.Id) == false)
                 throw new NullReferenceException("Transleted key not found");
             
-            return Translates[key];
+            textView.SetText(_translates[textView.Id]);
         }
 
-        protected abstract void FillTranslates();
+        protected abstract void FillTranslates(Dictionary<string, string> translates);
     }
 }

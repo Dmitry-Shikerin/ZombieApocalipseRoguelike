@@ -29,6 +29,7 @@ using Sources.Infrastructure.Services.Spawners;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.Factories.Views.Bullets;
 using Sources.InfrastructureInterfaces.Services.Localizations;
+using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.UI.Huds;
@@ -73,7 +74,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<OverlapService>().AsSingle();
             Container.Bind<IObjectPool<BulletView>>().To<ObjectPool<BulletView>>().AsSingle();
             Container.Bind<IBulletSpawner>().To<BulletSpawner>().AsSingle();
-            Container.Bind<ILocalizationService>().To<LocalizationService>().AsSingle();
+            Container.Bind<ILocalizationService>().To<TestLocalizationService>().AsSingle();
             Container.Bind<ITurkishTranslateService>().To<TurkishTranslateService>().AsSingle();
             Container.Bind<IEnglishTranslateService>().To<EnglishTranslateService>().AsSingle();
             Container.Bind<IRussianTranslateService>().To<RussianTranslateService>().AsSingle();
