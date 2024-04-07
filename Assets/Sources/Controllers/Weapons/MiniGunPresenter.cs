@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Common;
 using Sources.Domain.Weapons;
+using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Weapons;
 
 namespace Sources.Controllers.Weapons
@@ -28,9 +29,12 @@ namespace Sources.Controllers.Weapons
             _miniGun.Attacked -= OnAttack;
         }
 
+        //TODO как сделать грамотнее?
         private void OnAttack()
         {
-            
         }
+
+        public void DealDamage(IEnemyHealthView enemyHealthView) =>
+            enemyHealthView.TakeDamage(_miniGun.Damage);
     }
 }

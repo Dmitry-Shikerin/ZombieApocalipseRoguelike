@@ -60,7 +60,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             CharacterUpgraders characterUpgraders = new CharacterUpgraders(sawAbilityUpgrader);
             
             //Character
-            MiniGun minigun = new MiniGun(20, 0.5f);
+            MiniGun minigun = new MiniGun(2, 0.5f);
             Character character = new Character(
                 new CharacterMovement(),
                 new CharacterAttacker(minigun),
