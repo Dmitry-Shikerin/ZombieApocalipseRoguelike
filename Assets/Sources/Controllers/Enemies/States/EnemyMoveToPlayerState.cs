@@ -2,6 +2,7 @@
 using Sources.Domain.Enemies;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.PresentationsInterfaces.Views.Enemies;
+using UnityEngine;
 
 namespace Sources.Controllers.Enemies.States
 {
@@ -20,6 +21,7 @@ namespace Sources.Controllers.Enemies.States
 
         public override void Enter()
         {
+            Debug.Log("Enemy in moveToPlayerState");
             _enemyAnimation.PlayWalk();
         }
 

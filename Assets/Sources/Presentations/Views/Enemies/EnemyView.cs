@@ -18,14 +18,14 @@ namespace Sources.Presentations.Views.Enemies
         public EnemyHealthView EnemyHealthView => _healthView;
         public HealthUi HealthUi => _healthUi;
         public EnemyAnimation EnemyAnimation => _enemyAnimation;
+        public float StoppingDistance => _navMeshAgent.stoppingDistance;
+        public Vector3 Position => transform.position;
         public ICharacterMovementView CharacterMovementView { get; private set; }
 
         public void Move(Vector3 direction) =>
             _navMeshAgent.SetDestination(direction);
 
-        public void SetTargetFollow(ICharacterMovementView target)
-        {
+        public void SetTargetFollow(ICharacterMovementView target) =>
             CharacterMovementView = target;
-        }
     }
 }

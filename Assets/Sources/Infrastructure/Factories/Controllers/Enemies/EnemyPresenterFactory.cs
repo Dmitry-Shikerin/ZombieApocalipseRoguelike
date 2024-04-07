@@ -6,6 +6,7 @@ using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.Presentations.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies;
+using UnityEngine;
 
 namespace Sources.Infrastructure.Factories.Controllers.Enemies
 {
@@ -22,13 +23,24 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies
         {
             EnemyInitializeState initializeState = new EnemyInitializeState(enemy, enemyAnimation);
             EnemyMoveToPlayerState moveToPlayerState = new EnemyMoveToPlayerState(enemy, enemyView, enemyAnimation);
-            EnemyAttackState attackState = new EnemyAttackState();
+            EnemyAttackState attackState = new EnemyAttackState(enemy, enemyView, enemyAnimation);
             EnemyDieState dieState = new EnemyDieState();
-            
-            FiniteTransition toMoveToPlayerTransition = new FiniteTransitionBase(
-                moveToPlayerState, () => enemy.IsInitialized);
-            initializeState.AddTransition(toMoveToPlayerTransition);
 
+            FiniteTransition toMoveToPlayerTransition = new FiniteTransitionBase(
+                moveToPlayerState,
+                () =>
+                    enemy.IsInitialized &&
+                    Vector3.Distance(
+                        enemyView.Position,
+                        enemyView.CharacterMovementView.Position) > enemyView.StoppingDistance);
+            initializeState.AddTransition(toMoveToPlayerTransition);
+            attackState.AddTransition(toMoveToPlayerTransition);
+            
+            FiniteTransitionBase toAttackTransition = new FiniteTransitionBase(
+                attackState, () => Vector3.Distance(
+                    enemyView.Position, enemyView.CharacterMovementView.Position) < enemyView.StoppingDistance);
+            moveToPlayerState.AddTransition(toAttackTransition);
+            
             return new EnemyPresenter(
                 initializeState,
                 enemy,

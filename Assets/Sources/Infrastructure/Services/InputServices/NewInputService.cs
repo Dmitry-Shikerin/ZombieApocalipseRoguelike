@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Sources.Controllers.LayerMasks;
 using Sources.Domain.Inputs;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Sources.Infrastructure.Services.InputServices
 {
@@ -14,8 +13,9 @@ namespace Sources.Infrastructure.Services.InputServices
         public NewInputService()
         {
             _inputManager = new InputManager();
-            _inputManager.Enable();
             InputData = new InputData();
+            
+            _inputManager.Enable();
         }
         
         public InputData InputData { get; }
@@ -50,7 +50,7 @@ namespace Sources.Infrastructure.Services.InputServices
             Ray cameraPosition = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(cameraPosition,
-                    out RaycastHit raycastHit, float.MaxValue, 1 << LayerMask.NameToLayer("Plane")) == false)
+                    out RaycastHit raycastHit, float.MaxValue, Layer.Plane) == false)
                 return false;
 
             lookDirection = raycastHit.point;
