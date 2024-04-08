@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Sources.PresentationsInterfaces.Views.Bears;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Presentations.Views.Bears
 {
@@ -68,7 +67,7 @@ namespace Sources.Presentations.Views.Bears
             _animator.SetBool("IsAttack", false);
         }
         
-        // [UsedImplicitly]
+        [UsedImplicitly]
         private void OnAttack() =>
             Attacking?.Invoke();
 

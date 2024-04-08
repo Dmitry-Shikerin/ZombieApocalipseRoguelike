@@ -30,14 +30,21 @@ namespace Sources.Controllers.Enemies.States
         {
             Debug.Log("Enemy in attackState");
             _enemyAnimation.PlayAttack();
+            _enemyAnimation.Attacking += OnAttack;
         }
 
         public override void Exit()
         {
+            _enemyAnimation.Attacking -= OnAttack;
         }
 
         public override void Update(float deltaTime)
         {
+        }
+
+        private void OnAttack()
+        {
+            _enemyView.CharacterHealthView.TakeDamage(_enemy.EnemyAttacker.Damage);
         }
     }
 }

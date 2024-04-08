@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Sources.PresentationsInterfaces.Views.Enemies;
 using UnityEngine;
@@ -19,6 +20,8 @@ namespace Sources.Presentations.Views.Enemies
             _stoppingAnimations.Add(StopDie);
             _stoppingAnimations.Add(StopWalk);
         }
+
+        public event Action Attacking;
 
         public void PlayWalk()
         {
@@ -47,6 +50,10 @@ namespace Sources.Presentations.Views.Enemies
             
             _animator.SetBool("IsAttack", true);
         }
+        
+        [UsedImplicitly]
+        private void OnAttack() =>
+            Attacking?.Invoke();
 
         private void StopWalk()
         {

@@ -9,6 +9,7 @@ using Sources.Infrastructure.Factories.Controllers.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
+using Sources.Infrastructure.Factories.Services.Localizations;
 using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Bullets;
@@ -27,6 +28,7 @@ using Sources.Infrastructure.Services.ObjectPools;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.Services.Spawners;
 using Sources.Infrastructure.Services.UpdateServices;
+using Sources.InfrastructureInterfaces.Factories.Services;
 using Sources.InfrastructureInterfaces.Factories.Views.Bullets;
 using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
@@ -75,9 +77,12 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IObjectPool<BulletView>>().To<ObjectPool<BulletView>>().AsSingle();
             Container.Bind<IBulletSpawner>().To<BulletSpawner>().AsSingle();
             Container.Bind<ILocalizationService>().To<TestLocalizationService>().AsSingle();
-            Container.Bind<ITurkishTranslateService>().To<TurkishTranslateService>().AsSingle();
-            Container.Bind<IEnglishTranslateService>().To<EnglishTranslateService>().AsSingle();
-            Container.Bind<IRussianTranslateService>().To<RussianTranslateService>().AsSingle();
+            Container.Bind<ITranslateServiceFactory<ITurkishTranslateService>>()
+                .To<TurkishTranslateServiceFactory>().AsSingle();
+            Container.Bind<ITranslateServiceFactory<IRussianTranslateService>>()
+                .To<RussianTranslateServiceFactory>().AsSingle();
+            Container.Bind<ITranslateServiceFactory<IEnglishTranslateService>>()
+                .To<EnglishTranslateServiceFactory>().AsSingle();
         }
 
         private void BindFormFactories()
@@ -97,6 +102,9 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<CharacterAttackerPresenterFactory>().AsSingle();
             Container.Bind<CharacterAttackerViewFactory>().AsSingle();
+
+            Container.Bind<CharacterHealthPresenterFactory>().AsSingle();
+            Container.Bind<CharacterHealthViewFactory>().AsSingle();
         }
 
         private void BindBear()

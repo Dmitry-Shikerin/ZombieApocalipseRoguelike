@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Domain.Characters;
 using Sources.Infrastructure.Factories.Views.Abilities;
+using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Presentations.Views.Abilities;
 using Sources.Presentations.Views.Characters;
@@ -15,13 +16,17 @@ namespace Sources.Infrastructure.Factories.Views.Characters
         private readonly MiniGunViewFactory _miniGunViewFactory;
         private readonly SawLauncherAbilityViewFactory _sawLauncherAbilityViewFactory;
         private readonly SawLauncherViewFactory _sawLauncherViewFactory;
-        
+        private readonly CharacterHealthViewFactory _characterHealthViewFactory;
+        private readonly HealthUiFactory _healthUiFactory;
+
         public CharacterViewFactory(
             CharacterMovementViewFactory characterMovementViewFactory,
             CharacterAttackerViewFactory characterAttackerViewFactory,
             MiniGunViewFactory miniGunViewFactory,
             SawLauncherAbilityViewFactory sawLauncherAbilityViewFactory,
-            SawLauncherViewFactory sawLauncherViewFactory)
+            SawLauncherViewFactory sawLauncherViewFactory,
+            CharacterHealthViewFactory characterHealthViewFactory,
+            HealthUiFactory healthUiFactory)
         {
             _characterMovementViewFactory = characterMovementViewFactory 
                                             ?? throw new ArgumentNullException(nameof(characterMovementViewFactory));
@@ -32,6 +37,9 @@ namespace Sources.Infrastructure.Factories.Views.Characters
                                              throw new ArgumentNullException(nameof(sawLauncherAbilityViewFactory));
             _sawLauncherViewFactory = sawLauncherViewFactory ?? 
                                       throw new ArgumentNullException(nameof(sawLauncherViewFactory));
+            _characterHealthViewFactory = characterHealthViewFactory ??
+                                          throw new ArgumentNullException(nameof(characterHealthViewFactory));
+            _healthUiFactory = healthUiFactory ?? throw new ArgumentNullException(nameof(healthUiFactory));
         }
 
         public CharacterView Create(Character character, CharacterView characterView)
@@ -42,6 +50,9 @@ namespace Sources.Infrastructure.Factories.Views.Characters
                 characterView.CharacterAnimationView);
             _characterAttackerViewFactory.Create(character.CharacterAttacker, characterView.CharacterAttackerView);
             _miniGunViewFactory.Create(character.MiniGun, characterView.MiniGunView);
+
+            _characterHealthViewFactory.Create(character.CharacterHealth, characterView.CharacterHealthView);
+            _healthUiFactory.Create(character.CharacterHealth, characterView.HealthUi);
 
             SawLauncherAbilityView sawLauncherAbilityView = Object.FindObjectOfType<SawLauncherAbilityView>();
             sawLauncherAbilityView.SetTargetFollow(characterView.transform);

@@ -21,11 +21,16 @@ namespace Sources.Presentations.Views.Enemies
         public float StoppingDistance => _navMeshAgent.stoppingDistance;
         public Vector3 Position => transform.position;
         public ICharacterMovementView CharacterMovementView { get; private set; }
+        public ICharacterHealthView CharacterHealthView { get; private set; }
+
 
         public void Move(Vector3 direction) =>
             _navMeshAgent.SetDestination(direction);
 
         public void SetTargetFollow(ICharacterMovementView target) =>
             CharacterMovementView = target;
+
+        public void SetCharacterHealth(ICharacterHealthView characterHealthView) =>
+            CharacterHealthView = characterHealthView;
     }
 }

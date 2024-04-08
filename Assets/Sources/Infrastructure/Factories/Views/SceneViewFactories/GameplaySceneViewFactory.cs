@@ -65,6 +65,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             //Character
             MiniGun minigun = new MiniGun(2, 0.1f);
             Character character = new Character(
+                new CharacterHealth(100),
                 new CharacterMovement(),
                 new CharacterAttacker(minigun),
                 minigun,
@@ -88,11 +89,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             bearView.SetTargetFollow(characterView.CharacterMovementView);
             
             //Enemy
+            EnemyAttacker enemyAttacker = new EnemyAttacker(3);
             EnemyHealth enemyHealth = new EnemyHealth(100);
-            Enemy enemy = new Enemy(enemyHealth);
+            Enemy enemy = new Enemy(enemyHealth, enemyAttacker);
             EnemyView enemyView = Object.FindObjectOfType<EnemyView>();
             _enemyCommonViewFactory.Create(enemy, enemyView);
             enemyView.SetTargetFollow(characterView.CharacterMovementView);
+            enemyView.SetCharacterHealth(characterView.CharacterHealthView);
             
             //CinemachineService
             _gameplayHud.CinemachineCameraService.Follow(characterView.transform);

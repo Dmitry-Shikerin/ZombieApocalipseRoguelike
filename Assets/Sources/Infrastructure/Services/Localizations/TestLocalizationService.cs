@@ -1,39 +1,42 @@
 ﻿using System;
 using Sources.Domain.Localizations;
+using Sources.InfrastructureInterfaces.Factories.Services;
 using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
 using Sources.InfrastructureInterfaces.Services.Localizations.Translates.Common;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.Localizations;
+using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Localizations
 {
     public class TestLocalizationService : LocalizationServiceBase
     {
         public TestLocalizationService(
-            ILocalizationView localizationView,
-            IRussianTranslateService russianTranslateService,
-            ITurkishTranslateService turkishTranslateService,
-            IEnglishTranslateService englishTranslateService)
+            ILocalizationView localizationView, 
+            ITranslateServiceFactory<IEnglishTranslateService> englishTranslateFactory, 
+            ITranslateServiceFactory<IRussianTranslateService> russianTranslateFactory, 
+            ITranslateServiceFactory<ITurkishTranslateService> turkishTranslateFactory) 
             : base(
-                localizationView,
-                russianTranslateService,
-                turkishTranslateService,
-                englishTranslateService)
+                localizationView, 
+                englishTranslateFactory, 
+                russianTranslateFactory, 
+                turkishTranslateFactory)
         {
         }
 
         public override void Translate()
         {
-            ITranslateService translator = LocalizationView.Localization switch
+            string key = LocalizationView.Localization switch
             {
-                Localization.English => EnglishTranslateService,
-                Localization.Turkish => TurkishTranslateService,
-                Localization.Russian => RussianTranslateService,
-                _ => EnglishTranslateService,
+                Localization.English => "en",
+                Localization.Turkish => "tr",
+                Localization.Russian => "ru",
+                _ => "en",
             };
-
-            Translate(translator);
+            
+            Debug.Log("Translate: " + key);
+            Translate(key);
         }
     }
 }
