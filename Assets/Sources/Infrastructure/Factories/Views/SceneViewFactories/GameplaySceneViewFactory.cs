@@ -14,6 +14,7 @@ using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Enemies;
 using Sources.Infrastructure.Factories.Views.Upgrades;
+using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Characters;
@@ -32,6 +33,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly BearViewFactory _bearViewFactory;
         private readonly EnemyCommonViewFactory _enemyCommonViewFactory;
         private readonly UpgradeViewFactory _upgradeViewFactory;
+        private readonly ILoadService _loadService;
 
         public GameplaySceneViewFactory(
             GameplayHud gameplayHud,
@@ -39,7 +41,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             CharacterViewFactory characterViewFactory,
             BearViewFactory bearViewFactory,
             EnemyCommonViewFactory enemyCommonViewFactory,
-            UpgradeViewFactory upgradeViewFactory)
+            UpgradeViewFactory upgradeViewFactory,
+            ILoadService loadService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ?? 
@@ -49,6 +52,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
             _enemyCommonViewFactory = enemyCommonViewFactory ?? throw new ArgumentNullException(nameof(enemyCommonViewFactory));
             _upgradeViewFactory = upgradeViewFactory ?? throw new ArgumentNullException(nameof(upgradeViewFactory));
+            _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
         }
 
         public void Create()
@@ -57,10 +61,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _gameplayFormServiceFactory.Create().Show<HudFormView>();
 
             //Upgrades
-            Upgrader sawLauncherUpgrader = new Upgrader(2, 3, 0, 2);
-            Upgrader sawLauncherAbilityUpgrader = new Upgrader(0, 3, 2, 0);
+            Upgrader sawLauncherUpgrader = new Upgrader(
+                2, 3, 0, 2, "SawLauncherUpgrader");
+            Upgrader sawLauncherAbilityUpgrader = new Upgrader(
+                0, 3, 2, 0, "SawLauncherAbilityUpgrader");
             // _upgradeViewFactory.Create(sawAbilityUpgrader, )
             CharacterUpgraders characterUpgraders = new CharacterUpgraders(sawLauncherUpgrader);
+            _loadService.Register(sawLauncherAbilityUpgrader);
             
             //Character
             MiniGun minigun = new MiniGun(2, 0.1f);

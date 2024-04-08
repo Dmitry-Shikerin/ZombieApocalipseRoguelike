@@ -1,8 +1,9 @@
 using System;
+using Sources.DomainInterfaces.Data;
 
 namespace Sources.DomainInterfaces.Upgrades
 {
-    public interface IUpgrader
+    public interface IUpgrader : IDataModel
     {
         event Action LevelChanged;
 

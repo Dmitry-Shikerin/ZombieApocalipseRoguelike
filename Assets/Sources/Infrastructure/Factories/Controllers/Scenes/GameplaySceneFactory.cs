@@ -6,6 +6,7 @@ using Sources.ControllersInterfaces.Scenes;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Factories.Controllers.Scenes;
 using Sources.InfrastructureInterfaces.Services.InputServices;
+using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 
@@ -17,18 +18,21 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
         private readonly IInputServiceUpdater _inputServiceUpdater;
         private readonly GameplaySceneViewFactory _gameplaySceneViewFactory;
         private readonly ILocalizationService _localizationService;
+        private readonly ILoadService _loadService;
 
         public GameplaySceneFactory(
             IUpdateService updateService,
             IInputServiceUpdater inputServiceUpdater,
             GameplaySceneViewFactory gameplaySceneViewFactory,
-            ILocalizationService localizationService)
+            ILocalizationService localizationService,
+            ILoadService loadService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
             _gameplaySceneViewFactory = gameplaySceneViewFactory ??
                                         throw new ArgumentNullException(nameof(gameplaySceneViewFactory));
             _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
+            _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
         }
 
         public async UniTask<IScene> Create(object payload)
@@ -37,7 +41,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
                 _updateService,
                 _inputServiceUpdater,
                 _gameplaySceneViewFactory,
-                _localizationService);
+                _localizationService,
+                _loadService);
         }
     }
 }

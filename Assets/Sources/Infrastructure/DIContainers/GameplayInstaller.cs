@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using Sources.Domain.Data;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Characters;
@@ -8,6 +9,7 @@ using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Weapons;
+using Sources.Infrastructure.Factories.Domain.Data;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Services.Localizations;
 using Sources.Infrastructure.Factories.Views.Abilities;
@@ -22,14 +24,19 @@ using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.InputServices;
 using Sources.Infrastructure.Services.Linecasts;
+using Sources.Infrastructure.Services.LoadServices;
+using Sources.Infrastructure.Services.LoadServices.Data;
 using Sources.Infrastructure.Services.Localizations;
 using Sources.Infrastructure.Services.Localizations.Translates;
 using Sources.Infrastructure.Services.ObjectPools;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.Services.Spawners;
 using Sources.Infrastructure.Services.UpdateServices;
+using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Services;
 using Sources.InfrastructureInterfaces.Factories.Views.Bullets;
+using Sources.InfrastructureInterfaces.Services.LoadServices;
+using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
@@ -65,6 +72,7 @@ namespace Sources.Infrastructure.DIContainers
             BindBear();
             BindEnemy();
             BindUpgrades();
+            BindDtoFactories();
         }
 
         private void BindServices()
@@ -83,8 +91,16 @@ namespace Sources.Infrastructure.DIContainers
                 .To<RussianTranslateServiceFactory>().AsSingle();
             Container.Bind<ITranslateServiceFactory<IEnglishTranslateService>>()
                 .To<EnglishTranslateServiceFactory>().AsSingle();
+            Container.Bind<ILoadService>().To<LoadService>().AsSingle();
+            Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
         }
 
+        private void BindDtoFactories()
+        {
+            Container.Bind<IDtoFactory<SawLauncherAbilityUpgradeDto>>()
+                .To<SawLauncherAbilityUpgradeDtoFactory>().AsSingle();
+        }
+        
         private void BindFormFactories()
         {
             Container.Bind<GameplayFormServiceFactory>().AsSingle();
