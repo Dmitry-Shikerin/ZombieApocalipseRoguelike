@@ -13,5 +13,11 @@ namespace Sources.Presentations.Views
 
         public void SetParent(Transform parent) =>
             gameObject.transform.SetParent(parent);
+
+        public void SetLocalePosition(Vector3 position) =>
+            transform.localPosition = position;
+
+        public void SetPosition(Vector3 position) =>
+            transform.position = position;
     }
 }

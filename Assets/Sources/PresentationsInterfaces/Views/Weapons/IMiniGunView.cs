@@ -1,6 +1,10 @@
+using Sources.Presentations.Views.Weapons;
+
 namespace Sources.PresentationsInterfaces.Views.Weapons
 {
-    public interface IMiniGunView
+    public interface IMiniGunView : IWeaponView
     {
+        void PlayFireParticles();
+        void StopFireParticles();
     }
 }

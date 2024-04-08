@@ -19,7 +19,8 @@ namespace Sources.Infrastructure.Factories.Views.Enemies
 
         public IEnemyView Create(Enemy enemy, EnemyView enemyView)
         {
-            EnemyPresenter enemyPresenter = _enemyPresenterFactory.Create(enemy, enemyView);
+            EnemyPresenter enemyPresenter = _enemyPresenterFactory.Create(
+                enemy, enemyView, enemyView.EnemyAnimation);
             
             enemyView.Construct(enemyPresenter);
             

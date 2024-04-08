@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Characters.Attackers;
+using Sources.Domain.Characters.Attackers;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Character;

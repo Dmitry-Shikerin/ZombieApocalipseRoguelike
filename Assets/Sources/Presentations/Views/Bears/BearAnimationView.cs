@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Sources.PresentationsInterfaces.Views.Bears;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Presentations.Views.Bears
 {
@@ -13,7 +12,6 @@ namespace Sources.Presentations.Views.Bears
         [Required] [SerializeField] private Animator _animator;
         
         private readonly List<Action> _stoppingAnimations = new List<Action>();
-        
         
         public event Action Attacking;
 

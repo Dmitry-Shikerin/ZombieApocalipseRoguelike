@@ -8,5 +8,6 @@ namespace Sources.Domain.Inputs
         public Vector3 MoveDirection { get; set; }
         public Vector3 LookPosition { get; set; }
         public float Speed { get; set; }
+        public bool IsAttacking { get; set; }
     }
 }

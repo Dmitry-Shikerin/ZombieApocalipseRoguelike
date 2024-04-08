@@ -10,11 +10,21 @@ namespace Sources.Presentations.Views
         private void OnEnable()
         {
             Presenter?.Enable();
+            OnAfterEnable();
         }
 
         private void OnDisable()
         {
+            OnAfterDisable();
             Presenter?.Disable();
+        }
+
+        protected virtual void OnAfterEnable()
+        {
+        }
+
+        protected virtual void OnAfterDisable()
+        {
         }
 
         public void Construct(T presenter)

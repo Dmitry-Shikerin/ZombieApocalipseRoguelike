@@ -7,5 +7,7 @@ namespace Sources.PresentationsInterfaces.Views
         void Show();
         void Hide();
         void SetParent(Transform parent);
+        void SetLocalePosition(Vector3 position);
+        void SetPosition(Vector3 position);
     }
 }

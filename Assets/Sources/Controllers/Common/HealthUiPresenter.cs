@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.DomainInterfaces.Healths;
 using Sources.PresentationsInterfaces.Views.Common;
+using UnityEngine;
 
 namespace Sources.Controllers.Common
 {
@@ -22,7 +23,7 @@ namespace Sources.Controllers.Common
 
         public override void Disable()
         {
-            _health.HealthChanged += OnHealthChanged;
+            _health.HealthChanged -= OnHealthChanged;
         }
 
         private void OnHealthChanged()

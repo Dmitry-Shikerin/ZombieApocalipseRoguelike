@@ -1,7 +1,7 @@
-﻿using Sources.Domain.Inputs;
+﻿using Sources.Controllers.LayerMasks;
+using Sources.Domain.Inputs;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Sources.Infrastructure.Services.InputServices
 {
@@ -13,23 +13,21 @@ namespace Sources.Infrastructure.Services.InputServices
         public NewInputService()
         {
             _inputManager = new InputManager();
-            _inputManager.Enable();
             InputData = new InputData();
-
-            //TODO сделать отписку
-            _inputManager.Gameplay.Attack.performed += OnAttack;
+            
+            _inputManager.Enable();
         }
-
-        private void OnAttack(InputAction.CallbackContext obj)
-        {
-        }
-
+        
         public InputData InputData { get; }
 
         public void Update(float deltaTime)
         {
             UpdateMovement();
+            UpdateAttack();
         }
+
+        private void UpdateAttack() =>
+            InputData.IsAttacking = _inputManager.Gameplay.Attack.IsPressed();
 
         private void UpdateMovement()
         {
@@ -52,7 +50,7 @@ namespace Sources.Infrastructure.Services.InputServices
             Ray cameraPosition = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(cameraPosition,
-                    out RaycastHit raycastHit, float.MaxValue, 1 << LayerMask.NameToLayer("Plane")) == false)
+                    out RaycastHit raycastHit, float.MaxValue, Layer.Plane) == false)
                 return false;
 
             lookDirection = raycastHit.point;

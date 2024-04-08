@@ -1,27 +1,51 @@
-﻿using System.ComponentModel;
-using Sirenix.OdinInspector;
-using Sources.Controllers.Forms.Gameplay;
+﻿using Sirenix.OdinInspector;
+using Sources.Domain.Data;
+using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Common;
 using Sources.Infrastructure.Factories.Controllers.Enemies;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
+using Sources.Infrastructure.Factories.Controllers.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Weapons;
+using Sources.Infrastructure.Factories.Domain.Data;
 using Sources.Infrastructure.Factories.Services.FormServices;
+using Sources.Infrastructure.Factories.Services.Localizations;
+using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Bears;
+using Sources.Infrastructure.Factories.Views.Bullets;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.Infrastructure.Factories.Views.Enemies;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.InputServices;
 using Sources.Infrastructure.Services.Linecasts;
+using Sources.Infrastructure.Services.LoadServices;
+using Sources.Infrastructure.Services.LoadServices.Data;
+using Sources.Infrastructure.Services.Localizations;
+using Sources.Infrastructure.Services.Localizations.Translates;
+using Sources.Infrastructure.Services.ObjectPools;
 using Sources.Infrastructure.Services.Overlaps;
+using Sources.Infrastructure.Services.Spawners;
 using Sources.Infrastructure.Services.UpdateServices;
+using Sources.InfrastructureInterfaces.Factories.Domain.Data;
+using Sources.InfrastructureInterfaces.Factories.Services;
+using Sources.InfrastructureInterfaces.Factories.Views.Bullets;
+using Sources.InfrastructureInterfaces.Services.LoadServices;
+using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
+using Sources.InfrastructureInterfaces.Services.Localizations;
+using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
+using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
+using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
+using Sources.Presentations.Views.Bullets;
+using Sources.Presentations.Views.Localizations;
+using Sources.PresentationsInterfaces.Views.Localizations;
 using UnityEngine;
 using Zenject;
 
@@ -31,11 +55,13 @@ namespace Sources.Infrastructure.DIContainers
     {
         [Required][SerializeField] private GameplayHud _gameplayHud;
         [Required] [SerializeField] private ContainerView _containerView;
+        [Required] [SerializeField] private LocalizationView _localizationView;
         
         public override void InstallBindings()
         {
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
+            Container.Bind<ILocalizationView>().FromInstance(_localizationView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
             Container.Bind<GameplaySceneViewFactory>().AsSingle();
             
@@ -45,6 +71,8 @@ namespace Sources.Infrastructure.DIContainers
             BindWeapons();
             BindBear();
             BindEnemy();
+            BindUpgrades();
+            BindDtoFactories();
         }
 
         private void BindServices()
@@ -54,8 +82,27 @@ namespace Sources.Infrastructure.DIContainers
             Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
             Container.Bind<LinecastService>().AsSingle();
             Container.Bind<OverlapService>().AsSingle();
+            Container.Bind<IObjectPool<BulletView>>().To<ObjectPool<BulletView>>().AsSingle();
+            Container.Bind<IBulletSpawner>().To<BulletSpawner>().AsSingle();
+            Container.Bind<ILocalizationService>().To<TestLocalizationService>().AsSingle();
+            Container.Bind<ITranslateServiceFactory<ITurkishTranslateService>>()
+                .To<TurkishTranslateServiceFactory>().AsSingle();
+            Container.Bind<ITranslateServiceFactory<IRussianTranslateService>>()
+                .To<RussianTranslateServiceFactory>().AsSingle();
+            Container.Bind<ITranslateServiceFactory<IEnglishTranslateService>>()
+                .To<EnglishTranslateServiceFactory>().AsSingle();
+            Container.Bind<ILoadService>().To<LoadService>().AsSingle();
+            Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
         }
 
+        private void BindDtoFactories()
+        {
+            Container.Bind<IDtoFactory<SawLauncherAbilityUpgradeDto>>()
+                .To<SawLauncherAbilityUpgradeDtoFactory>().AsSingle();
+            Container.Bind<IDtoFactory<SawLauncherUpgradeDto>>()
+                .To<SawLauncherUpgradeDtoFactory>().AsSingle();
+        }
+        
         private void BindFormFactories()
         {
             Container.Bind<GameplayFormServiceFactory>().AsSingle();
@@ -73,6 +120,9 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<CharacterAttackerPresenterFactory>().AsSingle();
             Container.Bind<CharacterAttackerViewFactory>().AsSingle();
+
+            Container.Bind<CharacterHealthPresenterFactory>().AsSingle();
+            Container.Bind<CharacterHealthViewFactory>().AsSingle();
         }
 
         private void BindBear()
@@ -85,6 +135,14 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.Bind<MiniGunPresenterFactory>().AsSingle();
             Container.Bind<MiniGunViewFactory>().AsSingle();
+
+            Container.Bind<IBulletViewFactory>().To<BulletViewFactory>().AsSingle();
+
+            Container.Bind<SawLauncherAbilityPresenterFactory>().AsSingle();
+            Container.Bind<SawLauncherAbilityViewFactory>().AsSingle();
+
+            Container.Bind<SawLauncherPresenterFactory>().AsSingle();
+            Container.Bind<SawLauncherViewFactory>().AsSingle();
         }
 
         private void BindEnemy()
@@ -97,6 +155,15 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<EnemyHealthViewFactory>().AsSingle();
             Container.Bind<EnemyPresenterFactory>().AsSingle();
             Container.Bind<EnemyViewFactory>().AsSingle();
+        }
+
+        private void BindUpgrades()
+        {
+            Container.Bind<UpgradePresenterFactory>().AsSingle();
+            Container.Bind<UpgradeViewFactory>().AsSingle();
+
+            Container.Bind<UpgradeUiPresenterFactory>().AsSingle();
+            Container.Bind<UpgradeUiFactory>().AsSingle();
         }
     }
 }
