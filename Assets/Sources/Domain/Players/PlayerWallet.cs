@@ -1,16 +1,29 @@
-﻿namespace Sources.Domain.Players
+﻿using System;
+using Sources.DomainInterfaces.Data;
+using Sources.DomainInterfaces.Players;
+
+namespace Sources.Domain.Players
 {
-    public class PlayerWallet
+    public class PlayerWallet : IPlayerWallet, IDataModel
     {
-        public PlayerWallet(int coins)
+        public PlayerWallet(
+            int coins,
+            string id)
         {
             Coins = coins;
+            Id = id;
         }
-
-        public int Coins { get; private set; }
         
-        public void AddCoins(int amount) =>
+        public event Action CoinsChanged;
+
+        public string Id { get; }
+        public int Coins { get; private set; }
+
+        public void AddCoins(int amount)
+        {
             Coins += amount;
+            CoinsChanged?.Invoke();
+        }
 
         public bool TryRemoveCoins(int amount)
         {
@@ -18,6 +31,7 @@
                 return false;
             
             Coins -= amount;
+            CoinsChanged?.Invoke();
             return true;
         }
     }

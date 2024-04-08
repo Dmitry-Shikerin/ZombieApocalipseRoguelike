@@ -6,6 +6,7 @@ using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Common;
 using Sources.Infrastructure.Factories.Controllers.Enemies;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
+using Sources.Infrastructure.Factories.Controllers.Players;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Weapons;
@@ -18,6 +19,7 @@ using Sources.Infrastructure.Factories.Views.Bullets;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.Infrastructure.Factories.Views.Enemies;
+using Sources.Infrastructure.Factories.Views.Players;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
@@ -101,6 +103,8 @@ namespace Sources.Infrastructure.DIContainers
                 .To<SawLauncherAbilityUpgradeDtoFactory>().AsSingle();
             Container.Bind<IDtoFactory<SawLauncherUpgradeDto>>()
                 .To<SawLauncherUpgradeDtoFactory>().AsSingle();
+            Container.Bind<IDtoFactory<PlayerWalletDto>>()
+                .To<PlayerWalletDtoFactory>().AsSingle();
         }
         
         private void BindFormFactories()
@@ -123,6 +127,12 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<CharacterHealthPresenterFactory>().AsSingle();
             Container.Bind<CharacterHealthViewFactory>().AsSingle();
+
+            Container.Bind<CharacterWalletPresenterFactory>().AsSingle();
+            Container.Bind<CharacterWalletViewFactory>().AsSingle();
+
+            Container.Bind<PlayerWalletPresenterFactory>().AsSingle();
+            Container.Bind<PlayerWalletViewFactory>().AsSingle();
         }
 
         private void BindBear()

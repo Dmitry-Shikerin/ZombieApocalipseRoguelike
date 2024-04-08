@@ -8,6 +8,7 @@ using Sources.Domain.Characters;
 using Sources.Domain.Characters.Attackers;
 using Sources.Domain.Data.Ids;
 using Sources.Domain.Enemies;
+using Sources.Domain.Players;
 using Sources.Domain.Upgrades;
 using Sources.Domain.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
@@ -91,6 +92,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             //Character
             MiniGun minigun = new MiniGun(2, 0.1f);
             Character character = new Character(
+                new PlayerWallet(10, DataModelId.PlayerWallet),
                 new CharacterHealth(100),
                 new CharacterMovement(),
                 new CharacterAttacker(minigun),
