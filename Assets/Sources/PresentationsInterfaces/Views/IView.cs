@@ -9,5 +9,6 @@ namespace Sources.PresentationsInterfaces.Views
         void SetParent(Transform parent);
         void SetLocalePosition(Vector3 position);
         void SetPosition(Vector3 position);
+        void Destroy();
     }
 }

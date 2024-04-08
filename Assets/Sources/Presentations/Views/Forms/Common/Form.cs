@@ -38,5 +38,8 @@ namespace Sources.Presentations.Views.Forms.Common
 
         public void SetPosition(Vector3 position) =>
             _formView.SetPosition(position);
+
+        public void Destroy() =>
+            _formView.Destroy();
     }
 }

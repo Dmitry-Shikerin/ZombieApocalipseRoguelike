@@ -19,7 +19,8 @@ namespace Sources.Infrastructure.Services.LoadServices
         public LoadService(
             IDataService dataService,
             IDtoFactory<SawLauncherAbilityUpgradeDto> sawLauncherAbilityUpgradeDtoFactory,
-            IDtoFactory<SawLauncherUpgradeDto> sawLauncherUpgradeDtoFactory)
+            IDtoFactory<SawLauncherUpgradeDto> sawLauncherUpgradeDtoFactory,
+            IDtoFactory<PlayerWalletDto> playerWalletDtoFactory)
         {
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
             _dataModels = new List<IDataModel>();
@@ -27,6 +28,7 @@ namespace Sources.Infrastructure.Services.LoadServices
 
             _factories[DataModelId.SawLauncherAbilityUpgrader] = sawLauncherAbilityUpgradeDtoFactory.Create;
             _factories[DataModelId.SawLauncherUpgrader] = sawLauncherUpgradeDtoFactory.Create;
+            _factories[DataModelId.PlayerWallet] = playerWalletDtoFactory.Create;
         }
 
         public T Load<T>(IDataModel dataModel)

@@ -2,6 +2,7 @@
 using Sources.Domain.Characters;
 using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Commons;
+using Sources.Infrastructure.Factories.Views.Players;
 using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Presentations.Views.Abilities;
 using Sources.Presentations.Views.Characters;
@@ -18,6 +19,8 @@ namespace Sources.Infrastructure.Factories.Views.Characters
         private readonly SawLauncherViewFactory _sawLauncherViewFactory;
         private readonly CharacterHealthViewFactory _characterHealthViewFactory;
         private readonly HealthUiFactory _healthUiFactory;
+        private readonly CharacterWalletViewFactory _characterWalletViewFactory;
+        private readonly PlayerWalletViewFactory _playerWalletViewFactory;
 
         public CharacterViewFactory(
             CharacterMovementViewFactory characterMovementViewFactory,
@@ -26,7 +29,9 @@ namespace Sources.Infrastructure.Factories.Views.Characters
             SawLauncherAbilityViewFactory sawLauncherAbilityViewFactory,
             SawLauncherViewFactory sawLauncherViewFactory,
             CharacterHealthViewFactory characterHealthViewFactory,
-            HealthUiFactory healthUiFactory)
+            HealthUiFactory healthUiFactory,
+            CharacterWalletViewFactory characterWalletViewFactory,
+            PlayerWalletViewFactory playerWalletViewFactory)
         {
             _characterMovementViewFactory = characterMovementViewFactory 
                                             ?? throw new ArgumentNullException(nameof(characterMovementViewFactory));
@@ -40,6 +45,10 @@ namespace Sources.Infrastructure.Factories.Views.Characters
             _characterHealthViewFactory = characterHealthViewFactory ??
                                           throw new ArgumentNullException(nameof(characterHealthViewFactory));
             _healthUiFactory = healthUiFactory ?? throw new ArgumentNullException(nameof(healthUiFactory));
+            _characterWalletViewFactory = characterWalletViewFactory ?? 
+                                          throw new ArgumentNullException(nameof(characterWalletViewFactory));
+            _playerWalletViewFactory = playerWalletViewFactory ?? 
+                                       throw new ArgumentNullException(nameof(playerWalletViewFactory));
         }
 
         public CharacterView Create(Character character, CharacterView characterView)
@@ -61,6 +70,9 @@ namespace Sources.Infrastructure.Factories.Views.Characters
                 _sawLauncherViewFactory.Create(character.SawLaunchers[i], sawLauncherAbilityView.SawLauncherViews[i]);
 
             _sawLauncherAbilityViewFactory.Create(character.SawLauncherAbility, sawLauncherAbilityView);
+
+            _playerWalletViewFactory.Create(character.PlayerWallet, characterView.PlayerWalletView);
+            _characterWalletViewFactory.Create(character.PlayerWallet,characterView.CharacterWalletView);
 
             return characterView;
         }

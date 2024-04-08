@@ -1,6 +1,6 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.Presentations.Views.Abilities;
 using Sources.Presentations.Views.Common;
+using Sources.Presentations.Views.Players;
 using Sources.Presentations.Views.Weapons;
 using UnityEngine;
 
@@ -14,6 +14,8 @@ namespace Sources.Presentations.Views.Characters
         [Required] [SerializeField] private CharacterAttackerView _characterAttackerView;
         [Required] [SerializeField] private CharacterHealthView _characterHealthView;
         [Required] [SerializeField] private HealthUi _healthUi;
+        [Required] [SerializeField] private CharacterWalletView _characterWalletView;
+        [Required] [SerializeField] private PlayerWalletView _playerWalletView;
         
         public CharacterMovementView CharacterMovementView => _characterMovementView;
         public CharacterAnimationView CharacterAnimationView => _characterAnimationView;
@@ -21,5 +23,7 @@ namespace Sources.Presentations.Views.Characters
         public CharacterAttackerView CharacterAttackerView => _characterAttackerView;
         public CharacterHealthView CharacterHealthView => _characterHealthView;
         public HealthUi HealthUi => _healthUi;
+        public CharacterWalletView CharacterWalletView => _characterWalletView;
+        public PlayerWalletView PlayerWalletView => _playerWalletView;
     }
 }
