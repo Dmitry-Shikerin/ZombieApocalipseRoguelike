@@ -99,6 +99,8 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.Bind<IDtoFactory<SawLauncherAbilityUpgradeDto>>()
                 .To<SawLauncherAbilityUpgradeDtoFactory>().AsSingle();
+            Container.Bind<IDtoFactory<SawLauncherUpgradeDto>>()
+                .To<SawLauncherUpgradeDtoFactory>().AsSingle();
         }
         
         private void BindFormFactories()

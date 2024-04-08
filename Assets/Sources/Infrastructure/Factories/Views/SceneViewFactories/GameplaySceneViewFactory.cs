@@ -66,9 +66,23 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
 
             //Upgrades
             Upgrader sawLauncherUpgrader = new Upgrader(
-                2, 3, 0, 2, DataModelId.SawLauncherUpgrader);
+                2, 3, 0, 2, 
+                new List<int>()
+                {
+                    0,
+                    0,
+                    0,
+                },
+                DataModelId.SawLauncherUpgrader);
             Upgrader sawLauncherAbilityUpgrader = new Upgrader(
-                0, 3, 2, 0, DataModelId.SawLauncherAbilityUpgrader);
+                0, 3, 2, 0, 
+                new List<int>()
+                {
+                    0,
+                    0,
+                    0,
+                },
+                DataModelId.SawLauncherAbilityUpgrader);
             // _upgradeViewFactory.Create(sawAbilityUpgrader, )
             // _upgradeUiFactory.Create(sawLauncherAbilityUpgrader, );
             _loadService.Register(sawLauncherAbilityUpgrader);

@@ -15,18 +15,20 @@ namespace Sources.Domain.Upgrades
             int maxLevel,
             int currentLevel,
             float addedAmount,
+            List<int> moneyPerUpgrades,
             string id)
         {
             _startAmount = startAmount;
             MaxLevel = maxLevel;
             CurrentLevel = currentLevel;
             AddedAmount = addedAmount;
+            MoneyPerUpgrades = moneyPerUpgrades;
             Id = id;
         }
 
         public event Action LevelChanged;
 
-        public IReadOnlyList<int> MoneyPerUpgrades { get; } = new List<int>();
+        public IReadOnlyList<int> MoneyPerUpgrades { get; }
         public string Id { get; }
         public float CurrentAmount => _startAmount + CurrentLevel * AddedAmount;
         public int CurrentLevel { get; private set; }
