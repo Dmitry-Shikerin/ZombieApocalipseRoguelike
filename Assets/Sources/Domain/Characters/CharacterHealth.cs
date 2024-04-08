@@ -32,5 +32,10 @@ namespace Sources.Domain.Characters
         {
             CurrentHealth -= damage;
         }
+
+        public void TakeHeal(int heal)
+        {
+            CurrentHealth += heal;
+        }
     }
 }

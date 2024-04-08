@@ -21,7 +21,6 @@ namespace Sources.Controllers.Enemies.States
 
         public override void Enter()
         {
-            Debug.Log("Enemy in moveToPlayerState");
             _enemyAnimation.PlayWalk();
         }
 

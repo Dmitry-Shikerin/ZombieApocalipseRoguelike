@@ -28,7 +28,6 @@ namespace Sources.Controllers.Enemies.States
 
         public override void Enter()
         {
-            Debug.Log("Enemy in attackState");
             _enemyAnimation.PlayAttack();
             _enemyAnimation.Attacking += OnAttack;
         }
