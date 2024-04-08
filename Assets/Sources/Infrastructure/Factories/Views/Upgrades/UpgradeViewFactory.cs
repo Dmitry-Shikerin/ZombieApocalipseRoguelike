@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Upgrades;
+using Sources.Domain.Players;
 using Sources.Domain.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
 using Sources.Presentations.Views.Upgrades;
@@ -17,9 +18,10 @@ namespace Sources.Infrastructure.Factories.Views.Upgrades
                                        throw new ArgumentNullException(nameof(upgradePresenterFactory));
         }
 
-        public IUpgradeView Create(Upgrader upgrader, UpgradeView upgradeView)
+        public IUpgradeView Create(Upgrader upgrader, PlayerWallet playerWallet, UpgradeView upgradeView)
         {
-            UpgradePresenter upgradePresenter = _upgradePresenterFactory.Create(upgrader, upgradeView);
+            UpgradePresenter upgradePresenter = 
+                _upgradePresenterFactory.Create(upgrader, playerWallet, upgradeView);
             
             upgradeView.Construct(upgradePresenter);
             

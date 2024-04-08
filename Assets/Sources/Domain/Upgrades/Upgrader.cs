@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Sources.Domain.Players;
 using Sources.DomainInterfaces.Data;
 using Sources.DomainInterfaces.Upgrades;
 
@@ -24,6 +26,7 @@ namespace Sources.Domain.Upgrades
 
         public event Action LevelChanged;
 
+        public IReadOnlyList<int> MoneyPerUpgrades { get; } = new List<int>();
         public string Id { get; }
         public float CurrentAmount => _startAmount + CurrentLevel * AddedAmount;
         public int CurrentLevel { get; private set; }
@@ -31,11 +34,14 @@ namespace Sources.Domain.Upgrades
         public float AddedAmount { get; }
 
 
-        public void Upgrade()
+        public void Upgrade(PlayerWallet wallet)
         {
             if (CurrentLevel >= MaxLevel)
                 return;
-
+            
+            if(wallet.TryRemoveCoins(MoneyPerUpgrades[CurrentLevel + 1]) == false)
+                return;
+            
             CurrentLevel++;
             LevelChanged?.Invoke();
         }

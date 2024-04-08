@@ -6,6 +6,7 @@ using Sources.Domain.Abilities;
 using Sources.Domain.Bears;
 using Sources.Domain.Characters;
 using Sources.Domain.Characters.Attackers;
+using Sources.Domain.Data.Ids;
 using Sources.Domain.Enemies;
 using Sources.Domain.Upgrades;
 using Sources.Domain.Weapons;
@@ -33,6 +34,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly BearViewFactory _bearViewFactory;
         private readonly EnemyCommonViewFactory _enemyCommonViewFactory;
         private readonly UpgradeViewFactory _upgradeViewFactory;
+        private readonly UpgradeUiFactory _upgradeUiFactory;
         private readonly ILoadService _loadService;
 
         public GameplaySceneViewFactory(
@@ -42,6 +44,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             BearViewFactory bearViewFactory,
             EnemyCommonViewFactory enemyCommonViewFactory,
             UpgradeViewFactory upgradeViewFactory,
+            UpgradeUiFactory upgradeUiFactory,
             ILoadService loadService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
@@ -52,6 +55,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
             _enemyCommonViewFactory = enemyCommonViewFactory ?? throw new ArgumentNullException(nameof(enemyCommonViewFactory));
             _upgradeViewFactory = upgradeViewFactory ?? throw new ArgumentNullException(nameof(upgradeViewFactory));
+            _upgradeUiFactory = upgradeUiFactory ?? throw new ArgumentNullException(nameof(upgradeUiFactory));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
         }
 
@@ -62,12 +66,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
 
             //Upgrades
             Upgrader sawLauncherUpgrader = new Upgrader(
-                2, 3, 0, 2, "SawLauncherUpgrader");
+                2, 3, 0, 2, DataModelId.SawLauncherUpgrader);
             Upgrader sawLauncherAbilityUpgrader = new Upgrader(
-                0, 3, 2, 0, "SawLauncherAbilityUpgrader");
+                0, 3, 2, 0, DataModelId.SawLauncherAbilityUpgrader);
             // _upgradeViewFactory.Create(sawAbilityUpgrader, )
-            CharacterUpgraders characterUpgraders = new CharacterUpgraders(sawLauncherUpgrader);
+            // _upgradeUiFactory.Create(sawLauncherAbilityUpgrader, );
             _loadService.Register(sawLauncherAbilityUpgrader);
+            CharacterUpgraders characterUpgraders = new CharacterUpgraders(sawLauncherUpgrader);
             
             //Character
             MiniGun minigun = new MiniGun(2, 0.1f);

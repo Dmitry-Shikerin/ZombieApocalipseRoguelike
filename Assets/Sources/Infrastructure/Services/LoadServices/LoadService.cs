@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sources.Domain.Data;
+using Sources.Domain.Data.Ids;
 using Sources.DomainInterfaces.Data;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
@@ -17,13 +18,15 @@ namespace Sources.Infrastructure.Services.LoadServices
 
         public LoadService(
             IDataService dataService,
-            IDtoFactory<SawLauncherAbilityUpgradeDto> sawLauncherAbilityDtoFactory)
+            IDtoFactory<SawLauncherAbilityUpgradeDto> sawLauncherAbilityUpgradeDtoFactory,
+            IDtoFactory<SawLauncherUpgradeDto> sawLauncherUpgradeDtoFactory)
         {
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
             _dataModels = new List<IDataModel>();
             _factories = new Dictionary<string, Func<IDataModel, IDto>>();
 
-            _factories["SawLauncherAbilityUpgrader"] = sawLauncherAbilityDtoFactory.Create;
+            _factories[DataModelId.SawLauncherAbilityUpgrader] = sawLauncherAbilityUpgradeDtoFactory.Create;
+            _factories[DataModelId.SawLauncherUpgrader] = sawLauncherUpgradeDtoFactory.Create;
         }
 
         public T Load<T>(IDataModel dataModel)
