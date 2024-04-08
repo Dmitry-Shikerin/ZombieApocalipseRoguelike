@@ -44,7 +44,7 @@ namespace Sources.Controllers.Upgrades
                 return;
             }
             
-            string price = _upgrader.MoneyPerUpgrades[_upgrader.CurrentLevel + 1].ToString();
+            string price = _upgrader.MoneyPerUpgrades[_upgrader.CurrentLevel].ToString();
             _upgradeUi.SetPriceNextUpgrade(price);
         }
 

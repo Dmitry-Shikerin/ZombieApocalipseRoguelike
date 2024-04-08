@@ -1,6 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 using Sources.Controllers.Forms.MainMenu;
+using Sources.Infrastructure.Factories.Controllers.Forms.Common;
 using Sources.Infrastructure.Factories.Controllers.Forms.MainMenu;
 using Sources.Infrastructure.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.Forms;

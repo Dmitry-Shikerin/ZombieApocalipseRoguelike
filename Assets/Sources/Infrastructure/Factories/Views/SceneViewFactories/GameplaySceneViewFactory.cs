@@ -22,6 +22,7 @@ using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.Enemies;
 using Sources.Presentations.Views.Forms.Gameplay;
+using Sources.Presentations.Views.Upgrades;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -66,6 +67,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _gameplayFormServiceFactory.Create().Show<HudFormView>();
 
             //Upgrades
+
+            PlayerWallet playerWallet = new PlayerWallet(10, DataModelId.PlayerWallet);
+            
             Upgrader sawLauncherUpgrader = new Upgrader(
                 2, 3, 0, 2, 
                 new List<int>()
@@ -76,7 +80,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
                 },
                 DataModelId.SawLauncherUpgrader);
             Upgrader sawLauncherAbilityUpgrader = new Upgrader(
-                0, 3, 2, 0, 
+                0, 3, 0, 0,
                 new List<int>()
                 {
                     0,
@@ -84,15 +88,20 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
                     0,
                 },
                 DataModelId.SawLauncherAbilityUpgrader);
-            // _upgradeViewFactory.Create(sawAbilityUpgrader, )
-            // _upgradeUiFactory.Create(sawLauncherAbilityUpgrader, );
+
+            _upgradeViewFactory.Create(sawLauncherUpgrader, playerWallet, _gameplayHud.UpgradeViews[0]);
+            _upgradeUiFactory.Create(sawLauncherUpgrader, _gameplayHud.UpgradeUis[0]);
+            
+            _upgradeViewFactory.Create(sawLauncherAbilityUpgrader, playerWallet, _gameplayHud.UpgradeViews[1]);
+            _upgradeUiFactory.Create(sawLauncherAbilityUpgrader, _gameplayHud.UpgradeUis[1]);
+            
             _loadService.Register(sawLauncherAbilityUpgrader);
             CharacterUpgraders characterUpgraders = new CharacterUpgraders(sawLauncherUpgrader);
             
             //Character
             MiniGun minigun = new MiniGun(2, 0.1f);
             Character character = new Character(
-                new PlayerWallet(10, DataModelId.PlayerWallet),
+                playerWallet,
                 new CharacterHealth(100),
                 new CharacterMovement(),
                 new CharacterAttacker(minigun),
