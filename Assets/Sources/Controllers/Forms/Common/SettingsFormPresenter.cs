@@ -2,7 +2,10 @@
 using JetBrains.Annotations;
 using Sources.Controllers.Common;
 using Sources.InfrastructureInterfaces.Services.Forms;
+using Sources.Presentations.UI.Huds;
+using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.Forms.MainMenu;
+using Sources.PresentationsInterfaces.Views.Forms.Common;
 using Sources.PresentationsInterfaces.Views.Forms.MainMenu;
 
 namespace Sources.Controllers.Forms.MainMenu
@@ -25,6 +28,6 @@ namespace Sources.Controllers.Forms.MainMenu
             _settingsFormView.MainMenuHudButtonView.RemoveClickListener(ShowMainMenuHudForm);
 
         private void ShowMainMenuHudForm() =>
-            _formService.Show<MainMenuHudFormView>();
+            _formService.Show<PauseFormView>();
     }
 }

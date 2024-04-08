@@ -41,7 +41,7 @@ namespace Sources.Domain.Upgrades
             if (CurrentLevel >= MaxLevel)
                 return;
             
-            if(wallet.TryRemoveCoins(MoneyPerUpgrades[CurrentLevel + 1]) == false)
+            if(wallet.TryRemoveCoins(MoneyPerUpgrades[CurrentLevel]) == false)
                 return;
             
             CurrentLevel++;

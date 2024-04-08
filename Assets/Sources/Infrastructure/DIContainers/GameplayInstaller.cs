@@ -5,6 +5,7 @@ using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Common;
 using Sources.Infrastructure.Factories.Controllers.Enemies;
+using Sources.Infrastructure.Factories.Controllers.Forms.Common;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Players;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
@@ -113,6 +114,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<PauseFormPresenterFactory>().AsSingle();
             Container.Bind<HudFormPresenterFactory>().AsSingle();
             Container.Bind<UpgradeFormPresenterFactory>().AsSingle();
+            Container.Bind<TutorialFormPresenterFactory>().AsSingle();
+            Container.Bind<SettingsFormPresenterFactory>().AsSingle();
         }
 
         private void BindCharacters()

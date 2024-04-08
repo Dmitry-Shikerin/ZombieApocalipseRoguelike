@@ -6,5 +6,8 @@ namespace Sources.PresentationsInterfaces.Views.Forms.Gameplay
     {
         IButtonView HudButtonView { get; }
         IButtonView MainMenuButtonView { get; }
+        
+        IButtonView TutorialButtonView { get; }
+        IButtonView SettingsButtonView { get; }
     }
 }
