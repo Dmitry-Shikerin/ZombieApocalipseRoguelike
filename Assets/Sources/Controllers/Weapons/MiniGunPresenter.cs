@@ -12,16 +12,16 @@ namespace Sources.Controllers.Weapons
     {
         private readonly MiniGun _miniGun;
         private readonly IMiniGunView _miniGunView;
-        private readonly IBulletSpawner _bulletSpawner;
+        private readonly IBulletSpawnService _bulletSpawnService;
 
         public MiniGunPresenter(
             MiniGun miniGun,
             IMiniGunView miniGunView,
-            IBulletSpawner bulletSpawner)
+            IBulletSpawnService bulletSpawnService)
         {
             _miniGun = miniGun ?? throw new ArgumentNullException(nameof(miniGun));
             _miniGunView = miniGunView ?? throw new ArgumentNullException(nameof(miniGunView));
-            _bulletSpawner = bulletSpawner ?? throw new ArgumentNullException(nameof(bulletSpawner));
+            _bulletSpawnService = bulletSpawnService ?? throw new ArgumentNullException(nameof(bulletSpawnService));
         }
 
         public override void Enable() =>
@@ -32,7 +32,7 @@ namespace Sources.Controllers.Weapons
 
         private void OnAttack()
         {
-            _bulletSpawner.Spawn(_miniGunView);
+            _bulletSpawnService.Spawn(_miniGunView);
             _miniGunView.PlayFireParticles();
         }
 

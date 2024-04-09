@@ -16,6 +16,8 @@ namespace Sources.Controllers.Enemies
             _enemyHealthView = enemyHealthView ?? throw new ArgumentNullException(nameof(enemyHealthView));
         }
 
+        public float CurrentHealth => _enemyHealth.CurrentHealth;
+
         public override void Enable()
         {
         }

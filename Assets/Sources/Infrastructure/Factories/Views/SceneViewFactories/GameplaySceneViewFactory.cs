@@ -9,20 +9,26 @@ using Sources.Domain.Characters.Attackers;
 using Sources.Domain.Data.Ids;
 using Sources.Domain.Enemies;
 using Sources.Domain.Players;
+using Sources.Domain.Spawners;
 using Sources.Domain.Upgrades;
 using Sources.Domain.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Enemies;
+using Sources.Infrastructure.Factories.Views.EnemySpawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
+using Sources.Infrastructure.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
+using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.Enemies;
 using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.Upgrades;
+using Sources.PresentationsInterfaces.Views.Enemies;
+using Sources.PresentationsInterfaces.Views.RootGameObjects;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -34,20 +40,26 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly GameplayFormServiceFactory _gameplayFormServiceFactory;
         private readonly CharacterViewFactory _characterViewFactory;
         private readonly BearViewFactory _bearViewFactory;
-        private readonly EnemyCommonViewFactory _enemyCommonViewFactory;
         private readonly UpgradeViewFactory _upgradeViewFactory;
         private readonly UpgradeUiFactory _upgradeUiFactory;
-        private readonly ILoadService _loadService;
+        private readonly IEntityRepository _entityRepository;
+        private readonly IEnemySpawnService _enemySpawnService;
+        private readonly EnemySpawnViewFactory _enemySpawnViewFactory;
+        private readonly RootGameObject _rootGameObject;
+        private readonly EnemyViewFactory _enemyViewFactory;
 
         public GameplaySceneViewFactory(
             GameplayHud gameplayHud,
             GameplayFormServiceFactory gameplayFormServiceFactory,
             CharacterViewFactory characterViewFactory,
             BearViewFactory bearViewFactory,
-            EnemyCommonViewFactory enemyCommonViewFactory,
             UpgradeViewFactory upgradeViewFactory,
             UpgradeUiFactory upgradeUiFactory,
-            ILoadService loadService)
+            ILoadService loadService,
+            IEntityRepository entityRepository,
+            IEnemySpawnService enemySpawnService,
+            RootGameObject rootGameObject,
+            EnemySpawnViewFactory enemySpawnViewFactory)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ?? 
@@ -55,10 +67,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _characterViewFactory = characterViewFactory
                                     ?? throw new ArgumentNullException(nameof(characterViewFactory));
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
-            _enemyCommonViewFactory = enemyCommonViewFactory ?? throw new ArgumentNullException(nameof(enemyCommonViewFactory));
             _upgradeViewFactory = upgradeViewFactory ?? throw new ArgumentNullException(nameof(upgradeViewFactory));
             _upgradeUiFactory = upgradeUiFactory ?? throw new ArgumentNullException(nameof(upgradeUiFactory));
-            _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
+            _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
+            _enemySpawnService = enemySpawnService ?? throw new ArgumentNullException(nameof(enemySpawnService));
+            _enemySpawnViewFactory = enemySpawnViewFactory ?? throw new ArgumentNullException(nameof(enemySpawnViewFactory));
+            _rootGameObject = rootGameObject ? 
+                rootGameObject : throw new ArgumentNullException(nameof(rootGameObject));
         }
 
         public void Create()
@@ -95,7 +110,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _upgradeViewFactory.Create(sawLauncherAbilityUpgrader, playerWallet, _gameplayHud.UpgradeViews[1]);
             _upgradeUiFactory.Create(sawLauncherAbilityUpgrader, _gameplayHud.UpgradeUis[1]);
             
-            _loadService.Register(sawLauncherAbilityUpgrader);
+            _entityRepository.Add(sawLauncherAbilityUpgrader);
             CharacterUpgraders characterUpgraders = new CharacterUpgraders(sawLauncherUpgrader);
             
             //Character
@@ -115,7 +130,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
                     new SawLauncher(sawLauncherUpgrader),
                 });
             CharacterView characterView = Object.FindObjectOfType<CharacterView>();
-            Debug.Log(characterView);
             _characterViewFactory.Create(character, characterView);
             
             //Bear
@@ -126,16 +140,15 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             bearView.SetTargetFollow(characterView.CharacterMovementView);
             
             //Enemy
-            EnemyAttacker enemyAttacker = new EnemyAttacker(3);
-            EnemyHealth enemyHealth = new EnemyHealth(100);
-            Enemy enemy = new Enemy(enemyHealth, enemyAttacker);
-            EnemyView enemyView = Object.FindObjectOfType<EnemyView>();
-            _enemyCommonViewFactory.Create(enemy, enemyView);
+            IEnemyView enemyView = _enemySpawnService.Spawn();
             enemyView.SetTargetFollow(characterView.CharacterMovementView);
             enemyView.SetCharacterHealth(characterView.CharacterHealthView);
             
             //CinemachineService
             _gameplayHud.CinemachineCameraService.Follow(characterView.transform);
+            
+            //Spawners
+            _enemySpawnViewFactory.Create(new EnemySpawner(), _rootGameObject.EnemySpawnerView);
         }
     }
 }

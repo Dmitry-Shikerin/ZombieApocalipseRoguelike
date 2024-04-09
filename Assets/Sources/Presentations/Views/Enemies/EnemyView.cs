@@ -3,6 +3,7 @@ using Sources.Controllers.Enemies;
 using Sources.Presentations.Views.Common;
 using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.Enemies;
+using Sources.PresentationsInterfaces.Views.ObjectPools;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,7 +24,20 @@ namespace Sources.Presentations.Views.Enemies
         public ICharacterMovementView CharacterMovementView { get; private set; }
         public ICharacterHealthView CharacterHealthView { get; private set; }
 
-
+        public override void Destroy()
+        {
+            if (TryGetComponent(out PoolableObject poolableObject) == false)
+            {
+                Destroy(gameObject);
+                
+                return;
+            }
+            
+            poolableObject.ReturnToPool();
+            DestroyPresenter();
+            Hide();
+        }
+        
         public void Move(Vector3 direction) =>
             _navMeshAgent.SetDestination(direction);
 

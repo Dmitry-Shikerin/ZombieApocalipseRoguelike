@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Sources.PresentationsInterfaces.Views.Enemies
 {
-    public interface IEnemyView
+    public interface IEnemyView : IView
     {
         float StoppingDistance { get; }
         Vector3 Position { get; }
@@ -12,6 +12,6 @@ namespace Sources.PresentationsInterfaces.Views.Enemies
         
         void Move(Vector3 direction);
         void SetTargetFollow(ICharacterMovementView target);
-        
+        void SetCharacterHealth(ICharacterHealthView characterHealthView);
     }
 }

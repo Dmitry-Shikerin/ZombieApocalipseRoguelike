@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sources.Domain.Data;
-using Sources.Domain.Data.Ids;
+using Sources.Domain.Data.Common;
+using Sources.Domain.Players;
+using Sources.Domain.Upgrades;
 using Sources.DomainInterfaces.Data;
+using Sources.DomainInterfaces.Entities;
+using Sources.Infrastructure.Services.Repositories;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
@@ -12,51 +16,46 @@ namespace Sources.Infrastructure.Services.LoadServices
 {
     public class LoadService : ILoadService
     {
+        private readonly IEntityRepository _entityRepository;
         private readonly IDataService _dataService;
-        private readonly List<IDataModel> _dataModels;
-        private readonly Dictionary<string, Func<IDataModel, IDto>> _factories;
+        private readonly Dictionary<Type, Func<IEntity, IDto>> _mappers;
 
         public LoadService(
+            IEntityRepository entityRepository,
             IDataService dataService,
-            IDtoFactory<SawLauncherAbilityUpgradeDto> sawLauncherAbilityUpgradeDtoFactory,
-            IDtoFactory<SawLauncherUpgradeDto> sawLauncherUpgradeDtoFactory,
-            IDtoFactory<PlayerWalletDto> playerWalletDtoFactory)
+            IDtoMapper<UpgradeDto, Upgrader> upgradeDtoMapper,
+            IDtoMapper<PlayerWalletDto, PlayerWallet> playerWalletDtoMapper)
         {
+            _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
-            _dataModels = new List<IDataModel>();
-            _factories = new Dictionary<string, Func<IDataModel, IDto>>();
 
-            _factories[DataModelId.SawLauncherAbilityUpgrader] = sawLauncherAbilityUpgradeDtoFactory.Create;
-            _factories[DataModelId.SawLauncherUpgrader] = sawLauncherUpgradeDtoFactory.Create;
-            _factories[DataModelId.PlayerWallet] = playerWalletDtoFactory.Create;
+            _mappers = new Dictionary<Type, Func<IEntity, IDto>>();
+            _mappers[typeof(Upgrader)] = 
+                model => upgradeDtoMapper.MapTo(model as Upgrader);
+            _mappers[typeof(PlayerWallet)] =
+                model => playerWalletDtoMapper.MapTo(model as PlayerWallet);
         }
 
-        public T Load<T>(IDataModel dataModel)
+        public T Load<T>(IEntity entity)
             where T : IDto
         {
-            return _dataService.LoadData<T>(dataModel.Id);
+            return _dataService.LoadData<T>(entity.Id);
         }
 
-        public void Save<T>(T dataModel)
-            where T : IDataModel
+        public void Save(IEntity entity)
         {
-            if (_factories.ContainsKey(dataModel.Id) == false)
+            if (_mappers.ContainsKey(entity.Type) == false)
                 throw new NullReferenceException("DtaModel Id is not registered in LoadService");
 
-            _dataService.SaveData(_factories[dataModel.Id].Invoke(dataModel), dataModel.Id);
-        }
-
-        public void Register(IDataModel dataModel)
-        {
-            _dataModels.Add(dataModel);
+            _dataService.SaveData(_mappers[entity.Type].Invoke(entity), entity.Id);
         }
 
         public void SaveAll()
         {
-            foreach (IDataModel dataModel in _dataModels)
+            foreach (IEntity dataModel in _entityRepository.Entities.Values)
             {
                 Save(dataModel);
-                Debug.Log($"Saved {dataModel.Id}");
+                Debug.Log($"Saved {dataModel.GetType()}");
             }
         }
     }

@@ -31,13 +31,13 @@ namespace Sources.Controllers.Enemies
         public void Enable()
         {
             Start(_firstState);
-            _updateRegister.Register(Update);
+            _updateRegister.UpdateChanged += Update;
         }
 
         public void Disable()
         {
-            _updateRegister.UnRegister(Update);
             Stop();
+            _updateRegister.UpdateChanged -= Update;
         }
     }
 }

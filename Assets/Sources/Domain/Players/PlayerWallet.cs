@@ -1,10 +1,11 @@
 ﻿using System;
 using Sources.DomainInterfaces.Data;
+using Sources.DomainInterfaces.Entities;
 using Sources.DomainInterfaces.Players;
 
 namespace Sources.Domain.Players
 {
-    public class PlayerWallet : IPlayerWallet, IDataModel
+    public class PlayerWallet : IPlayerWallet, IEntity
     {
         public PlayerWallet(
             int coins,
@@ -17,6 +18,7 @@ namespace Sources.Domain.Players
         public event Action CoinsChanged;
 
         public string Id { get; }
+        public Type Type => GetType();
         public int Coins { get; private set; }
 
         public void AddCoins(int amount)

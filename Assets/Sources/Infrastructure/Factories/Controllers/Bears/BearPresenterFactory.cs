@@ -42,6 +42,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Bears
                     bearView.CharacterMovementView.Position, bearView.Position) < 4f);
             followCharacterState.AddTransition(toIdleTransition);
             moveToEnemyState.AddTransition(toIdleTransition);
+            attackState.AddTransition(toIdleTransition);
             
             FiniteTransitionBase toMoveToEnemyTransition = new FiniteTransitionBase(
                 moveToEnemyState, 

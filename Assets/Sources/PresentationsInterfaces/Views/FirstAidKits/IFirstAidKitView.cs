@@ -1,6 +1,6 @@
 namespace Sources.PresentationsInterfaces.Views.FirstAidKits
 {
-    public interface IFirstAidKitView
+    public interface IFirstAidKitView : IView
     {
         int HealAmount { get; }
         
