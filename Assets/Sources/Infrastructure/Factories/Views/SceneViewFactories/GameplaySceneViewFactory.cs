@@ -25,6 +25,7 @@ using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.RootGameObjects;
 using Sources.PresentationsInterfaces.Views.Enemies;
+using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories

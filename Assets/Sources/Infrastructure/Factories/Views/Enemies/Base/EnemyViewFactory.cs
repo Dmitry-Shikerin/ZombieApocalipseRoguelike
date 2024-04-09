@@ -1,8 +1,10 @@
 ﻿
 using System;
 using Sources.Controllers.Enemies;
+using Sources.Controllers.Enemies.Base;
 using Sources.Domain.Enemies;
 using Sources.Infrastructure.Factories.Controllers.Enemies;
+using Sources.Infrastructure.Factories.Controllers.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
@@ -10,6 +12,7 @@ using Sources.Presentations.Views.Bullets;
 using Sources.Presentations.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Bullets;
 using Sources.PresentationsInterfaces.Views.Enemies;
+using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.ObjectPools;
 using Sources.PresentationsInterfaces.Views.Weapons;
 using Unity.VisualScripting;

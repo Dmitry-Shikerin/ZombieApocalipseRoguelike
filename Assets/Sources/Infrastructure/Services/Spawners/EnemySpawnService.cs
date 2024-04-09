@@ -6,6 +6,7 @@ using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies;
+using Sources.PresentationsInterfaces.Views.Enemies.Base;
 
 namespace Sources.Infrastructure.Services.Spawners
 {

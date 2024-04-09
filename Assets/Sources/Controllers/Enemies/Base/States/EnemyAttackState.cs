@@ -2,9 +2,9 @@
 using Sources.Domain.Enemies;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.PresentationsInterfaces.Views.Enemies;
-using UnityEngine;
+using Sources.PresentationsInterfaces.Views.Enemies.Base;
 
-namespace Sources.Controllers.Enemies.States
+namespace Sources.Controllers.Enemies.Base.States
 {
     public class EnemyAttackState : FiniteState
     {

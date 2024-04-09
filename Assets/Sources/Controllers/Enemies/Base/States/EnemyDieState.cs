@@ -2,9 +2,10 @@
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.PresentationsInterfaces.Views.Enemies;
+using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using UnityEngine;
 
-namespace Sources.Controllers.Enemies.States
+namespace Sources.Controllers.Enemies.Base.States
 {
     public class EnemyDieState : FiniteState
     {

@@ -1,7 +1,7 @@
 using Sources.PresentationsInterfaces.Views.Character;
 using UnityEngine;
 
-namespace Sources.PresentationsInterfaces.Views.Enemies
+namespace Sources.PresentationsInterfaces.Views.Enemies.Base
 {
     public interface IEnemyView : IView
     {

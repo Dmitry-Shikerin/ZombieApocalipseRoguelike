@@ -8,6 +8,7 @@ using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.Enemies;
+using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Spawners;
 using UnityEngine;
 using Object = UnityEngine.Object;

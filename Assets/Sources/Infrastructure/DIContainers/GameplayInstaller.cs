@@ -8,6 +8,8 @@ using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Common;
 using Sources.Infrastructure.Factories.Controllers.Enemies;
+using Sources.Infrastructure.Factories.Controllers.Enemies.Base;
+using Sources.Infrastructure.Factories.Controllers.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Controllers.Forms.Common;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Players;
@@ -24,6 +26,7 @@ using Sources.Infrastructure.Factories.Views.Bullets;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.Infrastructure.Factories.Views.Enemies;
+using Sources.Infrastructure.Factories.Views.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Views.ExplosionBodyBloodyViews;
 using Sources.Infrastructure.Factories.Views.FirstAidKitViewFactory;
 using Sources.Infrastructure.Factories.Views.Players;
@@ -205,6 +208,9 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.Bind<HealthUiPresenterFactory>().AsSingle();
             Container.Bind<HealthUiFactory>().AsSingle();
+
+            Container.Bind<BossEnemyPresenterFactory>().AsSingle();
+            Container.Bind<BossEnemyViewFactory>().AsSingle();
             
             Container.Bind<EnemyHealthPresenterFactory>().AsSingle();
             Container.Bind<EnemyHealthViewFactory>().AsSingle();

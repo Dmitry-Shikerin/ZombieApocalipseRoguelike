@@ -1,6 +1,6 @@
 using System;
 
-namespace Sources.PresentationsInterfaces.Views.Enemies
+namespace Sources.PresentationsInterfaces.Views.Enemies.Base
 {
     public interface IEnemyAnimation
     {

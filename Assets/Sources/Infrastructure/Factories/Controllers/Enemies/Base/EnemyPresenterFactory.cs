@@ -1,14 +1,16 @@
 ﻿using System;
 using Sources.Controllers.Enemies;
+using Sources.Controllers.Enemies.Base;
+using Sources.Controllers.Enemies.Base.States;
 using Sources.Controllers.Enemies.States;
 using Sources.Domain.Enemies;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
-using Sources.PresentationsInterfaces.Views.Enemies;
+using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using UnityEngine;
 
-namespace Sources.Infrastructure.Factories.Controllers.Enemies
+namespace Sources.Infrastructure.Factories.Controllers.Enemies.Base
 {
     public class EnemyPresenterFactory
     {
@@ -60,8 +62,6 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies
             
             return new EnemyPresenter(
                 initializeState,
-                enemy,
-                enemyView,
                 _updateRegister
             );
         }
