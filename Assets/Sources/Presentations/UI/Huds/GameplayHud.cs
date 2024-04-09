@@ -4,6 +4,7 @@ using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
 using Sources.Presentations.Views.Forms.Common;
 using Sources.Presentations.Views.Forms.Gameplay;
+using Sources.Presentations.Views.Players;
 using Sources.Presentations.Views.Upgrades;
 using UnityEngine;
 
@@ -32,6 +33,10 @@ namespace Sources.Presentations.UI.Huds
         private List<UpgradeView> _upgradeViews;
         [FoldoutGroup("Upgrades")] [Required] [SerializeField]
         private List<UpgradeUi> _upgradeUis;
+        
+        [Button(ButtonSizes.Large)]
+        [FoldoutGroup("PlayerWallet")] [Required] [SerializeField]
+        private PlayerWalletView _playerWalletView;
 
 
         public PauseFormView PauseFormView => _pauseFormView;
@@ -44,5 +49,7 @@ namespace Sources.Presentations.UI.Huds
 
         public IReadOnlyList<UpgradeView> UpgradeViews => _upgradeViews;
         public IReadOnlyList<UpgradeUi> UpgradeUis => _upgradeUis;
+        
+        public PlayerWalletView PlayerWalletView => _playerWalletView;
     }
 }

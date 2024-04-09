@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using Sources.Domain.TextViewTypes;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.UI.Texts;
 using TMPro;
@@ -9,8 +10,10 @@ namespace Sources.Presentations.UI.Texts
     public class TextView : View, ITextView 
     {
         [Required] [SerializeField] private TextMeshProUGUI _tmpText;
+        [SerializeField] private TextViewType _textViewType;
         [SerializeField] private string _textId;
 
+        public TextViewType TextViewType => _textViewType;
         public string Id => _textId;
         
         public void SetText(string text) =>

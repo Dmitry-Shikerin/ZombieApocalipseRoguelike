@@ -16,7 +16,7 @@ namespace Sources.Controllers.Players
             _playerWalletView = playerWalletView ?? throw new ArgumentNullException(nameof(playerWalletView));
         }
 
-
+        //TODO почему не отрисовывается ТМП
         public override void Enable()
         {
             OnCoinsChanged();

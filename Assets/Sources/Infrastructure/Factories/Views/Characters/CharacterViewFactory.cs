@@ -4,6 +4,7 @@ using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.Infrastructure.Factories.Views.Players;
 using Sources.Infrastructure.Factories.Views.Weapons;
+using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Abilities;
 using Sources.Presentations.Views.Characters;
 using Object = UnityEngine.Object;
@@ -12,6 +13,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
 {
     public class CharacterViewFactory
     {
+        private readonly GameplayHud _gameplayHud;
         private readonly CharacterMovementViewFactory _characterMovementViewFactory;
         private readonly CharacterAttackerViewFactory _characterAttackerViewFactory;
         private readonly MiniGunViewFactory _miniGunViewFactory;
@@ -23,6 +25,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
         private readonly PlayerWalletViewFactory _playerWalletViewFactory;
 
         public CharacterViewFactory(
+            GameplayHud gameplayHud,
             CharacterMovementViewFactory characterMovementViewFactory,
             CharacterAttackerViewFactory characterAttackerViewFactory,
             MiniGunViewFactory miniGunViewFactory,
@@ -33,6 +36,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
             CharacterWalletViewFactory characterWalletViewFactory,
             PlayerWalletViewFactory playerWalletViewFactory)
         {
+            _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _characterMovementViewFactory = characterMovementViewFactory 
                                             ?? throw new ArgumentNullException(nameof(characterMovementViewFactory));
             _characterAttackerViewFactory = characterAttackerViewFactory ??
@@ -71,7 +75,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
 
             _sawLauncherAbilityViewFactory.Create(character.SawLauncherAbility, sawLauncherAbilityView);
 
-            _playerWalletViewFactory.Create(character.PlayerWallet, characterView.PlayerWalletView);
+            _playerWalletViewFactory.Create(character.PlayerWallet, _gameplayHud.PlayerWalletView);
             _characterWalletViewFactory.Create(character.PlayerWallet,characterView.CharacterWalletView);
 
             return characterView;

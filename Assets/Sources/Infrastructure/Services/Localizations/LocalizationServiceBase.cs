@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ModestTree.Util;
+using Sources.Domain.TextViewTypes;
 using Sources.InfrastructureInterfaces.Factories.Services;
 using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
 using Sources.InfrastructureInterfaces.Services.Localizations.Translates.Common;
+using Sources.Presentations.UI.Texts;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.Localizations;
+using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Localizations
 {
     public abstract class LocalizationServiceBase : ILocalizationService
     {
         private readonly Dictionary<string, Func<ITranslateService>> _translateServiceFactories;
-        
+
         protected LocalizationServiceBase(
             ILocalizationView localizationView,
             ITranslateServiceFactory<IEnglishTranslateService> englishTranslateFactory,
@@ -36,13 +40,22 @@ namespace Sources.Infrastructure.Services.Localizations
         {
             if (_translateServiceFactories.ContainsKey(key) == false)
                 throw new NullReferenceException(nameof(key));
-            
+
             ITranslateService translateService = _translateServiceFactories[key].Invoke();
-            
+            List<ITextView> texts = new List<ITextView>();
+
             foreach (ITextView textView in LocalizationView.Texts)
             {
+                if (textView.TextViewType == TextViewType.Default)
+                {
+                    texts.Add(textView);
+                    continue;
+                }
+
                 translateService.Translate(textView);
             }
+
+            Debug.Log(string.Join(", ", texts.Select(x => (x as TextView).gameObject.name)));
         }
     }
 }

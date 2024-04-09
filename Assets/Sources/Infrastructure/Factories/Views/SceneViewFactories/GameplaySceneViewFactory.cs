@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sources.Controllers.Bears.Attacks;
-using Sources.Controllers.Characters.Attackers;
 using Sources.Domain.Abilities;
 using Sources.Domain.Bears;
 using Sources.Domain.Characters;
 using Sources.Domain.Characters.Attackers;
 using Sources.Domain.Data.Ids;
-using Sources.Domain.Enemies;
 using Sources.Domain.Players;
 using Sources.Domain.Spawners;
 using Sources.Domain.Upgrades;
@@ -24,12 +22,9 @@ using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Characters;
-using Sources.Presentations.Views.Enemies;
 using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.RootGameObjects;
-using Sources.Presentations.Views.Upgrades;
 using Sources.PresentationsInterfaces.Views.Enemies;
-using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
@@ -87,7 +82,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _gameplayFormServiceFactory.Create().Show<HudFormView>();
 
             //Upgrades
-
             PlayerWallet playerWallet = new PlayerWallet(10, DataModelId.PlayerWallet);
             
             Upgrader sawLauncherUpgrader = new Upgrader(
@@ -118,6 +112,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _entityRepository.Add(sawLauncherAbilityUpgrader);
             CharacterUpgraders characterUpgraders = new CharacterUpgraders(sawLauncherUpgrader);
             
+            //TODO можно ли это все дело сделать на компонентах?
             //Character
             MiniGun minigun = new MiniGun(2, 0.1f);
             Character character = new Character(
