@@ -79,7 +79,6 @@ namespace Sources.Presentations.Views.Coins
 
         private async UniTask AddCoinsAsync(CancellationToken cancellationToken)
         {
-            _characterWalletView.AddCoins(Amount);
             _canMove = false;
 
             await UniTask.Yield(cancellationToken);

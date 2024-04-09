@@ -5,7 +5,6 @@ using Sources.Domain.Enemies;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
-using Sources.Presentations.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies;
 using UnityEngine;
 
@@ -15,14 +14,18 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies
     {
         private readonly IUpdateRegister _updateRegister;
         private readonly IExplosionBodyBloodySpawnService _explosionBodyBloodySpawnService;
+        private readonly IRewardItemSpawnService _rewardItemSpawnService;
 
         public EnemyPresenterFactory(
             IUpdateRegister updateRegister,
-            IExplosionBodyBloodySpawnService explosionBodyBloodySpawnService)
+            IExplosionBodyBloodySpawnService explosionBodyBloodySpawnService,
+            IRewardItemSpawnService rewardItemSpawnService)
         {
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
             _explosionBodyBloodySpawnService = explosionBodyBloodySpawnService ?? 
                                           throw new ArgumentNullException(nameof(explosionBodyBloodySpawnService));
+            _rewardItemSpawnService = rewardItemSpawnService ?? 
+                                      throw new ArgumentNullException(nameof(rewardItemSpawnService));
         }
 
         public EnemyPresenter Create(Enemy enemy, IEnemyView enemyView, IEnemyAnimation enemyAnimation)
@@ -30,7 +33,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies
             EnemyInitializeState initializeState = new EnemyInitializeState(enemy, enemyAnimation);
             EnemyMoveToPlayerState moveToPlayerState = new EnemyMoveToPlayerState(enemy, enemyView, enemyAnimation);
             EnemyAttackState attackState = new EnemyAttackState(enemy, enemyView, enemyAnimation);
-            EnemyDieState dieState = new EnemyDieState(enemyView, _explosionBodyBloodySpawnService);
+            EnemyDieState dieState = new EnemyDieState(
+                enemyView, _explosionBodyBloodySpawnService, _rewardItemSpawnService);
 
             FiniteTransition toMoveToPlayerTransition = new FiniteTransitionBase(
                 moveToPlayerState,

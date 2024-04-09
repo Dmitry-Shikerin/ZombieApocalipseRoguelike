@@ -27,6 +27,7 @@ using Sources.Infrastructure.Factories.Views.Enemies;
 using Sources.Infrastructure.Factories.Views.ExplosionBodyBloodyViews;
 using Sources.Infrastructure.Factories.Views.FirstAidKitViewFactory;
 using Sources.Infrastructure.Factories.Views.Players;
+using Sources.Infrastructure.Factories.Views.RewardItems;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
@@ -48,6 +49,7 @@ using Sources.InfrastructureInterfaces.Factories.Views.Bullets;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Factories.Views.ExplosionBodyBloodyViews;
 using Sources.InfrastructureInterfaces.Factories.Views.FirstAidKits;
+using Sources.InfrastructureInterfaces.Factories.Views.RewardItems;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using Sources.InfrastructureInterfaces.Services.Localizations;
@@ -61,6 +63,7 @@ using Sources.Presentations.Views.Enemies;
 using Sources.Presentations.Views.ExplosionBodyBloodies;
 using Sources.Presentations.Views.FirstAidKits;
 using Sources.Presentations.Views.Localizations;
+using Sources.Presentations.Views.RewardItems;
 using Sources.Presentations.Views.RootGameObjects;
 using Sources.PresentationsInterfaces.Views.Localizations;
 using UnityEngine;
@@ -107,10 +110,12 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IObjectPool<EnemyView>>().To<ObjectPool<EnemyView>>().AsSingle();
             Container.Bind<IObjectPool<ExplosionBodyBloodyView>>().To<ObjectPool<ExplosionBodyBloodyView>>().AsSingle();
             Container.Bind<IObjectPool<FirstAidKitView>>().To<ObjectPool<FirstAidKitView>>().AsSingle();
+            Container.Bind<IObjectPool<RewardItemView>>().To<ObjectPool<RewardItemView>>().AsSingle();
             Container.Bind<IBulletSpawnService>().To<BulletSpawnService>().AsSingle();
             Container.Bind<IEnemySpawnService>().To<EnemySpawnService>().AsSingle();
             Container.Bind<IExplosionBodyBloodySpawnService>().To<ExplosionBodyBloodySpawnService>().AsSingle();
             Container.Bind<IFirstAidKitSpawnService>().To<FirstAidKitSpawnService>().AsSingle();
+            Container.Bind<IRewardItemSpawnService>().To<RewardItemSpawnService>().AsSingle();
             Container.Bind<ILocalizationService>().To<TestLocalizationService>().AsSingle();
             Container.Bind<ITranslateServiceFactory<ITurkishTranslateService>>()
                 .To<TurkishTranslateServiceFactory>().AsSingle();
@@ -164,6 +169,7 @@ namespace Sources.Infrastructure.DIContainers
         private void BindItems()
         {
             Container.Bind<IFirstAidKitViewFactory>().To<FirstAidKitViewFactory>().AsSingle();
+            Container.Bind<IRewardItemViewFactory>().To<RewardItemViewFactory>().AsSingle();
         }
 
         private void BindBear()

@@ -10,12 +10,18 @@ namespace Sources.Controllers.Enemies.States
     {
         private readonly IEnemyView _enemyView;
         private readonly IExplosionBodyBloodySpawnService _explosionBodyBloodySpawnService;
+        private readonly IRewardItemSpawnService _rewardItemSpawnService;
 
-        public EnemyDieState(IEnemyView enemyView,IExplosionBodyBloodySpawnService explosionBodyBloodySpawnService)
+        public EnemyDieState(
+            IEnemyView enemyView, 
+            IExplosionBodyBloodySpawnService explosionBodyBloodySpawnService,
+            IRewardItemSpawnService rewardItemSpawnService)
         {
             _enemyView = enemyView ?? throw new ArgumentNullException(nameof(enemyView));
             _explosionBodyBloodySpawnService = explosionBodyBloodySpawnService ?? 
                                           throw new ArgumentNullException(nameof(explosionBodyBloodySpawnService));
+            _rewardItemSpawnService = rewardItemSpawnService ?? 
+                                      throw new ArgumentNullException(nameof(rewardItemSpawnService));
         }
 
         public override void Enter()
@@ -24,6 +30,7 @@ namespace Sources.Controllers.Enemies.States
             spawnPosition.y += 1f;
             
             _explosionBodyBloodySpawnService.Spawn(spawnPosition);
+            _rewardItemSpawnService.Spawn(_enemyView.Position, 3);
             _enemyView.Destroy();
         }
 
