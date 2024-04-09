@@ -7,8 +7,8 @@ namespace Sources.Presentations.Views.Spawners
 {
     public class EnemySpawnerView : PresentableView<EnemySpawnerPresenter>, IEnemySpawnerView
     {
-        [SerializeField] private List<EnemySpawnPointView> _spawnPoints;
+        [SerializeField] private List<EnemySpawnPoint> _spawnPoints;
 
-        public IReadOnlyList<IEnemySpawnPointView> SpawnPoints => _spawnPoints;
+        public IReadOnlyList<IEnemySpawnPoint> SpawnPoints => _spawnPoints;
     }
 }

@@ -1,10 +1,10 @@
-﻿using Sources.Domain.Enemies.Types;
+﻿using Sources.Domain.Spawners.Types;
 using Sources.PresentationsInterfaces.Views.Spawners;
 using UnityEngine;
 
 namespace Sources.Presentations.Views.Spawners
 {
-    public class EnemySpawnPointView : View, IEnemySpawnPointView
+    public class EnemySpawnPoint : View, IEnemySpawnPoint
     {
         [SerializeField] private EnemyType _enemyType;
         

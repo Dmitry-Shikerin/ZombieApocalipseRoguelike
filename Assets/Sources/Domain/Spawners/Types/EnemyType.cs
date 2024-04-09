@@ -1,4 +1,4 @@
-﻿namespace Sources.Domain.Enemies.Types
+﻿namespace Sources.Domain.Spawners.Types
 {
     public enum EnemyType
     {

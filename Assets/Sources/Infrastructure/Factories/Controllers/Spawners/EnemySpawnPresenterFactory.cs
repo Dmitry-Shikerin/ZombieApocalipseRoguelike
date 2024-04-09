@@ -4,7 +4,7 @@ using Sources.Domain.Spawners;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.PresentationsInterfaces.Views.Spawners;
 
-namespace Sources.Infrastructure.Factories.Controllers.EnemySpawners
+namespace Sources.Infrastructure.Factories.Controllers.Spawners
 {
     public class EnemySpawnPresenterFactory
     {

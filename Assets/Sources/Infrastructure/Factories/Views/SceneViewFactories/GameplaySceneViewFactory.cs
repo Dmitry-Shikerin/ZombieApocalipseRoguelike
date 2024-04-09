@@ -16,7 +16,7 @@ using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Enemies;
-using Sources.Infrastructure.Factories.Views.EnemySpawners;
+using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
@@ -26,9 +26,9 @@ using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.Enemies;
 using Sources.Presentations.Views.Forms.Gameplay;
+using Sources.Presentations.Views.RootGameObjects;
 using Sources.Presentations.Views.Upgrades;
 using Sources.PresentationsInterfaces.Views.Enemies;
-using Sources.PresentationsInterfaces.Views.RootGameObjects;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -45,6 +45,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly IEntityRepository _entityRepository;
         private readonly IEnemySpawnService _enemySpawnService;
         private readonly EnemySpawnViewFactory _enemySpawnViewFactory;
+        private readonly ItemSpawnerViewFactory _itemSpawnerViewFactory;
         private readonly RootGameObject _rootGameObject;
         private readonly EnemyViewFactory _enemyViewFactory;
 
@@ -59,7 +60,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             IEntityRepository entityRepository,
             IEnemySpawnService enemySpawnService,
             RootGameObject rootGameObject,
-            EnemySpawnViewFactory enemySpawnViewFactory)
+            EnemySpawnViewFactory enemySpawnViewFactory,
+            ItemSpawnerViewFactory itemSpawnerViewFactory)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ?? 
@@ -71,7 +73,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _upgradeUiFactory = upgradeUiFactory ?? throw new ArgumentNullException(nameof(upgradeUiFactory));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _enemySpawnService = enemySpawnService ?? throw new ArgumentNullException(nameof(enemySpawnService));
-            _enemySpawnViewFactory = enemySpawnViewFactory ?? throw new ArgumentNullException(nameof(enemySpawnViewFactory));
+            _enemySpawnViewFactory = enemySpawnViewFactory ?? 
+                                     throw new ArgumentNullException(nameof(enemySpawnViewFactory));
+            _itemSpawnerViewFactory = itemSpawnerViewFactory ?? 
+                                      throw new ArgumentNullException(nameof(itemSpawnerViewFactory));
             _rootGameObject = rootGameObject ? 
                 rootGameObject : throw new ArgumentNullException(nameof(rootGameObject));
         }
@@ -149,6 +154,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             
             //Spawners
             _enemySpawnViewFactory.Create(new EnemySpawner(), _rootGameObject.EnemySpawnerView);
+            _itemSpawnerViewFactory.Create(new ItemSpawner(), _rootGameObject.ItemSpawnerView);
         }
     }
 }

@@ -52,7 +52,7 @@ namespace Sources.Controllers.EnemeSpawners
             {
                 while (cancellationToken.IsCancellationRequested == false)
                 {
-                    foreach (IEnemySpawnPointView enemySpawnPointView in _enemySpawnerView.SpawnPoints)
+                    foreach (IEnemySpawnPoint enemySpawnPointView in _enemySpawnerView.SpawnPoints)
                     {
                         IEnemyView enemyView = _enemySpawnService.Spawn();
                         enemyView.SetPosition(enemySpawnPointView.Position);

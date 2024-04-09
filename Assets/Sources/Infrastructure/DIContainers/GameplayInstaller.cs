@@ -8,11 +8,11 @@ using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Common;
 using Sources.Infrastructure.Factories.Controllers.Enemies;
-using Sources.Infrastructure.Factories.Controllers.EnemySpawners;
 using Sources.Infrastructure.Factories.Controllers.Forms.Common;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Players;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
+using Sources.Infrastructure.Factories.Controllers.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Weapons;
 using Sources.Infrastructure.Factories.Domain.Data;
@@ -24,11 +24,11 @@ using Sources.Infrastructure.Factories.Views.Bullets;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.Infrastructure.Factories.Views.Enemies;
-using Sources.Infrastructure.Factories.Views.EnemySpawners;
 using Sources.Infrastructure.Factories.Views.ExplosionBodyBloodyViews;
 using Sources.Infrastructure.Factories.Views.FirstAidKitViewFactory;
 using Sources.Infrastructure.Factories.Views.Players;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.Forms;
@@ -61,8 +61,8 @@ using Sources.Presentations.Views.Enemies;
 using Sources.Presentations.Views.ExplosionBodyBloodies;
 using Sources.Presentations.Views.FirstAidKits;
 using Sources.Presentations.Views.Localizations;
+using Sources.Presentations.Views.RootGameObjects;
 using Sources.PresentationsInterfaces.Views.Localizations;
-using Sources.PresentationsInterfaces.Views.RootGameObjects;
 using UnityEngine;
 using Zenject;
 
@@ -93,6 +93,7 @@ namespace Sources.Infrastructure.DIContainers
             BindUpgrades();
             BindDtoFactories();
             BindItems();
+            BindSpawners();
         }
 
         private void BindServices()
@@ -185,10 +186,17 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<SawLauncherViewFactory>().AsSingle();
         }
 
-        private void BindEnemy()
+        private void BindSpawners()
         {
             Container.Bind<EnemySpawnPresenterFactory>().AsSingle();
             Container.Bind<EnemySpawnViewFactory>().AsSingle();
+
+            Container.Bind<ItemSpawnerPresenterFactory>().AsSingle();
+            Container.Bind<ItemSpawnerViewFactory>().AsSingle();
+        }
+        
+        private void BindEnemy()
+        {
             Container.Bind<HealthUiPresenterFactory>().AsSingle();
             Container.Bind<HealthUiFactory>().AsSingle();
             
