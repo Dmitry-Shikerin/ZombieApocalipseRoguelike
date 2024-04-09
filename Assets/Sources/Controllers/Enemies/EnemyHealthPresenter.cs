@@ -26,7 +26,10 @@ namespace Sources.Controllers.Enemies
         {
         }
 
-        public void TakeDamage(float damage) =>
+        public void TakeDamage(float damage)
+        {
             _enemyHealth.TakeDamage(damage);
+            _enemyHealthView.PlayBloodParticle();
+        }
     }
 }
