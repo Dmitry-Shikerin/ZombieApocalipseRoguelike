@@ -68,7 +68,7 @@ namespace Sources.Controllers.Upgrades
         private void AbilityImageChanged()
         {
             Sprite sprite = _spriteCollectionService.GetIcon(_upgrader.Id);
-            _upgradeUi.AbilityImageView.SetSprite(sprite);
+            // _upgradeUi.AbilityImageView.SetSprite(sprite);
         }
     }
 }
