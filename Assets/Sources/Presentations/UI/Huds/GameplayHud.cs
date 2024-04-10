@@ -2,7 +2,6 @@
 using Sirenix.OdinInspector;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
-using Sources.Presentations.Views.Forms.Common;
 using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.Players;
 using Sources.Presentations.Views.Upgrades;
@@ -22,7 +21,7 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("Forms")] [Required] [SerializeField]
         private TutorialFormView _tutorialFormView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private SettingsFormView _settingsFormView;
+        private GameplaySettingsFormView _settingsFormView;
         
         [Button(ButtonSizes.Large)] 
         [FoldoutGroup("Camera")] [Required] [SerializeField]
@@ -43,7 +42,7 @@ namespace Sources.Presentations.UI.Huds
         public HudFormView HudFormView => _hudFormView;
         public UpgradeFormView UpgradeFormView => _upgradeFormView;
         public TutorialFormView TutorialFormView => _tutorialFormView;
-        public SettingsFormView SettingsFormView => _settingsFormView;
+        public GameplaySettingsFormView SettingsFormView => _settingsFormView;
         
         public CinemachineCameraService CinemachineCameraService => _cinemachineCameraService;
 

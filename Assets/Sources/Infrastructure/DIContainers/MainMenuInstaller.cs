@@ -1,10 +1,13 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.Infrastructure.Factories.Controllers.Forms.Common;
 using Sources.Infrastructure.Factories.Controllers.Forms.MainMenu;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
+using Sources.Infrastructure.Factories.Controllers.YandexSDK;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Factories.Views.YandexSDK;
 using Sources.Infrastructure.Services.Forms;
+using Sources.Infrastructure.Services.YandexSDKServices;
+using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
 using UnityEngine;
@@ -31,15 +34,19 @@ namespace Sources.Infrastructure.DIContainers
         private void BindServices()
         {
             Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
+            Container.Bind<ILeaderBoardInitializeService>().To<YandexLeaderBoardInitializeService>().AsSingle();
+            Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
         }
 
         private void BindFormFactories()
         {
             Container.Bind<MainMenuFormServiceFactory>().AsSingle();
             Container.Bind<MainMenuHudFormPresenterFactory>().AsSingle();
-            Container.Bind<SettingsFormPresenterFactory>().AsSingle();
+            Container.Bind<MainMenuSettingsFormPresenterFactory>().AsSingle();
             Container.Bind<AuthorizationFormPresenterFactory>().AsSingle();
             Container.Bind<LeaderBoardFormPresenterFactory>().AsSingle();
+            Container.Bind<LeaderBoardElementPresenterFactory>().AsSingle();
+            Container.Bind<LeaderBoardElementViewFactory>().AsSingle();
         }
     }
 }

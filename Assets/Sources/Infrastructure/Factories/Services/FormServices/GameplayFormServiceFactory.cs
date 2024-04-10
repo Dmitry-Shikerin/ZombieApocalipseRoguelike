@@ -1,8 +1,5 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Sources.Controllers.Forms.Gameplay;
-using Sources.Controllers.Forms.MainMenu;
-using Sources.Infrastructure.Factories.Controllers.Forms.Common;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.Forms;
@@ -20,7 +17,7 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
         private readonly HudFormPresenterFactory _hudFormPresenterFactory;
         private readonly UpgradeFormPresenterFactory _upgradeFormPresenterFactory;
         private readonly TutorialFormPresenterFactory _tutorialFormPresenterFactory;
-        private readonly SettingsFormPresenterFactory _settingsFormPresenterFactory;
+        private readonly GameplaySettingsFormPresenterFactory _settingsFormPresenterFactory;
 
         public GameplayFormServiceFactory(
             FormService formService,
@@ -29,7 +26,7 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             HudFormPresenterFactory hudFormPresenterFactory,
             UpgradeFormPresenterFactory upgradeFormPresenterFactory,
             TutorialFormPresenterFactory tutorialFormPresenterFactory,
-            SettingsFormPresenterFactory settingsFormPresenterFactory)
+            GameplaySettingsFormPresenterFactory settingsFormPresenterFactory)
         {
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
@@ -71,8 +68,8 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             
             _formService.Add(tutorialForm);
 
-            Form<SettingsFormView, SettingsFormPresenter> settingsForm =
-                new Form<SettingsFormView, SettingsFormPresenter>(
+            Form<GameplaySettingsFormView, GameplaySettingsFormPresenter> settingsForm =
+                new Form<GameplaySettingsFormView, GameplaySettingsFormPresenter>(
                     _settingsFormPresenterFactory.Create, _gameplayHud.SettingsFormView);
             
             _formService.Add(settingsForm);
