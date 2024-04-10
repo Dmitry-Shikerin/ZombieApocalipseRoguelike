@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.Domain.Enemies;
+using Sources.Domain.Enemies.Base;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;

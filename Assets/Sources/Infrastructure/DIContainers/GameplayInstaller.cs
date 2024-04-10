@@ -2,6 +2,7 @@
 using Sources.Domain.Data;
 using Sources.Domain.Data.Common;
 using Sources.Domain.Players;
+using Sources.Domain.SpriteCollections;
 using Sources.Domain.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
@@ -25,6 +26,7 @@ using Sources.Infrastructure.Factories.Views.Bullets;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.Infrastructure.Factories.Views.Enemies;
+using Sources.Infrastructure.Factories.Views.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Views.ExplosionBodyBloodyViews;
 using Sources.Infrastructure.Factories.Views.FirstAidKitViewFactory;
@@ -35,6 +37,7 @@ using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.Forms;
+using Sources.Infrastructure.Services.Icons;
 using Sources.Infrastructure.Services.InputServices;
 using Sources.Infrastructure.Services.Linecasts;
 using Sources.Infrastructure.Services.LoadServices;
@@ -44,7 +47,9 @@ using Sources.Infrastructure.Services.ObjectPools;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Spawners;
+using Sources.Infrastructure.Services.Sprites;
 using Sources.Infrastructure.Services.UpdateServices;
+using Sources.Infrastructure.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Services;
 using Sources.InfrastructureInterfaces.Factories.Views.Bullets;
@@ -62,6 +67,7 @@ using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Bullets;
 using Sources.Presentations.Views.Enemies;
+using Sources.Presentations.Views.Enemies.Bosses;
 using Sources.Presentations.Views.ExplosionBodyBloodies;
 using Sources.Presentations.Views.FirstAidKits;
 using Sources.Presentations.Views.Localizations;
@@ -82,12 +88,14 @@ namespace Sources.Infrastructure.DIContainers
         
         public override void InstallBindings()
         {
+            Container.Bind<SpriteCollection>().FromResource("Configs/SpriteCollection").AsSingle();
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
             Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
             Container.Bind<ILocalizationView>().FromInstance(_localizationView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
             Container.Bind<GameplaySceneViewFactory>().AsSingle();
+            Container.Bind<IUpgradeCollectionService>().To<UpgradeCollectionService>().AsSingle();
             
             BindServices();
             BindCharacters();
@@ -108,13 +116,16 @@ namespace Sources.Infrastructure.DIContainers
             Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
             Container.Bind<LinecastService>().AsSingle();
             Container.Bind<OverlapService>().AsSingle();
+            Container.Bind<ISpriteCollectionService>().To<SpriteCollectionService>().AsSingle();
             Container.Bind<IObjectPool<BulletView>>().To<ObjectPool<BulletView>>().AsSingle();
             Container.Bind<IObjectPool<EnemyView>>().To<ObjectPool<EnemyView>>().AsSingle();
             Container.Bind<IObjectPool<ExplosionBodyBloodyView>>().To<ObjectPool<ExplosionBodyBloodyView>>().AsSingle();
             Container.Bind<IObjectPool<FirstAidKitView>>().To<ObjectPool<FirstAidKitView>>().AsSingle();
             Container.Bind<IObjectPool<RewardItemView>>().To<ObjectPool<RewardItemView>>().AsSingle();
+            Container.Bind<IObjectPool<BossEnemyView>>().To<ObjectPool<BossEnemyView>>().AsSingle();
             Container.Bind<IBulletSpawnService>().To<BulletSpawnService>().AsSingle();
             Container.Bind<IEnemySpawnService>().To<EnemySpawnService>().AsSingle();
+            Container.Bind<IBossEnemySpawnService>().To<BossEnemySpawnService>().AsSingle();
             Container.Bind<IExplosionBodyBloodySpawnService>().To<ExplosionBodyBloodySpawnService>().AsSingle();
             Container.Bind<IFirstAidKitSpawnService>().To<FirstAidKitSpawnService>().AsSingle();
             Container.Bind<IRewardItemSpawnService>().To<RewardItemSpawnService>().AsSingle();
@@ -209,7 +220,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<HealthUiFactory>().AsSingle();
 
             Container.Bind<BossEnemyPresenterFactory>().AsSingle();
-            Container.Bind<BossEnemyViewFactory>().AsSingle();
+            Container.Bind<IBossEnemyViewFactory>().To<BossEnemyViewFactory>().AsSingle();
             
             Container.Bind<EnemyHealthPresenterFactory>().AsSingle();
             Container.Bind<EnemyHealthViewFactory>().AsSingle();

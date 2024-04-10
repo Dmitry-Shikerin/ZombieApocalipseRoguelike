@@ -2,27 +2,69 @@
 using Sources.Controllers.Enemies.Base;
 using Sources.Domain.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Controllers.Enemies.Bosses;
+using Sources.Infrastructure.Factories.Views.Commons;
+using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
+using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.Presentations.Views.Enemies.Bosses;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
+using Sources.PresentationsInterfaces.Views.ObjectPools;
+using Unity.VisualScripting;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.Enemies.Bosses
 {
-    public class BossEnemyViewFactory
+    public class BossEnemyViewFactory : IBossEnemyViewFactory
     {
         private readonly BossEnemyPresenterFactory _bossEnemyPresenterFactory;
+        private readonly IObjectPool<BossEnemyView> _bossEnemyPool;
+        private readonly EnemyHealthViewFactory _enemyHealthViewFactory;
+        private readonly HealthUiFactory _healthUiFactory;
 
-        public BossEnemyViewFactory(BossEnemyPresenterFactory bossEnemyPresenterFactory)
+        public BossEnemyViewFactory(
+            BossEnemyPresenterFactory bossEnemyPresenterFactory,
+            IObjectPool<BossEnemyView> bossEnemyPool,
+            EnemyHealthViewFactory enemyHealthViewFactory,
+            HealthUiFactory healthUiFactory)
         {
             _bossEnemyPresenterFactory = bossEnemyPresenterFactory ??
                                          throw new ArgumentNullException(nameof(bossEnemyPresenterFactory));
+            _bossEnemyPool = bossEnemyPool ?? throw new ArgumentNullException(nameof(bossEnemyPool));
+            _enemyHealthViewFactory = enemyHealthViewFactory ?? 
+                                      throw new ArgumentNullException(nameof(enemyHealthViewFactory));
+            _healthUiFactory = healthUiFactory ?? throw new ArgumentNullException(nameof(healthUiFactory));
         }
 
+        public IBossEnemyView Create(BossEnemy bossEnemy)
+        {
+            BossEnemyView bossEnemyView = CreateView();
+            
+            return Create(bossEnemy, bossEnemyView);
+        }
+        
         public IBossEnemyView Create(BossEnemy bossEnemy, BossEnemyView bossEnemyView)
         {
             EnemyPresenter enemyPresenter = _bossEnemyPresenterFactory.Create(
                 bossEnemy, bossEnemyView, bossEnemyView.EnemyAnimation);
             
             bossEnemyView.Construct(enemyPresenter);
+            
+            _enemyHealthViewFactory.Create(bossEnemy.EnemyHealth, bossEnemyView.EnemyHealthView);
+            _healthUiFactory.Create(bossEnemy.EnemyHealth, bossEnemyView.HealthUi);
+
+            return bossEnemyView;
+        }
+
+        private BossEnemyView CreateView()
+        {
+            BossEnemyView bossEnemyView = Object.Instantiate(
+                Resources.Load<BossEnemyView>("Views/BossEnemyView"));
+            //TODO не забыть поменять
+            // EnemyView enemyView = Object.FindObjectOfType<EnemyView>();
+
+            bossEnemyView
+                .AddComponent<PoolableObject>()
+                .SetPool(_bossEnemyPool);
 
             return bossEnemyView;
         }

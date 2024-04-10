@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.Domain.Enemies;
+using Sources.Domain.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
@@ -37,6 +38,5 @@ namespace Sources.Infrastructure.Services.Spawners
             
             return _enemyViewFactory.Create(enemy, enemyView);
         }
-
     }
 }

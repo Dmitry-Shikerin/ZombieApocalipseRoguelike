@@ -1,4 +1,5 @@
 ﻿using Sources.Domain.Enemies;
+using Sources.Domain.Enemies.Base;
 using Sources.Presentations.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
