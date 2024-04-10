@@ -16,6 +16,7 @@ namespace Sources.Presentations.Views.Enemies.Bosses
         [Required] [SerializeField] private EnemyHealthView _healthView;
         [Required] [SerializeField] private HealthUi _healthUi;
         [Required] [SerializeField] private BossEnemyAnimation _enemyAnimation;
+        [Required] [SerializeField] private ParticleSystem _massAttackParticle;
         
         public EnemyHealthView EnemyHealthView => _healthView;
         public HealthUi HealthUi => _healthUi;
@@ -47,5 +48,11 @@ namespace Sources.Presentations.Views.Enemies.Bosses
 
         public void SetCharacterHealth(ICharacterHealthView characterHealthView) =>
             CharacterHealthView = characterHealthView;
+
+        public void PlayMassAttackParticle() =>
+            _massAttackParticle.Play();
+
+        public void SetAgentSpeed(float speed) =>
+            _navMeshAgent.speed = speed;
     }
 }

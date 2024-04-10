@@ -13,5 +13,7 @@ namespace Sources.PresentationsInterfaces.Views.Enemies.Bosses
         void Move(Vector3 direction);
         void SetTargetFollow(ICharacterMovementView target);
         void SetCharacterHealth(ICharacterHealthView characterHealthView);
+        void PlayMassAttackParticle();
+        void SetAgentSpeed(float speed);
     }
 }

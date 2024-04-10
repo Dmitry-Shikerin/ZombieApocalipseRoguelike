@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using UnityEngine;
 
@@ -9,7 +10,9 @@ namespace Sources.Presentations.Views.Enemies.Bosses
         [SerializeField] private Animator _animator;
         
         public event Action Attacking;
-        
+        public event Action ScreamAnimationEnded;
+
+
         public void PlayWalk()
         {
             _animator.SetTrigger("Walk");
@@ -37,6 +40,12 @@ namespace Sources.Presentations.Views.Enemies.Bosses
         public void PlayRun()
         {
             _animator.SetTrigger("Run");
+        }
+
+        [UsedImplicitly]
+        private void OnScreamAnimationEnded()
+        {
+            ScreamAnimationEnded?.Invoke();
         }
     }
 }

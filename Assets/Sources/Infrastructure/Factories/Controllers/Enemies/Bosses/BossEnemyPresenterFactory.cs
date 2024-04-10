@@ -21,7 +21,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Bosses
             IBossEnemyView bossEnemyView,
             IBossEnemyAnimation bossEnemyAnimation)
         {
-            EnemyIdleState idleState = new EnemyIdleState();
+            EnemyIdleState idleState = new EnemyIdleState(bossEnemy, bossEnemyAnimation);
             
             return new EnemyPresenter(idleState, _updateRegister);
         }
