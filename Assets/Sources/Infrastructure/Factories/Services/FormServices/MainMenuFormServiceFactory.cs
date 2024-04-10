@@ -1,7 +1,5 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Sources.Controllers.Forms.MainMenu;
-using Sources.Infrastructure.Factories.Controllers.Forms.Common;
 using Sources.Infrastructure.Factories.Controllers.Forms.MainMenu;
 using Sources.Infrastructure.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.Forms;
@@ -16,7 +14,7 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
         private readonly FormService _formService;
         private readonly MainMenuHud _mainMenuHud;
         private readonly MainMenuHudFormPresenterFactory _mainMenuHudFormPresenterFactory;
-        private readonly SettingsFormPresenterFactory _settingsFormPresenterFactory;
+        private readonly MainMenuSettingsFormPresenterFactory _settingsFormPresenterFactory;
         private readonly AuthorizationFormPresenterFactory _authorizationFormPresenterFactory;
         private readonly LeaderBoardFormPresenterFactory _leaderBoardFormPresenterFactory;
 
@@ -24,7 +22,7 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             FormService formService,
             MainMenuHud mainMenuHud,
             MainMenuHudFormPresenterFactory mainMenuHudFormPresenterFactory,
-            SettingsFormPresenterFactory settingsFormPresenterFactory,
+            MainMenuSettingsFormPresenterFactory settingsFormPresenterFactory,
             AuthorizationFormPresenterFactory authorizationFormPresenterFactory,
             LeaderBoardFormPresenterFactory leaderBoardFormPresenterFactory)
         {
@@ -48,8 +46,8 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             
             _formService.Add(mainMenuHudForm);
 
-            Form<SettingsFormView, SettingsFormPresenter> settingsForm =
-                new Form<SettingsFormView, SettingsFormPresenter>(
+            Form<MainMenuSettingsFormView, MainMenuSettingsFormPresenter> settingsForm =
+                new Form<MainMenuSettingsFormView, MainMenuSettingsFormPresenter>(
                     _settingsFormPresenterFactory.Create, _mainMenuHud.SettingsFormView);
             
             _formService.Add(settingsForm);
