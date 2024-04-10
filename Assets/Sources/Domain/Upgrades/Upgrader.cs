@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sources.Domain.Data.Common;
 using Sources.Domain.Players;
+using Sources.Domain.Upgrades.Configs;
 using Sources.DomainInterfaces.Data;
 using Sources.DomainInterfaces.Entities;
 using Sources.DomainInterfaces.Upgrades;
@@ -12,15 +14,35 @@ namespace Sources.Domain.Upgrades
         private float _startAmount;
 
         public Upgrader(
+            UpgradeConfig upgradeConfig,
+            UpgradeDto upgradeDto)
+            : this(
+            upgradeConfig.StartAmount,
+            upgradeDto.CurrentLevel,
+            upgradeConfig.AddedAmount,
+            upgradeConfig.MoneyPerUpgrades,
+            upgradeConfig.Id)
+        {
+        }
+        
+        public Upgrader(UpgradeConfig upgradeConfig) 
+            : this(
+            upgradeConfig.StartAmount,
+            0,
+            upgradeConfig.AddedAmount,
+            upgradeConfig.MoneyPerUpgrades,
+            upgradeConfig.Id)
+        {
+        }
+        
+        private Upgrader(
             float startAmount,
-            int maxLevel,
             int currentLevel,
             float addedAmount,
             List<int> moneyPerUpgrades,
             string id)
         {
             _startAmount = startAmount;
-            MaxLevel = maxLevel;
             CurrentLevel = currentLevel;
             AddedAmount = addedAmount;
             MoneyPerUpgrades = moneyPerUpgrades;
@@ -34,7 +56,7 @@ namespace Sources.Domain.Upgrades
         public Type Type => GetType();
         public float CurrentAmount => _startAmount + CurrentLevel * AddedAmount;
         public int CurrentLevel { get; private set; }
-        public int MaxLevel { get; }
+        public int MaxLevel => MoneyPerUpgrades.Count;
         public float AddedAmount { get; }
 
 

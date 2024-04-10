@@ -9,6 +9,7 @@ using Sources.Domain.Data.Ids;
 using Sources.Domain.Players;
 using Sources.Domain.Spawners;
 using Sources.Domain.Upgrades;
+using Sources.Domain.Upgrades.Configs;
 using Sources.Domain.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;
@@ -18,8 +19,10 @@ using Sources.Infrastructure.Factories.Views.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Services.Repositories;
+using Sources.Infrastructure.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Spawners;
+using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Characters;
@@ -43,6 +46,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly IEnemySpawnService _enemySpawnService;
         private readonly EnemySpawnViewFactory _enemySpawnViewFactory;
         private readonly ItemSpawnerViewFactory _itemSpawnerViewFactory;
+        private readonly IUpgradeConfigCollectionService _upgradeConfigCollectionService;
         private readonly RootGameObject _rootGameObject;
         private readonly EnemyViewFactory _enemyViewFactory;
 
@@ -58,7 +62,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             IEnemySpawnService enemySpawnService,
             RootGameObject rootGameObject,
             EnemySpawnViewFactory enemySpawnViewFactory,
-            ItemSpawnerViewFactory itemSpawnerViewFactory)
+            ItemSpawnerViewFactory itemSpawnerViewFactory,
+            IUpgradeConfigCollectionService upgradeConfigCollectionService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ?? 
@@ -74,6 +79,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
                                      throw new ArgumentNullException(nameof(enemySpawnViewFactory));
             _itemSpawnerViewFactory = itemSpawnerViewFactory ?? 
                                       throw new ArgumentNullException(nameof(itemSpawnerViewFactory));
+            _upgradeConfigCollectionService = upgradeConfigCollectionService ??
+                                              throw new ArgumentNullException(nameof(upgradeConfigCollectionService));
             _rootGameObject = rootGameObject ? 
                 rootGameObject : throw new ArgumentNullException(nameof(rootGameObject));
         }
@@ -84,26 +91,31 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _gameplayFormServiceFactory.Create().Show<HudFormView>();
 
             //Upgrades
-            PlayerWallet playerWallet = new PlayerWallet(10, DataModelId.PlayerWallet);
+            PlayerWallet playerWallet = new PlayerWallet(10, ModelId.PlayerWallet);
             
-            Upgrader sawLauncherUpgrader = new Upgrader(
-                2, 3, 0, 2, 
-                new List<int>()
-                {
-                    0,
-                    0,
-                    0,
-                },
-                DataModelId.SawLauncherUpgrader);
-            Upgrader sawLauncherAbilityUpgrader = new Upgrader(
-                0, 3, 0, 0,
-                new List<int>()
-                {
-                    0,
-                    0,
-                    0,
-                },
-                DataModelId.SawLauncherAbilityUpgrader);
+            UpgradeConfig bearMassAttackConfig = 
+                _upgradeConfigCollectionService.GetConfig(ModelId.BearMassAttackUpgrader);
+            Upgrader bearMassAttackUpgrader = new Upgrader(bearMassAttackConfig);
+
+            UpgradeConfig bearAttackConfig =
+                _upgradeConfigCollectionService.GetConfig(ModelId.BearAttackUpgrader);
+            Upgrader bearAttackUpgrader = new Upgrader(bearAttackConfig);
+
+            UpgradeConfig characterHealthConfig =
+                _upgradeConfigCollectionService.GetConfig(ModelId.CharacterHealthUpgrader);
+            Upgrader characterHealthUpgrader = new Upgrader(characterHealthConfig);
+
+            UpgradeConfig miniGunAttackConfig =
+                _upgradeConfigCollectionService.GetConfig(ModelId.MiniGunAttackUpgrader);
+            Upgrader miniGunAttackUpgrader = new Upgrader(miniGunAttackConfig);
+
+            UpgradeConfig sawLauncherConfig =
+                _upgradeConfigCollectionService.GetConfig(ModelId.SawLauncherUpgrader);
+            Upgrader sawLauncherUpgrader = new Upgrader(sawLauncherConfig);
+
+            UpgradeConfig sawLauncherAbilityConfig =
+                _upgradeConfigCollectionService.GetConfig(ModelId.SawLauncherAbilityUpgrader);
+            Upgrader sawLauncherAbilityUpgrader = new Upgrader(sawLauncherAbilityConfig);
 
             _upgradeViewFactory.Create(sawLauncherUpgrader, playerWallet, _gameplayHud.UpgradeViews[0]);
             _upgradeUiFactory.Create(sawLauncherUpgrader, _gameplayHud.UpgradeUis[0]);
@@ -116,10 +128,12 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             
             //TODO можно ли это все дело сделать на компонентах?
             //Character
-            MiniGun minigun = new MiniGun(2, 0.1f);
+            MiniGun minigun = new MiniGun(
+                 miniGunAttackUpgrader,
+                 0.1f);
             Character character = new Character(
                 playerWallet,
-                new CharacterHealth(100),
+                new CharacterHealth(characterHealthUpgrader),
                 new CharacterMovement(),
                 new CharacterAttacker(minigun),
                 minigun,
@@ -135,7 +149,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _characterViewFactory.Create(character, characterView);
             
             //Bear
-            BearAttacker bearAttacker = new BearAttacker();
+            BearAttacker bearAttacker = new BearAttacker(
+                bearAttackUpgrader, bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
             BearView bearView = Object.FindObjectOfType<BearView>();
             _bearViewFactory.Create(bear, bearView);

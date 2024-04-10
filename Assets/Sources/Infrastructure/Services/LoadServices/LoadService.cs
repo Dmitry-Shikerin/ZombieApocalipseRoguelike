@@ -36,10 +36,10 @@ namespace Sources.Infrastructure.Services.LoadServices
                 model => playerWalletDtoMapper.MapTo(model as PlayerWallet);
         }
 
-        public T Load<T>(IEntity entity)
+        public T Load<T>(string id)
             where T : IDto
         {
-            return _dataService.LoadData<T>(entity.Id);
+            return _dataService.LoadData<T>(id);
         }
 
         public void Save(IEntity entity)

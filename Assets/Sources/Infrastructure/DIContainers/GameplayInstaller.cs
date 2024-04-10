@@ -4,6 +4,7 @@ using Sources.Domain.Data.Common;
 using Sources.Domain.Players;
 using Sources.Domain.SpriteCollections;
 using Sources.Domain.Upgrades;
+using Sources.Domain.Upgrades.Configs.Containers;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Characters;
@@ -37,7 +38,6 @@ using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.Forms;
-using Sources.Infrastructure.Services.Icons;
 using Sources.Infrastructure.Services.InputServices;
 using Sources.Infrastructure.Services.Linecasts;
 using Sources.Infrastructure.Services.LoadServices;
@@ -47,7 +47,6 @@ using Sources.Infrastructure.Services.ObjectPools;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Spawners;
-using Sources.Infrastructure.Services.Sprites;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Infrastructure.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
@@ -63,6 +62,7 @@ using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.Spawners;
+using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Bullets;
@@ -88,7 +88,8 @@ namespace Sources.Infrastructure.DIContainers
         
         public override void InstallBindings()
         {
-            Container.Bind<SpriteCollection>().FromResource("Configs/SpriteCollection").AsSingle();
+            Container.Bind<UpgradeConfigContainer>()
+                .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer").AsSingle();
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
             Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
@@ -116,7 +117,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
             Container.Bind<LinecastService>().AsSingle();
             Container.Bind<OverlapService>().AsSingle();
-            Container.Bind<ISpriteCollectionService>().To<SpriteCollectionService>().AsSingle();
+            Container.Bind<IUpgradeConfigCollectionService>().To<UpgradeConfigCollectionService>().AsSingle();
             Container.Bind<IObjectPool<BulletView>>().To<ObjectPool<BulletView>>().AsSingle();
             Container.Bind<IObjectPool<EnemyView>>().To<ObjectPool<EnemyView>>().AsSingle();
             Container.Bind<IObjectPool<ExplosionBodyBloodyView>>().To<ObjectPool<ExplosionBodyBloodyView>>().AsSingle();
