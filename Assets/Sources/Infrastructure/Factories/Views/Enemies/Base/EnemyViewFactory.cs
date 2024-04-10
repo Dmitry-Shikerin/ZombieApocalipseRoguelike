@@ -1,25 +1,19 @@
-﻿
-using System;
-using Sources.Controllers.Enemies;
+﻿using System;
 using Sources.Controllers.Enemies.Base;
 using Sources.Domain.Enemies;
-using Sources.Infrastructure.Factories.Controllers.Enemies;
+using Sources.Domain.Enemies.Base;
 using Sources.Infrastructure.Factories.Controllers.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
-using Sources.Presentations.Views.Bullets;
 using Sources.Presentations.Views.Enemies;
-using Sources.PresentationsInterfaces.Views.Bullets;
-using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.ObjectPools;
-using Sources.PresentationsInterfaces.Views.Weapons;
 using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Sources.Infrastructure.Factories.Views.Enemies
+namespace Sources.Infrastructure.Factories.Views.Enemies.Base
 {
     public class EnemyViewFactory : IEnemyViewFactory
     {

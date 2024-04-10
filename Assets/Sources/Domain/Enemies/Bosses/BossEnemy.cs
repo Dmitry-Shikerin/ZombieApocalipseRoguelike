@@ -1,13 +1,19 @@
-﻿using UnityEngine;
+﻿using Sources.Domain.Enemies.Base;
+using UnityEngine;
 
 namespace Sources.Domain.Enemies.Bosses
 {
-    public class BossEnemy
+    public class BossEnemy : Enemy
     {
         public BossEnemy(
+            EnemyHealth enemyHealth,
+            EnemyAttacker enemyAttacker,
             float stunTime,
             float walkSpeed,
-            float runSpeed)
+            float runSpeed) 
+            : base(
+                enemyHealth, 
+                enemyAttacker)
         {
             StunTime = stunTime;
             WalkSpeed = walkSpeed;

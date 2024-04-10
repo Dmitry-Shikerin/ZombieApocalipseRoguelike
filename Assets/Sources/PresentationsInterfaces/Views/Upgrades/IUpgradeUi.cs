@@ -6,7 +6,8 @@ namespace Sources.PresentationsInterfaces.Views.Upgrades
 {
     public interface IUpgradeUi
     {
-        IReadOnlyList<IImageView> ImageViews { get; }
+        IReadOnlyList<IImageView> LevelImageViews { get; }
+        IImageView AbilityImageView { get; }
 
         void SetPriceNextUpgrade(string text);
     }

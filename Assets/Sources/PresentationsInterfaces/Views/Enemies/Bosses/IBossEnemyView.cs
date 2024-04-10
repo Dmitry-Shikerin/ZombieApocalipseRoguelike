@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Sources.PresentationsInterfaces.Views.Enemies.Bosses
 {
-    public interface IBossEnemyView
+    public interface IBossEnemyView : IView
     {
         float StoppingDistance { get; }
         Vector3 Position { get; }

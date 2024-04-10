@@ -4,6 +4,7 @@ using Sources.Controllers.Enemies.Base;
 using Sources.Controllers.Enemies.Base.States;
 using Sources.Controllers.Enemies.States;
 using Sources.Domain.Enemies;
+using Sources.Domain.Enemies.Base;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
