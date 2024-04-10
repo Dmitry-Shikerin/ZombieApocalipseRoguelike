@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Sources.DomainInterfaces.Data;
+using Sources.DomainInterfaces.Entities;
 
 namespace Sources.DomainInterfaces.Upgrades
 {
-    public interface IUpgrader : IDataModel
+    public interface IUpgrader : IEntity
     {
         event Action LevelChanged;
 

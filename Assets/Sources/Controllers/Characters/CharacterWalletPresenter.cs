@@ -2,7 +2,7 @@
 using Sources.Controllers.Common;
 using Sources.Domain.Players;
 using Sources.PresentationsInterfaces.Views.Character;
-using Sources.PresentationsInterfaces.Views.Coins;
+using Sources.PresentationsInterfaces.Views.RewardItems;
 
 namespace Sources.Controllers.Characters
 {
@@ -17,7 +17,10 @@ namespace Sources.Controllers.Characters
             _characterWalletView = characterWalletView ?? throw new ArgumentNullException(nameof(characterWalletView));
         }
         
-        public void AddCoins(int amount) =>
-            _playerWallet.AddCoins(amount);
+        public void AddRewardItem(IRewardItemView rewardItemView)
+        {
+            _playerWallet.AddCoins(rewardItemView.RewardAmount);
+            rewardItemView.Destroy();
+        }
     }
 }

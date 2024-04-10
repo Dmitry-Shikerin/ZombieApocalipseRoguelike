@@ -21,7 +21,6 @@ namespace Sources.Presentations.Views.Bullets
         private void OnDisable() =>
             _enemyHealthParticleCollision.Entered -= OnEntered;
 
-        //TODO исправить ротейшн у пулек
         private void OnParticleSystemStopped()
         {
             if (TryGetComponent(out PoolableObject poolableObject) == false)

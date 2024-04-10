@@ -26,6 +26,12 @@ namespace Sources.Presentations.Views
         protected virtual void OnAfterDisable()
         {
         }
+        
+        protected void DestroyPresenter()
+        {
+            Presenter.Disable();
+            Presenter = default;
+        }
 
         public void Construct(T presenter)
         {

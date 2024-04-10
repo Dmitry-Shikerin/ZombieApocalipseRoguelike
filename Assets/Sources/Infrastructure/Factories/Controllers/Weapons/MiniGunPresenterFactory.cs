@@ -8,16 +8,16 @@ namespace Sources.Infrastructure.Factories.Controllers.Weapons
 {
     public class MiniGunPresenterFactory
     {
-        private readonly IBulletSpawner _bulletSpawner;
+        private readonly IBulletSpawnService _bulletSpawnService;
 
-        public MiniGunPresenterFactory(IBulletSpawner bulletSpawner)
+        public MiniGunPresenterFactory(IBulletSpawnService bulletSpawnService)
         {
-            _bulletSpawner = bulletSpawner ?? throw new ArgumentNullException(nameof(bulletSpawner));
+            _bulletSpawnService = bulletSpawnService ?? throw new ArgumentNullException(nameof(bulletSpawnService));
         }
 
         public MiniGunPresenter Create(MiniGun miniGun, IMiniGunView miniGunView)
         {
-            return new MiniGunPresenter(miniGun, miniGunView, _bulletSpawner);
+            return new MiniGunPresenter(miniGun, miniGunView, _bulletSpawnService);
         }
     }
 }

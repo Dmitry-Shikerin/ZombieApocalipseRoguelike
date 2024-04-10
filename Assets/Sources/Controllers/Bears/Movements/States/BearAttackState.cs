@@ -41,6 +41,8 @@ namespace Sources.Controllers.Bears.Movements.States
 
         public override void Update(float deltaTime)
         {
+            if(_bearView.TargetEnemyHealth.CurrentHealth <= 0)
+                _bearView.SetTarget(null);
         }
 
         //TODO вынести в MVC и сервис или чисто в сервис
