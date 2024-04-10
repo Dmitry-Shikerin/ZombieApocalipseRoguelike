@@ -21,12 +21,18 @@ namespace Sources.Domain.Weapons
 
         public async void AttackAsync(CancellationToken cancellationToken)
         {
-            if (IsReady == false)
-                return;
+            try
+            {
+                if (IsReady == false)
+                    return;
 
-            await StartTimer(cancellationToken);
+                await StartTimer(cancellationToken);
 
-            Attacked?.Invoke();
+                Attacked?.Invoke();
+            }
+            catch (OperationCanceledException)
+            {
+            }
         }
 
         private async UniTask StartTimer(CancellationToken cancellationToken)
