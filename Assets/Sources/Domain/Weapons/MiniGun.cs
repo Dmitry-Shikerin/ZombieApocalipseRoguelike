@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Domain.Upgrades;
 using Sources.DomainInterfaces.Weapons;
+using UnityEngine;
 
 namespace Sources.Domain.Weapons
 {
@@ -17,11 +18,14 @@ namespace Sources.Domain.Weapons
         }
 
         public event Action Attacked;
+        public event Action AttackEnded;
 
         public Upgrader MiniGunAttackUpgrader { get; }
         public float Damage => MiniGunAttackUpgrader.CurrentAmount;
         public float AttackSpeed { get; }
         public bool IsReady { get; private set; } = true;
+        public bool IsEnded { get; set; }
+        public bool IsShooting { get; set; }
 
         public async void AttackAsync(CancellationToken cancellationToken)
         {
@@ -32,11 +36,21 @@ namespace Sources.Domain.Weapons
 
                 await StartTimer(cancellationToken);
 
+                IsEnded = false;
                 Attacked?.Invoke();
             }
             catch (OperationCanceledException)
             {
             }
+        }
+
+        public void EndAttack()
+        {
+            if(IsEnded)
+                return;
+                
+            AttackEnded?.Invoke();
+            IsEnded = true;
         }
 
         private async UniTask StartTimer(CancellationToken cancellationToken)

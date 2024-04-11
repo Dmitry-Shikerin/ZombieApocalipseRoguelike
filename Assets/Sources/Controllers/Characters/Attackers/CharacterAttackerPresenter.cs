@@ -46,6 +46,8 @@ namespace Sources.Controllers.Characters.Attackers
         {
             if (_inputService.InputData.IsAttacking)
                 _characterAttacker.Attack(_cancellationTokenSource.Token);
+            else
+                _characterAttacker.EndAttack();
         }
     }
 }

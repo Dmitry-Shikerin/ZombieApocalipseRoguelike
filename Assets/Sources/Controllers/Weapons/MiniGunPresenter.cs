@@ -24,15 +24,37 @@ namespace Sources.Controllers.Weapons
             _bulletSpawnService = bulletSpawnService ?? throw new ArgumentNullException(nameof(bulletSpawnService));
         }
 
-        public override void Enable() =>
+        public override void Enable()
+        {
+            _miniGunView.ShootAudioSource.SetLoop();
             _miniGun.Attacked += OnAttack;
+            _miniGun.AttackEnded += OnAttackEnded;
+        }
 
-        public override void Disable() =>
+        public override void Disable()
+        {
             _miniGun.Attacked -= OnAttack;
+            _miniGun.AttackEnded -= OnAttackEnded;
+        }
+
+        private void OnAttackEnded()
+        {
+            _miniGun.IsShooting = false;
+            Debug.Log("Attack ended");
+            _miniGunView.ShootAudioSource.Stop();
+            _miniGunView.EndShootAudioSource.Play();
+        }
 
         private void OnAttack()
         {
             _bulletSpawnService.Spawn(_miniGunView);
+            
+            if (_miniGun.IsShooting == false)
+            {
+                _miniGunView.EndShootAudioSource.Stop();
+                _miniGunView.ShootAudioSource.Play();
+                _miniGun.IsShooting = true;
+            }
             _miniGunView.PlayFireParticles();
         }
 
