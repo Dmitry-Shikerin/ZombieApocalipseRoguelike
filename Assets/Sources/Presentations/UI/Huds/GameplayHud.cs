@@ -6,6 +6,7 @@ using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.Players;
 using Sources.Presentations.Views.Upgrades;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sources.Presentations.UI.Huds
 {
@@ -23,9 +24,10 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("Forms")] [Required] [SerializeField]
         private GameplaySettingsFormView _settingsFormView;
         
+        [FormerlySerializedAs("_cinemachineCameraService")]
         [Button(ButtonSizes.Large)] 
         [FoldoutGroup("Camera")] [Required] [SerializeField]
-        private CinemachineCameraService _cinemachineCameraService;
+        private CinemachineCameraView cinemachineCameraView;
 
         [Button(ButtonSizes.Large)]
         [FoldoutGroup("Upgrades")] [Required] [SerializeField]
@@ -44,7 +46,7 @@ namespace Sources.Presentations.UI.Huds
         public TutorialFormView TutorialFormView => _tutorialFormView;
         public GameplaySettingsFormView SettingsFormView => _settingsFormView;
         
-        public CinemachineCameraService CinemachineCameraService => _cinemachineCameraService;
+        public CinemachineCameraView CinemachineCameraView => cinemachineCameraView;
 
         public IReadOnlyList<UpgradeView> UpgradeViews => _upgradeViews;
         public IReadOnlyList<UpgradeUi> UpgradeUis => _upgradeUis;

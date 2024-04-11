@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Sources.Presentations.Views.Cameras
 {
-    public class CinemachineCameraService : View, ICinemachineCameraService
+    public class CinemachineCameraView : View, ICinemachineCameraView
     {
         [Required] [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
         

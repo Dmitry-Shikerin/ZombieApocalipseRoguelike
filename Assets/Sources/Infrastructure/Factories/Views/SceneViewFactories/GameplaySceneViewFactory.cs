@@ -147,7 +147,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             // enemyView.SetCharacterHealth(characterView.CharacterHealthView);
 
             //CinemachineService
-            _gameplayHud.CinemachineCameraService.Follow(characterView.transform);
+            _gameplayHud.CinemachineCameraView.Follow(characterView.transform);
 
             //Spawners
             _enemySpawnViewFactory.Create(new EnemySpawner(), _rootGameObject.EnemySpawnerView);

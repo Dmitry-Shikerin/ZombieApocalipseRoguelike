@@ -2,13 +2,11 @@
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using JetBrains.Annotations;
 using Sources.Domain.Constants.LayerMasks;
 using Sources.Domain.Enemies.Bosses;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.Presentations.Views.Characters;
-using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using UnityEngine;
 
