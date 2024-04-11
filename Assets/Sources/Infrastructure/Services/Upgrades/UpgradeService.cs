@@ -64,7 +64,7 @@ namespace Sources.Infrastructure.Services.Upgrades
 
         private void OnUpgradeFormChanged()
         {
-            IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.GetUpgraders();
+            IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
             List<Upgrader> awaiableUpgraders = new List<Upgrader>();
 
             foreach (Upgrader upgrader in upgraders)

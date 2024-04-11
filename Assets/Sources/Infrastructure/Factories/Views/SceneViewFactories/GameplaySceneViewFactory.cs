@@ -106,21 +106,21 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             var sawLauncherUpgrader = CreateUpgrader(ModelId.SawLauncherUpgrader);
             var sawLauncherAbilityUpgrader = CreateUpgrader(ModelId.SawLauncherAbilityUpgrader);
             var miniGunAttackUpgrader = CreateUpgrader(ModelId.MiniGunAttackUpgrader);
-            
-            PlayerWallet playerWallet = new PlayerWallet(10, ModelId.PlayerWallet);
-            _playerWalletProvider.PlayerWallet = playerWallet;
 
-            _upgradeViewFactory.Create(sawLauncherUpgrader, playerWallet, _gameplayHud.UpgradeViews[0]);
-            _upgradeUiFactory.Create(sawLauncherUpgrader, _gameplayHud.UpgradeUis[0]);
+            IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
 
-            _upgradeViewFactory.Create(sawLauncherAbilityUpgrader, playerWallet, _gameplayHud.UpgradeViews[1]);
-            _upgradeUiFactory.Create(sawLauncherAbilityUpgrader, _gameplayHud.UpgradeUis[1]);
+            for (int i = 0; i < _gameplayHud.NotAwailabilityUpgradeUis.Count; i++)
+            {
+                var view = _gameplayHud.NotAwailabilityUpgradeUis[i];
+                var upgrader = upgraders[i];
 
-            // _upgradeViewFactory.Create(sawLauncherAbilityUpgrader, playerWallet, _gameplayHud.UpgradeViews[1]);
-            // _upgradeUiFactory.Create(sawLauncherAbilityUpgrader, _gameplayHud.UpgradeUis[2]);
+                _upgradeUiFactory.Create(upgrader, view);
+            }
 
             //TODO можно ли это все дело сделать на компонентах?
             //Character
+            PlayerWallet playerWallet = new PlayerWallet(10, ModelId.PlayerWallet);
+            _playerWalletProvider.PlayerWallet = playerWallet;
             MiniGun minigun = new MiniGun(
                 miniGunAttackUpgrader,
                 0.1f);

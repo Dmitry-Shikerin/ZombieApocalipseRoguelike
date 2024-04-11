@@ -1,8 +1,10 @@
 ﻿using System;
 using JetBrains.Annotations;
 using Sources.ControllersInterfaces.Scenes;
+using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Services.Upgrades;
+using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Localizations;
@@ -42,12 +44,13 @@ namespace Sources.Controllers.Scenes
         {
             _gameplaySceneViewFactory.Create();
             _localizationService.Translate();
-            _upgradeService.Enable();
+            //TODO раскоментировать UpgradeService
+            // _upgradeService.Enable();
         }
 
         public void Exit()
         {
-            _upgradeService.Disable();
+            // _upgradeService.Disable();
             _updateService.UnregisterAll();
         }
 

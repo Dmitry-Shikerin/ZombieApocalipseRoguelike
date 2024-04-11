@@ -78,8 +78,6 @@ namespace Sources.Infrastructure.DIContainers
     public class GameplayInstaller : MonoInstaller
     {
         [Required][SerializeField] private GameplayHud _gameplayHud;
-        [Required] [SerializeField] private ContainerView _containerView;
-        [Required] [SerializeField] private LocalizationView _localizationView;
         [Required] [SerializeField] private RootGameObject _rootGameObject;
         
         public override void InstallBindings()
@@ -88,8 +86,6 @@ namespace Sources.Infrastructure.DIContainers
                 .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer").AsSingle();
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
-            Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
-            Container.Bind<ILocalizationView>().FromInstance(_localizationView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
             Container.Bind<GameplaySceneViewFactory>().AsSingle();
             Container.Bind<IUpgradeCollectionService>().To<UpgradeCollectionService>().AsSingle();
@@ -150,6 +146,7 @@ namespace Sources.Infrastructure.DIContainers
         private void BindFormFactories()
         {
             Container.Bind<GameplayFormServiceFactory>().AsSingle();
+            Container.Bind<GamePlayTutorialFormServiceFactory>().AsSingle();        
             Container.Bind<PauseFormPresenterFactory>().AsSingle();
             Container.Bind<HudFormPresenterFactory>().AsSingle();
             Container.Bind<UpgradeFormPresenterFactory>().AsSingle();
