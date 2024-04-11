@@ -12,5 +12,6 @@ namespace Sources.DomainInterfaces.Weapons
         bool IsReady { get; }
 
         void AttackAsync(CancellationToken cancellationToken);
+        void EndAttack();
     }
 }

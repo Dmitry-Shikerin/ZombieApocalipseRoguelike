@@ -68,7 +68,6 @@ namespace Sources.Controllers.Enemies.Bosses.States
 
                     _enemy.CurrentTimeRunning = 0;
                     _enemy.IsRun = true;
-                    Debug.Log($"Is run = {_enemy.IsRun}");
                 }
             }
             catch (OperationCanceledException)

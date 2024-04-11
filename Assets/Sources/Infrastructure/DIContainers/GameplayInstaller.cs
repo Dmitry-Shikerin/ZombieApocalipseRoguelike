@@ -40,6 +40,7 @@ using Sources.Infrastructure.Services.LoadServices.Data;
 using Sources.Infrastructure.Services.Localizations;
 using Sources.Infrastructure.Services.ObjectPools;
 using Sources.Infrastructure.Services.Overlaps;
+using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Spawners;
 using Sources.Infrastructure.Services.UpdateServices;
@@ -77,8 +78,6 @@ namespace Sources.Infrastructure.DIContainers
     public class GameplayInstaller : MonoInstaller
     {
         [Required][SerializeField] private GameplayHud _gameplayHud;
-        [Required] [SerializeField] private ContainerView _containerView;
-        [Required] [SerializeField] private LocalizationView _localizationView;
         [Required] [SerializeField] private RootGameObject _rootGameObject;
         
         public override void InstallBindings()
@@ -87,11 +86,11 @@ namespace Sources.Infrastructure.DIContainers
                 .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer").AsSingle();
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
-            Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
-            Container.Bind<ILocalizationView>().FromInstance(_localizationView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
             Container.Bind<GameplaySceneViewFactory>().AsSingle();
             Container.Bind<IUpgradeCollectionService>().To<UpgradeCollectionService>().AsSingle();
+            Container.Bind<IUpgradeService>().To<UpgradeService>().AsSingle();
+            Container.Bind<PlayerWalletProvider>().AsSingle();
             
             BindServices();
             BindCharacters();
@@ -147,6 +146,7 @@ namespace Sources.Infrastructure.DIContainers
         private void BindFormFactories()
         {
             Container.Bind<GameplayFormServiceFactory>().AsSingle();
+            Container.Bind<GamePlayTutorialFormServiceFactory>().AsSingle();        
             Container.Bind<PauseFormPresenterFactory>().AsSingle();
             Container.Bind<HudFormPresenterFactory>().AsSingle();
             Container.Bind<UpgradeFormPresenterFactory>().AsSingle();

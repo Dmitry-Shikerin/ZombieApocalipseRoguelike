@@ -4,6 +4,7 @@ using Sources.InfrastructureInterfaces.Factories.Services;
 using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
 using Sources.InfrastructureInterfaces.Services.Localizations.Translates.Common;
+using Sources.Presentations.UI.Huds;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.Localizations;
 using UnityEngine;
@@ -13,12 +14,12 @@ namespace Sources.Infrastructure.Services.Localizations
     public class TestLocalizationService : LocalizationServiceBase
     {
         public TestLocalizationService(
-            ILocalizationView localizationView, 
+            GameplayHud gameplayHud, 
             ITranslateServiceFactory<IEnglishTranslateService> englishTranslateFactory, 
             ITranslateServiceFactory<IRussianTranslateService> russianTranslateFactory, 
             ITranslateServiceFactory<ITurkishTranslateService> turkishTranslateFactory) 
             : base(
-                localizationView, 
+                gameplayHud.LocalizationView, 
                 englishTranslateFactory, 
                 russianTranslateFactory, 
                 turkishTranslateFactory)
@@ -35,7 +36,7 @@ namespace Sources.Infrastructure.Services.Localizations
                 _ => "en",
             };
             
-            Debug.Log("Translate: " + key);
+            // Debug.Log("Translate: " + key);
             Translate(key);
         }
     }

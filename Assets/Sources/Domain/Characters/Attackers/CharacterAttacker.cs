@@ -13,9 +13,10 @@ namespace Sources.Domain.Characters.Attackers
 
         public IWeapon Weapon { get; }
 
-        public void Attack(CancellationToken cancellationToken)
-        {
+        public void Attack(CancellationToken cancellationToken) =>
             Weapon.AttackAsync(cancellationToken);
-        }
+
+        public void EndAttack() =>
+            Weapon.EndAttack();
     }
 }

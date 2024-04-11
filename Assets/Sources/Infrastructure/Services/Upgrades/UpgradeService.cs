@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using Sources.Domain.Players;
 using Sources.Domain.Upgrades;
 using Sources.Infrastructure.Factories.Views.Upgrades;
+using Sources.Infrastructure.Services.Providers;
 using Sources.InfrastructureInterfaces.Services.Forms;
+using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.Upgrades;
@@ -12,7 +14,8 @@ namespace Sources.Infrastructure.Services.Upgrades
 {
     public class UpgradeService : IUpgradeService
     {
-        private readonly PlayerWallet _playerWallet;
+        private PlayerWallet _playerWallet;
+        private readonly PlayerWalletProvider _playerWalletProvider;
         private readonly IUpgradeCollectionService _upgradeCollectionService;
         private readonly UpgradeViewFactory _upgradeViewFactory;
         private readonly UpgradeUiFactory _upgradeUiFactory;
@@ -21,7 +24,7 @@ namespace Sources.Infrastructure.Services.Upgrades
         private readonly IReadOnlyList<UpgradeView> _upgradeViews;
 
         public UpgradeService(
-            PlayerWallet playerWallet,
+            PlayerWalletProvider playerWalletProvider,
             IUpgradeCollectionService upgradeCollectionService,
             GameplayHud gameplayHud,
             UpgradeViewFactory upgradeViewFactory,
@@ -31,7 +34,8 @@ namespace Sources.Infrastructure.Services.Upgrades
             if (gameplayHud == null) 
                 throw new ArgumentNullException(nameof(gameplayHud));
 
-            _playerWallet = playerWallet ?? throw new ArgumentNullException(nameof(playerWallet));
+            _playerWalletProvider = playerWalletProvider ?? 
+                                    throw new ArgumentNullException(nameof(playerWalletProvider));
             _upgradeCollectionService = upgradeCollectionService ?? 
                                         throw new ArgumentNullException(nameof(upgradeCollectionService));
             _upgradeViewFactory = upgradeViewFactory ?? 
@@ -45,24 +49,30 @@ namespace Sources.Infrastructure.Services.Upgrades
                           throw new NullReferenceException(nameof(gameplayHud.UpgradeUis));
         }
 
-        private void Enable()
+        private PlayerWallet PlayerWallet => _playerWallet ??= _playerWalletProvider.PlayerWallet;
+
+        public void Enable()
         {
-            _playerWallet.CoinsChanged += OnUpgradeFormChanged;
+            OnUpgradeFormChanged();
+            PlayerWallet.CoinsChanged += OnUpgradeFormChanged;
         }
 
-        private void Disable()
+        public void Disable()
         {
-            _playerWallet.CoinsChanged -= OnUpgradeFormChanged;
+            PlayerWallet.CoinsChanged -= OnUpgradeFormChanged;
         }
 
         private void OnUpgradeFormChanged()
         {
-            IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.GetUpgraders();
+            IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
             List<Upgrader> awaiableUpgraders = new List<Upgrader>();
 
             foreach (Upgrader upgrader in upgraders)
             {
-                if(upgrader.MoneyPerUpgrades[upgrader.CurrentLevel] <= _playerWallet.Coins)
+                if(upgrader.CurrentLevel == 3)
+                    continue;
+                
+                if(upgrader.MoneyPerUpgrades[upgrader.CurrentLevel] <= PlayerWallet.Coins)
                     awaiableUpgraders.Add(upgrader);
             }
 
@@ -71,7 +81,7 @@ namespace Sources.Infrastructure.Services.Upgrades
                 for (int i = 0; i < 3; i++)
                 {
                     _upgradeUiFactory.Create(awaiableUpgraders[i], _upgradeUis[i]);
-                    _upgradeViewFactory.Create(awaiableUpgraders[i], _playerWallet, _upgradeViews[i]);
+                    _upgradeViewFactory.Create(awaiableUpgraders[i], PlayerWallet, _upgradeViews[i]);
                 }
                 
                 _formService.Show<UpgradeFormView>();

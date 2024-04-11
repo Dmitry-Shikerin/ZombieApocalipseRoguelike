@@ -54,8 +54,7 @@ namespace Sources.Infrastructure.Services.Localizations
 
                 translateService.Translate(textView);
             }
-
-            Debug.Log(string.Join(", ", texts.Select(x => (x as TextView).gameObject.name)));
+            // Debug.Log(string.Join(", ", texts.Select(x => (x as TextView).gameObject.name)));
         }
     }
 }

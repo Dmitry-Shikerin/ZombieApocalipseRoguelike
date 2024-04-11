@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Sources.InfrastructureInterfaces.Services.Forms;
+using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
 
@@ -12,6 +13,13 @@ namespace Sources.Infrastructure.Services.Forms
         private readonly ContainerView _containerView;
         private readonly Dictionary<string, IForm> _forms = new ();
 
+        public FormService(GameplayHud hud)
+        {
+            _containerView = hud.FormServiceContainerView
+                ? hud.FormServiceContainerView
+                : throw new ArgumentNullException(nameof(hud.FormServiceContainerView));
+        }
+        
         public FormService(ContainerView containerView)
         {
             _containerView = containerView

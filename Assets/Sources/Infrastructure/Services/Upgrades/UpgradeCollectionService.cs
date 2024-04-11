@@ -10,7 +10,7 @@ namespace Sources.Infrastructure.Services.Upgrades
         public void AddUpgrader(Upgrader upgrader) =>
             _upgraders.Add(upgrader);
 
-        public IReadOnlyList<Upgrader> GetUpgraders() =>
+        public IReadOnlyList<Upgrader> Get() =>
             _upgraders;
     }
 }

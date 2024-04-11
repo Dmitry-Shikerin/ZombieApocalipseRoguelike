@@ -1,6 +1,9 @@
-namespace Sources.Infrastructure.Services.Upgrades
+using Sources.ControllersInterfaces.ControllerLifetimes;
+using Sources.InfrastructureInterfaces.Services.StatesLifetimes;
+
+namespace Sources.InfrastructureInterfaces.Services.Upgrades
 {
-    public interface IUpgradeService
+    public interface IUpgradeService : IEnable, IDisable
     {
     }
 }

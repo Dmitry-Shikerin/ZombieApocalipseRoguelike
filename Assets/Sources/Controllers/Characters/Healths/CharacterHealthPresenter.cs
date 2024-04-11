@@ -30,7 +30,6 @@ namespace Sources.Controllers.Characters.Healths
             _characterHealth.TakeHeal(firstAidKitView.HealAmount);
             _characterHealthView.PlayHealParticle();
             firstAidKitView.Destroy();
-            Debug.Log("Heal amount: " + firstAidKitView.HealAmount);
         }
     }
 }
