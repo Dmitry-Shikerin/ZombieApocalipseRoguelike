@@ -27,5 +27,6 @@ namespace Sources.Domain.Enemies.Bosses
         public bool IsMassAttack { get; set; } = true;
         public bool IsRage { get; set; }
         public Vector3 Destination { get; set; }
+        public float CurrentTimeAbility { get; set; }
     }
 }

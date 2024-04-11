@@ -8,12 +8,13 @@ using Sources.Domain.Enemies.Bosses;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.Presentations.Views.Characters;
+using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using UnityEngine;
 
 namespace Sources.Controllers.Enemies.Bosses.States
 {
-    public class BossEnemyMoveToPlayerState : FiniteState
+    public class BossEnemyAttackState : FiniteState
     {
         private readonly BossEnemy _enemy;
         private readonly IBossEnemyView _enemyView;
@@ -21,10 +22,10 @@ namespace Sources.Controllers.Enemies.Bosses.States
         private readonly OverlapService _overlapService;
 
         private CancellationTokenSource _cancellationTokenSource;
-        
-        public BossEnemyMoveToPlayerState(
-            BossEnemy enemy, 
-            IBossEnemyView enemyView, 
+
+        public BossEnemyAttackState(
+            BossEnemy enemy,
+            IBossEnemyView enemyView,
             IBossEnemyAnimation enemyAnimation,
             OverlapService overlapService)
         {
@@ -37,20 +38,25 @@ namespace Sources.Controllers.Enemies.Bosses.States
         public override void Enter()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            
-            _enemyView.SetAgentSpeed(1.8f);
-            _enemyAnimation.PlayWalk();
+
+            _enemyAnimation.PlayAttack();
+            _enemyAnimation.Attacking += OnAttack;
             StartTimer(_cancellationTokenSource.Token);
         }
 
         public override void Exit()
         {
             _cancellationTokenSource.Cancel();
+            _enemyAnimation.Attacking -= OnAttack;
         }
 
         public override void Update(float deltaTime)
         {
-            _enemyView.Move(_enemyView.CharacterMovementView.Position);
+        }
+
+        private void OnAttack()
+        {
+            _enemyView.CharacterHealthView.TakeDamage(_enemy.EnemyAttacker.Damage);
         }
 
         private async void StartTimer(CancellationToken cancellationToken)
@@ -67,13 +73,14 @@ namespace Sources.Controllers.Enemies.Bosses.States
 
                     _enemy.CurrentTimeAbility = 0;
                     _enemyView.PlayMassAttackParticle();
+                    TryAttack();
                 }
             }
             catch (OperationCanceledException)
             {
             }
         }
-        
+
         private void TryAttack()
         {
             var characterHealthViews =

@@ -5,6 +5,7 @@ using Sources.Controllers.Enemies.Base.States;
 using Sources.Controllers.Enemies.Bosses.States;
 using Sources.Controllers.Enemies.States;
 using Sources.Domain.Enemies.Bosses;
+using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
@@ -18,17 +19,20 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Bosses
         private readonly IUpdateRegister _updateRegister;
         private readonly IExplosionBodyBloodySpawnService _explosionBodyBloodySpawnService;
         private readonly IRewardItemSpawnService _rewardItemSpawnService;
+        private readonly OverlapService _overlapService;
 
         public BossEnemyPresenterFactory(
             IUpdateRegister updateRegister,
             IExplosionBodyBloodySpawnService explosionBodyBloodySpawnService,
-            IRewardItemSpawnService rewardItemSpawnService)
+            IRewardItemSpawnService rewardItemSpawnService,
+            OverlapService overlapService)
         {
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
             _explosionBodyBloodySpawnService = explosionBodyBloodySpawnService ?? 
                                                throw new ArgumentNullException(nameof(explosionBodyBloodySpawnService));
             _rewardItemSpawnService = rewardItemSpawnService ?? 
                                       throw new ArgumentNullException(nameof(rewardItemSpawnService));
+            _overlapService = overlapService ?? throw new ArgumentNullException(nameof(overlapService));
         }
 
         public EnemyPresenter Create(
@@ -41,8 +45,9 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Bosses
             // BossEnemyMoveToPlayerState bossEnemyMoveToPlayerState = new BossEnemyMoveToPlayerState(
             //     bossEnemy, bossEnemyView, bossEnemyAnimation);
             BossEnemyMoveToPlayerState moveToPlayerState = new BossEnemyMoveToPlayerState(
-                bossEnemy, bossEnemyView, bossEnemyAnimation);
-            EnemyAttackState attackState = new EnemyAttackState(bossEnemy, bossEnemyView, bossEnemyAnimation);
+                bossEnemy, bossEnemyView, bossEnemyAnimation, _overlapService);
+            BossEnemyAttackState attackState = new BossEnemyAttackState(
+                bossEnemy, bossEnemyView, bossEnemyAnimation, _overlapService);
             EnemyDieState dieState = new EnemyDieState(
                 bossEnemyView, _explosionBodyBloodySpawnService, _rewardItemSpawnService);
             

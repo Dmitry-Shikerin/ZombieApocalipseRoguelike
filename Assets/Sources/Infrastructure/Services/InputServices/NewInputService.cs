@@ -1,4 +1,4 @@
-﻿using Sources.Controllers.LayerMasks;
+﻿using Sources.Domain.Constants.LayerMasks;
 using Sources.Domain.Inputs;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using UnityEngine;
