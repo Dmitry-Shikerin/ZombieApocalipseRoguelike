@@ -40,7 +40,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Bosses
             EnemyInitializeState initializeState = new EnemyInitializeState(bossEnemy, bossEnemyAnimation);
             // BossEnemyMoveToPlayerState bossEnemyMoveToPlayerState = new BossEnemyMoveToPlayerState(
             //     bossEnemy, bossEnemyView, bossEnemyAnimation);
-            EnemyMoveToPlayerState moveToPlayerState = new EnemyMoveToPlayerState(
+            BossEnemyMoveToPlayerState moveToPlayerState = new BossEnemyMoveToPlayerState(
                 bossEnemy, bossEnemyView, bossEnemyAnimation);
             EnemyAttackState attackState = new EnemyAttackState(bossEnemy, bossEnemyView, bossEnemyAnimation);
             EnemyDieState dieState = new EnemyDieState(

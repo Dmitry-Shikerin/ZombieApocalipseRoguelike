@@ -23,6 +23,7 @@ namespace Sources.Controllers.Enemies.Bosses.States
 
         public override void Enter()
         {
+            _enemyView.SetAgentSpeed(1.8f);
             _enemyAnimation.PlayWalk();
         }
 
