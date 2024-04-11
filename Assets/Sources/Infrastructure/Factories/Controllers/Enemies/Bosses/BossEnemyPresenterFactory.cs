@@ -50,6 +50,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Bosses
                 bossEnemy, bossEnemyView, bossEnemyAnimation, _overlapService);
             EnemyDieState dieState = new EnemyDieState(
                 bossEnemyView, _explosionBodyBloodySpawnService, _rewardItemSpawnService);
+            EnemyRunState enemyRunState = new EnemyRunState(bossEnemy, bossEnemyView, bossEnemyAnimation);
             
             FiniteTransition toMoveToPlayerTransition = new FiniteTransitionBase(
                 moveToPlayerState,
@@ -58,15 +59,23 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Bosses
                     bossEnemyView.CharacterMovementView != null &&
                     Vector3.Distance(
                         bossEnemyView.Position, 
-                        bossEnemyView.CharacterMovementView.Position) > bossEnemyView.StoppingDistance);
+                        bossEnemyView.CharacterMovementView.Position) > bossEnemyView.StoppingDistance 
+                    && bossEnemy.IsRun == false);
             initializeState.AddTransition(toMoveToPlayerTransition);
             attackState.AddTransition(toMoveToPlayerTransition);
+            enemyRunState.AddTransition(toMoveToPlayerTransition);
             
             FiniteTransitionBase toAttackTransition = new FiniteTransitionBase(
                 attackState, () => Vector3.Distance(
-                    bossEnemyView.Position, bossEnemyView.CharacterMovementView.Position) < bossEnemyView.StoppingDistance);
+                    bossEnemyView.Position, 
+                    bossEnemyView.CharacterMovementView.Position) 
+                                   < bossEnemyView.StoppingDistance);
             moveToPlayerState.AddTransition(toAttackTransition);
             initializeState.AddTransition(toAttackTransition);
+            enemyRunState.AddTransition(toAttackTransition);
+
+            FiniteTransition toRunTransition = new FiniteTransitionBase(enemyRunState, () => bossEnemy.IsRun);
+            moveToPlayerState.AddTransition(toRunTransition);
             
             FiniteTransition toDieTransition = new FiniteTransitionBase(
                 dieState, () => bossEnemy.EnemyHealth.CurrentHealth <= 0);

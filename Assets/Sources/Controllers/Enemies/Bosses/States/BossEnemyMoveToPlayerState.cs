@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using JetBrains.Annotations;
 using Sources.Domain.Constants.LayerMasks;
 using Sources.Domain.Enemies.Bosses;
 using Sources.Infrastructure.Services.Overlaps;
@@ -38,9 +37,11 @@ namespace Sources.Controllers.Enemies.Bosses.States
         {
             _cancellationTokenSource = new CancellationTokenSource();
             
+            _enemy.IsRun = false;
             _enemyView.SetAgentSpeed(1.8f);
             _enemyAnimation.PlayWalk();
-            StartTimer(_cancellationTokenSource.Token);
+            StartMassAttackTimer(_cancellationTokenSource.Token);
+            StartRunTimer(_cancellationTokenSource.Token);
         }
 
         public override void Exit()
@@ -53,7 +54,29 @@ namespace Sources.Controllers.Enemies.Bosses.States
             _enemyView.Move(_enemyView.CharacterMovementView.Position);
         }
 
-        private async void StartTimer(CancellationToken cancellationToken)
+        private async void StartMassAttackTimer(CancellationToken cancellationToken)
+        {
+            try
+            {
+                while (cancellationToken.IsCancellationRequested == false)
+                {
+                    while (_enemy.CurrentTimeRunning <= 5)
+                    {
+                        _enemy.CurrentTimeRunning += Time.deltaTime;
+                        await UniTask.Yield(cancellationToken);
+                    }
+
+                    _enemy.CurrentTimeRunning = 0;
+                    _enemy.IsRun = true;
+                    Debug.Log($"Is run = {_enemy.IsRun}");
+                }
+            }
+            catch (OperationCanceledException)
+            {
+            }
+        }
+        
+        private async void StartRunTimer(CancellationToken cancellationToken)
         {
             try
             {
@@ -67,6 +90,7 @@ namespace Sources.Controllers.Enemies.Bosses.States
 
                     _enemy.CurrentTimeAbility = 0;
                     _enemyView.PlayMassAttackParticle();
+                    TryAttack();
                 }
             }
             catch (OperationCanceledException)
@@ -78,16 +102,12 @@ namespace Sources.Controllers.Enemies.Bosses.States
         {
             var characterHealthViews =
                 _overlapService.OverlapSphere<CharacterHealthView>(
-                    _enemyView.Position, 7f, Layer.Character, Layer.Default);
+                    _enemyView.Position, 5f, Layer.Character, Layer.Default);
 
             if (characterHealthViews.Count == 0)
-            {
-                Debug.Log($"characterHealthView count = 0");
                 return;
-            }
 
             characterHealthViews.First().TakeDamage(10);
-            Debug.Log($"Enemy boss give damage");
         }
     }
 }

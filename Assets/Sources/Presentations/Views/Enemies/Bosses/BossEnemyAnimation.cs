@@ -53,7 +53,7 @@ namespace Sources.Presentations.Views.Enemies.Bosses
             if(_animator.GetBool("IsRun") == false)
                 return;
             
-            _animator.SetBool("IsRun", true);
+            _animator.SetBool("IsRun", false);
         }
 
         public void PlayWalk()

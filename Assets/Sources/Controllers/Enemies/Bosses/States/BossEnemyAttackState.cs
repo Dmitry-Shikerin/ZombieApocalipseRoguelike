@@ -39,6 +39,13 @@ namespace Sources.Controllers.Enemies.Bosses.States
         {
             _cancellationTokenSource = new CancellationTokenSource();
 
+            if (_enemy.IsRun)
+            {
+                TryAttack();
+                _enemyView.PlayMassAttackParticle();
+                _enemy.IsRun = false;
+            }
+
             _enemyAnimation.PlayAttack();
             _enemyAnimation.Attacking += OnAttack;
             StartTimer(_cancellationTokenSource.Token);
