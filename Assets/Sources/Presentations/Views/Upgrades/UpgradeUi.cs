@@ -14,8 +14,10 @@ namespace Sources.Presentations.Views.Upgrades
     {
         [Required] [SerializeField] private List<ImageView> _imageViews;
         [Required] [SerializeField] private TextMeshProUGUI _priceNextUpgrade;
+        [Required] [SerializeField] private ImageView _abilityImageView;
 
         public IReadOnlyList<IImageView> LevelImageViews => _imageViews;
+        public IImageView AbilityImageView => _abilityImageView;
 
         public void SetPriceNextUpgrade(string text) =>
             _priceNextUpgrade.text = text;

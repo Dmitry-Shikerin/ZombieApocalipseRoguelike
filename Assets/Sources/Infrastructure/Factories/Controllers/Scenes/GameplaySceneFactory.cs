@@ -9,6 +9,7 @@ using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
+using Sources.InfrastructureInterfaces.Services.Upgrades;
 
 namespace Sources.Infrastructure.Factories.Controllers.Scenes
 {
@@ -19,13 +20,15 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
         private readonly GameplaySceneViewFactory _gameplaySceneViewFactory;
         private readonly ILocalizationService _localizationService;
         private readonly ILoadService _loadService;
+        private readonly IUpgradeService _upgradeService;
 
         public GameplaySceneFactory(
             IUpdateService updateService,
             IInputServiceUpdater inputServiceUpdater,
             GameplaySceneViewFactory gameplaySceneViewFactory,
             ILocalizationService localizationService,
-            ILoadService loadService)
+            ILoadService loadService,
+            IUpgradeService upgradeService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -33,6 +36,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
                                         throw new ArgumentNullException(nameof(gameplaySceneViewFactory));
             _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
+            _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
         }
 
         public async UniTask<IScene> Create(object payload)
@@ -42,7 +46,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
                 _inputServiceUpdater,
                 _gameplaySceneViewFactory,
                 _localizationService,
-                _loadService);
+                _loadService,
+                _upgradeService);
         }
     }
 }

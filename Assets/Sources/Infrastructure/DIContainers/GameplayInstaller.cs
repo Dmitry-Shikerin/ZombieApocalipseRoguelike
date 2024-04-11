@@ -40,6 +40,7 @@ using Sources.Infrastructure.Services.LoadServices.Data;
 using Sources.Infrastructure.Services.Localizations;
 using Sources.Infrastructure.Services.ObjectPools;
 using Sources.Infrastructure.Services.Overlaps;
+using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Spawners;
 using Sources.Infrastructure.Services.UpdateServices;
@@ -92,6 +93,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
             Container.Bind<GameplaySceneViewFactory>().AsSingle();
             Container.Bind<IUpgradeCollectionService>().To<UpgradeCollectionService>().AsSingle();
+            Container.Bind<IUpgradeService>().To<UpgradeService>().AsSingle();
+            Container.Bind<PlayerWalletProvider>().AsSingle();
             
             BindServices();
             BindCharacters();

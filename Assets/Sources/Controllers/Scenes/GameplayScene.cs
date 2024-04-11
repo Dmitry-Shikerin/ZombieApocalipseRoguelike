@@ -2,10 +2,12 @@
 using JetBrains.Annotations;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
+using Sources.InfrastructureInterfaces.Services.Upgrades;
 using UnityEngine;
 
 namespace Sources.Controllers.Scenes
@@ -17,13 +19,15 @@ namespace Sources.Controllers.Scenes
         private readonly GameplaySceneViewFactory _gameplaySceneViewFactory;
         private readonly ILocalizationService _localizationService;
         private readonly ILoadService _loadService;
+        private readonly IUpgradeService _upgradeService;
 
         public GameplayScene(
             IUpdateService updateService,
             IInputServiceUpdater inputServiceUpdater,
             GameplaySceneViewFactory gameplaySceneViewFactory,
             ILocalizationService localizationService,
-            ILoadService loadService)
+            ILoadService loadService,
+            IUpgradeService upgradeService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -31,16 +35,19 @@ namespace Sources.Controllers.Scenes
                                         throw new ArgumentNullException(nameof(gameplaySceneViewFactory));
             _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
+            _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
         }
 
         public void Enter(object payload = null)
         {
             _gameplaySceneViewFactory.Create();
             _localizationService.Translate();
+            _upgradeService.Enable();
         }
 
         public void Exit()
         {
+            _upgradeService.Disable();
             _updateService.UnregisterAll();
         }
 

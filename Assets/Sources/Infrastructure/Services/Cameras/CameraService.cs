@@ -4,6 +4,7 @@ using Sources.Domain.Gameplay;
 using Sources.DomainInterfaces.FirstActions;
 using Sources.Presentations.Views.Cameras;
 using Sources.PresentationsInterfaces.Views.Character;
+using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Cameras
 {
@@ -31,14 +32,27 @@ namespace Sources.Infrastructure.Services.Cameras
             _enemyCounter.FirstActionActivate += OnFirsKillEnemyAction;
         }
 
-        private void OnFirsKillEnemyAction()
+        public void Disable()
         {
             
         }
 
-        public void Disable()
+        private void OnFirsKillEnemyAction()
         {
-            throw new NotImplementedException();
+            Debug.Log("First killEnemyAction");
+        }
+
+        private void SHowPanaramaLevelCamera()
+        {
+            //Todo сделать у камеры вид сверху
+            Debug.Log("");
+        }
+
+        private void ShowHealthBarTutorial()
+        {
+            //сделать затемнение экрана у всех туториалов и оставлять подсвеченными только элемент туториала
+            //TODO сделать отдельный сервис для формочек туториала
+            //сделать 
         }
     }
 }

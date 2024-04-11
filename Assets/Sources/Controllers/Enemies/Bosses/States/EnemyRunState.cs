@@ -24,7 +24,7 @@ namespace Sources.Controllers.Enemies.Bosses.States
 
         public override void Enter()
         {
-            Debug.Log($"Boss run state");
+            // Debug.Log($"Boss run state");
             _bossEnemyView.SetAgentSpeed(_bossEnemy.RunSpeed);
             _bossEnemyAnimation.PlayRun();
         }

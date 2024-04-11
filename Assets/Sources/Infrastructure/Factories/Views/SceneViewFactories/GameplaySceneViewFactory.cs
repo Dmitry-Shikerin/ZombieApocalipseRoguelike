@@ -17,7 +17,9 @@ using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
+using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
+using Sources.Infrastructure.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Spawners;
@@ -46,6 +48,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly ItemSpawnerViewFactory _itemSpawnerViewFactory;
         private readonly IUpgradeConfigCollectionService _upgradeConfigCollectionService;
         private readonly IUpgradeDtoMapper _upgradeDtoMapper;
+        private readonly IUpgradeCollectionService _upgradeCollectionService;
+        private readonly PlayerWalletProvider _playerWalletProvider;
         private readonly RootGameObject _rootGameObject;
         private readonly EnemyViewFactory _enemyViewFactory;
 
@@ -63,7 +67,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             EnemySpawnViewFactory enemySpawnViewFactory,
             ItemSpawnerViewFactory itemSpawnerViewFactory,
             IUpgradeConfigCollectionService upgradeConfigCollectionService,
-            IUpgradeDtoMapper upgradeDtoMapper)
+            IUpgradeDtoMapper upgradeDtoMapper,
+            IUpgradeCollectionService upgradeCollectionService,
+            PlayerWalletProvider playerWalletProvider)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ??
@@ -82,6 +88,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _upgradeConfigCollectionService = upgradeConfigCollectionService ??
                                               throw new ArgumentNullException(nameof(upgradeConfigCollectionService));
             _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));
+            _upgradeCollectionService = upgradeCollectionService ?? throw new ArgumentNullException(nameof(upgradeCollectionService));
+            _playerWalletProvider = playerWalletProvider ?? throw new ArgumentNullException(nameof(playerWalletProvider));
             _rootGameObject = rootGameObject ? rootGameObject : throw new ArgumentNullException(nameof(rootGameObject));
         }
 
@@ -100,6 +108,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             var miniGunAttackUpgrader = CreateUpgrader(ModelId.MiniGunAttackUpgrader);
             
             PlayerWallet playerWallet = new PlayerWallet(10, ModelId.PlayerWallet);
+            _playerWalletProvider.PlayerWallet = playerWallet;
 
             _upgradeViewFactory.Create(sawLauncherUpgrader, playerWallet, _gameplayHud.UpgradeViews[0]);
             _upgradeUiFactory.Create(sawLauncherUpgrader, _gameplayHud.UpgradeUis[0]);
@@ -159,6 +168,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             UpgradeDto upgradeDto = _upgradeDtoMapper.MapIdToDto(id);
             Upgrader upgrader = _upgradeDtoMapper.MapDtoToModel(upgradeDto);
             _entityRepository.Add(upgrader);
+            _upgradeCollectionService.AddUpgrader(upgrader);
 
             return upgrader;
         }

@@ -94,12 +94,10 @@ namespace Sources.Controllers.Enemies.Bosses.States
 
             if (characterHealthViews.Count == 0)
             {
-                Debug.Log($"characterHealthView count = 0");
                 return;
             }
 
             characterHealthViews.First().TakeDamage(10);
-            Debug.Log($"Enemy boss give damage");
         }
     }
 }

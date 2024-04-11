@@ -35,7 +35,7 @@ namespace Sources.Infrastructure.Services.Localizations
                 _ => "en",
             };
             
-            Debug.Log("Translate: " + key);
+            // Debug.Log("Translate: " + key);
             Translate(key);
         }
     }
