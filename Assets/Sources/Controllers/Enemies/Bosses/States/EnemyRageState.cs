@@ -18,7 +18,7 @@ namespace Sources.Controllers.Enemies.Bosses.States
 
         public override void Enter()
         {
-            _bossEnemyAnimation.PlayRage();
+            _bossEnemyAnimation.PlayScream();
             
             _bossEnemyAnimation.ScreamAnimationEnded += OnScreamAnimationEnded;
         }

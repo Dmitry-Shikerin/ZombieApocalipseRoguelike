@@ -13,10 +13,6 @@ namespace Sources.Controllers.Enemies.Base.States
         private readonly IEnemyView _enemyView;
         private readonly IEnemyAnimation _enemyAnimation;
 
-        public EnemyAttackState()
-        {
-        }
-
         public EnemyAttackState(
             Enemy enemy, 
             IEnemyView enemyView, 

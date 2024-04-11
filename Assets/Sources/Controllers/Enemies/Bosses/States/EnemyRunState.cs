@@ -2,6 +2,7 @@
 using Sources.Domain.Enemies.Bosses;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
+using UnityEngine;
 
 namespace Sources.Controllers.Enemies.Bosses.States
 {
@@ -23,6 +24,7 @@ namespace Sources.Controllers.Enemies.Bosses.States
 
         public override void Enter()
         {
+            Debug.Log($"Boss run state");
             _bossEnemyView.SetAgentSpeed(_bossEnemy.RunSpeed);
             _bossEnemyAnimation.PlayRun();
         }
@@ -33,6 +35,7 @@ namespace Sources.Controllers.Enemies.Bosses.States
 
         public override void Update(float deltaTime)
         {
+            _bossEnemyView.Move(_bossEnemyView.CharacterMovementView.Position);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Domain.Upgrades;
 using Sources.DomainInterfaces.Healths;
 using UnityEngine;
 
@@ -6,17 +7,18 @@ namespace Sources.Domain.Characters
 {
     public class CharacterHealth : IHealth
     {
+        public Upgrader HealthUpgrader { get; }
         private float _currentHealth;
 
-        public CharacterHealth(float maxHealth)
+        public CharacterHealth(Upgrader healthUpgrader)
         {
-            MaxHealth = maxHealth;
+            HealthUpgrader = healthUpgrader;
             CurrentHealth = MaxHealth;
         }
 
         public event Action HealthChanged;
-        
-        public float MaxHealth { get; }
+
+        public float MaxHealth => HealthUpgrader.CurrentAmount;
         public float CurrentHealth
         {
             get => _currentHealth;

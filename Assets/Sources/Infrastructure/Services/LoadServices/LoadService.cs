@@ -23,23 +23,23 @@ namespace Sources.Infrastructure.Services.LoadServices
         public LoadService(
             IEntityRepository entityRepository,
             IDataService dataService,
-            IDtoMapper<UpgradeDto, Upgrader> upgradeDtoMapper,
-            IDtoMapper<PlayerWalletDto, PlayerWallet> playerWalletDtoMapper)
+            IUpgradeDtoMapper upgradeDtoMapper,
+            IPlayerWalletDtoMapper playerWalletDtoMapper)
         {
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
 
             _mappers = new Dictionary<Type, Func<IEntity, IDto>>();
             _mappers[typeof(Upgrader)] = 
-                model => upgradeDtoMapper.MapTo(model as Upgrader);
+                model => upgradeDtoMapper.MapModelToDto(model as Upgrader);
             _mappers[typeof(PlayerWallet)] =
                 model => playerWalletDtoMapper.MapTo(model as PlayerWallet);
         }
 
-        public T Load<T>(IEntity entity)
+        public T Load<T>(string id)
             where T : IDto
         {
-            return _dataService.LoadData<T>(entity.Id);
+            return _dataService.LoadData<T>(id);
         }
 
         public void Save(IEntity entity)

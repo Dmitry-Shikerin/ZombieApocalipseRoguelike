@@ -4,6 +4,7 @@ using Sources.Domain.Enemies.Base;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
+using UnityEngine;
 
 namespace Sources.Controllers.Enemies.Base.States
 {
@@ -23,6 +24,7 @@ namespace Sources.Controllers.Enemies.Base.States
         public override void Enter()
         {
             _enemyAnimation.PlayWalk();
+            Debug.Log($"Play walk");
         }
 
         public override void Exit()
@@ -31,6 +33,7 @@ namespace Sources.Controllers.Enemies.Base.States
 
         public override void Update(float deltaTime)
         {
+            _enemyAnimation.PlayWalk();
             _enemyView.Move(_enemyView.CharacterMovementView.Position);
         }
     }

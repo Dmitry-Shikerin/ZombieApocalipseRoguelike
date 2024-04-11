@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Sources.Domain.Upgrades;
 using Sources.DomainInterfaces.Weapons;
 
 namespace Sources.Domain.Weapons
 {
     public class MiniGun : IWeapon
     {
-        public MiniGun(float damage, float attackSpeed)
+        public MiniGun(
+            Upgrader miniGunAttackUpgrader,
+            float attackSpeed)
         {
-            Damage = damage;
+            MiniGunAttackUpgrader = miniGunAttackUpgrader;
             AttackSpeed = attackSpeed;
         }
 
         public event Action Attacked;
-        
-        public float Damage { get; }
+
+        public Upgrader MiniGunAttackUpgrader { get; }
+        public float Damage => MiniGunAttackUpgrader.CurrentAmount;
         public float AttackSpeed { get; }
         public bool IsReady { get; private set; } = true;
 
