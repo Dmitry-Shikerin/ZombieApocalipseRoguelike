@@ -7,7 +7,7 @@ namespace Sources.PresentationsInterfaces.Views.Enemies.Bosses
     {
         event Action ScreamAnimationEnded;
         
-        void PlayRage();
+        void PlayScream();
         void PlayRun();
     }
 }

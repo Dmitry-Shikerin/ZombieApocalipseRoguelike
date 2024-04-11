@@ -1,9 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.Domain.Data;
-using Sources.Domain.Data.Common;
-using Sources.Domain.Players;
-using Sources.Domain.SpriteCollections;
-using Sources.Domain.Upgrades;
 using Sources.Domain.Upgrades.Configs.Containers;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
@@ -144,10 +139,9 @@ namespace Sources.Infrastructure.DIContainers
 
         private void BindDtoFactories()
         {
-            Container.Bind<IDtoMapper<UpgradeDto, Upgrader>>()
-                .To<UpgradeDtoMapper>().AsSingle();
-            Container.Bind<IDtoMapper<PlayerWalletDto, PlayerWallet>>()
-                .To<PlayerWalletDtoMapper>().AsSingle();
+            Container.Bind<IUpgradeDtoMapper>().To<UpgradeDtoMapper>().AsSingle();
+            Container.Bind<IPlayerWalletDtoMapper>()
+                .To<PlayerWalletDtoMapperMapper>().AsSingle();
         }
         
         private void BindFormFactories()

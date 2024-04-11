@@ -1,20 +1,20 @@
 ﻿using System;
-using Sources.Domain.Enemies;
-using Sources.Domain.Enemies.Base;
+using Sources.Domain.Enemies.Bosses;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
-using Sources.PresentationsInterfaces.Views.Enemies;
-using Sources.PresentationsInterfaces.Views.Enemies.Base;
-using UnityEngine;
+using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 
-namespace Sources.Controllers.Enemies.Base.States
+namespace Sources.Controllers.Enemies.Bosses.States
 {
-    public class EnemyMoveToPlayerState : FiniteState
+    public class BossEnemyMoveToPlayerState : FiniteState
     {
-        private readonly Enemy _enemy;
-        private readonly IEnemyView _enemyView;
-        private readonly IEnemyAnimation _enemyAnimation;
+        private readonly BossEnemy _enemy;
+        private readonly IBossEnemyView _enemyView;
+        private readonly IBossEnemyAnimation _enemyAnimation;
         
-        public EnemyMoveToPlayerState(Enemy enemy, IEnemyView enemyView, IEnemyAnimation enemyAnimation)
+        public BossEnemyMoveToPlayerState(
+            BossEnemy enemy, 
+            IBossEnemyView enemyView, 
+            IBossEnemyAnimation enemyAnimation)
         {
             _enemy = enemy ?? throw new ArgumentNullException(nameof(enemy));
             _enemyView = enemyView ?? throw new ArgumentNullException(nameof(enemyView));
@@ -24,7 +24,6 @@ namespace Sources.Controllers.Enemies.Base.States
         public override void Enter()
         {
             _enemyAnimation.PlayWalk();
-            Debug.Log($"Play walk");
         }
 
         public override void Exit()
@@ -33,7 +32,6 @@ namespace Sources.Controllers.Enemies.Base.States
 
         public override void Update(float deltaTime)
         {
-            _enemyAnimation.PlayWalk();
             _enemyView.Move(_enemyView.CharacterMovementView.Position);
         }
     }

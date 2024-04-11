@@ -12,30 +12,8 @@ namespace Sources.Domain.Upgrades
     public class Upgrader : IUpgrader, IEntity
     {
         private float _startAmount;
-
+        
         public Upgrader(
-            UpgradeConfig upgradeConfig,
-            UpgradeDto upgradeDto)
-            : this(
-            upgradeConfig.StartAmount,
-            upgradeDto.CurrentLevel,
-            upgradeConfig.AddedAmount,
-            upgradeConfig.MoneyPerUpgrades,
-            upgradeConfig.Id)
-        {
-        }
-        
-        public Upgrader(UpgradeConfig upgradeConfig) 
-            : this(
-            upgradeConfig.StartAmount,
-            0,
-            upgradeConfig.AddedAmount,
-            upgradeConfig.MoneyPerUpgrades,
-            upgradeConfig.Id)
-        {
-        }
-        
-        private Upgrader(
             float startAmount,
             int currentLevel,
             float addedAmount,

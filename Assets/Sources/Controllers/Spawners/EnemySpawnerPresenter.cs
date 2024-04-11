@@ -68,7 +68,7 @@ namespace Sources.Controllers.Spawners
                             continue;
                         }
                         
-                        SpawnEnemy(enemySpawnPointView, characterView);
+                        // SpawnEnemy(enemySpawnPointView, characterView);
 
                         await UniTask.Delay(TimeSpan.FromSeconds(10), cancellationToken: cancellationToken);
                     }

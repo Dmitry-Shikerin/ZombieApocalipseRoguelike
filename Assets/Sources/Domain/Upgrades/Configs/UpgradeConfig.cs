@@ -9,6 +9,8 @@ namespace Sources.Domain.Upgrades.Configs
         order = 51)]
     public class UpgradeConfig : ScriptableObject
     {
+        [field: SerializeField] public int MaxLevel { get; private set; }
+        [field: SerializeField] public int CurrentLevel { get; private set; }
         [field: SerializeField] public float StartAmount { get; private set; }
         [field: SerializeField] public float AddedAmount { get; private set; }
         [field: SerializeField] public List<int> MoneyPerUpgrades { get; private set; }
