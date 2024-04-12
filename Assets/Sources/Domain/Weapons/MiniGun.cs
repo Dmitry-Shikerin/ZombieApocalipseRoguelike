@@ -3,7 +3,6 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Domain.Upgrades;
 using Sources.DomainInterfaces.Weapons;
-using UnityEngine;
 
 namespace Sources.Domain.Weapons
 {

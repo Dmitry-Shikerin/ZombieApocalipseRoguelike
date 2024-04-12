@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Domain.Gameplay;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.PresentationsInterfaces.Views.Enemies;
@@ -9,15 +10,18 @@ namespace Sources.Controllers.Enemies.Base.States
 {
     public class EnemyDieState : FiniteState
     {
+        private readonly KillEnemyCounter _killEnemyCounter;
         private readonly IEnemyView _enemyView;
         private readonly IExplosionBodyBloodySpawnService _explosionBodyBloodySpawnService;
         private readonly IRewardItemSpawnService _rewardItemSpawnService;
 
         public EnemyDieState(
+            KillEnemyCounter killEnemyCounter,
             IEnemyView enemyView, 
             IExplosionBodyBloodySpawnService explosionBodyBloodySpawnService,
             IRewardItemSpawnService rewardItemSpawnService)
         {
+            _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
             _enemyView = enemyView ?? throw new ArgumentNullException(nameof(enemyView));
             _explosionBodyBloodySpawnService = explosionBodyBloodySpawnService ?? 
                                           throw new ArgumentNullException(nameof(explosionBodyBloodySpawnService));
@@ -30,6 +34,7 @@ namespace Sources.Controllers.Enemies.Base.States
             Vector3 spawnPosition = _enemyView.Position;
             spawnPosition.y += 1f;
             
+            _killEnemyCounter.IncreaseKillCount();
             _explosionBodyBloodySpawnService.Spawn(spawnPosition);
             _rewardItemSpawnService.Spawn(_enemyView.Position, 3);
             _enemyView.Destroy();

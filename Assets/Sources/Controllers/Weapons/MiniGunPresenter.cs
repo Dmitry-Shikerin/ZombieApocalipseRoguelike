@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using Sources.Controllers.Common;
 using Sources.Domain.Weapons;
 using Sources.InfrastructureInterfaces.Services.Spawners;
@@ -39,11 +40,15 @@ namespace Sources.Controllers.Weapons
 
         private void OnAttackEnded()
         {
+            // Debug.Log("Attack ended");
+            if(_miniGun.IsShooting == false)
+                return;
+            
             _miniGun.IsShooting = false;
-            Debug.Log("Attack ended");
             _miniGunView.ShootAudioSource.Stop();
             _miniGunView.EndShootAudioSource.Play();
         }
+        //TODO в сервисе для музыки сделать вейтАнтил и проверять аудиокли на ис Плеинг
 
         private void OnAttack()
         {

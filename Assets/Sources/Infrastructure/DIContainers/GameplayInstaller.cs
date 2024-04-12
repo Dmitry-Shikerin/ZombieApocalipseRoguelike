@@ -8,6 +8,7 @@ using Sources.Infrastructure.Factories.Controllers.Enemies;
 using Sources.Infrastructure.Factories.Controllers.Enemies.Base;
 using Sources.Infrastructure.Factories.Controllers.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
+using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Players;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
@@ -26,6 +27,7 @@ using Sources.Infrastructure.Factories.Views.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Views.ExplosionBodyBloodyViews;
 using Sources.Infrastructure.Factories.Views.FirstAidKitViewFactory;
+using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Players;
 using Sources.Infrastructure.Factories.Views.RewardItems;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
@@ -102,6 +104,7 @@ namespace Sources.Infrastructure.DIContainers
             BindDtoFactories();
             BindItems();
             BindSpawners();
+            BindGameplay();
         }
 
         private void BindServices()
@@ -134,6 +137,12 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ILoadService>().To<LoadService>().AsSingle();
             Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
+        }
+
+        private void BindGameplay()
+        {
+            Container.Bind<KillEnemyCounterPresenterFactory>().AsSingle();
+            Container.Bind<KillEnemyCounterViewFactory>().AsSingle();
         }
 
         private void BindDtoFactories()

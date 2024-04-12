@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Spawners;
+using Sources.Domain.Gameplay;
 using Sources.Domain.Spawners;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.PresentationsInterfaces.Views.Spawners;
@@ -20,11 +21,15 @@ namespace Sources.Infrastructure.Factories.Controllers.Spawners
                                      throw new ArgumentNullException(nameof(bossEnemySpawnService));
         }
 
-        public EnemySpawnerPresenter Create(EnemySpawner enemySpawner, IEnemySpawnerView enemySpawnerView)
+        public EnemySpawnerPresenter Create(
+            EnemySpawner enemySpawner, 
+            KillEnemyCounter killEnemyCounter, 
+            IEnemySpawnerView enemySpawnerView)
         {
             return new EnemySpawnerPresenter(
-                enemySpawner, 
-                enemySpawnerView, 
+                killEnemyCounter,
+                enemySpawner,
+                enemySpawnerView,
                 _enemySpawnService,
                 _bossEnemySpawnService);
         }

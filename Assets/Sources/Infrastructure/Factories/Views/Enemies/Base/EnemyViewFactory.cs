@@ -2,6 +2,7 @@
 using Sources.Controllers.Enemies.Base;
 using Sources.Domain.Enemies;
 using Sources.Domain.Enemies.Base;
+using Sources.Domain.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
@@ -36,17 +37,17 @@ namespace Sources.Infrastructure.Factories.Views.Enemies.Base
             _healthUiFactory = healthUiFactory ?? throw new ArgumentNullException(nameof(healthUiFactory));
         }
 
-        public IEnemyView Create(Enemy enemy)
+        public IEnemyView Create(Enemy enemy, KillEnemyCounter killEnemyCounter)
         {
             EnemyView enemyView = CreateView();
             
-            return Create(enemy, enemyView);
+            return Create(enemy, killEnemyCounter, enemyView);
         }
 
-        public IEnemyView Create(Enemy enemy, EnemyView enemyView)
+        public IEnemyView Create(Enemy enemy, KillEnemyCounter killEnemyCounter, EnemyView enemyView)
         {
             EnemyPresenter enemyPresenter = _enemyPresenterFactory.Create(
-                enemy, enemyView, enemyView.EnemyAnimation);
+                enemy, killEnemyCounter, enemyView, enemyView.EnemyAnimation);
             
             enemyView.Construct(enemyPresenter);
             
