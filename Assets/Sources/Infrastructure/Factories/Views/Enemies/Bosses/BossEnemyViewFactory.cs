@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Enemies.Base;
 using Sources.Domain.Enemies.Bosses;
+using Sources.Domain.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
@@ -35,17 +36,17 @@ namespace Sources.Infrastructure.Factories.Views.Enemies.Bosses
             _healthUiFactory = healthUiFactory ?? throw new ArgumentNullException(nameof(healthUiFactory));
         }
 
-        public IBossEnemyView Create(BossEnemy bossEnemy)
+        public IBossEnemyView Create(BossEnemy bossEnemy, KillEnemyCounter killEnemyCounter)
         {
             BossEnemyView bossEnemyView = CreateView();
             
-            return Create(bossEnemy, bossEnemyView);
+            return Create(bossEnemy, killEnemyCounter, bossEnemyView);
         }
         
-        public IBossEnemyView Create(BossEnemy bossEnemy, BossEnemyView bossEnemyView)
+        public IBossEnemyView Create(BossEnemy bossEnemy, KillEnemyCounter killEnemyCounter, BossEnemyView bossEnemyView)
         {
             EnemyPresenter enemyPresenter = _bossEnemyPresenterFactory.Create(
-                bossEnemy, bossEnemyView, bossEnemyView.EnemyAnimation);
+                bossEnemy, killEnemyCounter, bossEnemyView, bossEnemyView.EnemyAnimation);
             
             bossEnemyView.Construct(enemyPresenter);
             

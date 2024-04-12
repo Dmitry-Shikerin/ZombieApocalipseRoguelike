@@ -5,6 +5,7 @@ using Sources.Controllers.Enemies.Base.States;
 using Sources.Controllers.Enemies.States;
 using Sources.Domain.Enemies;
 using Sources.Domain.Enemies.Base;
+using Sources.Domain.Gameplay;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
@@ -31,13 +32,13 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Base
                                       throw new ArgumentNullException(nameof(rewardItemSpawnService));
         }
 
-        public EnemyPresenter Create(Enemy enemy, IEnemyView enemyView, IEnemyAnimation enemyAnimation)
+        public EnemyPresenter Create(Enemy enemy, KillEnemyCounter killEnemyCounter, IEnemyView enemyView, IEnemyAnimation enemyAnimation)
         {
             EnemyInitializeState initializeState = new EnemyInitializeState(enemy, enemyAnimation);
             EnemyMoveToPlayerState moveToPlayerState = new EnemyMoveToPlayerState(enemy, enemyView, enemyAnimation);
             EnemyAttackState attackState = new EnemyAttackState(enemy, enemyView, enemyAnimation);
             EnemyDieState dieState = new EnemyDieState(
-                enemyView, _explosionBodyBloodySpawnService, _rewardItemSpawnService);
+                killEnemyCounter, enemyView, _explosionBodyBloodySpawnService, _rewardItemSpawnService);
 
             FiniteTransition toMoveToPlayerTransition = new FiniteTransitionBase(
                 moveToPlayerState,

@@ -5,6 +5,7 @@ using Sources.Controllers.Enemies.Base.States;
 using Sources.Controllers.Enemies.Bosses.States;
 using Sources.Controllers.Enemies.States;
 using Sources.Domain.Enemies.Bosses;
+using Sources.Domain.Gameplay;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.Spawners;
@@ -37,6 +38,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Bosses
 
         public EnemyPresenter Create(
             BossEnemy bossEnemy,
+            KillEnemyCounter killEnemyCounter,
             IBossEnemyView bossEnemyView,
             IBossEnemyAnimation bossEnemyAnimation)
         {
@@ -49,7 +51,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Bosses
             BossEnemyAttackState attackState = new BossEnemyAttackState(
                 bossEnemy, bossEnemyView, bossEnemyAnimation, _overlapService);
             EnemyDieState dieState = new EnemyDieState(
-                bossEnemyView, _explosionBodyBloodySpawnService, _rewardItemSpawnService);
+                killEnemyCounter,bossEnemyView, _explosionBodyBloodySpawnService, _rewardItemSpawnService);
             EnemyRunState enemyRunState = new EnemyRunState(bossEnemy, bossEnemyView, bossEnemyAnimation);
             
             FiniteTransition toMoveToPlayerTransition = new FiniteTransitionBase(

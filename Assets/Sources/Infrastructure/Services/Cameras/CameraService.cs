@@ -12,24 +12,24 @@ namespace Sources.Infrastructure.Services.Cameras
     {
         private ICinemachineCameraView _cinnemachineCameraView;
         private ICharacterMovementView _characterMovementView;
-        private readonly EnemyCounter _enemyCounter;
+        private readonly KillEnemyCounter _killEnemyCounter;
 
         public CameraService(
             ICinemachineCameraView cinnemachineCameraView,
             ICharacterMovementView characterMovementView,
-            EnemyCounter enemyCounter)
+            KillEnemyCounter killEnemyCounter)
         {
             _cinnemachineCameraView = cinnemachineCameraView ?? 
                                       throw new ArgumentNullException(nameof(cinnemachineCameraView));
             _characterMovementView = characterMovementView ?? 
                                      throw new ArgumentNullException(nameof(characterMovementView));
-            _enemyCounter = enemyCounter ?? throw new ArgumentNullException(nameof(enemyCounter));
+            _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
         }
 
 
         public void Enable()
         {
-            _enemyCounter.FirstActionActivate += OnFirsKillEnemyAction;
+            _killEnemyCounter.FirstActionActivate += OnFirsKillKillEnemyAction;
         }
 
         public void Disable()
@@ -37,7 +37,7 @@ namespace Sources.Infrastructure.Services.Cameras
             
         }
 
-        private void OnFirsKillEnemyAction()
+        private void OnFirsKillKillEnemyAction()
         {
             Debug.Log("First killEnemyAction");
         }

@@ -7,6 +7,7 @@ using Sources.Domain.Characters;
 using Sources.Domain.Characters.Attackers;
 using Sources.Domain.Data.Common;
 using Sources.Domain.Data.Ids;
+using Sources.Domain.Gameplay;
 using Sources.Domain.Players;
 using Sources.Domain.Spawners;
 using Sources.Domain.Upgrades;
@@ -15,6 +16,7 @@ using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Enemies.Base;
+using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Services.Providers;
@@ -50,6 +52,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly IUpgradeDtoMapper _upgradeDtoMapper;
         private readonly IUpgradeCollectionService _upgradeCollectionService;
         private readonly PlayerWalletProvider _playerWalletProvider;
+        private readonly KillEnemyCounterViewFactory _killEnemyCounterViewFactory;
         private readonly RootGameObject _rootGameObject;
         private readonly EnemyViewFactory _enemyViewFactory;
 
@@ -69,7 +72,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             IUpgradeConfigCollectionService upgradeConfigCollectionService,
             IUpgradeDtoMapper upgradeDtoMapper,
             IUpgradeCollectionService upgradeCollectionService,
-            PlayerWalletProvider playerWalletProvider)
+            PlayerWalletProvider playerWalletProvider,
+            KillEnemyCounterViewFactory killEnemyCounterViewFactory)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ??
@@ -90,6 +94,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));
             _upgradeCollectionService = upgradeCollectionService ?? throw new ArgumentNullException(nameof(upgradeCollectionService));
             _playerWalletProvider = playerWalletProvider ?? throw new ArgumentNullException(nameof(playerWalletProvider));
+            _killEnemyCounterViewFactory = killEnemyCounterViewFactory ?? throw new ArgumentNullException(nameof(killEnemyCounterViewFactory));
             _rootGameObject = rootGameObject ? rootGameObject : throw new ArgumentNullException(nameof(rootGameObject));
         }
 
@@ -159,8 +164,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _gameplayHud.CinemachineCameraView.Follow(characterView.transform);
 
             //Spawners
-            _enemySpawnViewFactory.Create(new EnemySpawner(), _rootGameObject.EnemySpawnerView);
+            KillEnemyCounter killEnemyCounter = new KillEnemyCounter();
+            EnemySpawner enemySpawner = new EnemySpawner();
+            _enemySpawnViewFactory.Create(enemySpawner, killEnemyCounter, _rootGameObject.EnemySpawnerView);
             _itemSpawnerViewFactory.Create(new ItemSpawner(), _rootGameObject.ItemSpawnerView);
+            
+            //Gameplay
+            _killEnemyCounterViewFactory.Create(killEnemyCounter, enemySpawner, _gameplayHud.KillEnemyCounterView);
         }
 
         private Upgrader CreateUpgrader(string id)

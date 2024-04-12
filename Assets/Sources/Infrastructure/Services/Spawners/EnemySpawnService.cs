@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Domain.Enemies;
 using Sources.Domain.Enemies.Base;
+using Sources.Domain.Gameplay;
 using Sources.Infrastructure.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
@@ -22,21 +23,21 @@ namespace Sources.Infrastructure.Services.Spawners
             _enemyViewFactory = enemyViewFactory ?? throw new ArgumentNullException(nameof(enemyViewFactory));
         }
 
-        public IEnemyView Spawn()
+        public IEnemyView Spawn(KillEnemyCounter killEnemyCounter)
         {
-            Enemy enemy = new Enemy(new EnemyHealth(100), new EnemyAttacker(5));
+            Enemy enemy = new Enemy(new EnemyHealth(50), new EnemyAttacker(5));
             
-            return SpawnFromPool(enemy) ?? _enemyViewFactory.Create(enemy);
+            return SpawnFromPool(enemy, killEnemyCounter) ?? _enemyViewFactory.Create(enemy, killEnemyCounter);
         }
 
-        private IEnemyView SpawnFromPool(Enemy enemy)
+        private IEnemyView SpawnFromPool(Enemy enemy, KillEnemyCounter killEnemyCounter)
         {
             EnemyView enemyView = _enemyPool.Get<EnemyView>();
 
             if (enemyView == null)
                 return null;
             
-            return _enemyViewFactory.Create(enemy, enemyView);
+            return _enemyViewFactory.Create(enemy, killEnemyCounter, enemyView);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Domain.Enemies;
 using Sources.Domain.Enemies.Bosses;
+using Sources.Domain.Gameplay;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.Spawners;
@@ -24,7 +25,7 @@ namespace Sources.Infrastructure.Services.Spawners
                                     ?? throw new ArgumentNullException(nameof(bossEnemyViewFactory));
         }
 
-        public IBossEnemyView Spawn(Vector3 position)
+        public IBossEnemyView Spawn(KillEnemyCounter killEnemyCounter, Vector3 position)
         {
             BossEnemy bossEnemy = new BossEnemy(
                 new EnemyHealth(200), 
@@ -32,20 +33,21 @@ namespace Sources.Infrastructure.Services.Spawners
                 2f, 
                 2f, 
                 5f);
-            IBossEnemyView bossEnemyView = SpawnFromPool(bossEnemy) ?? _bossEnemyViewFactory.Create(bossEnemy);
+            IBossEnemyView bossEnemyView = SpawnFromPool(bossEnemy, killEnemyCounter) ?? 
+                                           _bossEnemyViewFactory.Create(bossEnemy, killEnemyCounter);
             bossEnemyView.SetPosition(position);
 
             return bossEnemyView;
         }
         
-        private IBossEnemyView SpawnFromPool(BossEnemy bossEnemy)
+        private IBossEnemyView SpawnFromPool(BossEnemy bossEnemy, KillEnemyCounter killEnemyCounter)
         {
             BossEnemyView enemyView = _bossEnemyPool.Get<BossEnemyView>();
 
             if (enemyView == null)
                 return null;
             
-            return _bossEnemyViewFactory.Create(bossEnemy, enemyView);
+            return _bossEnemyViewFactory.Create(bossEnemy, killEnemyCounter, enemyView);
         }
     }
 }
