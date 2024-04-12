@@ -39,8 +39,11 @@ namespace Sources.Controllers.Weapons
 
         private void OnAttackEnded()
         {
+            // Debug.Log("Attack ended");
+            if(_miniGun.IsShooting == false)
+                return;
+            
             _miniGun.IsShooting = false;
-            Debug.Log("Attack ended");
             _miniGunView.ShootAudioSource.Stop();
             _miniGunView.EndShootAudioSource.Play();
         }

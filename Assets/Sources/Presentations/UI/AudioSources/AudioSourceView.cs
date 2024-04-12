@@ -17,5 +17,9 @@ namespace Sources.Presentations.UI.AudioSources
 
         public void Stop() =>
             _audioSource.Stop();
+
+        public void Set()
+        {
+        }
     }
 }
