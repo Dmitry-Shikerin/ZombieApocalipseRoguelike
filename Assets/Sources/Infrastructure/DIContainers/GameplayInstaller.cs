@@ -45,6 +45,7 @@ using Sources.Infrastructure.Services.LoadServices.Data;
 using Sources.Infrastructure.Services.Localizations;
 using Sources.Infrastructure.Services.ObjectPools;
 using Sources.Infrastructure.Services.Overlaps;
+using Sources.Infrastructure.Services.PauseServices;
 using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Spawners;
@@ -62,6 +63,7 @@ using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
+using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.Presentations.UI.Huds;
@@ -143,6 +145,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ILoadService>().To<LoadService>().AsSingle();
             Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
+            Container.Bind<IPauseService>().To<PauseService>().AsSingle();
         }
 
         private void BindGameplay()
@@ -173,6 +176,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<UpgradeFormPresenterFactory>().AsSingle();
             Container.Bind<TutorialFormPresenterFactory>().AsSingle();
             Container.Bind<GameplaySettingsFormPresenterFactory>().AsSingle();
+            Container.Bind<GameOverFormPresenterFactory>().AsSingle();
+            Container.Bind<LevelCompletedFormPresenterFactory>().AsSingle();
         }
 
         private void BindCharacters()

@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Sources.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Services.Forms;
@@ -18,6 +19,8 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
         private readonly UpgradeFormPresenterFactory _upgradeFormPresenterFactory;
         private readonly TutorialFormPresenterFactory _tutorialFormPresenterFactory;
         private readonly GameplaySettingsFormPresenterFactory _settingsFormPresenterFactory;
+        private readonly GameOverFormPresenterFactory _gameOverFormPresenterFactory;
+        private readonly LevelCompletedFormPresenterFactory _levelCompletedFormPresenterFactory;
 
         public GameplayFormServiceFactory(
             FormService formService,
@@ -26,7 +29,9 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             HudFormPresenterFactory hudFormPresenterFactory,
             UpgradeFormPresenterFactory upgradeFormPresenterFactory,
             TutorialFormPresenterFactory tutorialFormPresenterFactory,
-            GameplaySettingsFormPresenterFactory settingsFormPresenterFactory)
+            GameplaySettingsFormPresenterFactory settingsFormPresenterFactory,
+            GameOverFormPresenterFactory gameOverFormPresenterFactory,
+            LevelCompletedFormPresenterFactory levelCompletedFormPresenterFactory)
         {
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
@@ -40,6 +45,10 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
                                             throw new ArgumentNullException(nameof(tutorialFormPresenterFactory));
             _settingsFormPresenterFactory = settingsFormPresenterFactory ??
                                             throw new ArgumentNullException(nameof(settingsFormPresenterFactory));
+            _gameOverFormPresenterFactory = gameOverFormPresenterFactory ??
+                                            throw new ArgumentNullException(nameof(gameOverFormPresenterFactory));
+            _levelCompletedFormPresenterFactory = levelCompletedFormPresenterFactory ??
+                                                  throw new ArgumentNullException(nameof(levelCompletedFormPresenterFactory));
         }
 
         public IFormService Create()
@@ -73,6 +82,19 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
                     _settingsFormPresenterFactory.Create, _gameplayHud.SettingsFormView);
             
             _formService.Add(settingsForm);
+
+            Form<GameOverFormView, GameOverFormPresenter> gameOverForm =
+                new Form<GameOverFormView, GameOverFormPresenter>(_gameOverFormPresenterFactory.Create,
+                    _gameplayHud.GameOverFormView);
+            
+            _formService.Add(gameOverForm);
+
+            Form<LevelCompletedFormView, LevelCompletedFormPresenter> levelCompletedForm =
+                new Form<LevelCompletedFormView, LevelCompletedFormPresenter>(
+                    _levelCompletedFormPresenterFactory.Create,
+                    _gameplayHud.LevelCompletedFormView);
+            
+            _formService.Add(levelCompletedForm);
             
             return _formService;
         }
