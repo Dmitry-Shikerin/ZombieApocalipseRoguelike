@@ -17,6 +17,7 @@ using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Gameplay;
+using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Services.Providers;
@@ -53,6 +54,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly IUpgradeCollectionService _upgradeCollectionService;
         private readonly PlayerWalletProvider _playerWalletProvider;
         private readonly KillEnemyCounterViewFactory _killEnemyCounterViewFactory;
+        private readonly BackgroundMusicViewFactory _backgroundMusicViewFactory;
         private readonly RootGameObject _rootGameObject;
         private readonly EnemyViewFactory _enemyViewFactory;
 
@@ -73,7 +75,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             IUpgradeDtoMapper upgradeDtoMapper,
             IUpgradeCollectionService upgradeCollectionService,
             PlayerWalletProvider playerWalletProvider,
-            KillEnemyCounterViewFactory killEnemyCounterViewFactory)
+            KillEnemyCounterViewFactory killEnemyCounterViewFactory,
+            BackgroundMusicViewFactory backgroundMusicViewFactory)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ??
@@ -95,6 +98,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _upgradeCollectionService = upgradeCollectionService ?? throw new ArgumentNullException(nameof(upgradeCollectionService));
             _playerWalletProvider = playerWalletProvider ?? throw new ArgumentNullException(nameof(playerWalletProvider));
             _killEnemyCounterViewFactory = killEnemyCounterViewFactory ?? throw new ArgumentNullException(nameof(killEnemyCounterViewFactory));
+            _backgroundMusicViewFactory = backgroundMusicViewFactory ?? throw new ArgumentNullException(nameof(backgroundMusicViewFactory));
             _rootGameObject = rootGameObject ? rootGameObject : throw new ArgumentNullException(nameof(rootGameObject));
         }
 
@@ -171,6 +175,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             
             //Gameplay
             _killEnemyCounterViewFactory.Create(killEnemyCounter, enemySpawner, _gameplayHud.KillEnemyCounterView);
+            
+            //BackgroundMusic
+            _backgroundMusicViewFactory.Create(_gameplayHud.BackgroundMusicView);
         }
 
         private Upgrader CreateUpgrader(string id)

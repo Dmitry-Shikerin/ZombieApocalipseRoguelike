@@ -6,6 +6,7 @@ using Sources.Presentations.Views.Cameras;
 using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.Gameplay;
 using Sources.Presentations.Views.Localizations;
+using Sources.Presentations.Views.Music;
 using Sources.Presentations.Views.Players;
 using Sources.Presentations.Views.Upgrades;
 using UnityEngine;
@@ -54,9 +55,13 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("PlayerWallet")] [Required] [SerializeField]
         private PlayerWalletView _playerWalletView;
 
-        [Button(ButtonSizes.Large)] [FoldoutGroup("KillEnemyCounter")] [Required] [SerializeField]
+        [Button(ButtonSizes.Large)] 
+        [FoldoutGroup("KillEnemyCounter")] [Required] [SerializeField]
         private KillEnemyCounterView _killEnemyCounterView;
-
+        
+        [Button(ButtonSizes.Large)] 
+        [FoldoutGroup("BackgroundMusic")] [Required] [SerializeField]
+        private BackgroundMusicView _backgroundMusicView;
 
         public PauseFormView PauseFormView => _pauseFormView;
         public HudFormView HudFormView => _hudFormView;
@@ -78,5 +83,7 @@ namespace Sources.Presentations.UI.Huds
         public PlayerWalletView PlayerWalletView => _playerWalletView;
 
         public KillEnemyCounterView KillEnemyCounterView => _killEnemyCounterView;
+        
+        public BackgroundMusicView BackgroundMusicView => _backgroundMusicView;
     }
 }

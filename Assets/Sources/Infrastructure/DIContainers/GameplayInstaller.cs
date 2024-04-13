@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using Sources.Domain.AudioSources;
 using Sources.Domain.Upgrades.Configs.Containers;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
@@ -9,6 +10,7 @@ using Sources.Infrastructure.Factories.Controllers.Enemies.Base;
 using Sources.Infrastructure.Factories.Controllers.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Gameplay;
+using Sources.Infrastructure.Factories.Controllers.Musics;
 using Sources.Infrastructure.Factories.Controllers.Players;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
@@ -28,6 +30,7 @@ using Sources.Infrastructure.Factories.Views.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Views.ExplosionBodyBloodyViews;
 using Sources.Infrastructure.Factories.Views.FirstAidKitViewFactory;
 using Sources.Infrastructure.Factories.Views.Gameplay;
+using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Players;
 using Sources.Infrastructure.Factories.Views.RewardItems;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
@@ -86,6 +89,8 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.Bind<UpgradeConfigContainer>()
                 .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer").AsSingle();
+            Container.Bind<AudioClipCollection>()
+                .FromResource("Configs/AudioClipContainer").AsSingle();
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
@@ -105,6 +110,7 @@ namespace Sources.Infrastructure.DIContainers
             BindItems();
             BindSpawners();
             BindGameplay();
+            BindMusic();
         }
 
         private void BindServices()
@@ -143,6 +149,12 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.Bind<KillEnemyCounterPresenterFactory>().AsSingle();
             Container.Bind<KillEnemyCounterViewFactory>().AsSingle();
+        }
+
+        private void BindMusic()
+        {
+            Container.Bind<BackgroundMusicPresenterFactory>().AsSingle();
+            Container.Bind<BackgroundMusicViewFactory>().AsSingle();
         }
 
         private void BindDtoFactories()
