@@ -40,17 +40,23 @@ namespace Sources.Controllers.Musics
         //TODO коллекцию клипов можно брать с вьюшки?
         public async void StartMusic(CancellationToken cancellationToken)
         {
-            while (cancellationToken.IsCancellationRequested == false)
+            try
             {
-                foreach (AudioClip audioClip in _audioClipCollection.AudioClips)
+                while (cancellationToken.IsCancellationRequested == false)
                 {
-                    _backgroundMusicView.BackgroundMusicAudioSource.SetClip(audioClip);
-                    _backgroundMusicView.BackgroundMusicAudioSource.Play();
-                    
-                    await UniTask.WaitUntil(
-                        () => _backgroundMusicView.BackgroundMusicAudioSource.IsPlaying == false,
-                        cancellationToken: cancellationToken);
+                    foreach (AudioClip audioClip in _audioClipCollection.AudioClips)
+                    {
+                        _backgroundMusicView.BackgroundMusicAudioSource.SetClip(audioClip);
+                        _backgroundMusicView.BackgroundMusicAudioSource.Play();
+
+                        await UniTask.WaitUntil(
+                            () => _backgroundMusicView.BackgroundMusicAudioSource.IsPlaying == false,
+                            cancellationToken: cancellationToken);
+                    }
                 }
+            }
+            catch (OperationCanceledException)
+            {
             }
         }
     }

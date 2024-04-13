@@ -38,7 +38,7 @@ namespace Sources.Controllers.Gameplay
         //TODO очень похож на HealthUI
         private void OnKillZombieCountChanged()
         {
-            float percent = _enemySpawner.EnemyInWave[_enemySpawner.EnemyInWave.Count - 1] / 100f;
+            float percent = _enemySpawner.SumEnemies / 100f;
             int currentPercents = 0;
             float currentHealth = 0;
 
