@@ -173,6 +173,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<UpgradeFormPresenterFactory>().AsSingle();
             Container.Bind<TutorialFormPresenterFactory>().AsSingle();
             Container.Bind<GameplaySettingsFormPresenterFactory>().AsSingle();
+            Container.Bind<GameOverFormPresenterFactory>().AsSingle();
+            Container.Bind<LevelCompletedFormPresenterFactory>().AsSingle();
         }
 
         private void BindCharacters()

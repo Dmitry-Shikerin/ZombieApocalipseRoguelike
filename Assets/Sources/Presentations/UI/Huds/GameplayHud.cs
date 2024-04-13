@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Sources.Controllers.Forms.Gameplay;
 using Sources.Domain.Gameplay;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
@@ -27,6 +28,10 @@ namespace Sources.Presentations.UI.Huds
         private TutorialFormView _tutorialFormView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
         private GameplaySettingsFormView _settingsFormView;
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private GameOverFormView _gameOverFormView;
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private LevelCompletedFormView _levelCompletedFormView;
 
         [FormerlySerializedAs("cinemachineCameraView")]
         [Button(ButtonSizes.Large)] 
@@ -68,6 +73,8 @@ namespace Sources.Presentations.UI.Huds
         public UpgradeFormView UpgradeFormView => _upgradeFormView;
         public TutorialFormView TutorialFormView => _tutorialFormView;
         public GameplaySettingsFormView SettingsFormView => _settingsFormView;
+        public GameOverFormView GameOverFormView => _gameOverFormView;
+        public LevelCompletedFormView LevelCompletedFormView => _levelCompletedFormView;
         
         public CinemachineCameraView CinemachineCameraView => _cinemachineCameraView;
 
