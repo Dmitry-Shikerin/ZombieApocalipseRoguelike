@@ -4,6 +4,7 @@ using Sources.Controllers.Forms.Gameplay;
 using Sources.Domain.Gameplay;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
+using Sources.Presentations.Views.Common;
 using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.Gameplay;
 using Sources.Presentations.Views.Localizations;
@@ -68,6 +69,10 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("BackgroundMusic")] [Required] [SerializeField]
         private BackgroundMusicView _backgroundMusicView;
 
+        [Button(ButtonSizes.Large)] 
+        [FoldoutGroup("HealthUi")] [Required] [SerializeField]
+        private HealthUi _characterHealthUi;
+
         public PauseFormView PauseFormView => _pauseFormView;
         public HudFormView HudFormView => _hudFormView;
         public UpgradeFormView UpgradeFormView => _upgradeFormView;
@@ -92,5 +97,7 @@ namespace Sources.Presentations.UI.Huds
         public KillEnemyCounterView KillEnemyCounterView => _killEnemyCounterView;
         
         public BackgroundMusicView BackgroundMusicView => _backgroundMusicView;
+        
+        public HealthUi CharacterHealthUi => _characterHealthUi;
     }
 }

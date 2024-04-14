@@ -70,7 +70,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
             _miniGunViewFactory.Create(character.MiniGun, characterView.MiniGunView);
 
             _characterHealthViewFactory.Create(character.CharacterHealth, characterView.CharacterHealthView);
-            _healthUiFactory.Create(character.CharacterHealth, characterView.HealthUi);
+            _healthUiFactory.Create(character.CharacterHealth, _gameplayHud.CharacterHealthUi);
 
             SawLauncherAbilityView sawLauncherAbilityView = Object.FindObjectOfType<SawLauncherAbilityView>();
             sawLauncherAbilityView.SetTargetFollow(characterView.transform);

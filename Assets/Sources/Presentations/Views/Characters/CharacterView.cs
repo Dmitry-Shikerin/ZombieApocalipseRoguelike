@@ -14,7 +14,6 @@ namespace Sources.Presentations.Views.Characters
         [Required] [SerializeField] private MiniGunView _miniGunView;
         [Required] [SerializeField] private CharacterAttackerView _characterAttackerView;
         [Required] [SerializeField] private CharacterHealthView _characterHealthView;
-        [Required] [SerializeField] private HealthUi _healthUi;
         [Required] [SerializeField] private CharacterWalletView _characterWalletView;
         [Required] [SerializeField] private EnemyIndicatorView _enemyIndicatorView;
         
@@ -23,7 +22,6 @@ namespace Sources.Presentations.Views.Characters
         public MiniGunView MiniGunView => _miniGunView;
         public CharacterAttackerView CharacterAttackerView => _characterAttackerView;
         public CharacterHealthView CharacterHealthView => _characterHealthView;
-        public HealthUi HealthUi => _healthUi;
         public CharacterWalletView CharacterWalletView => _characterWalletView;
         public EnemyIndicatorView EnemyIndicatorView => _enemyIndicatorView;
     }
