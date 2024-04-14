@@ -2,6 +2,8 @@
 using Sources.Controllers.Common;
 using Sources.Domain.Gameplay;
 using Sources.Domain.Spawners;
+using Sources.PresentationsInterfaces.UI.Images;
+using Sources.PresentationsInterfaces.UI.Sliders;
 using Sources.PresentationsInterfaces.Views.Gameplay;
 
 namespace Sources.Controllers.Gameplay
@@ -27,6 +29,8 @@ namespace Sources.Controllers.Gameplay
         public override void Enable()
         {
             OnKillZombieCountChanged();
+            HideSeparators();
+            SetSeparators();
             _killEnemyCounter.KillZombiesCountChanged += OnKillZombieCountChanged;
         }
 
@@ -49,6 +53,36 @@ namespace Sources.Controllers.Gameplay
             }
             
             _killEnemyCounterView.KillEnemyBar.SetFillAmount(currentPercents * 0.01f);
+        }
+
+        private void SetSeparators()
+        {
+            int currentEnemyCount = 0;
+            
+            for (int i = 0; i < _enemySpawner.EnemyInWave.Count; i++)
+            {
+                _killEnemyCounterView.WaveSeparators[i].Show();
+                
+                currentEnemyCount += _enemySpawner.EnemyInWave[i];
+                
+                float percent = _enemySpawner.SumEnemies / 100f;
+                int currentPercents = 0;
+                float currentHealth = 0;
+
+                while (currentHealth < currentEnemyCount)
+                {
+                    currentHealth += percent;
+                    currentPercents++;
+                }
+                
+                _killEnemyCounterView.WaveSeparators[i].SetValue(currentPercents * 0.01f);
+            }
+        }
+
+        private void HideSeparators()
+        {
+            foreach (ISliderView waveSeparator in _killEnemyCounterView.WaveSeparators)
+                waveSeparator.Hide();
         }
     }
 }
