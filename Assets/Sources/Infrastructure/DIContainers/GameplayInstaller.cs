@@ -37,6 +37,7 @@ using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
+using Sources.Infrastructure.Services.EnemyCollectors;
 using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.InputServices;
 using Sources.Infrastructure.Services.Linecasts;
@@ -58,6 +59,7 @@ using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Factories.Views.ExplosionBodyBloodyViews;
 using Sources.InfrastructureInterfaces.Factories.Views.FirstAidKits;
 using Sources.InfrastructureInterfaces.Factories.Views.RewardItems;
+using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using Sources.InfrastructureInterfaces.Services.Localizations;
@@ -146,6 +148,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
             Container.Bind<IPauseService>().To<PauseService>().AsSingle();
+            Container.Bind<IEnemyCollectorService>().To<EnemyCollectorService>().AsSingle();
         }
 
         private void BindGameplay()
@@ -198,6 +201,9 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<PlayerWalletPresenterFactory>().AsSingle();
             Container.Bind<PlayerWalletViewFactory>().AsSingle();
+
+            Container.Bind<EnemyIndicatorPresenterFactory>().AsSingle();
+            Container.Bind<EnemyIndicatorViewFactory>().AsSingle();
         }
 
         private void BindItems()

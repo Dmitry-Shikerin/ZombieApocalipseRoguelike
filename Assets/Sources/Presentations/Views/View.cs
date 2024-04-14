@@ -20,6 +20,9 @@ namespace Sources.Presentations.Views
         public void SetPosition(Vector3 position) =>
             transform.position = position;
 
+        public void SetRotation(Vector3 rotation) =>
+            transform.rotation = Quaternion.Euler(rotation);
+
         public virtual void Destroy() =>
             Destroy(gameObject);
     }

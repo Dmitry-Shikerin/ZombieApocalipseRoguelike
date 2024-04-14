@@ -39,6 +39,9 @@ namespace Sources.Presentations.Views.Forms.Common
         public void SetPosition(Vector3 position) =>
             _formView.SetPosition(position);
 
+        public void SetRotation(Vector3 rotation) =>
+            _formView.SetRotation(rotation);
+
         public void Destroy() =>
             _formView.Destroy();
     }
