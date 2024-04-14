@@ -24,6 +24,7 @@ using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
+using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
@@ -55,6 +56,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly PlayerWalletProvider _playerWalletProvider;
         private readonly KillEnemyCounterViewFactory _killEnemyCounterViewFactory;
         private readonly BackgroundMusicViewFactory _backgroundMusicViewFactory;
+        private readonly IGameOverService _gameOverService;
         private readonly RootGameObject _rootGameObject;
         private readonly EnemyViewFactory _enemyViewFactory;
 
@@ -76,7 +78,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             IUpgradeCollectionService upgradeCollectionService,
             PlayerWalletProvider playerWalletProvider,
             KillEnemyCounterViewFactory killEnemyCounterViewFactory,
-            BackgroundMusicViewFactory backgroundMusicViewFactory)
+            BackgroundMusicViewFactory backgroundMusicViewFactory,
+            IGameOverService gameOverService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ??
@@ -99,6 +102,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _playerWalletProvider = playerWalletProvider ?? throw new ArgumentNullException(nameof(playerWalletProvider));
             _killEnemyCounterViewFactory = killEnemyCounterViewFactory ?? throw new ArgumentNullException(nameof(killEnemyCounterViewFactory));
             _backgroundMusicViewFactory = backgroundMusicViewFactory ?? throw new ArgumentNullException(nameof(backgroundMusicViewFactory));
+            _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
             _rootGameObject = rootGameObject ? rootGameObject : throw new ArgumentNullException(nameof(rootGameObject));
         }
 
@@ -130,12 +134,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             //Character
             PlayerWallet playerWallet = new PlayerWallet(10, ModelId.PlayerWallet);
             _playerWalletProvider.PlayerWallet = playerWallet;
-            MiniGun minigun = new MiniGun(
-                miniGunAttackUpgrader,
-                0.1f);
+            MiniGun minigun = new MiniGun(miniGunAttackUpgrader, 0.1f);
+            CharacterHealth characterHealth = new CharacterHealth(characterHealthUpgrader);
             Character character = new Character(
                 playerWallet,
-                new CharacterHealth(characterHealthUpgrader),
+                characterHealth,
                 new CharacterMovement(),
                 new CharacterAttacker(minigun),
                 minigun,
@@ -159,11 +162,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _bearViewFactory.Create(bear, bearView);
             bearView.SetTargetFollow(characterView.CharacterMovementView);
 
-            //Enemy
-            // IEnemyView enemyView = _enemySpawnService.Spawn();
-            // enemyView.SetTargetFollow(characterView.CharacterMovementView);
-            // enemyView.SetCharacterHealth(characterView.CharacterHealthView);
-
+            //GameOverService
+            _gameOverService.Register(characterHealth);
+            
             //CinemachineService
             _gameplayHud.CinemachineCameraView.Follow(characterView.transform);
 

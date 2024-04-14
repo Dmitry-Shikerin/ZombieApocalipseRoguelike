@@ -38,7 +38,6 @@ namespace Sources.Controllers.Characters
 
         private void OnEnemyCountChanged()
         {
-            Debug.Log($"OnEnemyCountChanged {_enemyCollectorService.Enemies.Count}");
             HideViews();
             ShowViews();
         }

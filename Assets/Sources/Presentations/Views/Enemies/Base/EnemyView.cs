@@ -1,15 +1,13 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.Controllers.Enemies;
 using Sources.Controllers.Enemies.Base;
 using Sources.Presentations.Views.Common;
 using Sources.PresentationsInterfaces.Views.Character;
-using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.ObjectPools;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Sources.Presentations.Views.Enemies
+namespace Sources.Presentations.Views.Enemies.Base
 {
     public class EnemyView : PresentableView<EnemyPresenter>, IEnemyView
     {

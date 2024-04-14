@@ -2,6 +2,7 @@
 using Sources.Domain.Enemies.Base;
 using Sources.Domain.Gameplay;
 using Sources.Presentations.Views.Enemies;
+using Sources.Presentations.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 

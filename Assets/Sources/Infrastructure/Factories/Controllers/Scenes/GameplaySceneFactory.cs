@@ -1,10 +1,10 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using JetBrains.Annotations;
 using Sources.Controllers.Scenes;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Factories.Controllers.Scenes;
+using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Localizations;
@@ -21,6 +21,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
         private readonly ILocalizationService _localizationService;
         private readonly ILoadService _loadService;
         private readonly IUpgradeService _upgradeService;
+        private readonly IGameOverService _gameOverService;
 
         public GameplaySceneFactory(
             IUpdateService updateService,
@@ -28,7 +29,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
             GameplaySceneViewFactory gameplaySceneViewFactory,
             ILocalizationService localizationService,
             ILoadService loadService,
-            IUpgradeService upgradeService)
+            IUpgradeService upgradeService,
+            IGameOverService gameOverService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -37,6 +39,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
             _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
+            _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
         }
 
         public async UniTask<IScene> Create(object payload)
@@ -47,7 +50,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
                 _gameplaySceneViewFactory,
                 _localizationService,
                 _loadService,
-                _upgradeService);
+                _upgradeService,
+                _gameOverService);
         }
     }
 }

@@ -4,8 +4,11 @@ using Cysharp.Threading.Tasks;
 using Sources.Controllers.Common;
 using Sources.Domain.Gameplay;
 using Sources.Domain.Spawners;
+using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
+using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.Views.Characters;
+using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using Sources.PresentationsInterfaces.Views.Spawners;
@@ -20,6 +23,8 @@ namespace Sources.Controllers.Spawners
         private readonly IEnemySpawnerView _enemySpawnerView;
         private readonly IEnemySpawnService _enemySpawnService;
         private readonly IBossEnemySpawnService _bossEnemySpawnService;
+        private readonly IEnemyCollectorService _enemyCollectorService;
+        private readonly IFormService _formService;
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -28,7 +33,9 @@ namespace Sources.Controllers.Spawners
             EnemySpawner enemySpawner,
             IEnemySpawnerView enemySpawnerView,
             IEnemySpawnService enemySpawnService,
-            IBossEnemySpawnService bossEnemySpawnService)
+            IBossEnemySpawnService bossEnemySpawnService,
+            IEnemyCollectorService enemyCollectorService,
+            IFormService formService)
         {
             _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
             _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));
@@ -37,6 +44,8 @@ namespace Sources.Controllers.Spawners
                                  throw new ArgumentNullException(nameof(enemySpawnService));
             _bossEnemySpawnService = bossEnemySpawnService ??
                                      throw new ArgumentNullException(nameof(bossEnemySpawnService));
+            _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public override void Enable()
@@ -80,10 +89,13 @@ namespace Sources.Controllers.Spawners
                             SpawnBoss(enemySpawnPointView, characterView);
                             bossCounter++;
 
+                            await UniTask.WaitWhile(
+                                () => _enemyCollectorService.Enemies.Count > 0,
+                                cancellationToken: cancellationToken);
+
+                            _formService.Show<LevelCompletedFormView>();
                             _cancellationTokenSource.Cancel();
-
-                            await UniTask.Delay(TimeSpan.FromSeconds(10), cancellationToken: cancellationToken);
-
+                            
                             continue;
                         }
 
