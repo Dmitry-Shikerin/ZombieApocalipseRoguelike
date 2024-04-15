@@ -163,10 +163,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             bearView.SetTargetFollow(characterView.CharacterMovementView);
 
             //GameOverService
-            _gameOverService.Register(characterHealth);
-            
-            //CinemachineService
-            _gameplayHud.CinemachineCameraView.Follow(characterView.transform);
+            _gameOverService.Register(characterHealth);;
 
             //Spawners
             KillEnemyCounter killEnemyCounter = new KillEnemyCounter();
