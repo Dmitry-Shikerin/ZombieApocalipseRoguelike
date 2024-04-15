@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4643703093690418}
   - component: {fileID: 33221712835526672}
   - component: {fileID: 23594348264593010}
+  - component: {fileID: 7419723740145022751}
   m_Layer: 0
   m_Name: SM_Prop_TrafficLight_04
   m_TagString: Untagged
@@ -31,9 +32,9 @@ Transform:
   m_LocalScale: {x: 100.00006, y: 100, z: 100.00006}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1258934148707905276}
-  - {fileID: 8775283425207049337}
   - {fileID: 4785754081283137303}
+  - {fileID: 8775283425207049337}
+  - {fileID: 1258934148707905276}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33221712835526672
@@ -86,6 +87,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7419723740145022751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239561774200266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b45ead527fa41bc9a3bbd0d575a3d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trafficLights: []
 --- !u!1 &837737102777928579
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,13 +109,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1258934148707905276}
+  - component: {fileID: 946993049219329658}
   m_Layer: 0
   m_Name: GreenLight_Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
 --- !u!4 &1258934148707905276
 Transform:
   m_ObjectHideFlags: 0
@@ -119,6 +134,18 @@ Transform:
   - {fileID: 7997272544047642116}
   m_Father: {fileID: 4643703093690418}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &946993049219329658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837737102777928579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96c3237592648f7a98f49dcdb84d82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1545963559369731332
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +161,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7997272544047642116
 Transform:
@@ -410,13 +437,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8775283425207049337}
+  - component: {fileID: 585467593689807167}
   m_Layer: 0
   m_Name: YellowLight_Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 0
 --- !u!4 &8775283425207049337
 Transform:
   m_ObjectHideFlags: 0
@@ -434,6 +462,18 @@ Transform:
   - {fileID: 2419627273271920891}
   m_Father: {fileID: 4643703093690418}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &585467593689807167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4208385792509014090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96c3237592648f7a98f49dcdb84d82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7170501909102419557
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,12 +483,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4785754081283137303}
+  - component: {fileID: 234482500288490043}
   m_Layer: 0
   m_Name: RedLight_Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &4785754081283137303
 Transform:
@@ -467,6 +508,18 @@ Transform:
   - {fileID: 5136935165040879193}
   m_Father: {fileID: 4643703093690418}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &234482500288490043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7170501909102419557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96c3237592648f7a98f49dcdb84d82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7724445589922118895
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +535,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5136935165040879193
 Transform:
@@ -670,7 +723,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2419627273271920891
 Transform:

@@ -2,11 +2,11 @@
 using Sources.Controllers.Enemies;
 using Sources.Controllers.Enemies.Base;
 using Sources.Controllers.Enemies.Base.States;
-using Sources.Controllers.Enemies.States;
 using Sources.Domain.Enemies;
 using Sources.Domain.Enemies.Base;
 using Sources.Domain.Gameplay;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
+using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
@@ -19,26 +19,34 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Base
         private readonly IUpdateRegister _updateRegister;
         private readonly IExplosionBodyBloodySpawnService _explosionBodyBloodySpawnService;
         private readonly IRewardItemSpawnService _rewardItemSpawnService;
+        private readonly IEnemyCollectorService _enemyCollectorService;
 
         public EnemyPresenterFactory(
             IUpdateRegister updateRegister,
             IExplosionBodyBloodySpawnService explosionBodyBloodySpawnService,
-            IRewardItemSpawnService rewardItemSpawnService)
+            IRewardItemSpawnService rewardItemSpawnService,
+            IEnemyCollectorService enemyCollectorService)
         {
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
             _explosionBodyBloodySpawnService = explosionBodyBloodySpawnService ?? 
                                           throw new ArgumentNullException(nameof(explosionBodyBloodySpawnService));
             _rewardItemSpawnService = rewardItemSpawnService ?? 
                                       throw new ArgumentNullException(nameof(rewardItemSpawnService));
+            _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
         }
 
         public EnemyPresenter Create(Enemy enemy, KillEnemyCounter killEnemyCounter, IEnemyView enemyView, IEnemyAnimation enemyAnimation)
         {
-            EnemyInitializeState initializeState = new EnemyInitializeState(enemy, enemyAnimation);
+            EnemyInitializeState initializeState = new EnemyInitializeState(
+                enemy, enemyAnimation, enemyView, _enemyCollectorService);
             EnemyMoveToPlayerState moveToPlayerState = new EnemyMoveToPlayerState(enemy, enemyView, enemyAnimation);
             EnemyAttackState attackState = new EnemyAttackState(enemy, enemyView, enemyAnimation);
             EnemyDieState dieState = new EnemyDieState(
-                killEnemyCounter, enemyView, _explosionBodyBloodySpawnService, _rewardItemSpawnService);
+                killEnemyCounter,
+                enemyView, 
+                _explosionBodyBloodySpawnService, 
+                _rewardItemSpawnService,
+                _enemyCollectorService);
 
             FiniteTransition toMoveToPlayerTransition = new FiniteTransitionBase(
                 moveToPlayerState,

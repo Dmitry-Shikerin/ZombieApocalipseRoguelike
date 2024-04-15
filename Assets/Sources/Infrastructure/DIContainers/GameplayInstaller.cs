@@ -37,7 +37,9 @@ using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
+using Sources.Infrastructure.Services.EnemyCollectors;
 using Sources.Infrastructure.Services.Forms;
+using Sources.Infrastructure.Services.GameOvers;
 using Sources.Infrastructure.Services.InputServices;
 using Sources.Infrastructure.Services.Linecasts;
 using Sources.Infrastructure.Services.LoadServices;
@@ -58,6 +60,8 @@ using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Factories.Views.ExplosionBodyBloodyViews;
 using Sources.InfrastructureInterfaces.Factories.Views.FirstAidKits;
 using Sources.InfrastructureInterfaces.Factories.Views.RewardItems;
+using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
+using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using Sources.InfrastructureInterfaces.Services.Localizations;
@@ -70,6 +74,7 @@ using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Bullets;
 using Sources.Presentations.Views.Enemies;
+using Sources.Presentations.Views.Enemies.Base;
 using Sources.Presentations.Views.Enemies.Bosses;
 using Sources.Presentations.Views.ExplosionBodyBloodies;
 using Sources.Presentations.Views.FirstAidKits;
@@ -146,6 +151,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
             Container.Bind<IPauseService>().To<PauseService>().AsSingle();
+            Container.Bind<IEnemyCollectorService>().To<EnemyCollectorService>().AsSingle();
+            Container.Bind<IGameOverService>().To<GameOverService>().AsSingle();
         }
 
         private void BindGameplay()
@@ -198,6 +205,9 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<PlayerWalletPresenterFactory>().AsSingle();
             Container.Bind<PlayerWalletViewFactory>().AsSingle();
+
+            Container.Bind<EnemyIndicatorPresenterFactory>().AsSingle();
+            Container.Bind<EnemyIndicatorViewFactory>().AsSingle();
         }
 
         private void BindItems()
