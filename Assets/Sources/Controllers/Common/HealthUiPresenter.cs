@@ -18,6 +18,7 @@ namespace Sources.Controllers.Common
 
         public override void Enable()
         {
+            OnHealthChanged();
             _health.HealthChanged += OnHealthChanged;
         }
 

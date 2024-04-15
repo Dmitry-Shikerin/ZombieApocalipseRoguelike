@@ -8,6 +8,7 @@ using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.Presentations.Views.Enemies;
+using Sources.Presentations.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.ObjectPools;
 using Unity.VisualScripting;

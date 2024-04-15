@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Controllers.Characters;
 using Sources.Domain.Characters;
 using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Commons;
@@ -23,6 +24,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
         private readonly HealthUiFactory _healthUiFactory;
         private readonly CharacterWalletViewFactory _characterWalletViewFactory;
         private readonly PlayerWalletViewFactory _playerWalletViewFactory;
+        private readonly EnemyIndicatorViewFactory _enemyIndicatorViewFactory;
 
         public CharacterViewFactory(
             GameplayHud gameplayHud,
@@ -34,7 +36,8 @@ namespace Sources.Infrastructure.Factories.Views.Characters
             CharacterHealthViewFactory characterHealthViewFactory,
             HealthUiFactory healthUiFactory,
             CharacterWalletViewFactory characterWalletViewFactory,
-            PlayerWalletViewFactory playerWalletViewFactory)
+            PlayerWalletViewFactory playerWalletViewFactory,
+            EnemyIndicatorViewFactory enemyIndicatorViewFactory)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _characterMovementViewFactory = characterMovementViewFactory 
@@ -53,6 +56,8 @@ namespace Sources.Infrastructure.Factories.Views.Characters
                                           throw new ArgumentNullException(nameof(characterWalletViewFactory));
             _playerWalletViewFactory = playerWalletViewFactory ?? 
                                        throw new ArgumentNullException(nameof(playerWalletViewFactory));
+            _enemyIndicatorViewFactory = enemyIndicatorViewFactory ??
+                                         throw new ArgumentNullException(nameof(enemyIndicatorViewFactory));
         }
 
         public CharacterView Create(Character character, CharacterView characterView)
@@ -65,7 +70,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
             _miniGunViewFactory.Create(character.MiniGun, characterView.MiniGunView);
 
             _characterHealthViewFactory.Create(character.CharacterHealth, characterView.CharacterHealthView);
-            _healthUiFactory.Create(character.CharacterHealth, characterView.HealthUi);
+            _healthUiFactory.Create(character.CharacterHealth, _gameplayHud.CharacterHealthUi);
 
             SawLauncherAbilityView sawLauncherAbilityView = Object.FindObjectOfType<SawLauncherAbilityView>();
             sawLauncherAbilityView.SetTargetFollow(characterView.transform);
@@ -77,6 +82,8 @@ namespace Sources.Infrastructure.Factories.Views.Characters
 
             _playerWalletViewFactory.Create(character.PlayerWallet, _gameplayHud.PlayerWalletView);
             _characterWalletViewFactory.Create(character.PlayerWallet,characterView.CharacterWalletView);
+
+            _enemyIndicatorViewFactory.Create(characterView.EnemyIndicatorView);
 
             return characterView;
         }

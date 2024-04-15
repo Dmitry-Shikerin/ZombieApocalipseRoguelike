@@ -7,6 +7,7 @@ using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.Views.Enemies;
+using Sources.Presentations.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 

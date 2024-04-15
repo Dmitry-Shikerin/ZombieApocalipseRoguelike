@@ -6,16 +6,18 @@ namespace Sources.Domain.Spawners
     {
         public IReadOnlyList<int> EnemyInWave { get; } = new List<int>()
         {
+            2,
+            5,
             1,
-            1,
-            1
+            3
         };
         
         public IReadOnlyList<int> SpawnDelays { get; } = new List<int>()
         {
             6,
             4,
-            2
+            2,
+            1
         };
         
         public float CurrentDelay { get; set; }

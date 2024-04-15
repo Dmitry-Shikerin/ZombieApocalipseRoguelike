@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Localizations;
@@ -18,6 +19,7 @@ namespace Sources.Controllers.Scenes
         private readonly ILocalizationService _localizationService;
         private readonly ILoadService _loadService;
         private readonly IUpgradeService _upgradeService;
+        private readonly IGameOverService _gameOverService;
 
         public GameplayScene(
             IUpdateService updateService,
@@ -25,7 +27,8 @@ namespace Sources.Controllers.Scenes
             GameplaySceneViewFactory gameplaySceneViewFactory,
             ILocalizationService localizationService,
             ILoadService loadService,
-            IUpgradeService upgradeService)
+            IUpgradeService upgradeService,
+            IGameOverService gameOverService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -34,12 +37,14 @@ namespace Sources.Controllers.Scenes
             _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
+            _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
         }
 
         public void Enter(object payload = null)
         {
             _gameplaySceneViewFactory.Create();
             _localizationService.Translate();
+            _gameOverService.Enter();
             //TODO раскоментировать UpgradeService
             // _upgradeService.Enable();
         }
@@ -48,6 +53,7 @@ namespace Sources.Controllers.Scenes
         {
             // _upgradeService.Disable();
             _updateService.UnregisterAll();
+            _gameOverService.Exit();
         }
 
         public void Update(float deltaTime)
