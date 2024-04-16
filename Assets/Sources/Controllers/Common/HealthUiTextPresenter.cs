@@ -44,6 +44,7 @@ namespace Sources.Controllers.Common
 
             if (text == null)
             {
+                //TODO сделать добавление в очередь и вытаскивать оттуда текст
                 //TODO нужно ли создавать новый токен?
                 _cancellationTokenSource.Cancel();
 

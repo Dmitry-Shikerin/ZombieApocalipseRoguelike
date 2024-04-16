@@ -25,7 +25,8 @@ namespace Sources.Controllers.Cameras.States
         {
             Transform target = _cameraService.Get<CharacterView>().Transform;
             _cinemachineCameraView.Follow(target);
-            Debug.Log("CameraFollowCharacter");
+            
+            _cinemachineCameraView.SetRotation(new Vector3(60, 45, 0));
         }
 
         public override void Exit()

@@ -2,7 +2,6 @@
 using Sources.Controllers.Common;
 using Sources.Domain.Gameplay;
 using Sources.Domain.Spawners;
-using Sources.PresentationsInterfaces.UI.Images;
 using Sources.PresentationsInterfaces.UI.Sliders;
 using Sources.PresentationsInterfaces.Views.Gameplay;
 

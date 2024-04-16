@@ -12,10 +12,7 @@ namespace Sources.Presentations.Views.Cameras
 
         public Transform CharacterTransform { get; private set; }
         
-        public void Follow(Transform target)
-        {
+        public void Follow(Transform target) =>
             _cinemachineVirtualCamera.Follow = target;
-            Debug.Log("SetFollow");
-        }
     }
 }

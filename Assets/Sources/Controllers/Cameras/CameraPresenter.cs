@@ -42,7 +42,6 @@ namespace Sources.Controllers.Cameras
         private void OnFollowableChanged()
         {
             Apply(_cameraService.CurrentFollower);
-            Debug.Log("OnFollowableChanged");
         }
     }
 }

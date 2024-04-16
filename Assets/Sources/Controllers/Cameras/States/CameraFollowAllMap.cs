@@ -26,7 +26,8 @@ namespace Sources.Controllers.Cameras.States
         {
             Transform target = _cameraService.Get<AllMapPoint>().Transform;
             _cinemachineCameraView.Follow(target);
-            Debug.Log("CameraFollowAllMap");
+            
+            _cinemachineCameraView.SetRotation(new Vector3(60, -90, 0));
         }
 
         public override void Exit()

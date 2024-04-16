@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Sources.PresentationsInterfaces.Views.Cameras
 {
-    public interface ICinemachineCameraView
+    public interface ICinemachineCameraView : IView
     {
         Transform CharacterTransform { get; }
         

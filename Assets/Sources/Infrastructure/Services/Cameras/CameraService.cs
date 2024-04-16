@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.PresentationsInterfaces.Views.Cameras.Points;
-using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Cameras
 {
@@ -28,7 +27,6 @@ namespace Sources.Infrastructure.Services.Cameras
                 throw new InvalidOperationException(nameof(T));
             
             CurrentFollower = _cameraTargets[typeof(T)];
-            Debug.Log(_cameraTargets[typeof(T)].GetType().Name);
             FollowableChanged?.Invoke();
         }
 

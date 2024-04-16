@@ -25,7 +25,6 @@ namespace Sources.Controllers.Cameras.States
         {
             Transform target = _cameraService.Get<CharacterView>().Transform;
             _cinemachineCameraView.Follow(target);
-            Debug.Log("CameraInitializeState");
         }
 
         public override void Exit()
