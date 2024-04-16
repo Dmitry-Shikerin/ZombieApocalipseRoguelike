@@ -15,10 +15,12 @@ namespace Sources.Presentations.Views.Enemies.Base
         [Required] [SerializeField] private EnemyHealthView _healthView;
         [Required] [SerializeField] private HealthUi _healthUi;
         [Required] [SerializeField] private EnemyAnimation _enemyAnimation;
+        [Required] [SerializeField] private HealthUiText _healthUiText;
         
         public EnemyHealthView EnemyHealthView => _healthView;
         public HealthUi HealthUi => _healthUi;
         public EnemyAnimation EnemyAnimation => _enemyAnimation;
+        public HealthUiText HealthUiText => _healthUiText;
         public float StoppingDistance => _navMeshAgent.stoppingDistance;
         public Vector3 Position => transform.position;
         public ICharacterMovementView CharacterMovementView { get; private set; }

@@ -23,12 +23,14 @@ namespace Sources.Infrastructure.Factories.Views.Enemies.Base
         private readonly IObjectPool<EnemyView> _enemyPool;
         private readonly EnemyHealthViewFactory _enemyHealthViewFactory;
         private readonly HealthUiFactory _healthUiFactory;
+        private readonly HealthUiTextViewFactory _healthUiTextViewFactory;
 
         public EnemyViewFactory(
             EnemyPresenterFactory enemyPresenterFactory,
             IObjectPool<EnemyView> enemyPool,
             EnemyHealthViewFactory enemyHealthViewFactory,
-            HealthUiFactory healthUiFactory)
+            HealthUiFactory healthUiFactory,
+            HealthUiTextViewFactory healthUiTextViewFactory)
         {
             _enemyPresenterFactory = enemyPresenterFactory ??
                                      throw new ArgumentNullException(nameof(enemyPresenterFactory));
@@ -36,6 +38,8 @@ namespace Sources.Infrastructure.Factories.Views.Enemies.Base
             _enemyHealthViewFactory = enemyHealthViewFactory ?? 
                                       throw new ArgumentNullException(nameof(enemyHealthViewFactory));
             _healthUiFactory = healthUiFactory ?? throw new ArgumentNullException(nameof(healthUiFactory));
+            _healthUiTextViewFactory = healthUiTextViewFactory ??
+                                       throw new ArgumentNullException(nameof(healthUiTextViewFactory));
         }
 
         public IEnemyView Create(Enemy enemy, KillEnemyCounter killEnemyCounter)
@@ -54,6 +58,7 @@ namespace Sources.Infrastructure.Factories.Views.Enemies.Base
             
             _enemyHealthViewFactory.Create(enemy.EnemyHealth, enemyView.EnemyHealthView);
             _healthUiFactory.Create(enemy.EnemyHealth, enemyView.HealthUi);
+            _healthUiTextViewFactory.Create(enemy.EnemyHealth, enemyView.HealthUiText);
             
             return enemyView;
         }

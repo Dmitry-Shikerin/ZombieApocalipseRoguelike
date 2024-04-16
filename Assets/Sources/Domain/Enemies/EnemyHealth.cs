@@ -15,7 +15,8 @@ namespace Sources.Domain.Enemies
         }
 
         public event Action HealthChanged;
-        
+        public event Action<float> DamageReceived;
+
         public float MaxHealth { get; }
         public float CurrentHealth
         {
@@ -31,6 +32,7 @@ namespace Sources.Domain.Enemies
         public void TakeDamage(float damage)
         {
             CurrentHealth -= damage;
+            DamageReceived?.Invoke(damage);
         }
     }
 }

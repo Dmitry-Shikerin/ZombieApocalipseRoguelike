@@ -1,13 +1,12 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Presentations.Views.Characters.EnemyIndicators;
-using Sources.Presentations.Views.Common;
-using Sources.Presentations.Views.Players;
 using Sources.Presentations.Views.Weapons;
+using Sources.PresentationsInterfaces.Views.Cameras.Points;
 using UnityEngine;
 
 namespace Sources.Presentations.Views.Characters
 {
-    public class CharacterView : View
+    public class CharacterView : View, ICameraFollowable
     {
         [Required] [SerializeField] private CharacterMovementView _characterMovementView;
         [Required] [SerializeField] private CharacterAnimationView _characterAnimationView;
@@ -24,5 +23,6 @@ namespace Sources.Presentations.Views.Characters
         public CharacterHealthView CharacterHealthView => _characterHealthView;
         public CharacterWalletView CharacterWalletView => _characterWalletView;
         public EnemyIndicatorView EnemyIndicatorView => _enemyIndicatorView;
+        public Transform Transform => transform;
     }
 }

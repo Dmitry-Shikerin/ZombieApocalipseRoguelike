@@ -6,6 +6,6 @@ namespace Sources.InfrastructureInterfaces.StateMachines.ContextStateMachines.St
 {
     public interface IContextState : IEnterable, IExitable, IUpdatable
     {
-    void Apply(IContext context, IContextStateChanger contextStateChanger);
+        void Apply(IContext context, IContextStateChanger contextStateChanger);
     }
 }

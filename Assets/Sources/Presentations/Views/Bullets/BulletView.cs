@@ -35,8 +35,9 @@ namespace Sources.Presentations.Views.Bullets
             Hide();
         }
         
-        public void SetRotation(Vector3 rotation) =>
-            transform.rotation = Quaternion.Euler(rotation);
+        // public void SetRotation(Vector3 rotation) =>
+        //     transform.rotation = Quaternion.Euler(rotation);
+        
         public void SetRotation(Quaternion rotation) =>
             transform.rotation = rotation;
 

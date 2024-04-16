@@ -1,9 +1,11 @@
 using UnityEngine;
 
-namespace Sources.Presentations.Views.Cameras
+namespace Sources.PresentationsInterfaces.Views.Cameras
 {
     public interface ICinemachineCameraView
     {
+        Transform CharacterTransform { get; }
+        
         void Follow(Transform target);
     }
 }

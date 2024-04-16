@@ -14,22 +14,26 @@ using Sources.Domain.Upgrades;
 using Sources.Domain.Weapons;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;
+using Sources.Infrastructure.Factories.Views.Cameras;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
+using Sources.Infrastructure.Services.Cameras;
 using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
+using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Bears;
+using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.RootGameObjects;
@@ -57,6 +61,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly KillEnemyCounterViewFactory _killEnemyCounterViewFactory;
         private readonly BackgroundMusicViewFactory _backgroundMusicViewFactory;
         private readonly IGameOverService _gameOverService;
+        private readonly CameraViewFactory _cameraViewFactory;
+        private readonly ICameraService _cameraService;
         private readonly RootGameObject _rootGameObject;
         private readonly EnemyViewFactory _enemyViewFactory;
 
@@ -79,7 +85,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             PlayerWalletProvider playerWalletProvider,
             KillEnemyCounterViewFactory killEnemyCounterViewFactory,
             BackgroundMusicViewFactory backgroundMusicViewFactory,
-            IGameOverService gameOverService)
+            IGameOverService gameOverService,
+            CameraViewFactory cameraViewFactory,
+            ICameraService cameraService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ??
@@ -103,6 +111,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _killEnemyCounterViewFactory = killEnemyCounterViewFactory ?? throw new ArgumentNullException(nameof(killEnemyCounterViewFactory));
             _backgroundMusicViewFactory = backgroundMusicViewFactory ?? throw new ArgumentNullException(nameof(backgroundMusicViewFactory));
             _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
+            _cameraViewFactory = cameraViewFactory ?? throw new ArgumentNullException(nameof(cameraViewFactory));
+            _cameraService = cameraService ?? throw new ArgumentNullException(nameof(cameraService));
             _rootGameObject = rootGameObject ? rootGameObject : throw new ArgumentNullException(nameof(rootGameObject));
         }
 
@@ -176,6 +186,15 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             
             //BackgroundMusic
             _backgroundMusicViewFactory.Create(_gameplayHud.BackgroundMusicView);
+
+            //Camera
+            _cameraService.Add<CharacterView>(characterView);
+            _cameraService.Add<AllMapPoint>(_rootGameObject.AllMapPoint);
+            
+            // _cameraService.SetFollower<CharacterView>();
+            _cameraService.SetFollower<AllMapPoint>();
+            
+            _cameraViewFactory.Create(_gameplayHud.CinemachineCameraView);
         }
 
         private Upgrader CreateUpgrader(string id)
