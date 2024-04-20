@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Sources.Domain.Data;
 using Sources.Domain.Data.Common;
+using Sources.Domain.Data.Ids;
 using Sources.Domain.Players;
 using Sources.Domain.Upgrades;
 using Sources.DomainInterfaces.Data;
@@ -18,7 +19,8 @@ namespace Sources.Infrastructure.Services.LoadServices
     {
         private readonly IEntityRepository _entityRepository;
         private readonly IDataService _dataService;
-        private readonly Dictionary<Type, Func<IEntity, IDto>> _mappers;
+        private readonly Dictionary<Type, Func<IEntity, IDto>> _toDtoMappers;
+        private readonly Dictionary<Type, Func<IDto, IEntity>> _toModelMappers;
 
         public LoadService(
             IEntityRepository entityRepository,
@@ -29,32 +31,41 @@ namespace Sources.Infrastructure.Services.LoadServices
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
 
-            _mappers = new Dictionary<Type, Func<IEntity, IDto>>();
-            _mappers[typeof(Upgrader)] = 
+            _toDtoMappers = new Dictionary<Type, Func<IEntity, IDto>>();
+            _toDtoMappers[typeof(Upgrader)] = 
                 model => upgradeDtoMapper.MapModelToDto(model as Upgrader);
-            _mappers[typeof(PlayerWallet)] =
-                model => playerWalletDtoMapper.MapTo(model as PlayerWallet);
+            _toDtoMappers[typeof(PlayerWallet)] =
+                model => playerWalletDtoMapper.MapModelToDto(model as PlayerWallet);
+            
+            _toModelMappers = new Dictionary<Type, Func<IDto, IEntity>>();
+            _toModelMappers[typeof(Upgrader)] =
+                dto => upgradeDtoMapper.MapDtoToModel(dto as UpgradeDto);
+            _toModelMappers[typeof(PlayerWallet)] =
+                dto => playerWalletDtoMapper.MapDtoToModel(dto as PlayerWalletDto);
         }
 
-        public T Load<T>(string id)
-            where T : IDto
+            //TODO загружать все дто и сразу конвертить их в модели и складировать в инстансе контейнер
+
+        //todo лучше не придумал
+        public void LoadAll()
         {
-            return _dataService.LoadData<T>(id);
+            foreach (string id in ModelId.ModelsIds)
+            {
+                object dto = _dataService.LoadData(id, ModelId.ModelTypes[id]);
+                IEntity model = _toModelMappers[ModelId.ModelTypes[id]].Invoke((IDto)dto);
+                _entityRepository.Add(model);
+                Debug.Log($"Saved {model.GetType()}");
+            }
         }
-
-        public void Save(IEntity entity)
-        {
-            if (_mappers.ContainsKey(entity.Type) == false)
-                throw new NullReferenceException("DtaModel Id is not registered in LoadService");
-
-            _dataService.SaveData(_mappers[entity.Type].Invoke(entity), entity.Id);
-        }
-
+        
         public void SaveAll()
         {
             foreach (IEntity dataModel in _entityRepository.Entities.Values)
             {
-                Save(dataModel);
+                if (_toDtoMappers.ContainsKey(dataModel.Type) == false)
+                    throw new NullReferenceException("DtaModel Id is not registered in LoadService");
+
+                _dataService.SaveData(_toDtoMappers[dataModel.Type].Invoke(dataModel), dataModel.Id);
                 Debug.Log($"Saved {dataModel.GetType()}");
             }
         }

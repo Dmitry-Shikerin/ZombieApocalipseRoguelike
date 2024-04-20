@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Sources.DomainInterfaces.Data;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using UnityEngine;
@@ -13,6 +14,13 @@ namespace Sources.Infrastructure.Services.LoadServices.Data
             string json = PlayerPrefs.GetString(key, string.Empty);
 
             return JsonConvert.DeserializeObject<T>(json);
+        }
+        
+        public object LoadData(string key, Type type)
+        {
+            string json = PlayerPrefs.GetString(key, string.Empty);
+
+            return JsonConvert.DeserializeObject(json, type);
         }
 
         public void SaveData<T>(T dataModel, string key)

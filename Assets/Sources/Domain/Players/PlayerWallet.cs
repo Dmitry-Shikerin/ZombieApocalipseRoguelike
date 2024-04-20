@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Domain.Data;
 using Sources.DomainInterfaces.Data;
 using Sources.DomainInterfaces.Entities;
 using Sources.DomainInterfaces.Players;
@@ -14,7 +15,13 @@ namespace Sources.Domain.Players
             Coins = coins;
             Id = id;
         }
-        
+
+        public PlayerWallet(PlayerWalletDto playerWalletDto)
+        {
+            Coins = playerWalletDto.Coins;
+            Id = playerWalletDto.Id;
+        }
+
         public event Action CoinsChanged;
 
         public string Id { get; }

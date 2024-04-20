@@ -9,12 +9,17 @@ namespace Sources.Infrastructure.Factories.Domain.Data
 {
     public class PlayerWalletDtoMapperMapper : IPlayerWalletDtoMapper
     {
-        public PlayerWalletDto MapTo(PlayerWallet playerWallet)
+        public PlayerWalletDto MapModelToDto(PlayerWallet playerWallet)
         {
             return new PlayerWalletDto()
             {
                 Coins = playerWallet.Coins
             };
+        }
+
+        public PlayerWallet MapDtoToModel(PlayerWalletDto playerWalletDto)
+        {
+            return new PlayerWallet(playerWalletDto);
         }
     }
 }
