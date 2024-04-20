@@ -1,9 +1,11 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Infrastructure.Factories.Controllers.Forms.MainMenu;
+using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.YandexSDK;
 using Sources.Infrastructure.Factories.Services.FormServices;
+using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.YandexSDK;
@@ -32,6 +34,7 @@ namespace Sources.Infrastructure.DIContainers
             BindServices();
             BindFormFactories();
             BindSettings();
+            BindLevelAvailability();
         }
 
         private void BindServices()
@@ -56,6 +59,12 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.Bind<VolumePresenterFactory>().AsSingle();
             Container.Bind<VolumeViewFactory>().AsSingle();
+        }
+
+        private void BindLevelAvailability()
+        {
+            Container.Bind<LevelAvailabilityPresenterFactory>().AsSingle();
+            Container.Bind<LevelAvailabilityViewFactory>().AsSingle();
         }
     }
 }

@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Forms.MainMenu;
+using Sources.Presentations.Views.Gameplay;
 using Sources.Presentations.Views.Settings;
 using Sources.Presentations.Views.YandexSDK;
 using UnityEngine;
@@ -27,6 +28,10 @@ namespace Sources.Presentations.UI.Huds
         [Button(ButtonSizes.Large)]
         [FoldoutGroup("Settings")] [Required] [SerializeField]
         private VolumeView _volumeView;
+        
+        [Button(ButtonSizes.Large)]
+        [FoldoutGroup("LevelAvailability")] [Required] [SerializeField]
+        private LevelAvailabilityView _levelAvailabilityView;
 
         public MainMenuHudFormView MainMenuHudFormView => _mainMenuHudFormView;
         public MainMenuSettingsFormView SettingsFormView => _settingsFormView;
@@ -36,5 +41,7 @@ namespace Sources.Presentations.UI.Huds
         public IReadOnlyList<LeaderBoardElementView> LeaderBoardElementViews => _leaderBoardElementViews;
         
         public VolumeView VolumeView => _volumeView;
+        
+        public LevelAvailabilityView LevelAvailabilityView => _levelAvailabilityView;
     }
 }

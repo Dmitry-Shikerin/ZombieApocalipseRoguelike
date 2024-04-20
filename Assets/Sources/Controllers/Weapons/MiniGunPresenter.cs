@@ -1,11 +1,9 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
 using Sources.Controllers.Common;
 using Sources.Domain.Weapons;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Weapons;
-using UnityEngine;
 
 namespace Sources.Controllers.Weapons
 {
@@ -40,7 +38,6 @@ namespace Sources.Controllers.Weapons
 
         private void OnAttackEnded()
         {
-            // Debug.Log("Attack ended");
             if(_miniGun.IsShooting == false)
                 return;
             
@@ -60,6 +57,7 @@ namespace Sources.Controllers.Weapons
                 _miniGunView.ShootAudioSource.Play();
                 _miniGun.IsShooting = true;
             }
+            
             _miniGunView.PlayFireParticles();
         }
 
