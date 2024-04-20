@@ -33,6 +33,10 @@ namespace Sources.Infrastructure.Factories.App
                 sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
             sceneFactories["GamePlay2"] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
+            sceneFactories["GamePlay3"] = (payload, sceneContext) =>
+                sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
+            sceneFactories["GamePlay4"] = (payload, sceneContext) =>
+                sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
 
             sceneService.AddBeforeSceneChangeHandler(async sceneName => 
                 await projectContext.Container.Resolve<ISceneLoaderService>().LoadSceneAsync(sceneName));
