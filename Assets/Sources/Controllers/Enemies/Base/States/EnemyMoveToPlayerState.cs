@@ -24,7 +24,7 @@ namespace Sources.Controllers.Enemies.Base.States
         public override void Enter()
         {
             _enemyAnimation.PlayWalk();
-            Debug.Log($"Play walk");
+            // Debug.Log($"Play walk");
         }
 
         public override void Exit()
