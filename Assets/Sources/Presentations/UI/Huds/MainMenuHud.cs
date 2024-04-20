@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Forms.MainMenu;
+using Sources.Presentations.Views.Settings;
 using Sources.Presentations.Views.YandexSDK;
 using UnityEngine;
 
@@ -22,6 +23,10 @@ namespace Sources.Presentations.UI.Huds
         [Button(ButtonSizes.Large)]
         [FoldoutGroup("LeaderBoardElementViews")] [Required] [SerializeField]
         private List<LeaderBoardElementView> _leaderBoardElementViews;
+        
+        [Button(ButtonSizes.Large)]
+        [FoldoutGroup("Settings")] [Required] [SerializeField]
+        private VolumeView _volumeView;
 
         public MainMenuHudFormView MainMenuHudFormView => _mainMenuHudFormView;
         public MainMenuSettingsFormView SettingsFormView => _settingsFormView;
@@ -29,5 +34,7 @@ namespace Sources.Presentations.UI.Huds
         public LeaderBoardFormView LeaderBoardFormView => _leaderBoardFormView;
         
         public IReadOnlyList<LeaderBoardElementView> LeaderBoardElementViews => _leaderBoardElementViews;
+        
+        public VolumeView VolumeView => _volumeView;
     }
 }

@@ -1,9 +1,11 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Infrastructure.Factories.Controllers.Forms.MainMenu;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
+using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.YandexSDK;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.YandexSDK;
 using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.YandexSDKServices;
@@ -29,6 +31,7 @@ namespace Sources.Infrastructure.DIContainers
             
             BindServices();
             BindFormFactories();
+            BindSettings();
         }
 
         private void BindServices()
@@ -47,6 +50,12 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<LeaderBoardFormPresenterFactory>().AsSingle();
             Container.Bind<LeaderBoardElementPresenterFactory>().AsSingle();
             Container.Bind<LeaderBoardElementViewFactory>().AsSingle();
+        }
+
+        private void BindSettings()
+        {
+            Container.Bind<VolumePresenterFactory>().AsSingle();
+            Container.Bind<VolumeViewFactory>().AsSingle();
         }
     }
 }

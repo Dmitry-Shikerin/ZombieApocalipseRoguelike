@@ -95,6 +95,7 @@ namespace Sources.Infrastructure.DIContainers
     {
         [Required][SerializeField] private GameplayHud _gameplayHud;
         [Required] [SerializeField] private RootGameObject _rootGameObject;
+        [Required] [SerializeField] private ContainerView _containerView;
         
         public override void InstallBindings()
         {
@@ -104,6 +105,7 @@ namespace Sources.Infrastructure.DIContainers
                 .FromResource("Configs/AudioClipContainer").AsSingle();
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
+            Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
             Container.Bind<GameplaySceneViewFactory>().AsSingle();
             Container.Bind<IUpgradeCollectionService>().To<UpgradeCollectionService>().AsSingle();
