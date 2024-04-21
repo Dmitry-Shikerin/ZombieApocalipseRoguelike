@@ -30,5 +30,11 @@ namespace Sources.Infrastructure.Services.LoadServices.Data
             
             PlayerPrefs.SetString(key, json);
         }
+
+        public bool HasKey(string key) =>
+            PlayerPrefs.HasKey(key);
+
+        public void Clear(string key) =>
+            PlayerPrefs.DeleteKey(key);
     }
 }

@@ -1,32 +1,37 @@
 ﻿using System;
 using Sources.Domain.Constants;
 using Sources.Domain.Data;
+using Sources.Domain.Data.Ids;
+using Sources.DomainInterfaces.Entities;
 using UnityEngine;
 
 namespace Sources.Domain.Setting
 {
-    public class Volume
+    public class Volume : IEntity
     {
         private int _step;
 
-        public Volume(VolumeDto volumeData)
-            : this(volumeData.Step)
+        public Volume(VolumeDto volumeDto)
+            : this(volumeDto.Step, volumeDto.Id)
         {
         }
 
         public Volume()
-            : this(VolumeConstant.BaseStep)
+            : this(VolumeConstant.BaseStep, ModelId.Volume)
         {
         }
 
-        private Volume(int step)
+        private Volume(int step, string id)
         {
             Step = step;
+            Id = id;
         }
 
         public event Action VolumeChanged;
 
         public float VolumeValue => Step * VolumeConstant.VolumeValuePerStep;
+        public string Id { get; }
+        public Type Type => GetType();
 
         public int Step
         {

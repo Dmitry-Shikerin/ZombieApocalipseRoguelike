@@ -7,6 +7,7 @@ namespace Sources.Domain.Data.Ids
 {
     public static class ModelId
     {
+        //gameModels
         public const string SawLauncherAbilityUpgrader = "SawLauncherAbilityUpgrader";
         public const string SawLauncherUpgrader = "SawLauncherUpgrader";
         public const string PlayerWallet = "PlayerWallet";
@@ -14,6 +15,13 @@ namespace Sources.Domain.Data.Ids
         public const string CharacterHealthUpgrader = "CharacterHealthUpgrader";
         public const string BearAttackUpgrader = "BearAttackUpgrader";
         public const string BearMassAttackUpgrader = "BearMassAttackUpgrader";
+        
+        //commonModels
+        public const string Volume = "Volume";
+        public const string FirstLevel = "FirstLevel";
+        public const string SecondLevel = "SecondLevel";
+        public const string ThirdLevel = "ThirdLevel";
+        public const string FourthLevel = "FourthLevel";
         
         //todo переделать
         public static IReadOnlyList<string> ModelsIds = new List<string>()

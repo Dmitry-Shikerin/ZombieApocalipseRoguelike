@@ -20,6 +20,10 @@ namespace Sources.Infrastructure.Services.UpdateServices
         public void Update(float deltaTime)
         {
             UpdateChanged?.Invoke(deltaTime);
+            
+            if(_actions.Count == 0)
+                return;
+            
             _actions.ForEach(action => action.Invoke(deltaTime));
         }
 

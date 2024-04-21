@@ -179,6 +179,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IUpgradeDtoMapper>().To<UpgradeDtoMapper>().AsSingle();
             Container.Bind<IPlayerWalletDtoMapper>()
                 .To<PlayerWalletDtoMapperMapper>().AsSingle();
+            Container.Bind<ILevelDtoMapper>().To<LevelDtoMapper>().AsSingle();
+            Container.Bind<IVolumeDtoMapper>().To<VolumeDtoMapper>().AsSingle();
         }
         
         private void BindFormFactories()

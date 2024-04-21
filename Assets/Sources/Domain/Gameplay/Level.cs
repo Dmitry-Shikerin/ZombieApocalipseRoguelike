@@ -1,19 +1,28 @@
-﻿namespace Sources.Domain.Gameplay
+﻿using System;
+using Sources.Domain.Data;
+using Sources.DomainInterfaces.Entities;
+
+namespace Sources.Domain.Gameplay
 {
-    public class Level
+    public class Level : IEntity
     {
-        //TODO указывать айдишки уровней
+        public Level(LevelDto levelDto)
+        {
+            Id = levelDto.Id;
+            IsCompleted = levelDto.IsCompleted;
+        }
         public Level(
-            string name,
+            string id,
             bool isCompleted)
         {
-            Name = name;
+            Id = id;
             IsCompleted = isCompleted;
         }
 
         //TODO сохранять пройденные уровни
-        public string Name { get; }
         public bool IsCompleted { get; private set; }
+        public string Id { get; }
+        public Type Type => GetType();
 
         public void Complete() =>
             IsCompleted = true;
