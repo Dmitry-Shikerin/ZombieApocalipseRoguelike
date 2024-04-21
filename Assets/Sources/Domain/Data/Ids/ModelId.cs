@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sources.Domain.Gameplay;
 using Sources.Domain.Players;
+using Sources.Domain.Setting;
 using Sources.Domain.Upgrades;
 
 namespace Sources.Domain.Data.Ids
@@ -37,6 +39,11 @@ namespace Sources.Domain.Data.Ids
 
         public static IReadOnlyDictionary<string, Type> ModelTypes = new Dictionary<string, Type>()
         {
+            [Volume] = typeof(Volume),
+            [FirstLevel] = typeof(Level),
+            [SecondLevel] = typeof(Level),
+            [ThirdLevel] = typeof(Level),
+            [FourthLevel] = typeof(Level),
             [SawLauncherAbilityUpgrader] = typeof(Upgrader),
             [SawLauncherUpgrader] = typeof(Upgrader),
             [PlayerWallet] = typeof(PlayerWallet),

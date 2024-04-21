@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.ControllersInterfaces.Scenes;
+using Sources.DomainInterfaces.Payloads;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
@@ -42,7 +43,7 @@ namespace Sources.Controllers.Scenes
 
         public void Enter(object payload = null)
         {
-            _gameplaySceneViewFactory.Create();
+            _gameplaySceneViewFactory.Create(payload as IScenePayload);
             _localizationService.Translate();
             _gameOverService.Enter();
             //TODO раскоментировать UpgradeService

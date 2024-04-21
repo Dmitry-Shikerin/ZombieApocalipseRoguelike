@@ -9,9 +9,11 @@ using Sources.Domain.Data.Common;
 using Sources.Domain.Data.Ids;
 using Sources.Domain.Gameplay;
 using Sources.Domain.Players;
+using Sources.Domain.Setting;
 using Sources.Domain.Spawners;
 using Sources.Domain.Upgrades;
 using Sources.Domain.Weapons;
+using Sources.DomainInterfaces.Payloads;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
@@ -21,7 +23,6 @@ using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
-using Sources.Infrastructure.Services.Cameras;
 using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Upgrades;
@@ -37,7 +38,6 @@ using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.RootGameObjects;
-using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
@@ -50,6 +50,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly BearViewFactory _bearViewFactory;
         private readonly UpgradeViewFactory _upgradeViewFactory;
         private readonly UpgradeUiFactory _upgradeUiFactory;
+        private readonly ILoadService _loadService;
         private readonly IEntityRepository _entityRepository;
         private readonly IEnemySpawnService _enemySpawnService;
         private readonly EnemySpawnViewFactory _enemySpawnViewFactory;
@@ -97,6 +98,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
             _upgradeViewFactory = upgradeViewFactory ?? throw new ArgumentNullException(nameof(upgradeViewFactory));
             _upgradeUiFactory = upgradeUiFactory ?? throw new ArgumentNullException(nameof(upgradeUiFactory));
+            _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _enemySpawnService = enemySpawnService ?? throw new ArgumentNullException(nameof(enemySpawnService));
             _enemySpawnViewFactory = enemySpawnViewFactory ??
@@ -116,20 +118,52 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _rootGameObject = rootGameObject ? rootGameObject : throw new ArgumentNullException(nameof(rootGameObject));
         }
 
-        public void Create()
+        public void Create(IScenePayload scenePayload)
         {
+            //TODO покашто вилка тут
+            Volume volume = new Volume();
+
+            Level level = new Level(scenePayload.SceneId, false);
+            
+            PlayerWallet playerWallet;
+
+            Upgrader bearMassAttackUpgrader;
+            Upgrader bearAttackUpgrader;
+            Upgrader characterHealthUpgrader;
+            Upgrader sawLauncherUpgrader;
+            Upgrader sawLauncherAbilityUpgrader;
+            Upgrader miniGunAttackUpgrader;
+
+            if (scenePayload.CanLoad == false)
+            {
+                playerWallet = CreatePlayerWallet();
+                
+                bearMassAttackUpgrader = CreateUpgrader(ModelId.BearMassAttackUpgrader);
+                bearAttackUpgrader = CreateUpgrader(ModelId.BearAttackUpgrader);
+                characterHealthUpgrader = CreateUpgrader(ModelId.CharacterHealthUpgrader);
+                sawLauncherUpgrader = CreateUpgrader(ModelId.SawLauncherUpgrader);
+                sawLauncherAbilityUpgrader = CreateUpgrader(ModelId.SawLauncherAbilityUpgrader);
+                miniGunAttackUpgrader = CreateUpgrader(ModelId.MiniGunAttackUpgrader);
+            }
+            else
+            {
+                _loadService.LoadAll();
+                
+                playerWallet = (PlayerWallet)_entityRepository.Get(ModelId.PlayerWallet);
+                
+                bearMassAttackUpgrader = (Upgrader)_entityRepository.Get(ModelId.BearMassAttackUpgrader);
+                bearAttackUpgrader = (Upgrader)_entityRepository.Get(ModelId.BearAttackUpgrader);
+                characterHealthUpgrader = (Upgrader)_entityRepository.Get(ModelId.CharacterHealthUpgrader);
+                sawLauncherUpgrader = (Upgrader)_entityRepository.Get(ModelId.SawLauncherUpgrader);
+                sawLauncherAbilityUpgrader = (Upgrader)_entityRepository.Get(ModelId.SawLauncherAbilityUpgrader);
+                miniGunAttackUpgrader = (Upgrader)_entityRepository.Get(ModelId.MiniGunAttackUpgrader);
+            }
+            
             //FormService
             _gameplayFormServiceFactory.Create().Show<HudFormView>();
 
             //TODO возможно сделать древовидную структуру моделей и дто и мапить их
             //Upgrades
-            var bearMassAttackUpgrader = CreateUpgrader(ModelId.BearMassAttackUpgrader);
-            var bearAttackUpgrader = CreateUpgrader(ModelId.BearAttackUpgrader);
-            var characterHealthUpgrader = CreateUpgrader(ModelId.CharacterHealthUpgrader);
-            var sawLauncherUpgrader = CreateUpgrader(ModelId.SawLauncherUpgrader);
-            var sawLauncherAbilityUpgrader = CreateUpgrader(ModelId.SawLauncherAbilityUpgrader);
-            var miniGunAttackUpgrader = CreateUpgrader(ModelId.MiniGunAttackUpgrader);
-
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
 
             for (int i = 0; i < _gameplayHud.NotAwailabilityUpgradeUis.Count; i++)
@@ -142,7 +176,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
 
             //TODO можно ли это все дело сделать на компонентах?
             //Character
-            PlayerWallet playerWallet = new PlayerWallet(10, ModelId.PlayerWallet);
+            // PlayerWallet playerWallet = new PlayerWallet(10, ModelId.PlayerWallet);
             _playerWalletProvider.PlayerWallet = playerWallet;
             MiniGun minigun = new MiniGun(miniGunAttackUpgrader, 0.1f);
             CharacterHealth characterHealth = new CharacterHealth(characterHealthUpgrader);
@@ -191,7 +225,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _cameraService.Add<CharacterView>(characterView);
             _cameraService.Add<AllMapPoint>(_rootGameObject.AllMapPoint);
             
-            // _cameraService.SetFollower<CharacterView>();
             _cameraService.SetFollower<AllMapPoint>();
             
             _cameraViewFactory.Create(_gameplayHud.CinemachineCameraView);
@@ -205,6 +238,14 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _upgradeCollectionService.AddUpgrader(upgrader);
 
             return upgrader;
+        }
+
+        private PlayerWallet CreatePlayerWallet()
+        {
+            PlayerWallet playerWallet = new PlayerWallet(0, ModelId.PlayerWallet);
+            _entityRepository.Add(playerWallet);
+            
+            return playerWallet;
         }
     }
 }
