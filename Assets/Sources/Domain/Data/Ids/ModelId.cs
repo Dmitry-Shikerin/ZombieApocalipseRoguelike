@@ -20,6 +20,8 @@ namespace Sources.Domain.Data.Ids
         
         //commonModels
         public const string Volume = "Volume";
+        public const string GameData = "GameData";
+        public const string Tutorial = "Tutorial";
         public const string FirstLevel = "FirstLevel";
         public const string SecondLevel = "SecondLevel";
         public const string ThirdLevel = "ThirdLevel";
@@ -39,6 +41,8 @@ namespace Sources.Domain.Data.Ids
 
         public static IReadOnlyDictionary<string, Type> ModelTypes = new Dictionary<string, Type>()
         {
+            [Tutorial] = typeof(Tutorial),
+            [GameData] = typeof(GameData),
             [Volume] = typeof(Volume),
             [FirstLevel] = typeof(Level),
             [SecondLevel] = typeof(Level),

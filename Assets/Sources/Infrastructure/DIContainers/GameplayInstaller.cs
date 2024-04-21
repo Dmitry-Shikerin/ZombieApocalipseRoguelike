@@ -191,6 +191,8 @@ namespace Sources.Infrastructure.DIContainers
                 .To<PlayerWalletDtoMapperMapper>().AsSingle();
             Container.Bind<ILevelDtoMapper>().To<LevelDtoMapper>().AsSingle();
             Container.Bind<IVolumeDtoMapper>().To<VolumeDtoMapper>().AsSingle();
+            Container.Bind<ITutorialDtoMapper>().To<TutorialDtoMapper>().AsSingle();
+            Container.Bind<IGameDataDtoMapper>().To<GameDataDtoMapper>().AsSingle();
         }
         
         private void BindFormFactories()

@@ -30,7 +30,9 @@ namespace Sources.Infrastructure.Services.LoadServices
             IUpgradeDtoMapper upgradeDtoMapper,
             IPlayerWalletDtoMapper playerWalletDtoMapper,
             IVolumeDtoMapper volumeDtoMapper,
-            ILevelDtoMapper levelDtoMapper)
+            ILevelDtoMapper levelDtoMapper,
+            IGameDataDtoMapper gameDataDtoMapper,
+            ITutorialDtoMapper tutorialDtoMapper)
         {
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
@@ -44,6 +46,10 @@ namespace Sources.Infrastructure.Services.LoadServices
                 model => volumeDtoMapper.MapModelToDto(model as Volume);
             _toDtoMappers[typeof(Level)] =
                 model => levelDtoMapper.MapModelToDto(model as Level);
+            _toDtoMappers[typeof(GameData)] =
+                model => gameDataDtoMapper.MapModelToDto(model as GameData);
+            _toDtoMappers[typeof(Tutorial)] =
+                model => tutorialDtoMapper.MapModelToDto(model as Tutorial);
 
             _toModelMappers = new Dictionary<Type, Func<IDto, IEntity>>();
             _toModelMappers[typeof(Upgrader)] =
@@ -54,6 +60,10 @@ namespace Sources.Infrastructure.Services.LoadServices
                 dto => volumeDtoMapper.MapDtoToModel(dto as VolumeDto);
             _toModelMappers[typeof(Level)] =
                 dto => levelDtoMapper.MapDtoToModel(dto as LevelDto);
+            _toModelMappers[typeof(GameData)] =
+                dto => gameDataDtoMapper.MapDtoToModel(dto as GameDataDto);
+            _toModelMappers[typeof(Tutorial)] =
+                dto => tutorialDtoMapper.MapDtoToModel(dto as TutorialDto);
         }
 
         //TODO загружать все дто и сразу конвертить их в модели и складировать в инстансе контейнер
