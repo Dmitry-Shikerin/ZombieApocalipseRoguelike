@@ -20,36 +20,15 @@ namespace Sources.Controllers.Settings
 
         public override void Enable()
         {
-            
+            _volumeView.VolumeSlider.AddListener(SetVolume);
         }
 
         public override void Disable()
         {
-            
-        }
-        
-        public void IncreaseVolume()
-        {
-            _volume.Increase();
-            ShowSprites(_volume.Step);
+            _volumeView.VolumeSlider.RemoveListener(SetVolume);
         }
 
-        public void TurnDownVolume()
-        {
-            _volume.TurnDown();
-            ShowSprites(_volume.Step);
-        }
-
-        private void ShowSprites(int currentStep)
-        {
-            SetSpriteInRange(0, currentStep, _volumeView.FilledSprite);
-            SetSpriteInRange(currentStep, _volumeView.Images.Count, _volumeView.VoidSprite);
-        }
-
-        private void SetSpriteInRange(int from, int to, Sprite sprite)
-        {
-            for (var i = from; i < to; i++)
-                _volumeView.Images[i].SetSprite(sprite);
-        }
+        private void SetVolume(float value) =>
+            _volume.SetVolume(value);
     }
 }

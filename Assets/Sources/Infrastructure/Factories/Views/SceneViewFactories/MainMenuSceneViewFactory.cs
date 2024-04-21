@@ -6,6 +6,7 @@ using Sources.Domain.Setting;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Settings;
+using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Forms.MainMenu;
 
@@ -17,12 +18,14 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly MainMenuFormServiceFactory _mainMenuFormServiceFactory;
         private readonly VolumeViewFactory _volumeViewFactory;
         private readonly LevelAvailabilityViewFactory _levelAvailabilityViewFactory;
+        private readonly IVolumeService _volumeService;
 
         public MainMenuSceneViewFactory(
             MainMenuHud mainMenuHud,
             MainMenuFormServiceFactory mainMenuFormServiceFactory,
             VolumeViewFactory volumeViewFactory,
-            LevelAvailabilityViewFactory levelAvailabilityViewFactory)
+            LevelAvailabilityViewFactory levelAvailabilityViewFactory,
+            IVolumeService volumeService)
         {
             _mainMenuHud = mainMenuHud ? mainMenuHud : throw new ArgumentNullException(nameof(mainMenuHud));
             _mainMenuFormServiceFactory = mainMenuFormServiceFactory ??
@@ -30,6 +33,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _volumeViewFactory = volumeViewFactory ?? throw new ArgumentNullException(nameof(volumeViewFactory));
             _levelAvailabilityViewFactory = levelAvailabilityViewFactory ?? 
                                             throw new ArgumentNullException(nameof(levelAvailabilityViewFactory));
+            _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
         }
 
         public void Create()
@@ -37,6 +41,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             //Volume
             Volume volume = new Volume();  
             _volumeViewFactory.Create(volume, _mainMenuHud.VolumeView);
+            _volumeService.Register(volume);
             
             //LevelAvailability
             Level firstLevel = new Level("Level 1", false);

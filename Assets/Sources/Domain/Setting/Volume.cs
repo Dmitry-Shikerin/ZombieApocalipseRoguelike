@@ -9,10 +9,10 @@ namespace Sources.Domain.Setting
 {
     public class Volume : IEntity
     {
-        private int _step;
+        private float _volumeValue;
 
         public Volume(VolumeDto volumeDto)
-            : this(volumeDto.Step, volumeDto.Id)
+            : this(volumeDto.VolumeValue, volumeDto.Id)
         {
         }
 
@@ -21,32 +21,29 @@ namespace Sources.Domain.Setting
         {
         }
 
-        private Volume(int step, string id)
+        private Volume(float value, string id)
         {
-            Step = step;
+            VolumeValue = value;
             Id = id;
         }
 
         public event Action VolumeChanged;
 
-        public float VolumeValue => Step * VolumeConstant.VolumeValuePerStep;
-        public string Id { get; }
-        public Type Type => GetType();
-
-        public int Step
+        public float VolumeValue
         {
-            get => _step;
-            set
+            get => _volumeValue;
+
+            private set
             {
-                _step = Mathf.Clamp(value, 0, VolumeConstant.MaxStep);
+                _volumeValue = Mathf.Clamp(value, 0, 1);
                 VolumeChanged?.Invoke();
             }
         }
 
-        public void Increase() =>
-            Step++;
+        public string Id { get; }
+        public Type Type => GetType();
 
-        public void TurnDown() =>
-            Step--;
+        public void SetVolume(float value) =>
+            VolumeValue = value;
     }
 }

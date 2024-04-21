@@ -10,7 +10,7 @@ namespace Sources.Infrastructure.Factories.Domain.Data
         {
             return new VolumeDto()
             {
-                Step = volume.Step,
+                VolumeValue = volume.VolumeValue,
                 Id = volume.Id,
             };
         }
