@@ -21,6 +21,7 @@ using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Musics;
+using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Services.Providers;
@@ -32,6 +33,7 @@ using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
+using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Cameras.Points;
@@ -64,6 +66,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
         private readonly IGameOverService _gameOverService;
         private readonly CameraViewFactory _cameraViewFactory;
         private readonly ICameraService _cameraService;
+        private readonly VolumeViewFactory _volumeViewFactory;
+        private readonly IVolumeService _volumeService;
         private readonly RootGameObject _rootGameObject;
         private readonly EnemyViewFactory _enemyViewFactory;
 
@@ -88,7 +92,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             BackgroundMusicViewFactory backgroundMusicViewFactory,
             IGameOverService gameOverService,
             CameraViewFactory cameraViewFactory,
-            ICameraService cameraService)
+            ICameraService cameraService,
+            VolumeViewFactory volumeViewFactory,
+            IVolumeService volumeService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ??
@@ -115,6 +121,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
             _cameraViewFactory = cameraViewFactory ?? throw new ArgumentNullException(nameof(cameraViewFactory));
             _cameraService = cameraService ?? throw new ArgumentNullException(nameof(cameraService));
+            _volumeViewFactory = volumeViewFactory ?? throw new ArgumentNullException(nameof(volumeViewFactory));
+            _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _rootGameObject = rootGameObject ? rootGameObject : throw new ArgumentNullException(nameof(rootGameObject));
         }
 
@@ -158,6 +166,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
                 sawLauncherAbilityUpgrader = (Upgrader)_entityRepository.Get(ModelId.SawLauncherAbilityUpgrader);
                 miniGunAttackUpgrader = (Upgrader)_entityRepository.Get(ModelId.MiniGunAttackUpgrader);
             }
+            
+            //Volume
+            _volumeService.Register(volume);
+            _volumeViewFactory.Create(volume, _gameplayHud.VolumeView);
             
             //FormService
             _gameplayFormServiceFactory.Create().Show<HudFormView>();

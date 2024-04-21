@@ -14,6 +14,7 @@ using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Musics;
 using Sources.Infrastructure.Factories.Controllers.Players;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
+using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Weapons;
@@ -36,6 +37,7 @@ using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Players;
 using Sources.Infrastructure.Factories.Views.RewardItems;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
@@ -124,8 +126,10 @@ namespace Sources.Infrastructure.DIContainers
             BindSpawners();
             BindGameplay();
             BindMusic();
+            BindSettings();
         }
 
+        //TODO разбить все на отдельные моноинсталлеры
         private void BindServices()
         {
             Container.BindInterfacesAndSelfTo<UpdateService>().AsSingle();
@@ -166,6 +170,12 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.Bind<KillEnemyCounterPresenterFactory>().AsSingle();
             Container.Bind<KillEnemyCounterViewFactory>().AsSingle();
+        }
+        
+        private void BindSettings()
+        {
+            Container.Bind<VolumePresenterFactory>().AsSingle();
+            Container.Bind<VolumeViewFactory>().AsSingle();
         }
 
         private void BindMusic()
