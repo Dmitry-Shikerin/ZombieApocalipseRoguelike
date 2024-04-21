@@ -1,9 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Common;
 using Sources.Domain.Setting;
-using Sources.PresentationsInterfaces.Views.Forms.Common;
 using Sources.PresentationsInterfaces.Views.Settings;
-using UnityEngine;
 
 namespace Sources.Controllers.Settings
 {
@@ -21,6 +19,7 @@ namespace Sources.Controllers.Settings
         public override void Enable()
         {
             _volumeView.VolumeSlider.AddListener(SetVolume);
+            _volumeView.VolumeSlider.SetValue(_volume.VolumeValue);
         }
 
         public override void Disable()

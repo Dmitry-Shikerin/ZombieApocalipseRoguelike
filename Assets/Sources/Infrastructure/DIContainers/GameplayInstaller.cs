@@ -102,7 +102,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<UpgradeConfigContainer>()
                 .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer").AsSingle();
             Container.Bind<AudioClipCollection>()
-                .FromResource("Configs/AudioClipContainer").AsSingle();
+                .FromResource("Configs/GameplayAudioClipContainer").AsSingle();
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
             Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
