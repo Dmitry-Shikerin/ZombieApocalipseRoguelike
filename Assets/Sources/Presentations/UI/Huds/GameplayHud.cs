@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Sources.Controllers.Forms.Gameplay;
-using Sources.Domain.Gameplay;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
 using Sources.Presentations.Views.Common;
@@ -10,6 +8,7 @@ using Sources.Presentations.Views.Gameplay;
 using Sources.Presentations.Views.Localizations;
 using Sources.Presentations.Views.Music;
 using Sources.Presentations.Views.Players;
+using Sources.Presentations.Views.Settings;
 using Sources.Presentations.Views.Upgrades;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -72,6 +71,10 @@ namespace Sources.Presentations.UI.Huds
         [Button(ButtonSizes.Large)] 
         [FoldoutGroup("HealthUi")] [Required] [SerializeField]
         private HealthUi _characterHealthUi;
+        
+        [Button(ButtonSizes.Large)] 
+        [FoldoutGroup("Volume")] [Required] [SerializeField]
+        private VolumeView _volumeView;
 
         public PauseFormView PauseFormView => _pauseFormView;
         public HudFormView HudFormView => _hudFormView;
@@ -99,5 +102,7 @@ namespace Sources.Presentations.UI.Huds
         public BackgroundMusicView BackgroundMusicView => _backgroundMusicView;
         
         public HealthUi CharacterHealthUi => _characterHealthUi;
+        
+        public VolumeView VolumeView => _volumeView;
     }
 }

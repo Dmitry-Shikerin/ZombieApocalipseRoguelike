@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Domain.Payloads;
 using Sources.InfrastructureInterfaces.Services.SceneServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +14,9 @@ namespace Sources.App.Core
             DontDestroyOnLoad(this);
 
         private async void Start() =>
-            await _sceneService.ChangeSceneAsync(SceneManager.GetActiveScene().name, null);
+            await _sceneService.ChangeSceneAsync(
+                SceneManager.GetActiveScene().name, 
+                new ScenePayload(SceneManager.GetActiveScene().name, false));
 
         private void Update() =>
             _sceneService.Update(Time.deltaTime);

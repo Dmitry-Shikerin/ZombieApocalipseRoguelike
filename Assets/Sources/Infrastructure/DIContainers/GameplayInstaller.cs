@@ -14,6 +14,7 @@ using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Musics;
 using Sources.Infrastructure.Factories.Controllers.Players;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
+using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Weapons;
@@ -36,6 +37,7 @@ using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Players;
 using Sources.Infrastructure.Factories.Views.RewardItems;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
@@ -95,15 +97,17 @@ namespace Sources.Infrastructure.DIContainers
     {
         [Required][SerializeField] private GameplayHud _gameplayHud;
         [Required] [SerializeField] private RootGameObject _rootGameObject;
+        [Required] [SerializeField] private ContainerView _containerView;
         
         public override void InstallBindings()
         {
             Container.Bind<UpgradeConfigContainer>()
                 .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer").AsSingle();
             Container.Bind<AudioClipCollection>()
-                .FromResource("Configs/AudioClipContainer").AsSingle();
+                .FromResource("Configs/GameplayAudioClipContainer").AsSingle();
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
+            Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
             Container.Bind<GameplaySceneViewFactory>().AsSingle();
             Container.Bind<IUpgradeCollectionService>().To<UpgradeCollectionService>().AsSingle();
@@ -122,8 +126,10 @@ namespace Sources.Infrastructure.DIContainers
             BindSpawners();
             BindGameplay();
             BindMusic();
+            BindSettings();
         }
 
+        //TODO разбить все на отдельные моноинсталлеры
         private void BindServices()
         {
             Container.BindInterfacesAndSelfTo<UpdateService>().AsSingle();
@@ -165,6 +171,12 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<KillEnemyCounterPresenterFactory>().AsSingle();
             Container.Bind<KillEnemyCounterViewFactory>().AsSingle();
         }
+        
+        private void BindSettings()
+        {
+            Container.Bind<VolumePresenterFactory>().AsSingle();
+            Container.Bind<VolumeViewFactory>().AsSingle();
+        }
 
         private void BindMusic()
         {
@@ -177,6 +189,10 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IUpgradeDtoMapper>().To<UpgradeDtoMapper>().AsSingle();
             Container.Bind<IPlayerWalletDtoMapper>()
                 .To<PlayerWalletDtoMapperMapper>().AsSingle();
+            Container.Bind<ILevelDtoMapper>().To<LevelDtoMapper>().AsSingle();
+            Container.Bind<IVolumeDtoMapper>().To<VolumeDtoMapper>().AsSingle();
+            Container.Bind<ITutorialDtoMapper>().To<TutorialDtoMapper>().AsSingle();
+            Container.Bind<IGameDataDtoMapper>().To<GameDataDtoMapper>().AsSingle();
         }
         
         private void BindFormFactories()

@@ -13,6 +13,5 @@ namespace Sources.Presentations.Views.Forms.Gameplay
         [Required] [SerializeField] private ButtonView _hudButtonView;
 
         public IButtonView HudButtonView => _hudButtonView;
-        //TODO сделать спавн сервис и добавить все апгрейды
     }
 }

@@ -23,12 +23,14 @@ namespace Sources.Controllers.Enemies.Base
         {
             Start(_firstState);
             _updateRegister.UpdateChanged += Update;
+            // _updateRegister.Register(Update);
         }
 
         public void Disable()
         {
             Stop();
             _updateRegister.UpdateChanged -= Update;
+            // _updateRegister.UnRegister(Update);
         }
     }
 }

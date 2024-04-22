@@ -16,5 +16,11 @@ namespace Sources.Presentations.UI.Buttons
 
         public void RemoveClickListener(UnityAction onClick) =>
             _button.onClick.RemoveListener(onClick);
+
+        public void Enable() =>
+            _button.enabled = true;
+
+        public void Disable() =>
+            _button.enabled = false;
     }
 }

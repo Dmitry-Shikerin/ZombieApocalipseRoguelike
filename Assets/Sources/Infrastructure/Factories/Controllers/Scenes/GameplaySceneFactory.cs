@@ -10,6 +10,7 @@ using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
+using Sources.InfrastructureInterfaces.Services.Volumes;
 
 namespace Sources.Infrastructure.Factories.Controllers.Scenes
 {
@@ -22,6 +23,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
         private readonly ILoadService _loadService;
         private readonly IUpgradeService _upgradeService;
         private readonly IGameOverService _gameOverService;
+        private readonly IVolumeService _volumeService;
 
         public GameplaySceneFactory(
             IUpdateService updateService,
@@ -30,7 +32,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
             ILocalizationService localizationService,
             ILoadService loadService,
             IUpgradeService upgradeService,
-            IGameOverService gameOverService)
+            IGameOverService gameOverService,
+            IVolumeService volumeService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -40,6 +43,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
             _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
+            _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
         }
 
         public async UniTask<IScene> Create(object payload)
@@ -51,7 +55,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
                 _localizationService,
                 _loadService,
                 _upgradeService,
-                _gameOverService);
+                _gameOverService,
+                _volumeService);
         }
     }
 }
