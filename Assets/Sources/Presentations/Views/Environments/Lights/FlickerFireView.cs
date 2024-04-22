@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Sources.Presentations.Views.Environments
+namespace Sources.Presentations.Views.Environments.Lights
 {
     public class FlickerFireView : View
     {
