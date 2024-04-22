@@ -3,6 +3,7 @@ using Sources.Domain.AudioSources;
 using Sources.Domain.Upgrades.Configs.Containers;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
+using Sources.Infrastructure.Factories.Controllers.Cameras;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Common;
 using Sources.Infrastructure.Factories.Controllers.Enemies;
@@ -13,6 +14,7 @@ using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Musics;
 using Sources.Infrastructure.Factories.Controllers.Players;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
+using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Weapons;
@@ -22,6 +24,7 @@ using Sources.Infrastructure.Factories.Services.Localizations;
 using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Bullets;
+using Sources.Infrastructure.Factories.Views.Cameras;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.Infrastructure.Factories.Views.Enemies;
@@ -34,9 +37,11 @@ using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Players;
 using Sources.Infrastructure.Factories.Views.RewardItems;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
+using Sources.Infrastructure.Services.Cameras;
 using Sources.Infrastructure.Services.EnemyCollectors;
 using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.GameOvers;
@@ -60,6 +65,7 @@ using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Factories.Views.ExplosionBodyBloodyViews;
 using Sources.InfrastructureInterfaces.Factories.Views.FirstAidKits;
 using Sources.InfrastructureInterfaces.Factories.Views.RewardItems;
+using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
@@ -91,15 +97,17 @@ namespace Sources.Infrastructure.DIContainers
     {
         [Required][SerializeField] private GameplayHud _gameplayHud;
         [Required] [SerializeField] private RootGameObject _rootGameObject;
+        [Required] [SerializeField] private ContainerView _containerView;
         
         public override void InstallBindings()
         {
             Container.Bind<UpgradeConfigContainer>()
                 .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer").AsSingle();
             Container.Bind<AudioClipCollection>()
-                .FromResource("Configs/AudioClipContainer").AsSingle();
+                .FromResource("Configs/GameplayAudioClipContainer").AsSingle();
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
+            Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
             Container.Bind<GameplaySceneViewFactory>().AsSingle();
             Container.Bind<IUpgradeCollectionService>().To<UpgradeCollectionService>().AsSingle();
@@ -118,8 +126,10 @@ namespace Sources.Infrastructure.DIContainers
             BindSpawners();
             BindGameplay();
             BindMusic();
+            BindSettings();
         }
 
+        //TODO разбить все на отдельные моноинсталлеры
         private void BindServices()
         {
             Container.BindInterfacesAndSelfTo<UpdateService>().AsSingle();
@@ -153,12 +163,19 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IPauseService>().To<PauseService>().AsSingle();
             Container.Bind<IEnemyCollectorService>().To<EnemyCollectorService>().AsSingle();
             Container.Bind<IGameOverService>().To<GameOverService>().AsSingle();
+            Container.Bind<ICameraService>().To<CameraService>().AsSingle();
         }
 
         private void BindGameplay()
         {
             Container.Bind<KillEnemyCounterPresenterFactory>().AsSingle();
             Container.Bind<KillEnemyCounterViewFactory>().AsSingle();
+        }
+        
+        private void BindSettings()
+        {
+            Container.Bind<VolumePresenterFactory>().AsSingle();
+            Container.Bind<VolumeViewFactory>().AsSingle();
         }
 
         private void BindMusic()
@@ -172,6 +189,10 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IUpgradeDtoMapper>().To<UpgradeDtoMapper>().AsSingle();
             Container.Bind<IPlayerWalletDtoMapper>()
                 .To<PlayerWalletDtoMapperMapper>().AsSingle();
+            Container.Bind<ILevelDtoMapper>().To<LevelDtoMapper>().AsSingle();
+            Container.Bind<IVolumeDtoMapper>().To<VolumeDtoMapper>().AsSingle();
+            Container.Bind<ITutorialDtoMapper>().To<TutorialDtoMapper>().AsSingle();
+            Container.Bind<IGameDataDtoMapper>().To<GameDataDtoMapper>().AsSingle();
         }
         
         private void BindFormFactories()
@@ -208,6 +229,9 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<EnemyIndicatorPresenterFactory>().AsSingle();
             Container.Bind<EnemyIndicatorViewFactory>().AsSingle();
+
+            Container.Bind<CameraPresenterFactory>().AsSingle();
+            Container.Bind<CameraViewFactory>().AsSingle();
         }
 
         private void BindItems()
@@ -249,6 +273,9 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.Bind<HealthUiPresenterFactory>().AsSingle();
             Container.Bind<HealthUiFactory>().AsSingle();
+
+            Container.Bind<HealthUiTextPresenterFactory>().AsSingle();
+            Container.Bind<HealthUiTextViewFactory>().AsSingle();
 
             Container.Bind<BossEnemyPresenterFactory>().AsSingle();
             Container.Bind<IBossEnemyViewFactory>().To<BossEnemyViewFactory>().AsSingle();

@@ -11,5 +11,6 @@ namespace Sources.PresentationsInterfaces.UI.AudioSources
         void SetUnLoop();
         void Stop();
         void SetClip(AudioClip audioClip);
+        void SetVolume(float volume);
     }
 }

@@ -5,6 +5,7 @@ namespace Sources.InfrastructureInterfaces.Factories.Domain.Data
 {
     public interface IPlayerWalletDtoMapper
     {
-        PlayerWalletDto MapTo(PlayerWallet playerWallet);
+        PlayerWalletDto MapModelToDto(PlayerWallet playerWallet);
+        PlayerWallet MapDtoToModel(PlayerWalletDto playerWalletDto);
     }
 }

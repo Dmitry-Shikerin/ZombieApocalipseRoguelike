@@ -1,16 +1,21 @@
 ﻿using System;
 using Sources.Controllers.Musics;
 using Sources.Domain.AudioSources;
+using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.Views.Music;
 
 namespace Sources.Infrastructure.Factories.Controllers.Musics
 {
     public class BackgroundMusicPresenterFactory
     {
+        private readonly IVolumeService _volumeService;
         private readonly AudioClipCollection _audioClipCollection;
 
-        public BackgroundMusicPresenterFactory(AudioClipCollection audioClipCollection)
+        public BackgroundMusicPresenterFactory(
+            AudioClipCollection audioClipCollection,
+            IVolumeService volumeService)
         {
+            _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _audioClipCollection = audioClipCollection 
                 ? audioClipCollection 
                 : throw new ArgumentNullException(nameof(audioClipCollection));
@@ -18,7 +23,10 @@ namespace Sources.Infrastructure.Factories.Controllers.Musics
 
         public BackgroundMusicPresenter Create(IBackgroundMusicView backgroundMusicView)
         {
-            return new BackgroundMusicPresenter(_audioClipCollection, backgroundMusicView);
+            return new BackgroundMusicPresenter(
+                _audioClipCollection, 
+                backgroundMusicView,
+                _volumeService);
         }
     }
 }

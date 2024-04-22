@@ -17,6 +17,7 @@ namespace Sources.Domain.Characters
         }
 
         public event Action HealthChanged;
+        public event Action<float> DamageReceived;
 
         public float MaxHealth => HealthUpgrader.CurrentAmount;
         public float CurrentHealth
@@ -33,6 +34,7 @@ namespace Sources.Domain.Characters
         public void TakeDamage(float damage)
         {
             CurrentHealth -= damage;
+            DamageReceived?.Invoke(damage);
         }
 
         public void TakeHeal(int heal)

@@ -1,58 +1,49 @@
 ﻿using System;
-using JetBrains.Annotations;
-using Sources.Domain.Gameplay;
-using Sources.DomainInterfaces.FirstActions;
-using Sources.Presentations.Views.Cameras;
-using Sources.PresentationsInterfaces.Views.Character;
-using UnityEngine;
+using System.Collections.Generic;
+using Sources.InfrastructureInterfaces.Services.Cameras;
+using Sources.PresentationsInterfaces.Views.Cameras.Points;
 
 namespace Sources.Infrastructure.Services.Cameras
 {
     public class CameraService : ICameraService
     {
-        private ICinemachineCameraView _cinnemachineCameraView;
-        private ICharacterMovementView _characterMovementView;
-        private readonly KillEnemyCounter _killEnemyCounter;
+        private Dictionary<Type, ICameraFollowable> _cameraTargets = new Dictionary<Type, ICameraFollowable>();
 
-        public CameraService(
-            ICinemachineCameraView cinnemachineCameraView,
-            ICharacterMovementView characterMovementView,
-            KillEnemyCounter killEnemyCounter)
-        {
-            _cinnemachineCameraView = cinnemachineCameraView ?? 
-                                      throw new ArgumentNullException(nameof(cinnemachineCameraView));
-            _characterMovementView = characterMovementView ?? 
-                                     throw new ArgumentNullException(nameof(characterMovementView));
-            _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
-        }
-
+        public event Action FollowableChanged;
+        
+        public ICameraFollowable CurrentFollower { get; private set; }
 
         public void Enable()
         {
-            _killEnemyCounter.FirstActionActivate += OnFirsKillKillEnemyAction;
         }
 
         public void Disable()
         {
+        }
+
+        public void SetFollower<T>() where T : ICameraFollowable
+        {
+            if (_cameraTargets.ContainsKey(typeof(T)) == false)
+                throw new InvalidOperationException(nameof(T));
             
+            CurrentFollower = _cameraTargets[typeof(T)];
+            FollowableChanged?.Invoke();
         }
 
-        private void OnFirsKillKillEnemyAction()
+        public void Add<T>(ICameraFollowable cameraFollowable) where T : ICameraFollowable
         {
-            Debug.Log("First killEnemyAction");
+            if (_cameraTargets.ContainsKey(typeof(T)))
+                throw new InvalidOperationException(nameof(T));
+            
+            _cameraTargets[typeof(T)] = cameraFollowable;
         }
 
-        private void SHowPanaramaLevelCamera()
+        public ICameraFollowable Get<T>() where T : ICameraFollowable
         {
-            //Todo сделать у камеры вид сверху
-            Debug.Log("");
-        }
+            if (_cameraTargets.ContainsKey(typeof(T)) == false)
+                throw new InvalidOperationException(nameof(T));
 
-        private void ShowHealthBarTutorial()
-        {
-            //сделать затемнение экрана у всех туториалов и оставлять подсвеченными только элемент туториала
-            //TODO сделать отдельный сервис для формочек туториала
-            //сделать 
+            return _cameraTargets[typeof(T)];
         }
     }
 }

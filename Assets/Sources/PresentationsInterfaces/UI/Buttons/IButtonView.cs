@@ -7,5 +7,7 @@ namespace Sources.PresentationsInterfaces.UI.Buttons
     {
         void AddClickListener(UnityAction onClick);
         void RemoveClickListener(UnityAction onClick);
+        void Enable();
+        void Disable();
     }
 }

@@ -13,12 +13,12 @@ namespace Sources.Infrastructure.Services.Forms
         private readonly ContainerView _containerView;
         private readonly Dictionary<string, IForm> _forms = new ();
 
-        public FormService(GameplayHud hud)
-        {
-            _containerView = hud.FormServiceContainerView
-                ? hud.FormServiceContainerView
-                : throw new ArgumentNullException(nameof(hud.FormServiceContainerView));
-        }
+        // public FormService(GameplayHud hud)
+        // {
+        //     _containerView = hud.FormServiceContainerView
+        //         ? hud.FormServiceContainerView
+        //         : throw new ArgumentNullException(nameof(hud.FormServiceContainerView));
+        // }
         
         public FormService(ContainerView containerView)
         {

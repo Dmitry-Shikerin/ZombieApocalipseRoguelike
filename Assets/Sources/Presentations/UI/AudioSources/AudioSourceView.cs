@@ -26,6 +26,9 @@ namespace Sources.Presentations.UI.AudioSources
         public void SetClip(AudioClip audioClip) =>
             _audioSource.clip = audioClip;
 
+        public void SetVolume(float volume) =>
+            _audioSource.volume = volume;
+
         public void Set()
         {
         }
