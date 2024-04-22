@@ -18,8 +18,6 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("Forms")] [Required] [SerializeField]
         private MainMenuSettingsFormView _settingsFormView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private AuthorizationFormView _authorizationFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
         private LeaderBoardFormView _leaderBoardFormView;
 
         [Button(ButtonSizes.Large)]
@@ -40,7 +38,6 @@ namespace Sources.Presentations.UI.Huds
 
         public MainMenuHudFormView MainMenuHudFormView => _mainMenuHudFormView;
         public MainMenuSettingsFormView SettingsFormView => _settingsFormView;
-        public AuthorizationFormView AuthorizationFormView => _authorizationFormView;
         public LeaderBoardFormView LeaderBoardFormView => _leaderBoardFormView;
         
         public IReadOnlyList<LeaderBoardElementView> LeaderBoardElementViews => _leaderBoardElementViews;

@@ -20,14 +20,12 @@ namespace Sources.Controllers.Forms.MainMenu
         public override void Enable()
         {
             _mainMenuHudFormView.SettingsButtonView.AddClickListener(ShowSettingsForm);
-            _mainMenuHudFormView.AuthorizationButtonView.AddClickListener(ShowAuthorizationForm);
             _mainMenuHudFormView.LeaderBoardButtonView.AddClickListener(ShowLeaderBoardForm);
         }
 
         public override void Disable()
         {
             _mainMenuHudFormView.SettingsButtonView.RemoveClickListener(ShowSettingsForm);
-            _mainMenuHudFormView.AuthorizationButtonView.RemoveClickListener(ShowAuthorizationForm);
             _mainMenuHudFormView.LeaderBoardButtonView.RemoveClickListener(ShowLeaderBoardForm);
         }
 

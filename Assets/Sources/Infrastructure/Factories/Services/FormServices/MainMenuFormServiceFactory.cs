@@ -52,12 +52,6 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             
             _formService.Add(settingsForm);
 
-            Form<AuthorizationFormView, AuthorizationFormPresenter> authorizationForm =
-                new Form<AuthorizationFormView, AuthorizationFormPresenter>(
-                    _authorizationFormPresenterFactory.Create, _mainMenuHud.AuthorizationFormView);
-            
-            _formService.Add(authorizationForm);
-
             Form<LeaderBoardFormView, LeaderBoardFormPresenter> leaderBoardForm =
                 new Form<LeaderBoardFormView, LeaderBoardFormPresenter>(
                     _leaderBoardFormPresenterFactory.Create, _mainMenuHud.LeaderBoardFormView);
