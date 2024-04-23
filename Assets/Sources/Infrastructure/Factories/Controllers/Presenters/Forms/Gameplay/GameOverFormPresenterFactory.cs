@@ -1,0 +1,35 @@
+﻿using System;
+using JetBrains.Annotations;
+using Sources.Controllers.Forms.Gameplay;
+using Sources.InfrastructureInterfaces.Services.Forms;
+using Sources.InfrastructureInterfaces.Services.PauseServices;
+using Sources.InfrastructureInterfaces.Services.SceneServices;
+using Sources.PresentationsInterfaces.Views.Forms.Gameplay;
+
+namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
+{
+    public class GameOverFormPresenterFactory
+    {
+        private readonly IViewFormService _viewFormService;
+        private readonly ISceneService _sceneService;
+        private readonly IPauseService _pauseService;
+
+        public GameOverFormPresenterFactory(
+            IViewFormService viewFormService, 
+            ISceneService sceneService,
+            IPauseService pauseService)
+        {
+            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _sceneService = sceneService ?? throw new ArgumentNullException(nameof(sceneService));
+            _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
+        }
+
+        public GameOverFormPresenter Create(IGameOverFormView gameOverFormView)
+        {
+            if (gameOverFormView == null)
+                throw new ArgumentNullException(nameof(gameOverFormView));
+
+            return new GameOverFormPresenter(_viewFormService, gameOverFormView, _sceneService, _pauseService);
+        }
+    }
+}

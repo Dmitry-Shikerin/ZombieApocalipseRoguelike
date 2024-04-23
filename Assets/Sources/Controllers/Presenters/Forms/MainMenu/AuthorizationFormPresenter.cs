@@ -9,12 +9,12 @@ namespace Sources.Controllers.Forms.MainMenu
 {
     public class AuthorizationFormPresenter : PresenterBase
     {
-        private readonly IFormService _formService;
+        private readonly IViewFormService _viewFormService;
         private readonly IAuthorizationFormView _authorizationFormView;
 
-        public AuthorizationFormPresenter(IFormService formService, IAuthorizationFormView authorizationFormView)
+        public AuthorizationFormPresenter(IViewFormService viewFormService, IAuthorizationFormView authorizationFormView)
         {
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
             _authorizationFormView = authorizationFormView ??
                                      throw new ArgumentNullException(nameof(authorizationFormView));
         }
@@ -26,6 +26,6 @@ namespace Sources.Controllers.Forms.MainMenu
             _authorizationFormView.MainMenuHudButtonView.RemoveClickListener(ShowMainMenuHudForm);
 
         private void ShowMainMenuHudForm() =>
-            _formService.Show<MainMenuHudFormView>();
+            _viewFormService.Show<MainMenuHudFormView>();
     }
 }

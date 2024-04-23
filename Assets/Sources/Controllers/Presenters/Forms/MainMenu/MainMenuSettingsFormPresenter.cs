@@ -9,14 +9,14 @@ namespace Sources.Controllers.Forms.MainMenu
     public class MainMenuSettingsFormPresenter : PresenterBase
     {
         private readonly IMainMenuSettingsFormView _mainMenuSettingsFormView;
-        private readonly IFormService _formService;
+        private readonly IViewFormService _viewFormService;
 
-        public MainMenuSettingsFormPresenter(IFormService formService,
+        public MainMenuSettingsFormPresenter(IViewFormService viewFormService,
             IMainMenuSettingsFormView mainMenuSettingsFormView)
         {
             _mainMenuSettingsFormView = mainMenuSettingsFormView ??
                                         throw new ArgumentNullException(nameof(mainMenuSettingsFormView));
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
         }
 
         public override void Enable() =>
@@ -26,6 +26,6 @@ namespace Sources.Controllers.Forms.MainMenu
             _mainMenuSettingsFormView.MainMenuHudButtonView.RemoveClickListener(ShowMainMenuHudForm);
 
         private void ShowMainMenuHudForm() =>
-            _formService.Show<MainMenuHudFormView>();
+            _viewFormService.Show<MainMenuHudFormView>();
     }
 }

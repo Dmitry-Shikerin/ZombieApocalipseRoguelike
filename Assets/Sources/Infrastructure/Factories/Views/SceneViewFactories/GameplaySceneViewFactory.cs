@@ -8,6 +8,7 @@ using Sources.Domain.Characters.Attackers;
 using Sources.Domain.Data.Common;
 using Sources.Domain.Data.Ids;
 using Sources.Domain.Gameplay;
+using Sources.Domain.Models.Forms.Gameplay;
 using Sources.Domain.Players;
 using Sources.Domain.Setting;
 using Sources.Domain.Spawners;
@@ -172,7 +173,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _volumeViewFactory.Create(volume, _gameplayHud.VolumeView);
             
             //FormService
-            _gameplayFormServiceFactory.Create().Show<HudFormView>();
+            _gameplayFormServiceFactory.Create().Show<GameplayHudForm>();
 
             //TODO возможно сделать древовидную структуру моделей и дто и мапить их
             //Upgrades

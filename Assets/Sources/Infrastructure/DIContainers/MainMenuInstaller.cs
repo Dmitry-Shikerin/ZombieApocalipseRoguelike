@@ -50,7 +50,7 @@ namespace Sources.Infrastructure.DIContainers
         
         private void BindServices()
         {
-            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ViewViewFormService>().AsSingle();
             Container.Bind<ILeaderBoardInitializeService>().To<YandexLeaderBoardInitializeService>().AsSingle();
             Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
         }

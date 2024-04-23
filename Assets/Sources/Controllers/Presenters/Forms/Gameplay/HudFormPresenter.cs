@@ -9,12 +9,12 @@ namespace Sources.Controllers.Forms.Gameplay
 {
     public class HudFormPresenter : PresenterBase
     {
-        private readonly IFormService _formService;
+        private readonly IViewFormService _viewFormService;
         private readonly IHudFormView _hudFormView;
 
-        public HudFormPresenter(IFormService formService, IHudFormView hudFormView)
+        public HudFormPresenter(IViewFormService viewFormService, IHudFormView hudFormView)
         {
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
             _hudFormView = hudFormView ?? throw new ArgumentNullException(nameof(hudFormView));
         }
 
@@ -31,9 +31,9 @@ namespace Sources.Controllers.Forms.Gameplay
         }
 
         private void ShowPauseForm() =>
-            _formService.Show<PauseFormView>();
+            _viewFormService.Show<PauseFormView>();
 
         private void ShowUpgradeForm() =>
-            _formService.Show<UpgradeFormView>();
+            _viewFormService.Show<UpgradeFormView>();
     }
 }

@@ -24,7 +24,6 @@ namespace Sources.Controllers.Spawners
         private readonly IEnemySpawnService _enemySpawnService;
         private readonly IBossEnemySpawnService _bossEnemySpawnService;
         private readonly IEnemyCollectorService _enemyCollectorService;
-        private readonly IFormService _formService;
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -34,8 +33,7 @@ namespace Sources.Controllers.Spawners
             IEnemySpawnerView enemySpawnerView,
             IEnemySpawnService enemySpawnService,
             IBossEnemySpawnService bossEnemySpawnService,
-            IEnemyCollectorService enemyCollectorService,
-            IFormService formService)
+            IEnemyCollectorService enemyCollectorService)
         {
             _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
             _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));
@@ -45,7 +43,6 @@ namespace Sources.Controllers.Spawners
             _bossEnemySpawnService = bossEnemySpawnService ??
                                      throw new ArgumentNullException(nameof(bossEnemySpawnService));
             _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public override void Enable()
@@ -93,7 +90,7 @@ namespace Sources.Controllers.Spawners
                                 () => _enemyCollectorService.Enemies.Count > 0,
                                 cancellationToken: cancellationToken);
 
-                            _formService.Show<LevelCompletedFormView>();
+                            // _viewFormService.Show<LevelCompletedFormView>();
                             _cancellationTokenSource.Cancel();
                             
                             continue;

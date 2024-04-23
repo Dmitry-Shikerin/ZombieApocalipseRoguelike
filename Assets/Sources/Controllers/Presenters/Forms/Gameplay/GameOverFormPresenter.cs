@@ -9,18 +9,18 @@ namespace Sources.Controllers.Forms.Gameplay
 {
     public class GameOverFormPresenter : PresenterBase
     {
-        private readonly IFormService _formService;
+        private readonly IViewFormService _viewFormService;
         private readonly IGameOverFormView _gameOverFormView;
         private readonly ISceneService _sceneService;
         private readonly IPauseService _pauseService;
 
         public GameOverFormPresenter(
-            IFormService formService, 
+            IViewFormService viewFormService, 
             IGameOverFormView gameOverFormView,
             ISceneService sceneService,
             IPauseService pauseService)
         {
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
             _gameOverFormView = gameOverFormView ?? throw new ArgumentNullException(nameof(gameOverFormView));
             _sceneService = sceneService ?? throw new ArgumentNullException(nameof(sceneService));
             _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));

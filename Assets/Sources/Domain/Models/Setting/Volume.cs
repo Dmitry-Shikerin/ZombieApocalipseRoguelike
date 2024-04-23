@@ -2,6 +2,7 @@
 using Sources.Domain.Constants;
 using Sources.Domain.Data;
 using Sources.Domain.Data.Ids;
+using Sources.Domain.Models.Constants;
 using Sources.DomainInterfaces.Entities;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace Sources.Domain.Setting
         }
 
         public Volume()
-            : this(VolumeConstant.BaseStep, ModelId.Volume)
+            : this(VolumeConstant.BaseValue, ModelId.Volume)
         {
         }
 

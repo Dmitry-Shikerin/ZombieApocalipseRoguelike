@@ -5,18 +5,18 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
 {
     public class GamePlayTutorialFormServiceFactory
     {
-        private readonly ITutorialFormService _tutorialFormService;
+        private readonly ITutorialViewFormService _tutorialViewFormService;
 
         public GamePlayTutorialFormServiceFactory(
-            ITutorialFormService tutorialFormService)
+            ITutorialViewFormService tutorialViewFormService)
         {
-            _tutorialFormService = tutorialFormService ?? 
-                                   throw new ArgumentNullException(nameof(tutorialFormService));
+            _tutorialViewFormService = tutorialViewFormService ?? 
+                                   throw new ArgumentNullException(nameof(tutorialViewFormService));
         }
 
-        public ITutorialFormService Create()
+        public ITutorialViewFormService Create()
         {
-            return _tutorialFormService;
+            return _tutorialViewFormService;
         }
     }
 }
