@@ -2,22 +2,42 @@
 using Sources.MVVMFrameworks.Domain.Methods;
 using Sources.PresentationsInterfaces.Binds.Buttons;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Sources.Presentations.Binds.Buttons
 {
     public class ButtonClickMethodBind : BindableViewMethod<Vector3>, IButtonClickMethodBind
     {
-        [Required][SerializeField] private Button _button;
+        [Required] [SerializeField] private Button _button;
 
-        private void OnEnable() => 
-            _button?.onClick.AddListener(OnButtonClick);
+        private void OnEnable()
+        {
+            AddListener(OnButtonClick);
+            OnAfterEnable();
+        }
 
-        private void OnDisable() => 
-            _button?.onClick.RemoveListener(OnButtonClick);
+        private void OnDisable()
+        {
+            RemoveListener(OnButtonClick);
+            OnAfterDisable();
+        }
 
-        //TODO нужно ли оставлять Canvas на корневом обьекте?
-        private void OnButtonClick() => 
+        protected virtual void OnAfterEnable()
+        {
+        }
+
+        protected virtual void OnAfterDisable()
+        {
+        }
+
+        protected void AddListener(UnityAction action) =>
+            _button.onClick.AddListener(action);
+        
+        protected void RemoveListener(UnityAction action) =>
+            _button.onClick.RemoveListener(action);
+
+        private void OnButtonClick() =>
             BindingCallback.Invoke(Input.mousePosition);
     }
 }
