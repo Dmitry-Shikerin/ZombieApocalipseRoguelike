@@ -8,12 +8,10 @@ namespace Sources.Infrastructure.Services.GameOvers
 {
     public class GameOverService : IGameOverService
     {
-        private readonly IFormService _formService;
         private CharacterHealth _characterHealth;
 
-        public GameOverService(IFormService formService)
+        public GameOverService()
         {
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public void Enter(object payload = null)
@@ -37,7 +35,7 @@ namespace Sources.Infrastructure.Services.GameOvers
             if(_characterHealth.CurrentHealth > 0)
                 return;
             
-            _formService.Show<GameOverFormView>();
+            // _viewFormService.Show<GameOverFormView>();
         }
     }
 }

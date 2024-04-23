@@ -1,6 +1,14 @@
 ﻿using Sirenix.OdinInspector;
+using Sources.Controllers.ModelViews.Forms.Gameplay;
 using Sources.Domain.AudioSources;
+using Sources.Domain.Models.Forms.Gameplay;
 using Sources.Domain.Upgrades.Configs.Containers;
+using Sources.Frameworks.MVVM.Infrastructure.Builders;
+using Sources.Frameworks.MVVM.InfrastructureInterfaces;
+using Sources.Frameworks.MVVM.PresentationInterfaces.Factories;
+using Sources.Frameworks.MVVM.Presentations.Factories;
+using Sources.Frameworks.PresentationInterfaces.Binder;
+using Sources.Frameworks.Presentations.Binders;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Cameras;
@@ -17,8 +25,11 @@ using Sources.Infrastructure.Factories.Controllers.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
+using Sources.Infrastructure.Factories.Controllers.ViewModels.Components;
+using Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Weapons;
 using Sources.Infrastructure.Factories.Domain.Data;
+using Sources.Infrastructure.Factories.Domain.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Services.Localizations;
 using Sources.Infrastructure.Factories.Views.Abilities;
@@ -58,6 +69,8 @@ using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Spawners;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Infrastructure.Services.Upgrades;
+using Sources.Infrastructure.Services.UseCases.Commands;
+using Sources.Infrastructure.Services.UseCases.Queries;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Services;
 using Sources.InfrastructureInterfaces.Factories.Views.Bullets;
@@ -127,6 +140,7 @@ namespace Sources.Infrastructure.DIContainers
             BindGameplay();
             BindMusic();
             BindSettings();
+            BindMvvm();
         }
 
         //TODO разбить все на отдельные моноинсталлеры
@@ -134,7 +148,8 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.BindInterfacesAndSelfTo<UpdateService>().AsSingle();
             Container.BindInterfacesAndSelfTo<NewInputService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
+            // Container.BindInterfacesAndSelfTo<ViewViewFormService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<DomainFormService>().AsSingle();
             Container.Bind<LinecastService>().AsSingle();
             Container.Bind<OverlapService>().AsSingle();
             Container.Bind<IUpgradeConfigCollectionService>().To<UpgradeConfigCollectionService>().AsSingle();
@@ -198,16 +213,53 @@ namespace Sources.Infrastructure.DIContainers
         private void BindFormFactories()
         {
             Container.Bind<GameplayFormServiceFactory>().AsSingle();
-            Container.Bind<GamePlayTutorialFormServiceFactory>().AsSingle();        
-            Container.Bind<PauseFormPresenterFactory>().AsSingle();
-            Container.Bind<HudFormPresenterFactory>().AsSingle();
-            Container.Bind<UpgradeFormPresenterFactory>().AsSingle();
-            Container.Bind<TutorialFormPresenterFactory>().AsSingle();
-            Container.Bind<GameplaySettingsFormPresenterFactory>().AsSingle();
-            Container.Bind<GameOverFormPresenterFactory>().AsSingle();
-            Container.Bind<LevelCompletedFormPresenterFactory>().AsSingle();
+            // Container.Bind<GamePlayTutorialFormServiceFactory>().AsSingle();        
+            // Container.Bind<PauseFormPresenterFactory>().AsSingle();
+            // Container.Bind<HudFormPresenterFactory>().AsSingle();
+            // Container.Bind<UpgradeFormPresenterFactory>().AsSingle();
+            // Container.Bind<TutorialFormPresenterFactory>().AsSingle();
+            // Container.Bind<GameplaySettingsFormPresenterFactory>().AsSingle();
+            // Container.Bind<GameOverFormPresenterFactory>().AsSingle();
+            // Container.Bind<LevelCompletedFormPresenterFactory>().AsSingle();
+            Container.Bind<GameOverFormFactory>().AsSingle();
+            Container.Bind<LevelCompletedFormFactory>().AsSingle();
+            Container.Bind<UpgradeFormFactory>().AsSingle();
+            Container.Bind<TutorialFormFactory>().AsSingle();
+            Container.Bind<GameplaySettingFormFactory>().AsSingle();
+            Container.Bind<GameplayHudFormFactory>().AsSingle();
+            Container.Bind<PauseFormFactory>().AsSingle();
+
+            Container.Bind<VisibilityViewModelComponentFactory>().AsSingle();
+            Container.Bind<ShowPauseFormViewModelComponentFactory>().AsSingle();
+            Container.Bind<ShowHudFormViewModelComponentFactory>().AsSingle();
+            
+            Container
+                .Bind<IViewModelFactory<GameplayHudFormViewModel, GameplayHudForm>>()
+                .To<GameplayHudFormViewModelFactory>().AsSingle();
+            Container
+                .Bind<IViewModelFactory<PauseFormViewModel, PauseForm>>()
+                .To<PauseFormViewModelFactory>().AsSingle();
+
+            Container
+                .Bind<IBindableViewBuilder<PauseFormViewModel, PauseForm>>()
+                .To<BindableViewBuilder<PauseFormViewModel, PauseForm>>()
+                .AsSingle();
+            Container
+                .Bind<IBindableViewBuilder<GameplayHudFormViewModel, GameplayHudForm>>()
+                .To<BindableViewBuilder<GameplayHudFormViewModel, GameplayHudForm>>()
+                .AsSingle();
         }
 
+        private void BindMvvm()
+        {
+            Container.Bind<IBinder>().To<Binder>().AsSingle();
+            Container.Bind<IBindableViewFactory>().To<BindableViewFactory>().AsSingle();
+
+            Container.Bind<GetVisibilityQuery>().AsSingle();
+            Container.Bind<ShowCommand>().AsSingle();
+            Container.Bind<HideCommand>().AsSingle();
+        }
+        
         private void BindCharacters()
         {
             Container.Bind<CharacterViewFactory>().AsSingle();

@@ -19,7 +19,6 @@ namespace Sources.Infrastructure.Services.Upgrades
         private readonly IUpgradeCollectionService _upgradeCollectionService;
         private readonly UpgradeViewFactory _upgradeViewFactory;
         private readonly UpgradeUiFactory _upgradeUiFactory;
-        private readonly IFormService _formService;
         private readonly IReadOnlyList<UpgradeUi> _upgradeUis;
         private readonly IReadOnlyList<UpgradeView> _upgradeViews;
 
@@ -28,8 +27,7 @@ namespace Sources.Infrastructure.Services.Upgrades
             IUpgradeCollectionService upgradeCollectionService,
             GameplayHud gameplayHud,
             UpgradeViewFactory upgradeViewFactory,
-            UpgradeUiFactory upgradeUiFactory,
-            IFormService formService)
+            UpgradeUiFactory upgradeUiFactory)
         {
             if (gameplayHud == null) 
                 throw new ArgumentNullException(nameof(gameplayHud));
@@ -42,7 +40,6 @@ namespace Sources.Infrastructure.Services.Upgrades
                                   throw new ArgumentNullException(nameof(upgradeViewFactory));
             _upgradeUiFactory = upgradeUiFactory ?? 
                                 throw new ArgumentNullException(nameof(upgradeUiFactory));
-            _formService = formService;
             _upgradeUis = gameplayHud.UpgradeUis ?? 
                           throw new NullReferenceException(nameof(gameplayHud.UpgradeUis));
             _upgradeViews = gameplayHud.UpgradeViews ?? 
@@ -84,7 +81,7 @@ namespace Sources.Infrastructure.Services.Upgrades
                     _upgradeViewFactory.Create(awaiableUpgraders[i], PlayerWallet, _upgradeViews[i]);
                 }
                 
-                _formService.Show<UpgradeFormView>();
+                // _viewFormService.Show<UpgradeFormView>();
             }
         }
     }

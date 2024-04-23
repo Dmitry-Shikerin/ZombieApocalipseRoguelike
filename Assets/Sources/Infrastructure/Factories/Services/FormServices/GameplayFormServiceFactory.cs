@@ -1,7 +1,12 @@
 ﻿using System;
 using JetBrains.Annotations;
 using Sources.Controllers.Forms.Gameplay;
+using Sources.Controllers.ModelViews.Forms.Gameplay;
+using Sources.Domain.Models.Forms.Gameplay;
+using Sources.Frameworks.MVVM.InfrastructureInterfaces;
+using Sources.Frameworks.MVVM.PresentationInterfaces.Factories;
 using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
+using Sources.Infrastructure.Factories.Domain.Forms.Gameplay;
 using Sources.Infrastructure.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.Presentations.UI.Huds;
@@ -12,91 +17,65 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
 {
     public class GameplayFormServiceFactory
     {
-        private readonly FormService _formService;
+        private readonly DomainFormService _domainFormService;
+        private readonly GameOverFormFactory _gameOverFormFactory;
+        private readonly GameplayHudFormFactory _gameplayHudFormFactory;
+        private readonly GameplaySettingFormFactory _gameplaySettingFormFactory;
+        private readonly LevelCompletedFormFactory _levelCompletedFormFactory;
+        private readonly PauseFormFactory _pauseFormFactory;
+        private readonly TutorialFormFactory _tutorialFormFactory;
+        private readonly UpgradeFormFactory _upgradeFormFactory;
+        private readonly IBindableViewBuilder<GameplayHudFormViewModel, GameplayHudForm> _gameplayHudFormBuilder;
+        private readonly IBindableViewBuilder<PauseFormViewModel, PauseForm> _pauseFormBuilder;
         private readonly GameplayHud _gameplayHud;
-        private readonly PauseFormPresenterFactory _pauseFormPresenterFactory;
-        private readonly HudFormPresenterFactory _hudFormPresenterFactory;
-        private readonly UpgradeFormPresenterFactory _upgradeFormPresenterFactory;
-        private readonly TutorialFormPresenterFactory _tutorialFormPresenterFactory;
-        private readonly GameplaySettingsFormPresenterFactory _settingsFormPresenterFactory;
-        private readonly GameOverFormPresenterFactory _gameOverFormPresenterFactory;
-        private readonly LevelCompletedFormPresenterFactory _levelCompletedFormPresenterFactory;
 
         public GameplayFormServiceFactory(
-            FormService formService,
+            DomainFormService domainFormService,
             GameplayHud gameplayHud,
-            PauseFormPresenterFactory pauseFormPresenterFactory,
-            HudFormPresenterFactory hudFormPresenterFactory,
-            UpgradeFormPresenterFactory upgradeFormPresenterFactory,
-            TutorialFormPresenterFactory tutorialFormPresenterFactory,
-            GameplaySettingsFormPresenterFactory settingsFormPresenterFactory,
-            GameOverFormPresenterFactory gameOverFormPresenterFactory,
-            LevelCompletedFormPresenterFactory levelCompletedFormPresenterFactory)
+            GameOverFormFactory gameOverFormFactory,
+            GameplayHudFormFactory gameplayHudFormFactory,
+            GameplaySettingFormFactory gameplaySettingFormFactory,
+            LevelCompletedFormFactory levelCompletedFormFactory,
+            PauseFormFactory pauseFormFactory,
+            TutorialFormFactory tutorialFormFactory,
+            UpgradeFormFactory upgradeFormFactory,
+            IBindableViewBuilder<GameplayHudFormViewModel, GameplayHudForm> gameplayHudFormBuilder,
+            IBindableViewBuilder<PauseFormViewModel, PauseForm> pauseFormBuilder)
         {
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _domainFormService = domainFormService ?? throw new ArgumentNullException(nameof(domainFormService));
+            _gameOverFormFactory = gameOverFormFactory ?? throw new ArgumentNullException(nameof(gameOverFormFactory));
+            _gameplayHudFormFactory = gameplayHudFormFactory ?? throw new ArgumentNullException(nameof(gameplayHudFormFactory));
+            _gameplaySettingFormFactory = gameplaySettingFormFactory ?? throw new ArgumentNullException(nameof(gameplaySettingFormFactory));
+            _levelCompletedFormFactory = levelCompletedFormFactory ?? throw new ArgumentNullException(nameof(levelCompletedFormFactory));
+            _pauseFormFactory = pauseFormFactory ?? throw new ArgumentNullException(nameof(pauseFormFactory));
+            _tutorialFormFactory = tutorialFormFactory ?? throw new ArgumentNullException(nameof(tutorialFormFactory));
+            _upgradeFormFactory = upgradeFormFactory ?? throw new ArgumentNullException(nameof(upgradeFormFactory));
+            _gameplayHudFormBuilder = gameplayHudFormBuilder ?? throw new ArgumentNullException(nameof(gameplayHudFormBuilder));
+            _pauseFormBuilder = pauseFormBuilder ?? throw new ArgumentNullException(nameof(pauseFormBuilder));
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
-            _pauseFormPresenterFactory = pauseFormPresenterFactory ?? 
-                                         throw new ArgumentNullException(nameof(pauseFormPresenterFactory));
-            _hudFormPresenterFactory = hudFormPresenterFactory ?? 
-                                       throw new ArgumentNullException(nameof(hudFormPresenterFactory));
-            _upgradeFormPresenterFactory = upgradeFormPresenterFactory ??
-                                           throw new ArgumentNullException(nameof(upgradeFormPresenterFactory));
-            _tutorialFormPresenterFactory = tutorialFormPresenterFactory ??
-                                            throw new ArgumentNullException(nameof(tutorialFormPresenterFactory));
-            _settingsFormPresenterFactory = settingsFormPresenterFactory ??
-                                            throw new ArgumentNullException(nameof(settingsFormPresenterFactory));
-            _gameOverFormPresenterFactory = gameOverFormPresenterFactory ??
-                                            throw new ArgumentNullException(nameof(gameOverFormPresenterFactory));
-            _levelCompletedFormPresenterFactory = levelCompletedFormPresenterFactory ??
-                                                  throw new ArgumentNullException(nameof(levelCompletedFormPresenterFactory));
         }
 
-        public IFormService Create()
+        public IDomainFormService Create()
         {
-            Form<PauseFormView, PauseFormPresenter> pauseForm = 
-                new Form<PauseFormView, PauseFormPresenter>(
-                    _pauseFormPresenterFactory.Create, _gameplayHud.PauseFormView);
+            GameOverForm gameOverForm = _gameOverFormFactory.Create();
             
-            _formService.Add(pauseForm);
-
-            Form<HudFormView, HudFormPresenter> hudForm =
-                new Form<HudFormView, HudFormPresenter>(
-                    _hudFormPresenterFactory.Create, _gameplayHud.HudFormView);
+            GameplayHudForm gameplayHudForm = _gameplayHudFormFactory.Create();
+            _gameplayHudFormBuilder.Build(gameplayHudForm, _gameplayHud.GameplayHudFormBindableView);
+            _domainFormService.Register<GameplayHudForm>(gameplayHudForm);
             
-            _formService.Add(hudForm);
-
-            Form<UpgradeFormView, UpgradeFormPresenter> upgradeForm =
-                new Form<UpgradeFormView, UpgradeFormPresenter>(
-                    _upgradeFormPresenterFactory.Create, _gameplayHud.UpgradeFormView);
+            GameplaySettingsForm gameplaySettingForm = _gameplaySettingFormFactory.Create();
             
-            _formService.Add(upgradeForm);
-
-            Form<TutorialFormView, TutorialFormPresenter> tutorialForm =
-                new Form<TutorialFormView, TutorialFormPresenter>(
-                    _tutorialFormPresenterFactory.Create, _gameplayHud.TutorialFormView);
+            LevelCompletedForm levelCompletedForm = _levelCompletedFormFactory.Create();
             
-            _formService.Add(tutorialForm);
-
-            Form<GameplaySettingsFormView, GameplaySettingsFormPresenter> settingsForm =
-                new Form<GameplaySettingsFormView, GameplaySettingsFormPresenter>(
-                    _settingsFormPresenterFactory.Create, _gameplayHud.SettingsFormView);
+            PauseForm pauseForm = _pauseFormFactory.Create();
+            _pauseFormBuilder.Build(pauseForm, _gameplayHud.PauseFormBindableView);
+            _domainFormService.Register<PauseForm>(pauseForm);
             
-            _formService.Add(settingsForm);
-
-            Form<GameOverFormView, GameOverFormPresenter> gameOverForm =
-                new Form<GameOverFormView, GameOverFormPresenter>(_gameOverFormPresenterFactory.Create,
-                    _gameplayHud.GameOverFormView);
+            TutorialForm tutorialForm = _tutorialFormFactory.Create();
             
-            _formService.Add(gameOverForm);
-
-            Form<LevelCompletedFormView, LevelCompletedFormPresenter> levelCompletedForm =
-                new Form<LevelCompletedFormView, LevelCompletedFormPresenter>(
-                    _levelCompletedFormPresenterFactory.Create,
-                    _gameplayHud.LevelCompletedFormView);
+            UpgradeForm upgradeForm = _upgradeFormFactory.Create();
             
-            _formService.Add(levelCompletedForm);
-            
-            return _formService;
+            return _domainFormService;
         }
     }
 }

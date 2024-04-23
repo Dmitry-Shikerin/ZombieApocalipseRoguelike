@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Sources.Presentations.BindableViews.Forms.Gameplay;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
 using Sources.Presentations.Views.Common;
@@ -17,21 +18,26 @@ namespace Sources.Presentations.UI.Huds
 {
     public class GameplayHud : View
     {
+        // [Button(ButtonSizes.Large)]
+        // [FoldoutGroup("Forms")] [Required] [SerializeField]
+        // private PauseFormView _pauseFormView;
+        // [FoldoutGroup("Forms")] [Required] [SerializeField]
+        // private HudFormView _hudFormView;
+        // [FoldoutGroup("Forms")] [Required] [SerializeField]
+        // private UpgradeFormView _upgradeFormView;
+        // [FoldoutGroup("Forms")] [Required] [SerializeField]
+        // private TutorialFormView _tutorialFormView;
+        // [FoldoutGroup("Forms")] [Required] [SerializeField]
+        // private GameplaySettingsFormView _settingsFormView;
+        // [FoldoutGroup("Forms")] [Required] [SerializeField]
+        // private GameOverFormView _gameOverFormView;
+        // [FoldoutGroup("Forms")] [Required] [SerializeField]
+        // private LevelCompletedFormView _levelCompletedFormView;
         [Button(ButtonSizes.Large)]
         [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private PauseFormView _pauseFormView;
+        private PauseFormBindableView _pauseFormBindableView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private HudFormView _hudFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private UpgradeFormView _upgradeFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private TutorialFormView _tutorialFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private GameplaySettingsFormView _settingsFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private GameOverFormView _gameOverFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private LevelCompletedFormView _levelCompletedFormView;
+        private GameplayHudFormBindableView _gameplayHudFormBindableView;
 
         [FormerlySerializedAs("cinemachineCameraView")]
         [Button(ButtonSizes.Large)] 
@@ -76,13 +82,15 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("Volume")] [Required] [SerializeField]
         private VolumeView _volumeView;
 
-        public PauseFormView PauseFormView => _pauseFormView;
-        public HudFormView HudFormView => _hudFormView;
-        public UpgradeFormView UpgradeFormView => _upgradeFormView;
-        public TutorialFormView TutorialFormView => _tutorialFormView;
-        public GameplaySettingsFormView SettingsFormView => _settingsFormView;
-        public GameOverFormView GameOverFormView => _gameOverFormView;
-        public LevelCompletedFormView LevelCompletedFormView => _levelCompletedFormView;
+        // public PauseFormView PauseFormView => _pauseFormView;
+        // public HudFormView HudFormView => _hudFormView;
+        // public UpgradeFormView UpgradeFormView => _upgradeFormView;
+        // public TutorialFormView TutorialFormView => _tutorialFormView;
+        // public GameplaySettingsFormView SettingsFormView => _settingsFormView;
+        // public GameOverFormView GameOverFormView => _gameOverFormView;
+        // public LevelCompletedFormView LevelCompletedFormView => _levelCompletedFormView;
+        public PauseFormBindableView PauseFormBindableView => _pauseFormBindableView;
+        public GameplayHudFormBindableView GameplayHudFormBindableView => _gameplayHudFormBindableView;
         
         public CinemachineCameraView CinemachineCameraView => _cinemachineCameraView;
 
