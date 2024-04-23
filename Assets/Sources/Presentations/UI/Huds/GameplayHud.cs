@@ -4,7 +4,6 @@ using Sources.Presentations.BindableViews.Forms.Gameplay;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
 using Sources.Presentations.Views.Common;
-using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.Gameplay;
 using Sources.Presentations.Views.Localizations;
 using Sources.Presentations.Views.Music;

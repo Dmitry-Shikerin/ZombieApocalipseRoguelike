@@ -39,7 +39,6 @@ using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
-using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.RootGameObjects;
 using Object = UnityEngine.Object;
 

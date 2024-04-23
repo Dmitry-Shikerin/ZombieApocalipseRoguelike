@@ -6,16 +6,16 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Components
 {
     public class ShowHudFormViewModelComponentFactory
     {
-        private readonly IDomainFormService _domainFormService;
+        private readonly IFormService _formService;
 
-        public ShowHudFormViewModelComponentFactory(IDomainFormService domainFormService)
+        public ShowHudFormViewModelComponentFactory(IFormService formService)
         {
-            _domainFormService = domainFormService ?? throw new ArgumentNullException(nameof(domainFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public ShowHudFormViewModelComponent Create()
         {
-            return new ShowHudFormViewModelComponent(_domainFormService);
+            return new ShowHudFormViewModelComponent(_formService);
         }
 
     }

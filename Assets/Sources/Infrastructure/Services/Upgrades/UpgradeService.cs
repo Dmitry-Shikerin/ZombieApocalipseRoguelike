@@ -4,10 +4,8 @@ using Sources.Domain.Players;
 using Sources.Domain.Upgrades;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Services.Providers;
-using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.Presentations.UI.Huds;
-using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.Upgrades;
 
 namespace Sources.Infrastructure.Services.Upgrades

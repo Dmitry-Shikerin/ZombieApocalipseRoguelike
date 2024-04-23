@@ -11,12 +11,12 @@ namespace Sources.Controllers.ModelViews.Components
 {
     public class ShowGameplaySettingsFormViewModelComponent : IViewModelComponent
     {
-        private readonly IDomainFormService _domainFormService;
+        private readonly IFormService _formService;
 
-        public ShowGameplaySettingsFormViewModelComponent(IDomainFormService domainFormService)
+        public ShowGameplaySettingsFormViewModelComponent(IFormService formService)
         {
-            _domainFormService = domainFormService ??
-                                 throw new ArgumentNullException(nameof(domainFormService));
+            _formService = formService ??
+                                 throw new ArgumentNullException(nameof(formService));
         }
         public void Enable()
         {
@@ -30,7 +30,7 @@ namespace Sources.Controllers.ModelViews.Components
         [MethodBinding(typeof(IButtonClickMethodBind), "ToSettingsForm_Button")]
         private void OnClick(Vector3 position)
         {
-            _domainFormService.Show<GameplaySettingsForm>();
+            _formService.Show<GameplaySettingsForm>();
         }
     }
 }

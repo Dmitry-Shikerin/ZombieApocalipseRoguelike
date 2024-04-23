@@ -1,23 +1,17 @@
 ﻿using System;
-using JetBrains.Annotations;
-using Sources.Controllers.Forms.Gameplay;
 using Sources.Controllers.ModelViews.Forms.Gameplay;
 using Sources.Domain.Models.Forms.Gameplay;
 using Sources.Frameworks.MVVM.InfrastructureInterfaces;
-using Sources.Frameworks.MVVM.PresentationInterfaces.Factories;
-using Sources.Infrastructure.Factories.Controllers.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Domain.Forms.Gameplay;
 using Sources.Infrastructure.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.Presentations.UI.Huds;
-using Sources.Presentations.Views.Forms.Common;
-using Sources.Presentations.Views.Forms.Gameplay;
 
 namespace Sources.Infrastructure.Factories.Services.FormServices
 {
     public class GameplayFormServiceFactory
     {
-        private readonly DomainFormService _domainFormService;
+        private readonly FormService _formService;
         private readonly GameOverFormFactory _gameOverFormFactory;
         private readonly GameplayHudFormFactory _gameplayHudFormFactory;
         private readonly GameplaySettingFormFactory _gameplaySettingFormFactory;
@@ -32,7 +26,7 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
         private readonly GameplayHud _gameplayHud;
 
         public GameplayFormServiceFactory(
-            DomainFormService domainFormService,
+            FormService formService,
             GameplayHud gameplayHud,
             GameOverFormFactory gameOverFormFactory,
             GameplayHudFormFactory gameplayHudFormFactory,
@@ -46,7 +40,7 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             IBindableViewBuilder<GameplaySettingsFormViewModel, GameplaySettingsForm> gameplaySettingsFormBuilder,
             IBindableViewBuilder<UpgradeFormViewModel, UpgradeForm> upgradeFormBuilder)
         {
-            _domainFormService = domainFormService ?? throw new ArgumentNullException(nameof(domainFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _gameOverFormFactory = gameOverFormFactory ?? throw new ArgumentNullException(nameof(gameOverFormFactory));
             _gameplayHudFormFactory = gameplayHudFormFactory ?? throw new ArgumentNullException(nameof(gameplayHudFormFactory));
             _gameplaySettingFormFactory = gameplaySettingFormFactory ?? throw new ArgumentNullException(nameof(gameplaySettingFormFactory));
@@ -61,31 +55,31 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
         }
 
-        public IDomainFormService Create()
+        public IFormService Create()
         {
             GameOverForm gameOverForm = _gameOverFormFactory.Create();
             
             GameplayHudForm gameplayHudForm = _gameplayHudFormFactory.Create();
             _gameplayHudFormBuilder.Build(gameplayHudForm, _gameplayHud.GameplayHudFormBindableView);
-            _domainFormService.Register<GameplayHudForm>(gameplayHudForm);
+            _formService.Register<GameplayHudForm>(gameplayHudForm);
             
             GameplaySettingsForm gameplaySettingForm = _gameplaySettingFormFactory.Create();
             _gameplaySettingsFormBuilder.Build(gameplaySettingForm, _gameplayHud.GameplaySettingsFormBindableView);
-            _domainFormService.Register<GameplaySettingsForm>(gameplaySettingForm);
+            _formService.Register<GameplaySettingsForm>(gameplaySettingForm);
             
             LevelCompletedForm levelCompletedForm = _levelCompletedFormFactory.Create();
             
             PauseForm pauseForm = _pauseFormFactory.Create();
             _pauseFormBuilder.Build(pauseForm, _gameplayHud.PauseFormBindableView);
-            _domainFormService.Register<PauseForm>(pauseForm);
+            _formService.Register<PauseForm>(pauseForm);
             
             TutorialForm tutorialForm = _tutorialFormFactory.Create();
             
             UpgradeForm upgradeForm = _upgradeFormFactory.Create();
             _upgradeFormBuilder.Build(upgradeForm, _gameplayHud.UpgradeFormBindableView);
-            _domainFormService.Register<UpgradeForm>(upgradeForm);
+            _formService.Register<UpgradeForm>(upgradeForm);
             
-            return _domainFormService;
+            return _formService;
         }
     }
 }

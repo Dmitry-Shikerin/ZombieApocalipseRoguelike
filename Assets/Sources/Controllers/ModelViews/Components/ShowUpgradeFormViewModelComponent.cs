@@ -11,11 +11,11 @@ namespace Sources.Controllers.ModelViews.Components
 {
     public class ShowUpgradeFormViewModelComponent : IViewModelComponent
     {
-        private readonly IDomainFormService _domainFormService;
+        private readonly IFormService _formService;
 
-        public ShowUpgradeFormViewModelComponent(IDomainFormService domainFormService)
+        public ShowUpgradeFormViewModelComponent(IFormService formService)
         {
-            _domainFormService = domainFormService ?? throw new ArgumentNullException(nameof(domainFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public void Enable()
@@ -31,7 +31,7 @@ namespace Sources.Controllers.ModelViews.Components
         [MethodBinding(typeof(IButtonClickMethodBind), "ToUpgradeForm_Button")]
         private void OnClick(Vector3 position)
         {
-            _domainFormService.Show<UpgradeForm>();
+            _formService.Show<UpgradeForm>();
         }
     }
 }

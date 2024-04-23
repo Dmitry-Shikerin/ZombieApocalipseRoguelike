@@ -5,16 +5,14 @@ using Sources.Controllers.Common;
 using Sources.Domain.Gameplay;
 using Sources.Domain.Spawners;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
-using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.Views.Characters;
-using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using Sources.PresentationsInterfaces.Views.Spawners;
 using Object = UnityEngine.Object;
 
-namespace Sources.Controllers.Spawners
+namespace Sources.Controllers.Presenters.Spawners
 {
     public class EnemySpawnerPresenter : PresenterBase
     {
