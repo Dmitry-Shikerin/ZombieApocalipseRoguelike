@@ -10,11 +10,11 @@ namespace Sources.Controllers.ModelViews.Components
 {
     public class ShowHudFormViewModelComponent : IViewModelComponent
     {
-        private readonly IDomainFormService _domainFormService;
+        private readonly IFormService _formService;
 
-        public ShowHudFormViewModelComponent(IDomainFormService domainFormService)
+        public ShowHudFormViewModelComponent(IFormService formService)
         {
-            _domainFormService = domainFormService ?? throw new ArgumentNullException(nameof(domainFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public void Enable()
@@ -28,7 +28,7 @@ namespace Sources.Controllers.ModelViews.Components
         [MethodBinding(typeof(IButtonClickMethodBind), "ToHudForm_Button")]
         private void OnClick(Vector3 position)
         {
-            _domainFormService.Show<GameplayHudForm>();
+            _formService.Show<GameplayHudForm>();
             Debug.Log("ShowHudForm");
         }
 

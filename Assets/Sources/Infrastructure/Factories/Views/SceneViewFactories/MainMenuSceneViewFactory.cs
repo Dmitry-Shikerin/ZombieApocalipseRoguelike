@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using Sources.Domain.Gameplay;
 using Sources.Domain.Setting;
 using Sources.Infrastructure.Factories.Services.FormServices;
@@ -9,8 +8,6 @@ using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
-using Sources.Presentations.Views.Forms.MainMenu;
-using Sources.Presentations.Views.Music;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
 {
@@ -68,7 +65,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _levelAvailabilityViewFactory.Create(levelAvailability, _mainMenuHud.LevelAvailabilityView);
             
             //FormService
-            _mainMenuFormServiceFactory.Create().Show<MainMenuHudFormView>();
+            // _mainMenuFormServiceFactory.Create().Show<MainMenuHudFormView>();
         }
     }
 }

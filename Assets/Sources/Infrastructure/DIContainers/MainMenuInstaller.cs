@@ -1,6 +1,5 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Domain.AudioSources;
-using Sources.Infrastructure.Factories.Controllers.Forms.MainMenu;
 using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Musics;
 using Sources.Infrastructure.Factories.Controllers.Scenes;
@@ -58,10 +57,6 @@ namespace Sources.Infrastructure.DIContainers
         private void BindFormFactories()
         {
             Container.Bind<MainMenuFormServiceFactory>().AsSingle();
-            Container.Bind<MainMenuHudFormPresenterFactory>().AsSingle();
-            Container.Bind<MainMenuSettingsFormPresenterFactory>().AsSingle();
-            Container.Bind<AuthorizationFormPresenterFactory>().AsSingle();
-            Container.Bind<LeaderBoardFormPresenterFactory>().AsSingle();
             Container.Bind<LeaderBoardElementPresenterFactory>().AsSingle();
             Container.Bind<LeaderBoardElementViewFactory>().AsSingle();
         }

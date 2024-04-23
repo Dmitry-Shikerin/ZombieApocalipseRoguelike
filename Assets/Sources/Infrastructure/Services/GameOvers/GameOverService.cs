@@ -1,8 +1,6 @@
 ﻿using System;
 using Sources.Domain.Characters;
-using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
-using Sources.Presentations.Views.Forms.Gameplay;
 
 namespace Sources.Infrastructure.Services.GameOvers
 {
