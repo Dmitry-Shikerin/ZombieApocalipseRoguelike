@@ -17,7 +17,7 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
 {
     public class GameplayFormServiceFactory
     {
-        private readonly FormService _formService;
+        private readonly DomainFormService _domainFormService;
         private readonly GameOverFormFactory _gameOverFormFactory;
         private readonly GameplayHudFormFactory _gameplayHudFormFactory;
         private readonly GameplaySettingFormFactory _gameplaySettingFormFactory;
@@ -30,7 +30,7 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
         private readonly GameplayHud _gameplayHud;
 
         public GameplayFormServiceFactory(
-            FormService formService,
+            DomainFormService domainFormService,
             GameplayHud gameplayHud,
             GameOverFormFactory gameOverFormFactory,
             GameplayHudFormFactory gameplayHudFormFactory,
@@ -42,7 +42,7 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             IBindableViewBuilder<GameplayHudFormViewModel, GameplayHudForm> gameplayHudFormBuilder,
             IBindableViewBuilder<PauseFormViewModel, PauseForm> pauseFormBuilder)
         {
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _domainFormService = domainFormService ?? throw new ArgumentNullException(nameof(domainFormService));
             _gameOverFormFactory = gameOverFormFactory ?? throw new ArgumentNullException(nameof(gameOverFormFactory));
             _gameplayHudFormFactory = gameplayHudFormFactory ?? throw new ArgumentNullException(nameof(gameplayHudFormFactory));
             _gameplaySettingFormFactory = gameplaySettingFormFactory ?? throw new ArgumentNullException(nameof(gameplaySettingFormFactory));
@@ -55,13 +55,13 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
         }
 
-        public IFormService Create()
+        public IDomainFormService Create()
         {
             GameOverForm gameOverForm = _gameOverFormFactory.Create();
             
             GameplayHudForm gameplayHudForm = _gameplayHudFormFactory.Create();
             _gameplayHudFormBuilder.Build(gameplayHudForm, _gameplayHud.GameplayHudFormBindableView);
-            _formService.Register<GameplayHudForm>(gameplayHudForm);
+            _domainFormService.Register<GameplayHudForm>(gameplayHudForm);
             
             GameplaySettingsForm gameplaySettingForm = _gameplaySettingFormFactory.Create();
             
@@ -69,13 +69,13 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             
             PauseForm pauseForm = _pauseFormFactory.Create();
             _pauseFormBuilder.Build(pauseForm, _gameplayHud.PauseFormBindableView);
-            _formService.Register<PauseForm>(pauseForm);
+            _domainFormService.Register<PauseForm>(pauseForm);
             
             TutorialForm tutorialForm = _tutorialFormFactory.Create();
             
             UpgradeForm upgradeForm = _upgradeFormFactory.Create();
             
-            return _formService;
+            return _domainFormService;
         }
     }
 }

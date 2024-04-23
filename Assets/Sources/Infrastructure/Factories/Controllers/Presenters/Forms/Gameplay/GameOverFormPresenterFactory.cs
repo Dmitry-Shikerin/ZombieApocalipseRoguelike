@@ -10,16 +10,16 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
 {
     public class GameOverFormPresenterFactory
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
         private readonly ISceneService _sceneService;
         private readonly IPauseService _pauseService;
 
         public GameOverFormPresenterFactory(
-            IViewFormService viewFormService, 
+            IFormService formService, 
             ISceneService sceneService,
             IPauseService pauseService)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _sceneService = sceneService ?? throw new ArgumentNullException(nameof(sceneService));
             _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
         }
@@ -29,7 +29,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
             if (gameOverFormView == null)
                 throw new ArgumentNullException(nameof(gameOverFormView));
 
-            return new GameOverFormPresenter(_viewFormService, gameOverFormView, _sceneService, _pauseService);
+            return new GameOverFormPresenter(_formService, gameOverFormView, _sceneService, _pauseService);
         }
     }
 }

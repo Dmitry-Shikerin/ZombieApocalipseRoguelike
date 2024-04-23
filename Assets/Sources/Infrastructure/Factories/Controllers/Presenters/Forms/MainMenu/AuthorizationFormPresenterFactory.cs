@@ -8,11 +8,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.MainMenu
 {
     public class AuthorizationFormPresenterFactory
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
 
-        public AuthorizationFormPresenterFactory(IViewFormService viewFormService)
+        public AuthorizationFormPresenterFactory(IFormService formService)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public AuthorizationFormPresenter Create(IAuthorizationFormView authorizationFormView)
@@ -20,7 +20,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.MainMenu
             if (authorizationFormView == null)
                 throw new ArgumentNullException(nameof(authorizationFormView));
 
-            return new AuthorizationFormPresenter(_viewFormService, authorizationFormView);
+            return new AuthorizationFormPresenter(_formService, authorizationFormView);
         }
     }
 }

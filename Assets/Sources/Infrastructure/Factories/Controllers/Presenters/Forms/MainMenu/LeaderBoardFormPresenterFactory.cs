@@ -9,11 +9,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.MainMenu
 {
     public class LeaderBoardFormPresenterFactory
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
 
-        public LeaderBoardFormPresenterFactory(IViewFormService viewFormService)
+        public LeaderBoardFormPresenterFactory(IFormService formService)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public LeaderBoardFormPresenter Create(ILeaderBoardFormView leaderBoardFormView)
@@ -21,7 +21,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.MainMenu
             if (leaderBoardFormView == null)
                 throw new ArgumentNullException(nameof(leaderBoardFormView));
 
-            return new LeaderBoardFormPresenter(_viewFormService, leaderBoardFormView);
+            return new LeaderBoardFormPresenter(_formService, leaderBoardFormView);
         }
     }
 }

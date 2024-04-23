@@ -1,11 +1,15 @@
-﻿using Sources.DomainInterfaces.Models.Forms;
+using Sources.PresentationsInterfaces.Views.Forms.Common;
 
 namespace Sources.InfrastructureInterfaces.Services.Forms
 {
     public interface IFormService
     {
-        public void Show<T>() where T : IFormModel;
-        public void Hide<T>() where T : IFormModel;
-        public IFormModel Get<T>() where T : IFormModel;
+        void Show<T>()
+             where T : IFormView;
+
+        void Show(string formName);
+
+        void Hide<T>()
+            where T : IFormView;
     }
 }

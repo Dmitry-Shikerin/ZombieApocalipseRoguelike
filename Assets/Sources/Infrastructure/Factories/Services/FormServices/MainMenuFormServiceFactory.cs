@@ -11,7 +11,7 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
 {
     public class MainMenuFormServiceFactory
     {
-        private readonly ViewViewFormService _viewViewFormService;
+        private readonly FormService _formService;
         private readonly MainMenuHud _mainMenuHud;
         private readonly MainMenuHudFormPresenterFactory _mainMenuHudFormPresenterFactory;
         private readonly MainMenuSettingsFormPresenterFactory _settingsFormPresenterFactory;
@@ -19,14 +19,14 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
         private readonly LeaderBoardFormPresenterFactory _leaderBoardFormPresenterFactory;
 
         public MainMenuFormServiceFactory(
-            ViewViewFormService viewViewFormService,
+            FormService formService,
             MainMenuHud mainMenuHud,
             MainMenuHudFormPresenterFactory mainMenuHudFormPresenterFactory,
             MainMenuSettingsFormPresenterFactory settingsFormPresenterFactory,
             AuthorizationFormPresenterFactory authorizationFormPresenterFactory,
             LeaderBoardFormPresenterFactory leaderBoardFormPresenterFactory)
         {
-            _viewViewFormService = viewViewFormService ?? throw new ArgumentNullException(nameof(viewViewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _mainMenuHud = mainMenuHud ? mainMenuHud : throw new ArgumentNullException(nameof(mainMenuHud));
             _mainMenuHudFormPresenterFactory = mainMenuHudFormPresenterFactory ??
                                                throw new ArgumentNullException(nameof(mainMenuHudFormPresenterFactory));
@@ -38,33 +38,33 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
                                                throw new ArgumentNullException(nameof(leaderBoardFormPresenterFactory));
         }
 
-        public IViewFormService Create()
+        public IFormService Create()
         {
             Form<MainMenuHudFormView, MainMenuHudFormPresenter> mainMenuHudForm =
                 new Form<MainMenuHudFormView, MainMenuHudFormPresenter>(
                     _mainMenuHudFormPresenterFactory.Create, _mainMenuHud.MainMenuHudFormView);
             
-            _viewViewFormService.Add(mainMenuHudForm);
+            _formService.Add(mainMenuHudForm);
 
             Form<MainMenuSettingsFormView, MainMenuSettingsFormPresenter> settingsForm =
                 new Form<MainMenuSettingsFormView, MainMenuSettingsFormPresenter>(
                     _settingsFormPresenterFactory.Create, _mainMenuHud.SettingsFormView);
             
-            _viewViewFormService.Add(settingsForm);
+            _formService.Add(settingsForm);
 
             Form<AuthorizationFormView, AuthorizationFormPresenter> authorizationForm =
                 new Form<AuthorizationFormView, AuthorizationFormPresenter>(
                     _authorizationFormPresenterFactory.Create, _mainMenuHud.AuthorizationFormView);
             
-            _viewViewFormService.Add(authorizationForm);
+            _formService.Add(authorizationForm);
 
             Form<LeaderBoardFormView, LeaderBoardFormPresenter> leaderBoardForm =
                 new Form<LeaderBoardFormView, LeaderBoardFormPresenter>(
                     _leaderBoardFormPresenterFactory.Create, _mainMenuHud.LeaderBoardFormView);
             
-            _viewViewFormService.Add(leaderBoardForm);
+            _formService.Add(leaderBoardForm);
 
-            return _viewViewFormService;
+            return _formService;
         }
     }
 }

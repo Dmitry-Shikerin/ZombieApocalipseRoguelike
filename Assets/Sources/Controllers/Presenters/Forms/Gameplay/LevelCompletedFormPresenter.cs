@@ -9,18 +9,18 @@ namespace Sources.Controllers.Forms.Gameplay
 {
     public class LevelCompletedFormPresenter : PresenterBase
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
         private readonly ILevelCompletedFormView _levelCompletedFormView;
         private readonly ISceneService _sceneService;
         private readonly IPauseService _pauseService;
 
         public LevelCompletedFormPresenter(
-            IViewFormService viewFormService, 
+            IFormService formService, 
             ILevelCompletedFormView levelCompletedFormView,
             ISceneService sceneService,
             IPauseService pauseService)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _levelCompletedFormView = levelCompletedFormView ?? throw new ArgumentNullException(nameof(levelCompletedFormView));
             _sceneService = sceneService ?? throw new ArgumentNullException(nameof(sceneService));
             _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));

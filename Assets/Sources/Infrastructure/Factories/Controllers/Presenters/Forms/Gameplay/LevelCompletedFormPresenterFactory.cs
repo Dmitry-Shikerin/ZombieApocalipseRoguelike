@@ -10,16 +10,16 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
 {
     public class LevelCompletedFormPresenterFactory
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
         private readonly ISceneService _sceneService;
         private readonly IPauseService _pauseService;
 
         public LevelCompletedFormPresenterFactory(
-            IViewFormService viewFormService, 
+            IFormService formService, 
             ISceneService sceneService,
             IPauseService pauseService)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _sceneService = sceneService ?? throw new ArgumentNullException(nameof(sceneService));
             _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
         }
@@ -30,7 +30,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
                 throw new ArgumentNullException(nameof(levelCompletedFormView));
 
             return new LevelCompletedFormPresenter(
-                _viewFormService,
+                _formService,
                 levelCompletedFormView,
                 _sceneService,
                 _pauseService);

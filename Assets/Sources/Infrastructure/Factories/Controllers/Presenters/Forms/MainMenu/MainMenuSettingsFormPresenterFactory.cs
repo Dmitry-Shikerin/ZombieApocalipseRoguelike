@@ -8,11 +8,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.MainMenu
 {
     public class MainMenuSettingsFormPresenterFactory
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
 
-        public MainMenuSettingsFormPresenterFactory(IViewFormService viewFormService)
+        public MainMenuSettingsFormPresenterFactory(IFormService formService)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public MainMenuSettingsFormPresenter Create(IMainMenuSettingsFormView settingsFormView)
@@ -20,7 +20,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.MainMenu
             if (settingsFormView == null)
                 throw new ArgumentNullException(nameof(settingsFormView));
 
-            return new MainMenuSettingsFormPresenter(_viewFormService, settingsFormView);
+            return new MainMenuSettingsFormPresenter(_formService, settingsFormView);
         }
     }
 }

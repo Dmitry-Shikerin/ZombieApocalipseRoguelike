@@ -6,16 +6,16 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Components
 {
     public class ShowPauseFormViewModelComponentFactory
     {
-        private readonly IFormService _formService;
+        private readonly IDomainFormService _domainFormService;
 
-        public ShowPauseFormViewModelComponentFactory(IFormService formService)
+        public ShowPauseFormViewModelComponentFactory(IDomainFormService domainFormService)
         {
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _domainFormService = domainFormService ?? throw new ArgumentNullException(nameof(domainFormService));
         }
 
         public ShowPauseMenuFormViewModelComponent Create()
         {
-            return new ShowPauseMenuFormViewModelComponent(_formService);
+            return new ShowPauseMenuFormViewModelComponent(_domainFormService);
         }
     }
 }

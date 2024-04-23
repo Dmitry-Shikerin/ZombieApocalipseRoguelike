@@ -8,12 +8,12 @@ namespace Sources.Controllers.Forms.Gameplay
 {
     public class TutorialFormPresenter : PresenterBase
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
         private readonly ITutorialFormView _tutorialFormView;
 
-        public TutorialFormPresenter(IViewFormService viewFormService, ITutorialFormView tutorialFormView)
+        public TutorialFormPresenter(IFormService formService, ITutorialFormView tutorialFormView)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _tutorialFormView = tutorialFormView ??
                                 throw new ArgumentNullException(nameof(tutorialFormView));
         }
@@ -25,6 +25,6 @@ namespace Sources.Controllers.Forms.Gameplay
             _tutorialFormView.HudButtonView.RemoveClickListener(ShowHudForm);
 
         private void ShowHudForm() =>
-            _viewFormService.Show<PauseFormView>();
+            _formService.Show<PauseFormView>();
     }
 }

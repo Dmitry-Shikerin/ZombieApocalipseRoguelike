@@ -8,11 +8,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
 {
     public class PauseFormPresenterFactory
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
 
-        public PauseFormPresenterFactory(IViewFormService viewFormService)
+        public PauseFormPresenterFactory(IFormService formService)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public PauseFormPresenter Create(IPauseFormView pauseFormView)
@@ -20,7 +20,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
             if (pauseFormView == null)
                 throw new ArgumentNullException(nameof(pauseFormView));
 
-            return new PauseFormPresenter(_viewFormService, pauseFormView);
+            return new PauseFormPresenter(_formService, pauseFormView);
         }
     }
 }

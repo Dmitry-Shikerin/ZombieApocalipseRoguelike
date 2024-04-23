@@ -7,11 +7,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
 {
     public class TutorialFormPresenterFactory
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
 
-        public TutorialFormPresenterFactory(IViewFormService viewFormService)
+        public TutorialFormPresenterFactory(IFormService formService)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public TutorialFormPresenter Create(ITutorialFormView tutorialFormView)
@@ -19,7 +19,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
             if (tutorialFormView == null)
                 throw new ArgumentNullException(nameof(tutorialFormView));
 
-            return new TutorialFormPresenter(_viewFormService, tutorialFormView);
+            return new TutorialFormPresenter(_formService, tutorialFormView);
         }
     }
 }

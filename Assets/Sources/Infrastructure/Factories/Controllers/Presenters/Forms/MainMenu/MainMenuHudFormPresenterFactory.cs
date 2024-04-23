@@ -8,11 +8,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.MainMenu
 {
     public class MainMenuHudFormPresenterFactory
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
 
-        public MainMenuHudFormPresenterFactory(IViewFormService viewFormService)
+        public MainMenuHudFormPresenterFactory(IFormService formService)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public MainMenuHudFormPresenter Create(IMainMenuHudFormView mainMenuHudFormView)
@@ -20,7 +20,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.MainMenu
             if (mainMenuHudFormView == null)
                 throw new ArgumentNullException(nameof(mainMenuHudFormView));
 
-            return new MainMenuHudFormPresenter(_viewFormService, mainMenuHudFormView);
+            return new MainMenuHudFormPresenter(_formService, mainMenuHudFormView);
         }
     }
 }

@@ -9,12 +9,12 @@ namespace Sources.Controllers.Forms.Gameplay
     public class GameplaySettingsFormPresenter : PresenterBase
     {
         private readonly IGameplaySettingsFormView _gameplaySettingsFormView;
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
 
-        public GameplaySettingsFormPresenter(IViewFormService viewFormService, IGameplaySettingsFormView settingsFormView)
+        public GameplaySettingsFormPresenter(IFormService formService, IGameplaySettingsFormView settingsFormView)
         {
             _gameplaySettingsFormView = settingsFormView ?? throw new ArgumentNullException(nameof(settingsFormView));
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public override void Enable() =>
@@ -24,6 +24,6 @@ namespace Sources.Controllers.Forms.Gameplay
             _gameplaySettingsFormView.PauseFormButtonView.RemoveClickListener(ShowPauseForm);
 
         private void ShowPauseForm() =>
-            _viewFormService.Show<PauseFormView>();
+            _formService.Show<PauseFormView>();
     }
 }

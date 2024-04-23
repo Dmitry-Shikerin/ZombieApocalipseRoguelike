@@ -10,11 +10,11 @@ namespace Sources.Controllers.ModelViews.Components
 {
     public class ShowPauseMenuFormViewModelComponent : IViewModelComponent
     {
-        private readonly IFormService _formService;
+        private readonly IDomainFormService _domainFormService;
 
-        public ShowPauseMenuFormViewModelComponent(IFormService formService)
+        public ShowPauseMenuFormViewModelComponent(IDomainFormService domainFormService)
         {
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _domainFormService = domainFormService ?? throw new ArgumentNullException(nameof(domainFormService));
         }
 
         public void Enable()
@@ -30,7 +30,7 @@ namespace Sources.Controllers.ModelViews.Components
         [MethodBinding(typeof(IButtonClickMethodBind), "ToPauseMenuForm_Button")]
         private void OnClick(Vector3 position)
         {
-            _formService.Show<PauseForm>();
+            _domainFormService.Show<PauseForm>();
             Debug.Log("ShowPauseForm");
         }
     }

@@ -1,69 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sources.DomainInterfaces.Models.Forms;
-using Sources.Infrastructure.Services.UseCases.Commands;
 using Sources.InfrastructureInterfaces.Services.Forms;
+using Sources.Presentations.Views;
+using Sources.PresentationsInterfaces.Views.Forms.Common;
 
 namespace Sources.Infrastructure.Services.Forms
 {
     public class FormService : IFormService
     {
-        private Dictionary<Type, IFormModel> _forms = new Dictionary<Type, IFormModel>();
-        
-        private readonly HideCommand _hideCommand;
-        private readonly ShowCommand _showCommand;
+        private readonly ContainerView _containerView;
+        private readonly Dictionary<string, IForm> _forms = new ();
 
-        public FormService(
-            HideCommand hideCommand,
-            ShowCommand showCommand)
+        // public FormService(GameplayHud hud)
+        // {
+        //     _containerView = hud.FormServiceContainerView
+        //         ? hud.FormServiceContainerView
+        //         : throw new ArgumentNullException(nameof(hud.FormServiceContainerView));
+        // }
+        
+        public FormService(ContainerView containerView)
         {
-            _hideCommand = hideCommand ?? throw new ArgumentNullException(nameof(hideCommand));
-            _showCommand = showCommand ?? throw new ArgumentNullException(nameof(showCommand));
+            _containerView = containerView
+                ? containerView
+                : throw new ArgumentNullException(nameof(containerView));
         }
 
-        public void Show<T>() where T : IFormModel
+        public void Hide<T>() where T : IFormView
         {
-            if (_forms.ContainsKey(typeof(T)) == false)
-                throw new NullReferenceException(nameof(T));
+            string name = typeof(T).Name;
 
-            IFormModel activeForm = _forms[typeof(T)];
+            if (_forms.ContainsKey(name) == false)
+                throw new NullReferenceException(nameof(name));
+
+            IForm activeForm = _forms[name];
+
+            if(activeForm == null)
+                throw new NullReferenceException(nameof(activeForm));
+
+            activeForm.Hide();
+        }
+
+        public void Show<T>()
+            where T : IFormView =>
+            Show(typeof(T).Name);
+
+
+        public void Show(string formName)
+        {
+            if (_forms.ContainsKey(formName) == false)
+                throw new NullReferenceException(nameof(formName));
+
+            IForm activeForm = _forms[formName];
 
             _forms.Values
-                .Except(new List<IFormModel>() { activeForm })
+                .Except(new List<IForm> { activeForm, })
                 .ToList()
-                .ForEach(model => _hideCommand.Handle(model));
-            
-            _showCommand.Handle(activeForm);
+                .ForEach(form => form.Hide());
+
+            activeForm.Show();
         }
 
-        public void Hide<T>() where T : IFormModel
+        public void Add(IForm form, string name = null, bool isSetParent = false)
         {
-            if (_forms.ContainsKey(typeof(T)) == false)
-                throw new NullReferenceException(nameof(T));
+            if (isSetParent)
+                _containerView.AppendChild(form);
 
-            IFormModel activeFormId = _forms[typeof(T)];
-            
-            if (activeFormId == default)
-                throw new NullReferenceException(nameof(activeFormId));
-            
-            _hideCommand.Handle(activeFormId);
-        }
-
-        public void Register<T>(IFormModel form)
-        {
-            if (_forms.ContainsKey(typeof(T)))
-                throw new InvalidOperationException(nameof(T));
-
-            _forms[typeof(T)] = form;
-        }
-
-        public IFormModel Get<T>() where T : IFormModel
-        {
-            if (_forms.ContainsKey(typeof(T)) == false)
-                throw new NullReferenceException(nameof(T));
-
-            return _forms[typeof(T)];
+            _forms.Add(name ?? form.Name, form);
+            form.Hide();
         }
     }
 }

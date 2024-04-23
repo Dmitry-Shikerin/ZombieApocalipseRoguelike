@@ -8,12 +8,12 @@ namespace Sources.Controllers.Forms.Gameplay
 {
     public class UpgradeFormPresenter : PresenterBase
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
         private readonly IUpgradeFormView _upgradeFormView;
 
-        public UpgradeFormPresenter(IViewFormService viewFormService, IUpgradeFormView upgradeFormView)
+        public UpgradeFormPresenter(IFormService formService, IUpgradeFormView upgradeFormView)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _upgradeFormView = upgradeFormView ?? throw new ArgumentNullException(nameof(upgradeFormView));
         }
         
@@ -24,6 +24,6 @@ namespace Sources.Controllers.Forms.Gameplay
             _upgradeFormView.HudButtonView.RemoveClickListener(ShowHudForm);
 
         private void ShowHudForm() =>
-            _viewFormService.Show<HudFormView>();
+            _formService.Show<HudFormView>();
     }
 }

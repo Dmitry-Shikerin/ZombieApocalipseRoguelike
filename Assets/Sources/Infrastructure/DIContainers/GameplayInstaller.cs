@@ -149,7 +149,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.BindInterfacesAndSelfTo<UpdateService>().AsSingle();
             Container.BindInterfacesAndSelfTo<NewInputService>().AsSingle();
             // Container.BindInterfacesAndSelfTo<ViewViewFormService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<DomainFormService>().AsSingle();
             Container.Bind<LinecastService>().AsSingle();
             Container.Bind<OverlapService>().AsSingle();
             Container.Bind<IUpgradeConfigCollectionService>().To<UpgradeConfigCollectionService>().AsSingle();

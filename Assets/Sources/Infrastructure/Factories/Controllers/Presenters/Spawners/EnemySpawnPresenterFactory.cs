@@ -14,7 +14,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Spawners
         private readonly IEnemySpawnService _enemySpawnService;
         private readonly IBossEnemySpawnService _bossEnemySpawnService;
         private readonly IEnemyCollectorService _enemyCollectorService;
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
 
         public EnemySpawnPresenterFactory(
             IEnemySpawnService enemySpawnService,

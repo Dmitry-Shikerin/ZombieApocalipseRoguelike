@@ -8,11 +8,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
 {
     public class UpgradeFormPresenterFactory
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
 
-        public UpgradeFormPresenterFactory(IViewFormService viewFormService)
+        public UpgradeFormPresenterFactory(IFormService formService)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public UpgradeFormPresenter Create(IUpgradeFormView upgradeFormView)
@@ -20,7 +20,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
             if (upgradeFormView == null)
                 throw new ArgumentNullException(nameof(upgradeFormView));
 
-            return new UpgradeFormPresenter(_viewFormService, upgradeFormView);
+            return new UpgradeFormPresenter(_formService, upgradeFormView);
         }
     }
 }

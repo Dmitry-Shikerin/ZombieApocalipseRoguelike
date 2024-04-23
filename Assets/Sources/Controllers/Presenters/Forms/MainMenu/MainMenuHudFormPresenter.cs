@@ -8,12 +8,12 @@ namespace Sources.Controllers.Forms.MainMenu
 {
     public class MainMenuHudFormPresenter : PresenterBase
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
         private readonly IMainMenuHudFormView _mainMenuHudFormView;
 
-        public MainMenuHudFormPresenter(IViewFormService viewFormService, IMainMenuHudFormView mainMenuHudFormView)
+        public MainMenuHudFormPresenter(IFormService formService, IMainMenuHudFormView mainMenuHudFormView)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _mainMenuHudFormView = mainMenuHudFormView ?? throw new ArgumentNullException(nameof(mainMenuHudFormView));
         }
 
@@ -32,12 +32,12 @@ namespace Sources.Controllers.Forms.MainMenu
         }
 
         private void ShowSettingsForm() =>
-            _viewFormService.Show<MainMenuSettingsFormView>();
+            _formService.Show<MainMenuSettingsFormView>();
 
         private void ShowAuthorizationForm() =>
-            _viewFormService.Show<AuthorizationFormView>();
+            _formService.Show<AuthorizationFormView>();
 
         private void ShowLeaderBoardForm() =>
-            _viewFormService.Show<LeaderBoardFormView>();
+            _formService.Show<LeaderBoardFormView>();
     }
 }

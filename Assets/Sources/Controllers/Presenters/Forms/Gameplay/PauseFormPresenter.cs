@@ -8,12 +8,12 @@ namespace Sources.Controllers.Forms.Gameplay
 {
     public class PauseFormPresenter : PresenterBase
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
         private readonly IPauseFormView _pauseFormView;
 
-        public PauseFormPresenter(IViewFormService viewFormService, IPauseFormView pauseFormView)
+        public PauseFormPresenter(IFormService formService, IPauseFormView pauseFormView)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _pauseFormView = pauseFormView ?? throw new ArgumentNullException(nameof(pauseFormView));
         }
 
@@ -32,12 +32,12 @@ namespace Sources.Controllers.Forms.Gameplay
         }
 
         private void ShowHudForm() =>
-            _viewFormService.Show<HudFormView>();
+            _formService.Show<HudFormView>();
 
         private void ShowTutorialForm() =>
-            _viewFormService.Show<TutorialFormView>();
+            _formService.Show<TutorialFormView>();
 
         private void ShowSettingsForm() =>
-            _viewFormService.Show<GameplaySettingsFormView>();
+            _formService.Show<GameplaySettingsFormView>();
     }
 }

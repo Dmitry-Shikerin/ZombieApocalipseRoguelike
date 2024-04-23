@@ -9,12 +9,12 @@ namespace Sources.Controllers.Forms.MainMenu
 {
     public class LeaderBoardFormPresenter : PresenterBase
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
         private readonly ILeaderBoardFormView _leaderBoardFormView;
 
-        public LeaderBoardFormPresenter(IViewFormService viewFormService, ILeaderBoardFormView leaderBoardFormView)
+        public LeaderBoardFormPresenter(IFormService formService, ILeaderBoardFormView leaderBoardFormView)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _leaderBoardFormView = leaderBoardFormView ??
                                    throw new ArgumentNullException(nameof(leaderBoardFormView));
         }
@@ -26,6 +26,6 @@ namespace Sources.Controllers.Forms.MainMenu
             _leaderBoardFormView.MainMenuHudButtonView.RemoveClickListener(ShowMainMenuHudForm);
 
         private void ShowMainMenuHudForm() =>
-            _viewFormService.Show<MainMenuHudFormView>();
+            _formService.Show<MainMenuHudFormView>();
     }
 }

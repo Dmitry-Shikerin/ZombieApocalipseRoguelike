@@ -8,11 +8,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
 {
     public class GameplaySettingsFormPresenterFactory
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
 
-        public GameplaySettingsFormPresenterFactory(IViewFormService viewFormService)
+        public GameplaySettingsFormPresenterFactory(IFormService formService)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public GameplaySettingsFormPresenter Create(IGameplaySettingsFormView settingsFormView)
@@ -20,7 +20,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
             if (settingsFormView == null)
                 throw new ArgumentNullException(nameof(settingsFormView));
 
-            return new GameplaySettingsFormPresenter(_viewFormService, settingsFormView);
+            return new GameplaySettingsFormPresenter(_formService, settingsFormView);
         }
     }
 }

@@ -7,11 +7,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
 {
     public class HudFormPresenterFactory
     {
-        private readonly IViewFormService _viewFormService;
+        private readonly IFormService _formService;
 
-        public HudFormPresenterFactory(IViewFormService viewFormService)
+        public HudFormPresenterFactory(IFormService formService)
         {
-            _viewFormService = viewFormService ?? throw new ArgumentNullException(nameof(viewFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public HudFormPresenter Create(IHudFormView hudFormView)
@@ -19,7 +19,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Forms.Gameplay
             if (hudFormView == null) 
                 throw new ArgumentNullException(nameof(hudFormView));
 
-            return new HudFormPresenter(_viewFormService, hudFormView);
+            return new HudFormPresenter(_formService, hudFormView);
         }
     }
 }
