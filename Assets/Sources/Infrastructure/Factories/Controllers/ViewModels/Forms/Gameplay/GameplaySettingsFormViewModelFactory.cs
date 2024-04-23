@@ -7,36 +7,29 @@ using Sources.Infrastructure.Factories.Controllers.ViewModels.Components;
 
 namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
 {
-    public class GameplayHudFormViewModelFactory : IViewModelFactory<GameplayHudFormViewModel, GameplayHudForm>
+    public class GameplaySettingsFormViewModelFactory : IViewModelFactory<GameplaySettingsFormViewModel, GameplaySettingsForm>
     {
         private readonly VisibilityViewModelComponentFactory _visibilityViewModelComponentFactory;
         private readonly ShowPauseFormViewModelComponentFactory _showPauseFormViewModelComponentFactory;
-        private readonly ShowUpgradeFormViewModelComponentFactory _showUpgradeFormViewModelComponentFactory;
 
-        public GameplayHudFormViewModelFactory(
+        public GameplaySettingsFormViewModelFactory(
             VisibilityViewModelComponentFactory visibilityViewModelComponentFactory,
-            ShowPauseFormViewModelComponentFactory showPauseFormViewModelComponentFactory,
-            ShowUpgradeFormViewModelComponentFactory showUpgradeFormViewModelComponentFactory)
+            ShowPauseFormViewModelComponentFactory showPauseFormViewModelComponentFactory)
         {
-            _visibilityViewModelComponentFactory = 
-                visibilityViewModelComponentFactory ?? 
+            _visibilityViewModelComponentFactory =
+                visibilityViewModelComponentFactory ??
                 throw new ArgumentNullException(nameof(visibilityViewModelComponentFactory));
-            _showPauseFormViewModelComponentFactory = 
-                showPauseFormViewModelComponentFactory ?? 
+            _showPauseFormViewModelComponentFactory =
+                showPauseFormViewModelComponentFactory ??
                 throw new ArgumentNullException(nameof(showPauseFormViewModelComponentFactory));
-            _showUpgradeFormViewModelComponentFactory =
-                showUpgradeFormViewModelComponentFactory ?? 
-                throw new ArgumentNullException(nameof(showUpgradeFormViewModelComponentFactory));
         }
-
-        public IViewModel Create(GameplayHudForm model)
+        public IViewModel Create(GameplaySettingsForm model)
         {
-            return new GameplayHudFormViewModel(
+            return new GameplaySettingsFormViewModel(
                 new IViewModelComponent[]
                 {
                     _visibilityViewModelComponentFactory.Create(model),
                     _showPauseFormViewModelComponentFactory.Create(),
-                    _showUpgradeFormViewModelComponentFactory.Create(),
                 });
         }
     }

@@ -27,6 +27,8 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
         private readonly UpgradeFormFactory _upgradeFormFactory;
         private readonly IBindableViewBuilder<GameplayHudFormViewModel, GameplayHudForm> _gameplayHudFormBuilder;
         private readonly IBindableViewBuilder<PauseFormViewModel, PauseForm> _pauseFormBuilder;
+        private readonly IBindableViewBuilder<GameplaySettingsFormViewModel, GameplaySettingsForm> _gameplaySettingsFormBuilder;
+        private readonly IBindableViewBuilder<UpgradeFormViewModel, UpgradeForm> _upgradeFormBuilder;
         private readonly GameplayHud _gameplayHud;
 
         public GameplayFormServiceFactory(
@@ -40,7 +42,9 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             TutorialFormFactory tutorialFormFactory,
             UpgradeFormFactory upgradeFormFactory,
             IBindableViewBuilder<GameplayHudFormViewModel, GameplayHudForm> gameplayHudFormBuilder,
-            IBindableViewBuilder<PauseFormViewModel, PauseForm> pauseFormBuilder)
+            IBindableViewBuilder<PauseFormViewModel, PauseForm> pauseFormBuilder,
+            IBindableViewBuilder<GameplaySettingsFormViewModel, GameplaySettingsForm> gameplaySettingsFormBuilder,
+            IBindableViewBuilder<UpgradeFormViewModel, UpgradeForm> upgradeFormBuilder)
         {
             _domainFormService = domainFormService ?? throw new ArgumentNullException(nameof(domainFormService));
             _gameOverFormFactory = gameOverFormFactory ?? throw new ArgumentNullException(nameof(gameOverFormFactory));
@@ -52,6 +56,8 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             _upgradeFormFactory = upgradeFormFactory ?? throw new ArgumentNullException(nameof(upgradeFormFactory));
             _gameplayHudFormBuilder = gameplayHudFormBuilder ?? throw new ArgumentNullException(nameof(gameplayHudFormBuilder));
             _pauseFormBuilder = pauseFormBuilder ?? throw new ArgumentNullException(nameof(pauseFormBuilder));
+            _gameplaySettingsFormBuilder = gameplaySettingsFormBuilder ?? throw new ArgumentNullException(nameof(gameplaySettingsFormBuilder));
+            _upgradeFormBuilder = upgradeFormBuilder ?? throw new ArgumentNullException(nameof(upgradeFormBuilder));
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
         }
 
@@ -64,6 +70,8 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             _domainFormService.Register<GameplayHudForm>(gameplayHudForm);
             
             GameplaySettingsForm gameplaySettingForm = _gameplaySettingFormFactory.Create();
+            _gameplaySettingsFormBuilder.Build(gameplaySettingForm, _gameplayHud.GameplaySettingsFormBindableView);
+            _domainFormService.Register<GameplaySettingsForm>(gameplaySettingForm);
             
             LevelCompletedForm levelCompletedForm = _levelCompletedFormFactory.Create();
             
@@ -74,6 +82,8 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
             TutorialForm tutorialForm = _tutorialFormFactory.Create();
             
             UpgradeForm upgradeForm = _upgradeFormFactory.Create();
+            _upgradeFormBuilder.Build(upgradeForm, _gameplayHud.UpgradeFormBindableView);
+            _domainFormService.Register<UpgradeForm>(upgradeForm);
             
             return _domainFormService;
         }

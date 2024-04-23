@@ -2,9 +2,9 @@
 
 namespace Sources.Controllers.ModelViews.Forms.Gameplay
 {
-    public class GameplaySettingFormViewModel : ViewModelBase
+    public class GameplaySettingsFormViewModel : ViewModelBase
     {
-        public GameplaySettingFormViewModel(IViewModelComponent[] components) : base(components)
+        public GameplaySettingsFormViewModel(IViewModelComponent[] components) : base(components)
         {
         }
 

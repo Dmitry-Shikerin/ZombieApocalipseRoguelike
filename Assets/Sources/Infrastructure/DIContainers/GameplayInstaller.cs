@@ -213,14 +213,6 @@ namespace Sources.Infrastructure.DIContainers
         private void BindFormFactories()
         {
             Container.Bind<GameplayFormServiceFactory>().AsSingle();
-            // Container.Bind<GamePlayTutorialFormServiceFactory>().AsSingle();        
-            // Container.Bind<PauseFormPresenterFactory>().AsSingle();
-            // Container.Bind<HudFormPresenterFactory>().AsSingle();
-            // Container.Bind<UpgradeFormPresenterFactory>().AsSingle();
-            // Container.Bind<TutorialFormPresenterFactory>().AsSingle();
-            // Container.Bind<GameplaySettingsFormPresenterFactory>().AsSingle();
-            // Container.Bind<GameOverFormPresenterFactory>().AsSingle();
-            // Container.Bind<LevelCompletedFormPresenterFactory>().AsSingle();
             Container.Bind<GameOverFormFactory>().AsSingle();
             Container.Bind<LevelCompletedFormFactory>().AsSingle();
             Container.Bind<UpgradeFormFactory>().AsSingle();
@@ -232,13 +224,25 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<VisibilityViewModelComponentFactory>().AsSingle();
             Container.Bind<ShowPauseFormViewModelComponentFactory>().AsSingle();
             Container.Bind<ShowHudFormViewModelComponentFactory>().AsSingle();
+            Container.Bind<ShowGameplaySettingsFormViewModelComponentFactory>().AsSingle();
+            Container.Bind<ShowUpgradeFormViewModelComponentFactory>().AsSingle();
             
             Container
                 .Bind<IViewModelFactory<GameplayHudFormViewModel, GameplayHudForm>>()
-                .To<GameplayHudFormViewModelFactory>().AsSingle();
+                .To<GameplayHudFormViewModelFactory>()
+                .AsSingle();
             Container
                 .Bind<IViewModelFactory<PauseFormViewModel, PauseForm>>()
-                .To<PauseFormViewModelFactory>().AsSingle();
+                .To<PauseFormViewModelFactory>()
+                .AsSingle();
+            Container
+                .Bind<IViewModelFactory<GameplaySettingsFormViewModel, GameplaySettingsForm>>()
+                .To<GameplaySettingsFormViewModelFactory>()
+                .AsSingle();
+            Container
+                .Bind<IViewModelFactory<UpgradeFormViewModel, UpgradeForm>>()
+                .To<UpgradeFormViewModelFactory>()
+                .AsSingle();
 
             Container
                 .Bind<IBindableViewBuilder<PauseFormViewModel, PauseForm>>()
@@ -247,6 +251,14 @@ namespace Sources.Infrastructure.DIContainers
             Container
                 .Bind<IBindableViewBuilder<GameplayHudFormViewModel, GameplayHudForm>>()
                 .To<BindableViewBuilder<GameplayHudFormViewModel, GameplayHudForm>>()
+                .AsSingle();
+            Container
+                .Bind<IBindableViewBuilder<GameplaySettingsFormViewModel, GameplaySettingsForm>>()
+                .To<BindableViewBuilder<GameplaySettingsFormViewModel, GameplaySettingsForm>>()
+                .AsSingle();
+            Container
+                .Bind<IBindableViewBuilder<UpgradeFormViewModel, UpgradeForm>>()
+                .To<BindableViewBuilder<UpgradeFormViewModel, UpgradeForm>>()
                 .AsSingle();
         }
 

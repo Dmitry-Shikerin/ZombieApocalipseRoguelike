@@ -18,26 +18,15 @@ namespace Sources.Presentations.UI.Huds
 {
     public class GameplayHud : View
     {
-        // [Button(ButtonSizes.Large)]
-        // [FoldoutGroup("Forms")] [Required] [SerializeField]
-        // private PauseFormView _pauseFormView;
-        // [FoldoutGroup("Forms")] [Required] [SerializeField]
-        // private HudFormView _hudFormView;
-        // [FoldoutGroup("Forms")] [Required] [SerializeField]
-        // private UpgradeFormView _upgradeFormView;
-        // [FoldoutGroup("Forms")] [Required] [SerializeField]
-        // private TutorialFormView _tutorialFormView;
-        // [FoldoutGroup("Forms")] [Required] [SerializeField]
-        // private GameplaySettingsFormView _settingsFormView;
-        // [FoldoutGroup("Forms")] [Required] [SerializeField]
-        // private GameOverFormView _gameOverFormView;
-        // [FoldoutGroup("Forms")] [Required] [SerializeField]
-        // private LevelCompletedFormView _levelCompletedFormView;
         [Button(ButtonSizes.Large)]
         [FoldoutGroup("Forms")] [Required] [SerializeField]
         private PauseFormBindableView _pauseFormBindableView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
         private GameplayHudFormBindableView _gameplayHudFormBindableView;
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private GameplaySettingsFormBindableView _gameplaySettingsFormBindableView;
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private UpgradeFormBindableView _upgradeFormBindableView;
 
         [FormerlySerializedAs("cinemachineCameraView")]
         [Button(ButtonSizes.Large)] 
@@ -59,8 +48,8 @@ namespace Sources.Presentations.UI.Huds
         private List<UpgradeView> _upgradeViews;
         [FoldoutGroup("Upgrades")] [Required] [SerializeField]
         private List<UpgradeUi> _upgradeUis;
-        [FoldoutGroup("Upgrades")] [Required] [SerializeField]
-        private List<UpgradeUi> _notAwailabilityUpgradeUis;
+        [FormerlySerializedAs("notAvailabilityUpgradeUis")] [FormerlySerializedAs("_notAwailabilityUpgradeUis")] [FoldoutGroup("Upgrades")] [Required] [SerializeField]
+        private List<UpgradeUi> _notAvailabilityUpgradeUis;
         
         [Button(ButtonSizes.Large)]
         [FoldoutGroup("PlayerWallet")] [Required] [SerializeField]
@@ -81,16 +70,11 @@ namespace Sources.Presentations.UI.Huds
         [Button(ButtonSizes.Large)] 
         [FoldoutGroup("Volume")] [Required] [SerializeField]
         private VolumeView _volumeView;
-
-        // public PauseFormView PauseFormView => _pauseFormView;
-        // public HudFormView HudFormView => _hudFormView;
-        // public UpgradeFormView UpgradeFormView => _upgradeFormView;
-        // public TutorialFormView TutorialFormView => _tutorialFormView;
-        // public GameplaySettingsFormView SettingsFormView => _settingsFormView;
-        // public GameOverFormView GameOverFormView => _gameOverFormView;
-        // public LevelCompletedFormView LevelCompletedFormView => _levelCompletedFormView;
+        
         public PauseFormBindableView PauseFormBindableView => _pauseFormBindableView;
         public GameplayHudFormBindableView GameplayHudFormBindableView => _gameplayHudFormBindableView;
+        public GameplaySettingsFormBindableView GameplaySettingsFormBindableView => _gameplaySettingsFormBindableView;
+        public UpgradeFormBindableView UpgradeFormBindableView => _upgradeFormBindableView;
         
         public CinemachineCameraView CinemachineCameraView => _cinemachineCameraView;
 
@@ -101,7 +85,7 @@ namespace Sources.Presentations.UI.Huds
 
         public IReadOnlyList<UpgradeView> UpgradeViews => _upgradeViews;
         public IReadOnlyList<UpgradeUi> UpgradeUis => _upgradeUis;
-        public IReadOnlyList<UpgradeUi> NotAwailabilityUpgradeUis => _notAwailabilityUpgradeUis;
+        public IReadOnlyList<UpgradeUi> NotAvailabilityUpgradeUis => _notAvailabilityUpgradeUis;
         
         public PlayerWalletView PlayerWalletView => _playerWalletView;
 
