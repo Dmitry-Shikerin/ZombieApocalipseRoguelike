@@ -179,9 +179,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             //Upgrades
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
 
-            for (int i = 0; i < _gameplayHud.NotAwailabilityUpgradeUis.Count; i++)
+            for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
             {
-                var view = _gameplayHud.NotAwailabilityUpgradeUis[i];
+                var view = _gameplayHud.NotAvailabilityUpgradeUis[i];
                 var upgrader = upgraders[i];
 
                 _upgradeUiFactory.Create(upgrader, view);

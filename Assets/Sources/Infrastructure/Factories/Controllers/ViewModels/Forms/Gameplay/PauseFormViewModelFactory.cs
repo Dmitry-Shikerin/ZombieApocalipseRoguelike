@@ -11,10 +11,12 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
     {
         private readonly VisibilityViewModelComponentFactory _visibilityViewModelComponentFactory;
         private readonly ShowHudFormViewModelComponentFactory _showHudFormViewModelComponentFactory;
+        private readonly ShowGameplaySettingsFormViewModelComponentFactory _showGameplaySettingsFormViewModelComponentFactory;
 
         public PauseFormViewModelFactory(
             VisibilityViewModelComponentFactory visibilityViewModelComponentFactory,
-            ShowHudFormViewModelComponentFactory showHudFormViewModelComponentFactory)
+            ShowHudFormViewModelComponentFactory showHudFormViewModelComponentFactory,
+            ShowGameplaySettingsFormViewModelComponentFactory showGameplaySettingsFormViewModelComponentFactory)
         {
             _visibilityViewModelComponentFactory = 
                 visibilityViewModelComponentFactory ?? 
@@ -22,6 +24,9 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
             _showHudFormViewModelComponentFactory = 
                 showHudFormViewModelComponentFactory ??
                 throw new ArgumentNullException(nameof(showHudFormViewModelComponentFactory));
+            _showGameplaySettingsFormViewModelComponentFactory =
+                showGameplaySettingsFormViewModelComponentFactory ??
+                throw new ArgumentNullException(nameof(showGameplaySettingsFormViewModelComponentFactory));
         }
 
         public IViewModel Create(PauseForm model)
@@ -31,6 +36,7 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
                 {
                     _visibilityViewModelComponentFactory.Create(model),
                     _showHudFormViewModelComponentFactory.Create(),
+                    _showGameplaySettingsFormViewModelComponentFactory.Create(),
                 });
         }
     }
