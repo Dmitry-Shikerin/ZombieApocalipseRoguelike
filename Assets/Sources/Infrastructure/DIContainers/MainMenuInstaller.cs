@@ -15,6 +15,7 @@ using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.ViewModels.Components;
 using Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.MainMenu;
 using Sources.Infrastructure.Factories.Controllers.YandexSDK;
+using Sources.Infrastructure.Factories.Domain.Forms.MainMenu;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Musics;
@@ -80,7 +81,10 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<MainMenuFormServiceFactory>().AsSingle();
             Container.Bind<LeaderBoardElementPresenterFactory>().AsSingle();
             Container.Bind<LeaderBoardElementViewFactory>().AsSingle();
+            
+            Container.Bind<MainMenuHudFormFactory>().AsSingle();
 
+            Container.Bind<VisibilityViewModelComponentFactory>().AsSingle();
             Container.Bind<NewGameViewModelComponentFactory>().AsSingle();
 
             Container

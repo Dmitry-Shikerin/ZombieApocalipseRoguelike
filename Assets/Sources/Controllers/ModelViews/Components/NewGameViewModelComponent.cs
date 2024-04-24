@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Numerics;
 using JetBrains.Annotations;
 using Sources.ControllersInterfaces.ViewModels;
 using Sources.Domain.Models.Forms.Gameplay;
@@ -7,6 +6,7 @@ using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.SceneServices;
 using Sources.MVVMFrameworks.Domain.Attributes;
 using Sources.PresentationsInterfaces.Binds.Buttons;
+using UnityEngine;
 
 namespace Sources.Controllers.ModelViews.Components
 {
