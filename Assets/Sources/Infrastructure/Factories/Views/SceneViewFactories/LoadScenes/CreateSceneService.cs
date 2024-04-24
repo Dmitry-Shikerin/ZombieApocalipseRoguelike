@@ -6,10 +6,11 @@ using Sources.Domain.Bears;
 using Sources.Domain.Characters;
 using Sources.Domain.Characters.Attackers;
 using Sources.Domain.Data.Common;
-using Sources.Domain.Data.Ids;
 using Sources.Domain.Gameplay;
+using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Setting;
+using Sources.Domain.Models.Spawners;
 using Sources.Domain.Players;
 using Sources.Domain.Setting;
 using Sources.Domain.Spawners;
@@ -138,7 +139,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
                 bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
 
-            KillEnemyCounter killEnemyCounter = new KillEnemyCounter();
+            KillEnemyCounter killEnemyCounter = new KillEnemyCounter(ModelId.KillEnemyCounter, 0);
             EnemySpawner enemySpawner = new EnemySpawner();
 
             return new GameModels(

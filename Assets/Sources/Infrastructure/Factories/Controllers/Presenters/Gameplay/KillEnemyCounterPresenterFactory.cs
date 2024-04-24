@@ -1,6 +1,7 @@
 ﻿using Sources.Controllers.Gameplay;
 using Sources.Domain.Gameplay;
 using Sources.Domain.Models.Gameplay;
+using Sources.Domain.Models.Spawners;
 using Sources.Domain.Spawners;
 using Sources.PresentationsInterfaces.Views.Gameplay;
 
