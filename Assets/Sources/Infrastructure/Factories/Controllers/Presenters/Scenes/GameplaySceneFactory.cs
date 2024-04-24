@@ -2,7 +2,9 @@
 using Cysharp.Threading.Tasks;
 using Sources.Controllers.Scenes;
 using Sources.ControllersInterfaces.Scenes;
+using Sources.DomainInterfaces.Payloads;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes;
 using Sources.InfrastructureInterfaces.Factories.Controllers.Scenes;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
@@ -12,7 +14,7 @@ using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 
-namespace Sources.Infrastructure.Factories.Controllers.Scenes
+namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
 {
     public class GameplaySceneFactory : ISceneFactory
     {
@@ -24,6 +26,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
         private readonly IUpgradeService _upgradeService;
         private readonly IGameOverService _gameOverService;
         private readonly IVolumeService _volumeService;
+        private readonly LoadSceneService _loadSceneService;
+        private readonly CreateSceneService _createSceneService;
 
         public GameplaySceneFactory(
             IUpdateService updateService,
@@ -33,7 +37,9 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
             ILoadService loadService,
             IUpgradeService upgradeService,
             IGameOverService gameOverService,
-            IVolumeService volumeService)
+            IVolumeService volumeService,
+            LoadSceneService loadSceneService,
+            CreateSceneService createSceneService) 
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -44,6 +50,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
             _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
+            _loadSceneService = loadSceneService ?? throw new ArgumentNullException(nameof(loadSceneService));
+            _createSceneService = createSceneService ?? throw new ArgumentNullException(nameof(createSceneService));
         }
 
         public async UniTask<IScene> Create(object payload)
@@ -51,12 +59,25 @@ namespace Sources.Infrastructure.Factories.Controllers.Scenes
             return new GameplayScene(
                 _updateService,
                 _inputServiceUpdater,
-                _gameplaySceneViewFactory,
+                CreateLoadSceneService(payload),
                 _localizationService,
                 _loadService,
                 _upgradeService,
                 _gameOverService,
                 _volumeService);
+        }
+
+        private ILoadSceneService CreateLoadSceneService(object payload)
+        {
+            if (payload == null)
+                return _createSceneService;
+
+            var canLoad = payload is IScenePayload { CanLoad : true };
+
+            if (canLoad == false)
+                return _createSceneService;
+
+            return _loadSceneService;
         }
     }
 }

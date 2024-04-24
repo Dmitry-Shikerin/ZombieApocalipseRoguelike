@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Sources.Domain.Data;
 using Sources.Domain.Data.Common;
-using Sources.Domain.Data.Ids;
 using Sources.Domain.Gameplay;
+using Sources.Domain.Models.Data;
+using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Setting;
 using Sources.Domain.Players;
@@ -34,7 +35,8 @@ namespace Sources.Infrastructure.Services.LoadServices
             IVolumeDtoMapper volumeDtoMapper,
             ILevelDtoMapper levelDtoMapper,
             IGameDataDtoMapper gameDataDtoMapper,
-            ITutorialDtoMapper tutorialDtoMapper)
+            ITutorialDtoMapper tutorialDtoMapper,
+            IKillEnemyCounterDtoMapper killEnemyCounterDtoMapper)
         {
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
@@ -52,6 +54,8 @@ namespace Sources.Infrastructure.Services.LoadServices
                 model => gameDataDtoMapper.MapModelToDto(model as GameData);
             _toDtoMappers[typeof(Tutorial)] =
                 model => tutorialDtoMapper.MapModelToDto(model as Tutorial);
+            _toDtoMappers[typeof(KillEnemyCounter)] =
+                model => killEnemyCounterDtoMapper.MapModelToDto(model as KillEnemyCounter);
 
             _toModelMappers = new Dictionary<Type, Func<IDto, IEntity>>();
             _toModelMappers[typeof(Upgrader)] =
@@ -66,6 +70,8 @@ namespace Sources.Infrastructure.Services.LoadServices
                 dto => gameDataDtoMapper.MapDtoToModel(dto as GameDataDto);
             _toModelMappers[typeof(Tutorial)] =
                 dto => tutorialDtoMapper.MapDtoToModel(dto as TutorialDto);
+            _toModelMappers[typeof(KillEnemyCounter)] =
+                dto => killEnemyCounterDtoMapper.MapDtoToModel(dto as KillEnemyCounterDto);
         }
 
         //TODO загружать все дто и сразу конвертить их в модели и складировать в инстансе контейнер

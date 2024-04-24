@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sources.Domain.Spawners
+namespace Sources.Domain.Models.Spawners
 {
     public class EnemySpawner
     {

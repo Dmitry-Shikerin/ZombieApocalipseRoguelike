@@ -3,6 +3,7 @@ using Sources.Domain.Bears;
 using Sources.Domain.Characters;
 using Sources.Domain.Gameplay;
 using Sources.Domain.Models.Setting;
+using Sources.Domain.Models.Spawners;
 using Sources.Domain.Players;
 using Sources.Domain.Setting;
 using Sources.Domain.Spawners;
