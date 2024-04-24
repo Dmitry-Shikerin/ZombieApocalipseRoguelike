@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.Domain.Gameplay;
+using Sources.Domain.Models.Gameplay;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.Spawners;

@@ -2,6 +2,7 @@
 using Sources.Domain.Enemies;
 using Sources.Domain.Enemies.Bosses;
 using Sources.Domain.Gameplay;
+using Sources.Domain.Models.Gameplay;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.Spawners;

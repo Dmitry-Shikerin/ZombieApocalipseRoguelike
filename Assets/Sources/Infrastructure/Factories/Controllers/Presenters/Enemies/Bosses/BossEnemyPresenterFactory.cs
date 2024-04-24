@@ -5,6 +5,7 @@ using Sources.Controllers.Enemies.Base.States;
 using Sources.Controllers.Enemies.Bosses.States;
 using Sources.Domain.Enemies.Bosses;
 using Sources.Domain.Gameplay;
+using Sources.Domain.Models.Gameplay;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;

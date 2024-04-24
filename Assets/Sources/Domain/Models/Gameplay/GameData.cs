@@ -2,7 +2,7 @@
 using Sources.Domain.Data;
 using Sources.DomainInterfaces.Entities;
 
-namespace Sources.Domain.Gameplay
+namespace Sources.Domain.Models.Gameplay
 {
     public class GameData : IEntity
     {

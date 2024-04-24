@@ -5,6 +5,7 @@ using Sources.Controllers.Enemies.Base.States;
 using Sources.Domain.Enemies;
 using Sources.Domain.Enemies.Base;
 using Sources.Domain.Gameplay;
+using Sources.Domain.Models.Gameplay;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.Spawners;

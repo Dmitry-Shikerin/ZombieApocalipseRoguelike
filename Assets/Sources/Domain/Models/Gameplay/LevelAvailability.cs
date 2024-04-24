@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sources.Domain.Models.Gameplay;
 
 namespace Sources.Domain.Gameplay
 {

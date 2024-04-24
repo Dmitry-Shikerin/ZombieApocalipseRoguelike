@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sources.Domain.Gameplay;
+using Sources.Domain.Models.Gameplay;
+using Sources.Domain.Models.Setting;
 using Sources.Domain.Setting;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Gameplay;

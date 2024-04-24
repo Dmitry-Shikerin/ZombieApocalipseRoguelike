@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Common;
+using Sources.Domain.Models.Setting;
 using Sources.Domain.Setting;
 using Sources.PresentationsInterfaces.Views.Settings;
 
