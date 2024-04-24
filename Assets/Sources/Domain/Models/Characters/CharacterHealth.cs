@@ -1,9 +1,9 @@
 ﻿using System;
-using Sources.Domain.Upgrades;
+using Sources.Domain.Models.Upgrades;
 using Sources.DomainInterfaces.Healths;
 using UnityEngine;
 
-namespace Sources.Domain.Characters
+namespace Sources.Domain.Models.Characters
 {
     public class CharacterHealth : IHealth
     {

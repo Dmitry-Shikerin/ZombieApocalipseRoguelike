@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Gameplay;
-using Sources.Domain.Gameplay;
+using Sources.Domain.Models.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Presentations.Views.Gameplay;
 using Sources.PresentationsInterfaces.Views.Gameplay;

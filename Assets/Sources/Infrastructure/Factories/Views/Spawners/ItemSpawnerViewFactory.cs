@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Spawners;
-using Sources.Domain.Spawners;
+using Sources.Domain.Models.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
 using Sources.Presentations.Views.Spawners;
 using Sources.PresentationsInterfaces.Views.Spawners;

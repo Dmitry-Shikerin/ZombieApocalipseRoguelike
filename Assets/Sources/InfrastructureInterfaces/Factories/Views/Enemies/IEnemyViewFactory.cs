@@ -1,6 +1,4 @@
-﻿using Sources.Domain.Enemies;
-using Sources.Domain.Enemies.Base;
-using Sources.Domain.Gameplay;
+﻿using Sources.Domain.Models.Enemies.Base;
 using Sources.Domain.Models.Gameplay;
 using Sources.Presentations.Views.Enemies;
 using Sources.Presentations.Views.Enemies.Base;

@@ -1,4 +1,4 @@
-﻿using Sources.Domain.Upgrades.Configs;
+﻿using Sources.Domain.Models.Upgrades.Configs;
 using UnityEngine;
 
 namespace Sources.InfrastructureInterfaces.Services.Upgrades

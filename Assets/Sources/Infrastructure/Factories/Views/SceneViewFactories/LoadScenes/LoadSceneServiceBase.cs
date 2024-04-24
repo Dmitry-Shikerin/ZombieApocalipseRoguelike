@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Sources.Domain.Models.Forms.Gameplay;
 using Sources.Domain.Models.Gameplay;
-using Sources.Domain.Spawners;
-using Sources.Domain.Upgrades;
+using Sources.Domain.Models.Spawners;
+using Sources.Domain.Models.Upgrades;
 using Sources.DomainInterfaces.Payloads;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;

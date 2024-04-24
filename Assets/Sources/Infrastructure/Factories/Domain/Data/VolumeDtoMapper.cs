@@ -1,6 +1,6 @@
 ﻿using Sources.Domain.Data;
+using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Setting;
-using Sources.Domain.Setting;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 
 namespace Sources.Infrastructure.Factories.Domain.Data

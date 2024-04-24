@@ -1,6 +1,6 @@
 ﻿using Sources.Controllers.Abilities;
 using Sources.Controllers.Common;
-using Sources.Domain.Abilities;
+using Sources.Domain.Models.Abilities;
 using Sources.PresentationsInterfaces.Views.Abilities;
 
 namespace Sources.Infrastructure.Factories.Controllers.Abilities

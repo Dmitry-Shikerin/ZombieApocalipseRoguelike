@@ -2,10 +2,8 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Controllers.Common;
-using Sources.Domain.Gameplay;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
-using Sources.Domain.Spawners;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.Views.Characters;

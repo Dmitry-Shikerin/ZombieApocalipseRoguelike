@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Agava.WebUtility;
 using Agava.YandexGames;
-using Sources.Domain.Constants;
-using Sources.Domain.YandexSDK;
+using Sources.Domain.Models.Constants;
+using Sources.Domain.Models.YandexSDK;
 using Sources.Infrastructure.Factories.Views.YandexSDK;
 using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 using Sources.Presentations.UI.Huds;

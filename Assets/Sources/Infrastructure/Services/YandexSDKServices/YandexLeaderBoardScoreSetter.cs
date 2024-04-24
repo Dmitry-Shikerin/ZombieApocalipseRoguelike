@@ -1,6 +1,6 @@
 ﻿using Agava.WebUtility;
 using Agava.YandexGames;
-using Sources.Domain.Constants;
+using Sources.Domain.Models.Constants;
 using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 
 namespace Sources.Infrastructure.Services.YandexSDKServices

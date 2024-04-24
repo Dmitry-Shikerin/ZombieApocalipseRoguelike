@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Sources.Domain.Upgrades.Configs
+namespace Sources.Domain.Models.Upgrades.Configs
 {
     [CreateAssetMenu(
         fileName = "UpgradeConfig",

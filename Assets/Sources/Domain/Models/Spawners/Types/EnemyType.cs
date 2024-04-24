@@ -1,4 +1,4 @@
-﻿namespace Sources.Domain.Spawners.Types
+﻿namespace Sources.Domain.Models.Spawners.Types
 {
     public enum EnemyType
     {

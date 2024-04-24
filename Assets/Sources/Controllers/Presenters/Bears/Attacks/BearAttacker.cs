@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Domain.Upgrades;
+using Sources.Domain.Models.Upgrades;
 
 namespace Sources.Controllers.Bears.Attacks
 {

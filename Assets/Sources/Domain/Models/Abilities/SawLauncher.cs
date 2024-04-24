@@ -1,6 +1,6 @@
 ﻿using Sources.DomainInterfaces.Upgrades;
 
-namespace Sources.Domain.Abilities
+namespace Sources.Domain.Models.Abilities
 {
     public class SawLauncher
     {

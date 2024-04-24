@@ -1,4 +1,4 @@
-﻿namespace Sources.Domain.Enemies
+﻿namespace Sources.Domain.Models.Enemies
 {
     public class EnemyAttacker
     {

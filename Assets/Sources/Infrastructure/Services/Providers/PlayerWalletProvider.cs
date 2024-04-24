@@ -1,4 +1,4 @@
-﻿using Sources.Domain.Players;
+﻿using Sources.Domain.Models.Players;
 
 namespace Sources.Infrastructure.Services.Providers
 {

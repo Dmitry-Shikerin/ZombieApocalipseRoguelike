@@ -1,6 +1,4 @@
-﻿using Sources.Domain.Models.Setting;
-
-namespace Sources.Domain.Setting
+﻿namespace Sources.Domain.Models.Setting
 {
     public class Settings
     {

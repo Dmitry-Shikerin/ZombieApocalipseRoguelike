@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Sources.Domain.Models.Gameplay;
 
-namespace Sources.Domain.Gameplay
+namespace Sources.Domain.Models.Gameplay
 {
     public class LevelAvailability
     {

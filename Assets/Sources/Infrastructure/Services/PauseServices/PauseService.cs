@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Sources.Domain.Constants;
+using Sources.Domain.Models.Constants;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 using UnityEngine;
 

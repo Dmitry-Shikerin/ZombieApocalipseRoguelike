@@ -2,7 +2,7 @@
 using Sources.Controllers.Bears.Attacks;
 using UnityEngine;
 
-namespace Sources.Domain.Bears
+namespace Sources.Domain.Models.Bears
 {
     public class Bear
     {

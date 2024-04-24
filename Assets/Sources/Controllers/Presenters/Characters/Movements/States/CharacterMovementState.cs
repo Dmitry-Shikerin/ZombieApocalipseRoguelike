@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Domain.Characters;
+using Sources.Domain.Models.Characters;
 using Sources.Infrastructure.StateMachines.ContextStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.PresentationsInterfaces.Views.Character;

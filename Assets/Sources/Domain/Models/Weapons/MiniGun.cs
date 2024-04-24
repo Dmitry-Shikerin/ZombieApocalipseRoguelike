@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Sources.Domain.Upgrades;
+using Sources.Domain.Models.Upgrades;
 using Sources.DomainInterfaces.Weapons;
 
-namespace Sources.Domain.Weapons
+namespace Sources.Domain.Models.Weapons
 {
     public class MiniGun : IWeapon
     {

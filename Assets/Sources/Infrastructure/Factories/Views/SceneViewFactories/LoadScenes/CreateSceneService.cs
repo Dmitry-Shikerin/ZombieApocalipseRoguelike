@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sources.Controllers.Bears.Attacks;
-using Sources.Domain.Abilities;
-using Sources.Domain.Bears;
-using Sources.Domain.Characters;
-using Sources.Domain.Characters.Attackers;
-using Sources.Domain.Data.Common;
-using Sources.Domain.Gameplay;
+using Sources.Domain.Models.Abilities;
+using Sources.Domain.Models.Bears;
+using Sources.Domain.Models.Characters;
+using Sources.Domain.Models.Characters.Attackers;
+using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
+using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Setting;
 using Sources.Domain.Models.Spawners;
-using Sources.Domain.Players;
-using Sources.Domain.Setting;
-using Sources.Domain.Spawners;
-using Sources.Domain.Upgrades;
-using Sources.Domain.Weapons;
+using Sources.Domain.Models.Upgrades;
+using Sources.Domain.Models.Weapons;
 using Sources.DomainInterfaces.Payloads;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;
@@ -38,6 +35,7 @@ using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.RootGameObjects;
+using UnityEngine;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
 {
@@ -104,6 +102,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
 
         protected override GameModels LoadModels(IScenePayload scenePayload)
         {
+            Debug.Log("CreateModels");
             Volume volume = new Volume();
 
             Level level = new Level(scenePayload.SceneId, false);

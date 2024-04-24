@@ -1,8 +1,8 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Controllers.ModelViews.Forms.Gameplay;
-using Sources.Domain.AudioSources;
+using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Forms.Gameplay;
-using Sources.Domain.Upgrades.Configs.Containers;
+using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Frameworks.MVVM.Infrastructure.Builders;
 using Sources.Frameworks.MVVM.InfrastructureInterfaces;
 using Sources.Frameworks.MVVM.PresentationInterfaces.Factories;

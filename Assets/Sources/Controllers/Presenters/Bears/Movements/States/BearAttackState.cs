@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Bears.Attacks;
-using Sources.Domain.Bears;
+using Sources.Domain.Models.Bears;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.PresentationsInterfaces.Views.Bears;
 using UnityEngine;

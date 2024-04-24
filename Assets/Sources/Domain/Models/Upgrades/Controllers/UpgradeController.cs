@@ -1,4 +1,4 @@
-﻿namespace Sources.Domain.Upgrades.Controllers
+﻿namespace Sources.Domain.Models.Upgrades.Controllers
 {
     public class UpgradeController
     {

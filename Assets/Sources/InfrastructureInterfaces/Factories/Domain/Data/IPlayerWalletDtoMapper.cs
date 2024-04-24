@@ -1,5 +1,6 @@
 using Sources.Domain.Data;
-using Sources.Domain.Players;
+using Sources.Domain.Models.Data;
+using Sources.Domain.Models.Players;
 
 namespace Sources.InfrastructureInterfaces.Factories.Domain.Data
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Common;
-using Sources.Domain.Abilities;
+using Sources.Domain.Models.Abilities;
 using Sources.Presentations.Views.Abilities;
 using Sources.PresentationsInterfaces.Views.Abilities;
 using Sources.PresentationsInterfaces.Views.Enemies;

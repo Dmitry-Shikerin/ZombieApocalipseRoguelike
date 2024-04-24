@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Sources.Domain.Upgrades;
+using Sources.Domain.Models.Upgrades;
 
 namespace Sources.Infrastructure.Services.Upgrades
 {

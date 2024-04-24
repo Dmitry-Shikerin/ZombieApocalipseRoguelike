@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Sources.Domain.Constants.LayerMasks
+namespace Sources.Domain.Models.Constants.LayerMasks
 {
     public static class Layer
     {

@@ -1,5 +1,5 @@
 using Sources.ControllersInterfaces.ControllerLifetimes;
-using Sources.Domain.Characters;
+using Sources.Domain.Models.Characters;
 
 namespace Sources.InfrastructureInterfaces.Services.GameOvers
 {

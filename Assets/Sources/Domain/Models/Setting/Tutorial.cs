@@ -1,9 +1,9 @@
 ﻿using System;
-using Sources.Domain.Data;
+using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Data.Ids;
 using Sources.DomainInterfaces.Entities;
 
-namespace Sources.Domain.Setting
+namespace Sources.Domain.Models.Setting
 {
     public class Tutorial : IEntity
     {

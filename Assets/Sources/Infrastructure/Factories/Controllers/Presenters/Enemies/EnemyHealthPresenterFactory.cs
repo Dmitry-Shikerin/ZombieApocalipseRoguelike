@@ -1,5 +1,5 @@
 ﻿using Sources.Controllers.Enemies;
-using Sources.Domain.Enemies;
+using Sources.Domain.Models.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies;
 
 namespace Sources.Infrastructure.Factories.Controllers.Enemies

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Sources.Domain.Data.Common
+namespace Sources.Domain.Models.Data
 {
     public class MoneyPerUpgradeDto
     {

@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Sources.Domain.Constants.LayerMasks;
-using Sources.Domain.Enemies.Bosses;
+using Sources.Domain.Models.Constants.LayerMasks;
+using Sources.Domain.Models.Enemies.Bosses;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.Presentations.Views.Characters;

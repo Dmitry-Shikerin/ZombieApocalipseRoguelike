@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using Sources.Domain.Dictionaries;
+﻿using Sources.Domain.Models.Dictionaries;
 using UnityEngine;
 
-namespace Sources.Domain.SpriteCollections
+namespace Sources.Domain.Models.SpriteCollections
 {
     [CreateAssetMenu(fileName = "SpriteCollection", menuName = "Configs/SpriteCollection", order = 51)]
     public class SpriteCollection : ScriptableObject

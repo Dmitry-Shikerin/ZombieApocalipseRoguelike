@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sources.Domain.Data.Common;
-using Sources.Domain.Upgrades;
-using Sources.Domain.Upgrades.Configs;
+using Sources.Domain.Models.Data;
+using Sources.Domain.Models.Upgrades;
+using Sources.Domain.Models.Upgrades.Configs;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 

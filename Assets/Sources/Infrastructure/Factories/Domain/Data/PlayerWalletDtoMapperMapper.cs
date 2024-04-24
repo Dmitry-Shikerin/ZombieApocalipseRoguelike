@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Domain.Data;
-using Sources.Domain.Players;
+using Sources.Domain.Models.Data;
+using Sources.Domain.Models.Players;
 using Sources.DomainInterfaces.Data;
 using Sources.DomainInterfaces.Players;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;

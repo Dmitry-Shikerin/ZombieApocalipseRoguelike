@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Bears;
 using Sources.Controllers.Bears.Movements;
-using Sources.Domain.Bears;
+using Sources.Domain.Models.Bears;
 using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Presentations.Views.Bears;
 using Sources.PresentationsInterfaces.Views.Bears;

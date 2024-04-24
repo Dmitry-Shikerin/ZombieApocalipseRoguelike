@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Bears.Movements;
 using Sources.Controllers.Bears.Movements.States;
-using Sources.Domain.Bears;
+using Sources.Domain.Models.Bears;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;

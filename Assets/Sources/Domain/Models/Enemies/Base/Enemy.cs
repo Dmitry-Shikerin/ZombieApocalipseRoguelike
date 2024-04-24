@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sources.Domain.Enemies.Base
+namespace Sources.Domain.Models.Enemies.Base
 {
     public class Enemy
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Musics;
-using Sources.Domain.AudioSources;
+using Sources.Domain.Models.AudioSources;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.Views.Music;
 

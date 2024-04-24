@@ -1,5 +1,5 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.Domain.AudioSources;
+using Sources.Domain.Models.AudioSources;
 using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Musics;
 using Sources.Infrastructure.Factories.Controllers.Scenes;

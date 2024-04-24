@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Sources.Domain.Common
+namespace Sources.Domain.Models.Common
 {
     public class ObservableModel : INotifyPropertyChanged
     {

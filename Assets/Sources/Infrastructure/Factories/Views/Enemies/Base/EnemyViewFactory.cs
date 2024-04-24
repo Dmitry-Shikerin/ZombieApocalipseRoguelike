@@ -1,8 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Enemies.Base;
-using Sources.Domain.Enemies;
-using Sources.Domain.Enemies.Base;
-using Sources.Domain.Gameplay;
+using Sources.Domain.Models.Enemies.Base;
 using Sources.Domain.Models.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Commons;
