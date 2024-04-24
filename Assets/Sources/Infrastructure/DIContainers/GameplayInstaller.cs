@@ -204,6 +204,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IVolumeDtoMapper>().To<VolumeDtoMapper>().AsSingle();
             Container.Bind<ITutorialDtoMapper>().To<TutorialDtoMapper>().AsSingle();
             Container.Bind<IGameDataDtoMapper>().To<GameDataDtoMapper>().AsSingle();
+            Container.Bind<IKillEnemyCounterDtoMapper>().To<KillEnemyCounterDtoMapper>().AsSingle();
         }
         
         private void BindFormFactories()
