@@ -13,11 +13,9 @@ namespace Sources.Frameworks.MVVM.Infrastructure.Builders
         private readonly IBindableViewFactory _bindableViewFactory;
         private readonly IViewModelFactory<TViewModel, TModel> _viewModelFactory;
 
-        public BindableViewBuilder
-        (
+        public BindableViewBuilder(
             IBindableViewFactory bindableViewFactory,
-            IViewModelFactory<TViewModel, TModel> viewModelFactory
-        )
+            IViewModelFactory<TViewModel, TModel> viewModelFactory)
         {
             _bindableViewFactory = bindableViewFactory ??
                                    throw new ArgumentNullException(nameof(bindableViewFactory));
