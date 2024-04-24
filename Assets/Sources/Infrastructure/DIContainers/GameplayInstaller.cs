@@ -226,6 +226,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ShowGameplayHudFormViewModelComponentFactory>().AsSingle();
             Container.Bind<ShowGameplaySettingsFormViewModelComponentFactory>().AsSingle();
             Container.Bind<ShowUpgradeFormViewModelComponentFactory>().AsSingle();
+            Container.Bind<LoadMainMenuViewModelComponentFactory>().AsSingle();
             
             Container
                 .Bind<IViewModelFactory<GameplayHudFormViewModel, GameplayHudForm>>()

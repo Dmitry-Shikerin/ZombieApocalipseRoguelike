@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2051262739961540601}
   - component: {fileID: 4418078311731660582}
   - component: {fileID: 2894928223350485562}
-  - component: {fileID: 3437447357869215823}
+  - component: {fileID: 9176196232974405322}
   m_Layer: 5
   m_Name: ButtonTemplate
   m_TagString: Untagged
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3437447357869215823
+--- !u!114 &9176196232974405322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,10 +131,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1413396975185629582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 509ea0d0ca5541f0aaa3cec3808e001a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5af279acebaf402c8415e751f6d09903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 2894928223350485562}
+  _audioSource: {fileID: 0}
 --- !u!1 &1570481952915506850
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +148,7 @@ GameObject:
   - component: {fileID: 6586649199639147157}
   - component: {fileID: 1315415266561848431}
   m_Layer: 5
-  m_Name: Button_Text
+  m_Name: NewGame_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,8 +170,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: -15.5724}
-  m_SizeDelta: {x: -91.8499, y: -64.6402}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -91.8499, y: -27.3939}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6586649199639147157
 CanvasRenderer:
@@ -200,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Text
+  m_text: New Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d10a2c4b67b4adc4088ef3445a4b6562, type: 2}
   m_sharedMaterial: {fileID: 6254369423063020181, guid: d10a2c4b67b4adc4088ef3445a4b6562, type: 2}
@@ -227,10 +228,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
+  m_fontSize: 22.05
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -263,7 +264,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: 0.000015258789}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
