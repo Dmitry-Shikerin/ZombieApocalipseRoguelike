@@ -1,5 +1,5 @@
 ﻿using Sources.Controllers.Characters.Healths;
-using Sources.Domain.Characters;
+using Sources.Domain.Models.Characters;
 using Sources.PresentationsInterfaces.Views.Character;
 
 namespace Sources.Infrastructure.Factories.Controllers.Characters

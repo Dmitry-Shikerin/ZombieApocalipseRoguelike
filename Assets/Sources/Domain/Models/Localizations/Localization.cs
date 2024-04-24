@@ -1,4 +1,4 @@
-﻿namespace Sources.Domain.Localizations
+﻿namespace Sources.Domain.Models.Localizations
 {
     public enum Localization
     {

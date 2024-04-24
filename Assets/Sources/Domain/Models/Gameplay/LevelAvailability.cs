@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sources.Domain.Gameplay
+namespace Sources.Domain.Models.Gameplay
 {
     public class LevelAvailability
     {

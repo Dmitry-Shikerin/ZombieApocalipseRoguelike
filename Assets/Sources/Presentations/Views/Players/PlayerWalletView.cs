@@ -1,6 +1,5 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Controllers.Players;
-using Sources.Domain.Players;
 using Sources.Presentations.UI.Texts;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.Players;

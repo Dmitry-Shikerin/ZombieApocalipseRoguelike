@@ -2,7 +2,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
-using Sources.Domain.TextViewTypes;
+using Sources.Domain.Models.TextViewTypes;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.UI.Texts;
 using TMPro;

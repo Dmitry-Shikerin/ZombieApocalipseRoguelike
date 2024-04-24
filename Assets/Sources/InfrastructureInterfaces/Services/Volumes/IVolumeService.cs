@@ -1,6 +1,6 @@
 using System;
 using Sources.ControllersInterfaces.ControllerLifetimes;
-using Sources.Domain.Setting;
+using Sources.Domain.Models.Setting;
 
 namespace Sources.InfrastructureInterfaces.Services.Volumes
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Common;
-using Sources.Domain.Characters;
+using Sources.Domain.Models.Characters;
 using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.FirstAidKits;
 using UnityEngine;

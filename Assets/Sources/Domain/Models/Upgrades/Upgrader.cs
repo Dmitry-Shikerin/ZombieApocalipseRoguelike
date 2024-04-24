@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sources.Domain.Data.Common;
-using Sources.Domain.Players;
-using Sources.Domain.Upgrades.Configs;
-using Sources.DomainInterfaces.Data;
+using Sources.Domain.Models.Players;
 using Sources.DomainInterfaces.Entities;
 using Sources.DomainInterfaces.Upgrades;
 
-namespace Sources.Domain.Upgrades
+namespace Sources.Domain.Models.Upgrades
 {
     public class Upgrader : IUpgrader, IEntity
     {

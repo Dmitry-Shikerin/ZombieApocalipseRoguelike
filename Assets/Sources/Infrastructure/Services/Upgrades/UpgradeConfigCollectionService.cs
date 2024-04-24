@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sources.Domain.Upgrades.Configs;
-using Sources.Domain.Upgrades.Configs.Containers;
+using Sources.Domain.Models.Upgrades.Configs;
+using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 
 namespace Sources.Infrastructure.Services.Upgrades

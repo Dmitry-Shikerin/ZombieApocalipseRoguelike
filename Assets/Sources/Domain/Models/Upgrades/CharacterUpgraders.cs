@@ -1,4 +1,4 @@
-﻿namespace Sources.Domain.Upgrades
+﻿namespace Sources.Domain.Models.Upgrades
 {
     public class CharacterUpgraders
     {

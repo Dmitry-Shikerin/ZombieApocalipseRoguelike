@@ -1,10 +1,9 @@
 ﻿using System;
-using Sources.Domain.Data;
-using Sources.DomainInterfaces.Data;
+using Sources.Domain.Models.Data;
 using Sources.DomainInterfaces.Entities;
 using Sources.DomainInterfaces.Players;
 
-namespace Sources.Domain.Players
+namespace Sources.Domain.Models.Players
 {
     public class PlayerWallet : IPlayerWallet, IEntity
     {

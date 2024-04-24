@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Characters.Healths;
-using Sources.Domain.Characters;
+using Sources.Domain.Models.Characters;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Character;

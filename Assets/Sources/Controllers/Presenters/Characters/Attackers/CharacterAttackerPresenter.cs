@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Sources.Controllers.Common;
-using Sources.Domain.Characters.Attackers;
+using Sources.Domain.Models.Characters.Attackers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Character;

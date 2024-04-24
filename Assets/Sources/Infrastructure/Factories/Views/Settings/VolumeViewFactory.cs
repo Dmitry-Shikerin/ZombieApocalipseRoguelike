@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Settings;
-using Sources.Domain.Setting;
+using Sources.Domain.Models.Setting;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Presentations.Views.Settings;
 using Sources.PresentationsInterfaces.Views.Settings;

@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Domain.Enemies.Bosses;
+using Sources.Domain.Models.Enemies.Bosses;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using UnityEngine;

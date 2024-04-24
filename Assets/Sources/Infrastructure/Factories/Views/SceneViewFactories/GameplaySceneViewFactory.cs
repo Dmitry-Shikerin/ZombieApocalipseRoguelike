@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sources.Controllers.Bears.Attacks;
-using Sources.Domain.Abilities;
-using Sources.Domain.Bears;
-using Sources.Domain.Characters;
-using Sources.Domain.Characters.Attackers;
-using Sources.Domain.Data.Common;
-using Sources.Domain.Data.Ids;
-using Sources.Domain.Gameplay;
+using Sources.Domain.Models.Abilities;
+using Sources.Domain.Models.Bears;
+using Sources.Domain.Models.Characters;
+using Sources.Domain.Models.Characters.Attackers;
+using Sources.Domain.Models.Data;
+using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Forms.Gameplay;
-using Sources.Domain.Players;
-using Sources.Domain.Setting;
-using Sources.Domain.Spawners;
-using Sources.Domain.Upgrades;
-using Sources.Domain.Weapons;
+using Sources.Domain.Models.Gameplay;
+using Sources.Domain.Models.Players;
+using Sources.Domain.Models.Setting;
+using Sources.Domain.Models.Spawners;
+using Sources.Domain.Models.Upgrades;
+using Sources.Domain.Models.Weapons;
 using Sources.DomainInterfaces.Payloads;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;
@@ -188,7 +188,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
 
             //TODO можно ли это все дело сделать на компонентах?
             //Character
-            // PlayerWallet playerWallet = new PlayerWallet(10, ModelId.PlayerWallet);
             _playerWalletProvider.PlayerWallet = playerWallet;
             MiniGun minigun = new MiniGun(miniGunAttackUpgrader, 0.1f);
             CharacterHealth characterHealth = new CharacterHealth(characterHealthUpgrader);
@@ -222,7 +221,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _gameOverService.Register(characterHealth);;
 
             //Spawners
-            KillEnemyCounter killEnemyCounter = new KillEnemyCounter();
+            KillEnemyCounter killEnemyCounter = new KillEnemyCounter(ModelId.KillEnemyCounter, 0);
             EnemySpawner enemySpawner = new EnemySpawner();
             _enemySpawnViewFactory.Create(enemySpawner, killEnemyCounter, _rootGameObject.EnemySpawnerView);
             _itemSpawnerViewFactory.Create(new ItemSpawner(), _rootGameObject.ItemSpawnerView);

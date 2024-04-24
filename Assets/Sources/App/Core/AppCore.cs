@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Domain.Payloads;
+using Sources.Domain.Models.Payloads;
 using Sources.InfrastructureInterfaces.Services.SceneServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;

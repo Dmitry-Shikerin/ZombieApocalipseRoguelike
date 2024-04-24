@@ -1,5 +1,5 @@
 ﻿using Sources.Controllers.Settings;
-using Sources.Domain.Setting;
+using Sources.Domain.Models.Setting;
 using Sources.PresentationsInterfaces.Views.Settings;
 
 namespace Sources.Infrastructure.Factories.Controllers.Settings

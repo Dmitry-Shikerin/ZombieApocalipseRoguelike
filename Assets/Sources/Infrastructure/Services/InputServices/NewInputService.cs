@@ -1,5 +1,5 @@
-﻿using Sources.Domain.Constants.LayerMasks;
-using Sources.Domain.Inputs;
+﻿using Sources.Domain.Models.Constants.LayerMasks;
+using Sources.Domain.Models.Inputs;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using UnityEngine;
 

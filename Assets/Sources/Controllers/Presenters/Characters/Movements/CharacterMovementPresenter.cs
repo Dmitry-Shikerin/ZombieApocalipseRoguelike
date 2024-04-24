@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Sources.ControllersInterfaces;
-using Sources.Domain.Characters;
+using Sources.Domain.Models.Characters;
 using Sources.Infrastructure.StateMachines.ContextStateMachines;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;

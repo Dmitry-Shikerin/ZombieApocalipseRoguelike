@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Domain.Localizations;
+using Sources.Domain.Models.Localizations;
 using Sources.InfrastructureInterfaces.Factories.Services;
 using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.Localizations.Translates;

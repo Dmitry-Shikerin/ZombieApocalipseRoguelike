@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ModestTree.Util;
-using Sources.Domain.TextViewTypes;
+using Sources.Domain.Models.TextViewTypes;
 using Sources.InfrastructureInterfaces.Factories.Services;
 using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.Localizations.Translates;

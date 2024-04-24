@@ -1,7 +1,7 @@
-﻿using Sources.Domain.Common;
+﻿using Sources.Domain.Models.Common;
 using UnityEngine;
 
-namespace Sources.Domain.Characters
+namespace Sources.Domain.Models.Characters
 {
     public class CharacterMovement : ObservableModel
     {

@@ -1,6 +1,6 @@
 ﻿using Sources.DomainInterfaces.Payloads;
 
-namespace Sources.Domain.Payloads
+namespace Sources.Domain.Models.Payloads
 {
     public class ScenePayload : IScenePayload
     {

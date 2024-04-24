@@ -1,8 +1,8 @@
 ﻿using System;
 using Sources.Controllers.Presenters.Spawners;
 using Sources.Controllers.Spawners;
-using Sources.Domain.Gameplay;
-using Sources.Domain.Spawners;
+using Sources.Domain.Models.Gameplay;
+using Sources.Domain.Models.Spawners;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.Spawners;

@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Domain.Setting;
+using Sources.Domain.Models.Setting;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 
 namespace Sources.Infrastructure.Services.Volumes

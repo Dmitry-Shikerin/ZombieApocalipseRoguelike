@@ -1,4 +1,4 @@
-﻿namespace Sources.Domain.TextViewTypes
+﻿namespace Sources.Domain.Models.TextViewTypes
 {
     public enum TextViewType
     {

@@ -1,4 +1,4 @@
-﻿using Sources.Domain.Spawners.Types;
+﻿using Sources.Domain.Models.Spawners.Types;
 using Sources.PresentationsInterfaces.Views.Spawners;
 using UnityEngine;
 

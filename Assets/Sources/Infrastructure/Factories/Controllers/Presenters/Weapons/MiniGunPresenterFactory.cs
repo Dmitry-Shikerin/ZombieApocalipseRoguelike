@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Weapons;
-using Sources.Domain.Weapons;
+using Sources.Domain.Models.Weapons;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.PresentationsInterfaces.Views.Weapons;
 

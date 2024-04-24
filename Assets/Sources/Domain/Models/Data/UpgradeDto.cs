@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Sources.DomainInterfaces.Data;
 
-namespace Sources.Domain.Data.Common
+namespace Sources.Domain.Models.Data
 {
     public class UpgradeDto : IDto
     {

@@ -1,7 +1,7 @@
-﻿using Sources.Domain.Enemies.Base;
+﻿using Sources.Domain.Models.Enemies.Base;
 using UnityEngine;
 
-namespace Sources.Domain.Enemies.Bosses
+namespace Sources.Domain.Models.Enemies.Bosses
 {
     public class BossEnemy : Enemy
     {

@@ -1,4 +1,4 @@
-﻿namespace Sources.Domain.Constants
+﻿namespace Sources.Domain.Models.Constants
 {
     public class LeaderBoardName
     {

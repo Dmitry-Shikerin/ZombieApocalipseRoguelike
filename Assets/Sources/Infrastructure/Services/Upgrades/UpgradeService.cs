@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sources.Domain.Players;
-using Sources.Domain.Upgrades;
+using Sources.Domain.Models.Players;
+using Sources.Domain.Models.Upgrades;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Services.Providers;
 using Sources.InfrastructureInterfaces.Services.Upgrades;

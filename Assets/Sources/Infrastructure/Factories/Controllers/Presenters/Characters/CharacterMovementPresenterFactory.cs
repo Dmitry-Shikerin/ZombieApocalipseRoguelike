@@ -1,8 +1,8 @@
 ﻿using System;
 using Sources.Controllers.Characters.Movements;
 using Sources.Controllers.Characters.Movements.States;
-using Sources.Domain.Characters;
-using Sources.Domain.Inputs;
+using Sources.Domain.Models.Characters;
+using Sources.Domain.Models.Inputs;
 using Sources.Infrastructure.StateMachines.ContextStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;

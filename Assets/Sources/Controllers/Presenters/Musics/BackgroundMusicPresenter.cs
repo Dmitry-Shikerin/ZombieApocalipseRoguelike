@@ -2,7 +2,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Controllers.Common;
-using Sources.Domain.AudioSources;
+using Sources.Domain.Models.AudioSources;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.Views.Music;
 using UnityEngine;

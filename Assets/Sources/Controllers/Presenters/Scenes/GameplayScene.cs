@@ -2,6 +2,8 @@
 using Sources.ControllersInterfaces.Scenes;
 using Sources.DomainInterfaces.Payloads;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes;
+using Sources.Infrastructure.Services.SceneLoaderServices;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
@@ -17,7 +19,7 @@ namespace Sources.Controllers.Scenes
     {
         private readonly IUpdateService _updateService;
         private readonly IInputServiceUpdater _inputServiceUpdater;
-        private readonly GameplaySceneViewFactory _gameplaySceneViewFactory;
+        private readonly ILoadSceneService _loadSceneService;
         private readonly ILocalizationService _localizationService;
         private readonly ILoadService _loadService;
         private readonly IUpgradeService _upgradeService;
@@ -27,7 +29,7 @@ namespace Sources.Controllers.Scenes
         public GameplayScene(
             IUpdateService updateService,
             IInputServiceUpdater inputServiceUpdater,
-            GameplaySceneViewFactory gameplaySceneViewFactory,
+            ILoadSceneService loadSceneService,
             ILocalizationService localizationService,
             ILoadService loadService,
             IUpgradeService upgradeService,
@@ -36,8 +38,7 @@ namespace Sources.Controllers.Scenes
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
-            _gameplaySceneViewFactory = gameplaySceneViewFactory ?? 
-                                        throw new ArgumentNullException(nameof(gameplaySceneViewFactory));
+            _loadSceneService = loadSceneService ?? throw new ArgumentNullException(nameof(loadSceneService));
             _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
@@ -47,7 +48,8 @@ namespace Sources.Controllers.Scenes
 
         public void Enter(object payload = null)
         {
-            _gameplaySceneViewFactory.Create(payload as IScenePayload);
+            // _gameplaySceneViewFactory.Create(payload as IScenePayload);
+            _loadSceneService.Load(payload as IScenePayload);
             _localizationService.Translate();
             _gameOverService.Enter();
             _volumeService.Enter();

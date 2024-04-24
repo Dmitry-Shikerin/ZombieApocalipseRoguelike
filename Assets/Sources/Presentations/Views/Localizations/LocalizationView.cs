@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Sources.Domain.Localizations;
+using Sources.Domain.Models.Localizations;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.Localizations;
 using UnityEngine;

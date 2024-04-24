@@ -2,7 +2,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Controllers.Common;
-using Sources.Domain.Spawners;
+using Sources.Domain.Models.Spawners;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.Views.Spawners;
 using Sources.PresentationsInterfaces.Views.FirstAidKits;

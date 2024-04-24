@@ -1,7 +1,7 @@
 ﻿using Sources.InfrastructureInterfaces.StateMachines.ContextStateMachines.Contexts;
 using UnityEngine;
 
-namespace Sources.Domain.Inputs
+namespace Sources.Domain.Models.Inputs
 {
     public class InputData : IContext
     {

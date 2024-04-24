@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Sources.Controllers.Spawners;
-using Sources.Domain.Spawners.Types;
 using Sources.PresentationsInterfaces.Views.Spawners;
 using UnityEngine;
 

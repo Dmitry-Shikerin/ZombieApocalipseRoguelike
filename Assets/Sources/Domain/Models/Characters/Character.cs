@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sources.Controllers.Characters.Attackers;
-using Sources.Domain.Abilities;
-using Sources.Domain.Characters.Attackers;
-using Sources.Domain.Players;
-using Sources.Domain.Weapons;
-using Sources.Presentations.Views.Players;
+using Sources.Domain.Models.Abilities;
+using Sources.Domain.Models.Characters.Attackers;
+using Sources.Domain.Models.Players;
+using Sources.Domain.Models.Weapons;
 
-namespace Sources.Domain.Characters
+namespace Sources.Domain.Models.Characters
 {
     public class Character
     {

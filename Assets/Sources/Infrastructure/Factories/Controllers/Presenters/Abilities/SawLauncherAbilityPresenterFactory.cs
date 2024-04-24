@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Abilities;
-using Sources.Domain.Abilities;
+using Sources.Domain.Models.Abilities;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Abilities;
 

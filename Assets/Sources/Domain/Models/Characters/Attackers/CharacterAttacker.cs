@@ -2,7 +2,7 @@
 using System.Threading;
 using Sources.DomainInterfaces.Weapons;
 
-namespace Sources.Domain.Characters.Attackers
+namespace Sources.Domain.Models.Characters.Attackers
 {
     public class CharacterAttacker
     {

@@ -1,12 +1,12 @@
 ﻿using System;
-using Sources.Domain.Constants;
 using Sources.Domain.Data;
-using Sources.Domain.Data.Ids;
 using Sources.Domain.Models.Constants;
+using Sources.Domain.Models.Data;
+using Sources.Domain.Models.Data.Ids;
 using Sources.DomainInterfaces.Entities;
 using UnityEngine;
 
-namespace Sources.Domain.Setting
+namespace Sources.Domain.Models.Setting
 {
     public class Volume : IEntity
     {

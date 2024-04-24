@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Common;
-using Sources.Domain.Enemies;
+using Sources.Domain.Models.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies;
 
 namespace Sources.Controllers.Enemies

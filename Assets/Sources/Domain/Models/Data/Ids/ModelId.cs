@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sources.Domain.Gameplay;
-using Sources.Domain.Players;
-using Sources.Domain.Setting;
-using Sources.Domain.Upgrades;
+using Sources.Domain.Models.Gameplay;
+using Sources.Domain.Models.Players;
+using Sources.Domain.Models.Setting;
+using Sources.Domain.Models.Upgrades;
 
-namespace Sources.Domain.Data.Ids
+namespace Sources.Domain.Models.Data.Ids
 {
     public static class ModelId
     {
@@ -17,6 +17,7 @@ namespace Sources.Domain.Data.Ids
         public const string CharacterHealthUpgrader = "CharacterHealthUpgrader";
         public const string BearAttackUpgrader = "BearAttackUpgrader";
         public const string BearMassAttackUpgrader = "BearMassAttackUpgrader";
+        public const string KillEnemyCounter = "KillEnemyCounter";
         
         //commonModels
         public const string Volume = "Volume";
@@ -36,11 +37,13 @@ namespace Sources.Domain.Data.Ids
              MiniGunAttackUpgrader,
              CharacterHealthUpgrader,
              BearAttackUpgrader,
-             BearMassAttackUpgrader
+             BearMassAttackUpgrader,
+             KillEnemyCounter,
         };
 
         public static IReadOnlyDictionary<string, Type> ModelTypes = new Dictionary<string, Type>()
         {
+            [KillEnemyCounter] = typeof(KillEnemyCounter),
             [Tutorial] = typeof(Tutorial),
             [GameData] = typeof(GameData),
             [Volume] = typeof(Volume),

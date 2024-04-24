@@ -2,7 +2,7 @@
 using Sources.DomainInterfaces.Healths;
 using UnityEngine;
 
-namespace Sources.Domain.Enemies
+namespace Sources.Domain.Models.Enemies
 {
     public class EnemyHealth : IHealth
     {

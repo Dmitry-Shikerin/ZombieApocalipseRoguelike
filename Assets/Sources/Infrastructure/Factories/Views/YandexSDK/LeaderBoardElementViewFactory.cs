@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.YandexSDK;
-using Sources.Domain.YandexSDK;
+using Sources.Domain.Models.YandexSDK;
 using Sources.Infrastructure.Factories.Controllers.YandexSDK;
 using Sources.Presentations.Views.YandexSDK;
 using Sources.PresentationsInterfaces.Views.YandexSDK;

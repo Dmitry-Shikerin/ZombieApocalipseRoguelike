@@ -1,5 +1,5 @@
-﻿using Sources.Domain.Enemies.Bosses;
-using Sources.Domain.Gameplay;
+﻿using Sources.Domain.Models.Enemies.Bosses;
+using Sources.Domain.Models.Gameplay;
 using Sources.Presentations.Views.Enemies.Bosses;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 

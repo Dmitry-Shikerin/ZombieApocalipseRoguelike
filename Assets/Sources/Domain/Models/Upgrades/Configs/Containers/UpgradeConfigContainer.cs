@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Sources.Domain.Dictionaries;
 using UnityEngine;
 
-namespace Sources.Domain.Upgrades.Configs.Containers
+namespace Sources.Domain.Models.Upgrades.Configs.Containers
 {
     [CreateAssetMenu(
         fileName = "UpgradeConfigContainer",

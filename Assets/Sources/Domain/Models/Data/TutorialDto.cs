@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Sources.DomainInterfaces.Data;
 
-namespace Sources.Domain.Data
+namespace Sources.Domain.Models.Data
 {
     public class TutorialDto : IDto
     {

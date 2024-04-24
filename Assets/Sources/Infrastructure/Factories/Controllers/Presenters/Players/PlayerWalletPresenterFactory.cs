@@ -1,5 +1,4 @@
 ﻿using Sources.Controllers.Players;
-using Sources.Domain.Players;
 using Sources.DomainInterfaces.Players;
 using Sources.PresentationsInterfaces.Views.Players;
 

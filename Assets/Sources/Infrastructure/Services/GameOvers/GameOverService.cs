@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Domain.Characters;
+using Sources.Domain.Models.Characters;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 
 namespace Sources.Infrastructure.Services.GameOvers
