@@ -239,6 +239,18 @@ namespace Sources.Infrastructure.DIContainers
                 .Bind<IViewModelFactory<UpgradeFormViewModel, UpgradeForm>>()
                 .To<UpgradeFormViewModelFactory>()
                 .AsSingle();
+            Container
+                .Bind<IViewModelFactory<GameOverFormViewModel, GameOverForm>>()
+                .To<GameOverFormViewModelFactory>()
+                .AsSingle();
+            Container
+                .Bind<IViewModelFactory<LevelCompletedFormViewModel, LevelCompletedForm>>()
+                .To<LevelCompletedFormViewModelFactory>()
+                .AsSingle();
+            Container
+                .Bind<IViewModelFactory<TutorialFormViewModel, TutorialForm>>()
+                .To<TutorialFormViewModelFactory>()
+                .AsSingle();
 
             Container
                 .Bind<IBindableViewBuilder<PauseFormViewModel, PauseForm>>()
@@ -255,6 +267,19 @@ namespace Sources.Infrastructure.DIContainers
             Container
                 .Bind<IBindableViewBuilder<UpgradeFormViewModel, UpgradeForm>>()
                 .To<BindableViewBuilder<UpgradeFormViewModel, UpgradeForm>>()
+                .AsSingle();
+            Container
+                .Bind<IBindableViewBuilder<GameOverFormViewModel, GameOverForm>>()
+                .To<BindableViewBuilder<GameOverFormViewModel, GameOverForm>>()
+                .AsSingle();
+            Container
+                .Bind<IBindableViewBuilder<LevelCompletedFormViewModel, LevelCompletedForm>>()
+                .To<BindableViewBuilder<LevelCompletedFormViewModel, LevelCompletedForm>>()
+                .AsSingle();
+            Container
+                .Bind<IBindableViewBuilder<TutorialFormViewModel, TutorialForm>>()
+                .To<BindableViewBuilder<TutorialFormViewModel, TutorialForm>>()
+                
                 .AsSingle();
         }
 
