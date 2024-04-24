@@ -10,20 +10,20 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
     public class PauseFormViewModelFactory : IViewModelFactory<PauseFormViewModel, PauseForm>
     {
         private readonly VisibilityViewModelComponentFactory _visibilityViewModelComponentFactory;
-        private readonly ShowHudFormViewModelComponentFactory _showHudFormViewModelComponentFactory;
+        private readonly ShowGameplayHudFormViewModelComponentFactory _showGameplayHudFormViewModelComponentFactory;
         private readonly ShowGameplaySettingsFormViewModelComponentFactory _showGameplaySettingsFormViewModelComponentFactory;
 
         public PauseFormViewModelFactory(
             VisibilityViewModelComponentFactory visibilityViewModelComponentFactory,
-            ShowHudFormViewModelComponentFactory showHudFormViewModelComponentFactory,
+            ShowGameplayHudFormViewModelComponentFactory showGameplayHudFormViewModelComponentFactory,
             ShowGameplaySettingsFormViewModelComponentFactory showGameplaySettingsFormViewModelComponentFactory)
         {
             _visibilityViewModelComponentFactory = 
                 visibilityViewModelComponentFactory ?? 
                 throw new ArgumentNullException(nameof(visibilityViewModelComponentFactory));
-            _showHudFormViewModelComponentFactory = 
-                showHudFormViewModelComponentFactory ??
-                throw new ArgumentNullException(nameof(showHudFormViewModelComponentFactory));
+            _showGameplayHudFormViewModelComponentFactory = 
+                showGameplayHudFormViewModelComponentFactory ??
+                throw new ArgumentNullException(nameof(showGameplayHudFormViewModelComponentFactory));
             _showGameplaySettingsFormViewModelComponentFactory =
                 showGameplaySettingsFormViewModelComponentFactory ??
                 throw new ArgumentNullException(nameof(showGameplaySettingsFormViewModelComponentFactory));
@@ -35,7 +35,7 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
                 new IViewModelComponent[]
                 {
                     _visibilityViewModelComponentFactory.Create(model),
-                    _showHudFormViewModelComponentFactory.Create(),
+                    _showGameplayHudFormViewModelComponentFactory.Create(),
                     _showGameplaySettingsFormViewModelComponentFactory.Create(),
                 });
         }
