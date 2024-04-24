@@ -20,7 +20,6 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
     {
         private readonly IUpdateService _updateService;
         private readonly IInputServiceUpdater _inputServiceUpdater;
-        private readonly GameplaySceneViewFactory _gameplaySceneViewFactory;
         private readonly ILocalizationService _localizationService;
         private readonly ILoadService _loadService;
         private readonly IUpgradeService _upgradeService;
@@ -32,7 +31,6 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         public GameplaySceneFactory(
             IUpdateService updateService,
             IInputServiceUpdater inputServiceUpdater,
-            GameplaySceneViewFactory gameplaySceneViewFactory,
             ILocalizationService localizationService,
             ILoadService loadService,
             IUpgradeService upgradeService,
@@ -43,8 +41,6 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
-            _gameplaySceneViewFactory = gameplaySceneViewFactory ??
-                                        throw new ArgumentNullException(nameof(gameplaySceneViewFactory));
             _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));

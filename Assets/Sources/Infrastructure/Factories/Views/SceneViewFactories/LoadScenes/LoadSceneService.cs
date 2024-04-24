@@ -29,6 +29,7 @@ using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
+using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
@@ -67,7 +68,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
             CameraViewFactory cameraViewFactory, 
             ICameraService cameraService, 
             VolumeViewFactory volumeViewFactory, 
-            IVolumeService volumeService) 
+            IVolumeService volumeService,
+            ISaveService saveService) 
             : base(
                 gameplayHud, 
                 gameplayFormServiceFactory, 
@@ -91,7 +93,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
                 cameraViewFactory, 
                 cameraService, 
                 volumeViewFactory, 
-                volumeService)
+                volumeService,
+                saveService)
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
