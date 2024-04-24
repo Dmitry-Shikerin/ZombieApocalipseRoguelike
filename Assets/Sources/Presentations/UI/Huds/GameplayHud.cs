@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay;
 using Sources.Presentations.BindableViews.Forms.Gameplay;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
@@ -26,6 +27,12 @@ namespace Sources.Presentations.UI.Huds
         private GameplaySettingsFormBindableView _gameplaySettingsFormBindableView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
         private UpgradeFormBindableView _upgradeFormBindableView;
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private GameOverFormBindableView _gameOverFormBindableView;
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private LevelCompletedFormBindableView _levelCompletedFormBindableView;
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private TutorialFormBindableView _tutorialFormBindableView;
 
         [FormerlySerializedAs("cinemachineCameraView")]
         [Button(ButtonSizes.Large)] 
@@ -74,6 +81,9 @@ namespace Sources.Presentations.UI.Huds
         public GameplayHudFormBindableView GameplayHudFormBindableView => _gameplayHudFormBindableView;
         public GameplaySettingsFormBindableView GameplaySettingsFormBindableView => _gameplaySettingsFormBindableView;
         public UpgradeFormBindableView UpgradeFormBindableView => _upgradeFormBindableView;
+        public GameOverFormBindableView GameOverFormBindableView => _gameOverFormBindableView;
+        public LevelCompletedFormBindableView LevelCompletedFormBindableView => _levelCompletedFormBindableView;
+        public TutorialFormBindableView TutorialFormBindableView => _tutorialFormBindableView;
         
         public CinemachineCameraView CinemachineCameraView => _cinemachineCameraView;
 

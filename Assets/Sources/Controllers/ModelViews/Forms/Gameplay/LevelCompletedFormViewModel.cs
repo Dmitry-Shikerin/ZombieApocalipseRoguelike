@@ -2,9 +2,9 @@
 
 namespace Sources.Controllers.ModelViews.Forms.Gameplay
 {
-    public class LevelCompleteFormViewModel : ViewModelBase
+    public class LevelCompletedFormViewModel : ViewModelBase
     {
-        public LevelCompleteFormViewModel(IViewModelComponent[] components) : base(components)
+        public LevelCompletedFormViewModel(IViewModelComponent[] components) : base(components)
         {
         }
 
