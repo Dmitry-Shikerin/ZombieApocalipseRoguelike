@@ -279,7 +279,6 @@ namespace Sources.Infrastructure.DIContainers
             Container
                 .Bind<IBindableViewBuilder<TutorialFormViewModel, TutorialForm>>()
                 .To<BindableViewBuilder<TutorialFormViewModel, TutorialForm>>()
-                
                 .AsSingle();
         }
 
