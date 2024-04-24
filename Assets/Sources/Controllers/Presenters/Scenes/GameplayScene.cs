@@ -8,6 +8,7 @@ using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Localizations;
+using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
@@ -25,6 +26,7 @@ namespace Sources.Controllers.Scenes
         private readonly IUpgradeService _upgradeService;
         private readonly IGameOverService _gameOverService;
         private readonly IVolumeService _volumeService;
+        private readonly ISaveService _saveService;
 
         public GameplayScene(
             IUpdateService updateService,
@@ -34,7 +36,8 @@ namespace Sources.Controllers.Scenes
             ILoadService loadService,
             IUpgradeService upgradeService,
             IGameOverService gameOverService,
-            IVolumeService volumeService)
+            IVolumeService volumeService,
+            ISaveService saveService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -44,15 +47,16 @@ namespace Sources.Controllers.Scenes
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
             _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
+            _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
         }
 
         public void Enter(object payload = null)
         {
-            // _gameplaySceneViewFactory.Create(payload as IScenePayload);
             _loadSceneService.Load(payload as IScenePayload);
             _localizationService.Translate();
             _gameOverService.Enter();
             _volumeService.Enter();
+            _saveService.Enter();
             //TODO раскоментировать UpgradeService
             // _upgradeService.Enable();
         }
@@ -63,6 +67,7 @@ namespace Sources.Controllers.Scenes
             _updateService.UnregisterAll();
             _gameOverService.Exit();
             _volumeService.Exit();
+            _saveService.Exit();
         }
 
         public void Update(float deltaTime)

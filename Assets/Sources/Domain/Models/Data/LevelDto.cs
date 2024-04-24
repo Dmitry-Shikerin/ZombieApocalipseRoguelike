@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Sources.DomainInterfaces.Data;
+using Sources.DomainInterfaces.Models.Data;
 
 namespace Sources.Domain.Models.Data
 {

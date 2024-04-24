@@ -10,6 +10,7 @@ using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Localizations;
+using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
@@ -20,7 +21,6 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
     {
         private readonly IUpdateService _updateService;
         private readonly IInputServiceUpdater _inputServiceUpdater;
-        private readonly GameplaySceneViewFactory _gameplaySceneViewFactory;
         private readonly ILocalizationService _localizationService;
         private readonly ILoadService _loadService;
         private readonly IUpgradeService _upgradeService;
@@ -28,23 +28,22 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly IVolumeService _volumeService;
         private readonly LoadSceneService _loadSceneService;
         private readonly CreateSceneService _createSceneService;
+        private readonly ISaveService _saveService;
 
         public GameplaySceneFactory(
             IUpdateService updateService,
             IInputServiceUpdater inputServiceUpdater,
-            GameplaySceneViewFactory gameplaySceneViewFactory,
             ILocalizationService localizationService,
             ILoadService loadService,
             IUpgradeService upgradeService,
             IGameOverService gameOverService,
             IVolumeService volumeService,
             LoadSceneService loadSceneService,
-            CreateSceneService createSceneService) 
+            CreateSceneService createSceneService,
+            ISaveService saveService) 
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
-            _gameplaySceneViewFactory = gameplaySceneViewFactory ??
-                                        throw new ArgumentNullException(nameof(gameplaySceneViewFactory));
             _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
@@ -52,6 +51,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _loadSceneService = loadSceneService ?? throw new ArgumentNullException(nameof(loadSceneService));
             _createSceneService = createSceneService ?? throw new ArgumentNullException(nameof(createSceneService));
+            _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
         }
 
         public async UniTask<IScene> Create(object payload)
@@ -64,7 +64,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _loadService,
                 _upgradeService,
                 _gameOverService,
-                _volumeService);
+                _volumeService,
+                _saveService);
         }
 
         private ILoadSceneService CreateLoadSceneService(object payload)

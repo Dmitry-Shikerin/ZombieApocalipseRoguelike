@@ -30,6 +30,7 @@ using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
+using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
@@ -68,7 +69,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
             CameraViewFactory cameraViewFactory,
             ICameraService cameraService,
             VolumeViewFactory volumeViewFactory,
-            IVolumeService volumeService)
+            IVolumeService volumeService,
+            ISaveService saveService)
             : base(
                 gameplayHud,
                 gameplayFormServiceFactory,
@@ -92,7 +94,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
                 cameraViewFactory,
                 cameraService,
                 volumeViewFactory,
-                volumeService)
+                volumeService,
+                saveService)
         {
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));
@@ -102,10 +105,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
 
         protected override GameModels LoadModels(IScenePayload scenePayload)
         {
-            Debug.Log("CreateModels");
             Volume volume = new Volume();
+            _entityRepository.Add(volume);
 
             Level level = new Level(scenePayload.SceneId, false);
+            _entityRepository.Add(level);
 
             PlayerWallet playerWallet = CreatePlayerWallet();
 
@@ -139,8 +143,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
             Bear bear = new Bear(bearAttacker);
 
             KillEnemyCounter killEnemyCounter = new KillEnemyCounter(ModelId.KillEnemyCounter, 0);
+            _entityRepository.Add(killEnemyCounter);
             EnemySpawner enemySpawner = new EnemySpawner();
 
+            Debug.Log("CreateModels");
             return new GameModels(
                 bearMassAttackUpgrader,
                 bearAttackUpgrader,

@@ -22,11 +22,18 @@ namespace Sources.Infrastructure.Factories.Domain.Data
 
         public UpgradeDto MapModelToDto(Upgrader upgrader)
         {
+            MoneyPerUpgradeDto[] moneyPerUpgrades =
+                upgrader.MoneyPerUpgrades
+                    .Select(money => new MoneyPerUpgradeDto() { MoneyPerUpgrade = money, })
+                    .ToArray();
+            
             return new UpgradeDto()
             {
+                StartAmount = upgrader.StartAmount,
                 MaxLevel = upgrader.MaxLevel,
                 CurrentLevel = upgrader.CurrentLevel,
                 AddedAmount = upgrader.AddedAmount,
+                MoneyPerUpgrades = moneyPerUpgrades,
                 Id = upgrader.Id,
             };
         }

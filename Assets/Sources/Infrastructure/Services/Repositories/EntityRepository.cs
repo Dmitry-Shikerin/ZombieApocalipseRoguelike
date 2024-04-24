@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sources.DomainInterfaces.Entities;
+using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Repositories
 {
@@ -20,8 +21,11 @@ namespace Sources.Infrastructure.Services.Repositories
 
         public IEntity Get(string id)
         {
-            if(_entities.ContainsKey(id) == false)
+            if (_entities.ContainsKey(id) == false)
+            {
+                Debug.Log(id);
                 throw new InvalidOperationException("Entity with this Id does not exist");
+            }
             
             return _entities[id];
         }

@@ -1,4 +1,4 @@
-﻿namespace Sources.DomainInterfaces.Data
+﻿namespace Sources.DomainInterfaces.Models.Data
 {
     public interface IDto
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Sources.DomainInterfaces.Data;
+using Sources.DomainInterfaces.Models.Data;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using UnityEngine;
 
@@ -9,24 +9,28 @@ namespace Sources.Infrastructure.Services.LoadServices.Data
     public class PlayerPrefsDataService : IDataService
     {
         public T LoadData<T>(string key)
-            where T : IDto
+            where T : IDto => 
+            (T)LoadData(key, typeof(T));
+
+        public object LoadData(string key, Type dtoType)
         {
             string json = PlayerPrefs.GetString(key, string.Empty);
 
-            return JsonConvert.DeserializeObject<T>(json);
-        }
-        
-        public object LoadData(string key, Type type)
-        {
-            string json = PlayerPrefs.GetString(key, string.Empty);
+            if (string.IsNullOrEmpty(json))
+            {
+                Debug.Log($"{key}");
+                throw new NullReferenceException(nameof(json));
+            }
 
-            return JsonConvert.DeserializeObject(json, type);
+            return JsonConvert.DeserializeObject(json, dtoType) ?? 
+                   throw new NullReferenceException(nameof(json));
         }
 
         public void SaveData<T>(T dataModel, string key)
             where T : IDto
         {
-            string json = JsonConvert.SerializeObject(dataModel);
+            string json = JsonConvert.SerializeObject(dataModel) ?? 
+                          throw new NullReferenceException(nameof(dataModel));
             
             PlayerPrefs.SetString(key, json);
         }

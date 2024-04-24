@@ -66,6 +66,7 @@ using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.Services.PauseServices;
 using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
+using Sources.Infrastructure.Services.Saves;
 using Sources.Infrastructure.Services.Spawners;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Infrastructure.Services.Upgrades;
@@ -87,6 +88,7 @@ using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
+using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.Presentations.UI.Huds;
@@ -119,7 +121,6 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
             Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
-            Container.Bind<GameplaySceneViewFactory>().AsSingle();
             Container.Bind<IUpgradeCollectionService>().To<UpgradeCollectionService>().AsSingle();
             Container.Bind<IUpgradeService>().To<UpgradeService>().AsSingle();
             Container.Bind<PlayerWalletProvider>().AsSingle();
@@ -178,6 +179,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ICameraService>().To<CameraService>().AsSingle();
             Container.Bind<LoadSceneService>().AsSingle();
             Container.Bind<CreateSceneService>().AsSingle();
+            Container.Bind<ISaveService>().To<SaveService>().AsSingle();
         }
 
         private void BindGameplay()
@@ -202,7 +204,7 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.Bind<IUpgradeDtoMapper>().To<UpgradeDtoMapper>().AsSingle();
             Container.Bind<IPlayerWalletDtoMapper>()
-                .To<PlayerWalletDtoMapperMapper>().AsSingle();
+                .To<PlayerWalletDtoMapper>().AsSingle();
             Container.Bind<ILevelDtoMapper>().To<LevelDtoMapper>().AsSingle();
             Container.Bind<IVolumeDtoMapper>().To<VolumeDtoMapper>().AsSingle();
             Container.Bind<ITutorialDtoMapper>().To<TutorialDtoMapper>().AsSingle();

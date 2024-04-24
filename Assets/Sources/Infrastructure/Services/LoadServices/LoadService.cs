@@ -7,8 +7,8 @@ using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Setting;
 using Sources.Domain.Models.Upgrades;
-using Sources.DomainInterfaces.Data;
 using Sources.DomainInterfaces.Entities;
+using Sources.DomainInterfaces.Models.Data;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
@@ -55,19 +55,19 @@ namespace Sources.Infrastructure.Services.LoadServices
                 model => killEnemyCounterDtoMapper.MapModelToDto(model as KillEnemyCounter);
 
             _toModelMappers = new Dictionary<Type, Func<IDto, IEntity>>();
-            _toModelMappers[typeof(Upgrader)] =
+            _toModelMappers[typeof(UpgradeDto)] =
                 dto => upgradeDtoMapper.MapDtoToModel(dto as UpgradeDto);
-            _toModelMappers[typeof(PlayerWallet)] =
+            _toModelMappers[typeof(PlayerWalletDto)] =
                 dto => playerWalletDtoMapper.MapDtoToModel(dto as PlayerWalletDto);
-            _toModelMappers[typeof(Volume)] =
+            _toModelMappers[typeof(VolumeDto)] =
                 dto => volumeDtoMapper.MapDtoToModel(dto as VolumeDto);
-            _toModelMappers[typeof(Level)] =
+            _toModelMappers[typeof(LevelDto)] =
                 dto => levelDtoMapper.MapDtoToModel(dto as LevelDto);
-            _toModelMappers[typeof(GameData)] =
+            _toModelMappers[typeof(GameDataDto)] =
                 dto => gameDataDtoMapper.MapDtoToModel(dto as GameDataDto);
-            _toModelMappers[typeof(Tutorial)] =
+            _toModelMappers[typeof(TutorialDto)] =
                 dto => tutorialDtoMapper.MapDtoToModel(dto as TutorialDto);
-            _toModelMappers[typeof(KillEnemyCounter)] =
+            _toModelMappers[typeof(KillEnemyCounterDto)] =
                 dto => killEnemyCounterDtoMapper.MapDtoToModel(dto as KillEnemyCounterDto);
         }
 
@@ -94,8 +94,10 @@ namespace Sources.Infrastructure.Services.LoadServices
         {
             foreach (string id in ModelId.ModelsIds)
             {
-                object dto = _dataService.LoadData(id, ModelId.ModelTypes[id]);
-                IEntity model = _toModelMappers[ModelId.ModelTypes[id]].Invoke((IDto)dto);
+                Type modelType = ModelId.ModelTypes[id];
+                object dto = _dataService.LoadData(id, modelType);
+                Func<IDto, IEntity> mapper = _toModelMappers[modelType];
+                IEntity model = mapper.Invoke((IDto)dto);
                 _entityRepository.Add(model);
                 Debug.Log($"Saved {model.GetType()}");
             }
@@ -109,13 +111,15 @@ namespace Sources.Infrastructure.Services.LoadServices
                     throw new NullReferenceException("DtaModel Id is not registered in LoadService");
 
                 _dataService.SaveData(_toDtoMappers[dataModel.Type].Invoke(dataModel), dataModel.Id);
+                
+                //TOdo сделать валидацию на сохранение
                 Debug.Log($"Saved {dataModel.GetType()}");
             }
         }
 
         public void ClearAll()
         {
-            foreach (string id in ModelId.ModelsIds)
+            foreach (string id in ModelId.DeletedModelsIds)
                 _dataService.Clear(id);
         }
 

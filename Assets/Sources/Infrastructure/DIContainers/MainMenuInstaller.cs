@@ -23,9 +23,11 @@ using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.YandexSDK;
 using Sources.Infrastructure.Services.Forms;
+using Sources.Infrastructure.Services.LoadServices.Data;
 using Sources.Infrastructure.Services.UseCases.Commands;
 using Sources.Infrastructure.Services.UseCases.Queries;
 using Sources.Infrastructure.Services.YandexSDKServices;
+using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
@@ -64,6 +66,7 @@ namespace Sources.Infrastructure.DIContainers
         private void BindServices()
         {
             Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
+            Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
             Container.Bind<ILeaderBoardInitializeService>().To<YandexLeaderBoardInitializeService>().AsSingle();
             Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
         }

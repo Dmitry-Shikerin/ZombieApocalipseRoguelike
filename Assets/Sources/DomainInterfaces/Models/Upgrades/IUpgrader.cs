@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Sources.DomainInterfaces.Data;
 using Sources.DomainInterfaces.Entities;
 
 namespace Sources.DomainInterfaces.Upgrades

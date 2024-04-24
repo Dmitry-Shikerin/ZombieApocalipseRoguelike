@@ -21,6 +21,7 @@ using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
+using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
@@ -29,6 +30,7 @@ using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.RootGameObjects;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
@@ -58,6 +60,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
         private readonly ICameraService _cameraService;
         private readonly VolumeViewFactory _volumeViewFactory;
         private readonly IVolumeService _volumeService;
+        private readonly ISaveService _saveService;
 
         protected LoadSceneServiceBase(GameplayHud gameplayHud,
             GameplayFormServiceFactory gameplayFormServiceFactory,
@@ -81,7 +84,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
             CameraViewFactory cameraViewFactory,
             ICameraService cameraService,
             VolumeViewFactory volumeViewFactory,
-            IVolumeService volumeService)
+            IVolumeService volumeService,
+            ISaveService saveService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ?? 
@@ -117,6 +121,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
             _cameraService = cameraService ?? throw new ArgumentNullException(nameof(cameraService));
             _volumeViewFactory = volumeViewFactory ?? throw new ArgumentNullException(nameof(volumeViewFactory));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
+            _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
         }
 
         public void Load(IScenePayload scenePayload)
@@ -127,11 +132,16 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
             _volumeService.Register(gameModels.Volume);
             _volumeViewFactory.Create(gameModels.Volume, _gameplayHud.VolumeView);
             
+            //SaveService
+            _saveService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
+            
             //FormService
             _gameplayFormServiceFactory.Create().Show<GameplayHudForm>();
 
             //Upgrades
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
+            
+            Debug.Log(upgraders.Count);
 
             for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
             {
@@ -140,6 +150,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
 
                 _upgradeUiFactory.Create(upgrader, view);
             }
+            // for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
+            // {
+            //     var view = _gameplayHud.NotAvailabilityUpgradeUis[i];
+            //     var upgrader = upgraders[i];
+            //
+            //     _upgradeUiFactory.Create(upgrader, view);
+            // }
 
             //TODO можно ли это все дело сделать на компонентах?
             //Character
@@ -171,7 +188,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
             _cameraService.Add<CharacterView>(characterView);
             _cameraService.Add<AllMapPoint>(_rootGameObject.AllMapPoint);
             
-            _cameraService.SetFollower<AllMapPoint>();
+            _cameraService.SetFollower<CharacterView>();
             
             _cameraViewFactory.Create(_gameplayHud.CinemachineCameraView);
         }
