@@ -10,6 +10,7 @@ using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Localizations;
+using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
@@ -27,6 +28,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly IVolumeService _volumeService;
         private readonly LoadSceneService _loadSceneService;
         private readonly CreateSceneService _createSceneService;
+        private readonly ISaveService _saveService;
 
         public GameplaySceneFactory(
             IUpdateService updateService,
@@ -37,7 +39,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             IGameOverService gameOverService,
             IVolumeService volumeService,
             LoadSceneService loadSceneService,
-            CreateSceneService createSceneService) 
+            CreateSceneService createSceneService,
+            ISaveService saveService) 
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -48,6 +51,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _loadSceneService = loadSceneService ?? throw new ArgumentNullException(nameof(loadSceneService));
             _createSceneService = createSceneService ?? throw new ArgumentNullException(nameof(createSceneService));
+            _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
         }
 
         public async UniTask<IScene> Create(object payload)
@@ -60,7 +64,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _loadService,
                 _upgradeService,
                 _gameOverService,
-                _volumeService);
+                _volumeService,
+                _saveService);
         }
 
         private ILoadSceneService CreateLoadSceneService(object payload)

@@ -1,5 +1,4 @@
-﻿using Sources.DomainInterfaces.Data;
-using Sources.DomainInterfaces.Entities;
+﻿using Sources.DomainInterfaces.Entities;
 
 namespace Sources.InfrastructureInterfaces.Services.LoadServices
 {

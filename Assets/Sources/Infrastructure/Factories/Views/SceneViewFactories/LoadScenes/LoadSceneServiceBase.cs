@@ -30,6 +30,7 @@ using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.RootGameObjects;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
@@ -139,6 +140,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
 
             //Upgrades
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
+            
+            Debug.Log(upgraders.Count);
 
             for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
             {
@@ -147,6 +150,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
 
                 _upgradeUiFactory.Create(upgrader, view);
             }
+            // for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
+            // {
+            //     var view = _gameplayHud.NotAvailabilityUpgradeUis[i];
+            //     var upgrader = upgraders[i];
+            //
+            //     _upgradeUiFactory.Create(upgrader, view);
+            // }
 
             //TODO можно ли это все дело сделать на компонентах?
             //Character
@@ -178,7 +188,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
             _cameraService.Add<CharacterView>(characterView);
             _cameraService.Add<AllMapPoint>(_rootGameObject.AllMapPoint);
             
-            _cameraService.SetFollower<AllMapPoint>();
+            _cameraService.SetFollower<CharacterView>();
             
             _cameraViewFactory.Create(_gameplayHud.CinemachineCameraView);
         }

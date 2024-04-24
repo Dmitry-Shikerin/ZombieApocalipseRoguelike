@@ -105,10 +105,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
 
         protected override GameModels LoadModels(IScenePayload scenePayload)
         {
-            Debug.Log("CreateModels");
             Volume volume = new Volume();
+            _entityRepository.Add(volume);
 
             Level level = new Level(scenePayload.SceneId, false);
+            _entityRepository.Add(level);
 
             PlayerWallet playerWallet = CreatePlayerWallet();
 
@@ -142,8 +143,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
             Bear bear = new Bear(bearAttacker);
 
             KillEnemyCounter killEnemyCounter = new KillEnemyCounter(ModelId.KillEnemyCounter, 0);
+            _entityRepository.Add(killEnemyCounter);
             EnemySpawner enemySpawner = new EnemySpawner();
 
+            Debug.Log("CreateModels");
             return new GameModels(
                 bearMassAttackUpgrader,
                 bearAttackUpgrader,

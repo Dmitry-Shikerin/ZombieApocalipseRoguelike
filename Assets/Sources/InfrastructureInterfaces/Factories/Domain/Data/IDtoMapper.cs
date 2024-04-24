@@ -1,5 +1,5 @@
-using Sources.DomainInterfaces.Data;
 using Sources.DomainInterfaces.Entities;
+using Sources.DomainInterfaces.Models.Data;
 
 namespace Sources.InfrastructureInterfaces.Factories.Domain.Data
 {

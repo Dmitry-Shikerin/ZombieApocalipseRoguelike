@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Sources.DomainInterfaces.Data;
+using Sources.DomainInterfaces.Models.Data;
 
 namespace Sources.Domain.Models.Data
 {
@@ -11,7 +11,7 @@ namespace Sources.Domain.Models.Data
         [JsonProperty("maxLevel")]
         public int MaxLevel { get; set; }
         
-        [JsonProperty("maxLevel")]
+        [JsonProperty("startAmount")]
         public float StartAmount { get; set; }
         
         [JsonProperty("addedAmount")]

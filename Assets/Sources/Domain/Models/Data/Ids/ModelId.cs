@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sources.Domain.Models.Gameplay;
-using Sources.Domain.Models.Players;
-using Sources.Domain.Models.Setting;
-using Sources.Domain.Models.Upgrades;
 
 namespace Sources.Domain.Models.Data.Ids
 {
@@ -18,46 +14,60 @@ namespace Sources.Domain.Models.Data.Ids
         public const string BearAttackUpgrader = "BearAttackUpgrader";
         public const string BearMassAttackUpgrader = "BearMassAttackUpgrader";
         public const string KillEnemyCounter = "KillEnemyCounter";
-        
+
         //commonModels
         public const string Volume = "Volume";
         public const string GameData = "GameData";
         public const string Tutorial = "Tutorial";
-        public const string FirstLevel = "FirstLevel";
-        public const string SecondLevel = "SecondLevel";
-        public const string ThirdLevel = "ThirdLevel";
-        public const string FourthLevel = "FourthLevel";
+        public const string Gameplay = "Gameplay";
+        public const string Gameplay2 = "Gameplay2";
+        public const string Gameplay3 = "Gameplay3";
+        public const string Gameplay4 = "Gameplay4";
+
+        public static IReadOnlyList<string> DeletedModelsIds = new List<string>()
+        {
+            SawLauncherAbilityUpgrader,
+            SawLauncherUpgrader,
+            PlayerWallet,
+            MiniGunAttackUpgrader,
+            CharacterHealthUpgrader,
+            BearAttackUpgrader,
+            BearMassAttackUpgrader,
+            KillEnemyCounter,
+        };
         
         //todo переделать
         public static IReadOnlyList<string> ModelsIds = new List<string>()
         {
-             SawLauncherAbilityUpgrader,
-             SawLauncherUpgrader,
-             PlayerWallet,
-             MiniGunAttackUpgrader,
-             CharacterHealthUpgrader,
-             BearAttackUpgrader,
-             BearMassAttackUpgrader,
-             KillEnemyCounter,
+            Gameplay,
+            Volume,
+            SawLauncherAbilityUpgrader,
+            SawLauncherUpgrader,
+            PlayerWallet,
+            MiniGunAttackUpgrader,
+            CharacterHealthUpgrader,
+            BearAttackUpgrader,
+            BearMassAttackUpgrader,
+            KillEnemyCounter,
         };
 
         public static IReadOnlyDictionary<string, Type> ModelTypes = new Dictionary<string, Type>()
         {
-            [KillEnemyCounter] = typeof(KillEnemyCounter),
-            [Tutorial] = typeof(Tutorial),
-            [GameData] = typeof(GameData),
-            [Volume] = typeof(Volume),
-            [FirstLevel] = typeof(Level),
-            [SecondLevel] = typeof(Level),
-            [ThirdLevel] = typeof(Level),
-            [FourthLevel] = typeof(Level),
-            [SawLauncherAbilityUpgrader] = typeof(Upgrader),
-            [SawLauncherUpgrader] = typeof(Upgrader),
-            [PlayerWallet] = typeof(PlayerWallet),
-            [MiniGunAttackUpgrader] = typeof(Upgrader),
-            [CharacterHealthUpgrader] = typeof(Upgrader),
-            [BearAttackUpgrader] = typeof(Upgrader),
-            [BearMassAttackUpgrader] = typeof(Upgrader),
+            [KillEnemyCounter] = typeof(KillEnemyCounterDto),
+            [Tutorial] = typeof(TutorialDto),
+            [GameData] = typeof(GameDataDto),
+            [Volume] = typeof(VolumeDto),
+            [Gameplay] = typeof(LevelDto),
+            [Gameplay2] = typeof(LevelDto),
+            [Gameplay3] = typeof(LevelDto),
+            [Gameplay4] = typeof(LevelDto),
+            [SawLauncherAbilityUpgrader] = typeof(UpgradeDto),
+            [SawLauncherUpgrader] = typeof(UpgradeDto),
+            [PlayerWallet] = typeof(PlayerWalletDto),
+            [MiniGunAttackUpgrader] = typeof(UpgradeDto),
+            [CharacterHealthUpgrader] = typeof(UpgradeDto),
+            [BearAttackUpgrader] = typeof(UpgradeDto),
+            [BearMassAttackUpgrader] = typeof(UpgradeDto),
         };
     }
 }

@@ -44,6 +44,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
         //TODO можно ли сохранять в поле то что мы передаем дальше?
         private readonly ILoadService _loadService;
         private readonly IEntityRepository _entityRepository;
+        private readonly IUpgradeCollectionService _upgradeCollectionService;
 
         public LoadSceneService(
             GameplayHud gameplayHud, 
@@ -98,6 +99,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
+            _upgradeCollectionService = upgradeCollectionService ?? throw new ArgumentNullException(nameof(upgradeCollectionService));
         }
 
         protected override GameModels LoadModels(IScenePayload scenePayload)
@@ -112,11 +114,17 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
             PlayerWallet playerWallet = _entityRepository.Get(ModelId.PlayerWallet) as PlayerWallet;
             
             Upgrader bearMassAttackUpgrader = _entityRepository.Get(ModelId.BearMassAttackUpgrader) as Upgrader;
+            _upgradeCollectionService.AddUpgrader(bearMassAttackUpgrader);
             Upgrader bearAttackUpgrader = _entityRepository.Get(ModelId.BearAttackUpgrader) as Upgrader;
+            _upgradeCollectionService.AddUpgrader(bearAttackUpgrader);
             Upgrader characterHealthUpgrader = _entityRepository.Get(ModelId.CharacterHealthUpgrader) as Upgrader;
+            _upgradeCollectionService.AddUpgrader(characterHealthUpgrader);
             Upgrader sawLauncherUpgrader = _entityRepository.Get(ModelId.SawLauncherUpgrader) as Upgrader;
+            _upgradeCollectionService.AddUpgrader(sawLauncherUpgrader);
             Upgrader sawLauncherAbilityUpgrader = _entityRepository.Get(ModelId.SawLauncherAbilityUpgrader) as Upgrader;
+            _upgradeCollectionService.AddUpgrader(sawLauncherAbilityUpgrader);
             Upgrader miniGunAttackUpgrader = _entityRepository.Get(ModelId.MiniGunAttackUpgrader) as Upgrader;
+            _upgradeCollectionService.AddUpgrader(miniGunAttackUpgrader);
 
             MiniGun minigun = new MiniGun(miniGunAttackUpgrader, 0.1f);
             
