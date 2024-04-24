@@ -10,18 +10,18 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
     public class UpgradeFormViewModelFactory : IViewModelFactory<UpgradeFormViewModel, UpgradeForm>
     {
         private readonly VisibilityViewModelComponentFactory _visibilityViewModelComponentFactory;
-        private readonly ShowHudFormViewModelComponentFactory _showHudFormViewModelComponentFactory;
+        private readonly ShowGameplayHudFormViewModelComponentFactory _showGameplayHudFormViewModelComponentFactory;
 
         public UpgradeFormViewModelFactory(
             VisibilityViewModelComponentFactory visibilityViewModelComponentFactory,
-            ShowHudFormViewModelComponentFactory showHudFormViewModelComponentFactory)
+            ShowGameplayHudFormViewModelComponentFactory showGameplayHudFormViewModelComponentFactory)
         {
             _visibilityViewModelComponentFactory =
                 visibilityViewModelComponentFactory ??
                 throw new ArgumentNullException(nameof(visibilityViewModelComponentFactory));
-            _showHudFormViewModelComponentFactory =
-                showHudFormViewModelComponentFactory ??
-                throw new ArgumentNullException(nameof(showHudFormViewModelComponentFactory));
+            _showGameplayHudFormViewModelComponentFactory =
+                showGameplayHudFormViewModelComponentFactory ??
+                throw new ArgumentNullException(nameof(showGameplayHudFormViewModelComponentFactory));
         }
         public IViewModel Create(UpgradeForm model)
         {
@@ -29,7 +29,7 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
                 new IViewModelComponent[]
             {
                 _visibilityViewModelComponentFactory.Create(model),
-                _showHudFormViewModelComponentFactory.Create(),
+                _showGameplayHudFormViewModelComponentFactory.Create(),
             });
         }
     }

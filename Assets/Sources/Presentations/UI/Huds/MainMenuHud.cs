@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Sources.Domain.Models.Forms.MainMenu;
 using Sources.Presentations.BindableViews.Forms.MainMenu;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Gameplay;
@@ -15,6 +16,12 @@ namespace Sources.Presentations.UI.Huds
         [Button(ButtonSizes.Large)]
         [FoldoutGroup("Forms")] [Required] [SerializeField]
         private MainMenuHudFormBindableView _mainMenuHudFormBindableView;
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private AuthorizationFormBindableView _authorizationFormBindableView;
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private MainMenuSettingsFormBindableView _mainMenuSettingsFormBindableView;
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private LeaderboardFormBindableView _leaderboardFormBindableView;
 
         [Button(ButtonSizes.Large)]
         [FoldoutGroup("LeaderBoardElementViews")] [Required] [SerializeField]
@@ -33,6 +40,9 @@ namespace Sources.Presentations.UI.Huds
         private BackgroundMusicView _backgroundMusicView;
 
         public MainMenuHudFormBindableView MainMenuHudFormBindableView => _mainMenuHudFormBindableView;
+        public AuthorizationFormBindableView AuthorizationFormBindableView => _authorizationFormBindableView;
+        public MainMenuSettingsFormBindableView MainMenuSettingsFormBindableView => _mainMenuSettingsFormBindableView;
+        public LeaderboardFormBindableView LeaderboardFormBindableView => _leaderboardFormBindableView;
         public IReadOnlyList<LeaderBoardElementView> LeaderBoardElementViews => _leaderBoardElementViews;
         
         public VolumeView VolumeView => _volumeView;

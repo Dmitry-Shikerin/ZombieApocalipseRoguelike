@@ -224,7 +224,7 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<VisibilityViewModelComponentFactory>().AsSingle();
             Container.Bind<ShowPauseFormViewModelComponentFactory>().AsSingle();
-            Container.Bind<ShowHudFormViewModelComponentFactory>().AsSingle();
+            Container.Bind<ShowGameplayHudFormViewModelComponentFactory>().AsSingle();
             Container.Bind<ShowGameplaySettingsFormViewModelComponentFactory>().AsSingle();
             Container.Bind<ShowUpgradeFormViewModelComponentFactory>().AsSingle();
             
