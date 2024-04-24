@@ -21,7 +21,6 @@ using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Musics;
 using Sources.Infrastructure.Factories.Controllers.Players;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
-using Sources.Infrastructure.Factories.Controllers.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
