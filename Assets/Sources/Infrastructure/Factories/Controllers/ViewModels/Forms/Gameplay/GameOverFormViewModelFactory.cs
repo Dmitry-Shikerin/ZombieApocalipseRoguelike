@@ -10,13 +10,18 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
     public class GameOverFormViewModelFactory : IViewModelFactory<GameOverFormViewModel, GameOverForm>
     {
         private readonly VisibilityViewModelComponentFactory _visibilityViewModelComponentFactory;
+        private readonly LoadMainMenuViewModelComponentFactory _loadMainMenuViewModelComponentFactory;
 
         public GameOverFormViewModelFactory(
-            VisibilityViewModelComponentFactory visibilityViewModelComponentFactory)
+            VisibilityViewModelComponentFactory visibilityViewModelComponentFactory,
+            LoadMainMenuViewModelComponentFactory loadMainMenuViewModelComponentFactory)
         {
             _visibilityViewModelComponentFactory = 
                 visibilityViewModelComponentFactory ?? 
                 throw new ArgumentNullException(nameof(visibilityViewModelComponentFactory));
+            _loadMainMenuViewModelComponentFactory =
+                loadMainMenuViewModelComponentFactory ??
+                throw new ArgumentNullException(nameof(loadMainMenuViewModelComponentFactory));
         }
 
         public IViewModel Create(GameOverForm model)
@@ -25,6 +30,7 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
                 new IViewModelComponent[]
                 {
                     _visibilityViewModelComponentFactory.Create(model),
+                    _loadMainMenuViewModelComponentFactory.Create(),
                 });
         }
     }

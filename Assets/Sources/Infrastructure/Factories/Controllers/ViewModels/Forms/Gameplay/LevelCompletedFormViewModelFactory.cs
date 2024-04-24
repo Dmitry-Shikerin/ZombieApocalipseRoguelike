@@ -10,12 +10,18 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
     public class LevelCompletedFormViewModelFactory : IViewModelFactory<LevelCompletedFormViewModel, LevelCompletedForm>
     {
         private readonly VisibilityViewModelComponentFactory _visibilityViewModelComponentFactory;
+        private readonly LoadMainMenuViewModelComponentFactory _loadMainMenuViewModelComponentFactory;
 
-        public LevelCompletedFormViewModelFactory(VisibilityViewModelComponentFactory visibilityViewModelComponentFactory)
+        public LevelCompletedFormViewModelFactory(
+            VisibilityViewModelComponentFactory visibilityViewModelComponentFactory,
+            LoadMainMenuViewModelComponentFactory loadMainMenuViewModelComponentFactory)
         {
             _visibilityViewModelComponentFactory =
                 visibilityViewModelComponentFactory ??
                 throw new ArgumentNullException(nameof(visibilityViewModelComponentFactory));
+            _loadMainMenuViewModelComponentFactory =
+                loadMainMenuViewModelComponentFactory ??
+                throw new ArgumentNullException(nameof(loadMainMenuViewModelComponentFactory));
         }
         public IViewModel Create(LevelCompletedForm model)
         {
@@ -23,6 +29,7 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
                 new IViewModelComponent[]
                 {
                     _visibilityViewModelComponentFactory.Create(model),
+                    _loadMainMenuViewModelComponentFactory.Create(),
                 });
         }
     }

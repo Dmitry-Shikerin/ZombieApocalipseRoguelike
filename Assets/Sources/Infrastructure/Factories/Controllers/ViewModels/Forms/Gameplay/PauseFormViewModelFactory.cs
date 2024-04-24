@@ -12,11 +12,13 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
         private readonly VisibilityViewModelComponentFactory _visibilityViewModelComponentFactory;
         private readonly ShowGameplayHudFormViewModelComponentFactory _showGameplayHudFormViewModelComponentFactory;
         private readonly ShowGameplaySettingsFormViewModelComponentFactory _showGameplaySettingsFormViewModelComponentFactory;
+        private readonly LoadMainMenuViewModelComponentFactory _loadMainMenuViewModelComponentFactory;
 
         public PauseFormViewModelFactory(
             VisibilityViewModelComponentFactory visibilityViewModelComponentFactory,
             ShowGameplayHudFormViewModelComponentFactory showGameplayHudFormViewModelComponentFactory,
-            ShowGameplaySettingsFormViewModelComponentFactory showGameplaySettingsFormViewModelComponentFactory)
+            ShowGameplaySettingsFormViewModelComponentFactory showGameplaySettingsFormViewModelComponentFactory,
+            LoadMainMenuViewModelComponentFactory loadMainMenuViewModelComponentFactory)
         {
             _visibilityViewModelComponentFactory = 
                 visibilityViewModelComponentFactory ?? 
@@ -27,6 +29,9 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
             _showGameplaySettingsFormViewModelComponentFactory =
                 showGameplaySettingsFormViewModelComponentFactory ??
                 throw new ArgumentNullException(nameof(showGameplaySettingsFormViewModelComponentFactory));
+            _loadMainMenuViewModelComponentFactory =
+                loadMainMenuViewModelComponentFactory ??
+                throw new ArgumentNullException(nameof(loadMainMenuViewModelComponentFactory));
         }
 
         public IViewModel Create(PauseForm model)
@@ -37,6 +42,7 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay
                     _visibilityViewModelComponentFactory.Create(model),
                     _showGameplayHudFormViewModelComponentFactory.Create(),
                     _showGameplaySettingsFormViewModelComponentFactory.Create(),
+                    _loadMainMenuViewModelComponentFactory.Create(),
                 });
         }
     }
