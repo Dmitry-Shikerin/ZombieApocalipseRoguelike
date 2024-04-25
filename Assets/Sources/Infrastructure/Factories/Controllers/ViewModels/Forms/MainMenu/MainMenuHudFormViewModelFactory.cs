@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Controllers.ModelViews.Components;
 using Sources.Controllers.ModelViews.Forms.MainMenu;
 using Sources.ControllersInterfaces.ViewModels;
 using Sources.Domain.Models.Forms.MainMenu;
@@ -10,14 +11,14 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.MainMenu
     public class MainMenuHudFormViewModelFactory : IViewModelFactory<MainMenuHudFormViewModel, MainMenuHudForm>
     {
         private readonly VisibilityViewModelComponentFactory _visibilityViewModelComponentFactory;
-        private readonly NewGameViewModelComponentFactory _newGameViewModelComponentFactory;
+        private readonly ShowWarningNewGameFormViewModelComponentFactory _showWarningNewGameFormViewModelComponentFactory;
         private readonly LoadGameViewModelComponentFactory _loadGameViewModelComponentFactory;
         private readonly ShowLeaderboardFormViewModelComponentFactory _showLeaderboardFormViewModelComponentFactory;
         private readonly ShowMainMenuSettingsFormViewModelComponentFactory _showMainMenuSettingsFormViewModelComponentFactory;
 
         public MainMenuHudFormViewModelFactory(
             VisibilityViewModelComponentFactory visibilityViewModelComponentFactory,
-            NewGameViewModelComponentFactory newGameViewModelComponentFactory,
+            ShowWarningNewGameFormViewModelComponentFactory showWarningNewGameFormViewModelComponentFactory,
             LoadGameViewModelComponentFactory loadGameViewModelComponentFactory,
             ShowLeaderboardFormViewModelComponentFactory showLeaderboardFormViewModelComponentFactory,
             ShowMainMenuSettingsFormViewModelComponentFactory showMainMenuSettingsFormViewModelComponentFactory)
@@ -25,9 +26,9 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.MainMenu
             _visibilityViewModelComponentFactory =
                 visibilityViewModelComponentFactory ??
                 throw new ArgumentNullException(nameof(visibilityViewModelComponentFactory));
-            _newGameViewModelComponentFactory =
-                newGameViewModelComponentFactory ??
-                throw new ArgumentNullException(nameof(newGameViewModelComponentFactory));
+            _showWarningNewGameFormViewModelComponentFactory =
+                showWarningNewGameFormViewModelComponentFactory ??
+                throw new ArgumentNullException(nameof(showWarningNewGameFormViewModelComponentFactory));
             _loadGameViewModelComponentFactory = loadGameViewModelComponentFactory ?? throw new ArgumentNullException(nameof(loadGameViewModelComponentFactory));
             _showLeaderboardFormViewModelComponentFactory = showLeaderboardFormViewModelComponentFactory ?? throw new ArgumentNullException(nameof(showLeaderboardFormViewModelComponentFactory));
             _showMainMenuSettingsFormViewModelComponentFactory = showMainMenuSettingsFormViewModelComponentFactory ?? throw new ArgumentNullException(nameof(showMainMenuSettingsFormViewModelComponentFactory));
@@ -38,8 +39,8 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.MainMenu
                 new IViewModelComponent[]
                 {
                     _visibilityViewModelComponentFactory.Create(model),
-                    _newGameViewModelComponentFactory.Create(),
                     _loadGameViewModelComponentFactory.Create(),
+                    _showWarningNewGameFormViewModelComponentFactory.Create(),
                     _showLeaderboardFormViewModelComponentFactory.Create(),
                     _showMainMenuSettingsFormViewModelComponentFactory.Create(),
                 });
