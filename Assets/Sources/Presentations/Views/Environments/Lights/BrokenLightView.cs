@@ -31,7 +31,7 @@ namespace Sources.Presentations.Views.Environments.Lights
                 while (cancellationToken.IsCancellationRequested == false)
                 {
                     _light.enabled = false;
-                    await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: cancellationToken);
+                    await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: cancellationToken);
 
                     _light.enabled = true;
                     await UniTask.Delay(TimeSpan.FromSeconds(3), cancellationToken: cancellationToken);
