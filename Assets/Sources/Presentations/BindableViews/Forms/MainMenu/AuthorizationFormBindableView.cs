@@ -1,4 +1,4 @@
-﻿using Sources.Frameworks.Presentations.Views;
+﻿using Sources.Frameworks.MVVM.Presentations.Views;
 
 namespace Sources.Presentations.BindableViews.Forms.MainMenu
 {

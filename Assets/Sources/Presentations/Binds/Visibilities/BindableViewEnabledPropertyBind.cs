@@ -1,5 +1,5 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.Frameworks.Presentations.Views;
+using Sources.Frameworks.MVVM.Presentations.Views;
 using Sources.MVVMFrameworks.Domain.Properties;
 using Sources.PresentationsInterfaces.Binds.Visibilities;
 using UnityEngine;

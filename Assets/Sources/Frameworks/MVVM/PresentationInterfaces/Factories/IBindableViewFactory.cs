@@ -1,5 +1,5 @@
-﻿using Sources.Frameworks.PresentationInterfaces.Views;
-using Sources.Frameworks.Presentations.Views;
+﻿using Sources.Frameworks.MVVM.Presentations.Views;
+using Sources.Frameworks.PresentationInterfaces.Views;
 
 namespace Sources.Frameworks.MVVM.PresentationInterfaces.Factories
 {
