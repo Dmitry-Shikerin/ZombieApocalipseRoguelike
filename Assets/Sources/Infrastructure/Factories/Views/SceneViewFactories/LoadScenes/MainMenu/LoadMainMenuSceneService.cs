@@ -41,19 +41,18 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
 
         protected override MainMenuModels LoadModels(IScenePayload scenePayload)
         {
-            _loadService.LoadAll();
+            //TODO подумать над тем какие айдишки загружать
+            Volume volume = _loadService.Load<Volume>(ModelId.Volume);
             
-            Volume volume = _entityRepository.Get(ModelId.Volume) as Volume;
+            GameData gameData = _loadService.Load<GameData>(ModelId.GameData);
             
-            GameData gameData = _entityRepository.Get(ModelId.GameData) as GameData;
-            
-            SavedLevel savedLevel = _entityRepository.Get(ModelId.SavedLevel) as SavedLevel;
+            SavedLevel savedLevel = _loadService.Load<SavedLevel>(ModelId.SavedLevel);
             
             //LevelAvailability
-            Level firstLevel = _entityRepository.Get(ModelId.Gameplay) as Level;
-            Level secondLevel = _entityRepository.Get(ModelId.Gameplay2) as Level;
-            Level thirdLevel = _entityRepository.Get(ModelId.Gameplay3) as Level;
-            Level fourthLevel = _entityRepository.Get(ModelId.Gameplay4) as Level;
+            Level firstLevel = _loadService.Load<Level>(ModelId.Gameplay);
+            Level secondLevel = _loadService.Load<Level>(ModelId.Gameplay2);
+            Level thirdLevel = _loadService.Load<Level>(ModelId.Gameplay3);
+            Level fourthLevel = _loadService.Load<Level>(ModelId.Gameplay4);
             
             LevelAvailability levelAvailability = new LevelAvailability(
                 new List<Level>()

@@ -5,6 +5,6 @@ namespace Sources.PresentationsInterfaces.Views.Gameplay
 {
     public interface ILevelAvailabilityView
     {
-        IReadOnlyList<IButtonView> LevelButtons { get; }
+        IReadOnlyList<ILevelView> Levels { get; }
     }
 }
