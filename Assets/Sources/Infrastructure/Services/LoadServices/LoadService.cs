@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sources.Domain.Data;
 using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
@@ -33,7 +32,8 @@ namespace Sources.Infrastructure.Services.LoadServices
             ILevelDtoMapper levelDtoMapper,
             IGameDataDtoMapper gameDataDtoMapper,
             ITutorialDtoMapper tutorialDtoMapper,
-            IKillEnemyCounterDtoMapper killEnemyCounterDtoMapper)
+            IKillEnemyCounterDtoMapper killEnemyCounterDtoMapper,
+            ISavedLevelDtoMapper savedLevelDtoMapper)
         {
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
@@ -53,6 +53,8 @@ namespace Sources.Infrastructure.Services.LoadServices
                 model => tutorialDtoMapper.MapModelToDto(model as Tutorial);
             _toDtoMappers[typeof(KillEnemyCounter)] =
                 model => killEnemyCounterDtoMapper.MapModelToDto(model as KillEnemyCounter);
+            _toDtoMappers[typeof(SavedLevel)] =
+                model => savedLevelDtoMapper.MapModelToDto(model as SavedLevel);
 
             _toModelMappers = new Dictionary<Type, Func<IDto, IEntity>>();
             _toModelMappers[typeof(UpgradeDto)] =
@@ -69,6 +71,8 @@ namespace Sources.Infrastructure.Services.LoadServices
                 dto => tutorialDtoMapper.MapDtoToModel(dto as TutorialDto);
             _toModelMappers[typeof(KillEnemyCounterDto)] =
                 dto => killEnemyCounterDtoMapper.MapDtoToModel(dto as KillEnemyCounterDto);
+            _toModelMappers[typeof(SavedLevelDto)] =
+                dto => savedLevelDtoMapper.MapDtoToModel(dto as SavedLevelDto);
         }
 
         //TODO загружать все дто и сразу конвертить их в модели и складировать в инстансе контейнер
@@ -99,7 +103,7 @@ namespace Sources.Infrastructure.Services.LoadServices
                 Func<IDto, IEntity> mapper = _toModelMappers[modelType];
                 IEntity model = mapper.Invoke((IDto)dto);
                 _entityRepository.Add(model);
-                Debug.Log($"Saved {model.GetType()}");
+                Debug.Log($"Saved {model.Type}");
             }
         }
 

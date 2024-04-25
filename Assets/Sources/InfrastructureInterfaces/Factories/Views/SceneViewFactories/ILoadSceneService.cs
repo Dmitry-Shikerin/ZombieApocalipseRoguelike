@@ -1,6 +1,6 @@
 ﻿using Sources.DomainInterfaces.Payloads;
 
-namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
+namespace Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories
 {
     public interface ILoadSceneService
     {

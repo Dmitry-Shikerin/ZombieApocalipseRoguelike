@@ -18,6 +18,7 @@ using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
+using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
@@ -30,12 +31,11 @@ using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.RootGameObjects;
-using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
+namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay
 {
-    public abstract class LoadSceneServiceBase : ILoadSceneService
+    public abstract class LoadGameplaySceneServiceBase : ILoadSceneService
     {
         private readonly GameplayHud _gameplayHud;
         private readonly GameplayFormServiceFactory _gameplayFormServiceFactory;
@@ -62,7 +62,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
         private readonly IVolumeService _volumeService;
         private readonly ISaveService _saveService;
 
-        protected LoadSceneServiceBase(GameplayHud gameplayHud,
+        protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
             GameplayFormServiceFactory gameplayFormServiceFactory,
             CharacterViewFactory characterViewFactory,
             BearViewFactory bearViewFactory,
@@ -128,6 +128,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
         {
             GameModels gameModels = LoadModels(scenePayload);
             
+            //SavedLevel
+            SavedLevel savedLevel = gameModels.SavedLevel;
+            savedLevel.SavedLevelId = scenePayload.SceneId;
+            
             //Volume
             _volumeService.Register(gameModels.Volume);
             _volumeViewFactory.Create(gameModels.Volume, _gameplayHud.VolumeView);
@@ -141,8 +145,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
             //Upgrades
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
             
-            Debug.Log(upgraders.Count);
-
             for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
             {
                 var view = _gameplayHud.NotAvailabilityUpgradeUis[i];
@@ -150,13 +152,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
 
                 _upgradeUiFactory.Create(upgrader, view);
             }
-            // for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
-            // {
-            //     var view = _gameplayHud.NotAvailabilityUpgradeUis[i];
-            //     var upgrader = upgraders[i];
-            //
-            //     _upgradeUiFactory.Create(upgrader, view);
-            // }
 
             //TODO можно ли это все дело сделать на компонентах?
             //Character

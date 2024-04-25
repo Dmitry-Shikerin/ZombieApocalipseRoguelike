@@ -1,7 +1,9 @@
 ﻿using System;
 using JetBrains.Annotations;
 using Sources.ControllersInterfaces.ViewModels;
+using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Forms.Gameplay;
+using Sources.Domain.Models.Payloads;
 using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.SceneServices;
 using Sources.MVVMFrameworks.Domain.Attributes;
@@ -30,7 +32,7 @@ namespace Sources.Controllers.ModelViews.Components
         [MethodBinding(typeof(IButtonClickMethodBind), "NewGame_Button")]
         private void OnClick(Vector3 position)
         {
-            _sceneService.ChangeSceneAsync("Gameplay");
+            _sceneService.ChangeSceneAsync(ModelId.Gameplay, new ScenePayload(ModelId.Gameplay, false));
         }
     }
 }

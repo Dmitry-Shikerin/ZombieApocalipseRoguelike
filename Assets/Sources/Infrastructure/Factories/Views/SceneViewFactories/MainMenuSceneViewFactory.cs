@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Setting;
 using Sources.Infrastructure.Factories.Services.FormServices;
@@ -50,10 +51,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
             _backgroundMusicViewFactory.Create(_mainMenuHud.BackgroundMusicView);
             
             //LevelAvailability
-            Level firstLevel = new Level("Level 1", false);
-            Level secondLevel = new Level("Level 2", false);
-            Level thirdLevel = new Level("Level 3", false);
-            Level fourthLevel = new Level("Level 4", false);
+            Level firstLevel = new Level(ModelId.Gameplay, false);
+            Level secondLevel = new Level(ModelId.Gameplay2, false);
+            Level thirdLevel = new Level(ModelId.Gameplay3, false);
+            Level fourthLevel = new Level(ModelId.Gameplay4, false);
             LevelAvailability levelAvailability = new LevelAvailability(
                 new List<Level>()
                 {

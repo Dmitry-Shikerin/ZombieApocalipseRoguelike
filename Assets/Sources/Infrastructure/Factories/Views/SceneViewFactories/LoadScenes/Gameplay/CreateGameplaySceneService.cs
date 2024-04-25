@@ -38,15 +38,15 @@ using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.RootGameObjects;
 using UnityEngine;
 
-namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
+namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay
 {
-    public class CreateSceneService : LoadSceneServiceBase
+    public class CreateGameplaySceneService : LoadGameplaySceneServiceBase
     {
         private readonly IEntityRepository _entityRepository;
         private readonly IUpgradeDtoMapper _upgradeDtoMapper;
         private readonly IUpgradeCollectionService _upgradeCollectionService;
 
-        public CreateSceneService(
+        public CreateGameplaySceneService(
             GameplayHud gameplayHud,
             GameplayFormServiceFactory gameplayFormServiceFactory,
             CharacterViewFactory characterViewFactory,
@@ -110,6 +110,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
 
             Level level = new Level(scenePayload.SceneId, false);
             _entityRepository.Add(level);
+            
+            SavedLevel savedLevel = new SavedLevel(ModelId.SavedLevel, false, scenePayload.SceneId);
+            _entityRepository.Add(savedLevel);
 
             PlayerWallet playerWallet = CreatePlayerWallet();
 
@@ -163,7 +166,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
                 bearAttacker,
                 bear,
                 killEnemyCounter,
-                enemySpawner);
+                enemySpawner,
+                savedLevel);
         }
 
         private Upgrader CreateUpgrader(string id)

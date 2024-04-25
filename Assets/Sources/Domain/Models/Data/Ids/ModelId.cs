@@ -16,6 +16,7 @@ namespace Sources.Domain.Models.Data.Ids
         public const string KillEnemyCounter = "KillEnemyCounter";
 
         //commonModels
+        public const string SavedLevel = "SavedLevel";
         public const string Volume = "Volume";
         public const string GameData = "GameData";
         public const string Tutorial = "Tutorial";
@@ -39,7 +40,12 @@ namespace Sources.Domain.Models.Data.Ids
         //todo переделать
         public static IReadOnlyList<string> ModelsIds = new List<string>()
         {
+            SavedLevel,
+            GameData,
             Gameplay,
+            Gameplay2,
+            Gameplay3,
+            Gameplay4,
             Volume,
             SawLauncherAbilityUpgrader,
             SawLauncherUpgrader,
@@ -53,6 +59,7 @@ namespace Sources.Domain.Models.Data.Ids
 
         public static IReadOnlyDictionary<string, Type> ModelTypes = new Dictionary<string, Type>()
         {
+            [SavedLevel] = typeof(SavedLevelDto),
             [KillEnemyCounter] = typeof(KillEnemyCounterDto),
             [Tutorial] = typeof(TutorialDto),
             [GameData] = typeof(GameDataDto),

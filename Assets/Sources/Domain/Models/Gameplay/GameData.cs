@@ -1,5 +1,4 @@
 ﻿using System;
-using Sources.Domain.Data;
 using Sources.Domain.Models.Data;
 using Sources.DomainInterfaces.Entities;
 
@@ -10,17 +9,17 @@ namespace Sources.Domain.Models.Gameplay
         public GameData(GameDataDto gameDataDto)
         {
             Id = gameDataDto.Id;
-            IsThereSave = gameDataDto.IsThereSave;
+            WasLaunched = gameDataDto.WasLaunched;
         }
         
-        public GameData(string id, bool isThereSave)
+        public GameData(string id, bool wasLaunched)
         {
             Id = id;
-            IsThereSave = isThereSave;
+            WasLaunched = wasLaunched;
         }
 
         public string Id { get; }
         public Type Type => GetType();
-        public bool IsThereSave { get; private set; }
+        public bool WasLaunched { get; private set; }
     }
 }

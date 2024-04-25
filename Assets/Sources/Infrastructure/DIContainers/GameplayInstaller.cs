@@ -48,6 +48,7 @@ using Sources.Infrastructure.Factories.Views.Players;
 using Sources.Infrastructure.Factories.Views.RewardItems;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes;
+using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
@@ -177,8 +178,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IEnemyCollectorService>().To<EnemyCollectorService>().AsSingle();
             Container.Bind<IGameOverService>().To<GameOverService>().AsSingle();
             Container.Bind<ICameraService>().To<CameraService>().AsSingle();
-            Container.Bind<LoadSceneService>().AsSingle();
-            Container.Bind<CreateSceneService>().AsSingle();
+            Container.Bind<LoadGameplaySceneService>().AsSingle();
+            Container.Bind<CreateGameplaySceneService>().AsSingle();
             Container.Bind<ISaveService>().To<SaveService>().AsSingle();
         }
 
@@ -210,6 +211,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ITutorialDtoMapper>().To<TutorialDtoMapper>().AsSingle();
             Container.Bind<IGameDataDtoMapper>().To<GameDataDtoMapper>().AsSingle();
             Container.Bind<IKillEnemyCounterDtoMapper>().To<KillEnemyCounterDtoMapper>().AsSingle();
+            Container.Bind<ISavedLevelDtoMapper>().To<SavedLevelDtoMapper>().AsSingle();
         }
         
         private void BindFormFactories()
