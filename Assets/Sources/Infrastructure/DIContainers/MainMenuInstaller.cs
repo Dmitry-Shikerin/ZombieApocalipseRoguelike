@@ -129,6 +129,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<MainMenuSettingsFormFactory>().AsSingle();
             Container.Bind<AuthorizationFormFactory>().AsSingle();
             Container.Bind<LeaderboardFormFactory>().AsSingle();
+            Container.Bind<NewGameFormFactory>().AsSingle();
+            Container.Bind<WarningNewGameFormFactory>().AsSingle();
 
             Container.Bind<ShowMainMenuHudFormViewModelComponentFactory>().AsSingle();
             Container.Bind<NewGameViewModelComponentFactory>().AsSingle();
@@ -136,6 +138,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ShowMainMenuSettingsFormViewModelComponentFactory>().AsSingle();
             Container.Bind<ShowLeaderboardFormViewModelComponentFactory>().AsSingle();
             Container.Bind<LoadGameViewModelComponentFactory>().AsSingle();
+            Container.Bind<ShowNewGameFormViewModelComponentFactory>().AsSingle();
+            Container.Bind<ShowWarningNewGameFormViewModelComponentFactory>().AsSingle();
 
             Container
                 .Bind<IViewModelFactory<MainMenuHudFormViewModel, MainMenuHudForm>>()
@@ -153,6 +157,14 @@ namespace Sources.Infrastructure.DIContainers
                 .Bind<IViewModelFactory<LeaderboardFormViewModel, LeaderboardForm>>()
                 .To<LeaderboardFormViewModelFactory>()
                 .AsSingle();
+            Container
+                .Bind<IViewModelFactory<NewGameFormViewModel, NewGameForm>>()
+                .To<NewGameFormViewModelFactory>()
+                .AsSingle();
+            Container
+                .Bind<IViewModelFactory<WarningNewGameFormViewModel, WarningNewGameForm>>()
+                .To<WarningNewGameFormViewModelFactory>()
+                .AsSingle();
 
             Container
                 .Bind<IBindableViewBuilder<MainMenuHudFormViewModel, MainMenuHudForm>>()
@@ -169,6 +181,14 @@ namespace Sources.Infrastructure.DIContainers
             Container
                 .Bind<IBindableViewBuilder<LeaderboardFormViewModel, LeaderboardForm>>()
                 .To<BindableViewBuilder<LeaderboardFormViewModel, LeaderboardForm>>()
+                .AsSingle();
+            Container
+                .Bind<IBindableViewBuilder<NewGameFormViewModel, NewGameForm>>()
+                .To<BindableViewBuilder<NewGameFormViewModel, NewGameForm>>()
+                .AsSingle();
+            Container
+                .Bind<IBindableViewBuilder<WarningNewGameFormViewModel, WarningNewGameForm>>()
+                .To<BindableViewBuilder<WarningNewGameFormViewModel, WarningNewGameForm>>()
                 .AsSingle();
         }
 

@@ -22,6 +22,10 @@ namespace Sources.Presentations.UI.Huds
         private MainMenuSettingsFormBindableView _mainMenuSettingsFormBindableView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
         private LeaderboardFormBindableView _leaderboardFormBindableView;
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private NewGameFormBindableView _newGameFormBindableView;
+        [FoldoutGroup("Forms")] [Required] [SerializeField]
+        private WarningNewGameFormBindableView _warningNewGameFormBindableView;
 
         [Button(ButtonSizes.Large)]
         [FoldoutGroup("LeaderBoardElementViews")] [Required] [SerializeField]
@@ -43,6 +47,8 @@ namespace Sources.Presentations.UI.Huds
         public AuthorizationFormBindableView AuthorizationFormBindableView => _authorizationFormBindableView;
         public MainMenuSettingsFormBindableView MainMenuSettingsFormBindableView => _mainMenuSettingsFormBindableView;
         public LeaderboardFormBindableView LeaderboardFormBindableView => _leaderboardFormBindableView;
+        public NewGameFormBindableView NewGameFormBindableView => _newGameFormBindableView;
+        public WarningNewGameFormBindableView WarningNewGameFormBindableView => _warningNewGameFormBindableView;
         public IReadOnlyList<LeaderBoardElementView> LeaderBoardElementViews => _leaderBoardElementViews;
         
         public VolumeView VolumeView => _volumeView;
