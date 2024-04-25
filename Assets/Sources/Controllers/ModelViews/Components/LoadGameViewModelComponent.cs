@@ -30,6 +30,7 @@ namespace Sources.Controllers.ModelViews.Components
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
         }
         
+        //TODO те компоненты которые можно переиспользовать отделять а остальные компановать в одну вьюМодель?
         public void Enable()
         {
             //TODO закостылил
@@ -49,7 +50,6 @@ namespace Sources.Controllers.ModelViews.Components
         private void OnClick(Vector3 position)
         {
             _sceneService.ChangeSceneAsync("Gameplay", new ScenePayload("Gameplay", true));
-            Debug.Log("Загрузка сохранений");
         }
     }
 }

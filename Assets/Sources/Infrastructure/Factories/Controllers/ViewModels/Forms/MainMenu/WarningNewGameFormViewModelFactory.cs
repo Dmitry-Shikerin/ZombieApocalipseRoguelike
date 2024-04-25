@@ -24,8 +24,8 @@ namespace Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.MainMenu
             _showMainMenuHudFormViewModelComponentFactory =
                 showMainMenuHudFormViewModelComponentFactory ??
                 throw new ArgumentNullException(nameof(showMainMenuHudFormViewModelComponentFactory));
-            _showNewGameFormViewModelComponentFactory =
-                showNewGameFormViewModelComponentFactory ??
+            _showNewGameFormViewModelComponentFactory = 
+                showNewGameFormViewModelComponentFactory ?? 
                 throw new ArgumentNullException(nameof(showNewGameFormViewModelComponentFactory));
         }
         public IViewModel Create(WarningNewGameForm model)

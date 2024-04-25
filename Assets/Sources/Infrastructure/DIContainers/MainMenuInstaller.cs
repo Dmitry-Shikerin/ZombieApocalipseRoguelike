@@ -11,6 +11,7 @@ using Sources.Frameworks.PresentationInterfaces.Binder;
 using Sources.Frameworks.Presentations.Binders;
 using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Musics;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.ViewModels.Components;
@@ -133,12 +134,12 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<WarningNewGameFormFactory>().AsSingle();
 
             Container.Bind<ShowMainMenuHudFormViewModelComponentFactory>().AsSingle();
-            Container.Bind<NewGameViewModelComponentFactory>().AsSingle();
+            Container.Bind<ShowNewGameFormViewModelComponentFactory>().AsSingle();
             Container.Bind<VisibilityViewModelComponentFactory>().AsSingle();
             Container.Bind<ShowMainMenuSettingsFormViewModelComponentFactory>().AsSingle();
             Container.Bind<ShowLeaderboardFormViewModelComponentFactory>().AsSingle();
             Container.Bind<LoadGameViewModelComponentFactory>().AsSingle();
-            Container.Bind<ShowNewGameFormViewModelComponentFactory>().AsSingle();
+            Container.Bind<TryShowNewGameFormViewModelComponentFactory>().AsSingle();
             Container.Bind<ShowWarningNewGameFormViewModelComponentFactory>().AsSingle();
 
             Container

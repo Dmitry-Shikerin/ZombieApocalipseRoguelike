@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.ControllersInterfaces.ViewModels;
+using Sources.Frameworks.MVVM.PresentationInterfaces.Views;
 using Sources.Frameworks.PresentationInterfaces.Binder;
-using Sources.Frameworks.PresentationInterfaces.Views;
 using UnityEngine;
 
 namespace Sources.Frameworks.MVVM.Presentations.Views

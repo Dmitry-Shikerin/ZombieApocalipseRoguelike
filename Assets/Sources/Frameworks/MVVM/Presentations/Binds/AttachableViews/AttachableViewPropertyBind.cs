@@ -1,6 +1,6 @@
 ﻿using Sources.Frameworks.MVVM.PresentationInterfaces.Binds.AttachableView;
+using Sources.Frameworks.MVVM.PresentationInterfaces.Views;
 using Sources.Frameworks.PresentationInterfaces.Binds.AttachableView;
-using Sources.Frameworks.PresentationInterfaces.Views;
 using Sources.MVVMFrameworks.Domain.Properties;
 using UnityEngine;
 

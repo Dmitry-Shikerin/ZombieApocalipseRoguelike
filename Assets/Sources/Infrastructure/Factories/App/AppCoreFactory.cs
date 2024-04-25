@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Sources.App.Core;
 using Sources.ControllersInterfaces.Scenes;
+using Sources.Domain.Models.Data.Ids;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
 using Sources.Infrastructure.Services.SceneLoaderServices;
 using Sources.Infrastructure.Services.SceneServices;
@@ -27,15 +28,15 @@ namespace Sources.Infrastructure.Factories.App
 
             sceneFactories["MainMenu"] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<MainMenuSceneFactory>().Create(payload);
-            sceneFactories["Gameplay"] = (payload, sceneContext) =>
+            sceneFactories[ModelId.Gameplay] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
             sceneFactories["TestGameplay"] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
-            sceneFactories["GamePlay2"] = (payload, sceneContext) =>
+            sceneFactories[ModelId.Gameplay2] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
-            sceneFactories["GamePlay3"] = (payload, sceneContext) =>
+            sceneFactories[ModelId.Gameplay3] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
-            sceneFactories["GamePlay4"] = (payload, sceneContext) =>
+            sceneFactories[ModelId.Gameplay4] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
 
             sceneService.AddBeforeSceneChangeHandler(async sceneName => 
