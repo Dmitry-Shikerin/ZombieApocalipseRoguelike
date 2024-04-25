@@ -85,6 +85,8 @@ namespace Sources.Infrastructure.Services.LoadServices
 
             if (model is not T concrete)
                 throw new InvalidCastException(nameof(T));
+            
+            _entityRepository.Add(model);
 
             return concrete;
         }

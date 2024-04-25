@@ -1,6 +1,6 @@
 ﻿using Sources.ControllersInterfaces.ViewModels;
+using Sources.Frameworks.MVVM.Presentations.Views;
 using Sources.Frameworks.PresentationInterfaces.Views;
-using Sources.Frameworks.Presentations.Views;
 
 namespace Sources.Frameworks.MVVM.InfrastructureInterfaces
 {

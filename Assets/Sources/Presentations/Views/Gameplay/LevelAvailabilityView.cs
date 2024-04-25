@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sources.Controllers.Gameplay;
+using Sources.Controllers.Presenters.Gameplay;
 using Sources.Presentations.UI.Buttons;
 using Sources.PresentationsInterfaces.UI.Buttons;
 using Sources.PresentationsInterfaces.Views.Gameplay;
@@ -9,8 +10,8 @@ namespace Sources.Presentations.Views.Gameplay
 {
     public class LevelAvailabilityView : PresentableView<LevelAvailabilityPresenter>, ILevelAvailabilityView
     {
-        [SerializeField] private List<ButtonView> _levelButtons;
+        [SerializeField] private List<LevelView> _levelViews;
         
-        public IReadOnlyList<IButtonView> LevelButtons => _levelButtons;
+        public IReadOnlyList<ILevelView> Levels => _levelViews;
     }
 }

@@ -4,7 +4,7 @@ using Sources.Frameworks.PresentationInterfaces.Binder;
 using Sources.Frameworks.PresentationInterfaces.Views;
 using UnityEngine;
 
-namespace Sources.Frameworks.Presentations.Views
+namespace Sources.Frameworks.MVVM.Presentations.Views
 {
     public class BindableView : MonoBehaviour, IBindableView
     {

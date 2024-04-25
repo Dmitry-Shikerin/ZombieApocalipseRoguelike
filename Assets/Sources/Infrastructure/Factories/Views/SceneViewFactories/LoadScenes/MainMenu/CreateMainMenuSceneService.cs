@@ -8,7 +8,6 @@ using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Services.Repositories;
-using Sources.Infrastructure.Services.Volumes;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
@@ -52,13 +51,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             _entityRepository.Add(savedLevel);
             
             //LevelAvailability
-            Level firstLevel = new Level(ModelId.Gameplay, false);
+            Level firstLevel = new Level(ModelId.Gameplay, true);
             _entityRepository.Add(firstLevel);
-            Level secondLevel = new Level(ModelId.Gameplay2, false);
+            Level secondLevel = new Level(ModelId.Gameplay2, true);
             _entityRepository.Add(secondLevel);
-            Level thirdLevel = new Level(ModelId.Gameplay3, false);
+            Level thirdLevel = new Level(ModelId.Gameplay3, true);
             _entityRepository.Add(thirdLevel);
-            Level fourthLevel = new Level(ModelId.Gameplay4, false);
+            Level fourthLevel = new Level(ModelId.Gameplay4, true);
             _entityRepository.Add(fourthLevel);
             
             LevelAvailability levelAvailability = new LevelAvailability(
