@@ -37,16 +37,16 @@ using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.RootGameObjects;
 using UnityEngine;
 
-namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
+namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay
 {
-    public class LoadSceneService : LoadSceneServiceBase
+    public class LoadGameplaySceneService : LoadGameplaySceneServiceBase
     {
         //TODO можно ли сохранять в поле то что мы передаем дальше?
         private readonly ILoadService _loadService;
         private readonly IEntityRepository _entityRepository;
         private readonly IUpgradeCollectionService _upgradeCollectionService;
 
-        public LoadSceneService(
+        public LoadGameplaySceneService(
             GameplayHud gameplayHud, 
             GameplayFormServiceFactory gameplayFormServiceFactory, 
             CharacterViewFactory characterViewFactory, 
@@ -111,6 +111,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
 
             Level level = _entityRepository.Get(scenePayload.SceneId) as Level;
             
+            SavedLevel savedLevel = _entityRepository.Get(ModelId.SavedLevel) as SavedLevel;
+            
             PlayerWallet playerWallet = _entityRepository.Get(ModelId.PlayerWallet) as PlayerWallet;
             
             Upgrader bearMassAttackUpgrader = _entityRepository.Get(ModelId.BearMassAttackUpgrader) as Upgrader;
@@ -169,7 +171,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes
                 bearAttacker,
                 bear,
                 killEnemyCounter,
-                enemySpawner);
+                enemySpawner,
+                savedLevel);
         }
     }
 }

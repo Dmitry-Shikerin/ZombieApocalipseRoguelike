@@ -5,7 +5,9 @@ using Sources.ControllersInterfaces.Scenes;
 using Sources.DomainInterfaces.Payloads;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes;
+using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay;
 using Sources.InfrastructureInterfaces.Factories.Controllers.Scenes;
+using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
@@ -26,8 +28,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly IUpgradeService _upgradeService;
         private readonly IGameOverService _gameOverService;
         private readonly IVolumeService _volumeService;
-        private readonly LoadSceneService _loadSceneService;
-        private readonly CreateSceneService _createSceneService;
+        private readonly LoadGameplaySceneService _loadGameplaySceneService;
+        private readonly CreateGameplaySceneService _createGameplaySceneService;
         private readonly ISaveService _saveService;
 
         public GameplaySceneFactory(
@@ -38,8 +40,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             IUpgradeService upgradeService,
             IGameOverService gameOverService,
             IVolumeService volumeService,
-            LoadSceneService loadSceneService,
-            CreateSceneService createSceneService,
+            LoadGameplaySceneService loadGameplaySceneService,
+            CreateGameplaySceneService createGameplaySceneService,
             ISaveService saveService) 
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
@@ -49,8 +51,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
             _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
-            _loadSceneService = loadSceneService ?? throw new ArgumentNullException(nameof(loadSceneService));
-            _createSceneService = createSceneService ?? throw new ArgumentNullException(nameof(createSceneService));
+            _loadGameplaySceneService = loadGameplaySceneService ?? throw new ArgumentNullException(nameof(loadGameplaySceneService));
+            _createGameplaySceneService = createGameplaySceneService ?? throw new ArgumentNullException(nameof(createGameplaySceneService));
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
         }
 
@@ -71,14 +73,14 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private ILoadSceneService CreateLoadSceneService(object payload)
         {
             if (payload == null)
-                return _createSceneService;
+                return _createGameplaySceneService;
 
             var canLoad = payload is IScenePayload { CanLoad : true };
 
             if (canLoad == false)
-                return _createSceneService;
+                return _createGameplaySceneService;
 
-            return _loadSceneService;
+            return _loadGameplaySceneService;
         }
     }
 }

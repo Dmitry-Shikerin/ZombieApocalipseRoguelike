@@ -1,26 +1,25 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.Domain.Models.Forms.MainMenu;
+using Sources.DomainInterfaces.Payloads;
 using Sources.Infrastructure.Factories.Services.FormServices;
-using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 
-namespace Sources.Controllers.Scenes
+namespace Sources.Controllers.Presenters.Scenes
 {
     public class MainMenuScene : IScene
     {
-        private readonly MainMenuSceneViewFactory _mainMenuSceneViewFactory;
+        private readonly ILoadSceneService _loadSceneService;
         private readonly IVolumeService _volumeService;
         private readonly MainMenuFormServiceFactory _mainMenuFormServiceFactory;
 
         public MainMenuScene(
-            MainMenuSceneViewFactory mainMenuSceneViewFactory,
+            ILoadSceneService loadSceneService,
             IVolumeService volumeService,
             MainMenuFormServiceFactory menuFormServiceFactory)
         {
-            _mainMenuSceneViewFactory = mainMenuSceneViewFactory ??
-                                        throw new ArgumentNullException(nameof(mainMenuSceneViewFactory));
+            _loadSceneService = loadSceneService ?? throw new ArgumentNullException(nameof(loadSceneService));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _mainMenuFormServiceFactory = menuFormServiceFactory ??
                                       throw new ArgumentNullException(nameof(menuFormServiceFactory));
@@ -28,7 +27,7 @@ namespace Sources.Controllers.Scenes
         
         public void Enter(object payload = null)
         {
-            _mainMenuSceneViewFactory.Create();
+            _loadSceneService.Load(payload as IScenePayload);
             _volumeService.Enter();
             _mainMenuFormServiceFactory.Create().Show<MainMenuHudForm>();
         }

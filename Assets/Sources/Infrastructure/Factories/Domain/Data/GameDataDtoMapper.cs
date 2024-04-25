@@ -1,5 +1,4 @@
-﻿using Sources.Domain.Data;
-using Sources.Domain.Models.Data;
+﻿using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Gameplay;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 
@@ -12,7 +11,7 @@ namespace Sources.Infrastructure.Factories.Domain.Data
             return new GameDataDto()
             {
                 Id = gameData.Id,
-                IsThereSave = gameData.IsThereSave
+                WasLaunched = gameData.WasLaunched
             };
         }
 
