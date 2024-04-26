@@ -15,7 +15,7 @@ namespace Sources.Controllers.Presenters.Gameplay
         private readonly LevelAvailability _levelAvailability;
         private readonly ILevelAvailabilityView _levelAvailabilityView;
         private readonly ISceneService _sceneService;
-        private readonly IFormService _formService;
+        private readonly IDomainFormService _domainFormService;
 
         public LevelAvailabilityPresenter(
             LevelAvailability levelAvailability, 

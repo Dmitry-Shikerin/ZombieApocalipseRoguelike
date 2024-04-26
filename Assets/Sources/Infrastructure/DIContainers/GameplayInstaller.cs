@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using Sources.Controllers.Common.Forms;
 using Sources.Controllers.ModelViews.Forms.Gameplay;
 using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Forms.Gameplay;
@@ -20,6 +21,7 @@ using Sources.Infrastructure.Factories.Controllers.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Musics;
 using Sources.Infrastructure.Factories.Controllers.Players;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
@@ -58,6 +60,7 @@ using Sources.Infrastructure.Services.EnemyCollectors;
 using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.GameOvers;
 using Sources.Infrastructure.Services.InputServices;
+using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.Infrastructure.Services.Linecasts;
 using Sources.Infrastructure.Services.LoadServices;
 using Sources.Infrastructure.Services.LoadServices.Data;
@@ -128,7 +131,6 @@ namespace Sources.Infrastructure.DIContainers
             
             BindServices();
             BindCharacters();
-            BindFormFactories();
             BindWeapons();
             BindBear();
             BindEnemy();
@@ -139,7 +141,7 @@ namespace Sources.Infrastructure.DIContainers
             BindGameplay();
             BindMusic();
             BindSettings();
-            BindMvvm();
+            BindFormFactories();
         }
 
         //TODO разбить все на отдельные моноинсталлеры
@@ -148,7 +150,6 @@ namespace Sources.Infrastructure.DIContainers
             Container.BindInterfacesAndSelfTo<UpdateService>().AsSingle();
             Container.BindInterfacesAndSelfTo<NewInputService>().AsSingle();
             // Container.BindInterfacesAndSelfTo<ViewViewFormService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
             Container.Bind<LinecastService>().AsSingle();
             Container.Bind<OverlapService>().AsSingle();
             Container.Bind<IUpgradeConfigCollectionService>().To<UpgradeConfigCollectionService>().AsSingle();
@@ -181,6 +182,21 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<LoadGameplaySceneService>().AsSingle();
             Container.Bind<CreateGameplaySceneService>().AsSingle();
             Container.Bind<ISaveService>().To<SaveService>().AsSingle();
+            Container.Bind<ILevelCompletedService>().To<LevelCompletedService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
+        }
+
+        private void BindFormFactories()
+        {
+            Container.Bind<GameplayFormServiceFactory>().AsSingle();
+
+            Container.Bind<GameOverFormPresenterFactory>().AsSingle();
+            Container.Bind<GameplaySettingsFormPresenterFactory>().AsSingle();
+            Container.Bind<HudFormPresenterFactory>().AsSingle();
+            Container.Bind<LevelCompletedFormPresenterFactory>().AsSingle();
+            Container.Bind<PauseFormPresenterFactory>().AsSingle();
+            Container.Bind<TutorialFormPresenterFactory>().AsSingle();
+            Container.Bind<UpgradeFormPresenterFactory>().AsSingle();
         }
 
         private void BindGameplay()
@@ -214,92 +230,6 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ISavedLevelDtoMapper>().To<SavedLevelDtoMapper>().AsSingle();
         }
         
-        private void BindFormFactories()
-        {
-            Container.Bind<GameplayFormServiceFactory>().AsSingle();
-            Container.Bind<GameOverFormFactory>().AsSingle();
-            Container.Bind<LevelCompletedFormFactory>().AsSingle();
-            Container.Bind<UpgradeFormFactory>().AsSingle();
-            Container.Bind<TutorialFormFactory>().AsSingle();
-            Container.Bind<GameplaySettingFormFactory>().AsSingle();
-            Container.Bind<GameplayHudFormFactory>().AsSingle();
-            Container.Bind<PauseFormFactory>().AsSingle();
-
-            Container.Bind<VisibilityViewModelComponentFactory>().AsSingle();
-            Container.Bind<ShowPauseFormViewModelComponentFactory>().AsSingle();
-            Container.Bind<ShowGameplayHudFormViewModelComponentFactory>().AsSingle();
-            Container.Bind<ShowGameplaySettingsFormViewModelComponentFactory>().AsSingle();
-            Container.Bind<ShowUpgradeFormViewModelComponentFactory>().AsSingle();
-            Container.Bind<LoadMainMenuViewModelComponentFactory>().AsSingle();
-            
-            Container
-                .Bind<IViewModelFactory<GameplayHudFormViewModel, GameplayHudForm>>()
-                .To<GameplayHudFormViewModelFactory>()
-                .AsSingle();
-            Container
-                .Bind<IViewModelFactory<PauseFormViewModel, PauseForm>>()
-                .To<PauseFormViewModelFactory>()
-                .AsSingle();
-            Container
-                .Bind<IViewModelFactory<GameplaySettingsFormViewModel, GameplaySettingsForm>>()
-                .To<GameplaySettingsFormViewModelFactory>()
-                .AsSingle();
-            Container
-                .Bind<IViewModelFactory<UpgradeFormViewModel, UpgradeForm>>()
-                .To<UpgradeFormViewModelFactory>()
-                .AsSingle();
-            Container
-                .Bind<IViewModelFactory<GameOverFormViewModel, GameOverForm>>()
-                .To<GameOverFormViewModelFactory>()
-                .AsSingle();
-            Container
-                .Bind<IViewModelFactory<LevelCompletedFormViewModel, LevelCompletedForm>>()
-                .To<LevelCompletedFormViewModelFactory>()
-                .AsSingle();
-            Container
-                .Bind<IViewModelFactory<TutorialFormViewModel, TutorialForm>>()
-                .To<TutorialFormViewModelFactory>()
-                .AsSingle();
-
-            Container
-                .Bind<IBindableViewBuilder<PauseFormViewModel, PauseForm>>()
-                .To<BindableViewBuilder<PauseFormViewModel, PauseForm>>()
-                .AsSingle();
-            Container
-                .Bind<IBindableViewBuilder<GameplayHudFormViewModel, GameplayHudForm>>()
-                .To<BindableViewBuilder<GameplayHudFormViewModel, GameplayHudForm>>()
-                .AsSingle();
-            Container
-                .Bind<IBindableViewBuilder<GameplaySettingsFormViewModel, GameplaySettingsForm>>()
-                .To<BindableViewBuilder<GameplaySettingsFormViewModel, GameplaySettingsForm>>()
-                .AsSingle();
-            Container
-                .Bind<IBindableViewBuilder<UpgradeFormViewModel, UpgradeForm>>()
-                .To<BindableViewBuilder<UpgradeFormViewModel, UpgradeForm>>()
-                .AsSingle();
-            Container
-                .Bind<IBindableViewBuilder<GameOverFormViewModel, GameOverForm>>()
-                .To<BindableViewBuilder<GameOverFormViewModel, GameOverForm>>()
-                .AsSingle();
-            Container
-                .Bind<IBindableViewBuilder<LevelCompletedFormViewModel, LevelCompletedForm>>()
-                .To<BindableViewBuilder<LevelCompletedFormViewModel, LevelCompletedForm>>()
-                .AsSingle();
-            Container
-                .Bind<IBindableViewBuilder<TutorialFormViewModel, TutorialForm>>()
-                .To<BindableViewBuilder<TutorialFormViewModel, TutorialForm>>()
-                .AsSingle();
-        }
-
-        private void BindMvvm()
-        {
-            Container.Bind<IBinder>().To<Binder>().AsSingle();
-            Container.Bind<IBindableViewFactory>().To<BindableViewFactory>().AsSingle();
-
-            Container.Bind<GetVisibilityQuery>().AsSingle();
-            Container.Bind<ShowCommand>().AsSingle();
-            Container.Bind<HideCommand>().AsSingle();
-        }
         
         private void BindCharacters()
         {

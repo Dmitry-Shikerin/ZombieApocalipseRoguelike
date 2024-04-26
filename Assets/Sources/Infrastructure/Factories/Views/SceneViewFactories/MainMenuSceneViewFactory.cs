@@ -15,7 +15,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
     public class MainMenuSceneViewFactory
     {
         private readonly MainMenuHud _mainMenuHud;
-        private readonly MainMenuFormServiceFactory _mainMenuFormServiceFactory;
+        private readonly MVVMMainMenuFormServiceFactory _mvvmMainMenuFormServiceFactory;
         private readonly VolumeViewFactory _volumeViewFactory;
         private readonly LevelAvailabilityViewFactory _levelAvailabilityViewFactory;
         private readonly IVolumeService _volumeService;
@@ -23,15 +23,15 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories
 
         public MainMenuSceneViewFactory(
             MainMenuHud mainMenuHud,
-            MainMenuFormServiceFactory mainMenuFormServiceFactory,
+            MVVMMainMenuFormServiceFactory mvvmMainMenuFormServiceFactory,
             VolumeViewFactory volumeViewFactory,
             LevelAvailabilityViewFactory levelAvailabilityViewFactory,
             IVolumeService volumeService,
             BackgroundMusicViewFactory backgroundMusicViewFactory)
         {
             _mainMenuHud = mainMenuHud ? mainMenuHud : throw new ArgumentNullException(nameof(mainMenuHud));
-            _mainMenuFormServiceFactory = mainMenuFormServiceFactory ??
-                                          throw new ArgumentNullException(nameof(mainMenuFormServiceFactory));
+            _mvvmMainMenuFormServiceFactory = mvvmMainMenuFormServiceFactory ??
+                                          throw new ArgumentNullException(nameof(mvvmMainMenuFormServiceFactory));
             _volumeViewFactory = volumeViewFactory ?? throw new ArgumentNullException(nameof(volumeViewFactory));
             _levelAvailabilityViewFactory = levelAvailabilityViewFactory ?? 
                                             throw new ArgumentNullException(nameof(levelAvailabilityViewFactory));

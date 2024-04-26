@@ -12,24 +12,19 @@ namespace Sources.Controllers.Presenters.Scenes
     {
         private readonly ILoadSceneService _loadSceneService;
         private readonly IVolumeService _volumeService;
-        private readonly MainMenuFormServiceFactory _mainMenuFormServiceFactory;
 
         public MainMenuScene(
             ILoadSceneService loadSceneService,
-            IVolumeService volumeService,
-            MainMenuFormServiceFactory menuFormServiceFactory)
+            IVolumeService volumeService)
         {
             _loadSceneService = loadSceneService ?? throw new ArgumentNullException(nameof(loadSceneService));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
-            _mainMenuFormServiceFactory = menuFormServiceFactory ??
-                                      throw new ArgumentNullException(nameof(menuFormServiceFactory));
         }
         
         public void Enter(object payload = null)
         {
             _loadSceneService.Load(payload as IScenePayload);
             _volumeService.Enter();
-            _mainMenuFormServiceFactory.Create().Show<MainMenuHudForm>();
         }
 
         public void Exit()

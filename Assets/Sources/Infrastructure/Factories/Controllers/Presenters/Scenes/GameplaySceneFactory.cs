@@ -1,11 +1,12 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using Sources.Controllers.Scenes;
+using Sources.Controllers.Presenters.Scenes;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.DomainInterfaces.Payloads;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay;
+using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Factories.Controllers.Scenes;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
@@ -31,6 +32,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly LoadGameplaySceneService _loadGameplaySceneService;
         private readonly CreateGameplaySceneService _createGameplaySceneService;
         private readonly ISaveService _saveService;
+        private readonly ILevelCompletedService _levelCompletedService;
 
         public GameplaySceneFactory(
             IUpdateService updateService,
@@ -42,7 +44,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             IVolumeService volumeService,
             LoadGameplaySceneService loadGameplaySceneService,
             CreateGameplaySceneService createGameplaySceneService,
-            ISaveService saveService) 
+            ISaveService saveService,
+            ILevelCompletedService levelCompletedService) 
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -54,6 +57,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _loadGameplaySceneService = loadGameplaySceneService ?? throw new ArgumentNullException(nameof(loadGameplaySceneService));
             _createGameplaySceneService = createGameplaySceneService ?? throw new ArgumentNullException(nameof(createGameplaySceneService));
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
+            _levelCompletedService = levelCompletedService ?? throw new ArgumentNullException(nameof(levelCompletedService));
         }
 
         public async UniTask<IScene> Create(object payload)
@@ -67,7 +71,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _upgradeService,
                 _gameOverService,
                 _volumeService,
-                _saveService);
+                _saveService,
+                _levelCompletedService);
         }
 
         private ILoadSceneService CreateLoadSceneService(object payload)

@@ -11,7 +11,6 @@ namespace Sources.Domain.Models.Spawners
             1,
             3
         };
-        
         public IReadOnlyList<int> SpawnDelays { get; } = new List<int>()
         {
             6,
@@ -19,9 +18,10 @@ namespace Sources.Domain.Models.Spawners
             2,
             1
         };
-        
-        public float CurrentDelay { get; set; }
 
+        public int BossesInLevel { get; } = 1;
+        public float CurrentDelay { get; set; }
+        public int BossCounter { get; set; }
         public int SumEnemies => GetSumEnemyes();
 
         private int GetSumEnemyes()
@@ -31,6 +31,7 @@ namespace Sources.Domain.Models.Spawners
             foreach (int enemies in EnemyInWave)
                 sum += enemies;
 
+            
             return sum;
         }
     }

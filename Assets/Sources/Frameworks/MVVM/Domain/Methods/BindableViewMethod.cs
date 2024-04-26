@@ -1,4 +1,5 @@
-﻿using Sources.MVVMFrameworks.DomainInterfaces.Methods;
+﻿using Sources.Frameworks.MVVM.Domain.Methods;
+using Sources.MVVMFrameworks.DomainInterfaces.Methods;
 using Sources.MVVMFrameworks.DomainInterfaces.Methods.Generic;
 using UnityEngine;
 

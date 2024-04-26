@@ -23,6 +23,7 @@ using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
+using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Upgrades;
@@ -70,7 +71,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ICameraService cameraService,
             VolumeViewFactory volumeViewFactory,
             IVolumeService volumeService,
-            ISaveService saveService)
+            ISaveService saveService,
+            ILevelCompletedService levelCompletedService)
             : base(
                 gameplayHud,
                 gameplayFormServiceFactory,
@@ -95,7 +97,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 cameraService,
                 volumeViewFactory,
                 volumeService,
-                saveService)
+                saveService,
+                levelCompletedService)
         {
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));

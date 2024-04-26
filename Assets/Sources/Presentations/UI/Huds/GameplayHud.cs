@@ -5,6 +5,7 @@ using Sources.Presentations.BindableViews.Forms.Gameplay;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
 using Sources.Presentations.Views.Common;
+using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.Gameplay;
 using Sources.Presentations.Views.Localizations;
 using Sources.Presentations.Views.Music;
@@ -20,19 +21,20 @@ namespace Sources.Presentations.UI.Huds
     {
         [Button(ButtonSizes.Large)]
         [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private PauseFormBindableView _pauseFormBindableView;
+        private TutorialFormView _tutorialFormView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private GameplayHudFormBindableView _gameplayHudFormBindableView;
+        private PauseFormView _pauseFormView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private GameplaySettingsFormBindableView _gameplaySettingsFormBindableView;
+        private HudFormView _hudFormView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private UpgradeFormBindableView _upgradeFormBindableView;
+        private GameplaySettingsFormView _gameplaySettingsFormView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private GameOverFormBindableView _gameOverFormBindableView;
+        private UpgradeFormView _upgradeFormView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private LevelCompletedFormBindableView _levelCompletedFormBindableView;
+        private GameOverFormView _gameOverFormView;
         [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private TutorialFormBindableView _tutorialFormBindableView;
+        private LevelCompletedFormView _levelCompletedFormView;
+        
 
         [FormerlySerializedAs("cinemachineCameraView")]
         [Button(ButtonSizes.Large)] 
@@ -77,13 +79,13 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("Volume")] [Required] [SerializeField]
         private VolumeView _volumeView;
         
-        public PauseFormBindableView PauseFormBindableView => _pauseFormBindableView;
-        public GameplayHudFormBindableView GameplayHudFormBindableView => _gameplayHudFormBindableView;
-        public GameplaySettingsFormBindableView GameplaySettingsFormBindableView => _gameplaySettingsFormBindableView;
-        public UpgradeFormBindableView UpgradeFormBindableView => _upgradeFormBindableView;
-        public GameOverFormBindableView GameOverFormBindableView => _gameOverFormBindableView;
-        public LevelCompletedFormBindableView LevelCompletedFormBindableView => _levelCompletedFormBindableView;
-        public TutorialFormBindableView TutorialFormBindableView => _tutorialFormBindableView;
+        public TutorialFormView TutorialFormView => _tutorialFormView;
+        public PauseFormView PauseFormView => _pauseFormView;
+        public HudFormView HudFormView => _hudFormView;
+        public GameplaySettingsFormView GameplaySettingsFormView => _gameplaySettingsFormView;
+        public UpgradeFormView UpgradeFormView => _upgradeFormView;
+        public GameOverFormView GameOverFormView => _gameOverFormView;
+        public LevelCompletedFormView LevelCompletedFormView => _levelCompletedFormView;
         
         public CinemachineCameraView CinemachineCameraView => _cinemachineCameraView;
 
