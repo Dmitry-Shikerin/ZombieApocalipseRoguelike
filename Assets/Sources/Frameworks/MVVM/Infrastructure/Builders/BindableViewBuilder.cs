@@ -2,8 +2,8 @@
 using Sources.ControllersInterfaces.ViewModels;
 using Sources.Frameworks.MVVM.InfrastructureInterfaces;
 using Sources.Frameworks.MVVM.PresentationInterfaces.Factories;
+using Sources.Frameworks.MVVM.PresentationInterfaces.Views;
 using Sources.Frameworks.MVVM.Presentations.Views;
-using Sources.Frameworks.PresentationInterfaces.Views;
 
 namespace Sources.Frameworks.MVVM.Infrastructure.Builders
 {

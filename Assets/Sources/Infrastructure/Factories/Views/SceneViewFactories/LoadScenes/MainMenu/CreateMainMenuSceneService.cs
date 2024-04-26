@@ -4,6 +4,7 @@ using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Setting;
 using Sources.DomainInterfaces.Payloads;
+using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
@@ -27,13 +28,15 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             VolumeViewFactory volumeViewFactory,
             IVolumeService volumeService,
             BackgroundMusicViewFactory backgroundMusicViewFactory,
-            LevelAvailabilityViewFactory levelAvailabilityViewFactory) 
+            LevelAvailabilityViewFactory levelAvailabilityViewFactory,
+            MainMenuFormServiceFactory mainMenuFormServiceFactory) 
             : base(
                 mainMenuHud,
                 volumeViewFactory,
                 volumeService,
                 backgroundMusicViewFactory,
-                levelAvailabilityViewFactory)
+                levelAvailabilityViewFactory,
+                mainMenuFormServiceFactory)
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _entityRepository = entityRepository;

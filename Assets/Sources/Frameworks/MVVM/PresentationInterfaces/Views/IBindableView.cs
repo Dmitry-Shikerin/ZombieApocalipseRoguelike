@@ -1,6 +1,6 @@
 ﻿using Sources.ControllersInterfaces.ViewModels;
 
-namespace Sources.Frameworks.PresentationInterfaces.Views
+namespace Sources.Frameworks.MVVM.PresentationInterfaces.Views
 {
     public interface IBindableView
     {

@@ -54,11 +54,11 @@ namespace Sources.Controllers.Presenters.Spawners
             _cancellationTokenSource.Cancel();
         }
 
+        //TODO вынести эту логику в сирвис и подменять сервис в сцен контесте
+        //TODO сделать отдельный мноинсталлер для сервиса
         private async void Spawn(CancellationToken cancellationToken)
         {
             CharacterView characterView = Object.FindObjectOfType<CharacterView>();
-
-            int bossCounter = 0;
 
             try
             {
@@ -76,13 +76,13 @@ namespace Sources.Controllers.Presenters.Spawners
                             }
                         }
 
-                        if (bossCounter == 0 && 
+                        if (_enemySpawner.BossCounter == 0 && 
                             _killEnemyCounter.KillZombies == 
                             _enemySpawner.SumEnemies)
                         {
 
                             SpawnBoss(enemySpawnPointView, characterView);
-                            bossCounter++;
+                            _enemySpawner.BossCounter++;
 
                             await UniTask.WaitWhile(
                                 () => _enemyCollectorService.Enemies.Count > 0,

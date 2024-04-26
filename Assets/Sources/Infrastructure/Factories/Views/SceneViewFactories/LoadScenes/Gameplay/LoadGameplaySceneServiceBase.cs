@@ -14,6 +14,7 @@ using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
+using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Upgrades;
@@ -30,6 +31,7 @@ using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
+using Sources.Presentations.Views.Forms.Gameplay;
 using Sources.Presentations.Views.RootGameObjects;
 using Object = UnityEngine.Object;
 
@@ -61,6 +63,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly VolumeViewFactory _volumeViewFactory;
         private readonly IVolumeService _volumeService;
         private readonly ISaveService _saveService;
+        private readonly ILevelCompletedService _levelCompletedService;
 
         protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
             GameplayFormServiceFactory gameplayFormServiceFactory,
@@ -85,11 +88,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ICameraService cameraService,
             VolumeViewFactory volumeViewFactory,
             IVolumeService volumeService,
-            ISaveService saveService)
+            ISaveService saveService,
+            ILevelCompletedService levelCompletedService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
-            _gameplayFormServiceFactory = gameplayFormServiceFactory ?? 
-                                          throw new ArgumentNullException(nameof(gameplayFormServiceFactory));
+            _gameplayFormServiceFactory = gameplayFormServiceFactory ?? throw new ArgumentNullException(nameof(gameplayFormServiceFactory));
             _characterViewFactory = characterViewFactory ?? 
                                     throw new ArgumentNullException(nameof(characterViewFactory));
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
@@ -122,11 +125,15 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _volumeViewFactory = volumeViewFactory ?? throw new ArgumentNullException(nameof(volumeViewFactory));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
+            _levelCompletedService = levelCompletedService ?? throw new ArgumentNullException(nameof(levelCompletedService));
         }
 
         public void Load(IScenePayload scenePayload)
         {
             GameModels gameModels = LoadModels(scenePayload);
+            
+            //LevelCompleted
+            _levelCompletedService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
             
             //SavedLevel
             SavedLevel savedLevel = gameModels.SavedLevel;
@@ -140,7 +147,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _saveService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
             
             //FormService
-            _gameplayFormServiceFactory.Create().Show<GameplayHudForm>();
+            _gameplayFormServiceFactory.Create().Show<HudFormView>();
 
             //Upgrades
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();

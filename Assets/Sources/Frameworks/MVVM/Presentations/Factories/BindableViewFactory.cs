@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using Sources.Frameworks.MVVM.PresentationInterfaces.Factories;
+using Sources.Frameworks.MVVM.PresentationInterfaces.Views;
 using Sources.Frameworks.MVVM.Presentations.Views;
 using Sources.Frameworks.PresentationInterfaces.Binder;
-using Sources.Frameworks.PresentationInterfaces.Views;
 using Sources.Infrastructure.Factories.Services.Prefabs;
 
 namespace Sources.Frameworks.MVVM.Presentations.Factories

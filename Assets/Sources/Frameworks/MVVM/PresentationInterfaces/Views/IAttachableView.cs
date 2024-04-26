@@ -1,4 +1,4 @@
-﻿using Sources.Frameworks.PresentationInterfaces.Views;
+﻿using Sources.Frameworks.MVVM.PresentationInterfaces.Views;
 
 namespace Sources.Frameworks.MVVM.PresentationInterfaces.Binds.AttachableView
 {

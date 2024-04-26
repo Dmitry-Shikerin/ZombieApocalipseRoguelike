@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Sources.MVVMFrameworks.DomainInterfaces.Methods;
 
-namespace Sources.MVVMFrameworks.Domain.Methods
+namespace Sources.Frameworks.MVVM.Domain.Methods
 {
     public class BindableMethod<T> : IBindableMethod<T>
     {

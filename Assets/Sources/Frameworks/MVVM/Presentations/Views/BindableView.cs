@@ -1,14 +1,16 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Sources.ControllersInterfaces.ViewModels;
+using Sources.Frameworks.MVVM.PresentationInterfaces.Views;
 using Sources.Frameworks.PresentationInterfaces.Binder;
-using Sources.Frameworks.PresentationInterfaces.Views;
+using Sources.Presentations.Views;
 using UnityEngine;
 
 namespace Sources.Frameworks.MVVM.Presentations.Views
 {
-    public class BindableView : MonoBehaviour, IBindableView
+    public class BindableView : View, IBindableView
     {
-        protected IBinder Binder;
+        private IBinder Binder;
 
         private IViewModel _viewModel;
         
@@ -17,11 +19,24 @@ namespace Sources.Frameworks.MVVM.Presentations.Views
         private void Awake() => 
             gameObject.SetActive(false);
 
+        private void OnEnable()
+        {
+            // _viewModel?.Enable();
+        }
+
+        private void OnDisable()
+        {
+            // _viewModel?.Disable();
+        }
+        
+        //TODO почему нельзя сделать как с презентерами?
         public void Bind(IViewModel viewModel)
         {
+            // Hide();
             _viewModel = viewModel;
             Binder.Bind(this, viewModel);
             viewModel.Enable();
+            // Show();
         }
 
         public void Unbind()
@@ -34,6 +49,7 @@ namespace Sources.Frameworks.MVVM.Presentations.Views
             AfterUnbindCallback?.Invoke();
         }
 
+        [UsedImplicitly]
         private void Construct(IBinder binder) => 
             Binder = binder ?? throw new ArgumentNullException(nameof(binder));
 

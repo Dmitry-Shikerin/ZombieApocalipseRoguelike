@@ -16,6 +16,7 @@ namespace Sources.Domain.Models.Data.Ids
         public const string KillEnemyCounter = "KillEnemyCounter";
 
         //commonModels
+        public const string MainMenu = "MainMenu";
         public const string SavedLevel = "SavedLevel";
         public const string Volume = "Volume";
         public const string GameData = "GameData";

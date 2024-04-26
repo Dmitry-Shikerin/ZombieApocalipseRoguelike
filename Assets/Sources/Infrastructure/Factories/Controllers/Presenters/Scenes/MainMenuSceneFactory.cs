@@ -1,7 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Sources.Controllers.Presenters.Scenes;
-using Sources.Controllers.Scenes;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.Domain.Models.Data.Ids;
 using Sources.DomainInterfaces.Payloads;
@@ -21,14 +20,12 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly LoadMainMenuSceneService _loadMainMenuSceneService;
         private readonly IVolumeService _volumeService;
         private readonly ILoadService _loadService;
-        private readonly MainMenuFormServiceFactory _mainMenuFormServiceFactory;
 
         public MainMenuSceneFactory(
             CreateMainMenuSceneService createMainMenuSceneService,
             LoadMainMenuSceneService loadMainMenuSceneService,
             IVolumeService volumeService,
-            ILoadService loadService,
-            MainMenuFormServiceFactory mainMenuFormServiceFactory)
+            ILoadService loadService)
         {
             _createMainMenuSceneService = createMainMenuSceneService ?? 
                                           throw new ArgumentNullException(nameof(createMainMenuSceneService));
@@ -36,16 +33,13 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                                         throw new ArgumentNullException(nameof(loadMainMenuSceneService));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
-            _mainMenuFormServiceFactory = mainMenuFormServiceFactory ??
-                                          throw new ArgumentNullException(nameof(mainMenuFormServiceFactory));
         }
         
         public async UniTask<IScene> Create(object payload)
         {
             return new MainMenuScene(
                 CreateLoadSceneService(payload),
-                _volumeService,
-                _mainMenuFormServiceFactory);
+                _volumeService);
         }
         
         private ILoadSceneService CreateLoadSceneService(object payload)
