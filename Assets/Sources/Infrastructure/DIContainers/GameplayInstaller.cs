@@ -35,7 +35,7 @@ using Sources.Infrastructure.Factories.Domain.Data;
 using Sources.Infrastructure.Factories.Domain.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Services.Localizations;
-using Sources.Infrastructure.Factories.Services.UiFramevork.Forms;
+using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Bullets;
@@ -187,12 +187,13 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<CreateGameplaySceneService>().AsSingle();
             Container.Bind<ISaveService>().To<SaveService>().AsSingle();
             Container.Bind<ILevelCompletedService>().To<LevelCompletedService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
         }
 
         private void BindFormFactories()
         {
-            Container.Bind<GameplaySceneFormServiceFactory>().AsSingle();
+            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
+            
+            Container.Bind<GameplayFormServiceFactory>().AsSingle();
 
             Container.Bind<FormButtonViewFactory>().AsSingle();
             Container.Bind<CustomFormButtonViewFactory>().AsSingle();

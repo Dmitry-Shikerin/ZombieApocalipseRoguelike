@@ -6,7 +6,7 @@ using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
 using Sources.DomainInterfaces.Payloads;
 using Sources.Infrastructure.Factories.Services.FormServices;
-using Sources.Infrastructure.Factories.Services.UiFramevork.Forms;
+using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
 using Sources.Infrastructure.Factories.Views.Characters;
@@ -43,7 +43,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
     {
         private readonly GameplayHud _gameplayHud;
         private readonly MVPGameplayFormServiceFactory _mvpGameplayFormServiceFactory;
-        private readonly GameplaySceneFormServiceFactory _gameplaySceneFormServiceFactory;
+        private readonly GameplayFormServiceFactory _gameplayFormServiceFactory;
         private readonly CharacterViewFactory _characterViewFactory;
         private readonly BearViewFactory _bearViewFactory;
         private readonly UpgradeViewFactory _upgradeViewFactory;
@@ -69,7 +69,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ILevelCompletedService _levelCompletedService;
 
         protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
-            GameplaySceneFormServiceFactory gameplaySceneFormServiceFactory,
+            GameplayFormServiceFactory gameplayFormServiceFactory,
             CharacterViewFactory characterViewFactory,
             BearViewFactory bearViewFactory,
             UpgradeViewFactory upgradeViewFactory,
@@ -95,7 +95,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ILevelCompletedService levelCompletedService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
-            _gameplaySceneFormServiceFactory = gameplaySceneFormServiceFactory ?? throw new ArgumentNullException(nameof(gameplaySceneFormServiceFactory));
+            _gameplayFormServiceFactory = gameplayFormServiceFactory ?? throw new ArgumentNullException(nameof(gameplayFormServiceFactory));
             _characterViewFactory = characterViewFactory ?? 
                                     throw new ArgumentNullException(nameof(characterViewFactory));
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
@@ -150,7 +150,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _saveService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
             
             //FormService
-            _gameplaySceneFormServiceFactory
+            _gameplayFormServiceFactory
                 .Create()
                 .Show(FormId.Hud);
 

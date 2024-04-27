@@ -1,12 +1,10 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using Sources.Controllers.Common.UiFramework.Buttons;
-using Sources.Infrastructure.Services;
 using Sources.Infrastructure.Services.UiFramework;
 using Sources.Presentation.Ui.Buttons;
 using Sources.Presentation.Ui.Buttons.Types;
 
-namespace Sources.Controllers
+namespace Sources.Controllers.Presenters.UiFramework.Buttons
 {
     public class CustomFormButtonPresenter : FormButtonPresenterBase
     {

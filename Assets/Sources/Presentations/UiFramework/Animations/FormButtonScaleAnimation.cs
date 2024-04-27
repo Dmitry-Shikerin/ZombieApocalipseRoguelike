@@ -1,86 +1,34 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Cysharp.Threading.Tasks;
+﻿using Sources.Infrastructure.Services.UiFramework.Animations;
+using Sources.InfrastructureInterfaces.Services.UiFrameworks.Animations;
 using Sources.Presentation.Ui.Animations.Types;
 using Sources.Presentation.Ui.Buttons;
-using Sources.Presentation.Views;
 using Sources.Presentations.Views;
 using UnityEngine;
 
-namespace Sources.Presentation.Ui.Animations
+namespace Sources.Presentations.UiFramework.Animations
 {
     [RequireComponent(typeof(UiFormButton))]
     public class FormButtonScaleAnimation : View
     {
-        [SerializeField] private AnimationType _animationType;
-        [SerializeField] private ReactionAnimationType _reactionAnimationType;
-        [SerializeField] private ScaleAnimationType _scaleAnimationType;
-        [SerializeField] private float _animationDuration = 0.1f;
-        [SerializeField] private Vector3 _fromScale;
-        [SerializeField] private Vector3 _targetScale;
+        [field: SerializeField] public AnimationType AnimationType { get; private set; }
+        [field: SerializeField] public ReactionAnimationType ReactionAnimationType { get; private set; }
+        [field: SerializeField] public ScaleAnimationType ScaleAnimationType { get; private set; }
+        [field: SerializeField] public float AnimationDuration { get; private set; } = 0.1f;
+        [field: SerializeField] public Vector3 FromScale { get; private set; }
+        [field: SerializeField] public Vector3 TargetScale { get; private set; }
 
-        private UiFormButton _button;
-        private CancellationTokenSource _cancellationTokenSource;
-
+        IAnimationService _animationService = new AnimationService();
+        
         private void Awake()
         {
-            // if (_reactionAnimationType == ReactionAnimationType.ButtonClick)
-                _button = GetComponent<UiFormButton>();
-            
+            _animationService.Construct(this);
+            _animationService.Awake();
         }
 
-        private void OnEnable()
-        {
-            _cancellationTokenSource = new CancellationTokenSource();
+        private void OnEnable() =>
+            _animationService.Enable();
 
-            if (_reactionAnimationType == ReactionAnimationType.ButtonClick)
-                _button.AddClickListener(PlayAnimation);
-            
-            if(_reactionAnimationType == ReactionAnimationType.ShowView)
-                PlayAnimation();
-        }
-
-        private void OnDisable()
-        {
-            if (_reactionAnimationType == ReactionAnimationType.ButtonClick)
-                _button.RemoveClickListener(PlayAnimation);
-            
-            _cancellationTokenSource = new CancellationTokenSource();
-        }
-
-        private async void PlayAnimation()
-        {
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource = new CancellationTokenSource();
-
-            try
-            {
-                await PlayAnimationAsync(_cancellationTokenSource.Token);
-            }
-            catch (OperationCanceledException)
-            {
-                _button.transform.localScale = _fromScale;
-            }
-        }
-
-        private async Task PlayAnimationAsync(CancellationToken token)
-        {
-            while (Vector3.Distance(_button.transform.localScale, _targetScale) > 0.01f)
-            {
-                _button.transform.localScale = Vector3.MoveTowards(
-                    _button.transform.localScale, _targetScale, _animationDuration);
-
-                await UniTask.Yield(token);
-            }
-
-            while (Vector3.Distance(_button.transform.localScale, _fromScale) > 0.01f)
-            {
-                _button.transform.localScale = Vector3.MoveTowards(
-                    _button.transform.localScale, _fromScale, _animationDuration);
-
-                await UniTask.Yield(token);
-            }
-        }
+        private void OnDisable() =>
+            _animationService.Disable();
     }
 }

@@ -1,27 +1,27 @@
 ﻿using System;
 using Sources.Controllers;
-using Sources.Controllers.Common.UiFramework.Buttons;
 using Sources.Controllers.Presenters.UiFramework.Buttons;
-using Sources.InfrastructureInterfaces.Services;
+using Sources.Infrastructure.Services;
+using Sources.Infrastructure.Services.UiFramework;
 using Sources.Presentation.Ui.Buttons;
 
 namespace Sources.Infrastructure.Factories
 {
-    public class FormButtonViewFactory
+    public class CustomFormButtonViewFactory
     {
-        private readonly IFormService _formService;
+        private readonly FormService _formService;
 
-        public FormButtonViewFactory(IFormService formService)
+        public CustomFormButtonViewFactory(FormService formService)
         {
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public UiFormButton Create(UiFormButton view)
         {
-            FormButtonPresenter presenter = new FormButtonPresenter(view, _formService);
+            CustomFormButtonPresenter presenter = new CustomFormButtonPresenter(view, _formService);
             
             view.Construct(presenter);
-
+            
             return view;
         }
     }

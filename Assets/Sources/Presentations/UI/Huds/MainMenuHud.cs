@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sources.Domain.Models.Forms.MainMenu;
+using Sources.Presentation.Views.Forms;
 using Sources.Presentations.BindableViews.Forms.MainMenu;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Forms.MainMenu;
@@ -9,24 +10,16 @@ using Sources.Presentations.Views.Music;
 using Sources.Presentations.Views.Settings;
 using Sources.Presentations.Views.YandexSDK;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sources.Presentations.UI.Huds
 {
     public class MainMenuHud: View
     {
+        [FormerlySerializedAs("_mainMenuHudFormView")]
         [Button(ButtonSizes.Large)]
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private MainMenuHudFormView _mainMenuHudFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private LeaderboardFormView _leaderboardFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private MainMenuSettingsFormView _mainMenuSettingsFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private AuthorizationFormView _authorizationFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private NewGameFormView _newGameFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private WarningNewGameFormView _warningNewGameFormView;
+        [FoldoutGroup("UiCollector")] [Required] [SerializeField]
+        private UiCollector _uiCollector;
 
         [Button(ButtonSizes.Large)]
         [FoldoutGroup("LeaderBoardElementViews")] [Required] [SerializeField]
@@ -44,12 +37,7 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("BackgroundMusic")] [Required] [SerializeField]
         private BackgroundMusicView _backgroundMusicView;
 
-        public MainMenuHudFormView MainMenuHudFormView => _mainMenuHudFormView;
-        public LeaderboardFormView LeaderboardFormView => _leaderboardFormView;
-        public MainMenuSettingsFormView MainMenuSettingsFormView => _mainMenuSettingsFormView;
-        public AuthorizationFormView AuthorizationFormView => _authorizationFormView;
-        public NewGameFormView NewGameFormView => _newGameFormView;
-        public WarningNewGameFormView WarningNewGameFormView => _warningNewGameFormView;
+        public UiCollector UiCollector => _uiCollector;
         
         public IReadOnlyList<LeaderBoardElementView> LeaderBoardElementViews => _leaderBoardElementViews;
         
