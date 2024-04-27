@@ -2,6 +2,7 @@
 using System.Collections;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
 using Sources.Frameworks.UiFramework.Services.Forms;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.InfrastructureInterfaces.Services;
@@ -18,10 +19,12 @@ namespace Sources.Infrastructure.Factories.Services.UiFramework.Forms
             MainMenuHud mainMenuHud,
             FormService formService,
             CustomFormButtonViewFactory customFormButtonViewFactory,
-            FormButtonViewFactory formButtonViewFactory) 
+            FormButtonViewFactory formButtonViewFactory,
+            UiContainerFactory uiContainerFactory) 
             : base(
                 customFormButtonViewFactory, 
-                formButtonViewFactory)
+                formButtonViewFactory,
+                uiContainerFactory)
         {
             _mainMenuHud = mainMenuHud ? mainMenuHud : throw new ArgumentNullException(nameof(mainMenuHud));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));

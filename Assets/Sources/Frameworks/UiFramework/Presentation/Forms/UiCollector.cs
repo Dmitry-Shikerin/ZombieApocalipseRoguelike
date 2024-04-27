@@ -12,7 +12,6 @@ using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Forms
 {
-    // [DefaultExecutionOrder(-1)]
     public class UiCollector : View
     {
         [SerializeField] private Localization _localization;
@@ -23,7 +22,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
 
         public Localization Localization => _localization;
         public IReadOnlyList<UiFormButton> UiFormButtons => _uiFormButtons;
-        public IReadOnlyList<IUiContainer> UiContainers => _uiContainers;
+        public IReadOnlyList<UiContainer> UiContainers => _uiContainers;
         public IReadOnlyList<ITextView> TextViews => _textViews;
 
         private void Awake()
