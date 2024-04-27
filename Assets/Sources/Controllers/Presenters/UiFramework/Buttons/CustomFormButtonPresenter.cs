@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using Sources.Controllers.Common.UiFramework.Buttons;
 using Sources.Infrastructure.Services;
+using Sources.Infrastructure.Services.UiFramework;
 using Sources.Presentation.Ui.Buttons;
 using Sources.Presentation.Ui.Buttons.Types;
 
@@ -11,10 +12,10 @@ namespace Sources.Controllers
     {
         private readonly Action _action;
         private readonly FormService _formService;
-        private readonly FormButtonView _view;
+        private readonly UiFormButton _view;
 
         public CustomFormButtonPresenter(
-            FormButtonView view,
+            UiFormButton view,
             FormService formService)
         {
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));

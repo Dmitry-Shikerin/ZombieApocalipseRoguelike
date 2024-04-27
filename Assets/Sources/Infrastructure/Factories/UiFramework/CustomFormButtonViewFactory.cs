@@ -2,6 +2,7 @@
 using Sources.Controllers;
 using Sources.Controllers.Common.UiFramework.Buttons;
 using Sources.Infrastructure.Services;
+using Sources.Infrastructure.Services.UiFramework;
 using Sources.Presentation.Ui.Buttons;
 
 namespace Sources.Infrastructure.Factories
@@ -15,7 +16,7 @@ namespace Sources.Infrastructure.Factories
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
-        public FormButtonView Create(FormButtonView view)
+        public UiFormButton Create(UiFormButton view)
         {
             CustomFormButtonPresenter presenter = new CustomFormButtonPresenter(view, _formService);
             

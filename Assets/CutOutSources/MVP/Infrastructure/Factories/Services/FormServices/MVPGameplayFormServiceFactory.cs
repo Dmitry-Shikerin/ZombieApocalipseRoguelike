@@ -59,40 +59,40 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
 
         public IMVPFormService Create()
         {
-            Form<HudFormView, HudFormPresenter> hudForm = 
-                new Form<HudFormView, HudFormPresenter>(
-                _hudFormPresenterFactory.Create, _gameplayHud.HudFormView);
-            _imvpFormService.Add(hudForm);
-            
-            Form<GameOverFormView, GameOverFormPresenter> gameOverForm =
-                new Form<GameOverFormView, GameOverFormPresenter>(
-                    _gameOverFormPresenterFactory.Create, _gameplayHud.GameOverFormView);
-            _imvpFormService.Add(gameOverForm);
-            
-            Form<LevelCompletedFormView, LevelCompletedFormPresenter> levelCompletedForm =
-                new Form<LevelCompletedFormView, LevelCompletedFormPresenter>(
-                    _levelCompletedFormPresenterFactory.Create, _gameplayHud.LevelCompletedFormView);
-            _imvpFormService.Add(levelCompletedForm);
-            
-            Form<GameplaySettingsFormView, GameplaySettingsFormPresenter> gameplaySettingsForm =
-                new Form<GameplaySettingsFormView, GameplaySettingsFormPresenter>(
-                    _gameplaySettingsFormPresenterFactory.Create, _gameplayHud.GameplaySettingsFormView);
-            _imvpFormService.Add(gameplaySettingsForm);
-            
-            Form<PauseFormView, PauseFormPresenter> pauseForm =
-                new Form<PauseFormView, PauseFormPresenter>(
-                    _pauseFormPresenterFactory.Create, _gameplayHud.PauseFormView);
-            _imvpFormService.Add(pauseForm);
-            
-            Form<GreetingGreetingTutorialFormView, GreetingTutorialFormPresenter> tutorialForm =
-                new Form<GreetingGreetingTutorialFormView, GreetingTutorialFormPresenter>(
-                    _greetingTutorialFormPresenterFactory.Create, _gameplayHud.GreetingGreetingTutorialFormView);
-            _imvpFormService.Add(tutorialForm);
-            
-            Form<UpgradeFormView, UpgradeFormPresenter> upgradeForm =
-                new Form<UpgradeFormView, UpgradeFormPresenter>(
-                    _upgradeFormPresenterFactory.Create, _gameplayHud.UpgradeFormView);
-            _imvpFormService.Add(upgradeForm);
+            // Form<HudFormView, HudFormPresenter> hudForm = 
+            //     new Form<HudFormView, HudFormPresenter>(
+            //     _hudFormPresenterFactory.Create, _gameplayHud.HudFormView);
+            // _imvpFormService.Add(hudForm);
+            //
+            // Form<GameOverFormView, GameOverFormPresenter> gameOverForm =
+            //     new Form<GameOverFormView, GameOverFormPresenter>(
+            //         _gameOverFormPresenterFactory.Create, _gameplayHud.GameOverFormView);
+            // _imvpFormService.Add(gameOverForm);
+            //
+            // Form<LevelCompletedFormView, LevelCompletedFormPresenter> levelCompletedForm =
+            //     new Form<LevelCompletedFormView, LevelCompletedFormPresenter>(
+            //         _levelCompletedFormPresenterFactory.Create, _gameplayHud.LevelCompletedFormView);
+            // _imvpFormService.Add(levelCompletedForm);
+            //
+            // Form<GameplaySettingsFormView, GameplaySettingsFormPresenter> gameplaySettingsForm =
+            //     new Form<GameplaySettingsFormView, GameplaySettingsFormPresenter>(
+            //         _gameplaySettingsFormPresenterFactory.Create, _gameplayHud.GameplaySettingsFormView);
+            // _imvpFormService.Add(gameplaySettingsForm);
+            //
+            // Form<PauseFormView, PauseFormPresenter> pauseForm =
+            //     new Form<PauseFormView, PauseFormPresenter>(
+            //         _pauseFormPresenterFactory.Create, _gameplayHud.PauseFormView);
+            // _imvpFormService.Add(pauseForm);
+            //
+            // Form<GreetingGreetingTutorialFormView, GreetingTutorialFormPresenter> tutorialForm =
+            //     new Form<GreetingGreetingTutorialFormView, GreetingTutorialFormPresenter>(
+            //         _greetingTutorialFormPresenterFactory.Create, _gameplayHud.GreetingGreetingTutorialFormView);
+            // _imvpFormService.Add(tutorialForm);
+            //
+            // Form<UpgradeFormView, UpgradeFormPresenter> upgradeForm =
+            //     new Form<UpgradeFormView, UpgradeFormPresenter>(
+            //         _upgradeFormPresenterFactory.Create, _gameplayHud.UpgradeFormView);
+            // _imvpFormService.Add(upgradeForm);
             
             return _imvpFormService;
         }

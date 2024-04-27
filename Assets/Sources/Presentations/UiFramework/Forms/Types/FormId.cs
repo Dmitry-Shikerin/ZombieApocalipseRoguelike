@@ -1,4 +1,4 @@
-﻿namespace Sources.Presentation.Views.Forms.Types
+﻿namespace Sources.Presentations.UiFramework.Forms.Types
 {
     public enum FormId
     {
@@ -7,5 +7,8 @@
         Pause = 2,
         Settings = 3,
         Tutorial = 4,
+        Upgrade = 5,
+        GameOver = 6,
+        LevelCompleted = 7,
     }
 }

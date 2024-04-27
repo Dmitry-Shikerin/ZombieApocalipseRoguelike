@@ -14,6 +14,7 @@ using Sources.Domain.Models.Upgrades;
 using Sources.Domain.Models.Weapons;
 using Sources.DomainInterfaces.Payloads;
 using Sources.Infrastructure.Factories.Services.FormServices;
+using Sources.Infrastructure.Factories.Services.UiFramevork.Forms;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
 using Sources.Infrastructure.Factories.Views.Characters;
@@ -49,7 +50,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
         public LoadGameplaySceneService(
             GameplayHud gameplayHud, 
-            MVPGameplayFormServiceFactory mvpGameplayFormServiceFactory, 
+            GameplaySceneFormServiceFactory gameplaySceneFormServiceFactory, 
             CharacterViewFactory characterViewFactory, 
             BearViewFactory bearViewFactory, 
             UpgradeViewFactory upgradeViewFactory, 
@@ -75,7 +76,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ILevelCompletedService levelCompletedService) 
             : base(
                 gameplayHud, 
-                mvpGameplayFormServiceFactory, 
+                gameplaySceneFormServiceFactory, 
                 characterViewFactory, 
                 bearViewFactory, 
                 upgradeViewFactory, 

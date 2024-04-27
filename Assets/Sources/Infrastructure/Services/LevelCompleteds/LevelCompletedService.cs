@@ -2,7 +2,9 @@
 using Sources.Domain.Models.Forms.Gameplay;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
+using Sources.InfrastructureInterfaces.Services;
 using Sources.InfrastructureInterfaces.Services.Forms;
+using Sources.Presentations.UiFramework.Forms.Types;
 using Sources.Presentations.Views.Forms.Gameplay;
 using UnityEngine;
 
@@ -10,13 +12,13 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
 {
     public class LevelCompletedService : ILevelCompletedService
     {
-        private readonly IMVPFormService _imvpFormService;
+        private readonly IFormService _formService;
         private KillEnemyCounter _killEnemyCounter;
         private EnemySpawner _enemySpawner;
 
-        public LevelCompletedService(IMVPFormService imvpFormService)
+        public LevelCompletedService(IFormService formService)
         {
-            _imvpFormService = imvpFormService ?? throw new ArgumentNullException(nameof(imvpFormService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public void Enable()
@@ -33,7 +35,7 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
         {
             if (_killEnemyCounter.KillZombies == _enemySpawner.SumEnemies + _enemySpawner.BossesInLevel)
             {
-                _imvpFormService.Show<LevelCompletedFormView>();
+                _formService.Show(FormId.LevelCompleted);
                 Debug.Log("Show level completed form");
             }
         }

@@ -6,6 +6,7 @@ using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
 using Sources.DomainInterfaces.Payloads;
 using Sources.Infrastructure.Factories.Services.FormServices;
+using Sources.Infrastructure.Factories.Services.UiFramevork.Forms;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
 using Sources.Infrastructure.Factories.Views.Characters;
@@ -28,6 +29,7 @@ using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
+using Sources.Presentations.UiFramework.Forms.Types;
 using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
@@ -41,6 +43,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
     {
         private readonly GameplayHud _gameplayHud;
         private readonly MVPGameplayFormServiceFactory _mvpGameplayFormServiceFactory;
+        private readonly GameplaySceneFormServiceFactory _gameplaySceneFormServiceFactory;
         private readonly CharacterViewFactory _characterViewFactory;
         private readonly BearViewFactory _bearViewFactory;
         private readonly UpgradeViewFactory _upgradeViewFactory;
@@ -66,7 +69,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ILevelCompletedService _levelCompletedService;
 
         protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
-            MVPGameplayFormServiceFactory mvpGameplayFormServiceFactory,
+            GameplaySceneFormServiceFactory gameplaySceneFormServiceFactory,
             CharacterViewFactory characterViewFactory,
             BearViewFactory bearViewFactory,
             UpgradeViewFactory upgradeViewFactory,
@@ -92,7 +95,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ILevelCompletedService levelCompletedService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
-            _mvpGameplayFormServiceFactory = mvpGameplayFormServiceFactory ?? throw new ArgumentNullException(nameof(mvpGameplayFormServiceFactory));
+            _gameplaySceneFormServiceFactory = gameplaySceneFormServiceFactory ?? throw new ArgumentNullException(nameof(gameplaySceneFormServiceFactory));
             _characterViewFactory = characterViewFactory ?? 
                                     throw new ArgumentNullException(nameof(characterViewFactory));
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
@@ -147,7 +150,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _saveService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
             
             //FormService
-            _mvpGameplayFormServiceFactory.Create().Show<HudFormView>();
+            _gameplaySceneFormServiceFactory
+                .Create()
+                .Show(FormId.Hud);
 
             //Upgrades
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
