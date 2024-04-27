@@ -1,11 +1,13 @@
 ﻿using System;
 using Sources.Domain.Models.Data.Ids;
-using Sources.Infrastructure.Services.UiFramework;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
+using Sources.Frameworks.UiFramework.Presentation.Buttons.Types;
+using Sources.Frameworks.UiFramework.Services.Forms;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.InfrastructureInterfaces.Services;
 using Sources.InfrastructureInterfaces.Services.SceneServices;
-using Sources.Presentation.Ui.Buttons;
 using Sources.Presentations.UI.Huds;
-using Sources.Presentations.UiFramework.Buttons.Types;
 
 namespace Sources.Infrastructure.Factories.Services.UiFramework.Forms
 {

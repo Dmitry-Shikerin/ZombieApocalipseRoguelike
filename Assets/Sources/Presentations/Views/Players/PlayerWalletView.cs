@@ -1,6 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Controllers.Players;
-using Sources.Presentations.UI.Texts;
+using Sources.Frameworks.UiFramework.Presentation.Texts;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.Players;
 using UnityEngine;

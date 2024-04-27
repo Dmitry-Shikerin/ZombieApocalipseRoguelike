@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
-using Sources.Infrastructure.Services.UiFramework;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
+using Sources.Frameworks.UiFramework.Services.Forms;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.InfrastructureInterfaces.Services;
 using Sources.Presentations.UI.Huds;
 

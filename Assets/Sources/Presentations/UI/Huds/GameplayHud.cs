@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Sources.Presentation.Views.Forms;
+using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
 using Sources.Presentations.Views.Common;

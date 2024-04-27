@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Domain.Models.Gameplay;
 using Sources.DomainInterfaces.Payloads;
+using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Gameplay;
@@ -9,7 +10,6 @@ using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
-using Sources.Presentations.UiFramework.Forms.Types;
 using Sources.Presentations.Views.Forms.MainMenu;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.MainMenu
