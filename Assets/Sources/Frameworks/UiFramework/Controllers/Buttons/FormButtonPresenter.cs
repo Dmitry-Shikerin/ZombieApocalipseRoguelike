@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
+using Sources.Frameworks.UiFramework.Presentation.Buttons.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 
 namespace Sources.Frameworks.UiFramework.Controllers.Buttons
@@ -8,6 +11,7 @@ namespace Sources.Frameworks.UiFramework.Controllers.Buttons
     {
         private readonly IFormService _formService;
         private readonly UiFormButton _view;
+        private CancellationTokenSource _cancellationTokenSource;
 
         public FormButtonPresenter(UiFormButton view, IFormService formService)
         {
@@ -15,13 +19,36 @@ namespace Sources.Frameworks.UiFramework.Controllers.Buttons
             _view = view ? view : throw new ArgumentNullException(nameof(view));
         }
 
-        public override void Enable() =>
+        public override void Enable()
+        {
+            _cancellationTokenSource = new CancellationTokenSource();
+            
             _view.AddClickListener(ShowForm);
+        }
 
-        public override void Disable() =>
+        public override void Disable()
+        {
             _view.RemoveClickListener(ShowForm);
+            _cancellationTokenSource.Cancel();
+        }
 
-        private void ShowForm() =>
-            _formService.Show(_view.FormId);
+        private async void ShowForm()
+        {
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+            
+            try
+            {
+                if (_view.UseButtonType == UseButtonType.Delayed)
+                    await UniTask.Delay(TimeSpan.FromMilliseconds(_view.Delay),
+                        cancellationToken: _cancellationTokenSource.Token);
+
+                _formService.Show(_view.FormId);
+            }
+            catch (OperationCanceledException)
+            {
+            }
+
+        }
     }
 }

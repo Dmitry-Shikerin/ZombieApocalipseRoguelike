@@ -14,7 +14,7 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
             ITranslateServiceFactory<IRussianTranslateService> russianTranslateFactory, 
             ITranslateServiceFactory<ITurkishTranslateService> turkishTranslateFactory) 
             : base(
-                gameplayHud.LocalizationView, 
+                gameplayHud.UiLocalization, 
                 englishTranslateFactory, 
                 russianTranslateFactory, 
                 turkishTranslateFactory)

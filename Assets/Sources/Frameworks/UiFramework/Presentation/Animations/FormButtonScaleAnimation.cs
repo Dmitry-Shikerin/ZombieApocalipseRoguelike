@@ -17,7 +17,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Animations
         [field: SerializeField] public Vector3 FromScale { get; private set; }
         [field: SerializeField] public Vector3 TargetScale { get; private set; }
 
-        IAnimationService _animationService = new AnimationService();
+        private readonly IAnimationService _animationService = new AnimationService();
         
         private void Awake()
         {

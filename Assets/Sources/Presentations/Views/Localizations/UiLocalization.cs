@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Sources.Presentations.Views.Localizations
 {
-    public class LocalizationView : View, ILocalizationView
+    public class UiLocalization : View, ILocalizationView
     {
         [SerializeField] private Localization _localization;
         
