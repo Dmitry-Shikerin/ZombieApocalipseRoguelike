@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay;
-using Sources.Presentations.BindableViews.Forms.Gameplay;
+using Sources.Presentation.Views.Forms;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
 using Sources.Presentations.Views.Common;
 using Sources.Presentations.Views.Forms.Gameplay;
-using Sources.Presentations.Views.Forms.Gameplay.Tutorials;
 using Sources.Presentations.Views.Gameplay;
 using Sources.Presentations.Views.Localizations;
 using Sources.Presentations.Views.Music;
@@ -21,23 +19,9 @@ namespace Sources.Presentations.UI.Huds
     public class GameplayHud : View
     {
         [Button(ButtonSizes.Large)]
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private PauseFormView _pauseFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private HudFormView _hudFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private GameplaySettingsFormView _gameplaySettingsFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private UpgradeFormView _upgradeFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private GameOverFormView _gameOverFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private LevelCompletedFormView _levelCompletedFormView;
-        [FoldoutGroup("Forms")] [Required] [SerializeField]
-        private GreetingGreetingTutorialFormView _greetingGreetingTutorialFormView;
-        
+        [FoldoutGroup("UiCollector")] [Required] [SerializeField]
+        private UiCollector _uiCollector;
 
-        [FormerlySerializedAs("cinemachineCameraView")]
         [Button(ButtonSizes.Large)] 
         [FoldoutGroup("Camera")] [Required] [SerializeField]
         private CinemachineCameraView _cinemachineCameraView;
@@ -80,13 +64,7 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("Volume")] [Required] [SerializeField]
         private VolumeView _volumeView;
         
-        public PauseFormView PauseFormView => _pauseFormView;
-        public HudFormView HudFormView => _hudFormView;
-        public GameplaySettingsFormView GameplaySettingsFormView => _gameplaySettingsFormView;
-        public UpgradeFormView UpgradeFormView => _upgradeFormView;
-        public GameOverFormView GameOverFormView => _gameOverFormView;
-        public LevelCompletedFormView LevelCompletedFormView => _levelCompletedFormView;
-        public GreetingGreetingTutorialFormView GreetingGreetingTutorialFormView => _greetingGreetingTutorialFormView;
+        public UiCollector UiCollector => _uiCollector;
         
         public CinemachineCameraView CinemachineCameraView => _cinemachineCameraView;
 

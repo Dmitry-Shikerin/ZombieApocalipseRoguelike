@@ -1,8 +1,8 @@
-﻿using Sources.Presentation.Views.Forms.Types;
+﻿using Sources.Presentations.UiFramework.Forms.Types;
 
 namespace Sources.PresentationsInterfaces.Views.Forms.Common
 {
-    public interface IFormView : IView
+    public interface IUiContainer : IView
     {
         FormId Id { get; }
     }

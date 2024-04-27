@@ -10,6 +10,7 @@ using Sources.Frameworks.MVVM.PresentationInterfaces.Factories;
 using Sources.Frameworks.MVVM.Presentations.Factories;
 using Sources.Frameworks.PresentationInterfaces.Binder;
 using Sources.Frameworks.Presentations.Binders;
+using Sources.Infrastructure.Factories;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
 using Sources.Infrastructure.Factories.Controllers.Cameras;
@@ -34,6 +35,7 @@ using Sources.Infrastructure.Factories.Domain.Data;
 using Sources.Infrastructure.Factories.Domain.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Services.Localizations;
+using Sources.Infrastructure.Factories.Services.UiFramevork.Forms;
 using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Bullets;
@@ -73,6 +75,7 @@ using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Saves;
 using Sources.Infrastructure.Services.Spawners;
+using Sources.Infrastructure.Services.UiFramework;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Infrastructure.Services.Upgrades;
 using Sources.Infrastructure.Services.UseCases.Commands;
@@ -184,21 +187,17 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<CreateGameplaySceneService>().AsSingle();
             Container.Bind<ISaveService>().To<SaveService>().AsSingle();
             Container.Bind<ILevelCompletedService>().To<LevelCompletedService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<ImvpFormService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
         }
 
         private void BindFormFactories()
         {
-            Container.Bind<MVPGameplayFormServiceFactory>().AsSingle();
+            Container.Bind<GameplaySceneFormServiceFactory>().AsSingle();
 
-            Container.Bind<GameOverFormPresenterFactory>().AsSingle();
-            Container.Bind<GameplaySettingsFormPresenterFactory>().AsSingle();
-            Container.Bind<HudFormPresenterFactory>().AsSingle();
-            Container.Bind<LevelCompletedFormPresenterFactory>().AsSingle();
-            Container.Bind<PauseFormPresenterFactory>().AsSingle();
-            Container.Bind<GreetingTutorialFormPresenterFactory>().AsSingle();
-            Container.Bind<UpgradeFormPresenterFactory>().AsSingle();
+            Container.Bind<FormButtonViewFactory>().AsSingle();
+            Container.Bind<CustomFormButtonViewFactory>().AsSingle();
         }
+
 
         private void BindGameplay()
         {

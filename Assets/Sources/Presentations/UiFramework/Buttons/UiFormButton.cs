@@ -1,13 +1,13 @@
 ﻿using Sources.Controllers;
 using Sources.Controllers.Common.UiFramework.Buttons;
 using Sources.Presentation.Ui.Buttons.Types;
-using Sources.Presentation.Views.Forms.Types;
 using Sources.Presentations.UiFramework.Buttons.Types;
+using Sources.Presentations.UiFramework.Forms.Types;
 using UnityEngine;
 
 namespace Sources.Presentation.Ui.Buttons
 {
-    public class FormButtonView : PresentableFormButton<FormButtonPresenterBase>
+    public class UiFormButton : PresentableFormButton<FormButtonPresenterBase>
     {
         [SerializeField] private FormId _formId;
         [SerializeField] private ButtonType _buttonType;

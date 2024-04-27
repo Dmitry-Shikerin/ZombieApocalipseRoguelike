@@ -5,7 +5,7 @@ using Sources.Domain.Models.Spawners;
 using Sources.PresentationsInterfaces.UI.Sliders;
 using Sources.PresentationsInterfaces.Views.Gameplay;
 
-namespace Sources.Controllers.Gameplay
+namespace Sources.Controllers.Presenters.Gameplay
 {
     public class KillEnemyCounterPresenter : PresenterBase
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Sources.Controllers.Gameplay;
+using Sources.Controllers.Presenters.Gameplay;
 using Sources.Presentations.UI.Images;
 using Sources.Presentations.UI.Sliders;
 using Sources.PresentationsInterfaces.UI.Images;

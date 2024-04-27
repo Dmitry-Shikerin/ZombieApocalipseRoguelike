@@ -3,14 +3,14 @@ using Sources.Controllers.Common.UiFramework.Buttons;
 using Sources.InfrastructureInterfaces.Services;
 using Sources.Presentation.Ui.Buttons;
 
-namespace Sources.Controllers
+namespace Sources.Controllers.Presenters.UiFramework.Buttons
 {
     public class FormButtonPresenter : FormButtonPresenterBase
     {
         private readonly IFormService _formService;
-        private readonly FormButtonView _view;
+        private readonly UiFormButton _view;
 
-        public FormButtonPresenter(FormButtonView view, IFormService formService)
+        public FormButtonPresenter(UiFormButton view, IFormService formService)
         {
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _view = view ? view : throw new ArgumentNullException(nameof(view));

@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Sources.Presentation.Ui.Animations
 {
-    [RequireComponent(typeof(FormButtonView))]
+    [RequireComponent(typeof(UiFormButton))]
     public class FormButtonScaleAnimation : View
     {
         [SerializeField] private AnimationType _animationType;
@@ -20,13 +20,13 @@ namespace Sources.Presentation.Ui.Animations
         [SerializeField] private Vector3 _fromScale;
         [SerializeField] private Vector3 _targetScale;
 
-        private FormButtonView _buttonView;
+        private UiFormButton _button;
         private CancellationTokenSource _cancellationTokenSource;
 
         private void Awake()
         {
             // if (_reactionAnimationType == ReactionAnimationType.ButtonClick)
-                _buttonView = GetComponent<FormButtonView>();
+                _button = GetComponent<UiFormButton>();
             
         }
 
@@ -35,7 +35,7 @@ namespace Sources.Presentation.Ui.Animations
             _cancellationTokenSource = new CancellationTokenSource();
 
             if (_reactionAnimationType == ReactionAnimationType.ButtonClick)
-                _buttonView.AddClickListener(PlayAnimation);
+                _button.AddClickListener(PlayAnimation);
             
             if(_reactionAnimationType == ReactionAnimationType.ShowView)
                 PlayAnimation();
@@ -44,7 +44,7 @@ namespace Sources.Presentation.Ui.Animations
         private void OnDisable()
         {
             if (_reactionAnimationType == ReactionAnimationType.ButtonClick)
-                _buttonView.RemoveClickListener(PlayAnimation);
+                _button.RemoveClickListener(PlayAnimation);
             
             _cancellationTokenSource = new CancellationTokenSource();
         }
@@ -60,24 +60,24 @@ namespace Sources.Presentation.Ui.Animations
             }
             catch (OperationCanceledException)
             {
-                _buttonView.transform.localScale = _fromScale;
+                _button.transform.localScale = _fromScale;
             }
         }
 
         private async Task PlayAnimationAsync(CancellationToken token)
         {
-            while (Vector3.Distance(_buttonView.transform.localScale, _targetScale) > 0.01f)
+            while (Vector3.Distance(_button.transform.localScale, _targetScale) > 0.01f)
             {
-                _buttonView.transform.localScale = Vector3.MoveTowards(
-                    _buttonView.transform.localScale, _targetScale, _animationDuration);
+                _button.transform.localScale = Vector3.MoveTowards(
+                    _button.transform.localScale, _targetScale, _animationDuration);
 
                 await UniTask.Yield(token);
             }
 
-            while (Vector3.Distance(_buttonView.transform.localScale, _fromScale) > 0.01f)
+            while (Vector3.Distance(_button.transform.localScale, _fromScale) > 0.01f)
             {
-                _buttonView.transform.localScale = Vector3.MoveTowards(
-                    _buttonView.transform.localScale, _fromScale, _animationDuration);
+                _button.transform.localScale = Vector3.MoveTowards(
+                    _button.transform.localScale, _fromScale, _animationDuration);
 
                 await UniTask.Yield(token);
             }

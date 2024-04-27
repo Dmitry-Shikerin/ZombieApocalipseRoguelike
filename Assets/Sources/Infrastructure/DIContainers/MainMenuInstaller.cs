@@ -18,6 +18,7 @@ using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.LoadServices;
 using Sources.Infrastructure.Services.LoadServices.Data;
 using Sources.Infrastructure.Services.Repositories;
+using Sources.Infrastructure.Services.UiFramework;
 using Sources.Infrastructure.Services.Upgrades;
 using Sources.Infrastructure.Services.Volumes;
 using Sources.Infrastructure.Services.YandexSDKServices;
@@ -55,7 +56,6 @@ namespace Sources.Infrastructure.DIContainers
             BindMusic();
             BindMainMenuLoadService();
             BindDtoFactories();
-            BindFormFactories();
         }
 
         private void BindMusic()
@@ -64,17 +64,6 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<BackgroundMusicViewFactory>().AsSingle();
         }
 
-        private void BindFormFactories()
-        {
-            Container.Bind<MVPMainMenuFormServiceFactory>().AsSingle();
-
-            Container.Bind<AuthorizationFormPresenterFactory>().AsSingle();
-            Container.Bind<LeaderboardFormPresenterFactory>().AsSingle();
-            Container.Bind<MainMenuHudFormViewPresenterFactory>().AsSingle();
-            Container.Bind<MainMenuSettingFormPresenterFactory>().AsSingle();
-            Container.Bind<NewGameFormPresenterFactory>().AsSingle();
-            Container.Bind<WarningNewGameFormPresenterFactory>().AsSingle();
-        }
         
         private void BindServices()
         {
@@ -85,7 +74,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
             Container.Bind<ILoadService>().To<LoadService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
-            Container.BindInterfacesAndSelfTo<ImvpFormService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
         }
 
         private void BindMainMenuLoadService()

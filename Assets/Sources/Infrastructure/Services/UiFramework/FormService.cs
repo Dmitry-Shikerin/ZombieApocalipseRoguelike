@@ -2,29 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using Sources.InfrastructureInterfaces.Services;
-using Sources.Presentation;
 using Sources.Presentation.Ui.Buttons;
-using Sources.Presentation.Ui.Buttons.Types;
 using Sources.Presentation.Views.Forms;
-using Sources.Presentation.Views.Forms.Types;
+using Sources.Presentations.UI.Huds;
 using Sources.Presentations.UiFramework.Buttons.Types;
+using Sources.Presentations.UiFramework.Forms.Types;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
 
-namespace Sources.Infrastructure.Services
+namespace Sources.Infrastructure.Services.UiFramework
 {
     public class FormService : IFormService
     {
         private readonly ContainerView _containerView;
-        private readonly Dictionary<FormId, IFormView> _forms = new Dictionary<FormId, IFormView>();
+        private readonly Dictionary<FormId, IUiContainer> _forms = new Dictionary<FormId, IUiContainer>();
         private readonly Dictionary<ButtonId, Action> _buttonActions = new Dictionary<ButtonId, Action>();
 
-        private readonly Dictionary<ButtonId, Action<FormButtonView>> _enabledButtonActions =
-            new Dictionary<ButtonId, Action<FormButtonView>>();
+        private readonly Dictionary<ButtonId, Action<UiFormButton>> _enabledButtonActions =
+            new Dictionary<ButtonId, Action<UiFormButton>>();
 
-        public FormService(UiCollector uiCollector)
+        public FormService(GameplayHud gameplayHud)
         {
-            foreach (FormView form in uiCollector.Forms)
+            foreach (IUiContainer form in gameplayHud.UiCollector.UiContainers)
                 _forms.Add(form.Id, form);
         }
 
@@ -38,7 +37,7 @@ namespace Sources.Infrastructure.Services
             return this;
         }
 
-        public FormService AddEnabledButtonAction(ButtonId buttonId, Action<FormButtonView> enabledAction)
+        public FormService AddEnabledButtonAction(ButtonId buttonId, Action<UiFormButton> enabledAction)
         {
             if (_enabledButtonActions.ContainsKey(buttonId))
                 throw new InvalidOperationException(nameof(buttonId));
@@ -49,7 +48,7 @@ namespace Sources.Infrastructure.Services
         }
 
         //TODO чепуха ли?
-        public Action<FormButtonView> GetEnabledButtonAction(ButtonId buttonId)
+        public Action<UiFormButton> GetEnabledButtonAction(ButtonId buttonId)
         {
             if (_enabledButtonActions.ContainsKey(buttonId) == false)
                 return ((view) => { });
@@ -72,10 +71,10 @@ namespace Sources.Infrastructure.Services
                 throw new NullReferenceException(nameof(formId));
             }
 
-            IFormView activeForm = _forms[formId];
+            IUiContainer activeForm = _forms[formId];
 
             _forms.Values
-                .Except(new List<IFormView> { activeForm, })
+                .Except(new List<IUiContainer> { activeForm, })
                 .ToList()
                 .ForEach(form => form.Hide());
 
@@ -89,7 +88,7 @@ namespace Sources.Infrastructure.Services
             if (_forms.ContainsKey(formId) == false)
                 throw new NullReferenceException(nameof(formId));
 
-            IFormView activeForm = _forms[formId];
+            IUiContainer activeForm = _forms[formId];
 
             if (activeForm == null)
                 throw new NullReferenceException(nameof(activeForm));
@@ -97,13 +96,13 @@ namespace Sources.Infrastructure.Services
             activeForm.Hide();
         }
 
-        public void Add(IFormView formView, string name = null, bool isSetParent = false)
+        public void Add(IUiContainer uiContainer, string name = null, bool isSetParent = false)
         {
             if (isSetParent)
-                _containerView.AppendChild(formView);
+                _containerView.AppendChild(uiContainer);
 
-            _forms.Add(formView.Id, formView);
-            formView.Hide();
+            _forms.Add(uiContainer.Id, uiContainer);
+            uiContainer.Hide();
         }
     }
 }
