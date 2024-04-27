@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sources.Domain.Models.TextViewTypes;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations.Translates;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations.Translates.Common;
 using Sources.InfrastructureInterfaces.Factories.Services;
-using Sources.InfrastructureInterfaces.Services.Localizations;
-using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
-using Sources.InfrastructureInterfaces.Services.Localizations.Translates.Common;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.Localizations;
 
