@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 8094400662839620458}
   - component: {fileID: 5590254574008876696}
   - component: {fileID: 9220273423084681188}
-  - component: {fileID: 5462881567990285234}
+  - component: {fileID: 8022792747750523976}
+  - component: {fileID: 3223348222071951075}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -121,24 +122,40 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!95 &5462881567990285234
-Animator:
-  serializedVersion: 5
+--- !u!114 &8022792747750523976
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5934802496198314309}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5441a29fc97c9d94aabb5e76a5e35426, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417a57a2c6c64f678f30049c5abeafa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 9220273423084681188}
+  _audioSource: {fileID: 0}
+  _formId: 0
+  _buttonType: 0
+  _buttonId: 0
+  _useButtonType: 1
+  _delay: 100
+--- !u!114 &3223348222071951075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934802496198314309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07af929147148c8aa6146618ce512cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <AnimationType>k__BackingField: 1
+  <ReactionAnimationType>k__BackingField: 0
+  <ScaleAnimationType>k__BackingField: 0
+  <AnimationDuration>k__BackingField: 0.1
+  <FromScale>k__BackingField: {x: 1, y: 1, z: 1}
+  <TargetScale>k__BackingField: {x: 0.7, y: 0.7, z: 0.7}

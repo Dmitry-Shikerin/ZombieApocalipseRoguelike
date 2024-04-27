@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2051262739961540601}
   - component: {fileID: 4418078311731660582}
   - component: {fileID: 2894928223350485562}
-  - component: {fileID: 9176196232974405322}
-  - component: {fileID: 6092322609392781600}
+  - component: {fileID: 7095290984745475698}
+  - component: {fileID: 8383241175205843630}
   m_Layer: 5
   m_Name: ButtonTemplate
   m_TagString: Untagged
@@ -98,7 +98,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0.19607843}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &9176196232974405322
+--- !u!114 &7095290984745475698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,32 +132,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1413396975185629582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5af279acebaf402c8415e751f6d09903, type: 3}
+  m_Script: {fileID: 11500000, guid: 417a57a2c6c64f678f30049c5abeafa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 2894928223350485562}
   _audioSource: {fileID: 0}
---- !u!95 &6092322609392781600
-Animator:
-  serializedVersion: 5
+  _formId: 0
+  _buttonType: 0
+  _buttonId: 0
+  _useButtonType: 1
+  _delay: 100
+--- !u!114 &8383241175205843630
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413396975185629582}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 18868fddea0b86147b129f2456d70e09, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07af929147148c8aa6146618ce512cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <AnimationType>k__BackingField: 1
+  <ReactionAnimationType>k__BackingField: 0
+  <ScaleAnimationType>k__BackingField: 0
+  <AnimationDuration>k__BackingField: 0.1
+  <FromScale>k__BackingField: {x: 1, y: 1, z: 1}
+  <TargetScale>k__BackingField: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!1 &1570481952915506850
 GameObject:
   m_ObjectHideFlags: 0
