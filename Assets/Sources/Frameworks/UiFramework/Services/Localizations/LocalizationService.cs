@@ -13,7 +13,7 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
     public class LocalizationService : ILocalizationService
     {
         private readonly UiCollector _uiCollector;
-        private readonly Dictionary<string, TextView> _textViews = new Dictionary<string, TextView>();
+        private readonly List<TextView> _textViews = new List<TextView>();
         private readonly Dictionary<string, IReadOnlyDictionary<string, string>> _textDictionary;
 
         public LocalizationService(UiCollector uiCollector, LocalizationConfig localizationConfig)
@@ -48,13 +48,13 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
         {
             IReadOnlyDictionary<string, string> textDictionary = _textDictionary[key];
 
-            foreach (ITextView textView in _textViews.Values)
+            foreach (ITextView textView in _textViews)
             {
                 if (textView.TextViewType == TextViewType.Default)
                     continue;
 
                 if (textDictionary.ContainsKey(textView.Id) == false)
-                    throw new KeyNotFoundException(nameof(textView));
+                    throw new KeyNotFoundException(nameof(textView.Id));
 
                 textView.SetText(textDictionary[textView.Id]);
             }
@@ -64,10 +64,7 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
         {
             foreach (TextView textView in uiCollector.TextViews)
             {
-                if (_textViews.ContainsKey(textView.Id))
-                    throw new InvalidOperationException(nameof(textView));
-
-                _textViews[textView.Id] = textView;
+                _textViews.Add(textView);
             }
         }
     }
