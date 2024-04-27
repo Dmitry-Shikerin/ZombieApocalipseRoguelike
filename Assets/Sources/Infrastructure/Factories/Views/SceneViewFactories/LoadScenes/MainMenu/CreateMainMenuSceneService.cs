@@ -29,14 +29,14 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             IVolumeService volumeService,
             BackgroundMusicViewFactory backgroundMusicViewFactory,
             LevelAvailabilityViewFactory levelAvailabilityViewFactory,
-            MainMenuFormServiceFactory mainMenuFormServiceFactory) 
+            MVPMainMenuFormServiceFactory mvpMainMenuFormServiceFactory) 
             : base(
                 mainMenuHud,
                 volumeViewFactory,
                 volumeService,
                 backgroundMusicViewFactory,
                 levelAvailabilityViewFactory,
-                mainMenuFormServiceFactory)
+                mvpMainMenuFormServiceFactory)
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _entityRepository = entityRepository;

@@ -66,7 +66,7 @@ namespace Sources.Controllers.Presenters.Gameplay
                     _levelAvailabilityView.Levels[i + 1].ImageView.HideImage();
                     _levelAvailabilityView.Levels[i + 1].ButtonView.Enable();
 
-                    Debug.Log("Show nextlevel");
+                    // Debug.Log("Show nextlevel");
                 }
             }
         }

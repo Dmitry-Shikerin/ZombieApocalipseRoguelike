@@ -1,6 +1,6 @@
 ﻿using System;
-using Sources.Controllers.Musics;
-using Sources.Infrastructure.Factories.Controllers.Musics;
+using Sources.Controllers.Presenters.Musics;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
 using Sources.Presentations.Views.Music;
 
 namespace Sources.Infrastructure.Factories.Views.Musics

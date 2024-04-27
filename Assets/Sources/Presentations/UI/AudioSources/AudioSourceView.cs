@@ -11,6 +11,22 @@ namespace Sources.Presentations.UI.AudioSources
 
         public bool IsPlaying => _audioSource.isPlaying;
 
+        private void Awake()
+        {
+        }
+
+        public void Mute() =>
+            _audioSource.mute = true;
+
+        public void UnMute() =>
+            _audioSource.mute = false;
+
+        public void Pause() =>
+            _audioSource.Pause();
+
+        public void UnPause() =>
+            _audioSource.UnPause();
+
         public void Play() =>
             _audioSource.Play();
 

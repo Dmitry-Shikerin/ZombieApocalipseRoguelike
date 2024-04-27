@@ -40,7 +40,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
     public abstract class LoadGameplaySceneServiceBase : ILoadSceneService
     {
         private readonly GameplayHud _gameplayHud;
-        private readonly GameplayFormServiceFactory _gameplayFormServiceFactory;
+        private readonly MVPGameplayFormServiceFactory _mvpGameplayFormServiceFactory;
         private readonly CharacterViewFactory _characterViewFactory;
         private readonly BearViewFactory _bearViewFactory;
         private readonly UpgradeViewFactory _upgradeViewFactory;
@@ -66,7 +66,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ILevelCompletedService _levelCompletedService;
 
         protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
-            GameplayFormServiceFactory gameplayFormServiceFactory,
+            MVPGameplayFormServiceFactory mvpGameplayFormServiceFactory,
             CharacterViewFactory characterViewFactory,
             BearViewFactory bearViewFactory,
             UpgradeViewFactory upgradeViewFactory,
@@ -92,7 +92,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ILevelCompletedService levelCompletedService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
-            _gameplayFormServiceFactory = gameplayFormServiceFactory ?? throw new ArgumentNullException(nameof(gameplayFormServiceFactory));
+            _mvpGameplayFormServiceFactory = mvpGameplayFormServiceFactory ?? throw new ArgumentNullException(nameof(mvpGameplayFormServiceFactory));
             _characterViewFactory = characterViewFactory ?? 
                                     throw new ArgumentNullException(nameof(characterViewFactory));
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
@@ -147,7 +147,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _saveService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
             
             //FormService
-            _gameplayFormServiceFactory.Create().Show<HudFormView>();
+            _mvpGameplayFormServiceFactory.Create().Show<HudFormView>();
 
             //Upgrades
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();

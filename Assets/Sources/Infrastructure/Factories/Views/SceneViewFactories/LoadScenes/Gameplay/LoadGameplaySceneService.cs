@@ -49,7 +49,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
         public LoadGameplaySceneService(
             GameplayHud gameplayHud, 
-            GameplayFormServiceFactory gameplayFormServiceFactory, 
+            MVPGameplayFormServiceFactory mvpGameplayFormServiceFactory, 
             CharacterViewFactory characterViewFactory, 
             BearViewFactory bearViewFactory, 
             UpgradeViewFactory upgradeViewFactory, 
@@ -75,7 +75,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ILevelCompletedService levelCompletedService) 
             : base(
                 gameplayHud, 
-                gameplayFormServiceFactory, 
+                mvpGameplayFormServiceFactory, 
                 characterViewFactory, 
                 bearViewFactory, 
                 upgradeViewFactory, 

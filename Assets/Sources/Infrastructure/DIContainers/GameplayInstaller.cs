@@ -19,9 +19,10 @@ using Sources.Infrastructure.Factories.Controllers.Enemies;
 using Sources.Infrastructure.Factories.Controllers.Enemies.Base;
 using Sources.Infrastructure.Factories.Controllers.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Controllers.Gameplay;
-using Sources.Infrastructure.Factories.Controllers.Musics;
 using Sources.Infrastructure.Factories.Controllers.Players;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.Gameplay;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.Gameplay.Tutorials;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
@@ -183,19 +184,19 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<CreateGameplaySceneService>().AsSingle();
             Container.Bind<ISaveService>().To<SaveService>().AsSingle();
             Container.Bind<ILevelCompletedService>().To<LevelCompletedService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ImvpFormService>().AsSingle();
         }
 
         private void BindFormFactories()
         {
-            Container.Bind<GameplayFormServiceFactory>().AsSingle();
+            Container.Bind<MVPGameplayFormServiceFactory>().AsSingle();
 
             Container.Bind<GameOverFormPresenterFactory>().AsSingle();
             Container.Bind<GameplaySettingsFormPresenterFactory>().AsSingle();
             Container.Bind<HudFormPresenterFactory>().AsSingle();
             Container.Bind<LevelCompletedFormPresenterFactory>().AsSingle();
             Container.Bind<PauseFormPresenterFactory>().AsSingle();
-            Container.Bind<TutorialFormPresenterFactory>().AsSingle();
+            Container.Bind<GreetingTutorialFormPresenterFactory>().AsSingle();
             Container.Bind<UpgradeFormPresenterFactory>().AsSingle();
         }
 

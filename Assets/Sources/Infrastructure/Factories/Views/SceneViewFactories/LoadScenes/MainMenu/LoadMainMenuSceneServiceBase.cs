@@ -19,7 +19,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
         private readonly IVolumeService _volumeService;
         private readonly BackgroundMusicViewFactory _backgroundMusicViewFactory;
         private readonly LevelAvailabilityViewFactory _levelAvailabilityViewFactory;
-        private readonly MainMenuFormServiceFactory _mainMenuFormServiceFactory;
+        private readonly MVPMainMenuFormServiceFactory _mvpMainMenuFormServiceFactory;
 
         protected LoadMainMenuSceneServiceBase(
             MainMenuHud mainMenuHud,
@@ -27,7 +27,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             IVolumeService volumeService,
             BackgroundMusicViewFactory backgroundMusicViewFactory,
             LevelAvailabilityViewFactory levelAvailabilityViewFactory,
-            MainMenuFormServiceFactory mainMenuFormServiceFactory)
+            MVPMainMenuFormServiceFactory mvpMainMenuFormServiceFactory)
         {
             _mainMenuHud = mainMenuHud ? mainMenuHud : throw new ArgumentNullException(nameof(mainMenuHud));
             _volumeViewFactory = volumeViewFactory ?? throw new ArgumentNullException(nameof(volumeViewFactory));
@@ -36,7 +36,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
                                           throw new ArgumentNullException(nameof(backgroundMusicViewFactory));
             _levelAvailabilityViewFactory = levelAvailabilityViewFactory ?? 
                                             throw new ArgumentNullException(nameof(levelAvailabilityViewFactory));
-            _mainMenuFormServiceFactory = mainMenuFormServiceFactory ?? throw new ArgumentNullException(nameof(mainMenuFormServiceFactory));
+            _mvpMainMenuFormServiceFactory = mvpMainMenuFormServiceFactory ?? throw new ArgumentNullException(nameof(mvpMainMenuFormServiceFactory));
         }
 
         public void Load(IScenePayload scenePayload)
@@ -57,7 +57,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             _levelAvailabilityViewFactory.Create(models.LevelAvailability, _mainMenuHud.LevelAvailabilityView);
             
             //FormService
-            _mainMenuFormServiceFactory.Create().Show<MainMenuHudFormView>();
+            _mvpMainMenuFormServiceFactory.Create().Show<MainMenuHudFormView>();
         }
         
         protected abstract MainMenuModels LoadModels(IScenePayload scenePayload);
