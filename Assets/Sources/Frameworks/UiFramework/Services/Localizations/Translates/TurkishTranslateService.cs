@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sources.Frameworks.UiFramework.Services.Localizations.Translates.Common;
-using Sources.InfrastructureInterfaces.Services.Localizations;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations.Translates;
 
 namespace Sources.Frameworks.UiFramework.Services.Localizations.Translates
 {

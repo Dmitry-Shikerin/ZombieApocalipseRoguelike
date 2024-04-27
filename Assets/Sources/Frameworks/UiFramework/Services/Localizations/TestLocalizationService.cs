@@ -1,7 +1,6 @@
 ﻿using Sources.Domain.Models.Localizations;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations.Translates;
 using Sources.InfrastructureInterfaces.Factories.Services;
-using Sources.InfrastructureInterfaces.Services.Localizations;
-using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
 using Sources.Presentations.UI.Huds;
 
 namespace Sources.Frameworks.UiFramework.Services.Localizations

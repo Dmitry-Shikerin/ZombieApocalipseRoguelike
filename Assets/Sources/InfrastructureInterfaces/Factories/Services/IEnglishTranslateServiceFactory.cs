@@ -1,4 +1,4 @@
-﻿using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
+﻿using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations.Translates;
 
 namespace Sources.InfrastructureInterfaces.Factories.Services
 {

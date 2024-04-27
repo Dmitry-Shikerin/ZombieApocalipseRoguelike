@@ -1,6 +1,6 @@
 using Sources.PresentationsInterfaces.UI.Texts;
 
-namespace Sources.InfrastructureInterfaces.Services.Localizations.Translates.Common
+namespace Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations.Translates.Common
 {
     public interface ITranslateService
     {

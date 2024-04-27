@@ -1,12 +1,12 @@
 ﻿using System;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.DomainInterfaces.Payloads;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
-using Sources.InfrastructureInterfaces.Services.Localizations;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
