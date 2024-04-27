@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sources.InfrastructureInterfaces.Services.Localizations.Translates.Common;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations.Translates.Common;
 using Sources.PresentationsInterfaces.UI.Texts;
 
 namespace Sources.Frameworks.UiFramework.Services.Localizations.Translates.Common

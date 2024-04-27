@@ -1,4 +1,4 @@
-namespace Sources.InfrastructureInterfaces.Services.Localizations
+namespace Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations
 {
     public interface ILocalizationService
     {
