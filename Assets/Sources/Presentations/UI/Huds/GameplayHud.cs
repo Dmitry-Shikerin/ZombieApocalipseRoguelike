@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Sources.Presentation.Views.Forms;
+using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
 using Sources.Presentations.Views.Common;
@@ -26,9 +26,10 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("Camera")] [Required] [SerializeField]
         private CinemachineCameraView _cinemachineCameraView;
         
+        [FormerlySerializedAs("_localizationView")]
         [Button(ButtonSizes.Large)] 
         [FoldoutGroup("Localizations")] [Required] [SerializeField]
-        private LocalizationView _localizationView;
+        private UiLocalization uiLocalization;
 
         [Button(ButtonSizes.Large)] 
         [FoldoutGroup("Containers")] [Required] [SerializeField]
@@ -68,7 +69,7 @@ namespace Sources.Presentations.UI.Huds
         
         public CinemachineCameraView CinemachineCameraView => _cinemachineCameraView;
 
-        public LocalizationView LocalizationView => _localizationView;
+        public UiLocalization UiLocalization => uiLocalization;
 
         public ContainerView FormServiceContainerView => _formServiceContainerView;
         public ContainerView TutorialFormServiceContainerView => _tutorialFormServiceContainerView;

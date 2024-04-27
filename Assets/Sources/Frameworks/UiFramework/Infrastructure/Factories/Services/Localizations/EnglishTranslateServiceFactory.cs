@@ -1,0 +1,12 @@
+﻿using Sources.Frameworks.UiFramework.Services.Localizations.Translates;
+using Sources.InfrastructureInterfaces.Factories.Services;
+using Sources.InfrastructureInterfaces.Services.Localizations.Translates;
+
+namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Localizations
+{
+    public class EnglishTranslateServiceFactory : ITranslateServiceFactory<IEnglishTranslateService>
+    {
+        public IEnglishTranslateService Create() =>
+            new EnglishTranslateService();
+    }
+}

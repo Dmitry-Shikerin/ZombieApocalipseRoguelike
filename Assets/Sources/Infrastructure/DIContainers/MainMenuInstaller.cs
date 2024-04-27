@@ -2,6 +2,9 @@
 using Sources.Controllers.Common.Forms.MainMenu;
 using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
+using Sources.Frameworks.UiFramework.Services.Forms;
+using Sources.Infrastructure.Factories;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.MainMenu;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
@@ -9,6 +12,7 @@ using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Domain.Data;
 using Sources.Infrastructure.Factories.Services.FormServices;
+using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
@@ -18,7 +22,6 @@ using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.LoadServices;
 using Sources.Infrastructure.Services.LoadServices.Data;
 using Sources.Infrastructure.Services.Repositories;
-using Sources.Infrastructure.Services.UiFramework;
 using Sources.Infrastructure.Services.Upgrades;
 using Sources.Infrastructure.Services.Volumes;
 using Sources.Infrastructure.Services.YandexSDKServices;
@@ -48,7 +51,6 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<UpgradeConfigContainer>()
                 .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer").AsSingle();
             Container.Bind<AudioClipCollection>().FromResource("Configs/MainMenuAudioClipContainer").AsSingle();
-            Container.Bind<MainMenuSceneViewFactory>().AsSingle();
             
             BindServices();
             BindSettings();
@@ -56,6 +58,7 @@ namespace Sources.Infrastructure.DIContainers
             BindMusic();
             BindMainMenuLoadService();
             BindDtoFactories();
+            BindFormFactories();
         }
 
         private void BindMusic()
@@ -63,7 +66,6 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<BackgroundMusicPresenterFactory>().AsSingle();
             Container.Bind<BackgroundMusicViewFactory>().AsSingle();
         }
-
         
         private void BindServices()
         {
@@ -74,7 +76,16 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
             Container.Bind<ILoadService>().To<LoadService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
+        }
+        
+        private void BindFormFactories()
+        {
             Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
+            
+            Container.Bind<GameplayFormServiceFactory>().AsSingle();
+
+            Container.Bind<FormButtonViewFactory>().AsSingle();
+            Container.Bind<CustomFormButtonViewFactory>().AsSingle();
         }
 
         private void BindMainMenuLoadService()
