@@ -10,6 +10,10 @@ using Sources.Frameworks.MVVM.PresentationInterfaces.Factories;
 using Sources.Frameworks.MVVM.Presentations.Factories;
 using Sources.Frameworks.PresentationInterfaces.Binder;
 using Sources.Frameworks.Presentations.Binders;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Localizations;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
+using Sources.Frameworks.UiFramework.Services.Forms;
+using Sources.Frameworks.UiFramework.Services.Localizations;
 using Sources.Infrastructure.Factories;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
@@ -34,8 +38,7 @@ using Sources.Infrastructure.Factories.Controllers.Weapons;
 using Sources.Infrastructure.Factories.Domain.Data;
 using Sources.Infrastructure.Factories.Domain.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Services.FormServices;
-using Sources.Infrastructure.Factories.Services.Localizations;
-using Sources.Infrastructure.Factories.Services.UiFramevork.Forms;
+using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Bullets;
@@ -67,7 +70,6 @@ using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.Infrastructure.Services.Linecasts;
 using Sources.Infrastructure.Services.LoadServices;
 using Sources.Infrastructure.Services.LoadServices.Data;
-using Sources.Infrastructure.Services.Localizations;
 using Sources.Infrastructure.Services.ObjectPools;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.Services.PauseServices;
@@ -75,7 +77,6 @@ using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Saves;
 using Sources.Infrastructure.Services.Spawners;
-using Sources.Infrastructure.Services.UiFramework;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Infrastructure.Services.Upgrades;
 using Sources.Infrastructure.Services.UseCases.Commands;
@@ -187,12 +188,13 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<CreateGameplaySceneService>().AsSingle();
             Container.Bind<ISaveService>().To<SaveService>().AsSingle();
             Container.Bind<ILevelCompletedService>().To<LevelCompletedService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
         }
 
         private void BindFormFactories()
         {
-            Container.Bind<GameplaySceneFormServiceFactory>().AsSingle();
+            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
+            
+            Container.Bind<GameplayFormServiceFactory>().AsSingle();
 
             Container.Bind<FormButtonViewFactory>().AsSingle();
             Container.Bind<CustomFormButtonViewFactory>().AsSingle();

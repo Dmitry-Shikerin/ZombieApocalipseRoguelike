@@ -1,4 +1,4 @@
-﻿using Sources.Presentations.UiFramework.Forms.Types;
+﻿using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 
 namespace Sources.PresentationsInterfaces.Views.Forms.Common
 {

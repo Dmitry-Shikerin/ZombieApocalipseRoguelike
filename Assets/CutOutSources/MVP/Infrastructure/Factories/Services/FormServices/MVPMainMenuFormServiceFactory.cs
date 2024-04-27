@@ -44,34 +44,34 @@ namespace Sources.Infrastructure.Factories.Services.FormServices
 
         public IMVPFormService Create()
         {
-            Form<AuthorizationFormView, AuthorizationFormPresenter> authorizationForm =
-                new Form<AuthorizationFormView, AuthorizationFormPresenter>(
-                    _authorizationFormPresenterFactory.Create, _mainMenuHud.AuthorizationFormView);
-            _imvpFormService.Add(authorizationForm);
-            
-            Form<LeaderboardFormView, LeaderboardFormPresenter> leaderboardForm =
-                new Form<LeaderboardFormView, LeaderboardFormPresenter>(
-                    _leaderboardFormPresenterFactory.Create, _mainMenuHud.LeaderboardFormView);
-            _imvpFormService.Add(leaderboardForm);
-            
-            Form<MainMenuSettingsFormView, MainMenuSettingsFormPresenter> leaderboardSettingForm =
-                new Form<MainMenuSettingsFormView, MainMenuSettingsFormPresenter>(
-                    _leaderboardSettingFormPresenterFactory.Create, _mainMenuHud.MainMenuSettingsFormView);
-            _imvpFormService.Add(leaderboardSettingForm);
-            
-            Form<MainMenuHudFormView, MainMenuHudFormPresenter> mainMenuHudForm =
-                new Form<MainMenuHudFormView, MainMenuHudFormPresenter>(
-                    _mainMenuHudFormViewPresenterFactory.Create, _mainMenuHud.MainMenuHudFormView);
-            _imvpFormService.Add(mainMenuHudForm);
-            
-            Form<NewGameFormView, NewGameFormPresenter> newGameForm = 
-                new Form<NewGameFormView, NewGameFormPresenter>(
-                _newGameFormPresenterFactory.Create, _mainMenuHud.NewGameFormView);
-            _imvpFormService.Add(newGameForm);
-            
-            var warningNewGameForm = new Form<WarningNewGameFormView, WarningNewGameFormPresenter>(
-                _warningNewGameFormPresenterFactory.Create, _mainMenuHud.WarningNewGameFormView);
-            _imvpFormService.Add(warningNewGameForm);
+            // Form<AuthorizationFormView, AuthorizationFormPresenter> authorizationForm =
+            //     new Form<AuthorizationFormView, AuthorizationFormPresenter>(
+            //         _authorizationFormPresenterFactory.Create, _mainMenuHud.AuthorizationFormView);
+            // _imvpFormService.Add(authorizationForm);
+            //
+            // Form<LeaderboardFormView, LeaderboardFormPresenter> leaderboardForm =
+            //     new Form<LeaderboardFormView, LeaderboardFormPresenter>(
+            //         _leaderboardFormPresenterFactory.Create, _mainMenuHud.LeaderboardFormView);
+            // _imvpFormService.Add(leaderboardForm);
+            //
+            // Form<MainMenuSettingsFormView, MainMenuSettingsFormPresenter> leaderboardSettingForm =
+            //     new Form<MainMenuSettingsFormView, MainMenuSettingsFormPresenter>(
+            //         _leaderboardSettingFormPresenterFactory.Create, _mainMenuHud.MainMenuSettingsFormView);
+            // _imvpFormService.Add(leaderboardSettingForm);
+            //
+            // Form<MainMenuHudFormView, MainMenuHudFormPresenter> mainMenuHudForm =
+            //     new Form<MainMenuHudFormView, MainMenuHudFormPresenter>(
+            //         _mainMenuHudFormViewPresenterFactory.Create, _mainMenuHud.UICollector);
+            // _imvpFormService.Add(mainMenuHudForm);
+            //
+            // Form<NewGameFormView, NewGameFormPresenter> newGameForm = 
+            //     new Form<NewGameFormView, NewGameFormPresenter>(
+            //     _newGameFormPresenterFactory.Create, _mainMenuHud.NewGameFormView);
+            // _imvpFormService.Add(newGameForm);
+            //
+            // var warningNewGameForm = new Form<WarningNewGameFormView, WarningNewGameFormPresenter>(
+            //     _warningNewGameFormPresenterFactory.Create, _mainMenuHud.WarningNewGameFormView);
+            // _imvpFormService.Add(warningNewGameForm);
             
             return _imvpFormService;
         }
