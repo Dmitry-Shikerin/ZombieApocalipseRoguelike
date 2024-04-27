@@ -85,7 +85,6 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<GameplayFormServiceFactory>().AsSingle();
 
             Container.Bind<FormButtonViewFactory>().AsSingle();
-            Container.Bind<CustomFormButtonViewFactory>().AsSingle();
         }
 
         private void BindMainMenuLoadService()

@@ -8,6 +8,7 @@ using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
+using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Services.Forms
 {
@@ -15,10 +16,6 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
     {
         private readonly ContainerView _containerView;
         private readonly Dictionary<FormId, IUiContainer> _forms = new Dictionary<FormId, IUiContainer>();
-        private readonly Dictionary<ButtonId, Action> _buttonActions = new Dictionary<ButtonId, Action>();
-
-        private readonly Dictionary<ButtonId, Action<UiFormButton>> _enabledButtonActions =
-            new Dictionary<ButtonId, Action<UiFormButton>>();
 
         public FormService(GameplayHud gameplayHud)
         {
@@ -26,49 +23,10 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
                 _forms.Add(form.Id, form);
         }
 
-        public FormService AddButtonAction(ButtonId buttonId, Action onClick)
-        {
-            if (_buttonActions.ContainsKey(buttonId))
-                throw new InvalidOperationException(nameof(buttonId));
-
-            _buttonActions[buttonId] = onClick;
-
-            return this;
-        }
-
-        public FormService AddEnabledButtonAction(ButtonId buttonId, Action<UiFormButton> enabledAction)
-        {
-            if (_enabledButtonActions.ContainsKey(buttonId))
-                throw new InvalidOperationException(nameof(buttonId));
-
-            _enabledButtonActions[buttonId] = enabledAction;
-
-            return this;
-        }
-
-        //TODO чепуха ли?
-        public Action<UiFormButton> GetEnabledButtonAction(ButtonId buttonId)
-        {
-            if (_enabledButtonActions.ContainsKey(buttonId) == false)
-                return ((view) => { });
-            
-            return _enabledButtonActions[buttonId] ;
-        }
-
-        public Action GetButtonAction(ButtonId buttonId)
-        {
-            if (_buttonActions.ContainsKey(buttonId) == false)
-                throw new NullReferenceException(nameof(buttonId));
-
-            return _buttonActions[buttonId];
-        }
-
         public void Show(FormId formId)
         {
             if (_forms.ContainsKey(formId) == false)
-            {
                 throw new NullReferenceException(nameof(formId));
-            }
 
             IUiContainer activeForm = _forms[formId];
 
@@ -82,8 +40,6 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
 
         public void Hide(FormId formId)
         {
-            // string name = typeof(T).Name;
-            //
             if (_forms.ContainsKey(formId) == false)
                 throw new NullReferenceException(nameof(formId));
 

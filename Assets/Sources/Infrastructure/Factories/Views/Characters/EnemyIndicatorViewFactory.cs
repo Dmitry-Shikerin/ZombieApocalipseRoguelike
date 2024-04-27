@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Characters;
+using Sources.Controllers.Presenters.Characters;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.Characters.EnemyIndicators;

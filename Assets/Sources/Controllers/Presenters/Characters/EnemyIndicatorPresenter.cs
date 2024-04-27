@@ -5,7 +5,7 @@ using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Character.EnemyIndicators;
 using UnityEngine;
 
-namespace Sources.Controllers.Characters
+namespace Sources.Controllers.Presenters.Characters
 {
     public class EnemyIndicatorPresenter : PresenterBase
     {

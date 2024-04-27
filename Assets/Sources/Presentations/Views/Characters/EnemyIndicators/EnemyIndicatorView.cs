@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sources.Controllers.Characters;
+using Sources.Controllers.Presenters.Characters;
 using Sources.PresentationsInterfaces.Views.Character.EnemyIndicators;
 using UnityEngine;
 

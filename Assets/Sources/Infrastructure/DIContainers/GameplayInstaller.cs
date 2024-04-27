@@ -11,8 +11,12 @@ using Sources.Frameworks.MVVM.Presentations.Factories;
 using Sources.Frameworks.PresentationInterfaces.Binder;
 using Sources.Frameworks.Presentations.Binders;
 using Sources.Frameworks.UiFramework.Domain.Configs.Localizations;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices.Controllers;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms.Controllers;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Localizations;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Services.Forms;
 using Sources.Frameworks.UiFramework.Services.Localizations;
@@ -159,7 +163,6 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.BindInterfacesAndSelfTo<UpdateService>().AsSingle();
             Container.BindInterfacesAndSelfTo<NewInputService>().AsSingle();
-            // Container.BindInterfacesAndSelfTo<ViewViewFormService>().AsSingle();
             Container.Bind<LinecastService>().AsSingle();
             Container.Bind<OverlapService>().AsSingle();
             Container.Bind<IUpgradeConfigCollectionService>().To<UpgradeConfigCollectionService>().AsSingle();
@@ -176,12 +179,6 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IFirstAidKitSpawnService>().To<FirstAidKitSpawnService>().AsSingle();
             Container.Bind<IRewardItemSpawnService>().To<RewardItemSpawnService>().AsSingle();
             Container.Bind<ILocalizationService>().To<LocalizationService>().AsSingle();
-            // Container.Bind<ITranslateServiceFactory<ITurkishTranslateService>>()
-            //     .To<TurkishTranslateServiceFactory>().AsSingle();
-            // Container.Bind<ITranslateServiceFactory<IRussianTranslateService>>()
-            //     .To<RussianTranslateServiceFactory>().AsSingle();
-            // Container.Bind<ITranslateServiceFactory<IEnglishTranslateService>>()
-            //     .To<EnglishTranslateServiceFactory>().AsSingle();
             Container.Bind<ILoadService>().To<LoadService>().AsSingle();
             Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
@@ -202,7 +199,19 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<GameplayFormServiceFactory>().AsSingle();
 
             Container.Bind<FormButtonViewFactory>().AsSingle();
-            Container.Bind<CustomFormButtonViewFactory>().AsSingle();
+
+            Container.Bind<UiContainerFactory>().AsSingle();
+
+            Container.Bind<CustomButtonClickServiceCollection>().AsSingle();
+            Container.Bind<LoadMainMenuButtonClickService>().AsSingle();
+            Container.Bind<UiFormButtonClickService>().AsSingle();
+            Container.Bind<ButtonServiceCollection>().AsSingle();
+            Container.Bind<PauseButtonService>().AsSingle();
+            Container.Bind<VoidButtonService>().AsSingle();
+
+            Container.Bind<UiContainerServicesCollection>().AsSingle();
+            Container.Bind<UiContainerPauseService>().AsSingle();
+            Container.Bind<UiContainerVoidService>().AsSingle();
         }
 
 
