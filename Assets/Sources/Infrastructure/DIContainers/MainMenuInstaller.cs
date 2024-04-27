@@ -2,9 +2,9 @@
 using Sources.Controllers.Common.Forms.MainMenu;
 using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
-using Sources.Infrastructure.Factories.Controllers.Musics;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.MainMenu;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Gameplay;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Domain.Data;
@@ -66,12 +66,14 @@ namespace Sources.Infrastructure.DIContainers
 
         private void BindFormFactories()
         {
-            Container.Bind<MainMenuFormServiceFactory>().AsSingle();
+            Container.Bind<MVPMainMenuFormServiceFactory>().AsSingle();
 
             Container.Bind<AuthorizationFormPresenterFactory>().AsSingle();
             Container.Bind<LeaderboardFormPresenterFactory>().AsSingle();
             Container.Bind<MainMenuHudFormViewPresenterFactory>().AsSingle();
             Container.Bind<MainMenuSettingFormPresenterFactory>().AsSingle();
+            Container.Bind<NewGameFormPresenterFactory>().AsSingle();
+            Container.Bind<WarningNewGameFormPresenterFactory>().AsSingle();
         }
         
         private void BindServices()
@@ -83,7 +85,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
             Container.Bind<ILoadService>().To<LoadService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
-            Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ImvpFormService>().AsSingle();
         }
 
         private void BindMainMenuLoadService()

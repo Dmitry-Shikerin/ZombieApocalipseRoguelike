@@ -96,6 +96,18 @@ namespace Sources.Infrastructure.Services.LoadServices
             _dataService.SaveData(_toDtoMappers[entity.Type].Invoke(entity), entity.Id);
         }
 
+        public void Save(string id)
+        {
+            if (_entityRepository.Get(id) == null)
+                throw new NullReferenceException(nameof(id));
+            
+            IEntity entity = _entityRepository.Get(id);
+            
+            Debug.Log($"Model saved {entity.Id}");
+            
+            _dataService.SaveData(_toDtoMappers[entity.Type].Invoke(entity), entity.Id);
+        }
+
         public void LoadAll()
         {
             foreach (string id in ModelId.ModelsIds)
@@ -122,6 +134,12 @@ namespace Sources.Infrastructure.Services.LoadServices
                 Debug.Log($"Saved {dataModel.GetType()}");
             }
         }
+
+        public void Clear(IEntity entity) =>
+            _dataService.Clear(entity.Id);
+
+        public void Clear(string id) =>
+            _dataService.Clear(id);
 
         public void ClearAll()
         {

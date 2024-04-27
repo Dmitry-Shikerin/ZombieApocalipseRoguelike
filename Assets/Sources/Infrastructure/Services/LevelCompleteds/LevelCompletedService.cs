@@ -10,13 +10,13 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
 {
     public class LevelCompletedService : ILevelCompletedService
     {
-        private readonly IFormService _formService;
+        private readonly IMVPFormService _imvpFormService;
         private KillEnemyCounter _killEnemyCounter;
         private EnemySpawner _enemySpawner;
 
-        public LevelCompletedService(IFormService formService)
+        public LevelCompletedService(IMVPFormService imvpFormService)
         {
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _imvpFormService = imvpFormService ?? throw new ArgumentNullException(nameof(imvpFormService));
         }
 
         public void Enable()
@@ -33,7 +33,7 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
         {
             if (_killEnemyCounter.KillZombies == _enemySpawner.SumEnemies + _enemySpawner.BossesInLevel)
             {
-                _formService.Show<LevelCompletedFormView>();
+                _imvpFormService.Show<LevelCompletedFormView>();
                 Debug.Log("Show level completed form");
             }
         }

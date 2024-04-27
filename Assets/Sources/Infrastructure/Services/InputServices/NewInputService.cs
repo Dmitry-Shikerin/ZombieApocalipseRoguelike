@@ -1,17 +1,21 @@
-﻿using Sources.Domain.Models.Constants.LayerMasks;
+﻿using System;
+using Sources.Domain.Models.Constants.LayerMasks;
 using Sources.Domain.Models.Inputs;
 using Sources.InfrastructureInterfaces.Services.InputServices;
+using Sources.InfrastructureInterfaces.Services.PauseServices;
 using UnityEngine;
 
 namespace Sources.Infrastructure.Services.InputServices
 {
     public class NewInputService : IInputService, IInputServiceUpdater
     {
+        private readonly IPauseService _pauseService;
         private InputManager _inputManager;
         private float _speed;
 
-        public NewInputService()
+        public NewInputService(IPauseService pauseService)
         {
+            _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
             _inputManager = new InputManager();
             InputData = new InputData();
             
@@ -22,6 +26,9 @@ namespace Sources.Infrastructure.Services.InputServices
 
         public void Update(float deltaTime)
         {
+            if(_pauseService.IsPaused)
+                return;
+            
             UpdateMovement();
             UpdateAttack();
         }
