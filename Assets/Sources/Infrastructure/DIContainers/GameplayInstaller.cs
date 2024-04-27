@@ -10,8 +10,10 @@ using Sources.Frameworks.MVVM.PresentationInterfaces.Factories;
 using Sources.Frameworks.MVVM.Presentations.Factories;
 using Sources.Frameworks.PresentationInterfaces.Binder;
 using Sources.Frameworks.Presentations.Binders;
+using Sources.Frameworks.UiFramework.Domain.Configs.Localizations;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Localizations;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
+using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Services.Forms;
 using Sources.Frameworks.UiFramework.Services.Localizations;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
@@ -126,7 +128,10 @@ namespace Sources.Infrastructure.DIContainers
                 .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer").AsSingle();
             Container.Bind<AudioClipCollection>()
                 .FromResource("Configs/GameplayAudioClipContainer").AsSingle();
+            Container.Bind<LocalizationConfig>()
+                .FromResource("Configs/Localizations/LocalizationConfig").AsSingle();
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
+            Container.Bind<UiCollector>().FromInstance(_gameplayHud.UiCollector).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
             Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
@@ -170,13 +175,13 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IExplosionBodyBloodySpawnService>().To<ExplosionBodyBloodySpawnService>().AsSingle();
             Container.Bind<IFirstAidKitSpawnService>().To<FirstAidKitSpawnService>().AsSingle();
             Container.Bind<IRewardItemSpawnService>().To<RewardItemSpawnService>().AsSingle();
-            Container.Bind<ILocalizationService>().To<TestLocalizationService>().AsSingle();
-            Container.Bind<ITranslateServiceFactory<ITurkishTranslateService>>()
-                .To<TurkishTranslateServiceFactory>().AsSingle();
-            Container.Bind<ITranslateServiceFactory<IRussianTranslateService>>()
-                .To<RussianTranslateServiceFactory>().AsSingle();
-            Container.Bind<ITranslateServiceFactory<IEnglishTranslateService>>()
-                .To<EnglishTranslateServiceFactory>().AsSingle();
+            Container.Bind<ILocalizationService>().To<LocalizationService>().AsSingle();
+            // Container.Bind<ITranslateServiceFactory<ITurkishTranslateService>>()
+            //     .To<TurkishTranslateServiceFactory>().AsSingle();
+            // Container.Bind<ITranslateServiceFactory<IRussianTranslateService>>()
+            //     .To<RussianTranslateServiceFactory>().AsSingle();
+            // Container.Bind<ITranslateServiceFactory<IEnglishTranslateService>>()
+            //     .To<EnglishTranslateServiceFactory>().AsSingle();
             Container.Bind<ILoadService>().To<LoadService>().AsSingle();
             Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
