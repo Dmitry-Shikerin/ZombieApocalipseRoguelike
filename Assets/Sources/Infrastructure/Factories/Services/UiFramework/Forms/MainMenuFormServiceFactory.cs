@@ -18,11 +18,9 @@ namespace Sources.Infrastructure.Factories.Services.UiFramework.Forms
         public MainMenuFormServiceFactory(
             MainMenuHud mainMenuHud,
             FormService formService,
-            CustomFormButtonViewFactory customFormButtonViewFactory,
             FormButtonViewFactory formButtonViewFactory,
             UiContainerFactory uiContainerFactory) 
             : base(
-                customFormButtonViewFactory, 
                 formButtonViewFactory,
                 uiContainerFactory)
         {

@@ -12,19 +12,22 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons
     {
         private readonly FormService _formService;
         private readonly ButtonServiceCollection _buttonServiceCollection;
+        private readonly UiFormButtonClickService _uiFormButtonClickService;
 
         public FormButtonViewFactory(
             FormService formService,
-            ButtonServiceCollection buttonServiceCollection)
+            ButtonServiceCollection buttonServiceCollection,
+            UiFormButtonClickService uiFormButtonClickService)
         {
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _buttonServiceCollection = buttonServiceCollection ?? throw new ArgumentNullException(nameof(buttonServiceCollection));
+            _uiFormButtonClickService = uiFormButtonClickService ?? throw new ArgumentNullException(nameof(uiFormButtonClickService));
         }
 
         public UiFormButton Create(UiFormButton view)
         {
-            FormButtonPresenter presenter = new FormButtonPresenter(
-                view, _formService, _buttonServiceCollection);
+            UiFormButtonPresenter presenter = new UiFormButtonPresenter(
+                view, _formService, _buttonServiceCollection, _uiFormButtonClickService);
             
             view.Construct(presenter);
 

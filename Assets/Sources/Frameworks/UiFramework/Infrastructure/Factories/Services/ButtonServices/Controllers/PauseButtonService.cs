@@ -1,8 +1,9 @@
 ﻿using System;
+using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 using UnityEngine;
 
-namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices
+namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices.Controllers
 {
     public class PauseButtonService : IButtonService
     {
@@ -15,17 +16,15 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
 
         public void Enable()
         {
-            Debug.Log("Pause");
             _pauseService.Pause();
         }
 
         public void Disable()
         {
-            Debug.Log("Continue");
             _pauseService.Continue();
         }
-
-        public void OnClick()
+        
+        public void OnClick(UiFormButton button)
         {
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 {
-    public class UiFormButton : PresentableFormButton<FormButtonPresenterBase>
+    public class UiFormButton : PresentableFormButton<UiFormButtonPresenter>
     {
         [SerializeField] private FormId _formId;
         [SerializeField] private ButtonType _buttonType;

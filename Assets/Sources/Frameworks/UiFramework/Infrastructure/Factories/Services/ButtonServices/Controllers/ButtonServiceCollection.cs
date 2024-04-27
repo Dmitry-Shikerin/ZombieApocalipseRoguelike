@@ -13,11 +13,11 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
         {
             _buttonServices[FormId.Default] = voidButtonService;
             _buttonServices[FormId.Hud] = voidButtonService;
-            _buttonServices[FormId.Pause] = pauseButtonService;
-            _buttonServices[FormId.Settings] = pauseButtonService;
-            _buttonServices[FormId.Upgrade] = pauseButtonService;
-            _buttonServices[FormId.GameOver] = pauseButtonService;
-            _buttonServices[FormId.LevelCompleted] = pauseButtonService;
+            _buttonServices[FormId.Pause] = voidButtonService;
+            _buttonServices[FormId.Settings] = voidButtonService;
+            _buttonServices[FormId.Upgrade] = voidButtonService;
+            _buttonServices[FormId.GameOver] = voidButtonService;
+            _buttonServices[FormId.LevelCompleted] = voidButtonService;
             _buttonServices[FormId.GreetingTutorial] = voidButtonService;
             _buttonServices[FormId.RewardTutorial] = voidButtonService;
             _buttonServices[FormId.SaveTutorial] = voidButtonService;

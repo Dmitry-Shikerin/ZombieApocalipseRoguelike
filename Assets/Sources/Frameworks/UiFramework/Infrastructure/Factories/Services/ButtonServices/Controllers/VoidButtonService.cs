@@ -1,4 +1,6 @@
-﻿namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices.Controllers
+﻿using Sources.Frameworks.UiFramework.Presentation.Buttons;
+
+namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices.Controllers
 {
     public class VoidButtonService : IButtonService
     {
@@ -9,8 +11,8 @@
         public void Disable()
         {
         }
-
-        public void OnClick()
+        
+        public void OnClick(UiFormButton button)
         {
         }
     }

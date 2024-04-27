@@ -199,15 +199,15 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<GameplayFormServiceFactory>().AsSingle();
 
             Container.Bind<FormButtonViewFactory>().AsSingle();
-            Container.Bind<CustomFormButtonViewFactory>().AsSingle();
 
             Container.Bind<UiContainerFactory>().AsSingle();
 
+            Container.Bind<UiFormButtonClickService>().AsSingle();
             Container.Bind<ButtonServiceCollection>().AsSingle();
             Container.Bind<PauseButtonService>().AsSingle();
             Container.Bind<VoidButtonService>().AsSingle();
 
-            Container.Bind<FormServicesCollection>().AsSingle();
+            Container.Bind<UiContainerServicesCollection>().AsSingle();
             Container.Bind<UiContainerPauseService>().AsSingle();
             Container.Bind<UiContainerVoidService>().AsSingle();
         }

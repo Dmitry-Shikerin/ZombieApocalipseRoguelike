@@ -1,7 +1,9 @@
-﻿namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices
+﻿using Sources.Frameworks.UiFramework.Presentation.Buttons;
+
+namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices
 {
     public interface IOnClick
     {
-        void OnClick();
+        void OnClick(UiFormButton button);
     }
 }

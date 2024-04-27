@@ -24,11 +24,9 @@ namespace Sources.Infrastructure.Factories.Services.UiFramework.Forms
             ISceneService sceneService,
             FormService formService,
             GameplayHud gameplayHud,
-            CustomFormButtonViewFactory customFormButtonViewFactory,
             FormButtonViewFactory formButtonViewFactory,
             UiContainerFactory uiContainerFactory) 
             : base(
-                customFormButtonViewFactory, 
                 formButtonViewFactory,
                 uiContainerFactory)
         {
@@ -41,9 +39,9 @@ namespace Sources.Infrastructure.Factories.Services.UiFramework.Forms
         public IFormService Create()
         {
             //MainMenu
-            _formService.AddButtonAction(
-                ButtonId.FromPauseToMainMenuScene, 
-                () => _sceneService.ChangeSceneAsync(ModelId.MainMenu));
+            // _formService.AddButtonAction(
+            //     ButtonId.FromPauseToMainMenuScene, 
+            //     () => _sceneService.ChangeSceneAsync(ModelId.MainMenu));
             
             //Pause
             // _formService.AddFormButtonEnabledAction(FormId.Pause, (button) =>

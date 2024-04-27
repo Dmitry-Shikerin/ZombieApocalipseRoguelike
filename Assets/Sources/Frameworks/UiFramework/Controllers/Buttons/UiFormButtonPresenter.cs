@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Sources.Controllers.Common;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices.Controllers;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
@@ -9,54 +10,40 @@ using Sources.Frameworks.UiFramework.Services.Forms;
 
 namespace Sources.Frameworks.UiFramework.Controllers.Buttons
 {
-    public class FormButtonPresenter : FormButtonPresenterBase
+    public class UiFormButtonPresenter : PresenterBase
     {
         private readonly FormService _formService;
+        private readonly UiFormButtonClickService _buttonClickService;
         private readonly UiFormButton _view;
-        private CancellationTokenSource _cancellationTokenSource;
         private readonly IButtonService _buttonService;
 
-        public FormButtonPresenter(
+        public UiFormButtonPresenter(
             UiFormButton view,
             FormService formService,
-            ButtonServiceCollection buttonServiceCollection)
+            ButtonServiceCollection buttonServiceCollection,
+            UiFormButtonClickService buttonClickService)
         {
             _buttonService = buttonServiceCollection.GetButtonService(view.FormId);
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _buttonClickService = buttonClickService ?? throw new ArgumentNullException(nameof(buttonClickService));
             _view = view ? view : throw new ArgumentNullException(nameof(view));
         }
 
         public override void Enable()
         {
-            _cancellationTokenSource = new CancellationTokenSource();
-
             _buttonService.Enable();
+            _buttonClickService.Enable();
             _view.AddClickListener(ShowForm);
         }
 
         public override void Disable()
         {
             _buttonService.Disable();
-            _cancellationTokenSource.Cancel();
+            _buttonClickService.Disable();
             _view.RemoveClickListener(ShowForm);
         }
 
-        private async void ShowForm()
-        {
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource = new CancellationTokenSource();
-
-            try
-            {
-                if (_view.UseButtonType == UseButtonType.Delayed)
-                    await UniTask.Delay(TimeSpan.FromMilliseconds(_view.Delay),
-                        cancellationToken: _cancellationTokenSource.Token);
-
-                _formService.Show(_view.FormId);
-            }
-            catch (OperationCanceledException)
-            {
-            }
-        }
+        private void ShowForm() =>
+            _buttonClickService.OnClick(_view);
     }
 }

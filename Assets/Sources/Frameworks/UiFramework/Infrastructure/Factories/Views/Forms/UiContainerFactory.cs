@@ -7,17 +7,17 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms
 {
     public class UiContainerFactory
     {
-        private readonly FormServicesCollection _formServicesCollection;
+        private readonly UiContainerServicesCollection _uiContainerServicesCollection;
 
-        public UiContainerFactory(FormServicesCollection formServicesCollection)
+        public UiContainerFactory(UiContainerServicesCollection uiContainerServicesCollection)
         {
-            _formServicesCollection = formServicesCollection ?? 
-                                      throw new ArgumentNullException(nameof(formServicesCollection));
+            _uiContainerServicesCollection = uiContainerServicesCollection ?? 
+                                      throw new ArgumentNullException(nameof(uiContainerServicesCollection));
         }
 
         public UiContainer Create(UiContainer container)
         {
-            UiContainerPresenter presenter = new UiContainerPresenter(container, _formServicesCollection);
+            UiContainerPresenter presenter = new UiContainerPresenter(container, _uiContainerServicesCollection);
             
             container.Construct(presenter);   
             
