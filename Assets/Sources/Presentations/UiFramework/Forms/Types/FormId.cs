@@ -6,9 +6,16 @@
         Hud = 1,
         Pause = 2,
         Settings = 3,
-        Tutorial = 4,
-        Upgrade = 5,
-        GameOver = 6,
-        LevelCompleted = 7,
+        Upgrade = 4,
+        GameOver = 5,
+        LevelCompleted = 6,
+        GreetingTutorial = 7,
+        HealthBarTutorial = 8,
+        KillEnemyCounterTutorial = 9,
+        SaveTutorial = 10,
+        RewardTutorial = 11,
+        EnemySpawnPointsTutorial = 12,
+        UpgradeFormTopAbilitiesTutorial = 13,
+        UpgradeFormBottomAbilitiesTutorial = 14
     }
 }

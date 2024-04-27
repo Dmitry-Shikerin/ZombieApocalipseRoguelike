@@ -13,8 +13,6 @@ namespace Sources.Infrastructure.Factories.Services.UiFramework.Forms
     {
         private readonly ISceneService _sceneService;
         private readonly FormService _formService;
-        private readonly CustomFormButtonViewFactory _customFormButtonViewFactory;
-        private readonly FormButtonViewFactory _formButtonViewFactory;
         private readonly GameplayHud _gameplayHud;
 
         public GameplayFormServiceFactory(
@@ -28,11 +26,7 @@ namespace Sources.Infrastructure.Factories.Services.UiFramework.Forms
                 formButtonViewFactory)
         {
             _sceneService = sceneService ?? throw new ArgumentNullException(nameof(sceneService));
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
-            _customFormButtonViewFactory = customFormButtonViewFactory ?? 
-                                           throw new ArgumentNullException(nameof(customFormButtonViewFactory));
-            _formButtonViewFactory = formButtonViewFactory ?? 
-                                     throw new ArgumentNullException(nameof(formButtonViewFactory));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));;
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
         }
 

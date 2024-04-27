@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Sources.Presentation.Ui.Buttons;
+using UnityEngine;
 
-namespace Sources.Presentation.Ui.Buttons
+namespace Sources.Presentations.UiFramework.Buttons
 {
     public class ButtonSoundView : ButtonView
     {
