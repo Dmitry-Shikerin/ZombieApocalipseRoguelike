@@ -5,7 +5,8 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
 {
     public class ButtonServiceCollection
     {
-        private readonly Dictionary<FormId, IButtonService> _buttonServices = new Dictionary<FormId, IButtonService>();
+        private readonly Dictionary<FormId, IButtonService> _buttonServices = 
+            new Dictionary<FormId, IButtonService>();
 
         public ButtonServiceCollection(
             PauseButtonService pauseButtonService,

@@ -202,6 +202,8 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<UiContainerFactory>().AsSingle();
 
+            Container.Bind<CustomButtonClickServiceCollection>().AsSingle();
+            Container.Bind<LoadMainMenuButtonClickService>().AsSingle();
             Container.Bind<UiFormButtonClickService>().AsSingle();
             Container.Bind<ButtonServiceCollection>().AsSingle();
             Container.Bind<PauseButtonService>().AsSingle();

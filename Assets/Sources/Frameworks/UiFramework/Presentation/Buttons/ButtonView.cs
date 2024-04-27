@@ -1,4 +1,5 @@
-﻿using Sources.Presentations.Views;
+﻿using Sirenix.OdinInspector;
+using Sources.Presentations.Views;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 {
     public class ButtonView : View
     {
+        [TabGroup("Components")]
         [SerializeField] private Button _button;
         
         public void AddClickListener(UnityAction onClick) =>

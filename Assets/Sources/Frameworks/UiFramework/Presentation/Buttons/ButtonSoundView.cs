@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 {
     public class ButtonSoundView : ButtonView
     {
+        [TabGroup("Components")]
         [SerializeField] private AudioSource _audioSource;
 
         private void Awake() =>
