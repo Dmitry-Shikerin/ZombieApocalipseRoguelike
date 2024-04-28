@@ -137,16 +137,16 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         {
             GameModels gameModels = LoadModels(scenePayload);
             
-            //Tutorial
-            _tutorialService.Construct(gameModels.Tutorial);
-            
             //LevelCompleted
             _levelCompletedService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
-            
+
             //SavedLevel
             SavedLevel savedLevel = gameModels.SavedLevel;
             savedLevel.SavedLevelId = scenePayload.SceneId;
             
+            //Tutorial
+            _tutorialService.Construct(gameModels.Tutorial, savedLevel);
+
             //Volume
             _volumeService.Register(gameModels.Volume);
             _volumeViewFactory.Create(gameModels.Volume, _gameplayHud.VolumeView);

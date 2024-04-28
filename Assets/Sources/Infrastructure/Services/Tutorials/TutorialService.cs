@@ -1,4 +1,6 @@
 ﻿using System;
+using Sources.Domain.Models.Data.Ids;
+using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Setting;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
@@ -13,6 +15,7 @@ namespace Sources.Infrastructure.Services.Tutorials
         private readonly IFormService _formService;
         private readonly ILoadService _loadService;
         private Tutorial _tutorial;
+        private SavedLevel _savedLevel;
 
         public TutorialService(
             IFormService formService,
@@ -24,12 +27,20 @@ namespace Sources.Infrastructure.Services.Tutorials
 
         public void Enable()
         {
-            if(_tutorial.HasCompleted == false)
-                _formService.Show(FormId.GreetingTutorial);
+            if (_tutorial.HasCompleted)
+                return;
+            
+            if(_savedLevel.SavedLevelId != ModelId.Gameplay)
+                return;
+
+            _formService.Show(FormId.GreetingTutorial);
         }
 
-        public void Construct(Tutorial tutorial) =>
+        public void Construct(Tutorial tutorial, SavedLevel savedLevel)
+        {
             _tutorial = tutorial ?? throw new System.ArgumentNullException(nameof(tutorial));
+            _savedLevel = savedLevel ?? throw new System.ArgumentNullException(nameof(savedLevel));
+        }
 
         public void Complete()
         {

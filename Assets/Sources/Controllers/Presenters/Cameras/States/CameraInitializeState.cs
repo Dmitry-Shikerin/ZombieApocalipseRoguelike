@@ -5,7 +5,7 @@ using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Cameras;
 using UnityEngine;
 
-namespace Sources.Controllers.Cameras.States
+namespace Sources.Controllers.Presenters.Cameras.States
 {
     public class CameraInitializeState : ContextStateBase
     {
