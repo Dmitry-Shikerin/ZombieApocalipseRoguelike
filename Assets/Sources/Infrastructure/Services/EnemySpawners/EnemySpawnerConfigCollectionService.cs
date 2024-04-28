@@ -14,8 +14,11 @@ namespace Sources.Infrastructure.Services.EnemySpawners
         {
             if(enemySpawnerConfigContainer == null)
                 throw new ArgumentNullException(nameof(enemySpawnerConfigContainer));
+            
+            if(enemySpawnerConfigContainer.Configs.Count <= 0)
+                throw new IndexOutOfRangeException(nameof(enemySpawnerConfigContainer));
 
-            _spawnerConfigs = enemySpawnerConfigContainer.Configs.ToDictionary(key => key.Id);
+            _spawnerConfigs = enemySpawnerConfigContainer.Configs.ToDictionary(key => key.SceneId);
         }
 
         public EnemySpawnerConfig Get(string id)

@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sources.Domain.Models.Data;
 using Sources.DomainInterfaces.Entities;
 
 namespace Sources.Domain.Models.Spawners
 {
     public class EnemySpawner : IEntity
     {
+        public EnemySpawner(EnemySpawnerDto enemySpawnerDto)
+        {
+            Id = enemySpawnerDto.Id;
+            EnemyInWave = enemySpawnerDto.EnemyInWave;
+            SpawnDelays = enemySpawnerDto.SpawnDelays;
+        }
+
         public EnemySpawner(
             string id, 
             IReadOnlyList<int> enemyInWave, 
