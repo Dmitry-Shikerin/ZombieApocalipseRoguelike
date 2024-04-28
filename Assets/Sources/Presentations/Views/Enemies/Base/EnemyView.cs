@@ -16,7 +16,7 @@ namespace Sources.Presentations.Views.Enemies.Base
         [Required] [SerializeField] private HealthUi _healthUi;
         [Required] [SerializeField] private EnemyAnimation _enemyAnimation;
         [Required] [SerializeField] private HealthUiText _healthUiText;
-        
+
         public EnemyHealthView EnemyHealthView => _healthView;
         public HealthUi HealthUi => _healthUi;
         public EnemyAnimation EnemyAnimation => _enemyAnimation;
@@ -31,15 +31,15 @@ namespace Sources.Presentations.Views.Enemies.Base
             if (TryGetComponent(out PoolableObject poolableObject) == false)
             {
                 Destroy(gameObject);
-                
+
                 return;
             }
-            
+
             poolableObject.ReturnToPool();
             DestroyPresenter();
             Hide();
         }
-        
+
         public void Move(Vector3 direction) =>
             _navMeshAgent.SetDestination(direction);
 
@@ -48,5 +48,11 @@ namespace Sources.Presentations.Views.Enemies.Base
 
         public void SetCharacterHealth(ICharacterHealthView characterHealthView) =>
             CharacterHealthView = characterHealthView;
+
+        public void EnableNavmeshAgent() =>
+            _navMeshAgent.enabled = true;
+
+        public void DisableNavmeshAgent() =>
+            _navMeshAgent.enabled = false;
     }
 }

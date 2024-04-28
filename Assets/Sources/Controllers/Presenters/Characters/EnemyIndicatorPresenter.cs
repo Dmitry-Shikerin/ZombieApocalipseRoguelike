@@ -34,6 +34,7 @@ namespace Sources.Controllers.Presenters.Characters
         public override void Disable()
         {
             _enemyCollectorService.EnemiesCountChanged -= OnEnemyCountChanged;
+            _updateRegister.UpdateChanged -= OnUpdate;
         }
 
         private void OnEnemyCountChanged()
@@ -66,6 +67,12 @@ namespace Sources.Controllers.Presenters.Characters
             
             for (int i = 0; i < _enemyCollectorService.Enemies.Count; i++)
             {
+                if(_enemyCollectorService.Enemies[i] == null)
+                    return;
+                
+                if(_enemyIndicatorView.Arrows[i] == null)
+                    return;
+                
                 Vector3 lookDirection = _enemyCollectorService.Enemies[i].Position -
                                         _enemyIndicatorView.Position;
                 lookDirection.y = _enemyIndicatorView.Position.y;

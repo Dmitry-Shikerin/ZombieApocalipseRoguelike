@@ -35,6 +35,9 @@ namespace Sources.Controllers.Enemies.Base.States
 
         public override void Enter()
         {
+            if(_enemyView == null)
+                return;
+            
             Vector3 spawnPosition = _enemyView.Position;
             spawnPosition.y += 1f;
             

@@ -45,7 +45,11 @@ namespace Sources.Controllers.Characters.Movements.States
                 _characterMovement.Speed, targetSpeed, 0.01f);
             
             _characterMovement.Direction = _characterMovement.Speed * 2 *
-                                           deltaTime * _inputService.InputData.MoveDirection.normalized;
+                                           deltaTime * 
+                                           _inputService.InputData.MoveDirection.normalized + 
+                                           Physics.gravity;
+            
+            
             if(_inputService.InputData.LookPosition == Vector3.zero)
                 return;
 

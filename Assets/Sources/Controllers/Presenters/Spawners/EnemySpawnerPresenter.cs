@@ -11,6 +11,7 @@ using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using Sources.PresentationsInterfaces.Views.Spawners;
 using UnityEngine;
+using UnityEngine.AI;
 using Object = UnityEngine.Object;
 
 namespace Sources.Controllers.Presenters.Spawners
@@ -110,10 +111,12 @@ namespace Sources.Controllers.Presenters.Spawners
         private void SpawnEnemy(IEnemySpawnPoint enemySpawnPointView, CharacterView characterView)
         {
             IEnemyView enemyView = _enemySpawnService.Spawn(_killEnemyCounter);
+            enemyView.DisableNavmeshAgent();
             enemyView.SetPosition(enemySpawnPointView.Position);
-            Debug.Log(enemySpawnPointView.Position);
             enemyView.SetCharacterHealth(characterView.CharacterHealthView);
             enemyView.SetTargetFollow(characterView.CharacterMovementView);
+            enemyView.EnableNavmeshAgent();
+            // (enemyView as MonoBehaviour).GetComponent<NavMeshAgent>().enabled = true;
         }
 
         private void SpawnBoss(IEnemySpawnPoint enemySpawnPoint, CharacterView characterView)

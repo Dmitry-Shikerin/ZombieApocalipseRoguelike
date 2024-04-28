@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -10,7 +11,7 @@ using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using UnityEngine;
 
-namespace Sources.Controllers.Enemies.Bosses.States
+namespace Sources.Controllers.Presenters.Enemies.Bosses.States
 {
     public class BossEnemyAttackState : FiniteState
     {
@@ -88,14 +89,15 @@ namespace Sources.Controllers.Enemies.Bosses.States
 
         private void TryAttack()
         {
-            var characterHealthViews =
+            if(_enemyView == null)
+                return;
+            
+            IReadOnlyList<CharacterHealthView> characterHealthViews =
                 _overlapService.OverlapSphere<CharacterHealthView>(
                     _enemyView.Position, 7f, Layer.Character, Layer.Default);
 
             if (characterHealthViews.Count == 0)
-            {
                 return;
-            }
 
             characterHealthViews.First().TakeDamage(10);
         }

@@ -13,5 +13,7 @@ namespace Sources.PresentationsInterfaces.Views.Enemies.Base
         void Move(Vector3 direction);
         void SetTargetFollow(ICharacterMovementView target);
         void SetCharacterHealth(ICharacterHealthView characterHealthView);
+        void EnableNavmeshAgent();
+        void DisableNavmeshAgent();
     }
 }
