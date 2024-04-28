@@ -8,7 +8,7 @@ using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices.Controllers
 {
-    public class UiFormButtonClickService : IButtonService
+    public class UiFormButtonClickService : ICustomButtonClickService
     {
         private readonly IFormService _formService;
         private readonly CustomButtonClickServiceCollection _customButtonClickServiceCollection;
@@ -24,14 +24,24 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
                 throw new ArgumentNullException(nameof(customButtonClickServiceCollection));
         }
 
-        public void Enable()
+        public void Enable(UiFormButton button)
         {
             _cancellationTokenSource = new CancellationTokenSource();
+
+            if (button.ButtonId == ButtonId.Default || button.FormId != FormId.Default)
+                return;
+
+            _customButtonClickServiceCollection.Get(button).Enable(button);
         }
 
-        public void Disable()
+        public void Disable(UiFormButton button)
         {
             _cancellationTokenSource.Cancel();
+
+            if (button.ButtonId == ButtonId.Default || button.FormId != FormId.Default)
+                return;
+
+            _customButtonClickServiceCollection.Get(button).Disable(button);
         }
 
         public async void OnClick(UiFormButton button)

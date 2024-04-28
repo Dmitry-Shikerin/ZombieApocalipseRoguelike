@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Cameras;
 using Sources.Controllers.Cameras.States;
+using Sources.Controllers.Presenters.Cameras.States;
 using Sources.Infrastructure.StateMachines.ContextStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;

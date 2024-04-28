@@ -10,6 +10,8 @@ using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using Sources.PresentationsInterfaces.Views.Spawners;
+using UnityEngine;
+using UnityEngine.AI;
 using Object = UnityEngine.Object;
 
 namespace Sources.Controllers.Presenters.Spawners
@@ -56,6 +58,7 @@ namespace Sources.Controllers.Presenters.Spawners
 
         //TODO вынести эту логику в сирвис и подменять сервис в сцен контесте
         //TODO сделать отдельный мноинсталлер для сервиса
+        //TODO enemy плохо спавнятся на третьей локации
         private async void Spawn(CancellationToken cancellationToken)
         {
             CharacterView characterView = Object.FindObjectOfType<CharacterView>();
@@ -72,7 +75,7 @@ namespace Sources.Controllers.Presenters.Spawners
                         {
                             if (_enemySpawner.EnemyInWave[i] >= _killEnemyCounter.KillZombies)
                             {
-                                _enemySpawner.CurrentDelay = _enemySpawner.SpawnDelays[i];
+                                _enemySpawner.CurrentStepDelay = i;
                             }
                         }
 
@@ -94,7 +97,9 @@ namespace Sources.Controllers.Presenters.Spawners
                             continue;
                         }
 
-                        await UniTask.Delay(TimeSpan.FromSeconds(10), cancellationToken: cancellationToken);
+                        await UniTask.Delay(TimeSpan.FromSeconds(
+                            _enemySpawner.SpawnDelays[_enemySpawner.CurrentStepDelay]),
+                            cancellationToken: cancellationToken);
                     }
                 }
             }
@@ -106,9 +111,12 @@ namespace Sources.Controllers.Presenters.Spawners
         private void SpawnEnemy(IEnemySpawnPoint enemySpawnPointView, CharacterView characterView)
         {
             IEnemyView enemyView = _enemySpawnService.Spawn(_killEnemyCounter);
+            enemyView.DisableNavmeshAgent();
             enemyView.SetPosition(enemySpawnPointView.Position);
             enemyView.SetCharacterHealth(characterView.CharacterHealthView);
             enemyView.SetTargetFollow(characterView.CharacterMovementView);
+            enemyView.EnableNavmeshAgent();
+            // (enemyView as MonoBehaviour).GetComponent<NavMeshAgent>().enabled = true;
         }
 
         private void SpawnBoss(IEnemySpawnPoint enemySpawnPoint, CharacterView characterView)

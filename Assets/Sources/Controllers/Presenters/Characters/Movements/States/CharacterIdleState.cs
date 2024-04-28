@@ -62,6 +62,7 @@ namespace Sources.Controllers.Characters.Movements.States
                     _characterMovement.AnimationDirectionSpeed * deltaTime);
             
             _characterAnimationView.SetDirection(_characterMovement.AnimationDirection);
+            // _characterMovementView.Move(_characterMovement.Direction);
             
             if(distance < 0.7f)
                 return;

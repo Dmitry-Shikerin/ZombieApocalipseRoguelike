@@ -14,7 +14,6 @@ using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
 using Sources.Domain.Models.Weapons;
 using Sources.DomainInterfaces.Payloads;
-using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
@@ -34,6 +33,7 @@ using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
+using Sources.InfrastructureInterfaces.Services.Tutorials;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
@@ -44,9 +44,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 {
     public class CreateGameplaySceneService : LoadGameplaySceneServiceBase
     {
+        private readonly ILoadService _loadService;
         private readonly IEntityRepository _entityRepository;
         private readonly IUpgradeDtoMapper _upgradeDtoMapper;
         private readonly IUpgradeCollectionService _upgradeCollectionService;
+        private readonly IEnemySpawnerDtoMapper _enemySpawnerDtoMapper;
 
         public CreateGameplaySceneService(
             GameplayHud gameplayHud,
@@ -73,7 +75,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             VolumeViewFactory volumeViewFactory,
             IVolumeService volumeService,
             ISaveService saveService,
-            ILevelCompletedService levelCompletedService)
+            ILevelCompletedService levelCompletedService,
+            ITutorialService tutorialService,
+            IEnemySpawnerDtoMapper enemySpawnerDtoMapper)
             : base(
                 gameplayHud,
                 gameplayFormServiceFactory,
@@ -99,16 +103,22 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 volumeViewFactory,
                 volumeService,
                 saveService,
-                levelCompletedService)
+                levelCompletedService,
+                tutorialService)
         {
+            _loadService = loadService;
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));
             _upgradeCollectionService = upgradeCollectionService ??
                                         throw new ArgumentNullException(nameof(upgradeCollectionService));
+            _enemySpawnerDtoMapper = enemySpawnerDtoMapper ?? throw new ArgumentNullException(nameof(enemySpawnerDtoMapper));
         }
 
         protected override GameModels LoadModels(IScenePayload scenePayload)
         {
+            //TODO потом нужно сделать загрузку туториала
+            Tutorial tutorial = new Tutorial();
+            
             Volume volume = new Volume();
             _entityRepository.Add(volume);
 
@@ -118,7 +128,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             SavedLevel savedLevel = new SavedLevel(ModelId.SavedLevel, false, scenePayload.SceneId);
             _entityRepository.Add(savedLevel);
 
-            PlayerWallet playerWallet = CreatePlayerWallet();
+            PlayerWallet playerWallet = new PlayerWallet(0, ModelId.PlayerWallet);
+            _entityRepository.Add(playerWallet);
 
             Upgrader bearMassAttackUpgrader = CreateUpgrader(ModelId.BearMassAttackUpgrader);
             Upgrader bearAttackUpgrader = CreateUpgrader(ModelId.BearAttackUpgrader);
@@ -127,6 +138,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             Upgrader sawLauncherAbilityUpgrader = CreateUpgrader(ModelId.SawLauncherAbilityUpgrader);
             Upgrader miniGunAttackUpgrader = CreateUpgrader(ModelId.MiniGunAttackUpgrader);
 
+            KillEnemyCounter killEnemyCounter = new KillEnemyCounter(ModelId.KillEnemyCounter, 0);
+            _entityRepository.Add(killEnemyCounter);
+            
+            EnemySpawner enemySpawner = CreateEnemySpawner(scenePayload.SceneId);
+            
             MiniGun minigun = new MiniGun(miniGunAttackUpgrader, 0.1f);
             CharacterHealth characterHealth = new CharacterHealth(characterHealthUpgrader);
             Character character = new Character(
@@ -149,9 +165,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
 
-            KillEnemyCounter killEnemyCounter = new KillEnemyCounter(ModelId.KillEnemyCounter, 0);
-            _entityRepository.Add(killEnemyCounter);
-            EnemySpawner enemySpawner = new EnemySpawner();
 
             Debug.Log("CreateModels");
             return new GameModels(
@@ -171,7 +184,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 bear,
                 killEnemyCounter,
                 enemySpawner,
-                savedLevel);
+                savedLevel,
+                tutorial);
         }
 
         private Upgrader CreateUpgrader(string id)
@@ -184,12 +198,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             return upgrader;
         }
 
-        private PlayerWallet CreatePlayerWallet()
+        private EnemySpawner CreateEnemySpawner(string sceneId)
         {
-            PlayerWallet playerWallet = new PlayerWallet(0, ModelId.PlayerWallet);
-            _entityRepository.Add(playerWallet);
-
-            return playerWallet;
+            EnemySpawnerDto enemySpawnerDto = _enemySpawnerDtoMapper.MapIdToDto(sceneId);
+            EnemySpawner enemySpawner = _enemySpawnerDtoMapper.MapDtoToModel(enemySpawnerDto);
+            _entityRepository.Add(enemySpawner);
+            
+            return enemySpawner;
         }
     }
 }

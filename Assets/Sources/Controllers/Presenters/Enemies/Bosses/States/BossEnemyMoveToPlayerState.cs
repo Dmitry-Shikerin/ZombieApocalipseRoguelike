@@ -99,6 +99,9 @@ namespace Sources.Controllers.Enemies.Bosses.States
         
         private void TryAttack()
         {
+            if(_enemyView == null)
+                return;
+            
             var characterHealthViews =
                 _overlapService.OverlapSphere<CharacterHealthView>(
                     _enemyView.Position, 5f, Layer.Character, Layer.Default);

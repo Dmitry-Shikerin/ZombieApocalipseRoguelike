@@ -51,6 +51,12 @@ namespace Sources.Presentations.Views.Enemies.Bosses
         public void SetCharacterHealth(ICharacterHealthView characterHealthView) =>
             CharacterHealthView = characterHealthView;
 
+        public void EnableNavmeshAgent() =>
+            _navMeshAgent.enabled = true;
+
+        public void DisableNavmeshAgent() =>
+            _navMeshAgent.enabled = false;
+
         public void PlayMassAttackParticle() =>
             _massAttackParticle.Play();
 

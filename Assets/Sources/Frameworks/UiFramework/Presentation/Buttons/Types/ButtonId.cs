@@ -6,7 +6,12 @@
     public enum ButtonId
     {
         Default = 0,
-        FromHudToSettings = 1,
-        FromPauseToMainMenuScene = 2
+        FromSettingsToHud = 1,
+        FromPauseToMainMenuScene = 2,
+        CompleteTutorial = 3,
+        NewGame = 4,
+        FromWarningNewGameToNewGame = 5,
+        LeaderBoard = 6,
+        LoadGame = 7,
     }
 }

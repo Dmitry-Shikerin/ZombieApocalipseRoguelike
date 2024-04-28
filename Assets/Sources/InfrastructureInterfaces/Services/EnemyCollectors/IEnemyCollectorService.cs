@@ -12,5 +12,6 @@ namespace Sources.InfrastructureInterfaces.Services.EnemyCollectors
 
         void Add(IEnemyView enemyView);
         void Remove(IEnemyView enemyView);
+        void Clear();
     }
 }

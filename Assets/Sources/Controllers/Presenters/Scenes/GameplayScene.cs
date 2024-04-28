@@ -4,10 +4,12 @@ using Sources.DomainInterfaces.Payloads;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
+using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
+using Sources.InfrastructureInterfaces.Services.Tutorials;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
@@ -27,6 +29,8 @@ namespace Sources.Controllers.Presenters.Scenes
         private readonly IVolumeService _volumeService;
         private readonly ISaveService _saveService;
         private readonly ILevelCompletedService _levelCompletedService;
+        private readonly ITutorialService _tutorialService;
+        private readonly IEnemyCollectorService _enemyCollectorService;
 
         public GameplayScene(
             IUpdateService updateService,
@@ -38,7 +42,9 @@ namespace Sources.Controllers.Presenters.Scenes
             IGameOverService gameOverService,
             IVolumeService volumeService,
             ISaveService saveService,
-            ILevelCompletedService levelCompletedService)
+            ILevelCompletedService levelCompletedService,
+            ITutorialService tutorialService,
+            IEnemyCollectorService enemyCollectorService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -51,6 +57,8 @@ namespace Sources.Controllers.Presenters.Scenes
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
             _levelCompletedService = levelCompletedService ?? 
                                      throw new ArgumentNullException(nameof(levelCompletedService));
+            _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
+            _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
         }
 
         public void Enter(object payload = null)
@@ -61,6 +69,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _volumeService.Enter();
             _saveService.Enter();
             _levelCompletedService.Enable();
+            _tutorialService.Enable();
             //TODO раскоментировать UpgradeService
             // _upgradeService.Enable();
         }
@@ -73,6 +82,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _volumeService.Exit();
             _saveService.Exit();
             _levelCompletedService.Disable();
+            _enemyCollectorService.Clear();
         }
 
         public void Update(float deltaTime)

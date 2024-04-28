@@ -45,6 +45,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
 
         protected override MainMenuModels LoadModels(IScenePayload scenePayload)
         {
+            Tutorial tutorial = _loadService.Load<Tutorial>(ModelId.Tutorial);
+            
             //TODO подумать над тем какие айдишки загружать
             Volume volume = _loadService.Load<Volume>(ModelId.Volume);
             
@@ -77,7 +79,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
                 fourthLevel,
                 levelAvailability,
                 gameData,
-                savedLevel);
+                savedLevel,
+                tutorial);
         }
     }
 }

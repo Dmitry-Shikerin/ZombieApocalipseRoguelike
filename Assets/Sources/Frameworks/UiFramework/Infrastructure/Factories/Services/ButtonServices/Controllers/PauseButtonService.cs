@@ -1,7 +1,6 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
-using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices.Controllers
 {

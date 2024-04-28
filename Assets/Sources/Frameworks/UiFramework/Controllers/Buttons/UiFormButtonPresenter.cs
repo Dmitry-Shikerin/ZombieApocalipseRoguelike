@@ -32,14 +32,14 @@ namespace Sources.Frameworks.UiFramework.Controllers.Buttons
         public override void Enable()
         {
             _buttonService.Enable();
-            _buttonClickService.Enable();
+            _buttonClickService.Enable(_view);
             _view.AddClickListener(ShowForm);
         }
 
         public override void Disable()
         {
             _buttonService.Disable();
-            _buttonClickService.Disable();
+            _buttonClickService.Disable(_view);
             _view.RemoveClickListener(ShowForm);
         }
 

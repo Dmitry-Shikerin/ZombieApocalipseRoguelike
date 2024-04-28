@@ -5,6 +5,7 @@ using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Setting;
+using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
 using Sources.DomainInterfaces.Entities;
 using Sources.DomainInterfaces.Models.Data;
@@ -33,7 +34,8 @@ namespace Sources.Infrastructure.Services.LoadServices
             IGameDataDtoMapper gameDataDtoMapper,
             ITutorialDtoMapper tutorialDtoMapper,
             IKillEnemyCounterDtoMapper killEnemyCounterDtoMapper,
-            ISavedLevelDtoMapper savedLevelDtoMapper)
+            ISavedLevelDtoMapper savedLevelDtoMapper,
+            IEnemySpawnerDtoMapper enemySpawnerDtoMapper)
         {
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
@@ -55,6 +57,8 @@ namespace Sources.Infrastructure.Services.LoadServices
                 model => killEnemyCounterDtoMapper.MapModelToDto(model as KillEnemyCounter);
             _toDtoMappers[typeof(SavedLevel)] =
                 model => savedLevelDtoMapper.MapModelToDto(model as SavedLevel);
+            _toDtoMappers[typeof(EnemySpawner)] =
+                model => enemySpawnerDtoMapper.MapModelToDto(model as EnemySpawner);
 
             _toModelMappers = new Dictionary<Type, Func<IDto, IEntity>>();
             _toModelMappers[typeof(UpgradeDto)] =
@@ -73,6 +77,8 @@ namespace Sources.Infrastructure.Services.LoadServices
                 dto => killEnemyCounterDtoMapper.MapDtoToModel(dto as KillEnemyCounterDto);
             _toModelMappers[typeof(SavedLevelDto)] =
                 dto => savedLevelDtoMapper.MapDtoToModel(dto as SavedLevelDto);
+            _toModelMappers[typeof(EnemySpawnerDto)] =
+                dto => enemySpawnerDtoMapper.MapDtoToModel(dto as EnemySpawnerDto);
         }
 
         //TODO загружать все дто и сразу конвертить их в модели и складировать в инстансе контейнер

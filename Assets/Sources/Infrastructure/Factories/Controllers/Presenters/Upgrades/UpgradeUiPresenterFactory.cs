@@ -4,7 +4,7 @@ using Sources.DomainInterfaces.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.PresentationsInterfaces.Views.Upgrades;
 
-namespace Sources.Infrastructure.Factories.Controllers.Upgrades
+namespace Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades
 {
     public class UpgradeUiPresenterFactory
     {

@@ -3,6 +3,7 @@ using Sources.Controllers.Common.Forms;
 using Sources.Controllers.ModelViews.Forms.Gameplay;
 using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Forms.Gameplay;
+using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Frameworks.MVVM.Infrastructure.Builders;
 using Sources.Frameworks.MVVM.InfrastructureInterfaces;
@@ -37,6 +38,7 @@ using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.Gameplay.Tutorials;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
@@ -71,6 +73,7 @@ using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.Cameras;
 using Sources.Infrastructure.Services.EnemyCollectors;
+using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.GameOvers;
 using Sources.Infrastructure.Services.InputServices;
@@ -85,6 +88,7 @@ using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Saves;
 using Sources.Infrastructure.Services.Spawners;
+using Sources.Infrastructure.Services.Tutorials;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Infrastructure.Services.Upgrades;
 using Sources.Infrastructure.Services.UseCases.Commands;
@@ -105,6 +109,7 @@ using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
+using Sources.InfrastructureInterfaces.Services.Tutorials;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
@@ -128,12 +133,22 @@ namespace Sources.Infrastructure.DIContainers
         
         public override void InstallBindings()
         {
-            Container.Bind<UpgradeConfigContainer>()
-                .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer").AsSingle();
-            Container.Bind<AudioClipCollection>()
-                .FromResource("Configs/GameplayAudioClipContainer").AsSingle();
-            Container.Bind<LocalizationConfig>()
-                .FromResource("Configs/Localizations/LocalizationConfig").AsSingle();
+            Container
+                .Bind<UpgradeConfigContainer>()
+                .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer")
+                .AsSingle();
+            Container
+                .Bind<AudioClipCollection>()
+                .FromResource("Configs/GameplayAudioClipContainer")
+                .AsSingle();
+            Container
+                .Bind<LocalizationConfig>()
+                .FromResource("Configs/Localizations/LocalizationConfig")
+                .AsSingle();
+            Container
+                .Bind<EnemySpawnerConfigContainer>()
+                .FromResource("Configs/EnemySpawners/Containers/EnemySpawnerConfigContainer")
+                .AsSingle();
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<UiCollector>().FromInstance(_gameplayHud.UiCollector).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
@@ -190,6 +205,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<CreateGameplaySceneService>().AsSingle();
             Container.Bind<ISaveService>().To<SaveService>().AsSingle();
             Container.Bind<ILevelCompletedService>().To<LevelCompletedService>().AsSingle();
+            Container.Bind<ITutorialService>().To<TutorialService>().AsSingle();
+            Container.Bind<IEnemySpawnerConfigCollectionService>().To<EnemySpawnerConfigCollectionService>().AsSingle();
         }
 
         private void BindFormFactories()
@@ -203,6 +220,12 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<UiContainerFactory>().AsSingle();
 
             Container.Bind<CustomButtonClickServiceCollection>().AsSingle();
+            Container.Bind<LoadGameButtonClickService>().AsSingle();
+            Container.Bind<FromSettingsToHudButtonClickService>().AsSingle();
+            Container.Bind<LeaderBoardButtonClickService>().AsSingle();
+            Container.Bind<FromWarningToNewGameButtonClickService>().AsSingle();
+            Container.Bind<NewGameButtonClickService>().AsSingle();
+            Container.Bind<CompleteTutorialButtonClickService>().AsSingle();
             Container.Bind<LoadMainMenuButtonClickService>().AsSingle();
             Container.Bind<UiFormButtonClickService>().AsSingle();
             Container.Bind<ButtonServiceCollection>().AsSingle();
@@ -213,7 +236,6 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<UiContainerPauseService>().AsSingle();
             Container.Bind<UiContainerVoidService>().AsSingle();
         }
-
 
         private void BindGameplay()
         {
@@ -244,6 +266,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IGameDataDtoMapper>().To<GameDataDtoMapper>().AsSingle();
             Container.Bind<IKillEnemyCounterDtoMapper>().To<KillEnemyCounterDtoMapper>().AsSingle();
             Container.Bind<ISavedLevelDtoMapper>().To<SavedLevelDtoMapper>().AsSingle();
+            Container.Bind<IEnemySpawnerDtoMapper>().To<EnemySpawnerDtoMapper>().AsSingle();
         }
         
         

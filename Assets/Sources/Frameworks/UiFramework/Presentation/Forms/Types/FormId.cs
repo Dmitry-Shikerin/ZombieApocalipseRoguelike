@@ -16,6 +16,10 @@
         RewardTutorial = 11,
         EnemySpawnPointsTutorial = 12,
         UpgradeFormTopAbilitiesTutorial = 13,
-        UpgradeFormBottomAbilitiesTutorial = 14
+        UpgradeFormBottomAbilitiesTutorial = 14,
+        WarningNewGame = 15,
+        NewGame = 16,
+        Authorization = 17,
+        Leaderboard = 18,
     }
 }
