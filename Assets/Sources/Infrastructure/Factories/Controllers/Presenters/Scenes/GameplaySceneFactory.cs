@@ -10,6 +10,7 @@ using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gamep
 using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Factories.Controllers.Scenes;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
+using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
@@ -35,6 +36,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly ISaveService _saveService;
         private readonly ILevelCompletedService _levelCompletedService;
         private readonly ITutorialService _tutorialService;
+        private readonly IEnemyCollectorService _enemyCollectorService;
 
         public GameplaySceneFactory(
             IUpdateService updateService,
@@ -48,7 +50,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             CreateGameplaySceneService createGameplaySceneService,
             ISaveService saveService,
             ILevelCompletedService levelCompletedService,
-            ITutorialService tutorialService) 
+            ITutorialService tutorialService,
+            IEnemyCollectorService enemyCollectorService) 
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -62,6 +65,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
             _levelCompletedService = levelCompletedService ?? throw new ArgumentNullException(nameof(levelCompletedService));
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
+            _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
         }
 
         public async UniTask<IScene> Create(object payload)
@@ -77,7 +81,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _volumeService,
                 _saveService,
                 _levelCompletedService,
-                _tutorialService);
+                _tutorialService,
+                _enemyCollectorService);
         }
 
         private ILoadSceneService CreateLoadSceneService(object payload)

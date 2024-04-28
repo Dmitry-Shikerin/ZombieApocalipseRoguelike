@@ -4,6 +4,7 @@ using Sources.DomainInterfaces.Payloads;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
+using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
@@ -29,6 +30,7 @@ namespace Sources.Controllers.Presenters.Scenes
         private readonly ISaveService _saveService;
         private readonly ILevelCompletedService _levelCompletedService;
         private readonly ITutorialService _tutorialService;
+        private readonly IEnemyCollectorService _enemyCollectorService;
 
         public GameplayScene(
             IUpdateService updateService,
@@ -41,7 +43,8 @@ namespace Sources.Controllers.Presenters.Scenes
             IVolumeService volumeService,
             ISaveService saveService,
             ILevelCompletedService levelCompletedService,
-            ITutorialService tutorialService)
+            ITutorialService tutorialService,
+            IEnemyCollectorService enemyCollectorService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -55,6 +58,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _levelCompletedService = levelCompletedService ?? 
                                      throw new ArgumentNullException(nameof(levelCompletedService));
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
+            _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
         }
 
         public void Enter(object payload = null)
@@ -78,6 +82,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _volumeService.Exit();
             _saveService.Exit();
             _levelCompletedService.Disable();
+            _enemyCollectorService.Clear();
         }
 
         public void Update(float deltaTime)

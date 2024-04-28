@@ -10,6 +10,7 @@ using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using Sources.PresentationsInterfaces.Views.Spawners;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Sources.Controllers.Presenters.Spawners
@@ -56,6 +57,7 @@ namespace Sources.Controllers.Presenters.Spawners
 
         //TODO вынести эту логику в сирвис и подменять сервис в сцен контесте
         //TODO сделать отдельный мноинсталлер для сервиса
+        //TODO enemy плохо спавнятся на третьей локации
         private async void Spawn(CancellationToken cancellationToken)
         {
             CharacterView characterView = Object.FindObjectOfType<CharacterView>();
@@ -109,6 +111,7 @@ namespace Sources.Controllers.Presenters.Spawners
         {
             IEnemyView enemyView = _enemySpawnService.Spawn(_killEnemyCounter);
             enemyView.SetPosition(enemySpawnPointView.Position);
+            Debug.Log(enemySpawnPointView.Position);
             enemyView.SetCharacterHealth(characterView.CharacterHealthView);
             enemyView.SetTargetFollow(characterView.CharacterMovementView);
         }

@@ -25,5 +25,11 @@ namespace Sources.Infrastructure.Services.EnemyCollectors
             _enemies.Remove(enemyView);
             EnemiesCountChanged?.Invoke();
         }
+
+        public void Clear()
+        {
+            _enemies.Clear();
+            EnemiesCountChanged?.Invoke();
+        }
     }
 }

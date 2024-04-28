@@ -9,7 +9,7 @@ using Sources.InfrastructureInterfaces.StateMachines.ContextStateMachines.States
 using Sources.PresentationsInterfaces.Views.Character;
 using UnityEngine;
 
-namespace Sources.Controllers.Characters.Movements
+namespace Sources.Controllers.Presenters.Characters.Movements
 {
     public class CharacterMovementPresenter : ContextStateMachine, IPresenter
     {

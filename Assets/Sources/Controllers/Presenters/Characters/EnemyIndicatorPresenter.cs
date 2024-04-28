@@ -20,7 +20,7 @@ namespace Sources.Controllers.Presenters.Characters
         {
             _enemyIndicatorView = enemyIndicatorView ??
                                   throw new ArgumentNullException(nameof(enemyIndicatorView));
-            _enemyCollectorService = enemyCollectorService ?? 
+            _enemyCollectorService = enemyCollectorService ??
                                      throw new ArgumentNullException(nameof(enemyCollectorService));
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
         }
@@ -61,16 +61,19 @@ namespace Sources.Controllers.Presenters.Characters
 
         private void ChangeArrowPositions()
         {
+            if (_enemyCollectorService.Enemies.Count == 0)
+                return;
+            
             for (int i = 0; i < _enemyCollectorService.Enemies.Count; i++)
             {
                 Vector3 lookDirection = _enemyCollectorService.Enemies[i].Position -
                                         _enemyIndicatorView.Position;
                 lookDirection.y = _enemyIndicatorView.Position.y;
-                
+
                 float angle = Vector3.SignedAngle(Vector3.forward, lookDirection, Vector3.up);
-            
+
                 //TODO почему приходится доворачиввать X и почему я  кручу Y а не Z
-                _enemyIndicatorView.Arrows[i].SetAngleEuler(new Vector3(90,angle,0));
+                _enemyIndicatorView.Arrows[i].SetAngleEuler(new Vector3(90, angle, 0));
             }
         }
     }
