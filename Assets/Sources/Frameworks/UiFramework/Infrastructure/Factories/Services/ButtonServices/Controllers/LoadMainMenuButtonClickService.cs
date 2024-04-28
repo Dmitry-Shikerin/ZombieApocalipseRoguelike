@@ -14,11 +14,11 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
             _sceneService = sceneService ?? throw new ArgumentNullException(nameof(sceneService));
         }
 
-        public void Enable()
+        public void Enable(UiFormButton button)
         {
         }
 
-        public void Disable()
+        public void Disable(UiFormButton button)
         {
         }
 

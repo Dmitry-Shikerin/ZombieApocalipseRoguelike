@@ -3,6 +3,7 @@ using Sources.Controllers.Common.Forms;
 using Sources.Controllers.ModelViews.Forms.Gameplay;
 using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Forms.Gameplay;
+using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Frameworks.MVVM.Infrastructure.Builders;
 using Sources.Frameworks.MVVM.InfrastructureInterfaces;
@@ -145,7 +146,7 @@ namespace Sources.Infrastructure.DIContainers
                 .FromResource("Configs/Localizations/LocalizationConfig")
                 .AsSingle();
             Container
-                .Bind<EnemySpawnerConfigCollectionService>()
+                .Bind<EnemySpawnerConfigContainer>()
                 .FromResource("Configs/EnemySpawners/Containers/EnemySpawnerConfigContainer")
                 .AsSingle();
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
@@ -219,6 +220,11 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<UiContainerFactory>().AsSingle();
 
             Container.Bind<CustomButtonClickServiceCollection>().AsSingle();
+            Container.Bind<LoadGameButtonClickService>().AsSingle();
+            Container.Bind<FromSettingsToHudButtonClickService>().AsSingle();
+            Container.Bind<LeaderBoardButtonClickService>().AsSingle();
+            Container.Bind<FromWarningToNewGameButtonClickService>().AsSingle();
+            Container.Bind<NewGameButtonClickService>().AsSingle();
             Container.Bind<CompleteTutorialButtonClickService>().AsSingle();
             Container.Bind<LoadMainMenuButtonClickService>().AsSingle();
             Container.Bind<UiFormButtonClickService>().AsSingle();
@@ -230,7 +236,6 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<UiContainerPauseService>().AsSingle();
             Container.Bind<UiContainerVoidService>().AsSingle();
         }
-
 
         private void BindGameplay()
         {
@@ -261,6 +266,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IGameDataDtoMapper>().To<GameDataDtoMapper>().AsSingle();
             Container.Bind<IKillEnemyCounterDtoMapper>().To<KillEnemyCounterDtoMapper>().AsSingle();
             Container.Bind<ISavedLevelDtoMapper>().To<SavedLevelDtoMapper>().AsSingle();
+            Container.Bind<IEnemySpawnerDtoMapper>().To<EnemySpawnerDtoMapper>().AsSingle();
         }
         
         

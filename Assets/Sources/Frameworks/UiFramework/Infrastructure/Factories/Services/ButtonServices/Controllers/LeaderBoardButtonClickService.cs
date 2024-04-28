@@ -2,38 +2,30 @@
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
-using Sources.InfrastructureInterfaces.Services.LoadServices;
-using Sources.InfrastructureInterfaces.Services.Tutorials;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices.Controllers
 {
-    public class CompleteTutorialButtonClickService : ICustomButtonClickService
+    public class LeaderBoardButtonClickService : ICustomButtonClickService
     {
-        private readonly ITutorialService _tutorialService;
         private readonly IFormService _formService;
 
-        public CompleteTutorialButtonClickService(
-            ITutorialService tutorialService,
-            IFormService formService)
+        public LeaderBoardButtonClickService(IFormService formService)
         {
-            _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public void Enable(UiFormButton button)
         {
-            
         }
 
         public void Disable(UiFormButton button)
         {
-            
         }
 
         public void OnClick(UiFormButton button)
         {
-            _tutorialService.Complete();
-            _formService.Show(FormId.Pause);
+            //TODO добавить логику авторизации
+            _formService.Show(FormId.Leaderboard);
         }
     }
 }

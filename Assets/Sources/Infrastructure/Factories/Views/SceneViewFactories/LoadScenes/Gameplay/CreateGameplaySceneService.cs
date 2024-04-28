@@ -48,6 +48,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly IEntityRepository _entityRepository;
         private readonly IUpgradeDtoMapper _upgradeDtoMapper;
         private readonly IUpgradeCollectionService _upgradeCollectionService;
+        private readonly IEnemySpawnerDtoMapper _enemySpawnerDtoMapper;
 
         public CreateGameplaySceneService(
             GameplayHud gameplayHud,
@@ -75,7 +76,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IVolumeService volumeService,
             ISaveService saveService,
             ILevelCompletedService levelCompletedService,
-            ITutorialService tutorialService)
+            ITutorialService tutorialService,
+            IEnemySpawnerDtoMapper enemySpawnerDtoMapper)
             : base(
                 gameplayHud,
                 gameplayFormServiceFactory,
@@ -109,6 +111,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));
             _upgradeCollectionService = upgradeCollectionService ??
                                         throw new ArgumentNullException(nameof(upgradeCollectionService));
+            _enemySpawnerDtoMapper = enemySpawnerDtoMapper ?? throw new ArgumentNullException(nameof(enemySpawnerDtoMapper));
         }
 
         protected override GameModels LoadModels(IScenePayload scenePayload)
@@ -135,6 +138,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             Upgrader sawLauncherAbilityUpgrader = CreateUpgrader(ModelId.SawLauncherAbilityUpgrader);
             Upgrader miniGunAttackUpgrader = CreateUpgrader(ModelId.MiniGunAttackUpgrader);
 
+            KillEnemyCounter killEnemyCounter = new KillEnemyCounter(ModelId.KillEnemyCounter, 0);
+            _entityRepository.Add(killEnemyCounter);
+            
+            EnemySpawner enemySpawner = CreateEnemySpawner(scenePayload.SceneId);
+            
             MiniGun minigun = new MiniGun(miniGunAttackUpgrader, 0.1f);
             CharacterHealth characterHealth = new CharacterHealth(characterHealthUpgrader);
             Character character = new Character(
@@ -157,10 +165,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
 
-            KillEnemyCounter killEnemyCounter = new KillEnemyCounter(ModelId.KillEnemyCounter, 0);
-            _entityRepository.Add(killEnemyCounter);
-            EnemySpawner enemySpawner = new EnemySpawner(
-                ModelId.EnemySpawner, new List<int>(), new List<int>());
 
             Debug.Log("CreateModels");
             return new GameModels(
@@ -192,6 +196,15 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _upgradeCollectionService.AddUpgrader(upgrader);
 
             return upgrader;
+        }
+
+        private EnemySpawner CreateEnemySpawner(string sceneId)
+        {
+            EnemySpawnerDto enemySpawnerDto = _enemySpawnerDtoMapper.MapIdToDto(sceneId);
+            EnemySpawner enemySpawner = _enemySpawnerDtoMapper.MapDtoToModel(enemySpawnerDto);
+            _entityRepository.Add(enemySpawner);
+            
+            return enemySpawner;
         }
     }
 }

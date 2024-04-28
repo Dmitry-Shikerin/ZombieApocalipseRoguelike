@@ -7,6 +7,6 @@ namespace Sources.InfrastructureInterfaces.Factories.Domain.Data
     {
         EnemySpawnerDto MapModelToDto(EnemySpawner enemySpawner);
         EnemySpawner MapDtoToModel(EnemySpawnerDto enemySpawnerDto);
-        EnemySpawnerDto MapIdToDto(string id);
+        EnemySpawnerDto MapIdToDto(string sceneId);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Buttons.Types;
+using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Presentations.UI.Huds;
@@ -17,9 +18,9 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
         private readonly ContainerView _containerView;
         private readonly Dictionary<FormId, IUiContainer> _forms = new Dictionary<FormId, IUiContainer>();
 
-        public FormService(GameplayHud gameplayHud)
+        public FormService(UiCollector uiCollector)
         {
-            foreach (IUiContainer form in gameplayHud.UiCollector.UiContainers)
+            foreach (IUiContainer form in uiCollector.UiContainers)
                 _forms.Add(form.Id, form);
         }
 

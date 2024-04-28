@@ -12,31 +12,37 @@ namespace Sources.Domain.Models.Spawners
             Id = enemySpawnerDto.Id;
             EnemyInWave = enemySpawnerDto.EnemyInWave;
             SpawnDelays = enemySpawnerDto.SpawnDelays;
+            BossesInLevel = enemySpawnerDto.BossesInLevel;
         }
 
         public EnemySpawner(
-            string id, 
-            IReadOnlyList<int> enemyInWave, 
-            IReadOnlyList<int> spawnDelays)
+            string id,
+            IReadOnlyList<int> enemyInWave,
+            IReadOnlyList<int> spawnDelays,
+            int bossesInLevel)
         {
             Id = id;
 
             if (enemyInWave.Count != spawnDelays.Count)
                 throw new ArgumentOutOfRangeException(nameof(spawnDelays));
-            
+
             EnemyInWave = enemyInWave;
             SpawnDelays = spawnDelays;
+            BossesInLevel = bossesInLevel;
         }
 
         public IReadOnlyList<int> EnemyInWave { get; }
         public IReadOnlyList<int> SpawnDelays { get; }
         public string Id { get; }
-        public Type Type { get; }
-        public int BossesInLevel { get; } = 1;
-        public float CurrentDelay { get; set; }
+        public Type Type => GetType();
         public int BossCounter { get; set; }
-        public int SumEnemies => GetSumEnemyes();
 
+        public int SumEnemies => GetSumEnemyes();
+        public int SumAllEnemies => GetSumEnemyes() + BossesInLevel;
+
+        //TODO это тоже сохранять
+        public int BossesInLevel { get; }
+        public int CurrentStepDelay { get; set; }
 
         private int GetSumEnemyes()
         {
@@ -44,8 +50,7 @@ namespace Sources.Domain.Models.Spawners
 
             foreach (int enemies in EnemyInWave)
                 sum += enemies;
-
-
+            
             return sum;
         }
     }

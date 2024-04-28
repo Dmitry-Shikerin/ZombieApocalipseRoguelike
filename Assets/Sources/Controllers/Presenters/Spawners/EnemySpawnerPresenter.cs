@@ -72,7 +72,7 @@ namespace Sources.Controllers.Presenters.Spawners
                         {
                             if (_enemySpawner.EnemyInWave[i] >= _killEnemyCounter.KillZombies)
                             {
-                                _enemySpawner.CurrentDelay = _enemySpawner.SpawnDelays[i];
+                                _enemySpawner.CurrentStepDelay = i;
                             }
                         }
 
@@ -94,7 +94,9 @@ namespace Sources.Controllers.Presenters.Spawners
                             continue;
                         }
 
-                        await UniTask.Delay(TimeSpan.FromSeconds(10), cancellationToken: cancellationToken);
+                        await UniTask.Delay(TimeSpan.FromSeconds(
+                            _enemySpawner.SpawnDelays[_enemySpawner.CurrentStepDelay]),
+                            cancellationToken: cancellationToken);
                     }
                 }
             }

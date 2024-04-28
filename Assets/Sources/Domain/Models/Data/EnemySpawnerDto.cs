@@ -9,6 +9,9 @@ namespace Sources.Domain.Models.Data
         [JsonProperty("id")]
         public string Id { get; set; }
         
+        [JsonProperty("bossesInLevel")]
+        public int BossesInLevel { get; set; }
+        
         [JsonProperty("enemyInWave")]
         public int[] EnemyInWave { get; set; }
         

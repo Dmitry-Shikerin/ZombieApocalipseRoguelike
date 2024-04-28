@@ -137,10 +137,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             Upgrader miniGunAttackUpgrader = _entityRepository.Get(ModelId.MiniGunAttackUpgrader) as Upgrader;
             _upgradeCollectionService.AddUpgrader(miniGunAttackUpgrader);
 
+            KillEnemyCounter killEnemyCounter = _entityRepository.Get(ModelId.KillEnemyCounter) as KillEnemyCounter;
+            EnemySpawner enemySpawner = _entityRepository.Get(ModelId.GameplayEnemySpawner) as EnemySpawner;
+            
             MiniGun minigun = new MiniGun(miniGunAttackUpgrader, 0.1f);
-            
+
             CharacterHealth characterHealth = new CharacterHealth(characterHealthUpgrader);
-            
+
             Character character = new Character(
                 playerWallet,
                 characterHealth,
@@ -155,16 +158,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                     new SawLauncher(sawLauncherUpgrader),
                     new SawLauncher(sawLauncherUpgrader),
                 });
-            
+
             BearAttacker bearAttacker = new BearAttacker(
                 bearAttackUpgrader,
                 bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
 
-            KillEnemyCounter killEnemyCounter = _entityRepository.Get(ModelId.KillEnemyCounter) as KillEnemyCounter;
-            EnemySpawner enemySpawner = new EnemySpawner(
-                ModelId.EnemySpawner, new List<int>(), new List<int>());
-            
+
             return new GameModels(
                 bearMassAttackUpgrader,
                 bearAttackUpgrader,

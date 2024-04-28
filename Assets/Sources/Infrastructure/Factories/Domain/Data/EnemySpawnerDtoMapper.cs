@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Sources.Domain.Models.Data;
+using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Spawners.Configs;
 using Sources.Infrastructure.Services.EnemySpawners;
@@ -20,15 +21,16 @@ namespace Sources.Infrastructure.Factories.Domain.Data
                 throw new ArgumentNullException(nameof(enemySpawnerConfigCollectionService));
         }
 
-        public EnemySpawnerDto MapIdToDto(string id)
+        public EnemySpawnerDto MapIdToDto(string sceneId)
         {
-            EnemySpawnerConfig enemySpawnerConfig = _enemySpawnerConfigCollectionService.Get(id);
+            EnemySpawnerConfig enemySpawnerConfig = _enemySpawnerConfigCollectionService.Get(sceneId);
 
             return new EnemySpawnerDto()
             {
-                Id = enemySpawnerConfig.SceneId,
+                Id = ModelId.GameplayEnemySpawner,
                 EnemyInWave = enemySpawnerConfig.EnemyInWave.ToArray(),
                 SpawnDelays = enemySpawnerConfig.SpawnDelays.ToArray(),
+                BossesInLevel = enemySpawnerConfig.BossesInLevel,
             };
         }
 
@@ -40,6 +42,7 @@ namespace Sources.Infrastructure.Factories.Domain.Data
                 Id = enemySpawner.Id,
                 EnemyInWave = enemySpawner.EnemyInWave.ToArray(),
                 SpawnDelays = enemySpawner.SpawnDelays.ToArray(),
+                BossesInLevel = enemySpawner.BossesInLevel
             };
         }
 

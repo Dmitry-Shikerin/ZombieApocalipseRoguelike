@@ -11,12 +11,22 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
         
         public CustomButtonClickServiceCollection(
             LoadMainMenuButtonClickService loadMainMenuButtonClickService,
-            CompleteTutorialButtonClickService completeTutorialButtonClickService)
+            CompleteTutorialButtonClickService completeTutorialButtonClickService,
+            NewGameButtonClickService newGameButtonClickService,
+            FromWarningToNewGameButtonClickService fromWarningToNewGameButtonClickService,
+            LeaderBoardButtonClickService leaderBoardButtonClickService,
+            FromSettingsToHudButtonClickService fromSettingsToHudButtonClickService,
+            LoadGameButtonClickService loadGameButtonClickService)
         {
             _buttonServices = new Dictionary<ButtonId, ICustomButtonClickService>()
             {
+                [ButtonId.FromSettingsToHud] = fromSettingsToHudButtonClickService,
                 [ButtonId.FromPauseToMainMenuScene] = loadMainMenuButtonClickService,
                 [ButtonId.CompleteTutorial] = completeTutorialButtonClickService,
+                [ButtonId.NewGame] = newGameButtonClickService,
+                [ButtonId.FromWarningNewGameToNewGame] = fromWarningToNewGameButtonClickService,
+                [ButtonId.LeaderBoard] = leaderBoardButtonClickService,
+                [ButtonId.LoadGame] = loadGameButtonClickService
             };
         }
 
