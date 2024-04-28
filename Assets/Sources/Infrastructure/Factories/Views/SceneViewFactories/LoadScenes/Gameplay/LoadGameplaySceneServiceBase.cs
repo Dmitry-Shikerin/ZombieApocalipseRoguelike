@@ -26,6 +26,7 @@ using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
+using Sources.InfrastructureInterfaces.Services.Tutorials;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
@@ -65,6 +66,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly IVolumeService _volumeService;
         private readonly ISaveService _saveService;
         private readonly ILevelCompletedService _levelCompletedService;
+        private readonly ITutorialService _tutorialService;
 
         protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
             GameplayFormServiceFactory gameplayFormServiceFactory,
@@ -90,7 +92,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             VolumeViewFactory volumeViewFactory,
             IVolumeService volumeService,
             ISaveService saveService,
-            ILevelCompletedService levelCompletedService)
+            ILevelCompletedService levelCompletedService,
+            ITutorialService tutorialService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ?? throw new ArgumentNullException(nameof(gameplayFormServiceFactory));
@@ -127,11 +130,15 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
             _levelCompletedService = levelCompletedService ?? throw new ArgumentNullException(nameof(levelCompletedService));
+            _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
         }
 
         public void Load(IScenePayload scenePayload)
         {
             GameModels gameModels = LoadModels(scenePayload);
+            
+            //Tutorial
+            _tutorialService.Construct(gameModels.Tutorial);
             
             //LevelCompleted
             _levelCompletedService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);

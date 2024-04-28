@@ -12,7 +12,8 @@ namespace Sources.Domain.Models.Gameplay
             Level fourthLevel,
             LevelAvailability levelAvailability,
             GameData gameData,
-            SavedLevel savedLevel)
+            SavedLevel savedLevel,
+            Tutorial tutorial)
         {
             Volume = volume;
             FirstLevel = firstLevel;
@@ -22,6 +23,7 @@ namespace Sources.Domain.Models.Gameplay
             LevelAvailability = levelAvailability;
             GameData = gameData;
             SavedLevel = savedLevel;
+            Tutorial = tutorial;
         }
 
         public Volume Volume { get; }
@@ -32,5 +34,6 @@ namespace Sources.Domain.Models.Gameplay
         public LevelAvailability LevelAvailability { get; }
         public GameData GameData { get; }
         public SavedLevel SavedLevel { get; }
+        public Tutorial Tutorial { get; }
     }
 }

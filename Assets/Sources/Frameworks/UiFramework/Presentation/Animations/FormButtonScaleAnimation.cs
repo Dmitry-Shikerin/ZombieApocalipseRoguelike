@@ -5,7 +5,6 @@ using Sources.Frameworks.UiFramework.Services.Animations;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Animations;
 using Sources.Presentations.Views;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Animations
 {

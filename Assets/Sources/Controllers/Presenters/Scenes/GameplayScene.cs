@@ -8,6 +8,7 @@ using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
+using Sources.InfrastructureInterfaces.Services.Tutorials;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
@@ -27,6 +28,7 @@ namespace Sources.Controllers.Presenters.Scenes
         private readonly IVolumeService _volumeService;
         private readonly ISaveService _saveService;
         private readonly ILevelCompletedService _levelCompletedService;
+        private readonly ITutorialService _tutorialService;
 
         public GameplayScene(
             IUpdateService updateService,
@@ -38,7 +40,8 @@ namespace Sources.Controllers.Presenters.Scenes
             IGameOverService gameOverService,
             IVolumeService volumeService,
             ISaveService saveService,
-            ILevelCompletedService levelCompletedService)
+            ILevelCompletedService levelCompletedService,
+            ITutorialService tutorialService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -51,6 +54,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
             _levelCompletedService = levelCompletedService ?? 
                                      throw new ArgumentNullException(nameof(levelCompletedService));
+            _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
         }
 
         public void Enter(object payload = null)
@@ -61,6 +65,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _volumeService.Enter();
             _saveService.Enter();
             _levelCompletedService.Enable();
+            _tutorialService.Enable();
             //TODO раскоментировать UpgradeService
             // _upgradeService.Enable();
         }

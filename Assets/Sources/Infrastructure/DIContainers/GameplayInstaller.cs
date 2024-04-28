@@ -85,6 +85,7 @@ using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.Infrastructure.Services.Saves;
 using Sources.Infrastructure.Services.Spawners;
+using Sources.Infrastructure.Services.Tutorials;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Infrastructure.Services.Upgrades;
 using Sources.Infrastructure.Services.UseCases.Commands;
@@ -105,6 +106,7 @@ using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
+using Sources.InfrastructureInterfaces.Services.Tutorials;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
@@ -190,6 +192,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<CreateGameplaySceneService>().AsSingle();
             Container.Bind<ISaveService>().To<SaveService>().AsSingle();
             Container.Bind<ILevelCompletedService>().To<LevelCompletedService>().AsSingle();
+            Container.Bind<ITutorialService>().To<TutorialService>().AsSingle();
         }
 
         private void BindFormFactories()
@@ -203,6 +206,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<UiContainerFactory>().AsSingle();
 
             Container.Bind<CustomButtonClickServiceCollection>().AsSingle();
+            Container.Bind<CompleteTutorialButtonClickService>().AsSingle();
             Container.Bind<LoadMainMenuButtonClickService>().AsSingle();
             Container.Bind<UiFormButtonClickService>().AsSingle();
             Container.Bind<ButtonServiceCollection>().AsSingle();

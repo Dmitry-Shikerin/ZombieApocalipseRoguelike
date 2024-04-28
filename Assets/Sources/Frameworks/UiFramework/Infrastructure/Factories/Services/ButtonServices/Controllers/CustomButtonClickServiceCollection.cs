@@ -1,20 +1,22 @@
 ﻿using System.Collections.Generic;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Buttons.Types;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices.Controllers
 {
+    //TODO наверное это команды а не сервисы
     public class CustomButtonClickServiceCollection
     {
         private readonly Dictionary<ButtonId, ICustomButtonClickService> _buttonServices;
         
         public CustomButtonClickServiceCollection(
-            LoadMainMenuButtonClickService loadMainMenuButtonClickService)
+            LoadMainMenuButtonClickService loadMainMenuButtonClickService,
+            CompleteTutorialButtonClickService completeTutorialButtonClickService)
         {
             _buttonServices = new Dictionary<ButtonId, ICustomButtonClickService>()
             {
                 [ButtonId.FromPauseToMainMenuScene] = loadMainMenuButtonClickService,
+                [ButtonId.CompleteTutorial] = completeTutorialButtonClickService,
             };
         }
 

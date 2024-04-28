@@ -14,7 +14,6 @@ using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
 using Sources.Domain.Models.Weapons;
 using Sources.DomainInterfaces.Payloads;
-using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
@@ -34,6 +33,7 @@ using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
+using Sources.InfrastructureInterfaces.Services.Tutorials;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
@@ -44,6 +44,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 {
     public class CreateGameplaySceneService : LoadGameplaySceneServiceBase
     {
+        private readonly ILoadService _loadService;
         private readonly IEntityRepository _entityRepository;
         private readonly IUpgradeDtoMapper _upgradeDtoMapper;
         private readonly IUpgradeCollectionService _upgradeCollectionService;
@@ -73,7 +74,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             VolumeViewFactory volumeViewFactory,
             IVolumeService volumeService,
             ISaveService saveService,
-            ILevelCompletedService levelCompletedService)
+            ILevelCompletedService levelCompletedService,
+            ITutorialService tutorialService)
             : base(
                 gameplayHud,
                 gameplayFormServiceFactory,
@@ -99,8 +101,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 volumeViewFactory,
                 volumeService,
                 saveService,
-                levelCompletedService)
+                levelCompletedService,
+                tutorialService)
         {
+            _loadService = loadService;
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));
             _upgradeCollectionService = upgradeCollectionService ??
@@ -109,6 +113,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
         protected override GameModels LoadModels(IScenePayload scenePayload)
         {
+            //TODO потом нужно сделать загрузку туториала
+            Tutorial tutorial = new Tutorial();
+            
             Volume volume = new Volume();
             _entityRepository.Add(volume);
 
@@ -118,7 +125,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             SavedLevel savedLevel = new SavedLevel(ModelId.SavedLevel, false, scenePayload.SceneId);
             _entityRepository.Add(savedLevel);
 
-            PlayerWallet playerWallet = CreatePlayerWallet();
+            PlayerWallet playerWallet = new PlayerWallet(0, ModelId.PlayerWallet);
+            _entityRepository.Add(playerWallet);
 
             Upgrader bearMassAttackUpgrader = CreateUpgrader(ModelId.BearMassAttackUpgrader);
             Upgrader bearAttackUpgrader = CreateUpgrader(ModelId.BearAttackUpgrader);
@@ -171,7 +179,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 bear,
                 killEnemyCounter,
                 enemySpawner,
-                savedLevel);
+                savedLevel,
+                tutorial);
         }
 
         private Upgrader CreateUpgrader(string id)
@@ -182,14 +191,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _upgradeCollectionService.AddUpgrader(upgrader);
 
             return upgrader;
-        }
-
-        private PlayerWallet CreatePlayerWallet()
-        {
-            PlayerWallet playerWallet = new PlayerWallet(0, ModelId.PlayerWallet);
-            _entityRepository.Add(playerWallet);
-
-            return playerWallet;
         }
     }
 }

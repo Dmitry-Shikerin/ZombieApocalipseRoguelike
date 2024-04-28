@@ -7,6 +7,7 @@
     {
         Default = 0,
         FromHudToSettings = 1,
-        FromPauseToMainMenuScene = 2
+        FromPauseToMainMenuScene = 2,
+        CompleteTutorial = 3
     }
 }

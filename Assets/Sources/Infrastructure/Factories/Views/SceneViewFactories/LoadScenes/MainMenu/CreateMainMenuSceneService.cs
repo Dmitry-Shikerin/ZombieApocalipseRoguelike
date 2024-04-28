@@ -45,6 +45,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
 
         protected override MainMenuModels LoadModels(IScenePayload scenePayload)
         {
+            Tutorial tutorial = new Tutorial();
+            _entityRepository.Add(tutorial);
+            
             Volume volume = new Volume();
             _entityRepository.Add(volume);
             
@@ -85,7 +88,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
                 fourthLevel,
                 levelAvailability,
                 gameData,
-                savedLevel);
+                savedLevel,
+                tutorial);
         }
     }
 }

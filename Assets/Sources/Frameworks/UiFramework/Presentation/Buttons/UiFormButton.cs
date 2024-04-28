@@ -8,18 +8,21 @@ namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 {
     public class UiFormButton : PresentableFormButton<UiFormButtonPresenter>
     {
-        [TabGroup("Ids")]
+        [TabGroup("Ids")] 
+        [EnableIf("_buttonId", ButtonId.Default)] 
         [SerializeField] private FormId _formId;
-        [TabGroup("Ids")]
+        [TabGroup("Ids")] 
+        [EnableIf("_formId", FormId.Default)] 
         [SerializeField] private ButtonId _buttonId;
-        [TabGroup("Settings")]
+        [TabGroup("Settings")] 
+        [EnableIf("_formId", FormId.Default)]
         [SerializeField] private ButtonType _buttonType;
-        [TabGroup("Settings")]
+        [TabGroup("Settings")] 
         [SerializeField] private UseButtonType _useButtonType;
-        [TabGroup("Settings")]
+        [TabGroup("Settings")] [Range(0f, 1000f)]
         [SerializeField] private float _delay;
-        
-        public float Delay => _delay;
+
+        [TabGroup("Settings")] public float Delay => _delay;
         public UseButtonType UseButtonType => _useButtonType;
         public ButtonId ButtonId => _buttonId;
         public ButtonType ButtonType => _buttonType;

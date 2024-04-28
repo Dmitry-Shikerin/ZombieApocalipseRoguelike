@@ -33,6 +33,7 @@ using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
+using Sources.InfrastructureInterfaces.Services.Tutorials;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
@@ -73,7 +74,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             VolumeViewFactory volumeViewFactory, 
             IVolumeService volumeService,
             ISaveService saveService,
-            ILevelCompletedService levelCompletedService) 
+            ILevelCompletedService levelCompletedService,
+            ITutorialService tutorialService) 
             : base(
                 gameplayHud, 
                 gameplayFormServiceFactory, 
@@ -99,7 +101,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 volumeViewFactory, 
                 volumeService,
                 saveService,
-                levelCompletedService)
+                levelCompletedService,
+                tutorialService)
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
@@ -110,6 +113,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         {
             Debug.Log("Load Models");
             _loadService.LoadAll();
+            
+            Tutorial tutorial = _entityRepository.Get(ModelId.Tutorial) as Tutorial;
             
             Volume volume = _entityRepository.Get(ModelId.Volume) as Volume;
 
@@ -176,7 +181,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 bear,
                 killEnemyCounter,
                 enemySpawner,
-                savedLevel);
+                savedLevel,
+                tutorial);
         }
     }
 }
