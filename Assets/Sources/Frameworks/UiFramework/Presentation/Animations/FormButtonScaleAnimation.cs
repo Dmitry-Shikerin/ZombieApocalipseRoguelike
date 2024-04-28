@@ -5,12 +5,15 @@ using Sources.Frameworks.UiFramework.Services.Animations;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Animations;
 using Sources.Presentations.Views;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Animations
 {
     [RequireComponent(typeof(UiFormButton))]
     public class FormButtonScaleAnimation : View
     {
+        [DisplayAsString(false)] [HideLabel]
+        [SerializeField] private string _title = "<size=24><b><color=#FF5555><i>UiAnimator</i></color></b></size>";
         [TabGroup("Types")]
         [SerializeField] private AnimationType _animationType = AnimationType.Scale;
         [TabGroup("Types")]

@@ -5,12 +5,15 @@ using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.TextCore.Text;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Forms
 {
     public class UiContainer : PresentableView<UiContainerPresenter>, IUiContainer
     {
+        [DisplayAsString(false)] [HideLabel]
+        [SerializeField] private string _lebelText = "<size=24><b><color=#9370DB><i>UiContainer</i></color></b></size>";
         [SerializeField] private FormId _formId;
 
         // [Title("Showed Settings")]

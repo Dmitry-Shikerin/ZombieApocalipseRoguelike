@@ -9,12 +9,22 @@ using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Forms
 {
     public class UiCollector : View
     {
+        [DisplayAsString(false)] [HideLabel]
+        [SerializeField] private string _lebelText = "<size=24><b><color=#3CB371><i>UiCollector</i></color></b></size>";
+        [TabGroup("Tab1", "Texts", true, 1)]
         [SerializeField] private Localization _localization;
+        [TabGroup("Tab1", "Texts", true, 1)]
+        [SerializeField] private bool _includeTexts;
+        [TabGroup("Tab1", "Containers", true, 1)]
+        [SerializeField] private bool _includeInActive;
+        [TabGroup("Tab1", "Buttons", true, 1)]
+        [SerializeField] private bool _includeButtons;
         
         private List<UiFormButton> _uiFormButtons;
         private List<UiContainer> _uiContainers;
