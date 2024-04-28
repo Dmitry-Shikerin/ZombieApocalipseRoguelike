@@ -37,6 +37,7 @@ using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.Gameplay.Tutorials;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
@@ -71,6 +72,7 @@ using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.Cameras;
 using Sources.Infrastructure.Services.EnemyCollectors;
+using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.GameOvers;
 using Sources.Infrastructure.Services.InputServices;
@@ -130,12 +132,22 @@ namespace Sources.Infrastructure.DIContainers
         
         public override void InstallBindings()
         {
-            Container.Bind<UpgradeConfigContainer>()
-                .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer").AsSingle();
-            Container.Bind<AudioClipCollection>()
-                .FromResource("Configs/GameplayAudioClipContainer").AsSingle();
-            Container.Bind<LocalizationConfig>()
-                .FromResource("Configs/Localizations/LocalizationConfig").AsSingle();
+            Container
+                .Bind<UpgradeConfigContainer>()
+                .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer")
+                .AsSingle();
+            Container
+                .Bind<AudioClipCollection>()
+                .FromResource("Configs/GameplayAudioClipContainer")
+                .AsSingle();
+            Container
+                .Bind<LocalizationConfig>()
+                .FromResource("Configs/Localizations/LocalizationConfig")
+                .AsSingle();
+            Container
+                .Bind<EnemySpawnerConfigCollectionService>()
+                .FromResource("Configs/EnemySpawners/Containers/EnemySpawnerConfigContainer")
+                .AsSingle();
             Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<UiCollector>().FromInstance(_gameplayHud.UiCollector).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
@@ -193,6 +205,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ISaveService>().To<SaveService>().AsSingle();
             Container.Bind<ILevelCompletedService>().To<LevelCompletedService>().AsSingle();
             Container.Bind<ITutorialService>().To<TutorialService>().AsSingle();
+            Container.Bind<IEnemySpawnerConfigCollectionService>().To<EnemySpawnerConfigCollectionService>().AsSingle();
         }
 
         private void BindFormFactories()

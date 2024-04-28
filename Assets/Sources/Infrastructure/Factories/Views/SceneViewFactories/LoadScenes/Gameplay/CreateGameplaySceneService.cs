@@ -159,7 +159,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
             KillEnemyCounter killEnemyCounter = new KillEnemyCounter(ModelId.KillEnemyCounter, 0);
             _entityRepository.Add(killEnemyCounter);
-            EnemySpawner enemySpawner = new EnemySpawner();
+            EnemySpawner enemySpawner = new EnemySpawner(
+                ModelId.EnemySpawner, new List<int>(), new List<int>());
 
             Debug.Log("CreateModels");
             return new GameModels(

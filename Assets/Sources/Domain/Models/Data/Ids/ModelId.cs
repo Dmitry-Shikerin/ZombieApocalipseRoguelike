@@ -6,6 +6,7 @@ namespace Sources.Domain.Models.Data.Ids
     public static class ModelId
     {
         //gameModels
+        public const string EnemySpawner = "EnemySpawner";
         public const string SawLauncherAbilityUpgrader = "SawLauncherAbilityUpgrader";
         public const string SawLauncherUpgrader = "SawLauncherUpgrader";
         public const string PlayerWallet = "PlayerWallet";

@@ -162,7 +162,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             Bear bear = new Bear(bearAttacker);
 
             KillEnemyCounter killEnemyCounter = _entityRepository.Get(ModelId.KillEnemyCounter) as KillEnemyCounter;
-            EnemySpawner enemySpawner = new EnemySpawner();
+            EnemySpawner enemySpawner = new EnemySpawner(
+                ModelId.EnemySpawner, new List<int>(), new List<int>());
             
             return new GameModels(
                 bearMassAttackUpgrader,
