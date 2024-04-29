@@ -16,7 +16,6 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         [DisplayAsString(false)] [HideLabel]
         [SerializeField] private string _lebel = UiConstant.UiContainerLabel;
         [SerializeField] private FormId _formId;
-
         [TabGroup("Showed Settings")]
         [EnumToggleButtons] [HideLabel]
         public Enable _enabled;
