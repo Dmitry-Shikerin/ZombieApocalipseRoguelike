@@ -8,31 +8,24 @@ using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.UI.Texts;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Texts
 {
-    public class UiText : View, IUiText 
+    [RequireComponent(typeof(TextMeshProUGUI))]
+    public class UiText : View, IUiText
     {
-        [DisplayAsString(false)] [HideLabel]
+        [DisplayAsString(false)] [HideLabel] 
         [SerializeField] private string _label = UiConstant.UiTextLabel;
-        [SerializeField] private TextViewType _textViewType;
+        [SerializeField] private TextMeshProUGUI _tmpText;
+        [TabGroup("Settings")] [SerializeField]
+        private TextViewType _textViewType;
+        [TabGroup("Ids")] 
         [SerializeField] private string _textId;
 
-        private TextMeshProUGUI _tmpText;
-        
         public TextViewType TextViewType => _textViewType;
         public bool IsHide { get; private set; }
         public string Id => _textId;
-
-        private void Awake()
-        {
-            _tmpText = GetComponent<TextMeshProUGUI>();
-
-            if (_tmpText == null)
-                throw new NullReferenceException(nameof(UiText));
-        }
-
+        
         public void SetText(string text) =>
             _tmpText.text = text;
 
@@ -56,7 +49,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
 
                 IsHide = true;
             }
-            catch(OperationCanceledException)
+            catch (OperationCanceledException)
             {
                 IsHide = true;
             }
@@ -68,8 +61,12 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
         public void Disable() =>
             _tmpText.enabled = false;
 
-        [Button]
+        [Button(ButtonSizes.Large)] [ButtonGroup("Settings")]
         public void AddTmpText() =>
             gameObject.AddComponent<TextMeshProUGUI>();
+
+        [Button(ButtonSizes.Large)] [ButtonGroup("Settings")]
+        public void SetTmpText() =>
+            _tmpText = GetComponent<TextMeshProUGUI>();
     }
 }
