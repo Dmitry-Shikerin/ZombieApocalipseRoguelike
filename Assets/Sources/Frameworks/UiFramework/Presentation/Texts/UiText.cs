@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Texts
 {
-    public class UiText : View, ITextView 
+    public class UiText : View, IUiText 
     {
         [Required] [SerializeField] private TextMeshProUGUI _tmpText;
         [SerializeField] private TextViewType _textViewType;

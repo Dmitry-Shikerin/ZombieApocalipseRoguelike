@@ -11,6 +11,6 @@ namespace Sources.Presentations.Views.Common
     {
         [SerializeField] private List<UiText> _damageTexts;
 
-        public IReadOnlyList<ITextView> DamageTexts => _damageTexts;
+        public IReadOnlyList<IUiText> DamageTexts => _damageTexts;
     }
 }

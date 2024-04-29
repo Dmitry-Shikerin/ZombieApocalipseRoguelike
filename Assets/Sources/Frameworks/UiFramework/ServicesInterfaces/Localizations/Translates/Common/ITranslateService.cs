@@ -4,6 +4,6 @@ namespace Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations.Transl
 {
     public interface ITranslateService
     {
-        void Translate(ITextView textView);
+        void Translate(IUiText uiText);
     }
 }

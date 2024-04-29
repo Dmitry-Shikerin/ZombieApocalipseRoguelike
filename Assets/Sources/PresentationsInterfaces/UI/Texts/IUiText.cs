@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Sources.PresentationsInterfaces.UI.Texts
 {
-    public interface ITextView : IEnable, IDisable
+    public interface IUiText : IEnable, IDisable
     {
         TextViewType TextViewType { get; }
         bool IsHide { get; }

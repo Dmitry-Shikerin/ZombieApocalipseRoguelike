@@ -7,6 +7,6 @@ namespace Sources.PresentationsInterfaces.Views.Localizations
     public interface ILocalizationView
     {
         Localization Localization { get; }
-        IReadOnlyList<ITextView> Texts { get; }
+        IReadOnlyList<IUiText> Texts { get; }
     }
 }
