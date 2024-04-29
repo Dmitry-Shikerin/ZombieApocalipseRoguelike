@@ -21,9 +21,9 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms
             _uiContainerFactory = uiContainerFactory ?? throw new ArgumentNullException(nameof(uiContainerFactory));
         }
 
-        protected void CreateFormButtons(IEnumerable<UiFormButton> formButtons)
+        protected void CreateFormButtons(IEnumerable<UiButton> formButtons)
         {
-            foreach (UiFormButton formButton in formButtons)
+            foreach (UiButton formButton in formButtons)
             {
                 _formButtonViewFactory.Create(formButton);
             }

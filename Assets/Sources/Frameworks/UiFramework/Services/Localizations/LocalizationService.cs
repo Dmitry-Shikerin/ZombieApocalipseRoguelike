@@ -13,7 +13,7 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
     public class LocalizationService : ILocalizationService
     {
         private readonly UiCollector _uiCollector;
-        private readonly List<TextView> _textViews = new List<TextView>();
+        private readonly List<UiText> _textViews = new List<UiText>();
         private readonly Dictionary<string, IReadOnlyDictionary<string, string>> _textDictionary;
 
         public LocalizationService(UiCollector uiCollector, LocalizationConfig localizationConfig)
@@ -62,7 +62,7 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
 
         private void AddTextViews(UiCollector uiCollector)
         {
-            foreach (TextView textView in uiCollector.TextViews)
+            foreach (UiText textView in uiCollector.UITexts)
             {
                 _textViews.Add(textView);
             }

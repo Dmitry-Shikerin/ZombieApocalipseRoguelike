@@ -1,16 +1,16 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Frameworks.UiFramework.Controllers.Buttons;
+using Sources.Frameworks.UiFramework.Domain.Constants;
 using Sources.Frameworks.UiFramework.Presentation.Buttons.Types;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 {
-    public class UiFormButton : PresentableFormButton<UiFormButtonPresenter>
+    public class UiButton : PresentableFormButton<UiFormButtonPresenter>
     {
         [DisplayAsString(false)] [HideLabel]
-        [SerializeField] private string _lebel = "<size=24><b><color=#1E90FF><i>UiFormButton</i></color></b></size>";
+        [SerializeField] private string _lebel = UiConstant.UiButtonLabel;
         [TabGroup("Ids")]
         [EnableIf("_buttonId", ButtonId.Default)] 
         [SerializeField] private FormId _formId;
@@ -30,5 +30,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Buttons
         public ButtonId ButtonId => _buttonId;
         public ButtonType ButtonType => _buttonType;
         public FormId FormId => _formId;
+        
+        //TODO дописать возмость проигрывать аудиоСоурсе по типу не получая его в зависимость
     }
 }

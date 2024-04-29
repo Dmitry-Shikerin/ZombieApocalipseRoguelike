@@ -4,8 +4,8 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
 {
     public interface ICustomButtonClickService
     {
-        void Enable(UiFormButton button);
-        void Disable(UiFormButton button);
-        void OnClick(UiFormButton button);
+        void Enable(UiButton button);
+        void Disable(UiButton button);
+        void OnClick(UiButton button);
     }
 }

@@ -23,7 +23,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
             _pauseService.Continue();
         }
         
-        public void OnClick(UiFormButton button)
+        public void OnClick(UiButton button)
         {
         }
     }
