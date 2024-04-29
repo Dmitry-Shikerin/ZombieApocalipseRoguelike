@@ -9,7 +9,7 @@ namespace Sources.Presentations.Views.Common
 {
     public class HealthUiText : PresentableView<HealthUiTextPresenter>, IHealthUiText
     {
-        [SerializeField] private List<TextView> _damageTexts;
+        [SerializeField] private List<UiText> _damageTexts;
 
         public IReadOnlyList<ITextView> DamageTexts => _damageTexts;
     }

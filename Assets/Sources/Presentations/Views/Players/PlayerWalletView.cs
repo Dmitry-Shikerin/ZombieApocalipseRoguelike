@@ -4,13 +4,14 @@ using Sources.Frameworks.UiFramework.Presentation.Texts;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.Players;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sources.Presentations.Views.Players
 {
     public class PlayerWalletView : PresentableView<PlayerWalletPresenter>, IPlayerWalletView
     {
-        [Required] [SerializeField] private TextView _coinsTextView;
+        [FormerlySerializedAs("_coinsTextView")] [Required] [SerializeField] private UiText coinsUiText;
 
-        public ITextView CoinsTextView => _coinsTextView;
+        public ITextView CoinsTextView => coinsUiText;
     }
 }

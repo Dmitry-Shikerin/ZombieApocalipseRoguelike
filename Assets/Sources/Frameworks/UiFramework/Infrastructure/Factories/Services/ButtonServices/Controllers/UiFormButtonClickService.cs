@@ -24,7 +24,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
                 throw new ArgumentNullException(nameof(customButtonClickServiceCollection));
         }
 
-        public void Enable(UiFormButton button)
+        public void Enable(UiButton button)
         {
             _cancellationTokenSource = new CancellationTokenSource();
 
@@ -34,7 +34,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
             _customButtonClickServiceCollection.Get(button).Enable(button);
         }
 
-        public void Disable(UiFormButton button)
+        public void Disable(UiButton button)
         {
             _cancellationTokenSource.Cancel();
 
@@ -44,7 +44,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
             _customButtonClickServiceCollection.Get(button).Disable(button);
         }
 
-        public async void OnClick(UiFormButton button)
+        public async void OnClick(UiButton button)
         {
             _cancellationTokenSource.Cancel();
             _cancellationTokenSource = new CancellationTokenSource();
@@ -63,7 +63,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
             }
         }
 
-        private void ButtonClick(UiFormButton button)
+        private void ButtonClick(UiButton button)
         {
             if (button.ButtonId == ButtonId.Default && button.FormId != FormId.Default)
                 _formService.Show(button.FormId);

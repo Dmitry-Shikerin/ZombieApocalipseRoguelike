@@ -38,8 +38,8 @@ namespace Sources.Infrastructure.Services.Tutorials
 
         public void Construct(Tutorial tutorial, SavedLevel savedLevel)
         {
-            _tutorial = tutorial ?? throw new System.ArgumentNullException(nameof(tutorial));
-            _savedLevel = savedLevel ?? throw new System.ArgumentNullException(nameof(savedLevel));
+            _tutorial = tutorial ?? throw new ArgumentNullException(nameof(tutorial));
+            _savedLevel = savedLevel ?? throw new ArgumentNullException(nameof(savedLevel));
         }
 
         public void Complete()

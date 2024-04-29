@@ -12,7 +12,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
         {
         }
         
-        public void OnClick(UiFormButton button)
+        public void OnClick(UiButton button)
         {
         }
     }
