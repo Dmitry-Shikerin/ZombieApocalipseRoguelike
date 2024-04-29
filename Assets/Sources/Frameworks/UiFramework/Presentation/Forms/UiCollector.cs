@@ -20,20 +20,31 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         [FormerlySerializedAs("_lebelText")]
         [DisplayAsString(false)] [HideLabel]
         [SerializeField] private string _lebel = UiConstant.UiCollectorLabel;
-        [TabGroup("Tab1", "Texts", true, 1)] [EnumToggleButtons]
-        [SerializeField] private Localization _localization;
+        
         [TabGroup("Tab1", "Texts", true, 1)] 
         [EnumToggleButtons] [HideLabel] [LabelText("IncludeInactive", SdfIconType.Search)]
         [SerializeField] private Enable _includeTexts = Enable.Enable;
+        
+        [TabGroup("Tab1", "Texts", true, 1)] 
+        [EnumToggleButtons]
+        [SerializeField] private Enable _useTestLocalization = Enable.Enable; 
+        
+        [TabGroup("Tab1", "Texts", true, 1)] 
+        [EnumToggleButtons] [EnableIf("_useTestLocalization", Enable.Enable)]
+        [SerializeField] private Localization _localization;
+        
         [TabGroup("Tab1", "Containers", true, 1)] 
         [EnumToggleButtons] [HideLabel] [LabelText("IncludeInactive" , SdfIconType.Search)]
         [SerializeField] private Enable _includeContainers = Enable.Enable;
+        
         [TabGroup("Tab1", "Buttons", true, 1)] 
         [EnumToggleButtons] [HideLabel] [LabelText("IncludeInactive", SdfIconType.Search)]
         [SerializeField] private Enable _includeButtons = Enable.Enable;
+        
         [TabGroup("Tab1", "AudioSources", true, 1)] 
         [EnumToggleButtons] [HideLabel] [LabelText("IncludeInactive", SdfIconType.Search)]
         [SerializeField] private Enable _includeAudioSources = Enable.Enable;
+        
         [TabGroup("Tab1", "Animators", true, 1)] 
         [EnumToggleButtons] [HideLabel] [LabelText("IncludeInactive", SdfIconType.Search)]
         [SerializeField] private Enable _includeAnimators = Enable.Enable;
