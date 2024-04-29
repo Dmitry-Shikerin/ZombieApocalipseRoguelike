@@ -33,8 +33,13 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
                 throw new NullReferenceException(nameof(UiText));
         }
 
-        public void SetText(string text) =>
+        public void SetText(string text)
+        {
+            if (_tmpText == null)
+                throw new NullReferenceException(Id);
+            
             _tmpText.text = text;
+        }
 
         public void SetTextColor(Color color) =>
             _tmpText.color = color;
