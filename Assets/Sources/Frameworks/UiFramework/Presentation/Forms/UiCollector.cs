@@ -17,8 +17,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
 {
     public class UiCollector : View
     {
-        [FormerlySerializedAs("_lebelText")]
-        [DisplayAsString(false)] [HideLabel]
+        [DisplayAsString(false)] [HideLabel] [Indent(8)]
         [SerializeField] private string _lebel = UiConstant.UiCollectorLabel;
         
         [TabGroup("Tab1", "Texts", true, 1)] 
