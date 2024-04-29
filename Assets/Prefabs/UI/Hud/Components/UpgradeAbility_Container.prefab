@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4170983095028231920}
-  - component: {fileID: 1605883257142487404}
-  - component: {fileID: 4752073712553671425}
   m_Layer: 5
   m_Name: UpgradeAbility_Container
   m_TagString: Untagged
@@ -43,34 +41,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.46237183, y: 0.80000305}
   m_SizeDelta: {x: 0.92471313, y: -0.3156128}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1605883257142487404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 921864587673956566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8839602ad92142f3b88fce5dc432b671, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _imageViews: []
-  _priceNextUpgrade: {fileID: 5418999471700519266}
-  _abilityImageView: {fileID: 5228100154177037729}
---- !u!114 &4752073712553671425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 921864587673956566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd54e043a734f758bcbf5d7fd3dccfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _upgradeButton: {fileID: 4647143171544501247}
 --- !u!1 &1940511804730545961
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +133,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
+  m_fontSize: 22.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -171,7 +141,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -199,7 +169,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 4.87735, z: 0, w: 4.412842}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -216,7 +186,6 @@ GameObject:
   - component: {fileID: 3742299558934647601}
   - component: {fileID: 2099061375808372985}
   - component: {fileID: 8928329732011927488}
-  - component: {fileID: 6196428010588875516}
   m_Layer: 0
   m_Name: Scull_Image
   m_TagString: Untagged
@@ -281,26 +250,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6196428010588875516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2384137266473469427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: 72
-  m_PreferredHeight: -1
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: -1
-  m_LayoutPriority: 1
 --- !u!1 &3514696337637009169
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +326,6 @@ GameObject:
   - component: {fileID: 3703742814312561703}
   - component: {fileID: 5914249932157196499}
   - component: {fileID: 7984792705354336019}
-  - component: {fileID: 5228100154177037729}
   m_Layer: 5
   m_Name: Ability_Image
   m_TagString: Untagged
@@ -442,19 +390,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5228100154177037729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4098584062889453054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54b71550cfed4651abaebda32c4f7497, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _image: {fileID: 7984792705354336019}
 --- !u!1 &5681380784990293113
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,8 +401,6 @@ GameObject:
   - component: {fileID: 7635805901892093799}
   - component: {fileID: 8702596896632008417}
   - component: {fileID: 3468449852509218463}
-  - component: {fileID: 8227210294141733230}
-  - component: {fileID: 4647143171544501247}
   m_Layer: 5
   m_Name: Upgrade_Button
   m_TagString: Untagged
@@ -533,64 +466,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8227210294141733230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5681380784990293113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 3468449852509218463}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &4647143171544501247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5681380784990293113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a7d3f2ff8344e41bfe53ab3ad0a65c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _button: {fileID: 8227210294141733230}
-  _audioSource: {fileID: 0}
 --- !u!1 &6616960778431271656
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,7 +559,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 22.2
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
@@ -738,6 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33f92880cc8f47b1917eb024986de355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _label: <size=24><b><color=#FF7F50><i>UiText</i></color></b></size>
   _tmpText: {fileID: 1076181769679662870}
   _textViewType: 1
   _textId: Apply
@@ -775,8 +651,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.089}
   m_AnchorMax: {x: 0, y: 0.21900001}
-  m_AnchoredPosition: {x: 59.559006, y: 0.16999817}
-  m_SizeDelta: {x: 119.56, y: 0.4810028}
+  m_AnchoredPosition: {x: 35.911, y: 0.16999817}
+  m_SizeDelta: {x: 72.263, y: 0.481}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7514931709155449495
 GameObject:
@@ -870,7 +746,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 58.5
+  m_fontSize: 41.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1079,7 +955,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1656972315358036729, guid: ef01763a906b50b49ac610c72fb71a23, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1181,7 +1058,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1656972315358036729, guid: ef01763a906b50b49ac610c72fb71a23, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1283,7 +1161,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1656972315358036729, guid: ef01763a906b50b49ac610c72fb71a23, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

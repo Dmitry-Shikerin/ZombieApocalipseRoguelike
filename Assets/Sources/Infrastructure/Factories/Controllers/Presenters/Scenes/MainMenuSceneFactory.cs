@@ -4,6 +4,7 @@ using Sources.Controllers.Presenters.Scenes;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.Domain.Models.Data.Ids;
 using Sources.DomainInterfaces.Payloads;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.MainMenu;
@@ -20,12 +21,14 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly LoadMainMenuSceneService _loadMainMenuSceneService;
         private readonly IVolumeService _volumeService;
         private readonly ILoadService _loadService;
+        private readonly ILocalizationService _localizationService;
 
         public MainMenuSceneFactory(
             CreateMainMenuSceneService createMainMenuSceneService,
             LoadMainMenuSceneService loadMainMenuSceneService,
             IVolumeService volumeService,
-            ILoadService loadService)
+            ILoadService loadService,
+            ILocalizationService localizationService)
         {
             _createMainMenuSceneService = createMainMenuSceneService ?? 
                                           throw new ArgumentNullException(nameof(createMainMenuSceneService));
@@ -33,13 +36,16 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                                         throw new ArgumentNullException(nameof(loadMainMenuSceneService));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
+            _localizationService = localizationService ??
+                                   throw new ArgumentNullException(nameof(localizationService));
         }
         
         public async UniTask<IScene> Create(object payload)
         {
             return new MainMenuScene(
                 CreateLoadSceneService(payload),
-                _volumeService);
+                _volumeService,
+                _localizationService);
         }
         
         private ILoadSceneService CreateLoadSceneService(object payload)
