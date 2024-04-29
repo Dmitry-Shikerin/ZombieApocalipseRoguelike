@@ -11,9 +11,9 @@ namespace Sources.Presentations.Views.Localizations
         [SerializeField] private Localization _localization;
         
         public Localization Localization => _localization;
-        public IReadOnlyList<ITextView> Texts { get; private set; }
+        public IReadOnlyList<IUiText> Texts { get; private set; }
         
         private void Awake() =>
-            Texts = GetComponentsInChildren<ITextView>(true);
+            Texts = GetComponentsInChildren<IUiText>(true);
     }
 }

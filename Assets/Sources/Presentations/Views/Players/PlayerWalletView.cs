@@ -10,8 +10,8 @@ namespace Sources.Presentations.Views.Players
 {
     public class PlayerWalletView : PresentableView<PlayerWalletPresenter>, IPlayerWalletView
     {
-        [FormerlySerializedAs("_coinsTextView")] [Required] [SerializeField] private UiText coinsUiText;
+        [FormerlySerializedAs("coinsUiUiText")] [FormerlySerializedAs("_coinsTextView")] [Required] [SerializeField] private UiText coinsUiText;
 
-        public ITextView CoinsTextView => coinsUiText;
+        public IUiText CoinsUiText => coinsUiText;
     }
 }

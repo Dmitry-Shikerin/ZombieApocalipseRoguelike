@@ -48,7 +48,7 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
         {
             IReadOnlyDictionary<string, string> textDictionary = _textDictionary[key];
 
-            foreach (ITextView textView in _textViews)
+            foreach (IUiText textView in _textViews)
             {
                 if (textView.TextViewType == TextViewType.Default)
                     continue;
@@ -62,7 +62,7 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
 
         private void AddTextViews(UiCollector uiCollector)
         {
-            foreach (UiText textView in uiCollector.UITexts)
+            foreach (UiText textView in uiCollector.UiTexts)
             {
                 _textViews.Add(textView);
             }

@@ -38,9 +38,9 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
                 throw new NullReferenceException(nameof(key));
 
             ITranslateService translateService = _translateServiceFactories[key].Invoke();
-            List<ITextView> texts = new List<ITextView>();
+            List<IUiText> texts = new List<IUiText>();
 
-            foreach (ITextView textView in LocalizationView.Texts)
+            foreach (IUiText textView in LocalizationView.Texts)
             {
                 if (textView.TextViewType == TextViewType.Default)
                 {

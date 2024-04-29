@@ -48,7 +48,9 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         public Localization Localization => _localization;
         public IReadOnlyList<UiButton> UiFormButtons => _uiFormButtons;
         public IReadOnlyList<UiContainer> UiContainers => _uiContainers;
-        public IReadOnlyList<ITextView> UITexts => _uiTexts;
+        public IReadOnlyList<IUiText> UiTexts => _uiTexts;
+        public IReadOnlyList<UiAudioSource> UiAudioSources => _uiAudioSources;
+        public IReadOnlyList<UiAnimator> UiAnimators => _uiAnimators;
 
         private void Awake()
         {

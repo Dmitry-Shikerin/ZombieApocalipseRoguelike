@@ -14,12 +14,12 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations.Translates.Commo
             FillTranslates(_translates);
         }
 
-        public void Translate(ITextView textView)
+        public void Translate(IUiText uiText)
         {
-            if(_translates.ContainsKey(textView.Id) == false)
+            if(_translates.ContainsKey(uiText.Id) == false)
                 throw new NullReferenceException("Transleted key not found");
             
-            textView.SetText(_translates[textView.Id]);
+            uiText.SetText(_translates[uiText.Id]);
         }
 
         protected abstract void FillTranslates(Dictionary<string, string> translates);
