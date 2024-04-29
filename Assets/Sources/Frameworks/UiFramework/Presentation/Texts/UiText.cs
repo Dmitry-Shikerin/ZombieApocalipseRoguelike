@@ -25,7 +25,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
         public TextViewType TextViewType => _textViewType;
         public bool IsHide { get; private set; }
         public string Id => _textId;
-        
+
         public void SetText(string text) =>
             _tmpText.text = text;
 
