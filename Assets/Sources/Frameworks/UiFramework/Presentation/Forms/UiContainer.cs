@@ -18,8 +18,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         [SerializeField] private FormId _formId;
         [TabGroup("Showed Settings")]
         [EnumToggleButtons] [HideLabel]
-        public Enable _enabled;
-
+        [SerializeField] private Enable _enabled;
         [TabGroup("Id")] 
         [SerializeField] private string _id;
         

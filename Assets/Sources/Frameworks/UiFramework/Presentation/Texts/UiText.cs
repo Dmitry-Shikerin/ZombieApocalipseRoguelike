@@ -21,7 +21,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
         private TextViewType _textViewType;
         [TabGroup("Ids")] 
         [SerializeField] private string _textId;
-
+        
         public TextViewType TextViewType => _textViewType;
         public bool IsHide { get; private set; }
         public string Id => _textId;
