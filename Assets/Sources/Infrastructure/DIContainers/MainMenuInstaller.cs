@@ -3,12 +3,17 @@ using Sources.Controllers.Common.Forms.MainMenu;
 using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
+using Sources.Frameworks.UiFramework.Domain.Configs.Localizations;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices.Controllers;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms.Controllers;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Services.Forms;
+using Sources.Frameworks.UiFramework.Services.Localizations;
+using Sources.Frameworks.UiFramework.Services.Localizations.Translates.Common;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations.Translates.Common;
 using Sources.Infrastructure.Factories;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.MainMenu;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Gameplay;
@@ -63,6 +68,10 @@ namespace Sources.Infrastructure.DIContainers
                 .Bind<UpgradeConfigContainer>()
                 .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer")
                 .AsSingle();
+            Container
+                .Bind<LocalizationConfig>()
+                .FromResource("Configs/Localizations/LocalizationConfig")
+                .AsSingle();
             Container.Bind<AudioClipCollection>().FromResource("Configs/MainMenuAudioClipContainer").AsSingle();
             Container
                 .Bind<EnemySpawnerConfigContainer>()
@@ -96,6 +105,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
             Container.Bind<ILoadService>().To<LoadService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
+            Container.Bind<ILocalizationService>().To<LocalizationService>().AsSingle();
         }
         
         private void BindFormFactories()
