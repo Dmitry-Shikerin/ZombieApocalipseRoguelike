@@ -14,11 +14,11 @@ namespace Sources.Frameworks.UiFramework.Controllers.Buttons
     {
         private readonly FormService _formService;
         private readonly UiFormButtonClickService _buttonClickService;
-        private readonly UiFormButton _view;
+        private readonly UiButton _view;
         private readonly IButtonService _buttonService;
 
         public UiFormButtonPresenter(
-            UiFormButton view,
+            UiButton view,
             FormService formService,
             ButtonServiceCollection buttonServiceCollection,
             UiFormButtonClickService buttonClickService)

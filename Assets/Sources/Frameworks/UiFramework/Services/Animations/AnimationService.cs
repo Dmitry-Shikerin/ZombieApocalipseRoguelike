@@ -11,75 +11,116 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
 {
     public class AnimationService : IAnimationService
     {
-        private FormButtonScaleAnimation _formButtonScaleAnimation;
-        private UiFormButton _button;
+        private UiAnimator _uiAnimator;
+        private UiButton _button;
         private CancellationTokenSource _cancellationTokenSource;
 
         public void Awake()
         {
-            _button = _formButtonScaleAnimation.GetComponent<UiFormButton>();
+            if (_uiAnimator.ReactionAnimationType == ReactionAnimationType.ButtonClick)
+            {
+                _button = _uiAnimator.GetComponent<UiButton>();
+                
+                if(_button == null)
+                    throw new NullReferenceException(nameof(_button));
+            }
         }
 
         public void Enable()
         {
             _cancellationTokenSource = new CancellationTokenSource();
 
-            if (_formButtonScaleAnimation.ReactionAnimationType == ReactionAnimationType.ButtonClick)
+            if (_uiAnimator.ReactionAnimationType == ReactionAnimationType.ButtonClick)
                 _button.AddClickListener(PlayAnimation);
 
-            if (_formButtonScaleAnimation.ReactionAnimationType == ReactionAnimationType.ShowView)
+            if (_uiAnimator.ReactionAnimationType == ReactionAnimationType.ShowView)
                 PlayAnimation();
         }
 
         public void Disable()
         {
-            if (_formButtonScaleAnimation.ReactionAnimationType == ReactionAnimationType.ButtonClick)
+            if (_uiAnimator.ReactionAnimationType == ReactionAnimationType.ButtonClick)
                 _button.RemoveClickListener(PlayAnimation);
 
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        public void Construct(FormButtonScaleAnimation formButtonScaleAnimation)
+        public void Construct(UiAnimator uiAnimator)
         {
-            _formButtonScaleAnimation = formButtonScaleAnimation;
+            _uiAnimator = uiAnimator;
         }
-        
+
         private async void PlayAnimation()
         {
             _cancellationTokenSource.Cancel();
             _cancellationTokenSource = new CancellationTokenSource();
 
-            try
+            if (_uiAnimator.AnimationType == AnimationType.Scale)
             {
-                await PlayAnimationAsync(_cancellationTokenSource.Token);
+                await PlayScaleAnimationAsync(_cancellationTokenSource.Token);
+
+                return;
             }
-            catch (OperationCanceledException)
+
+            if (_uiAnimator.AnimationType == AnimationType.Rotate)
             {
-                _button.transform.localScale = _formButtonScaleAnimation.FromScale;
+                await PlayRotateAnimationAsync(_cancellationTokenSource.Token);
             }
         }
 
-        private async UniTask PlayAnimationAsync(CancellationToken token)
+        private async UniTask PlayScaleAnimationAsync(CancellationToken token)
         {
-            while (Vector3.Distance(_button.transform.localScale, _formButtonScaleAnimation.TargetScale) > 0.01f)
+            try
             {
-                _button.transform.localScale = Vector3.MoveTowards(
-                    _button.transform.localScale, 
-                    _formButtonScaleAnimation.TargetScale, 
-                    _formButtonScaleAnimation.AnimationDuration);
+                while (Vector3.Distance(_button.transform.localScale, _uiAnimator.TargetScale) > 0.01f)
+                {
+                    _button.transform.localScale = Vector3.MoveTowards(
+                        _button.transform.localScale,
+                        _uiAnimator.TargetScale,
+                        _uiAnimator.AnimationDuration);
+
+                    await UniTask.Yield(token);
+                }
+
+                while (Vector3.Distance(_button.transform.localScale, _uiAnimator.FromScale) > 0.01f)
+                {
+                    _button.transform.localScale = Vector3.MoveTowards(
+                        _button.transform.localScale,
+                        _uiAnimator.FromScale,
+                        _uiAnimator.AnimationDuration);
+
+                    await UniTask.Yield(token);
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                _button.transform.localScale = _uiAnimator.FromScale;
+            }
+        }
+
+        private async UniTask PlayRotateAnimationAsync(CancellationToken token)
+        {
+            while (_uiAnimator != null && token.IsCancellationRequested == false && _uiAnimator.enabled)
+            {
+                if(_uiAnimator == null)
+                    return;
+                    
+                _uiAnimator?.transform.Rotate(_uiAnimator.RotationVector);
 
                 await UniTask.Yield(token);
             }
 
-            while (Vector3.Distance(_button.transform.localScale, _formButtonScaleAnimation.FromScale) > 0.01f)
+            try
             {
-                _button.transform.localScale = Vector3.MoveTowards(
-                    _button.transform.localScale, 
-                    _formButtonScaleAnimation.FromScale,
-                    _formButtonScaleAnimation.AnimationDuration);
-
-                await UniTask.Yield(token);
             }
+            catch (OperationCanceledException)
+            {
+            }
+        }
+
+        public void Destroy()
+        {
+            _cancellationTokenSource.Cancel();
         }
     }
 }

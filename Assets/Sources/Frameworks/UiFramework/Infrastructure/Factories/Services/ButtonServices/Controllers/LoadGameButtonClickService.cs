@@ -25,7 +25,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
         }
 
-        public void Enable(UiFormButton button)
+        public void Enable(UiButton button)
         {
             button.Show();
 
@@ -33,11 +33,11 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
                 button.Hide();
         }
 
-        public void Disable(UiFormButton button)
+        public void Disable(UiButton button)
         {
         }
 
-        public void OnClick(UiFormButton button)
+        public void OnClick(UiButton button)
         {
             if (_loadService.HasKey(ModelId.PlayerWallet) == false)
                 return;

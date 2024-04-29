@@ -14,15 +14,15 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
-        public void Enable(UiFormButton button)
+        public void Enable(UiButton button)
         {
         }
 
-        public void Disable(UiFormButton button)
+        public void Disable(UiButton button)
         {
         }
 
-        public void OnClick(UiFormButton button)
+        public void OnClick(UiButton button)
         {
             //TODO добавить логику авторизации
             _formService.Show(FormId.Leaderboard);

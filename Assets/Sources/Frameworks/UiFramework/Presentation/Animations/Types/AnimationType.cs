@@ -4,5 +4,6 @@
     {
         Default = 0,
         Scale = 1,
+        Rotate = 2,
     }
 }

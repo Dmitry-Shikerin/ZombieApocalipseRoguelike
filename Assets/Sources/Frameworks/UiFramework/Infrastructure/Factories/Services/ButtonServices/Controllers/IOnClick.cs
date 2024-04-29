@@ -4,6 +4,6 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
 {
     public interface IOnClick
     {
-        void OnClick(UiFormButton button);
+        void OnClick(UiButton button);
     }
 }

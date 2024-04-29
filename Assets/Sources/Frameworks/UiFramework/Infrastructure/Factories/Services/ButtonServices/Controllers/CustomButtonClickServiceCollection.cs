@@ -30,7 +30,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
             };
         }
 
-        public ICustomButtonClickService Get(UiFormButton button)
+        public ICustomButtonClickService Get(UiButton button)
         {
             if(_buttonServices.ContainsKey(button.ButtonId) == false)
                 throw new KeyNotFoundException(button.FormId.ToString());
