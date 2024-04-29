@@ -39,10 +39,10 @@ namespace Sources.Controllers.Common
 
         private void OnDamageReceived(float damage)
         {
-            ITextView text = _healthUiText.DamageTexts
+            IUiText uiText = _healthUiText.DamageTexts
                 .FirstOrDefault(text => text.IsHide);
 
-            if (text == null)
+            if (uiText == null)
             {
                 //TODO сделать добавление в очередь и вытаскивать оттуда текст
                 //TODO нужно ли создавать новый токен?
@@ -52,14 +52,14 @@ namespace Sources.Controllers.Common
                 _healthUiText.DamageTexts.ForEach(text => text.SetTextColor(Color.clear));
                 
                 _cancellationTokenSource = new CancellationTokenSource();
-                text = _healthUiText.DamageTexts
+                uiText = _healthUiText.DamageTexts
                     .FirstOrDefault(text => text.IsHide);
             }
             
-            text.SetTextColor(Color.red);
-            text.SetIsHide(false);
-            text.SetText(damage.ToString());
-            text.SetClearColorAsync(_cancellationTokenSource.Token);
+            uiText.SetTextColor(Color.red);
+            uiText.SetIsHide(false);
+            uiText.SetText(damage.ToString());
+            uiText.SetClearColorAsync(_cancellationTokenSource.Token);
         }
 
         private void HideAllTexts() =>

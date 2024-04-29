@@ -5,6 +5,6 @@ namespace Sources.PresentationsInterfaces.Views.Common
 {
     public interface IHealthUiText
     {
-        IReadOnlyList<ITextView> DamageTexts { get; }
+        IReadOnlyList<IUiText> DamageTexts { get; }
     }
 }

@@ -27,6 +27,6 @@ namespace Sources.Controllers.Players
             _playerWallet.CoinsChanged -= OnCoinsChanged;
 
         private void OnCoinsChanged() =>
-            _playerWalletView.CoinsTextView.SetText(_playerWallet.Coins.ToString());
+            _playerWalletView.CoinsUiText.SetText(_playerWallet.Coins.ToString());
     }
 }

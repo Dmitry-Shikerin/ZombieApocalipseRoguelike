@@ -1,9 +1,8 @@
-﻿using System;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using Sources.Frameworks.UiFramework.Domain.Constants;
+using Sources.Frameworks.UiFramework.Presentation.AudioSources.Types;
 using Sources.Presentations.Views;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Frameworks.UiFramework.Presentation.AudioSources
 {
@@ -12,8 +11,11 @@ namespace Sources.Frameworks.UiFramework.Presentation.AudioSources
     {
         [DisplayAsString(false)] [HideLabel]
         [SerializeField] private string _lebel = UiConstant.UiAudioSourceLabel;
+        [SerializeField] private AudioSourceId _audioSourceId;
         
         private AudioSource _audioSource;
+        
+        public AudioSourceId AudioSourceId => _audioSourceId;
 
         private void Awake()
         {
@@ -22,5 +24,8 @@ namespace Sources.Frameworks.UiFramework.Presentation.AudioSources
             if (_audioSource.clip == null)
                 Debug.Log($"Missing audio clip in {nameof(UiAudioSource)}");
         }
+
+        public void Play() =>
+            _audioSource.Play();
     }
 }
