@@ -56,6 +56,7 @@ namespace Sources.Controllers.Presenters.Characters
 
         private void ShowViews()
         {
+            //todo вылетает out of range exception
             for (int i = 0; i < _enemyCollectorService.Enemies.Count; i++)
                 _enemyIndicatorView.Arrows[i].Show();
         }
