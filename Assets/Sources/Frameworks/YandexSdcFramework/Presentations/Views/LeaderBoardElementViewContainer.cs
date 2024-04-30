@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Sources.Presentations.Views.YandexSDK
+namespace Sources.Frameworks.YandexSdcFramework.Presentations.Views
 {
     public class LeaderBoardElementViewContainer
     {

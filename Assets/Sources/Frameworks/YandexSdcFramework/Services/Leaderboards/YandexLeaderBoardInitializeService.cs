@@ -4,10 +4,10 @@ using Agava.WebUtility;
 using Agava.YandexGames;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.YandexSDK;
+using Sources.Frameworks.YandexSdcFramework.Presentations.Views;
 using Sources.Infrastructure.Factories.Views.YandexSDK;
 using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 using Sources.Presentations.UI.Huds;
-using Sources.Presentations.Views.YandexSDK;
 
 namespace Sources.Infrastructure.Services.YandexSDKServices
 {

@@ -31,6 +31,7 @@ namespace Sources.Controllers.Presenters.Weapons
             _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
         }
 
+        //TODO сделать отдельную громкость для минигана
         public override void Enable()
         {
             _miniGunView.ShootAudioSource.SetLoop();

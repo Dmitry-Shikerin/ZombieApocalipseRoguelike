@@ -1,9 +1,10 @@
 ﻿using Sources.Controllers.YandexSDK;
+using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.Views.YandexSDK;
 using TMPro;
 using UnityEngine;
 
-namespace Sources.Presentations.Views.YandexSDK
+namespace Sources.Frameworks.YandexSdcFramework.Presentations.Views
 {
     public class LeaderBoardElementView : PresentableView<LeaderBoardElementPresenter>, ILeaderBoardElementView
     {

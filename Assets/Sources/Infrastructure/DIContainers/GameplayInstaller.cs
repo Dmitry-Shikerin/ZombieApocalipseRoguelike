@@ -23,6 +23,7 @@ using Sources.Frameworks.UiFramework.Services.Forms;
 using Sources.Frameworks.UiFramework.Services.Localizations;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations.Translates;
+using Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices;
 using Sources.Infrastructure.Factories;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
@@ -171,6 +172,7 @@ namespace Sources.Infrastructure.DIContainers
             BindMusic();
             BindSettings();
             BindFormFactories();
+            BindSdcServices();
         }
 
         //TODO разбить все на отдельные моноинсталлеры
@@ -236,6 +238,11 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<UiContainerServicesCollection>().AsSingle();
             Container.Bind<UiContainerPauseService>().AsSingle();
             Container.Bind<UiContainerVoidService>().AsSingle();
+        }
+
+        private void BindSdcServices()
+        {
+            Container.BindInterfacesTo<AdvertisingService>().AsSingle();
         }
 
         private void BindGameplay()
