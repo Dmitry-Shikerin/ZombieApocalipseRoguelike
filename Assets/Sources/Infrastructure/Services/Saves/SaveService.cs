@@ -29,12 +29,14 @@ namespace Sources.Infrastructure.Services.Saves
 
         private void OnKillEnemyCounterChanged()
         {
+
+            int sum = 0;
+            
             for (int i = 0; i < _enemySpawner.EnemyInWave.Count; i++)
             {
-                if(_killEnemyCounter.KillZombies < _enemySpawner.EnemyInWave[i])
-                    return;
-
-                if (_killEnemyCounter.KillZombies == _enemySpawner.EnemyInWave[i])
+                sum += _enemySpawner.EnemyInWave[i];
+                
+                if (_killEnemyCounter.KillZombies == sum)
                 {
                     _loadService.SaveAll();
                     Debug.Log("Game saved");
