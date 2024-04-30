@@ -30,7 +30,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             IVolumeService volumeService,
             BackgroundMusicViewFactory backgroundMusicViewFactory,
             LevelAvailabilityViewFactory levelAvailabilityViewFactory,
-            MainMenuFormServiceFactory mainMenuFormServiceFactory) 
+            MainMenuFormServiceFactory mainMenuFormServiceFactory)
             : base(
                 mainMenuHud,
                 volumeViewFactory,
@@ -47,16 +47,25 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
         {
             Tutorial tutorial = new Tutorial();
             _entityRepository.Add(tutorial);
+
+            Volume volume;
             
-            Volume volume = new Volume();
-            _entityRepository.Add(volume);
-            
+            if (_loadService.HasKey(ModelId.Volume))
+            {
+                volume = _loadService.Load<Volume>(ModelId.Volume);
+            }
+            else
+            {
+                volume = new Volume();
+                _entityRepository.Add(volume);
+            }
+
             GameData gameData = new GameData(ModelId.GameData, true);
             _entityRepository.Add(gameData);
-            
+
             SavedLevel savedLevel = new SavedLevel(ModelId.SavedLevel, false, ModelId.Gameplay);
             _entityRepository.Add(savedLevel);
-            
+
             //LevelAvailability
             Level firstLevel = new Level(ModelId.Gameplay, true);
             _entityRepository.Add(firstLevel);
@@ -66,7 +75,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             _entityRepository.Add(thirdLevel);
             Level fourthLevel = new Level(ModelId.Gameplay4, true);
             _entityRepository.Add(fourthLevel);
-            
+
             LevelAvailability levelAvailability = new LevelAvailability(
                 new List<Level>()
                 {
@@ -75,11 +84,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
                     thirdLevel,
                     fourthLevel,
                 });
-            
+
             Debug.Log("Created MainMenuModels");
             //TODO здесь сохраняю посли того  как создал все модели
             _loadService.SaveAll();
-            
+
             return new MainMenuModels(
                 volume,
                 firstLevel,

@@ -9,8 +9,8 @@ namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 {
     public class UiButton : PresentableFormButton<UiFormButtonPresenter>
     {
-        [DisplayAsString(false)] [HideLabel]
-        [SerializeField] private string _lebel = UiConstant.UiButtonLabel;
+        [DisplayAsString(false)] [HideLabel] [Indent(8)]
+        [SerializeField] private string _labelText = UiConstant.UiButtonLabel;
         [TabGroup("Ids")]
         [EnableIf("_buttonId", ButtonId.Default)] 
         [SerializeField] private FormId _formId;

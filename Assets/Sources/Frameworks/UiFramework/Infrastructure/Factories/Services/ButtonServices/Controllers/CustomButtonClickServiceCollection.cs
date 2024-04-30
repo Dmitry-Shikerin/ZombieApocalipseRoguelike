@@ -16,7 +16,8 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
             FromWarningToNewGameButtonClickService fromWarningToNewGameButtonClickService,
             LeaderBoardButtonClickService leaderBoardButtonClickService,
             FromSettingsToHudButtonClickService fromSettingsToHudButtonClickService,
-            LoadGameButtonClickService loadGameButtonClickService)
+            LoadGameButtonClickService loadGameButtonClickService,
+            FromSettingsToPauseButtonClickService fromSettingsToPauseButtonClickService)
         {
             _buttonServices = new Dictionary<ButtonId, ICustomButtonClickService>()
             {
@@ -26,7 +27,8 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
                 [ButtonId.NewGame] = newGameButtonClickService,
                 [ButtonId.FromWarningNewGameToNewGame] = fromWarningToNewGameButtonClickService,
                 [ButtonId.LeaderBoard] = leaderBoardButtonClickService,
-                [ButtonId.LoadGame] = loadGameButtonClickService
+                [ButtonId.LoadGame] = loadGameButtonClickService,
+                [ButtonId.FromSettingsToPause] = fromSettingsToPauseButtonClickService,
             };
         }
 

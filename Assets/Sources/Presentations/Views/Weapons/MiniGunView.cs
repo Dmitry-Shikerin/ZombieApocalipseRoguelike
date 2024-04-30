@@ -1,5 +1,5 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.Controllers.Weapons;
+using Sources.Controllers.Presenters.Weapons;
 using Sources.Presentations.UI.AudioSources;
 using Sources.PresentationsInterfaces.UI.AudioSources;
 using Sources.PresentationsInterfaces.Views.Bullets;
