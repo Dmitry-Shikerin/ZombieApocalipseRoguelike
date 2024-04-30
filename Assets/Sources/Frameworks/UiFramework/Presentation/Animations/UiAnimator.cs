@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using JetBrains.Annotations;
+using Sirenix.OdinInspector;
 using Sources.Frameworks.UiFramework.Domain.Constants;
 using Sources.Frameworks.UiFramework.Presentation.Animations.Types;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
@@ -12,36 +13,47 @@ namespace Sources.Frameworks.UiFramework.Presentation.Animations
 {
     public class UiAnimator : View
     {
-        [FormerlySerializedAs("_title")] 
-        [DisplayAsString(false)] [HideLabel] 
+        [DisplayAsString(false)] [HideLabel] [Indent(8)]
         [SerializeField] private string _label = UiConstant.UiAnimatorLabel;
-
-        [TabGroup("Types")] 
+        
+        [Space(15)]
+        [EnumToggleButtons] [LabelText("FPS", SdfIconType.Activity)] 
+        [SerializeField] private AnimationFps _animationFps = AnimationFps.Thirty;
+        
+        [TabGroup("Types")] [PropertyTooltip(UiTooltipConstant.AnimationType)]
         [SerializeField] private AnimationType _animationType = AnimationType.Scale;
-
-        [TabGroup("Types")] 
+        
+        [TabGroup("Types")] [PropertyTooltip(UiTooltipConstant.ReactionAnimationType)]
         [SerializeField] private ReactionAnimationType _reactionAnimationType = ReactionAnimationType.ButtonClick;
 
-        [EnableIf("_animationType", AnimationType.Scale)] 
+        [EnableIf(nameof(_animationType), AnimationType.Scale)] 
         [TabGroup("ScaleSettings")] 
         [SerializeField] private ScaleAnimationType _scaleAnimationType;
 
-        [EnableIf("_animationType", AnimationType.Scale)] 
+        [EnableIf(nameof(_animationType), AnimationType.Scale)] 
         [TabGroup("ScaleSettings")] 
         [SerializeField] private float _animationDuration = 0.1f;
+        
+        [EnableIf(nameof(_animationType), AnimationType.Scale)] 
+        [TabGroup("ScaleSettings")] 
+        [SerializeField] private AnimationCurve _scaleAnimationCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
-        [EnableIf("_animationType", AnimationType.Scale)] 
+        [EnableIf(nameof(_animationType), AnimationType.Scale)] 
         [TabGroup("ScaleSettings")]
         [SerializeField] private Vector3 _fromScale = new Vector3(1, 1, 1);
 
-        [EnableIf("_animationType", AnimationType.Scale)] 
+        [EnableIf(nameof(_animationType), AnimationType.Scale)] 
         [TabGroup("ScaleSettings")] 
         [SerializeField] private Vector3 _targetScale = new Vector3(0.7f, 0.7f, 0.7f);
 
-        [EnableIf("_animationType", AnimationType.Rotate)] 
-        [TabGroup("RotaSettings")] 
+        [EnableIf(nameof(_animationType), AnimationType.Rotate)] 
+        [TabGroup("RotateSettings")] 
+        [SerializeField] private AnimationCurve _rotateAnimationCurve = AnimationCurve.Linear(0, 0, 1, 1);
+        
+        [EnableIf(nameof(_animationType), AnimationType.Rotate)] 
+        [TabGroup("RotateSettings")] 
         [SerializeField] private Vector3 _rotationVector = new Vector3(0, 0, -0.5f);
-
+        
         private readonly IAnimationService _animationService = new AnimationService();
 
         public AnimationType AnimationType => _animationType;

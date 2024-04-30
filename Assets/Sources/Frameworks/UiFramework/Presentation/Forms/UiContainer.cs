@@ -13,14 +13,13 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
 {
     public class UiContainer : PresentableView<UiContainerPresenter>, IUiContainer
     {
-        [DisplayAsString(false)] [HideLabel]
+        [DisplayAsString(false)] [HideLabel] [Indent(8)]
         [SerializeField] private string _lebel = UiConstant.UiContainerLabel;
-        [SerializeField] private FormId _formId;
         [TabGroup("Showed Settings")]
         [EnumToggleButtons] [HideLabel]
         [SerializeField] private Enable _enabled;
         [TabGroup("Id")] 
-        [SerializeField] private string _id;
+        [SerializeField] private FormId _formId;
         
         public FormId Id => _formId;
         public bool IsEnabled => _enabled == Enable.Enable;

@@ -55,6 +55,7 @@ namespace Sources.Infrastructure.Factories.Services.UiFramework.Forms
             //     // _pauseService.Continue();
             // });
             
+            //TODO обобщить фабрики бля двух сцен
             CreateFormButtons(_gameplayHud.UiCollector.UiFormButtons);
             CreateUiContainers(_gameplayHud.UiCollector.UiContainers);
 

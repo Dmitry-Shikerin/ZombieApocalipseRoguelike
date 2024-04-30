@@ -13,5 +13,6 @@
         FromWarningNewGameToNewGame = 5,
         LeaderBoard = 6,
         LoadGame = 7,
+        FromSettingsToPause = 8,
     }
 }
