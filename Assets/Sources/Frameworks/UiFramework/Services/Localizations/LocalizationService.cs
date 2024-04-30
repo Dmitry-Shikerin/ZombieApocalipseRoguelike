@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Agava.WebUtility;
+using Agava.YandexGames;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Localizations;
 using Sources.Domain.Models.TextViewTypes;
 using Sources.Frameworks.UiFramework.Domain.Configs.Localizations;
@@ -7,6 +10,7 @@ using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Texts;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.PresentationsInterfaces.UI.Texts;
+using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Services.Localizations
 {
@@ -24,24 +28,19 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
 
             _textDictionary = new Dictionary<string, IReadOnlyDictionary<string, string>>()
             {
-                ["ru"] = localizationConfig.Russian,
-                ["en"] = localizationConfig.English,
-                ["tr"] = localizationConfig.Turkish,
+                [LocalizationConstant.RussianCode] = localizationConfig.Russian,
+                [LocalizationConstant.EnglishCode] = localizationConfig.English,
+                [LocalizationConstant.TurkishCode] = localizationConfig.Turkish,
             };
         }
 
         public void Translate()
         {
-            string key = _uiCollector.Localization switch
-            {
-                Localization.English => "en",
-                Localization.Turkish => "tr",
-                Localization.Russian => "ru",
-                _ => "en",
-            };
-
-            // Debug.Log("Translate: " + key);
-            TranslateViews(key);
+            //todo вынести в отдельный сервис
+            if(WebApplication.IsRunningOnWebGL)
+                ChangeSdcLanguage();
+            else
+                ChangeCollectorLanguage();
         }
 
         private void TranslateViews(string key)
@@ -66,6 +65,35 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
             {
                 _textViews.Add(textView);
             }
+        }
+
+        private void ChangeCollectorLanguage()
+        {
+            string key = _uiCollector.Localization switch
+            {
+                Localization.English => LocalizationConstant.EnglishCode,
+                Localization.Turkish => LocalizationConstant.TurkishCode,
+                Localization.Russian => LocalizationConstant.RussianCode,
+                _ => LocalizationConstant.EnglishCode,
+            };
+
+            TranslateViews(key);
+        }
+        
+        private void ChangeSdcLanguage()
+        {
+            if (WebApplication.IsRunningOnWebGL == false)
+                return;
+
+            string languageCode = YandexGamesSdk.Environment.i18n.lang switch
+            {
+                LocalizationConstant.English => LocalizationConstant.EnglishCode,
+                LocalizationConstant.Turkish => LocalizationConstant.TurkishCode,
+                LocalizationConstant.Russian => LocalizationConstant.RussianCode,
+                _ => LocalizationConstant.EnglishCode
+            };
+
+            TranslateViews(languageCode);
         }
     }
 }

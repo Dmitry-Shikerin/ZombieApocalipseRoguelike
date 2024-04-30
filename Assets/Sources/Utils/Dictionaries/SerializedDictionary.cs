@@ -7,7 +7,6 @@ namespace Sources.Utils.Dictionaries
     public class SerializedDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
     {
         [SerializeField, HideInInspector] private List<TKey> _keys = new List<TKey>();
-        [MultiLineProperty(10)]
         [SerializeField, HideInInspector] private List<TValue> _values = new List<TValue>();
 
         public void OnAfterDeserialize()

@@ -24,6 +24,8 @@ using Sources.Frameworks.UiFramework.Services.Localizations;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations.Translates;
 using Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices;
+using Sources.Frameworks.YandexSdcFramework.Services.Focuses;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
 using Sources.Infrastructure.Factories;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
@@ -243,6 +245,7 @@ namespace Sources.Infrastructure.DIContainers
         private void BindSdcServices()
         {
             Container.BindInterfacesTo<AdvertisingService>().AsSingle();
+            Container.Bind<IFocusService>().To<FocusService>().AsSingle();
         }
 
         private void BindGameplay()
