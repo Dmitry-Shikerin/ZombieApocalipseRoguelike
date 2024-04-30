@@ -11,44 +11,43 @@ using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using Sources.PresentationsInterfaces.Views.Spawners;
 using UnityEngine;
-using UnityEngine.AI;
 using Object = UnityEngine.Object;
 
 namespace Sources.Controllers.Presenters.Spawners
 {
     public class EnemySpawnerPresenter : PresenterBase
     {
-        private readonly KillEnemyCounter _killEnemyCounter;
         private readonly EnemySpawner _enemySpawner;
+        private readonly KillEnemyCounter _killEnemyCounter;
         private readonly IEnemySpawnerView _enemySpawnerView;
         private readonly IEnemySpawnService _enemySpawnService;
         private readonly IBossEnemySpawnService _bossEnemySpawnService;
         private readonly IEnemyCollectorService _enemyCollectorService;
 
         private CancellationTokenSource _cancellationTokenSource;
-
+        
         public EnemySpawnerPresenter(
             KillEnemyCounter killEnemyCounter,
-            EnemySpawner enemySpawner,
-            IEnemySpawnerView enemySpawnerView,
-            IEnemySpawnService enemySpawnService,
-            IBossEnemySpawnService bossEnemySpawnService,
+            EnemySpawner enemySpawner, 
+            IEnemySpawnerView enemySpawnerView, 
+            IEnemySpawnService enemySpawnService, 
+            IBossEnemySpawnService bossEnemySpawnService, 
             IEnemyCollectorService enemyCollectorService)
         {
             _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
             _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));
             _enemySpawnerView = enemySpawnerView ?? throw new ArgumentNullException(nameof(enemySpawnerView));
-            _enemySpawnService = enemySpawnService ??
-                                 throw new ArgumentNullException(nameof(enemySpawnService));
-            _bossEnemySpawnService = bossEnemySpawnService ??
+            _enemySpawnService = enemySpawnService ?? throw new ArgumentNullException(nameof(enemySpawnService));
+            _bossEnemySpawnService = bossEnemySpawnService ?? 
                                      throw new ArgumentNullException(nameof(bossEnemySpawnService));
-            _enemyCollectorService =
-                enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
+            _enemyCollectorService = enemyCollectorService ?? 
+                                     throw new ArgumentNullException(nameof(enemyCollectorService));
         }
 
         public override void Enable()
         {
             _cancellationTokenSource = new CancellationTokenSource();
+            
             Spawn(_cancellationTokenSource.Token);
         }
 
@@ -57,49 +56,47 @@ namespace Sources.Controllers.Presenters.Spawners
             _cancellationTokenSource.Cancel();
         }
 
-        //TODO вынести эту логику в сирвис и подменять сервис в сцен контесте
-        //TODO сделать отдельный мноинсталлер для сервиса
-        //TODO enemy плохо спавнятся на третьей локации
         private async void Spawn(CancellationToken cancellationToken)
         {
             CharacterView characterView = Object.FindObjectOfType<CharacterView>();
-
+            
             try
             {
-                while (cancellationToken.IsCancellationRequested == false)
+                while (_cancellationTokenSource.IsCancellationRequested == false)
                 {
-                    foreach (IEnemySpawnPoint enemySpawnPointView in _enemySpawnerView.SpawnPoints)
+                    foreach (IEnemySpawnPoint spawnPoint in _enemySpawnerView.SpawnPoints)
                     {
-                        if (_enemySpawner.SumEnemies > _enemySpawner.SpawnedEnemies)
-                            SpawnEnemy(enemySpawnPointView, characterView);
+                        int sum = 0;
+                        bool isComplited = false;
 
+                        //TODO работает но нужно исправить делеи
                         for (int i = 0; i < _enemySpawner.EnemyInWave.Count; i++)
                         {
-                            if (_enemySpawner.EnemyInWave[i] >= _killEnemyCounter.KillZombies)
+                            sum += _enemySpawner.EnemyInWave[i];
+                            
+                            if (isComplited)
+                                continue;
+                                
+                            if (_enemySpawner.SpawnedEnemies > sum)
                             {
-                                _enemySpawner.CurrentStepDelay = i;
+                                _enemySpawner.CurrentWave = i;
+                                isComplited = true;
                             }
                         }
+                        
+                        if(_enemySpawner.SpawnedEnemies < _enemySpawner.SumEnemies)
+                            SpawnEnemy(spawnPoint.Position, characterView);
 
-                        if (_enemySpawner.BossCounter == 0 &&
-                            _enemySpawner.SumEnemies ==
-                            _enemySpawner.SpawnedEnemies)
+                        if (_enemySpawner.SpawnedEnemies >= _enemySpawner.SumEnemies && _enemySpawner.BossCounter == 0)
                         {
-                            SpawnBoss(enemySpawnPointView, characterView);
-                            _enemySpawner.BossCounter++;
-
-                            await UniTask.WaitWhile(
-                                () => _enemyCollectorService.Enemies.Count > 0,
-                                cancellationToken: cancellationToken);
-
-                            // _viewFormService.Show<LevelCompletedFormView>();
+                            SpawnBoss(spawnPoint.Position, characterView);
+                            
                             _cancellationTokenSource.Cancel();
-
-                            continue;
                         }
-
-                        await UniTask.Delay(TimeSpan.FromSeconds(
-                                _enemySpawner.SpawnDelays[_enemySpawner.CurrentStepDelay]),
+                        
+                        await UniTask.Delay(
+                            TimeSpan.FromSeconds(
+                                _enemySpawner.SpawnDelays[_enemySpawner.CurrentWave]), 
                             cancellationToken: cancellationToken);
                     }
                 }
@@ -109,24 +106,28 @@ namespace Sources.Controllers.Presenters.Spawners
             }
         }
 
-        private void SpawnEnemy(IEnemySpawnPoint enemySpawnPointView, CharacterView characterView)
+        private void SpawnEnemy(Vector3 position, CharacterView characterView)
         {
             IEnemyView enemyView = _enemySpawnService.Spawn(_killEnemyCounter);
             enemyView.DisableNavmeshAgent();
-            enemyView.SetPosition(enemySpawnPointView.Position);
+            enemyView.SetPosition(position);
+            enemyView.EnableNavmeshAgent();
             enemyView.SetCharacterHealth(characterView.CharacterHealthView);
             enemyView.SetTargetFollow(characterView.CharacterMovementView);
-            enemyView.EnableNavmeshAgent();
 
             _enemySpawner.SpawnedEnemies++;
-            // (enemyView as MonoBehaviour).GetComponent<NavMeshAgent>().enabled = true;
         }
 
-        private void SpawnBoss(IEnemySpawnPoint enemySpawnPoint, CharacterView characterView)
+        private void SpawnBoss(Vector3 position, CharacterView characterView)
         {
-            IBossEnemyView bossEnemyView = _bossEnemySpawnService.Spawn(_killEnemyCounter, enemySpawnPoint.Position);
+            IBossEnemyView bossEnemyView = _bossEnemySpawnService.Spawn(_killEnemyCounter, position);
+            bossEnemyView.DisableNavmeshAgent();
+            bossEnemyView.SetPosition(position);
+            bossEnemyView.EnableNavmeshAgent();
             bossEnemyView.SetCharacterHealth(characterView.CharacterHealthView);
             bossEnemyView.SetTargetFollow(characterView.CharacterMovementView);
+            
+            _enemySpawner.BossCounter++;
         }
     }
 }
