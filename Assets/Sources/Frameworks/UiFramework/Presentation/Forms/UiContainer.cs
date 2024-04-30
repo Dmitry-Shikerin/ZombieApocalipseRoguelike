@@ -6,8 +6,6 @@ using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.TextCore.Text;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Forms
 {
@@ -15,13 +13,22 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
     {
         [DisplayAsString(false)] [HideLabel] [Indent(8)]
         [SerializeField] private string _lebel = UiConstant.UiContainerLabel;
+        
         [TabGroup("Showed Settings")]
-        [EnumToggleButtons] [HideLabel]
+        [EnumToggleButtons] [HideLabel] [LabelText("Enabled GameObject")]
         [SerializeField] private Enable _enabled;
-        [TabGroup("Id")] 
+        
+        [TabGroup("Type")] [EnumToggleButtons]
+        [SerializeField] private ContainerType _containerType = ContainerType.Form;
+        
+        [TabGroup("Type")] [EnableIf(nameof(_customFormId), CustomFormId.Default)]
         [SerializeField] private FormId _formId;
         
-        public FormId Id => _formId;
+        [TabGroup("Type")] [EnableIf(nameof(_formId), FormId.Default)]
+        [SerializeField] private CustomFormId _customFormId = CustomFormId.Default;
+        
+        public FormId FormId => _formId;
         public bool IsEnabled => _enabled == Enable.Enable;
+        public CustomFormId CustomFormId => _customFormId;
     }
 }

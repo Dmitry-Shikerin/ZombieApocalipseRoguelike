@@ -7,6 +7,7 @@ namespace Sources.Presentations.Views.Forms.Common
     public class FormBase<T> : PresentableView<T>, IUiContainer
         where T : IPresenter
     {
-        public FormId Id { get; }
+        public FormId FormId { get; }
+        public CustomFormId CustomFormId { get; }
     }
 }

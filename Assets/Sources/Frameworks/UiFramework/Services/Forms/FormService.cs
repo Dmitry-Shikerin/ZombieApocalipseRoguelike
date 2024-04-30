@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sources.Frameworks.UiFramework.Presentation.Buttons;
-using Sources.Frameworks.UiFramework.Presentation.Buttons.Types;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
-using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
-using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Services.Forms
 {
@@ -17,11 +13,34 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
     {
         private readonly ContainerView _containerView;
         private readonly Dictionary<FormId, IUiContainer> _forms = new Dictionary<FormId, IUiContainer>();
+        private readonly Dictionary<CustomFormId, IUiContainer> _customForms = 
+            new Dictionary<CustomFormId, IUiContainer>();
 
         public FormService(UiCollector uiCollector)
         {
             foreach (IUiContainer form in uiCollector.UiContainers)
-                _forms.Add(form.Id, form);
+            {
+                if (form.FormId != FormId.Default)
+                    _forms.Add(form.FormId, form);
+                if(form.CustomFormId != CustomFormId.Default)
+                    _customForms.Add(form.CustomFormId, form);
+            }
+        }
+
+        public void ShowCustomContainer(CustomFormId formId)
+        {
+            if (_customForms.ContainsKey(formId) == false)
+                throw new KeyNotFoundException(nameof(formId));
+            
+            _customForms[formId].Show();
+        }
+
+        public void HideCustomContainer(CustomFormId formId)
+        {
+            if (_customForms.ContainsKey(formId) == false)
+                throw new KeyNotFoundException(nameof(formId));
+            
+            _customForms[formId].Hide();
         }
 
         public void Show(FormId formId)
@@ -57,7 +76,7 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
             if (isSetParent)
                 _containerView.AppendChild(uiContainer);
 
-            _forms.Add(uiContainer.Id, uiContainer);
+            _forms.Add(uiContainer.FormId, uiContainer);
             uiContainer.Hide();
         }
     }
