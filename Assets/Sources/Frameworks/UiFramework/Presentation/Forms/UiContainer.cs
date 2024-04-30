@@ -16,7 +16,11 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         
         [TabGroup("Showed Settings")]
         [EnumToggleButtons] [HideLabel] [LabelText("Enabled GameObject")]
-        [SerializeField] private Enable _enabled;
+        [SerializeField] private Enable _enabledGameObject;
+        
+        [TabGroup("Showed Settings")]
+        [EnumToggleButtons] [HideLabel] [LabelText("Enabled CanvasGroup")]
+        [SerializeField] private Enable _EnabledCanvasGroup;
         
         [TabGroup("Type")] [EnumToggleButtons]
         [SerializeField] private ContainerType _containerType = ContainerType.Form;
@@ -28,7 +32,6 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         [SerializeField] private CustomFormId _customFormId = CustomFormId.Default;
         
         public FormId FormId => _formId;
-        public bool IsEnabled => _enabled == Enable.Enable;
         public CustomFormId CustomFormId => _customFormId;
     }
 }

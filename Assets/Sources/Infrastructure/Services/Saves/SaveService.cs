@@ -60,7 +60,6 @@ namespace Sources.Infrastructure.Services.Saves
                     _loadService.SaveAll();
                     ShowSaveForm(_cancellationTokenSource.Token);
                     Debug.Log("Game saved");
-                    //TODO сделать формочку о том что игра сохранена
                     return;
                 }
             }

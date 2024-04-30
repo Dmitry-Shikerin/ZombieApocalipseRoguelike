@@ -9,6 +9,7 @@ namespace Sources.Infrastructure.Services.Repositories
         
         void Add(IEntity entity);
         IEntity Get(string id);
+        T Get<T>(string id) where T : class, IEntity;
         void Release();
     }
 }
