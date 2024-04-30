@@ -56,12 +56,19 @@ namespace Sources.Controllers.Presenters.Characters
 
         private void ShowViews()
         {
+            if (_enemyIndicatorView.Arrows.Count < _enemyCollectorService.Enemies.Count)
+                return; //убрать
+            
+            //todo вылетает out of range exception
             for (int i = 0; i < _enemyCollectorService.Enemies.Count; i++)
                 _enemyIndicatorView.Arrows[i].Show();
         }
 
         private void ChangeArrowPositions()
         {
+            if (_enemyIndicatorView.Arrows.Count < _enemyCollectorService.Enemies.Count)
+                return; //убрать
+            
             if (_enemyCollectorService.Enemies.Count == 0)
                 return;
             
