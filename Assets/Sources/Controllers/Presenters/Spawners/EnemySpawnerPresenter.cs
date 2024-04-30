@@ -42,7 +42,8 @@ namespace Sources.Controllers.Presenters.Spawners
                                  throw new ArgumentNullException(nameof(enemySpawnService));
             _bossEnemySpawnService = bossEnemySpawnService ??
                                      throw new ArgumentNullException(nameof(bossEnemySpawnService));
-            _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
+            _enemyCollectorService =
+                enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
         }
 
         public override void Enable()
@@ -69,8 +70,9 @@ namespace Sources.Controllers.Presenters.Spawners
                 {
                     foreach (IEnemySpawnPoint enemySpawnPointView in _enemySpawnerView.SpawnPoints)
                     {
-                        SpawnEnemy(enemySpawnPointView, characterView);
-                        
+                        if (_enemySpawner.SumEnemies > _enemySpawner.SpawnedEnemies)
+                            SpawnEnemy(enemySpawnPointView, characterView);
+
                         for (int i = 0; i < _enemySpawner.EnemyInWave.Count; i++)
                         {
                             if (_enemySpawner.EnemyInWave[i] >= _killEnemyCounter.KillZombies)
@@ -79,11 +81,10 @@ namespace Sources.Controllers.Presenters.Spawners
                             }
                         }
 
-                        if (_enemySpawner.BossCounter == 0 && 
-                            _killEnemyCounter.KillZombies == 
-                            _enemySpawner.SumEnemies)
+                        if (_enemySpawner.BossCounter == 0 &&
+                            _enemySpawner.SumEnemies ==
+                            _enemySpawner.SpawnedEnemies)
                         {
-
                             SpawnBoss(enemySpawnPointView, characterView);
                             _enemySpawner.BossCounter++;
 
@@ -93,12 +94,12 @@ namespace Sources.Controllers.Presenters.Spawners
 
                             // _viewFormService.Show<LevelCompletedFormView>();
                             _cancellationTokenSource.Cancel();
-                            
+
                             continue;
                         }
 
                         await UniTask.Delay(TimeSpan.FromSeconds(
-                            _enemySpawner.SpawnDelays[_enemySpawner.CurrentStepDelay]),
+                                _enemySpawner.SpawnDelays[_enemySpawner.CurrentStepDelay]),
                             cancellationToken: cancellationToken);
                     }
                 }
@@ -116,6 +117,8 @@ namespace Sources.Controllers.Presenters.Spawners
             enemyView.SetCharacterHealth(characterView.CharacterHealthView);
             enemyView.SetTargetFollow(characterView.CharacterMovementView);
             enemyView.EnableNavmeshAgent();
+
+            _enemySpawner.SpawnedEnemies++;
             // (enemyView as MonoBehaviour).GetComponent<NavMeshAgent>().enabled = true;
         }
 

@@ -5,6 +5,7 @@ using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
 using Sources.DomainInterfaces.Payloads;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Bears;
@@ -67,6 +68,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ISaveService _saveService;
         private readonly ILevelCompletedService _levelCompletedService;
         private readonly ITutorialService _tutorialService;
+        private readonly IAdvertisingService _advertisingService;
 
         protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
             GameplayFormServiceFactory gameplayFormServiceFactory,
@@ -93,7 +95,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IVolumeService volumeService,
             ISaveService saveService,
             ILevelCompletedService levelCompletedService,
-            ITutorialService tutorialService)
+            ITutorialService tutorialService,
+            IAdvertisingService advertisingService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _gameplayFormServiceFactory = gameplayFormServiceFactory ?? throw new ArgumentNullException(nameof(gameplayFormServiceFactory));
@@ -131,11 +134,15 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
             _levelCompletedService = levelCompletedService ?? throw new ArgumentNullException(nameof(levelCompletedService));
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
+            _advertisingService = advertisingService ?? throw new ArgumentNullException(nameof(advertisingService));
         }
 
         public void Load(IScenePayload scenePayload)
         {
             GameModels gameModels = LoadModels(scenePayload);
+            
+            //AdvertisingService
+            _advertisingService.Construct(gameModels.PlayerWallet);
             
             //LevelCompleted
             _levelCompletedService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);

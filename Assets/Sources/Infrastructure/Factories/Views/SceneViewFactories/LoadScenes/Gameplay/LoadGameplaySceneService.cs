@@ -13,6 +13,7 @@ using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
 using Sources.Domain.Models.Weapons;
 using Sources.DomainInterfaces.Payloads;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Bears;
@@ -75,7 +76,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IVolumeService volumeService,
             ISaveService saveService,
             ILevelCompletedService levelCompletedService,
-            ITutorialService tutorialService) 
+            ITutorialService tutorialService,
+            IAdvertisingService advertisingService) 
             : base(
                 gameplayHud, 
                 gameplayFormServiceFactory, 
@@ -102,7 +104,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 volumeService,
                 saveService,
                 levelCompletedService,
-                tutorialService)
+                tutorialService,
+                advertisingService)
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));

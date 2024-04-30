@@ -30,6 +30,20 @@ namespace Sources.Infrastructure.Services.Repositories
             return _entities[id];
         }
 
+        public T Get<T>(string id) where T : class, IEntity
+        {
+            if (_entities.ContainsKey(id) == false)
+            {
+                Debug.Log(id);
+                throw new InvalidOperationException("Entity with this Id does not exist");
+            }
+            
+            if(_entities[id] is not T concreteEntity)
+                throw new InvalidCastException("Entity with this Id does not exist");
+            
+            return concreteEntity;
+        }
+
         public void Release() =>
             _entities.Clear();
     }

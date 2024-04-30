@@ -41,8 +41,8 @@ namespace Sources.Presentations.Views.Bullets
         public void SetRotation(Quaternion rotation) =>
             transform.rotation = rotation;
 
-        public void Construct(IMiniGunView miniGunView) =>
-            _miniGunView = miniGunView ?? throw new ArgumentNullException(nameof(miniGunView));
+        public void Construct(IMiniGunView playerWallet) =>
+            _miniGunView = playerWallet ?? throw new ArgumentNullException(nameof(playerWallet));
 
         private void OnEntered(IEnemyHealthView enemyHealthView) =>
             _miniGunView.DealDamage(enemyHealthView);

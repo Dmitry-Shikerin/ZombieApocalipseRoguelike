@@ -17,7 +17,8 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
             LeaderBoardButtonClickService leaderBoardButtonClickService,
             FromSettingsToHudButtonClickService fromSettingsToHudButtonClickService,
             LoadGameButtonClickService loadGameButtonClickService,
-            FromSettingsToPauseButtonClickService fromSettingsToPauseButtonClickService)
+            FromSettingsToPauseButtonClickService fromSettingsToPauseButtonClickService,
+            FromLevelCompletedToMeinMenuSceneButtonClickService fromLevelCompletedToMeinMenuSceneButtonClickService)
         {
             _buttonServices = new Dictionary<ButtonId, ICustomButtonClickService>()
             {
@@ -29,6 +30,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
                 [ButtonId.LeaderBoard] = leaderBoardButtonClickService,
                 [ButtonId.LoadGame] = loadGameButtonClickService,
                 [ButtonId.FromSettingsToPause] = fromSettingsToPauseButtonClickService,
+                [ButtonId.FromLevelCompletedToMainMenuScene] = fromLevelCompletedToMeinMenuSceneButtonClickService,
             };
         }
 

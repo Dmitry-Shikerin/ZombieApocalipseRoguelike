@@ -45,9 +45,9 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        public void Construct(UiAnimator uiAnimator)
+        public void Construct(UiAnimator playerWallet)
         {
-            _uiAnimator = uiAnimator;
+            _uiAnimator = playerWallet;
         }
 
         private async void PlayAnimation()
