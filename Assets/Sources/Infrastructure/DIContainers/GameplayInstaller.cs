@@ -25,7 +25,13 @@ using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations.Translates;
 using Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices;
 using Sources.Frameworks.YandexSdcFramework.Services.Focuses;
+using Sources.Frameworks.YandexSdcFramework.Services.Leaderboards;
+using Sources.Frameworks.YandexSdcFramework.Services.PlayerAccounts;
+using Sources.Frameworks.YandexSdcFramework.Services.SdcInitializeServices;
+using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.PlayerAccounts;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
 using Sources.Infrastructure.Factories;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Bears;
@@ -114,6 +120,7 @@ using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
+using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Bullets;
@@ -246,6 +253,11 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.BindInterfacesTo<AdvertisingService>().AsSingle();
             Container.Bind<IFocusService>().To<FocusService>().AsSingle();
+            Container.Bind<ILeaderBoardInitializeService>().To<YandexLeaderBoardInitializeService>().AsSingle();
+            Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
+            Container.Bind<IPlayerAccountAuthorizeService>().To<PlayerAccountAuthorizeService>().AsSingle();
+            Container.Bind<ISdcInitializeService>().To<SdcInitializeService>().AsSingle();
+            Container.Bind<IStickyService>().To<StickyService>().AsSingle();
         }
 
         private void BindGameplay()

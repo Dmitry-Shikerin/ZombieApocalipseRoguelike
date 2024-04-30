@@ -9,7 +9,7 @@ using Sources.Infrastructure.Factories.Views.YandexSDK;
 using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 using Sources.Presentations.UI.Huds;
 
-namespace Sources.Infrastructure.Services.YandexSDKServices
+namespace Sources.Frameworks.YandexSdcFramework.Services.Leaderboards
 {
     public class YandexLeaderBoardInitializeService : ILeaderBoardInitializeService
     {

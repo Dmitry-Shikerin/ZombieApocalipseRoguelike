@@ -3,7 +3,7 @@ using Agava.YandexGames;
 using Sources.Domain.Models.Constants;
 using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 
-namespace Sources.Infrastructure.Services.YandexSDKServices
+namespace Sources.Frameworks.YandexSdcFramework.Services.Leaderboards
 {
     public class YandexLeaderBoardScoreSetter : ILeaderBoardScoreSetter
     {
