@@ -111,20 +111,42 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));
             _upgradeCollectionService = upgradeCollectionService ??
                                         throw new ArgumentNullException(nameof(upgradeCollectionService));
-            _enemySpawnerDtoMapper = enemySpawnerDtoMapper ?? throw new ArgumentNullException(nameof(enemySpawnerDtoMapper));
+            _enemySpawnerDtoMapper =
+                enemySpawnerDtoMapper ?? throw new ArgumentNullException(nameof(enemySpawnerDtoMapper));
         }
 
         protected override GameModels LoadModels(IScenePayload scenePayload)
         {
             //TODO потом нужно сделать загрузку туториала
-            Tutorial tutorial = new Tutorial();
-            
-            Volume volume = new Volume();
-            _entityRepository.Add(volume);
+            Tutorial tutorial;
+
+            if (_loadService.HasKey(ModelId.Tutorial))
+            {
+                tutorial = _loadService.Load<Tutorial>(ModelId.Tutorial);
+            }
+            else
+            {
+                tutorial = new Tutorial();
+                _entityRepository.Add(tutorial);
+            }
+
+            Volume volume;
+
+            //TODO покашто такая вилка
+            if (_loadService.HasKey(ModelId.Volume))
+            {
+                volume = _loadService.Load<Volume>(ModelId.Volume);
+            }
+            else
+            {
+                volume = new Volume();
+                _entityRepository.Add(volume);
+            }
+
 
             Level level = new Level(scenePayload.SceneId, false);
             _entityRepository.Add(level);
-            
+
             SavedLevel savedLevel = new SavedLevel(ModelId.SavedLevel, false, scenePayload.SceneId);
             _entityRepository.Add(savedLevel);
 
@@ -140,9 +162,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
             KillEnemyCounter killEnemyCounter = new KillEnemyCounter(ModelId.KillEnemyCounter, 0);
             _entityRepository.Add(killEnemyCounter);
-            
+
             EnemySpawner enemySpawner = CreateEnemySpawner(scenePayload.SceneId);
-            
+
             MiniGun minigun = new MiniGun(miniGunAttackUpgrader, 0.1f);
             CharacterHealth characterHealth = new CharacterHealth(characterHealthUpgrader);
             Character character = new Character(
@@ -203,7 +225,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             EnemySpawnerDto enemySpawnerDto = _enemySpawnerDtoMapper.MapIdToDto(sceneId);
             EnemySpawner enemySpawner = _enemySpawnerDtoMapper.MapDtoToModel(enemySpawnerDto);
             _entityRepository.Add(enemySpawner);
-            
+
             return enemySpawner;
         }
     }

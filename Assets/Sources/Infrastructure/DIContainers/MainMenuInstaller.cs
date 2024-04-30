@@ -119,6 +119,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<UiContainerFactory>().AsSingle();
 
             Container.Bind<CustomButtonClickServiceCollection>().AsSingle();
+            Container.Bind<FromSettingsToPauseButtonClickService>().AsSingle();
             Container.Bind<LoadGameButtonClickService>().AsSingle();
             Container.Bind<FromSettingsToHudButtonClickService>().AsSingle();
             Container.Bind<LeaderBoardButtonClickService>().AsSingle();

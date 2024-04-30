@@ -39,12 +39,12 @@ using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.Gameplay.Tut
 using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Weapons;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.ViewModels.Components;
 using Sources.Infrastructure.Factories.Controllers.ViewModels.Forms.Gameplay;
-using Sources.Infrastructure.Factories.Controllers.Weapons;
 using Sources.Infrastructure.Factories.Domain.Data;
 using Sources.Infrastructure.Factories.Domain.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Services.FormServices;
@@ -220,6 +220,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<UiContainerFactory>().AsSingle();
 
             Container.Bind<CustomButtonClickServiceCollection>().AsSingle();
+            Container.Bind<FromSettingsToPauseButtonClickService>().AsSingle();
             Container.Bind<LoadGameButtonClickService>().AsSingle();
             Container.Bind<FromSettingsToHudButtonClickService>().AsSingle();
             Container.Bind<LeaderBoardButtonClickService>().AsSingle();
