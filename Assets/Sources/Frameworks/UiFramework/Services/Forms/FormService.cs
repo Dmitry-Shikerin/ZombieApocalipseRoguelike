@@ -12,13 +12,13 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
     public class FormService : IFormService
     {
         private readonly ContainerView _containerView;
-        private readonly Dictionary<FormId, IUiContainer> _forms = new Dictionary<FormId, IUiContainer>();
-        private readonly Dictionary<CustomFormId, IUiContainer> _customForms = 
-            new Dictionary<CustomFormId, IUiContainer>();
+        private readonly Dictionary<FormId, IUiView> _forms = new Dictionary<FormId, IUiView>();
+        private readonly Dictionary<CustomFormId, IUiView> _customForms = 
+            new Dictionary<CustomFormId, IUiView>();
 
         public FormService(UiCollector uiCollector)
         {
-            foreach (IUiContainer form in uiCollector.UiContainers)
+            foreach (IUiView form in uiCollector.UiContainers)
             {
                 if (form.FormId != FormId.Default)
                     _forms.Add(form.FormId, form);
@@ -48,10 +48,10 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
             if (_forms.ContainsKey(formId) == false)
                 throw new NullReferenceException(nameof(formId));
 
-            IUiContainer activeForm = _forms[formId];
+            IUiView activeForm = _forms[formId];
 
             _forms.Values
-                .Except(new List<IUiContainer> { activeForm, })
+                .Except(new List<IUiView> { activeForm, })
                 .ToList()
                 .ForEach(form => form.Hide());
 
@@ -63,7 +63,7 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
             if (_forms.ContainsKey(formId) == false)
                 throw new NullReferenceException(nameof(formId));
 
-            IUiContainer activeForm = _forms[formId];
+            IUiView activeForm = _forms[formId];
 
             if (activeForm == null)
                 throw new NullReferenceException(nameof(activeForm));
@@ -71,13 +71,13 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
             activeForm.Hide();
         }
 
-        public void Add(IUiContainer uiContainer, string name = null, bool isSetParent = false)
+        public void Add(IUiView uiView, string name = null, bool isSetParent = false)
         {
             if (isSetParent)
-                _containerView.AppendChild(uiContainer);
+                _containerView.AppendChild(uiView);
 
-            _forms.Add(uiContainer.FormId, uiContainer);
-            uiContainer.Hide();
+            _forms.Add(uiView.FormId, uiView);
+            uiView.Hide();
         }
     }
 }

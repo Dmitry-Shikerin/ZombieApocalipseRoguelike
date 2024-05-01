@@ -20,7 +20,7 @@ namespace Sources.Infrastructure.Services.Forms
         }
 
         public void Show<T>()
-            where T : IUiContainer =>
+            where T : IUiView =>
             Show(typeof(T).Name);
 
         public void Show(string name)
@@ -39,7 +39,7 @@ namespace Sources.Infrastructure.Services.Forms
         }
 
         public void Hide<T>()
-            where T : IUiContainer
+            where T : IUiView
         {
             string name = typeof(T).Name;
 

@@ -36,7 +36,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         [SerializeField] private Localization _localization;
         
         [TabGroup("Tab1", "Containers", true, 1)] 
-        [SerializeField] private List<UiContainer> _uiContainers;
+        [SerializeField] private List<UiView> _uiContainers;
         
         [TabGroup("Tab1", "Containers", true, 1)] 
         [EnumToggleButtons] [HideLabel] [LabelText("IncludeInactive" , SdfIconType.Search)]
@@ -72,7 +72,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
 
         public Localization Localization => _localization;
         public IReadOnlyList<UiButton> UiFormButtons => _uiFormButtons;
-        public IReadOnlyList<UiContainer> UiContainers => _uiContainers;
+        public IReadOnlyList<UiView> UiContainers => _uiContainers;
         public IReadOnlyList<IUiText> UiTexts => _uiTexts;
         public IReadOnlyList<UiAudioSource> UiAudioSources => _uiAudioSources;
         public IReadOnlyList<UiAnimator> UiAnimators => _uiAnimators;
@@ -80,7 +80,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         private void Awake()
         {
             _uiFormButtons = GetComponentsInChildren<UiButton>(IncludeButtons).ToList();
-            _uiContainers = GetComponentsInChildren<UiContainer>(IncludeContainers).ToList();
+            _uiContainers = GetComponentsInChildren<UiView>(IncludeContainers).ToList();
             _uiTexts = GetComponentsInChildren<UiText>(IncludeTexts).ToList();
             _uiAudioSources = GetComponentsInChildren<UiAudioSource>(IncludeAudioSources).ToList();
             _uiAnimators = GetComponentsInChildren<UiAnimator>(IncludeAnimators).ToList();
@@ -99,7 +99,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         [TabGroup("Tab1", "Containers", true, 1)] 
         [Button(ButtonSizes.Large)]
         private void AddContainers() =>
-            _uiContainers = GetComponentsInChildren<UiContainer>(IncludeContainers).ToList();
+            _uiContainers = GetComponentsInChildren<UiView>(IncludeContainers).ToList();
         
         [TabGroup("Tab1", "Containers", true, 1)] 
         [Button(ButtonSizes.Medium)]

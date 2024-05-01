@@ -10,14 +10,14 @@ namespace Sources.Frameworks.UiFramework.Controllers.Forms
         private readonly IUiContainerService _uiContainerService;
 
         public UiContainerPresenter(
-            UiContainer uiContainer,
+            UiView uiView,
             UiContainerServicesCollection uiContainerServicesCollection,
             UiContainerCustomServiceCollection uiContainerCustomServiceCollection)
         {
-            if (uiContainer.FormId != FormId.Default)
-                _uiContainerService = uiContainerServicesCollection.Get(uiContainer.FormId);
-            if(uiContainer.CustomFormId != CustomFormId.Default)
-                _uiContainerService = uiContainerCustomServiceCollection.Get(uiContainer.CustomFormId);
+            if (uiView.FormId != FormId.Default)
+                _uiContainerService = uiContainerServicesCollection.Get(uiView.FormId);
+            if(uiView.CustomFormId != CustomFormId.Default)
+                _uiContainerService = uiContainerCustomServiceCollection.Get(uiView.CustomFormId);
                 
         }
 

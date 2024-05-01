@@ -10,7 +10,8 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms
         
         public UiContainerServicesCollection(
             UiContainerVoidService uiContainerVoidService,
-            UiContainerPauseService uiContainerPauseService)
+            UiContainerPauseService uiContainerPauseService,
+            UiContainerGameOverService uiContainerGameOverService)
         {
             _formServices[FormId.Hud] = uiContainerVoidService;
             _formServices[FormId.Pause] = uiContainerPauseService;
@@ -26,7 +27,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms
             _formServices[FormId.KillEnemyCounterTutorial] = uiContainerPauseService;
             _formServices[FormId.UpgradeFormBottomAbilitiesTutorial] = uiContainerPauseService;
             _formServices[FormId.UpgradeFormTopAbilitiesTutorial] = uiContainerPauseService;
-
+            _formServices[FormId.GameOver] = uiContainerGameOverService;
         }
 
         public IUiContainerService Get(FormId uiContainerId) =>

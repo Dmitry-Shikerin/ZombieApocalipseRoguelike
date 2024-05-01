@@ -21,16 +21,16 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms
                 throw new ArgumentNullException(nameof(uiContainerCustomServiceCollection));
         }
 
-        public UiContainer Create(UiContainer container)
+        public UiView Create(UiView view)
         {
             UiContainerPresenter presenter = new UiContainerPresenter(
-                container, 
+                view, 
                 _uiContainerServicesCollection,
                 _uiContainerCustomServiceCollection);
             
-            container.Construct(presenter);   
+            view.Construct(presenter);   
             
-            return container;
+            return view;
         }
     }
 }
