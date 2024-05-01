@@ -1,36 +1,26 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.Controllers.Common.Forms.MainMenu;
 using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Frameworks.UiFramework.Domain.Configs.Localizations;
-using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices.Controllers;
-using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms.Controllers;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Services.Forms;
 using Sources.Frameworks.UiFramework.Services.Localizations;
-using Sources.Frameworks.UiFramework.Services.Localizations.Translates.Common;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
-using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations.Translates.Common;
 using Sources.Frameworks.YandexSdcFramework.Services.Leaderboards;
-using Sources.Infrastructure.Factories;
-using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.MainMenu;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Domain.Data;
-using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Musics;
-using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.MainMenu;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Services.EnemySpawners;
-using Sources.Infrastructure.Services.Forms;
 using Sources.Infrastructure.Services.LoadServices;
 using Sources.Infrastructure.Services.LoadServices.Data;
 using Sources.Infrastructure.Services.PauseServices;
@@ -118,26 +108,6 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<UiContainerFactory>().AsSingle();
 
-            Container.Bind<UiContainerCustomServiceCollection>().AsSingle();
-            Container.Bind<UiContainerGameOverService>().AsSingle();
-            Container.Bind<FromLevelCompletedToMeinMenuSceneButtonClickService>().AsSingle();
-            Container.Bind<CustomButtonClickServiceCollection>().AsSingle();
-            Container.Bind<FromSettingsToPauseButtonClickService>().AsSingle();
-            Container.Bind<LoadGameButtonClickService>().AsSingle();
-            Container.Bind<FromSettingsToHudButtonClickService>().AsSingle();
-            Container.Bind<LeaderBoardButtonClickService>().AsSingle();
-            Container.Bind<FromWarningToNewGameButtonClickService>().AsSingle();
-            Container.Bind<NewGameButtonClickService>().AsSingle();
-            Container.Bind<CompleteTutorialButtonClickService>().AsSingle();
-            Container.Bind<LoadMainMenuButtonClickService>().AsSingle();
-            Container.Bind<UiFormButtonClickService>().AsSingle();
-            Container.Bind<ButtonServiceCollection>().AsSingle();
-            Container.Bind<PauseButtonService>().AsSingle();
-            Container.Bind<VoidButtonService>().AsSingle();
-
-            Container.Bind<UiContainerServicesCollection>().AsSingle();
-            Container.Bind<UiContainerPauseService>().AsSingle();
-            Container.Bind<UiContainerVoidService>().AsSingle();
         }
 
         private void BindMainMenuLoadService()

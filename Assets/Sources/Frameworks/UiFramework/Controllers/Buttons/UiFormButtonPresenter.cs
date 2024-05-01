@@ -2,48 +2,59 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Controllers.Common;
-using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices;
-using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices.Controllers;
+using Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Buttons.Types;
-using Sources.Frameworks.UiFramework.Services.Forms;
 
 namespace Sources.Frameworks.UiFramework.Controllers.Buttons
 {
     public class UiFormButtonPresenter : PresenterBase
     {
-        private readonly FormService _formService;
-        private readonly UiFormButtonClickService _buttonClickService;
+        private readonly UiButtonViewService _uiButtonViewService;
         private readonly UiButton _view;
-        private readonly IButtonService _buttonService;
+
+        private CancellationTokenSource _cancellationTokenSource;
 
         public UiFormButtonPresenter(
             UiButton view,
-            FormService formService,
-            ButtonServiceCollection buttonServiceCollection,
-            UiFormButtonClickService buttonClickService)
+            UiButtonViewService uiButtonViewService)
         {
-            _buttonService = buttonServiceCollection.GetButtonService(view.FormId);
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
-            _buttonClickService = buttonClickService ?? throw new ArgumentNullException(nameof(buttonClickService));
+            _uiButtonViewService = uiButtonViewService ??
+                                   throw new ArgumentNullException(nameof(uiButtonViewService));
             _view = view ? view : throw new ArgumentNullException(nameof(view));
         }
 
         public override void Enable()
         {
-            _buttonService.Enable();
-            _buttonClickService.Enable(_view);
+            _cancellationTokenSource = new CancellationTokenSource();
             _view.AddClickListener(ShowForm);
+            _uiButtonViewService.Handle(_view.EnableCommandId, _view);
         }
 
         public override void Disable()
         {
-            _buttonService.Disable();
-            _buttonClickService.Disable(_view);
+            _cancellationTokenSource.Cancel();
+            _uiButtonViewService.Handle(_view.DisableCommandId, _view);
             _view.RemoveClickListener(ShowForm);
         }
 
-        private void ShowForm() =>
-            _buttonClickService.OnClick(_view);
+        private async void ShowForm()
+        {
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+
+            try
+            {
+                if (_view.UseButtonType == UseButtonType.Delayed)
+                    await UniTask.Delay(TimeSpan.FromMilliseconds(_view.Delay),
+                        cancellationToken: _cancellationTokenSource.Token,
+                        ignoreTimeScale: true);
+
+                _uiButtonViewService.Handle(_view.OnClickCommandId, _view);
+            }
+            catch (OperationCanceledException)
+            {
+            }
+        }
     }
 }

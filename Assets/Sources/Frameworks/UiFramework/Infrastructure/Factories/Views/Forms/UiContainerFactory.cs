@@ -1,32 +1,28 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Controllers.Forms;
-using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms.Controllers;
+using Sources.Frameworks.UiFramework.Infrastructure.Services.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms
 {
     public class UiContainerFactory
     {
-        private readonly UiContainerServicesCollection _uiContainerServicesCollection;
-        private readonly UiContainerCustomServiceCollection _uiContainerCustomServiceCollection;
+        private readonly UiViewService _uiViewService;
+        private readonly IFormService _formService;
 
-        public UiContainerFactory(
-            UiContainerServicesCollection uiContainerServicesCollection,
-            UiContainerCustomServiceCollection uiContainerCustomServiceCollection)
+        public UiContainerFactory(UiViewService uiViewService, IFormService formService)
         {
-            _uiContainerServicesCollection = uiContainerServicesCollection ?? 
-                                             throw new ArgumentNullException(nameof(uiContainerServicesCollection));
-            _uiContainerCustomServiceCollection = 
-                uiContainerCustomServiceCollection ?? 
-                throw new ArgumentNullException(nameof(uiContainerCustomServiceCollection));
+            _uiViewService = uiViewService ?? throw new ArgumentNullException(nameof(uiViewService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public UiView Create(UiView view)
         {
-            UiContainerPresenter presenter = new UiContainerPresenter(
-                view, 
-                _uiContainerServicesCollection,
-                _uiContainerCustomServiceCollection);
+            UiViewPresenter presenter = new UiViewPresenter(
+                view,
+                _uiViewService,
+                _formService);
             
             view.Construct(presenter);   
             
