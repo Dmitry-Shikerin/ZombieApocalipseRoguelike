@@ -29,7 +29,6 @@ namespace Sources.Frameworks.UiFramework.Presentation.Buttons
         [SerializeField] private float _delay;
         [TabGroup("Commands")]
         [SerializeField] private List<ButtonCommandId> _onClickCommandId;
-        [FormerlySerializedAs("_enebleCommandId")]
         [TabGroup("Commands")]
         [SerializeField] private List<ButtonCommandId> enableCommandId;
         [TabGroup("Commands")] 
