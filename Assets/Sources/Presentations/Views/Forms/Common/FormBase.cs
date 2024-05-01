@@ -4,7 +4,7 @@ using Sources.PresentationsInterfaces.Views.Forms.Common;
 
 namespace Sources.Presentations.Views.Forms.Common
 {
-    public class FormBase<T> : PresentableView<T>, IUiContainer
+    public class FormBase<T> : PresentableView<T>, IUiView
         where T : IPresenter
     {
         public FormId FormId { get; }

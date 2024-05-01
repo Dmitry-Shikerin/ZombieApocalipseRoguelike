@@ -31,6 +31,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Butto
                 [ButtonId.LoadGame] = loadGameButtonClickService,
                 [ButtonId.FromSettingsToPause] = fromSettingsToPauseButtonClickService,
                 [ButtonId.FromLevelCompletedToMainMenuScene] = fromLevelCompletedToMeinMenuSceneButtonClickService,
+                [ButtonId.FromGameOverToMainMenuScene] = loadMainMenuButtonClickService,
             };
         }
 

@@ -15,5 +15,6 @@
         LoadGame = 7,
         FromSettingsToPause = 8,
         FromLevelCompletedToMainMenuScene = 9,
+        FromGameOverToMainMenuScene = 10,
     }
 }

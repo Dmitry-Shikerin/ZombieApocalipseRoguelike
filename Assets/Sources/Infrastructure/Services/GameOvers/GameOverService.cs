@@ -1,15 +1,19 @@
 ﻿using System;
 using Sources.Domain.Models.Characters;
+using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 
 namespace Sources.Infrastructure.Services.GameOvers
 {
     public class GameOverService : IGameOverService
     {
+        private readonly IFormService _formService;
         private CharacterHealth _characterHealth;
 
-        public GameOverService()
+        public GameOverService(IFormService formService)
         {
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public void Enter(object payload = null)
@@ -33,7 +37,7 @@ namespace Sources.Infrastructure.Services.GameOvers
             if(_characterHealth.CurrentHealth > 0)
                 return;
             
-            // _viewFormService.Show<GameOverFormView>();
+            _formService.Show(FormId.GameOver);
         }
     }
 }

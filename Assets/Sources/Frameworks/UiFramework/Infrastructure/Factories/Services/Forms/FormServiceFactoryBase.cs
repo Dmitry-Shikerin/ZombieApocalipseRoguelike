@@ -29,9 +29,9 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms
             }
         }
 
-        protected void CreateUiContainers(IEnumerable<UiContainer> containers)
+        protected void CreateUiContainers(IEnumerable<UiView> containers)
         {
-            foreach (UiContainer container in containers)
+            foreach (UiView container in containers)
             {
                 _uiContainerFactory.Create(container);
             }
