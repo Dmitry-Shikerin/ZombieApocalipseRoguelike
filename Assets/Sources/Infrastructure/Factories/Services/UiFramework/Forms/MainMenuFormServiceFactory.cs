@@ -30,7 +30,8 @@ namespace Sources.Infrastructure.Factories.Services.UiFramework.Forms
 
         public IFormService Create()
         {
-            CreateFormButtons(_mainMenuHud.UiCollector.UiFormButtons);            
+            CreateFormButtons(_mainMenuHud.UiCollector.UiFormButtons);
+            CreateUiContainers(_mainMenuHud.UiCollector.UiContainers);
 
             return _formService;
         }

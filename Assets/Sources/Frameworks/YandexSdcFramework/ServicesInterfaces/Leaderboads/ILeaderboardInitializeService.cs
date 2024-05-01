@@ -1,6 +1,6 @@
 ﻿namespace Sources.InfrastructureInterfaces.Services.YandexSDKServices
 {
-    public interface ILeaderBoardInitializeService
+    public interface ILeaderboardInitializeService
     {
         void Fill();
     }

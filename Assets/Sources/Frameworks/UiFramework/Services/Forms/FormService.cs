@@ -6,6 +6,7 @@ using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
+using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Services.Forms
 {
@@ -13,49 +14,28 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
     {
         private readonly ContainerView _containerView;
         private readonly Dictionary<FormId, IUiView> _forms = new Dictionary<FormId, IUiView>();
-        private readonly Dictionary<CustomFormId, IUiView> _customForms = 
-            new Dictionary<CustomFormId, IUiView>();
 
         public FormService(UiCollector uiCollector)
         {
             foreach (IUiView form in uiCollector.UiContainers)
             {
-                if (form.FormId != FormId.Default)
-                    _forms.Add(form.FormId, form);
-                if(form.CustomFormId != CustomFormId.Default)
-                    _customForms.Add(form.CustomFormId, form);
+                _forms.Add(form.FormId, form);
             }
-        }
-
-        public void ShowCustomContainer(CustomFormId formId)
-        {
-            if (_customForms.ContainsKey(formId) == false)
-                throw new KeyNotFoundException(nameof(formId));
-            
-            _customForms[formId].Show();
-        }
-
-        public void HideCustomContainer(CustomFormId formId)
-        {
-            if (_customForms.ContainsKey(formId) == false)
-                throw new KeyNotFoundException(nameof(formId));
-            
-            _customForms[formId].Hide();
         }
 
         public void ShowOneForm(FormId formId)
         {
-            if(_forms.ContainsKey(formId) == false)
+            if (_forms.ContainsKey(formId) == false)
                 throw new KeyNotFoundException(nameof(formId));
-            
+
             _forms[formId].Show();
         }
 
         public void HideOneForm(FormId formId)
         {
-            if(_forms.ContainsKey(formId) == false)
+            if (_forms.ContainsKey(formId) == false)
                 throw new KeyNotFoundException(nameof(formId));
-            
+
             _forms[formId].Hide();
         }
 

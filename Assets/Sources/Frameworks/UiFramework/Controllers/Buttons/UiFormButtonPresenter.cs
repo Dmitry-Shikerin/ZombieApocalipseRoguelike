@@ -33,9 +33,9 @@ namespace Sources.Frameworks.UiFramework.Controllers.Buttons
 
         public override void Disable()
         {
-            _cancellationTokenSource.Cancel();
-            _uiButtonViewService.Handle(_view.DisableCommandId, _view);
             _view.RemoveClickListener(ShowForm);
+            _uiButtonViewService.Handle(_view.DisableCommandId, _view);
+            _cancellationTokenSource.Cancel();
         }
 
         private async void ShowForm()

@@ -218,6 +218,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<LoadMainMenuSceneCommand>().AsSingle(); 
             Container.Bind<NewGameCommand>().AsSingle();
             Container.Bind<LoadGameCommand>().AsSingle();
+            Container.Bind<ShowLeaderboardCommand>().AsSingle();
             
             //Views
             Container.Bind<UiViewService>().AsSingle();
@@ -233,7 +234,7 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.BindInterfacesTo<AdvertisingService>().AsSingle();
             Container.Bind<IFocusService>().To<FocusService>().AsSingle();
-            Container.Bind<ILeaderBoardInitializeService>().To<YandexLeaderBoardInitializeService>().AsSingle();
+            Container.Bind<ILeaderboardInitializeService>().To<YandexLeaderboardInitializeService>().AsSingle();
             Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
             Container.Bind<IPlayerAccountAuthorizeService>().To<PlayerAccountAuthorizeService>().AsSingle();
             Container.Bind<ISdcInitializeService>().To<SdcInitializeService>().AsSingle();

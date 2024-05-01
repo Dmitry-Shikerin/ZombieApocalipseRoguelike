@@ -14,13 +14,15 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Collect
             CompleteTutorialCommand completeTutorialCommand,
             LoadMainMenuSceneCommand loadMainMenuSceneCommand,
             LoadGameCommand loadGameCommand,
-            NewGameCommand newGameCommand)
+            NewGameCommand newGameCommand,
+            ShowLeaderboardCommand showLeaderBoardCommand)
         {
             _commands[showFormCommand.Id] = showFormCommand;
             _commands[completeTutorialCommand.Id] = completeTutorialCommand;
             _commands[loadMainMenuSceneCommand.Id] = loadMainMenuSceneCommand;
             _commands[loadGameCommand.Id] = loadGameCommand;
             _commands[newGameCommand.Id] = newGameCommand;
+            _commands[showLeaderBoardCommand.Id] = showLeaderBoardCommand;
         }
 
         public void Handle(UiButton uiButton, ButtonCommandId buttonCommandId)

@@ -11,12 +11,12 @@ using Sources.Presentations.UI.Huds;
 
 namespace Sources.Frameworks.YandexSdcFramework.Services.Leaderboards
 {
-    public class YandexLeaderBoardInitializeService : ILeaderBoardInitializeService
+    public class YandexLeaderboardInitializeService : ILeaderboardInitializeService
     {
         private readonly LeaderBoardElementViewFactory _leaderBoardElementViewFactory;
         private IReadOnlyList<LeaderBoardElementView> _leaderBoardElementViews;
         
-        public YandexLeaderBoardInitializeService(MainMenuHud mainMenuHud,
+        public YandexLeaderboardInitializeService(MainMenuHud mainMenuHud,
             LeaderBoardElementViewFactory leaderBoardElementViewFactory)
         {
             if (mainMenuHud == null)

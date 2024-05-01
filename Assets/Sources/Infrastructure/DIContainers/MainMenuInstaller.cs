@@ -97,7 +97,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IUpgradeConfigCollectionService>().To<UpgradeConfigCollectionService>().AsSingle();
             Container.Bind<IVolumeService>().To<VolumeService>().AsSingle();
             Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
-            Container.Bind<ILeaderBoardInitializeService>().To<YandexLeaderBoardInitializeService>().AsSingle();
+            Container.Bind<ILeaderboardInitializeService>().To<YandexLeaderboardInitializeService>().AsSingle();
             Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
             Container.Bind<ILoadService>().To<LoadService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
@@ -123,6 +123,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<LoadMainMenuSceneCommand>().AsSingle(); 
             Container.Bind<NewGameCommand>().AsSingle();
             Container.Bind<LoadGameCommand>().AsSingle();
+            Container.Bind<ShowLeaderboardCommand>().AsSingle();
             
             //Views
             Container.Bind<UiViewService>().AsSingle();
