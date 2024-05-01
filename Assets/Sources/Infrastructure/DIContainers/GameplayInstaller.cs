@@ -4,9 +4,10 @@ using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Frameworks.UiFramework.Domain.Configs.Localizations;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons;
-using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Collectors;
+using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handlers;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms;
-using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Collectors;
+using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Handlers;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
 using Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons;
@@ -22,6 +23,7 @@ using Sources.Frameworks.YandexSdcFramework.Services.PlayerAccounts;
 using Sources.Frameworks.YandexSdcFramework.Services.SdcInitializeServices;
 using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.PlayerAccounts;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
@@ -42,7 +44,6 @@ using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Infrastructure.Factories.Controllers.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
 using Sources.Infrastructure.Factories.Domain.Data;
-using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Bullets;
@@ -138,7 +139,7 @@ namespace Sources.Infrastructure.DIContainers
                 .Bind<EnemySpawnerConfigContainer>()
                 .FromResource("Configs/EnemySpawners/Containers/EnemySpawnerConfigContainer")
                 .AsSingle();
-            Container.Bind<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
+            Container.BindInterfacesAndSelfTo<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<UiCollector>().FromInstance(_gameplayHud.UiCollector).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
             Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
@@ -203,7 +204,7 @@ namespace Sources.Infrastructure.DIContainers
         {
             Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
             
-            Container.Bind<GameplayFormServiceFactory>().AsSingle();
+            Container.Bind<UiCollectorFactory>().AsSingle();
 
             Container.Bind<FormButtonViewFactory>().AsSingle();
 
@@ -211,7 +212,7 @@ namespace Sources.Infrastructure.DIContainers
 
             //Buttons
             Container.Bind<UiButtonViewService>().AsSingle();
-            Container.Bind<ButtonCommandHandler>().AsSingle();
+            Container.Bind<IButtonCommandHandler>().To<GameplayButtonCommandHandler>().AsSingle();
             
             Container.Bind<ShowFormCommand>().AsSingle();
             Container.Bind<CompleteTutorialCommand>().AsSingle();
@@ -219,10 +220,11 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<NewGameCommand>().AsSingle();
             Container.Bind<LoadGameCommand>().AsSingle();
             Container.Bind<ShowLeaderboardCommand>().AsSingle();
+            Container.Bind<EnableLoadGameButtonCommand>().AsSingle();
             
             //Views
             Container.Bind<UiViewService>().AsSingle();
-            Container.Bind<ViewCommandHandler>().AsSingle();
+            Container.Bind<UiViewCommandHandler>().AsSingle();
             
             Container.Bind<UnPauseCommand>().AsSingle();
             Container.Bind<PauseCommand>().AsSingle();

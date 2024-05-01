@@ -7,6 +7,7 @@
         LoadMainMenuScene = 2,
         LoadGame = 3,
         NewGame = 4,
-        Leaderboard = 5
+        Leaderboard = 5,
+        EnableLoadGameButton = 6,
     }
 }

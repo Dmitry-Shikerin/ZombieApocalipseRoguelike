@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using Sources.Frameworks.UiFramework.Domain.Commands;
-using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Collectors;
+using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handlers;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons
 {
     public class UiButtonViewService
     {
-        private readonly ButtonCommandHandler _commandHandler;
+        private readonly IButtonCommandHandler _commandHandler;
 
-        public UiButtonViewService(ButtonCommandHandler commandHandler)
+        public UiButtonViewService(IButtonCommandHandler commandHandler)
         {
             _commandHandler = commandHandler;
         }

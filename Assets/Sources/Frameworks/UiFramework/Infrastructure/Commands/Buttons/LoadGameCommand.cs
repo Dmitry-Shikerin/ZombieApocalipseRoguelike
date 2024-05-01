@@ -33,7 +33,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
             if (_loadService.HasKey(ModelId.PlayerWallet) == false)
                 return;
 
-            SavedLevel savedLevel = _entityRepository.Get(ModelId.SavedLevel) as SavedLevel;
+            SavedLevel savedLevel = _entityRepository.Get<SavedLevel>(ModelId.SavedLevel);
 
             _sceneService.ChangeSceneAsync(
                 savedLevel.SavedLevelId,

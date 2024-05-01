@@ -16,7 +16,7 @@ using UnityEngine.Serialization;
 
 namespace Sources.Presentations.UI.Huds
 {
-    public class GameplayHud : View
+    public class GameplayHud : View, IHud
     {
         [Button(ButtonSizes.Large)]
         [FoldoutGroup("UiCollector")] [Required] [SerializeField]

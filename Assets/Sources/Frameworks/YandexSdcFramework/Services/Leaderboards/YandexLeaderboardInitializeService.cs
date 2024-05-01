@@ -5,6 +5,7 @@ using Agava.YandexGames;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.YandexSDK;
 using Sources.Frameworks.YandexSdcFramework.Presentations.Views;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
 using Sources.Infrastructure.Factories.Views.YandexSDK;
 using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 using Sources.Presentations.UI.Huds;
@@ -16,7 +17,8 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.Leaderboards
         private readonly LeaderBoardElementViewFactory _leaderBoardElementViewFactory;
         private IReadOnlyList<LeaderBoardElementView> _leaderBoardElementViews;
         
-        public YandexLeaderboardInitializeService(MainMenuHud mainMenuHud,
+        public YandexLeaderboardInitializeService(
+            MainMenuHud mainMenuHud,
             LeaderBoardElementViewFactory leaderBoardElementViewFactory)
         {
             if (mainMenuHud == null)
@@ -61,7 +63,6 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.Leaderboards
                         new LeaderBoardPlayer(rank, name, score),
                         _leaderBoardElementViews[i]);
                 }
-
             });
         }
     }

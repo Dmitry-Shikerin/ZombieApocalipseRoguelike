@@ -1,24 +1,24 @@
 ﻿using System.Collections.Generic;
 using Sources.Frameworks.UiFramework.Domain.Commands;
-using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Collectors;
+using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Handlers;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Services.Forms
 {
     public class UiViewService
     {
-        private readonly ViewCommandHandler _viewCommandHandler;
+        private readonly UiViewCommandHandler _uiViewCommandHandler;
 
-        public UiViewService(ViewCommandHandler viewCommandHandler)
+        public UiViewService(UiViewCommandHandler uiViewCommandHandler)
         {
-            _viewCommandHandler = viewCommandHandler;
+            _uiViewCommandHandler = uiViewCommandHandler;
         }
 
         public void Handle(IEnumerable<FormCommandId> commandIds)
         {
             foreach (FormCommandId commandId in commandIds)
             {
-                _viewCommandHandler.Handle(commandId);
+                _uiViewCommandHandler.Handle(commandId);
             }
         }
     }

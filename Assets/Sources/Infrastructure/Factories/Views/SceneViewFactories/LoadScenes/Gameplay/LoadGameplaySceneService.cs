@@ -13,9 +13,9 @@ using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
 using Sources.Domain.Models.Weapons;
 using Sources.DomainInterfaces.Payloads;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
-using Sources.Infrastructure.Factories.Services.FormServices;
-using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
 using Sources.Infrastructure.Factories.Views.Characters;
@@ -52,7 +52,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
         public LoadGameplaySceneService(
             GameplayHud gameplayHud, 
-            GameplayFormServiceFactory gameplayFormServiceFactory, 
+            UiCollectorFactory uiCollectorFactory, 
             CharacterViewFactory characterViewFactory, 
             BearViewFactory bearViewFactory, 
             UpgradeViewFactory upgradeViewFactory, 
@@ -77,10 +77,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ISaveService saveService,
             ILevelCompletedService levelCompletedService,
             ITutorialService tutorialService,
-            IAdvertisingService advertisingService) 
+            IAdvertisingService advertisingService,
+            IFormService formService) 
             : base(
                 gameplayHud, 
-                gameplayFormServiceFactory, 
+                uiCollectorFactory, 
                 characterViewFactory, 
                 bearViewFactory, 
                 upgradeViewFactory, 
@@ -105,7 +106,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 saveService,
                 levelCompletedService,
                 tutorialService,
-                advertisingService)
+                advertisingService,
+                formService)
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
