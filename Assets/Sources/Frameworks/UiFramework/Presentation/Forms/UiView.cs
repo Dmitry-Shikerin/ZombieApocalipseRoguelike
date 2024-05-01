@@ -34,11 +34,11 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         private CustomFormId _customFormId = CustomFormId.Default;
 
         [TabGroup("OnEnable")] [HideLabel]
-        [LabelText("Enabled Forms")] [SerializeField] private List<FormId> _onEnableEnabledForms = new List<FormId>();
+        [LabelText("Enabled Forms")] 
+        [SerializeField] private List<FormId> _onEnableEnabledForms = new List<FormId>();
 
         [TabGroup("OnEnable")] [HideLabel] [LabelText("Disabled Forms")]
-        [SerializeField]
-        private List<FormId> _onEnableDisabledForms = new List<FormId>();
+        [SerializeField] private List<FormId> _onEnableDisabledForms = new List<FormId>();
 
         [TabGroup("OnDisable")] [HideLabel] [LabelText("Enabled Forms")] [SerializeField]
         private List<FormId> _onDisableEnabledForms = new List<FormId>();
