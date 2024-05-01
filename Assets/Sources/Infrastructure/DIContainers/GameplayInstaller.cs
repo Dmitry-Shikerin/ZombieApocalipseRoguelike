@@ -227,27 +227,6 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<PauseCommand>().AsSingle();
             Container.Bind<SaveVolumeCommand>().AsSingle();
             Container.Bind<ClearSavesCommand>().AsSingle();
-
-            // Container.Bind<UiContainerCustomServiceCollection>().AsSingle();
-            // Container.Bind<UiContainerGameOverService>().AsSingle();
-            // Container.Bind<FromLevelCompletedToMeinMenuSceneButtonClickService>().AsSingle();
-            // Container.Bind<CustomButtonClickServiceCollection>().AsSingle();
-            // Container.Bind<FromSettingsToPauseButtonClickService>().AsSingle();
-            // Container.Bind<LoadGameButtonClickService>().AsSingle();
-            // Container.Bind<FromSettingsToHudButtonClickService>().AsSingle();
-            // Container.Bind<LeaderBoardButtonClickService>().AsSingle();
-            // Container.Bind<FromWarningToNewGameButtonClickService>().AsSingle();
-            // Container.Bind<NewGameButtonClickService>().AsSingle();
-            // Container.Bind<CompleteTutorialButtonClickService>().AsSingle();
-            // Container.Bind<LoadMainMenuButtonClickService>().AsSingle();
-            // Container.Bind<UiFormButtonClickService>().AsSingle();
-            // Container.Bind<ButtonServiceCollection>().AsSingle();
-            // Container.Bind<PauseButtonService>().AsSingle();
-            // Container.Bind<VoidButtonService>().AsSingle();
-            //
-            // Container.Bind<UiContainerServicesCollection>().AsSingle();
-            // Container.Bind<UiContainerPauseService>().AsSingle();
-            // Container.Bind<UiContainerVoidService>().AsSingle();
         }
 
         private void BindSdcServices()

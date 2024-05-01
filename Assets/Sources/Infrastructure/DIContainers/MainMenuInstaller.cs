@@ -3,8 +3,14 @@ using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Frameworks.UiFramework.Domain.Configs.Localizations;
+using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons;
+using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Collectors;
+using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms;
+using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Collectors;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
+using Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons;
+using Sources.Frameworks.UiFramework.Infrastructure.Services.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Services.Forms;
 using Sources.Frameworks.UiFramework.Services.Localizations;
@@ -108,6 +114,24 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<UiContainerFactory>().AsSingle();
 
+            //Buttons
+            Container.Bind<UiButtonViewService>().AsSingle();
+            Container.Bind<ButtonCommandHandler>().AsSingle();
+            
+            Container.Bind<ShowFormCommand>().AsSingle();
+            Container.Bind<CompleteTutorialCommand>().AsSingle();
+            Container.Bind<LoadMainMenuSceneCommand>().AsSingle(); 
+            Container.Bind<NewGameCommand>().AsSingle();
+            Container.Bind<LoadGameCommand>().AsSingle();
+            
+            //Views
+            Container.Bind<UiViewService>().AsSingle();
+            Container.Bind<ViewCommandHandler>().AsSingle();
+            
+            Container.Bind<UnPauseCommand>().AsSingle();
+            Container.Bind<PauseCommand>().AsSingle();
+            Container.Bind<SaveVolumeCommand>().AsSingle();
+            Container.Bind<ClearSavesCommand>().AsSingle();
         }
 
         private void BindMainMenuLoadService()
