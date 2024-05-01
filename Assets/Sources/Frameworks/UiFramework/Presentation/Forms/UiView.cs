@@ -8,52 +8,103 @@ using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Forms
 {
-    public class UiView : PresentableView<UiContainerPresenter>, IUiView
+    public class UiView : PresentableView<UiViewPresenter>, IUiView
     {
-        [DisplayAsString(false)] [HideLabel] [Indent(8)]
-        [SerializeField] private string _label = UiConstant.UiContainerLabel;
-        
+        [DisplayAsString(false)] [HideLabel] [Indent(8)] [SerializeField]
+        private string _label = UiConstant.UiContainerLabel;
+
+        [TabGroup("Showed Settings")] [EnumToggleButtons] [HideLabel] [LabelText("Enabled GameObject")] [SerializeField]
+        private Enable _enabledGameObject;
+
         [TabGroup("Showed Settings")]
-        [EnumToggleButtons] [HideLabel] [LabelText("Enabled GameObject")]
-        [SerializeField] private Enable _enabledGameObject;
-        
-        [TabGroup("Showed Settings")]
-        [EnumToggleButtons] [HideLabel] [LabelText("Enabled CanvasGroup")]
+        [EnumToggleButtons] [HideLabel] [LabelText("Enabled CanvasGroup")] 
         [SerializeField] private Enable _EnabledCanvasGroup;
-        
-        [TabGroup("Type")] [EnumToggleButtons]
-        [SerializeField] private ContainerType _containerType = ContainerType.Form;
-        
-        [TabGroup("Type")] [EnableIf(nameof(_customFormId), CustomFormId.Default)]
-        [SerializeField] private FormId _formId;
-        
-        [TabGroup("Type")] [EnableIf(nameof(_formId), FormId.Default)]
-        [SerializeField] private CustomFormId _customFormId = CustomFormId.Default;
-        
-        [TabGroup("Enabled Settings")]
-        [SerializeField] private List<FormId> _enabledForms = new List<FormId>();
-        
-        [TabGroup("Enabled Settings")]
-        [SerializeField] private List<FormId> _disabledForms = new List<FormId>();
-        
-        [Space(10)]
-        [TabGroup("Enabled Settings")]
-        [SerializeField] private List<FormCommandId> _enabledFormCommads = new List<FormCommandId>();
-        
-        [TabGroup("Enabled Settings")]
-        [SerializeField] private List<FormCommandId> _disabledFormCommands = new List<FormCommandId>();
-        
-        public string Label => _label;
+
+        [TabGroup("Type")] [EnumToggleButtons] [SerializeField]
+        private ContainerType _containerType = ContainerType.Form;
+
+        [TabGroup("Type")] [EnableIf(nameof(_customFormId), CustomFormId.Default)] [SerializeField]
+        private FormId _formId;
+
+        [TabGroup("Type")] [EnableIf(nameof(_formId), FormId.Default)] [SerializeField]
+        private CustomFormId _customFormId = CustomFormId.Default;
+
+        [TabGroup("OnEnable")] [HideLabel]
+        [LabelText("Enabled Forms")] [SerializeField] private List<FormId> _onEnableEnabledForms = new List<FormId>();
+
+        [TabGroup("OnEnable")] [HideLabel] [LabelText("Disabled Forms")]
+        [SerializeField]
+        private List<FormId> _onEnableDisabledForms = new List<FormId>();
+
+        [TabGroup("OnDisable")] [HideLabel] [LabelText("Enabled Forms")] [SerializeField]
+        private List<FormId> _onDisableEnabledForms = new List<FormId>();
+
+        [TabGroup("OnDisable")] [HideLabel] [LabelText("Disabled Forms")] [SerializeField]
+        private List<FormId> _onDisableDisabledForms = new List<FormId>();
+
+        [TabGroup("Commands")] [SerializeField]
+        private List<FormCommandId> _enabledFormCommands = new List<FormCommandId>();
+
+        [TabGroup("Commands")] [SerializeField]
+        private List<FormCommandId> _disabledFormCommands = new List<FormCommandId>();
+
         public Enable EnabledGameObject => _enabledGameObject;
         public Enable EnabledCanvasGroup => _EnabledCanvasGroup;
         public ContainerType ContainerType => _containerType;
-        public List<FormId> EnabledForms => _enabledForms;
-        public List<FormId> DisabledForms => _disabledForms;
-        
+        public IReadOnlyList<FormId> OnEnableEnabledForms => _onEnableEnabledForms;
+        public IReadOnlyList<FormId> OnEnableDisabledForms => _onEnableDisabledForms;
+        public IReadOnlyList<FormId> OnDisableEnabledForms => _onDisableEnabledForms;
+        public IReadOnlyList<FormId> OnDisableDisabledForms => _onDisableDisabledForms;
+
+        public IReadOnlyList<FormCommandId> EnabledFormCommands => _enabledFormCommands;
+        public IReadOnlyList<FormCommandId> DisabledFormCommands => _disabledFormCommands;
+
         public FormId FormId => _formId;
         public CustomFormId CustomFormId => _customFormId;
+
+        [TabGroup("OnEnable")]  [Button] 
+        private void AddAllOnEnableEnabledForms() =>
+            _onEnableEnabledForms = AddAllForms();
+        
+        [TabGroup("OnEnable")] [Button]
+        private void AddAllOnEnableDisabledForms() =>
+            _onEnableDisabledForms = AddAllForms();
+        
+        [TabGroup("OnDisable")] [Button]
+        private void AddAllOnDisableEnabledForms() =>
+            _onDisableEnabledForms = AddAllForms();
+        [TabGroup("OnDisable")] [Button]
+        private void AddAllOnDisableDisabledForms() =>
+            _onDisableDisabledForms = AddAllForms();
+
+        private List<FormId> AddAllForms()
+        {
+            return new List<FormId>()
+            {
+                FormId.Default,
+                FormId.Hud,
+                FormId.Pause,
+                FormId.Settings,
+                FormId.Upgrade,
+                FormId.GameOver,
+                FormId.LevelCompleted,
+                FormId.GreetingTutorial,
+                FormId.HealthBarTutorial,
+                FormId.KillEnemyCounterTutorial,
+                FormId.SaveTutorial,
+                FormId.RewardTutorial,
+                FormId.EnemySpawnPointsTutorial,
+                FormId.UpgradeFormTopAbilitiesTutorial,
+                FormId.UpgradeFormBottomAbilitiesTutorial,
+                FormId.WarningNewGame,
+                FormId.NewGame,
+                FormId.Authorization,
+                FormId.Leaderboard,
+            };
+        }
     }
 }

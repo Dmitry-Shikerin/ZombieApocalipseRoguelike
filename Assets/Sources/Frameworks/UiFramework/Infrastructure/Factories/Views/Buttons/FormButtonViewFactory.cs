@@ -1,33 +1,24 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Controllers.Buttons;
-using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices;
-using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.ButtonServices.Controllers;
+using Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
-using Sources.Frameworks.UiFramework.Services.Forms;
-using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons
 {
     public class FormButtonViewFactory
     {
-        private readonly FormService _formService;
-        private readonly ButtonServiceCollection _buttonServiceCollection;
-        private readonly UiFormButtonClickService _uiFormButtonClickService;
+        private readonly UiButtonViewService _uiButtonViewService;
 
         public FormButtonViewFactory(
-            FormService formService,
-            ButtonServiceCollection buttonServiceCollection,
-            UiFormButtonClickService uiFormButtonClickService)
+            UiButtonViewService uiButtonViewService)
         {
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
-            _buttonServiceCollection = buttonServiceCollection ?? throw new ArgumentNullException(nameof(buttonServiceCollection));
-            _uiFormButtonClickService = uiFormButtonClickService ?? throw new ArgumentNullException(nameof(uiFormButtonClickService));
+            _uiButtonViewService = uiButtonViewService ?? throw new ArgumentNullException(nameof(uiButtonViewService));
         }
 
         public UiButton Create(UiButton view)
         {
             UiFormButtonPresenter presenter = new UiFormButtonPresenter(
-                view, _formService, _buttonServiceCollection, _uiFormButtonClickService);
+                view, _uiButtonViewService);
             
             view.Construct(presenter);
 

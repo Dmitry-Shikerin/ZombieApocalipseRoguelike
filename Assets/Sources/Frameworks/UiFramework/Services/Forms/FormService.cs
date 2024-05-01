@@ -43,6 +43,22 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
             _customForms[formId].Hide();
         }
 
+        public void ShowOneForm(FormId formId)
+        {
+            if(_forms.ContainsKey(formId) == false)
+                throw new KeyNotFoundException(nameof(formId));
+            
+            _forms[formId].Show();
+        }
+
+        public void HideOneForm(FormId formId)
+        {
+            if(_forms.ContainsKey(formId) == false)
+                throw new KeyNotFoundException(nameof(formId));
+            
+            _forms[formId].Hide();
+        }
+
         public void Show(FormId formId)
         {
             if (_forms.ContainsKey(formId) == false)
