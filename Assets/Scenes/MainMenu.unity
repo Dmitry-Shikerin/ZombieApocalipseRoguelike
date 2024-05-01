@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4843,16 +4843,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
       propertyPath: _buttonId
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
       propertyPath: _buttonType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
       propertyPath: _audioSource
       value: 
       objectReference: {fileID: 1808870388}
+    - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
+      propertyPath: enableCommandId.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
+      propertyPath: _onClickCommandId.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
+      propertyPath: enableCommandId.Array.data[0]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
+      propertyPath: _onClickCommandId.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8982510513915497034, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
       propertyPath: m_SizeDelta.y
       value: -23.8467
@@ -5514,6 +5530,10 @@ PrefabInstance:
       propertyPath: _audioSource
       value: 
       objectReference: {fileID: 145062949}
+    - target: {fileID: 8022792747750523976, guid: f7eb3726ac576c747824419e6dafee42, type: 3}
+      propertyPath: _onClickCommandId.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8060894791707502294, guid: f7eb3726ac576c747824419e6dafee42, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9194,8 +9214,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
+      propertyPath: _formId
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
       propertyPath: _buttonId
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
       propertyPath: _buttonType
@@ -9205,6 +9229,18 @@ PrefabInstance:
       propertyPath: _audioSource
       value: 
       objectReference: {fileID: 1808870388}
+    - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
+      propertyPath: _onClickCommandId.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
+      propertyPath: _onClickCommandId.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8383241175205843630, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
+      propertyPath: _animationFps
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 9176196232974405322, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
       propertyPath: _audioSource
       value: 
@@ -9610,6 +9646,10 @@ PrefabInstance:
       propertyPath: _audioSource
       value: 
       objectReference: {fileID: 1808870388}
+    - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
+      propertyPath: _onClickCommandId.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8982510513915497034, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
       propertyPath: m_SizeDelta.y
       value: -23.8467
@@ -9928,8 +9968,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
+      propertyPath: _formId
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
       propertyPath: _buttonId
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
       propertyPath: _buttonType
@@ -9939,6 +9983,10 @@ PrefabInstance:
       propertyPath: _audioSource
       value: 
       objectReference: {fileID: 1808870388}
+    - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
+      propertyPath: _onClickCommandId.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9176196232974405322, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
       propertyPath: _audioSource
       value: 
@@ -10024,6 +10072,10 @@ PrefabInstance:
       propertyPath: _audioSource
       value: 
       objectReference: {fileID: 1808870388}
+    - target: {fileID: 8022792747750523976, guid: f7eb3726ac576c747824419e6dafee42, type: 3}
+      propertyPath: _onClickCommandId.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8060894791707502294, guid: f7eb3726ac576c747824419e6dafee42, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12022,6 +12074,10 @@ PrefabInstance:
       propertyPath: _onClickCommandId.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
+      propertyPath: _onClickCommandId.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8982510513915497034, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
       propertyPath: m_SizeDelta.y
       value: -25.6203
@@ -13043,6 +13099,10 @@ PrefabInstance:
       propertyPath: _audioSource
       value: 
       objectReference: {fileID: 1808870388}
+    - target: {fileID: 7095290984745475698, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
+      propertyPath: _onClickCommandId.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8982510513915497034, guid: 803394db75f9ed14e9f5711eefbb861a, type: 3}
       propertyPath: m_SizeDelta.y
       value: -23.8467
@@ -14609,7 +14669,7 @@ MonoBehaviour:
   _onEnableDisabledForms: 010000000f000000030000001100000012000000
   _onDisableEnabledForms: 
   _onDisableDisabledForms: 
-  _enabledFormCommands: 
+  _enabledFormCommands: 04000000
   _disabledFormCommands: 
 --- !u!1001 &2138594079
 PrefabInstance:

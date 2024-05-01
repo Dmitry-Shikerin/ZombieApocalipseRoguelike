@@ -17,8 +17,8 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         [DisplayAsString(false)] [HideLabel] [Indent(8)] [SerializeField]
         private string _label = UiConstant.UiContainerLabel;
 
-        [TabGroup("Showed Settings")] [EnumToggleButtons] [HideLabel] [LabelText("Enabled GameObject")] [SerializeField]
-        private Enable _enabledGameObject;
+        [TabGroup("Showed Settings")] [EnumToggleButtons] [HideLabel] [LabelText("Enabled GameObject")] 
+        [SerializeField] private Enable _enabledGameObject;
 
         [TabGroup("Showed Settings")]
         [EnumToggleButtons] [HideLabel] [LabelText("Enabled CanvasGroup")] 
@@ -33,24 +33,23 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         [TabGroup("Type")] [EnableIf(nameof(_formId), FormId.Default)] [SerializeField]
         private CustomFormId _customFormId = CustomFormId.Default;
 
-        [TabGroup("OnEnable")] [HideLabel]
-        [LabelText("Enabled Forms")] 
-        [SerializeField] private List<FormId> _onEnableEnabledForms = new List<FormId>();
+        [TabGroup("OnEnable")] [HideLabel] [LabelText("Enabled Forms")] 
+        [SerializeField] private List<FormId> _onEnableEnabledForms;
 
         [TabGroup("OnEnable")] [HideLabel] [LabelText("Disabled Forms")]
-        [SerializeField] private List<FormId> _onEnableDisabledForms = new List<FormId>();
+        [SerializeField] private List<FormId> _onEnableDisabledForms;
 
-        [TabGroup("OnDisable")] [HideLabel] [LabelText("Enabled Forms")] [SerializeField]
-        private List<FormId> _onDisableEnabledForms = new List<FormId>();
+        [TabGroup("OnDisable")] [HideLabel] [LabelText("Enabled Forms")] 
+        [SerializeField] private List<FormId> _onDisableEnabledForms;
 
-        [TabGroup("OnDisable")] [HideLabel] [LabelText("Disabled Forms")] [SerializeField]
-        private List<FormId> _onDisableDisabledForms = new List<FormId>();
+        [TabGroup("OnDisable")] [HideLabel] [LabelText("Disabled Forms")]
+        [SerializeField] private List<FormId> _onDisableDisabledForms;
 
-        [TabGroup("Commands")] [SerializeField]
-        private List<FormCommandId> _enabledFormCommands = new List<FormCommandId>();
+        [TabGroup("Commands")] 
+        [SerializeField] private List<FormCommandId> _enabledFormCommands;
 
-        [TabGroup("Commands")] [SerializeField]
-        private List<FormCommandId> _disabledFormCommands = new List<FormCommandId>();
+        [TabGroup("Commands")] 
+        [SerializeField] private List<FormCommandId> _disabledFormCommands;
 
         public Enable EnabledGameObject => _enabledGameObject;
         public Enable EnabledCanvasGroup => _EnabledCanvasGroup;

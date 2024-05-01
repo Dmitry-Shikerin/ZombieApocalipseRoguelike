@@ -4,10 +4,11 @@ using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
 using Sources.DomainInterfaces.Payloads;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 using Sources.Infrastructure.Factories.Services.FormServices;
-using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
 using Sources.Infrastructure.Factories.Views.Characters;
@@ -43,7 +44,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
     {
         private readonly GameplayHud _gameplayHud;
         private readonly MVPGameplayFormServiceFactory _mvpGameplayFormServiceFactory;
-        private readonly GameplayFormServiceFactory _gameplayFormServiceFactory;
+        private readonly UiCollectorFactory _uiCollectorFactory;
         private readonly CharacterViewFactory _characterViewFactory;
         private readonly BearViewFactory _bearViewFactory;
         private readonly UpgradeViewFactory _upgradeViewFactory;
@@ -69,9 +70,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ILevelCompletedService _levelCompletedService;
         private readonly ITutorialService _tutorialService;
         private readonly IAdvertisingService _advertisingService;
+        private readonly IFormService _formService;
 
         protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
-            GameplayFormServiceFactory gameplayFormServiceFactory,
+            UiCollectorFactory uiCollectorFactory,
             CharacterViewFactory characterViewFactory,
             BearViewFactory bearViewFactory,
             UpgradeViewFactory upgradeViewFactory,
@@ -96,10 +98,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ISaveService saveService,
             ILevelCompletedService levelCompletedService,
             ITutorialService tutorialService,
-            IAdvertisingService advertisingService)
+            IAdvertisingService advertisingService,
+            IFormService formService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
-            _gameplayFormServiceFactory = gameplayFormServiceFactory ?? throw new ArgumentNullException(nameof(gameplayFormServiceFactory));
+            _uiCollectorFactory = uiCollectorFactory ?? throw new ArgumentNullException(nameof(uiCollectorFactory));
             _characterViewFactory = characterViewFactory ?? 
                                     throw new ArgumentNullException(nameof(characterViewFactory));
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
@@ -135,6 +138,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _levelCompletedService = levelCompletedService ?? throw new ArgumentNullException(nameof(levelCompletedService));
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _advertisingService = advertisingService ?? throw new ArgumentNullException(nameof(advertisingService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public void Load(IScenePayload scenePayload)
@@ -162,9 +166,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _saveService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
             
             //FormService
-            _gameplayFormServiceFactory
-                .Create()
-                .Show(FormId.Hud);
+            _uiCollectorFactory.Create();
+            _formService.ShowOneForm(FormId.Hud);
 
             //Upgrades
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();

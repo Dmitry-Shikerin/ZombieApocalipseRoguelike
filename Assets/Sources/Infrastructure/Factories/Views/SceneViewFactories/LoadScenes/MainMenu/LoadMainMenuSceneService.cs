@@ -4,8 +4,8 @@ using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Setting;
 using Sources.DomainInterfaces.Payloads;
-using Sources.Infrastructure.Factories.Services.FormServices;
-using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
@@ -30,14 +30,16 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             IVolumeService volumeService,
             BackgroundMusicViewFactory backgroundMusicViewFactory, 
             LevelAvailabilityViewFactory levelAvailabilityViewFactory,
-            MainMenuFormServiceFactory mainMenuFormServiceFactory) 
+            UiCollectorFactory uiCollectorFactory,
+            IFormService formService) 
             : base(
                 mainMenuHud, 
                 volumeViewFactory, 
                 volumeService, 
                 backgroundMusicViewFactory, 
                 levelAvailabilityViewFactory,
-                mainMenuFormServiceFactory)
+                uiCollectorFactory,
+                formService)
         {
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));

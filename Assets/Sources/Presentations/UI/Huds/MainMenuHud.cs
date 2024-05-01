@@ -14,7 +14,7 @@ using UnityEngine.Serialization;
 
 namespace Sources.Presentations.UI.Huds
 {
-    public class MainMenuHud: View
+    public class MainMenuHud: View, IHud
     {
         [FormerlySerializedAs("_mainMenuHudFormView")]
         [Button(ButtonSizes.Large)]

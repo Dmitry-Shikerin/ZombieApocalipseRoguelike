@@ -4,9 +4,10 @@ using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Frameworks.UiFramework.Domain.Configs.Localizations;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons;
-using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Collectors;
+using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handlers;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms;
-using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Collectors;
+using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Handlers;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
 using Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons;
@@ -16,16 +17,20 @@ using Sources.Frameworks.UiFramework.Services.Forms;
 using Sources.Frameworks.UiFramework.Services.Localizations;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Frameworks.YandexSdcFramework.Services.Leaderboards;
+using Sources.Frameworks.YandexSdcFramework.Services.PlayerAccounts;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.PlayerAccounts;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Settings;
+using Sources.Infrastructure.Factories.Controllers.YandexSDK;
 using Sources.Infrastructure.Factories.Domain.Data;
-using Sources.Infrastructure.Factories.Services.UiFramework.Forms;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.MainMenu;
 using Sources.Infrastructure.Factories.Views.Settings;
+using Sources.Infrastructure.Factories.Views.YandexSDK;
 using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.Infrastructure.Services.LoadServices;
 using Sources.Infrastructure.Services.LoadServices.Data;
@@ -56,7 +61,7 @@ namespace Sources.Infrastructure.DIContainers
 
         public override void InstallBindings()
         {
-            Container.Bind<MainMenuHud>().FromInstance(_mainMenuHud).AsSingle();
+            Container.BindInterfacesAndSelfTo<MainMenuHud>().FromInstance(_mainMenuHud).AsSingle();
             Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
             Container.Bind<UiCollector>().FromInstance(_mainMenuHud.UiCollector).AsSingle();
             Container.BindInterfacesAndSelfTo<MainMenuSceneFactory>().AsSingle();
@@ -97,18 +102,21 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IUpgradeConfigCollectionService>().To<UpgradeConfigCollectionService>().AsSingle();
             Container.Bind<IVolumeService>().To<VolumeService>().AsSingle();
             Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
-            Container.Bind<ILeaderBoardInitializeService>().To<YandexLeaderBoardInitializeService>().AsSingle();
+            Container.Bind<ILeaderboardInitializeService>().To<YandexLeaderboardInitializeService>().AsSingle();
             Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
             Container.Bind<ILoadService>().To<LoadService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
             Container.Bind<ILocalizationService>().To<LocalizationService>().AsSingle();
+            Container.Bind<IPlayerAccountAuthorizeService>().To<PlayerAccountAuthorizeService>().AsSingle();
+            Container.Bind<LeaderBoardElementViewFactory>().AsSingle();
+            Container.Bind<LeaderBoardElementPresenterFactory>().AsSingle();
         }
         
         private void BindFormFactories()
         {
             Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
             
-            Container.Bind<MainMenuFormServiceFactory>().AsSingle();
+            Container.Bind<UiCollectorFactory>().AsSingle();
 
             Container.Bind<FormButtonViewFactory>().AsSingle();
 
@@ -116,17 +124,19 @@ namespace Sources.Infrastructure.DIContainers
 
             //Buttons
             Container.Bind<UiButtonViewService>().AsSingle();
-            Container.Bind<ButtonCommandHandler>().AsSingle();
+            Container.Bind<IButtonCommandHandler>().To<MainMenuButtonCommandHandler>().AsSingle();
             
             Container.Bind<ShowFormCommand>().AsSingle();
             Container.Bind<CompleteTutorialCommand>().AsSingle();
             Container.Bind<LoadMainMenuSceneCommand>().AsSingle(); 
             Container.Bind<NewGameCommand>().AsSingle();
             Container.Bind<LoadGameCommand>().AsSingle();
+            Container.Bind<ShowLeaderboardCommand>().AsSingle();
+            Container.Bind<EnableLoadGameButtonCommand>().AsSingle();
             
             //Views
             Container.Bind<UiViewService>().AsSingle();
-            Container.Bind<ViewCommandHandler>().AsSingle();
+            Container.Bind<UiViewCommandHandler>().AsSingle();
             
             Container.Bind<UnPauseCommand>().AsSingle();
             Container.Bind<PauseCommand>().AsSingle();

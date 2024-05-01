@@ -4,24 +4,34 @@ using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
+using Sources.Presentations.UI.Huds;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms
 {
-    public class FormServiceFactoryBase
+    public class UiCollectorFactory
     {
         private readonly FormButtonViewFactory _formButtonViewFactory;
         private readonly UiContainerFactory _uiContainerFactory;
+        private readonly IHud _hud;
 
-        protected FormServiceFactoryBase(
+        protected UiCollectorFactory(
             FormButtonViewFactory formButtonViewFactory,
-            UiContainerFactory uiContainerFactory)
+            UiContainerFactory uiContainerFactory,
+            IHud hud)
         {
             _formButtonViewFactory = formButtonViewFactory ??
                                      throw new ArgumentNullException(nameof(formButtonViewFactory));
             _uiContainerFactory = uiContainerFactory ?? throw new ArgumentNullException(nameof(uiContainerFactory));
+            _hud = hud ?? throw new ArgumentNullException(nameof(hud));
         }
 
-        protected void CreateFormButtons(IEnumerable<UiButton> formButtons)
+        public void Create()
+        {
+            CreateFormButtons(_hud.UiCollector.UiFormButtons);
+            CreateUiContainers(_hud.UiCollector.UiContainers);
+        }
+
+        private void CreateFormButtons(IEnumerable<UiButton> formButtons)
         {
             foreach (UiButton formButton in formButtons)
             {
@@ -29,7 +39,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms
             }
         }
 
-        protected void CreateUiContainers(IEnumerable<UiView> containers)
+        private void CreateUiContainers(IEnumerable<UiView> containers)
         {
             foreach (UiView container in containers)
             {

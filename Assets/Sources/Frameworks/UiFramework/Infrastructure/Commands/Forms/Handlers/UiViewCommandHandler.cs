@@ -2,13 +2,13 @@
 using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands;
 
-namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Collectors
+namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Handlers
 {
-    public class ViewCommandHandler
+    public class UiViewCommandHandler
     {
         private readonly Dictionary<FormCommandId, IViewCommand> _commands = new Dictionary<FormCommandId, IViewCommand>();
         
-        public ViewCommandHandler(
+        public UiViewCommandHandler(
             PauseCommand pauseCommand,
             UnPauseCommand unPauseCommand,
             SaveVolumeCommand saveVolumeCommand,
