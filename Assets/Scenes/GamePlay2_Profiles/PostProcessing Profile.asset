@@ -65,8 +65,8 @@ MonoBehaviour:
   - {fileID: 2975487861073763222}
   - {fileID: -6444665161327756995}
   - {fileID: 7069734896192283889}
-  - {fileID: 1098761485392078678}
---- !u!114 &1098761485392078678
+  - {fileID: 2937859263659007513}
+--- !u!114 &2937859263659007513
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,13 +87,13 @@ MonoBehaviour:
     value: {x: 50, y: 95}
   minLuminance:
     overrideState: 1
-    value: -1
+    value: 1
   maxLuminance:
     overrideState: 1
-    value: 1
+    value: 3
   keyValue:
-    overrideState: 1
-    value: 0.15
+    overrideState: 0
+    value: 1.5
   eyeAdaptation:
     overrideState: 0
     value: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a79b01ea5641d4aa6daa2e23605641, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
@@ -208,7 +208,7 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   colorFilter:
-    overrideState: 0
+    overrideState: 1
     value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     overrideState: 0
@@ -233,7 +233,7 @@ MonoBehaviour:
     value: 0
   mixerRedOutBlueIn:
     overrideState: 0
-    value: 0
+    value: 10
   mixerGreenOutRedIn:
     overrideState: 0
     value: 0
