@@ -21,5 +21,6 @@
         NewGame = 16,
         Authorization = 17,
         Leaderboard = 18,
+        Save = 19,
     }
 }
