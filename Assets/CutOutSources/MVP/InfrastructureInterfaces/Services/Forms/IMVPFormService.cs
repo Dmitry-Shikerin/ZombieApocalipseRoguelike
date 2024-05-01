@@ -5,11 +5,11 @@ namespace Sources.InfrastructureInterfaces.Services.Forms
     public interface IMVPFormService
     {
         void Show<T>()
-            where T : IUiContainer;
+            where T : IUiView;
 
         void Show(string formName);
 
         void Hide<T>()
-            where T : IUiContainer;
+            where T : IUiView;
     }
 }

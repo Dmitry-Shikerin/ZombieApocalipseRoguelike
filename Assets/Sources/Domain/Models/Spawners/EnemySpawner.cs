@@ -43,7 +43,7 @@ namespace Sources.Domain.Models.Spawners
         //TODO это тоже сохранять
         public int BossesInLevel { get; }
         public int SpawnedEnemies { get; set; }
-        public int CurrentStepDelay { get; set; }
+        public int CurrentWave { get; set; }
 
         private int GetSumEnemyes()
         {

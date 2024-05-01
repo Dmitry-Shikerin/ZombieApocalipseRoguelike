@@ -118,6 +118,9 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<UiContainerFactory>().AsSingle();
 
+            Container.Bind<UiContainerCustomServiceCollection>().AsSingle();
+            Container.Bind<UiContainerGameOverService>().AsSingle();
+            Container.Bind<FromLevelCompletedToMeinMenuSceneButtonClickService>().AsSingle();
             Container.Bind<CustomButtonClickServiceCollection>().AsSingle();
             Container.Bind<FromSettingsToPauseButtonClickService>().AsSingle();
             Container.Bind<LoadGameButtonClickService>().AsSingle();

@@ -9,6 +9,6 @@ namespace Sources.Frameworks.UiFramework.ServicesInterfaces.Forms
         void Hide(FormId formId);
         void ShowCustomContainer(CustomFormId formId);
         void HideCustomContainer(CustomFormId formId);
-        void Add(IUiContainer uiContainer, string name = null, bool isSetParent = false);
+        void Add(IUiView uiView, string name = null, bool isSetParent = false);
     }
 }
