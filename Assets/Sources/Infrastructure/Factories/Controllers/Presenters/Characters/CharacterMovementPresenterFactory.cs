@@ -1,5 +1,4 @@
 ﻿using System;
-using Sources.Controllers.Characters.Movements;
 using Sources.Controllers.Characters.Movements.States;
 using Sources.Controllers.Presenters.Characters.Movements;
 using Sources.Domain.Models.Characters;
@@ -8,10 +7,8 @@ using Sources.Infrastructure.StateMachines.ContextStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Character;
-using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace Sources.Infrastructure.Factories.Controllers.Characters
+namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
 {
     public class CharacterMovementPresenterFactory
     {

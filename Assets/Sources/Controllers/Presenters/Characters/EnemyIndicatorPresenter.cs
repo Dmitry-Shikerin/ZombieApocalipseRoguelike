@@ -87,6 +87,7 @@ namespace Sources.Controllers.Presenters.Characters
                 float angle = Vector3.SignedAngle(Vector3.forward, lookDirection, Vector3.up);
 
                 //TODO почему приходится доворачиввать X и почему я  кручу Y а не Z
+                // _enemyIndicatorView.Arrows[i].SetAngleEuler(new Vector3(0, angle, 0));
                 _enemyIndicatorView.Arrows[i].SetAngleEuler(new Vector3(90, angle, 0));
             }
         }
