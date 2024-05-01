@@ -169,7 +169,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
 
-
             return new GameModels(
                 bearMassAttackUpgrader,
                 bearAttackUpgrader,

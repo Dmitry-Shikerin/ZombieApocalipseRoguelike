@@ -46,7 +46,13 @@ namespace Sources.Infrastructure.Services.InputServices
             if (TryGetLook(out Vector3 look))
                 lookDirection = look;
 
-            InputData.MoveDirection = new Vector3(input.x, 0, input.y);
+            Vector3 cameraForward = Camera.main.transform.forward;
+            cameraForward.y = 0;
+            
+            float angle = Vector3.SignedAngle(Vector3.forward, cameraForward, Vector3.up);
+            Vector3 moveDirection = Quaternion.Euler(0, angle, 0) * new Vector3(input.x, 0, input.y);
+            
+            InputData.MoveDirection =  moveDirection;
             InputData.LookPosition = lookDirection;
             InputData.Speed = speed;
         }

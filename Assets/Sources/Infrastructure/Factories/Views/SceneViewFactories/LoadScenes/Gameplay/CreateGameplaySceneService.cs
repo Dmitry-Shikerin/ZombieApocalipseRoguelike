@@ -148,8 +148,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 volume = new Volume();
                 _entityRepository.Add(volume);
             }
-
-
+            
             Level level = new Level(scenePayload.SceneId, false);
             _entityRepository.Add(level);
 

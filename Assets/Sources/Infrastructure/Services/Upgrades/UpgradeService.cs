@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Upgrades;
+using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Services.Providers;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
@@ -17,6 +19,7 @@ namespace Sources.Infrastructure.Services.Upgrades
         private readonly IUpgradeCollectionService _upgradeCollectionService;
         private readonly UpgradeViewFactory _upgradeViewFactory;
         private readonly UpgradeUiFactory _upgradeUiFactory;
+        private readonly IFormService _formService;
         private readonly IReadOnlyList<UpgradeUi> _upgradeUis;
         private readonly IReadOnlyList<UpgradeView> _upgradeViews;
 
@@ -25,7 +28,8 @@ namespace Sources.Infrastructure.Services.Upgrades
             IUpgradeCollectionService upgradeCollectionService,
             GameplayHud gameplayHud,
             UpgradeViewFactory upgradeViewFactory,
-            UpgradeUiFactory upgradeUiFactory)
+            UpgradeUiFactory upgradeUiFactory,
+            IFormService formService)
         {
             if (gameplayHud == null) 
                 throw new ArgumentNullException(nameof(gameplayHud));
@@ -38,6 +42,7 @@ namespace Sources.Infrastructure.Services.Upgrades
                                   throw new ArgumentNullException(nameof(upgradeViewFactory));
             _upgradeUiFactory = upgradeUiFactory ?? 
                                 throw new ArgumentNullException(nameof(upgradeUiFactory));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _upgradeUis = gameplayHud.UpgradeUis ?? 
                           throw new NullReferenceException(nameof(gameplayHud.UpgradeUis));
             _upgradeViews = gameplayHud.UpgradeViews ?? 
@@ -79,7 +84,7 @@ namespace Sources.Infrastructure.Services.Upgrades
                     _upgradeViewFactory.Create(awaiableUpgraders[i], PlayerWallet, _upgradeViews[i]);
                 }
                 
-                // _viewFormService.Show<UpgradeFormView>();
+                _formService.ShowOneForm(FormId.Upgrade);
             }
         }
     }

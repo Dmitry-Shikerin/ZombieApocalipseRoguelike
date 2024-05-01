@@ -8,7 +8,7 @@ using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Bears;
 using UnityEngine;
 
-namespace Sources.Infrastructure.Factories.Controllers.Bears
+namespace Sources.Infrastructure.Factories.Controllers.Presenters.Bears
 {
     public class BearPresenterFactory
     {

@@ -65,18 +65,22 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         public FormId FormId => _formId;
         public CustomFormId CustomFormId => _customFormId;
 
-        [TabGroup("OnEnable")]  [Button] 
+        [TabGroup("OnEnable")]
+        [Button(ButtonSizes.Medium)]
         private void AddAllOnEnableEnabledForms() =>
             _onEnableEnabledForms = AddAllForms();
         
-        [TabGroup("OnEnable")] [Button]
+        [TabGroup("OnEnable")]
+        [Button(ButtonSizes.Medium)]
         private void AddAllOnEnableDisabledForms() =>
             _onEnableDisabledForms = AddAllForms();
         
-        [TabGroup("OnDisable")] [Button]
+        [TabGroup("OnDisable")] 
+        [Button(ButtonSizes.Medium)]
         private void AddAllOnDisableEnabledForms() =>
             _onDisableEnabledForms = AddAllForms();
-        [TabGroup("OnDisable")] [Button]
+        [TabGroup("OnDisable")] 
+        [Button(ButtonSizes.Medium)]
         private void AddAllOnDisableDisabledForms() =>
             _onDisableDisabledForms = AddAllForms();
 

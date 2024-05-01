@@ -49,7 +49,6 @@ namespace Sources.Controllers.Characters.Movements.States
                                            _inputService.InputData.MoveDirection.normalized + 
                                            Physics.gravity;
             
-            
             if(_inputService.InputData.LookPosition == Vector3.zero)
                 return;
 

@@ -6,7 +6,8 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Handlers
 {
     public class UiViewCommandHandler
     {
-        private readonly Dictionary<FormCommandId, IViewCommand> _commands = new Dictionary<FormCommandId, IViewCommand>();
+        private readonly Dictionary<FormCommandId, IViewCommand> _commands = 
+            new Dictionary<FormCommandId, IViewCommand>();
         
         public UiViewCommandHandler(
             PauseCommand pauseCommand,
