@@ -23,12 +23,12 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
             _commands[enableLoadGameButtonCommand.Id] = enableLoadGameButtonCommand;
         }
         
-        public void Handle(UiButton uiButton, ButtonCommandId buttonCommandId)
+        public void Handle(UiUiUiUiButton uiUiUiUiButton, ButtonCommandId buttonCommandId)
         {
             if (_commands.ContainsKey(buttonCommandId) == false)
                 throw new KeyNotFoundException(nameof(buttonCommandId));
 
-            _commands[buttonCommandId].Handle(uiButton);
+            _commands[buttonCommandId].Handle(uiUiUiUiButton);
         }
     }
 }

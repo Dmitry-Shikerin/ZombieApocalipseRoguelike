@@ -71,12 +71,11 @@ namespace Sources.Controllers.Presenters.Scenes
             _levelCompletedService.Enable();
             _tutorialService.Enable();
             //TODO раскоментировать UpgradeService
-            // _upgradeService.Enable();
+            _upgradeService.Enable();
         }
 
         public void Exit()
         {
-            // _upgradeService.Disable();
             _updateService.UnregisterAll();
             _gameOverService.Exit();
             _volumeService.Exit();

@@ -18,12 +18,12 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 
         public ButtonCommandId Id => ButtonCommandId.EnableLoadGameButton;
         
-        public void Handle(UiButton uiButton)
+        public void Handle(UiUiUiUiButton uiUiUiUiButton)
         {
-            uiButton.Show();
+            uiUiUiUiButton.Show();
             
             if (_loadService.HasKey(ModelId.PlayerWallet) == false)
-                uiButton.Hide();
+                uiUiUiUiButton.Hide();
         }
     }
 }

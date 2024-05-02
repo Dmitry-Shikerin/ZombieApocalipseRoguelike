@@ -14,11 +14,11 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons
             _commandHandler = commandHandler;
         }
 
-        public void Handle(IEnumerable<ButtonCommandId> commandIds, UiButton uiButton)
+        public void Handle(IEnumerable<ButtonCommandId> commandIds, UiUiUiUiButton uiUiUiUiButton)
         {
             foreach (ButtonCommandId commandId in commandIds)
             {
-                _commandHandler.Handle(uiButton, commandId);
+                _commandHandler.Handle(uiUiUiUiButton, commandId);
             }
         }
     }

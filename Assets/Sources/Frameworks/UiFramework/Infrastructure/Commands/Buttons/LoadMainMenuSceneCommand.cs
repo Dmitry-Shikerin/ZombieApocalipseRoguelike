@@ -24,7 +24,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 
         public ButtonCommandId Id => ButtonCommandId.LoadMainMenuScene;
         
-        public void Handle(UiButton uiButton)
+        public void Handle(UiUiUiUiButton uiUiUiUiButton)
         {
             SavedLevel savedLevel = _entityRepository.Get<SavedLevel>(ModelId.SavedLevel);
             _sceneService.ChangeSceneAsync(ModelId.MainMenu, new ScenePayload(savedLevel.SavedLevelId, false));

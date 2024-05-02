@@ -31,9 +31,9 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms
             CreateUiContainers(_hud.UiCollector.UiContainers);
         }
 
-        private void CreateFormButtons(IEnumerable<UiButton> formButtons)
+        private void CreateFormButtons(IEnumerable<UiUiUiUiButton> formButtons)
         {
-            foreach (UiButton formButton in formButtons)
+            foreach (UiUiUiUiButton formButton in formButtons)
             {
                 _formButtonViewFactory.Create(formButton);
             }

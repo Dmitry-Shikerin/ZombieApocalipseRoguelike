@@ -5,6 +5,6 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
 {
     public interface IButtonCommandHandler
     {
-        void Handle(UiButton uiButton, ButtonCommandId buttonCommandId);
+        void Handle(UiUiUiUiButton uiUiUiUiButton, ButtonCommandId buttonCommandId);
     }
 }

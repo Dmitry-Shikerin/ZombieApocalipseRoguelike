@@ -1,9 +1,10 @@
 ﻿using Sirenix.OdinInspector;
+using Sources.PresentationsInterfaces.UI.Buttons;
 using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 {
-    public class ButtonSoundView : ButtonView
+    public class UiUiButtonSoundView : UiButtonView, IButtonView
     {
         [TabGroup("Components")]
         [SerializeField] private AudioSource _audioSource;
