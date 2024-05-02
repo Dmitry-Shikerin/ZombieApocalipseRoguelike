@@ -19,12 +19,12 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
             _commands[loadMainMenuSceneCommand.Id] = loadMainMenuSceneCommand;
         }
 
-        public void Handle(UiUiUiUiButton uiUiUiUiButton, ButtonCommandId buttonCommandId)
+        public void Handle(UiButton uiButton, ButtonCommandId buttonCommandId)
         {
             if (_commands.ContainsKey(buttonCommandId) == false)
                 throw new KeyNotFoundException(nameof(buttonCommandId));
 
-            _commands[buttonCommandId].Handle(uiUiUiUiButton);
+            _commands[buttonCommandId].Handle(uiButton);
 
         }
     }

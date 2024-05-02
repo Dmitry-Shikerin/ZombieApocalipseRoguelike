@@ -43,7 +43,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         [SerializeField] private Enable _includeContainers = Enable.Enable;
         
         [TabGroup("Tab1", "Buttons", true, 1)] 
-        [SerializeField] private List<UiUiUiUiButton> _uiFormButtons;
+        [SerializeField] private List<UiButton> _uiFormButtons;
         
         [TabGroup("Tab1", "Buttons", true, 1)] 
         [EnumToggleButtons] [HideLabel] [LabelText("IncludeInactive", SdfIconType.Search)]
@@ -71,7 +71,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         private bool IncludeAnimators => _includeAnimators == Enable.Enable;
 
         public Localization Localization => _localization;
-        public IReadOnlyList<UiUiUiUiButton> UiFormButtons => _uiFormButtons;
+        public IReadOnlyList<UiButton> UiFormButtons => _uiFormButtons;
         public IReadOnlyList<UiView> UiContainers => _uiContainers;
         public IReadOnlyList<IUiText> UiTexts => _uiTexts;
         public IReadOnlyList<UiAudioSource> UiAudioSources => _uiAudioSources;
@@ -79,7 +79,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
 
         private void Awake()
         {
-            _uiFormButtons = GetComponentsInChildren<UiUiUiUiButton>(IncludeButtons).ToList();
+            _uiFormButtons = GetComponentsInChildren<UiButton>(IncludeButtons).ToList();
             _uiContainers = GetComponentsInChildren<UiView>(IncludeContainers).ToList();
             _uiTexts = GetComponentsInChildren<UiText>(IncludeTexts).ToList();
             _uiAudioSources = GetComponentsInChildren<UiAudioSource>(IncludeAudioSources).ToList();
@@ -109,7 +109,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         [TabGroup("Tab1", "Buttons", true, 1)] 
         [Button(ButtonSizes.Large)] 
         private void AddButtons() =>
-            _uiFormButtons = GetComponentsInChildren<UiUiUiUiButton>(IncludeButtons).ToList();
+            _uiFormButtons = GetComponentsInChildren<UiButton>(IncludeButtons).ToList();
         
         [TabGroup("Tab1", "Buttons", true, 1)] 
         [Button(ButtonSizes.Medium)]

@@ -30,7 +30,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 
         public ButtonCommandId Id => ButtonCommandId.Leaderboard;
         
-        public void Handle(UiUiUiUiButton uiUiUiUiButton)
+        public void Handle(UiButton uiButton)
         {
             if (_playerAccountAuthorizeService.IsAuthorized() == false)
             {

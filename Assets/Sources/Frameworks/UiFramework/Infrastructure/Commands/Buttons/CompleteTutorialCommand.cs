@@ -17,7 +17,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 
         public ButtonCommandId Id => ButtonCommandId.CompleteTutorial;
         
-        public void Handle(UiUiUiUiButton uiUiUiUiButton)
+        public void Handle(UiButton uiButton)
         {
             _tutorialService.Complete();
         }

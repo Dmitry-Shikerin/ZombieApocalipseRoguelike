@@ -7,6 +7,6 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
     {
         ButtonCommandId Id { get; }
 
-        void Handle(UiUiUiUiButton uiUiUiUiButton);
+        void Handle(UiButton uiButton);
     }
 }

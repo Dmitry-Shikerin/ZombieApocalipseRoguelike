@@ -11,12 +11,12 @@ namespace Sources.Frameworks.UiFramework.Controllers.Buttons
     public class UiFormButtonPresenter : PresenterBase
     {
         private readonly UiButtonViewService _uiButtonViewService;
-        private readonly UiUiUiUiButton _view;
+        private readonly UiButton _view;
 
         private CancellationTokenSource _cancellationTokenSource;
 
         public UiFormButtonPresenter(
-            UiUiUiUiButton view,
+            UiButton view,
             UiButtonViewService uiButtonViewService)
         {
             _uiButtonViewService = uiButtonViewService ??

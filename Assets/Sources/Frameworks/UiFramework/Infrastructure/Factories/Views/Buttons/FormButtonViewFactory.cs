@@ -15,7 +15,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons
             _uiButtonViewService = uiButtonViewService ?? throw new ArgumentNullException(nameof(uiButtonViewService));
         }
 
-        public UiUiUiUiButton Create(UiUiUiUiButton view)
+        public UiButton Create(UiButton view)
         {
             UiFormButtonPresenter presenter = new UiFormButtonPresenter(
                 view, _uiButtonViewService);

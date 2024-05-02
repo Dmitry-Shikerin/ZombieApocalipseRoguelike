@@ -12,14 +12,14 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
     public class AnimationService : IAnimationService
     {
         private UiAnimator _uiAnimator;
-        private UiUiUiUiButton _uiUiUiButton;
+        private UiButton _uiUiUiButton;
         private CancellationTokenSource _cancellationTokenSource;
 
         public void Awake()
         {
             if (_uiAnimator.ReactionAnimationType == ReactionAnimationType.ButtonClick)
             {
-                _uiUiUiButton = _uiAnimator.GetComponent<UiUiUiUiButton>();
+                _uiUiUiButton = _uiAnimator.GetComponent<UiButton>();
                 
                 if(_uiUiUiButton == null)
                     throw new NullReferenceException(nameof(_uiUiUiButton));
