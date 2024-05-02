@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 {
-    public class UiButton : PresentableFormButton<UiFormButtonPresenter>
+    public class UiButton : PresentableFormUiUiButton<UiFormButtonPresenter>
     {
         [DisplayAsString(false)] [HideLabel] [Indent(8)]
         [SerializeField] private string _labelText = UiConstant.UiButtonLabel;

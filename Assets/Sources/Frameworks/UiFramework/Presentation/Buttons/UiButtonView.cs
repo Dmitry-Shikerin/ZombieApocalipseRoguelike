@@ -1,12 +1,13 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Presentations.Views;
+using Sources.PresentationsInterfaces.UI.Buttons;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 {
-    public class ButtonView : View
+    public class UiButtonView : View, IButtonView
     {
         [TabGroup("Components")]
         [SerializeField] private Button _button;
