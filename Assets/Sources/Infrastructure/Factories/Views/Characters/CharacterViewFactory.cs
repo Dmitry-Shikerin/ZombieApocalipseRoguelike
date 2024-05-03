@@ -8,6 +8,7 @@ using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Abilities;
 using Sources.Presentations.Views.Characters;
+using Sources.Presentations.Views.Players;
 using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.Characters
@@ -80,7 +81,9 @@ namespace Sources.Infrastructure.Factories.Views.Characters
 
             _sawLauncherAbilityViewFactory.Create(character.SawLauncherAbility, sawLauncherAbilityView);
 
-            _playerWalletViewFactory.Create(character.PlayerWallet, _gameplayHud.PlayerWalletView);
+            foreach (PlayerWalletView playerWalletView in _gameplayHud.PlayerWalletViews) 
+                _playerWalletViewFactory.Create(character.PlayerWallet, playerWalletView);
+            
             _characterWalletViewFactory.Create(character.PlayerWallet,characterView.CharacterWalletView);
 
             _enemyIndicatorViewFactory.Create(characterView.EnemyIndicatorView);

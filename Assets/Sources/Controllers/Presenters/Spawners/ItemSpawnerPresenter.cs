@@ -47,7 +47,9 @@ namespace Sources.Controllers.Spawners
                 {
                     foreach (IItemSpawnPoint itemSpawnPoint in _itemSpawnerView.SpawnPoints)
                     {
-                        IFirstAidKitView enemyView = _firstAidKitSpawnService.Spawn(itemSpawnPoint.Position);
+                        IFirstAidKitView firstAidKitView = _firstAidKitSpawnService.Spawn(itemSpawnPoint.Position);
+                        
+                        firstAidKitView.SetHealAmount(15);
 
                         await UniTask.Delay(TimeSpan.FromSeconds(30), cancellationToken: cancellationToken);
                     }
