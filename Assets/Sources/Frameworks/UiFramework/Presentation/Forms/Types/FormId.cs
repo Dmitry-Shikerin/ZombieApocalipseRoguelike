@@ -22,5 +22,6 @@
         Authorization = 17,
         Leaderboard = 18,
         Save = 19,
+        FirstKitAidTutorial = 20,
     }
 }
