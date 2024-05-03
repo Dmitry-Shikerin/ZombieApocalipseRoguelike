@@ -29,7 +29,7 @@ namespace Sources.Presentations.UI.Huds
         [SerializeField] private List<UpgradeUi> _notAvailabilityUpgradeUis;
         
         [FoldoutGroup("PlayerWallet")] [Required] 
-        [SerializeField] private PlayerWalletView _playerWalletView;
+        [SerializeField] private List<PlayerWalletView> _playerWalletViews;
 
         [FoldoutGroup("KillEnemyCounter")] [Required] 
         [SerializeField] private KillEnemyCounterView _killEnemyCounterView;
@@ -51,7 +51,7 @@ namespace Sources.Presentations.UI.Huds
         public IReadOnlyList<UpgradeUi> UpgradeUis => _upgradeUis;
         public IReadOnlyList<UpgradeUi> NotAvailabilityUpgradeUis => _notAvailabilityUpgradeUis;
         
-        public PlayerWalletView PlayerWalletView => _playerWalletView;
+        public IReadOnlyList<PlayerWalletView> PlayerWalletViews => _playerWalletViews;
 
         public KillEnemyCounterView KillEnemyCounterView => _killEnemyCounterView;
         
