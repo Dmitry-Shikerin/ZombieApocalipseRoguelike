@@ -25,12 +25,12 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
         {
             if (_loadService.HasKey(ModelId.PlayerWallet))
             {
-                _formService.ShowOneForm(FormId.WarningNewGame);
+                _formService.Show(FormId.WarningNewGame);
                 
                 return;
             }
             
-            _formService.ShowOneForm(FormId.NewGame);
+            _formService.Show(FormId.NewGame);
         }
     }
 }

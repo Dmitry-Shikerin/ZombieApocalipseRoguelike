@@ -28,9 +28,9 @@ namespace Sources.Frameworks.UiFramework.Controllers.Forms
             _uiViewService.Handle(_uiView.EnabledFormCommands);
 
             foreach (FormId formId in _uiView.OnEnableEnabledForms)
-                _formService.ShowOneForm(formId);
+                _formService.Show(formId);
             foreach (FormId formId in _uiView.OnEnableDisabledForms)
-                _formService.HideOneForm(formId);
+                _formService.Hide(formId);
         }
 
         public override void Disable()
@@ -38,9 +38,9 @@ namespace Sources.Frameworks.UiFramework.Controllers.Forms
             _uiViewService.Handle(_uiView.DisabledFormCommands);
             
             foreach (FormId formId in _uiView.OnDisableEnabledForms)
-                _formService.ShowOneForm(formId);
+                _formService.Show(formId);
             foreach (FormId formId in _uiView.OnDisableDisabledForms)
-                _formService.HideOneForm(formId);
+                _formService.Hide(formId);
         }
     }
 }
