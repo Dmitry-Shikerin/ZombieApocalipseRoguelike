@@ -36,6 +36,7 @@ using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.RootGameObjects;
+using Sources.Presentations.Views.Upgrades;
 using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay
@@ -174,9 +175,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             
             for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
             {
-                var view = _gameplayHud.NotAvailabilityUpgradeUis[i];
-                var upgrader = upgraders[i];
-
+                UpgradeUi view = _gameplayHud.NotAvailabilityUpgradeUis[i];
+                Upgrader upgrader = upgraders[i];
+            
                 _upgradeUiFactory.Create(upgrader, view);
             }
 

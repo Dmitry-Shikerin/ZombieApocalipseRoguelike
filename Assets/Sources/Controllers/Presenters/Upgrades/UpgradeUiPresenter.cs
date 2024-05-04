@@ -6,7 +6,7 @@ using Sources.PresentationsInterfaces.UI.Images;
 using Sources.PresentationsInterfaces.Views.Upgrades;
 using UnityEngine;
 
-namespace Sources.Controllers.Upgrades
+namespace Sources.Controllers.Presenters.Upgrades
 {
     public class UpgradeUiPresenter : PresenterBase
     {
