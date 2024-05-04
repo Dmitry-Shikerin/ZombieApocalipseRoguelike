@@ -34,13 +34,13 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
         {
             if (_playerAccountAuthorizeService.IsAuthorized() == false)
             {
-                _formService.ShowOneForm(FormId.Authorization);
+                _formService.Show(FormId.Authorization);
 
                 return;
             }
 
             _leaderboardInitializeService.Fill();
-            _formService.ShowOneForm(FormId.Leaderboard);
+            _formService.Show(FormId.Leaderboard);
         }
     }
 }

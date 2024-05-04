@@ -14,5 +14,6 @@ namespace Sources.PresentationsInterfaces.Views.Forms.Common
         
         FormId FormId { get; }
         CustomFormId CustomFormId { get; }
+        bool IsActive { get; }
     }
 }

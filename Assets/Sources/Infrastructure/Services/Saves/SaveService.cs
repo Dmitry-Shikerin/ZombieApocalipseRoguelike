@@ -31,7 +31,7 @@ namespace Sources.Infrastructure.Services.Saves
         public void Enter(object payload = null)
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            _formService.HideOneForm(FormId.Save);
+            _formService.Hide(FormId.Save);
             
             _killEnemyCounter.KillZombiesCountChanged += OnKillEnemyCounterChanged;
         }
@@ -69,9 +69,9 @@ namespace Sources.Infrastructure.Services.Saves
         {
             try
             {
-                _formService.ShowOneForm(FormId.Save);
+                _formService.Show(FormId.Save);
                 await UniTask.Delay(TimeSpan.FromSeconds(5f), cancellationToken: cancellationToken);
-                _formService.HideOneForm(FormId.Save);
+                _formService.Hide(FormId.Save);
             }
             catch (OperationCanceledException)
             {

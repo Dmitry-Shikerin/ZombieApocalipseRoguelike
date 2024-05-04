@@ -167,7 +167,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             
             //FormService
             _uiCollectorFactory.Create();
-            _formService.ShowOneForm(FormId.Hud);
+            _formService.Show(FormId.Hud);
 
             //Upgrades
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();

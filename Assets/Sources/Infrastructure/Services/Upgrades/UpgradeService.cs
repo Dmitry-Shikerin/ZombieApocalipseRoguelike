@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Upgrades;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
@@ -9,6 +10,7 @@ using Sources.Infrastructure.Services.Providers;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Upgrades;
+using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Upgrades
 {
@@ -64,6 +66,11 @@ namespace Sources.Infrastructure.Services.Upgrades
 
         private void OnUpgradeFormChanged()
         {
+            //TODO получится ли за счет этого починить?
+            if(_formService.IsActive(FormId.Upgrade))
+                return;
+            
+            //TODO сделать выборку улучшений по уровню от меньшего к большему
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
             List<Upgrader> awaiableUpgraders = new List<Upgrader>();
 
@@ -76,6 +83,8 @@ namespace Sources.Infrastructure.Services.Upgrades
                     awaiableUpgraders.Add(upgrader);
             }
 
+            awaiableUpgraders = awaiableUpgraders.OrderBy(upgrader => upgrader.CurrentLevel).ToList();
+
             if (awaiableUpgraders.Count >= 3)
             {
                 for (int i = 0; i < 3; i++)
@@ -84,7 +93,7 @@ namespace Sources.Infrastructure.Services.Upgrades
                     _upgradeViewFactory.Create(awaiableUpgraders[i], PlayerWallet, _upgradeViews[i]);
                 }
                 
-                _formService.ShowOneForm(FormId.Upgrade);
+                _formService.Show(FormId.Upgrade);
             }
         }
     }

@@ -42,6 +42,7 @@ namespace Sources.Controllers.Upgrades
             // Debug.Log($"Upgrade: {_upgrader.CurrentLevel}");
             UpdatePrice();
             UpdateImages();
+            AbilityImageChanged();
         }
 
         private void UpdatePrice()

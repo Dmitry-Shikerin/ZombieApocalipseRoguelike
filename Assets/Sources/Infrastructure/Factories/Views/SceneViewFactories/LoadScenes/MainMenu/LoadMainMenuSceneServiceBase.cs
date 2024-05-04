@@ -62,7 +62,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             
             //FormService
             _uiCollectorFactory.Create();
-            _formService.ShowOneForm(FormId.Hud);
+            _formService.Show(FormId.Hud);
         }
         
         protected abstract MainMenuModels LoadModels(IScenePayload scenePayload);
