@@ -23,6 +23,7 @@ namespace Sources.Infrastructure.Services.Upgrades
         private readonly UpgradeViewFactory _upgradeViewFactory;
         private readonly UpgradeUiFactory _upgradeUiFactory;
         private readonly IFormService _formService;
+        private readonly UpgradeDescriptionViewFactory _upgradeDescriptionViewFactory;
         private readonly IReadOnlyList<UpgradeUi> _upgradeUis;
         private readonly IReadOnlyList<UpgradeView> _upgradeViews;
 
@@ -32,7 +33,8 @@ namespace Sources.Infrastructure.Services.Upgrades
             GameplayHud gameplayHud,
             UpgradeViewFactory upgradeViewFactory,
             UpgradeUiFactory upgradeUiFactory,
-            IFormService formService)
+            IFormService formService,
+            UpgradeDescriptionViewFactory upgradeDescriptionViewFactory)
         {
             if (gameplayHud == null) throw new ArgumentNullException(nameof(gameplayHud));
             if (gameplayHud == null) 
@@ -48,6 +50,8 @@ namespace Sources.Infrastructure.Services.Upgrades
             _upgradeUiFactory = upgradeUiFactory ?? 
                                 throw new ArgumentNullException(nameof(upgradeUiFactory));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _upgradeDescriptionViewFactory = upgradeDescriptionViewFactory ?? 
+                                             throw new ArgumentNullException(nameof(upgradeDescriptionViewFactory));
             _upgradeUis = gameplayHud.UpgradeUis ?? 
                           throw new NullReferenceException(nameof(gameplayHud.UpgradeUis));
             _upgradeViews = gameplayHud.UpgradeViews ?? 
@@ -56,6 +60,7 @@ namespace Sources.Infrastructure.Services.Upgrades
 
         private PlayerWallet PlayerWallet => _playerWallet ??= _playerWalletProvider.PlayerWallet;
 
+        //TODO это должен быть контроллер?
         public void Enable()
         {
             OnUpgradeFormChanged();
@@ -96,6 +101,7 @@ namespace Sources.Infrastructure.Services.Upgrades
                     Debug.Log($"Avaiable upgrader: {awaiableUpgraders[i].Id}");
                     _upgradeUiFactory.Create(awaiableUpgraders[i], _upgradeUis[i]);
                     _upgradeViewFactory.Create(awaiableUpgraders[i], PlayerWallet, _upgradeViews[i]);
+                    _upgradeDescriptionViewFactory.Create(awaiableUpgraders[i], _gameplayHud.UpgradeDescriptionViews[i]);
                 }
                 
                 _formService.Show(FormId.Upgrade);

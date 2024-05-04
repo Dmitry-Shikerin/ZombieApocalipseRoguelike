@@ -6,9 +6,11 @@ namespace Sources.InfrastructureInterfaces.Services.Volumes
 {
     public interface IVolumeService : IEnterable, IExitable
     {
-        event Action VolumeChanged;
+        event Action MusicVolumeChanged;
+        event Action MiniGunVolumeChanged;
         
-        float Volume { get; }
+        float MusicVolume { get; }
+        float MiniGunVolume { get; }
         
         void Register(Volume volume);
     }

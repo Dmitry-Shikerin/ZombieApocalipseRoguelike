@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Controllers.Settings;
+using Sources.Controllers.Presenters.Settings;
 using Sources.Domain.Models.Setting;
 using Sources.Infrastructure.Factories.Controllers.Settings;
 using Sources.Presentations.Views.Settings;

@@ -19,6 +19,7 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
         private readonly UiCollector _uiCollector;
         private readonly List<UiText> _textViews = new List<UiText>();
         private readonly Dictionary<string, IReadOnlyDictionary<string, string>> _textDictionary;
+        private IReadOnlyDictionary<string, string> _currentLanguageDictionary;
 
         public LocalizationService(UiCollector uiCollector, LocalizationConfig localizationConfig)
         {
@@ -43,19 +44,27 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
                 ChangeCollectorLanguage();
         }
 
+        public string GetText(string key)
+        {
+            if(_currentLanguageDictionary.ContainsKey(key) == false)
+                throw new KeyNotFoundException(nameof(key));
+            
+            return _currentLanguageDictionary[key];
+        }
+
         private void TranslateViews(string key)
         {
-            IReadOnlyDictionary<string, string> textDictionary = _textDictionary[key];
+            _currentLanguageDictionary = _textDictionary[key];
 
             foreach (IUiText textView in _textViews)
             {
                 if (textView.TextViewType == TextViewType.Default)
                     continue;
 
-                if (textDictionary.ContainsKey(textView.Id) == false)
+                if (_currentLanguageDictionary.ContainsKey(textView.Id) == false)
                     throw new KeyNotFoundException(nameof(textView.Id));
 
-                textView.SetText(textDictionary[textView.Id]);
+                textView.SetText(_currentLanguageDictionary[textView.Id]);
             }
         }
 
