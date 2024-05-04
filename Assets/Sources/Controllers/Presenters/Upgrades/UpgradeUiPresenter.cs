@@ -39,7 +39,7 @@ namespace Sources.Controllers.Upgrades
 
         private void OnLevelChanged()
         {
-            Debug.Log($"Upgrade: {_upgrader.CurrentLevel}");
+            // Debug.Log($"Upgrade: {_upgrader.CurrentLevel}");
             UpdatePrice();
             UpdateImages();
         }
