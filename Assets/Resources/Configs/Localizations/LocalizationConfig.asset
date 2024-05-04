@@ -53,6 +53,13 @@ MonoBehaviour:
     - UpgradeTopAbilitiesDescription
     - UpgradeAvailableAbilitiesDescription
     - Sounds
+    - SawLauncherAbilityUpgrader
+    - BearAttackUpgrader
+    - BearMassAttackUpgrader
+    - CharacterHealthUpgrader
+    - MiniGunAttackUpgrader
+    - SawLauncherUpgrader
+    - FirstAidKitTutorialDescription
     _values:
     - "\u0414\u043E\u0431\u0440\u043E \u043F\u043E\u0436\u0430\u043B\u043E\u0432\u0430\u0442\u044C
       \u0432 \u0438\u0433\u0440\u0443!"
@@ -143,6 +150,27 @@ MonoBehaviour:
       \u043A\u0443\u043F\u0438\u0442\u044C \u0437\u0430 \u0432\u0430\u0448\u0438
       \u0447\u0435\u0440\u0435\u043F\u0430."
     - "\u0417\u0432\u0443\u043A\u0438"
+    - "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442 \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E
+      \u0446\u0438\u0440\u043A\u0443\u043B\u044F\u0440\u043D\u044B\u0445 \u043F\u0438\u043B"
+    - "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442 \u0443\u0440\u043E\u043D
+      \u043C\u0435\u0434\u0432\u0435\u0434\u044F"
+    - "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442 \u0440\u0430\u0434\u0438\u0443\u0441
+      \u0430\u0442\u0430\u043A\u0438 \u043C\u0435\u0434\u0432\u0435\u0434\u044F"
+    - "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435"
+    - "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442 \u0443\u0440\u043E\u043D
+      \u043F\u0443\u043B\u0435\u043C\u0451\u0442\u0430"
+    - "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442 \u0443\u0440\u043E\u043D
+      \u0446\u0438\u0440\u043A\u0443\u043B\u044F\u0440\u043D\u043E\u0439 \u043F\u0438\u043B\u044B"
+    - "\u042D\u0442\u043E \u0441\u043F\u0430\u0432\u043D\u0435\u0440\u044B, \u043D\u0430
+      \u043A\u043E\u0442\u043E\u0440\u044B\u0445 \u043C\u043E\u0436\u0435\u0442 \u0437\u0430\u0441\u043F\u0430\u0432\u043D\u0438\u0442\u044C\u0441\u044F
+      \u0430\u043F\u0442\u0435\u0447\u043A\u0430. \u041D\u0430 \u043E\u0434\u043D\u043E\u0439
+      \u043B\u043E\u043A\u0430\u0446\u0438\u0438 \u0438\u0445 \u043C\u043E\u0436\u0435\u0442
+      \u0431\u044B\u0442\u044C \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u043E,
+      \u0442\u043E\u0433\u0434\u0430 \u0430\u043F\u0442\u0435\u0447\u043A\u0430 \u0431\u0443\u0434\u0435\u0442
+      \u0441\u043F\u0430\u0432\u043D\u0438\u0442\u044C\u0441\u044F \u0440\u0430\u043D\u0434\u043E\u043C\u043D\u043E.
+      \u041A\u0430\u0436\u0434\u0430\u044F \u0430\u043F\u0442\u0435\u0447\u043A\u0430
+      \u0443\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442 \u0432\u0430\u0448\u0435
+      \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435."
   _english:
     _keys:
     - GreetingTutorialTitle
@@ -184,6 +212,13 @@ MonoBehaviour:
     - UpgradeTopAbilitiesDescription
     - UpgradeAvailableAbilitiesDescription
     - Sounds
+    - SawLauncherUpgrader
+    - BearAttackUpgrader
+    - BearMassAttackUpgrader
+    - CharacterHealthUpgrader
+    - MiniGunAttackUpgrader
+    - SawLauncherAbilityUpgrader
+    - FirstAidKitTutorialDescription
     _values:
     - Welcome to game!
     - Pause
@@ -230,6 +265,15 @@ MonoBehaviour:
     - ' This is a list of all your available upgrades.'
     - ' This is a list of upgrades you can buy with your skulls.'
     - Sounds
+    - Increase saw damage
+    - Increase bear damage
+    - Increase the bear`s attack radius
+    - Increase health
+    - Increase minigun damage
+    - Increase saw amount
+    - ' These are spawners on which a first aid kit can spawn. There may be several
+      of them in one location, then the first aid kit will spawn randomly. Each first
+      aid kit increases your health.'
   _turkish:
     _keys:
     - Pause
@@ -271,6 +315,13 @@ MonoBehaviour:
     - UpgradeTopAbilitiesDescription
     - UpgradeAvailableAbilitiesDescription
     - Sounds
+    - SawLauncherUpgrader
+    - BearAttackUpgrader
+    - BearMassAttackUpgrader
+    - CharacterHealthUpgrader
+    - MiniGunAttackUpgrader
+    - SawLauncherAbilityUpgrader
+    - FirstAidKitTutorialDescription
     _values:
     - Duraklat
     - "Oyuna ho\u015F geldiniz!"
@@ -323,3 +374,14 @@ MonoBehaviour:
     - "Bu, kafataslar\u0131n\u0131zla sat\u0131n alabilece\u011Finiz y\xFCkseltmelerin
       bir listesidir."
     - Sesler
+    - "Testere hasar\u0131n\u0131 art\u0131r\u0131n"
+    - "Ay\u0131 hasar\u0131n\u0131 art\u0131r\u0131n"
+    - "Ay\u0131lar\u0131n sald\u0131r\u0131 yar\u0131\xE7ap\u0131n\u0131 art\u0131r\u0131n"
+    - "Sa\u011Fl\u0131\u011F\u0131 art\u0131r\u0131n"
+    - "Minigun hasar\u0131n\u0131 art\u0131r\u0131n"
+    - "Testere miktar\u0131n\u0131 art\u0131r\u0131n"
+    - " Bunlar, bir ilk yard\u0131m \xE7antas\u0131n\u0131n ortaya \xE7\u0131kabilece\u011Fi
+      yumurtlay\u0131c\u0131lard\u0131r. Bir yerde bunlardan birka\xE7\u0131 olabilir,
+      o zaman ilk yard\u0131m \xE7antas\u0131 rastgele ortaya \xE7\u0131kacakt\u0131r.
+      Her ilk yard\u0131m \xE7antas\u0131 sa\u011Fl\u0131\u011F\u0131n\u0131z\u0131
+      art\u0131r\u0131r."
