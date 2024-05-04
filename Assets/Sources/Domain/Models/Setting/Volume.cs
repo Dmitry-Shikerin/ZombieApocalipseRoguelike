@@ -10,41 +10,50 @@ namespace Sources.Domain.Models.Setting
 {
     public class Volume : IEntity
     {
-        private float _volumeValue;
+        private float _musicMusicValue;
+        private float _miniGunVolumeValue;
 
         public Volume(VolumeDto volumeDto)
-            : this(volumeDto.VolumeValue, volumeDto.Id)
+            : this(volumeDto.MusicValue, volumeDto.MiniGunVolumeValue, volumeDto.Id)
         {
         }
 
         public Volume()
-            : this(VolumeConstant.BaseValue, ModelId.Volume)
+            : this(VolumeConstant.BaseMusciValue, VolumeConstant.BaseMusciValue, ModelId.Volume)
         {
         }
 
-        private Volume(float value, string id)
+        private Volume(float musicValue, float miniGunVolume, string id)
         {
-            VolumeValue = value;
+            MusicMusicValue = musicValue;
+            MiniGunVolumeValue = miniGunVolume;
             Id = id;
         }
 
-        public event Action VolumeChanged;
+        public event Action MusicVolumeChanged;
+        public event Action MiniGunVolumeChanged;
 
-        public float VolumeValue
+        public float MusicMusicValue
         {
-            get => _volumeValue;
-
-            private set
+            get => _musicMusicValue;
+            set
             {
-                _volumeValue = Mathf.Clamp(value, 0, 1);
-                VolumeChanged?.Invoke();
+                _musicMusicValue = Mathf.Clamp(value, 0, 1);
+                MusicVolumeChanged?.Invoke();
+            }
+        }
+        
+        public float MiniGunVolumeValue
+        {
+            get => _miniGunVolumeValue;
+            set
+            {
+                _miniGunVolumeValue = Mathf.Clamp(value, 0, 1);
+                MiniGunVolumeChanged?.Invoke();
             }
         }
 
         public string Id { get; }
         public Type Type => GetType();
-
-        public void SetVolume(float value) =>
-            VolumeValue = value;
     }
 }

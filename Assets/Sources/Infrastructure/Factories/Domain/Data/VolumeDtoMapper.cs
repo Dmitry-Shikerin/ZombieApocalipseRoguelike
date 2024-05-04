@@ -11,7 +11,8 @@ namespace Sources.Infrastructure.Factories.Domain.Data
         {
             return new VolumeDto()
             {
-                VolumeValue = volume.VolumeValue,
+                MusicValue = volume.MusicMusicValue,
+                MiniGunVolumeValue = volume.MiniGunVolumeValue,
                 Id = volume.Id,
             };
         }
