@@ -19,13 +19,14 @@ namespace Sources.Controllers.Presenters.Settings
         public override void Enable()
         {
             _volumeView.MusicVolumeSlider.AddListener(SetMusicVolume);
-            _volumeView.MusicVolumeSlider.AddListener(SetMiniGunVolume);
+            _volumeView.MiniGunVolumeSlider.AddListener(SetMiniGunVolume);
             _volumeView.MusicVolumeSlider.SetValue(_volume.MusicMusicValue);
         }
 
         public override void Disable()
         {
             _volumeView.MusicVolumeSlider.RemoveListener(SetMusicVolume);
+            _volumeView.MiniGunVolumeSlider.RemoveListener(SetMiniGunVolume);
         }
 
         private void SetMiniGunVolume(float value) =>

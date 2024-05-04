@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1286,9 +1286,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 119245810}
-  - component: {fileID: 119245811}
   m_Layer: 5
-  m_Name: Audio_Container
+  m_Name: MusicVolume_Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1315,19 +1314,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.81921387, y: -3}
   m_SizeDelta: {x: -143.28662, y: 116.9624}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &119245811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119245809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ef8d26ccdb484da6c30ff57612cec3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _volumeSlider: {fileID: 600224812}
 --- !u!1001 &129568377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5302,9 +5288,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 746858179}
-  - component: {fileID: 746858180}
   m_Layer: 5
-  m_Name: Sounds_Container
+  m_Name: MiniGunVolume_Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5331,19 +5316,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.81921387, y: 2}
   m_SizeDelta: {x: -143.28662, y: 116.9624}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &746858180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746858178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ef8d26ccdb484da6c30ff57612cec3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _volumeSlider: {fileID: 2039987112}
 --- !u!1001 &749542478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5487,13 +5459,14 @@ GameObject:
   - component: {fileID: 774348123}
   - component: {fileID: 774348125}
   - component: {fileID: 774348126}
+  - component: {fileID: 774348127}
   m_Layer: 5
   m_Name: SettingsForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &774348123
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5550,6 +5523,20 @@ MonoBehaviour:
   _onDisableDisabledForms: 
   _enabledFormCommands: 
   _disabledFormCommands: 03000000
+--- !u!114 &774348127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774348121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ef8d26ccdb484da6c30ff57612cec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _musicVolumeSlider: {fileID: 600224812}
+  _miniGunVolumeSlider: {fileID: 2039987112}
 --- !u!1 &798728632
 GameObject:
   m_ObjectHideFlags: 0
@@ -6871,8 +6858,8 @@ RectTransform:
   - {fileID: 1012824467}
   m_Father: {fileID: 599396524}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7677,8 +7664,8 @@ RectTransform:
   - {fileID: 290926104}
   m_Father: {fileID: 1397953657}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8423,7 +8410,7 @@ RectTransform:
   m_Father: {fileID: 1836423075}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -25, y: 0}
   m_SizeDelta: {x: 15, y: 0}
   m_Pivot: {x: 0, y: 0.5}
@@ -11341,7 +11328,7 @@ MonoBehaviour:
   - {fileID: 291326159}
   - {fileID: 1414795520}
   - {fileID: 1323827290}
-  _volumeView: {fileID: 119245811}
+  _volumeView: {fileID: 0}
   _levelAvailabilityView: {fileID: 825393486}
   _backgroundMusicView: {fileID: 145062950}
 --- !u!222 &1497509151
@@ -15611,7 +15598,7 @@ RectTransform:
   m_Father: {fileID: 807410519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -25, y: 0}
   m_SizeDelta: {x: 15, y: 0}
   m_Pivot: {x: 0, y: 0.5}

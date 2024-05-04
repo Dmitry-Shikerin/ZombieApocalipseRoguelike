@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using Sources.Controllers.Presenters.Upgrades;
 using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
@@ -363,6 +364,9 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<UpgradeUiPresenterFactory>().AsSingle();
             Container.Bind<UpgradeUiFactory>().AsSingle();
+
+            Container.Bind<UpgradeDescriptionPresenterFactory>().AsSingle();
+            Container.Bind<UpgradeDescriptionViewFactory>().AsSingle();
         }
     }
 }
