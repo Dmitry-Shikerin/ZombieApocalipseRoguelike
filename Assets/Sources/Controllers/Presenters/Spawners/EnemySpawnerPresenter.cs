@@ -70,17 +70,9 @@ namespace Sources.Controllers.Presenters.Spawners
                         TrySpawnEnemy(spawnPoint, characterView);
                         TrySpawnBoss(spawnPoint, characterView);
 
-                        Debug.Log($"Current wave: {_enemySpawner.CurrentWave}");
-
-                        foreach (int sumEnemies in _enemySpawner.SumEnemiesInWave)
-                        {
-                            if (_enemySpawner.SpawnedEnemies == sumEnemies)
-                            {
-                                await UniTask.WaitUntil(() =>
-                                        _killEnemyCounter.KillZombies == sumEnemies,
-                                    cancellationToken: cancellationToken);
-                            }
-                        }
+                        // Debug.Log($"Current wave: {_enemySpawner.CurrentWave}");
+                        Debug.Log($"Current Delay: {_enemySpawner.SpawnDelays[_enemySpawner.CurrentWave]}");
+                        await WaitWave(cancellationToken);
 
                         await UniTask.Delay(
                             TimeSpan.FromSeconds(
@@ -94,14 +86,34 @@ namespace Sources.Controllers.Presenters.Spawners
             }
         }
 
+        private async UniTask WaitWave(CancellationToken cancellationToken)
+        {
+            foreach (int sumEnemies in _enemySpawner.SumEnemiesInWave)
+            {
+                if (_enemySpawner.SpawnedEnemies == sumEnemies)
+                {
+                    await UniTask.WaitUntil(() =>
+                            _killEnemyCounter.KillZombies == sumEnemies,
+                        cancellationToken: cancellationToken);
+                }
+            }
+        }
+
         private void SetCurrentWave()
         {
             for (int i = 0; i < _enemySpawner.SumEnemiesInWave.Count; i++)
             {
-                if (_killEnemyCounter.KillZombies < _enemySpawner.SumEnemiesInWave[i])
-                    return;
-                
-                _enemySpawner.CurrentWave = i;
+                if (_killEnemyCounter.KillZombies >= _enemySpawner.SumEnemiesInWave[i])
+                {
+                    //TODO будет ли тут out of range?
+                    if(i == _enemySpawner.SumEnemiesInWave.Count)
+                        return;
+                    
+                    _enemySpawner.CurrentWave = i + 1;
+                    // Debug.Log($"Kill zombies: {_killEnemyCounter.KillZombies}");
+                    // Debug.Log($"Sum enemies: {_enemySpawner.SumEnemiesInWave[i]}");
+                    // Debug.Log($"Current wave: {_enemySpawner.CurrentWave}");
+                }
             }
         }
 
