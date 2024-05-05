@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using Sources.Domain.Models.Constants;
 using Sources.Presentations.Views;
@@ -44,7 +45,9 @@ namespace Sources.Presentations.UI.Curtains
                     end,
                     Time.deltaTime / _duration);
 
-                await UniTask.Yield();
+                // await UniTask.Yield();
+                //TODO как заигнорить TimeScale?
+                await UniTask.Delay(TimeSpan.FromMilliseconds(1), ignoreTimeScale: true);
             }
 
             _canvasGroup.alpha = end;

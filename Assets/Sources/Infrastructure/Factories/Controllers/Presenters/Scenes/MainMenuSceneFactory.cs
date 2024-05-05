@@ -12,6 +12,7 @@ using Sources.InfrastructureInterfaces.Factories.Controllers.Scenes;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Volumes;
+using Sources.Presentations.UI.Curtains;
 
 namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
 {
@@ -22,13 +23,15 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly IVolumeService _volumeService;
         private readonly ILoadService _loadService;
         private readonly ILocalizationService _localizationService;
+        private readonly CurtainView _curtainView;
 
         public MainMenuSceneFactory(
             CreateMainMenuSceneService createMainMenuSceneService,
             LoadMainMenuSceneService loadMainMenuSceneService,
             IVolumeService volumeService,
             ILoadService loadService,
-            ILocalizationService localizationService)
+            ILocalizationService localizationService,
+            CurtainView curtainView)
         {
             _createMainMenuSceneService = createMainMenuSceneService ?? 
                                           throw new ArgumentNullException(nameof(createMainMenuSceneService));
@@ -38,6 +41,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _localizationService = localizationService ??
                                    throw new ArgumentNullException(nameof(localizationService));
+            _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
         
         public async UniTask<IScene> Create(object payload)
@@ -45,7 +49,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             return new MainMenuScene(
                 CreateLoadSceneService(payload),
                 _volumeService,
-                _localizationService);
+                _localizationService,
+                _curtainView);
         }
         
         private ILoadSceneService CreateLoadSceneService(object payload)

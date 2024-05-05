@@ -70,8 +70,6 @@ namespace Sources.Controllers.Presenters.Spawners
                         TrySpawnEnemy(spawnPoint, characterView);
                         TrySpawnBoss(spawnPoint, characterView);
 
-                        // Debug.Log($"Current wave: {_enemySpawner.CurrentWave}");
-                        Debug.Log($"Current Delay: {_enemySpawner.SpawnDelays[_enemySpawner.CurrentWave]}");
                         await WaitWave(cancellationToken);
 
                         await UniTask.Delay(

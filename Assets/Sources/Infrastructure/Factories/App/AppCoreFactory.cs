@@ -25,6 +25,7 @@ namespace Sources.Infrastructure.Factories.App
             CurtainView curtainView =
                 Object.Instantiate(Resources.Load<CurtainView>(PrefabPath.Curtain)) ??
                 throw new NullReferenceException(nameof(CurtainView));
+            projectContext.Container.Bind<CurtainView>().FromInstance(curtainView);
 
             Dictionary<string, Func<object, SceneContext, UniTask<IScene>>> sceneFactories =
                 new Dictionary<string, Func<object, SceneContext, UniTask<IScene>>>();
@@ -49,8 +50,8 @@ namespace Sources.Infrastructure.Factories.App
             
             sceneService.AddBeforeSceneChangeHandler(async sceneName => 
                 await projectContext.Container.Resolve<ISceneLoaderService>().LoadSceneAsync(sceneName));
-            
-            sceneService.AddAfterSceneChangeHandler(async () => await curtainView.HideCurtain());
+            //
+            // sceneService.AddAfterSceneChangeHandler(async () => await curtainView.HideCurtain());
             
             appCore.Construct(sceneService);
             
