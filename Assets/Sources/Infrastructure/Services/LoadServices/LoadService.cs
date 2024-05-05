@@ -109,7 +109,7 @@ namespace Sources.Infrastructure.Services.LoadServices
             
             IEntity entity = _entityRepository.Get(id);
             
-            Debug.Log($"Model saved {entity.Id}");
+            // Debug.Log($"Model saved {entity.Id}");
             
             _dataService.SaveData(_toDtoMappers[entity.Type].Invoke(entity), entity.Id);
         }
@@ -123,7 +123,7 @@ namespace Sources.Infrastructure.Services.LoadServices
                 Func<IDto, IEntity> mapper = _toModelMappers[modelType];
                 IEntity model = mapper.Invoke((IDto)dto);
                 _entityRepository.Add(model);
-                Debug.Log($"Saved {model.Type}");
+                // Debug.Log($"Saved {model.Type}");
             }
         }
 
@@ -137,7 +137,7 @@ namespace Sources.Infrastructure.Services.LoadServices
                 _dataService.SaveData(_toDtoMappers[dataModel.Type].Invoke(dataModel), dataModel.Id);
                 
                 //TOdo сделать валидацию на сохранение
-                Debug.Log($"Saved {dataModel.GetType()}");
+                // Debug.Log($"Saved {dataModel.GetType()}");
             }
         }
 

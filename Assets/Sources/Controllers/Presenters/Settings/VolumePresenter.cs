@@ -3,7 +3,7 @@ using Sources.Controllers.Common;
 using Sources.Domain.Models.Setting;
 using Sources.PresentationsInterfaces.Views.Settings;
 
-namespace Sources.Controllers.Settings
+namespace Sources.Controllers.Presenters.Settings
 {
     public class VolumePresenter : PresenterBase
     {
@@ -18,16 +18,21 @@ namespace Sources.Controllers.Settings
 
         public override void Enable()
         {
-            _volumeView.VolumeSlider.AddListener(SetVolume);
-            _volumeView.VolumeSlider.SetValue(_volume.VolumeValue);
+            _volumeView.MusicVolumeSlider.AddListener(SetMusicVolume);
+            _volumeView.MiniGunVolumeSlider.AddListener(SetMiniGunVolume);
+            _volumeView.MusicVolumeSlider.SetValue(_volume.MusicMusicValue);
         }
 
         public override void Disable()
         {
-            _volumeView.VolumeSlider.RemoveListener(SetVolume);
+            _volumeView.MusicVolumeSlider.RemoveListener(SetMusicVolume);
+            _volumeView.MiniGunVolumeSlider.RemoveListener(SetMiniGunVolume);
         }
 
-        private void SetVolume(float value) =>
-            _volume.SetVolume(value);
+        private void SetMiniGunVolume(float value) =>
+            _volume.MiniGunVolumeValue = value;
+
+        private void SetMusicVolume(float value) =>
+            _volume.MusicMusicValue = value;
     }
 }

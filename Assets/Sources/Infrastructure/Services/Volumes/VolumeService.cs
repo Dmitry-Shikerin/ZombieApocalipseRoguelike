@@ -8,23 +8,30 @@ namespace Sources.Infrastructure.Services.Volumes
     {
         private Volume _volume;
 
-        public event Action VolumeChanged;
+        public event Action MusicVolumeChanged;
+        public event Action MiniGunVolumeChanged;
 
-        public float Volume => _volume.VolumeValue;
+        public float MusicVolume => _volume.MusicMusicValue;
+        public float MiniGunVolume => _volume.MiniGunVolumeValue;
 
         public void Enter(object payload = null)
         {
-            OnVolumeChanged();
-            _volume.VolumeChanged += OnVolumeChanged;
+            OnMusicVolumeChanged();
+            _volume.MusicVolumeChanged += OnMusicVolumeChanged;
+            _volume.MiniGunVolumeChanged += OnMiniGunVolumeChanged; 
         }
 
         public void Exit()
         {
-            _volume.VolumeChanged -= OnVolumeChanged;
+            _volume.MusicVolumeChanged -= OnMusicVolumeChanged;
+            _volume.MiniGunVolumeChanged -= OnMiniGunVolumeChanged; 
         }
 
-        private void OnVolumeChanged() =>
-            VolumeChanged?.Invoke();
+        private void OnMiniGunVolumeChanged() =>
+            MiniGunVolumeChanged?.Invoke();
+
+        private void OnMusicVolumeChanged() =>
+            MusicVolumeChanged?.Invoke();
 
         public void Register(Volume volume) =>
             _volume = volume ?? throw new ArgumentNullException(nameof(volume));

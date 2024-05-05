@@ -23,7 +23,7 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
             }
         }
 
-        public void ShowOneForm(FormId formId)
+        public void Show(FormId formId)
         {
             if (_forms.ContainsKey(formId) == false)
                 throw new KeyNotFoundException(nameof(formId));
@@ -31,7 +31,7 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
             _forms[formId].Show();
         }
 
-        public void HideOneForm(FormId formId)
+        public void Hide(FormId formId)
         {
             if (_forms.ContainsKey(formId) == false)
                 throw new KeyNotFoundException(nameof(formId));
@@ -39,41 +39,12 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
             _forms[formId].Hide();
         }
 
-        public void Show(FormId formId)
+        public bool IsActive(FormId formId)
         {
             if (_forms.ContainsKey(formId) == false)
-                throw new NullReferenceException(nameof(formId));
+                throw new KeyNotFoundException(nameof(formId));
 
-            IUiView activeForm = _forms[formId];
-
-            _forms.Values
-                .Except(new List<IUiView> { activeForm, })
-                .ToList()
-                .ForEach(form => form.Hide());
-
-            activeForm.Show();
-        }
-
-        public void Hide(FormId formId)
-        {
-            if (_forms.ContainsKey(formId) == false)
-                throw new NullReferenceException(nameof(formId));
-
-            IUiView activeForm = _forms[formId];
-
-            if (activeForm == null)
-                throw new NullReferenceException(nameof(activeForm));
-
-            activeForm.Hide();
-        }
-
-        public void Add(IUiView uiView, string name = null, bool isSetParent = false)
-        {
-            if (isSetParent)
-                _containerView.AppendChild(uiView);
-
-            _forms.Add(uiView.FormId, uiView);
-            uiView.Hide();
+            return _forms[formId].IsActive;
         }
     }
 }

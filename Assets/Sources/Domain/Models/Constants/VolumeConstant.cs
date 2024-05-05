@@ -3,7 +3,7 @@
     public class VolumeConstant
     {
         public const float VolumeValuePerStep = 0.2f;
-        public const float BaseValue = 0.1f;
+        public const float BaseMusciValue = 0.1f;
         public const int MaxStep = 5;
 
     }

@@ -27,6 +27,8 @@ namespace Sources.Presentations.UI.Huds
         [SerializeField] private List<UpgradeUi> _upgradeUis;
         [FoldoutGroup("Upgrades")] [Required] 
         [SerializeField] private List<UpgradeUi> _notAvailabilityUpgradeUis;
+        [FoldoutGroup("Upgrades")] [Required] 
+        [SerializeField] private List<UpgradeDescriptionView> _upgradeDescriptionViews;
         
         [FoldoutGroup("PlayerWallet")] [Required] 
         [SerializeField] private List<PlayerWalletView> _playerWalletViews;
@@ -50,6 +52,7 @@ namespace Sources.Presentations.UI.Huds
         public IReadOnlyList<UpgradeView> UpgradeViews => _upgradeViews;
         public IReadOnlyList<UpgradeUi> UpgradeUis => _upgradeUis;
         public IReadOnlyList<UpgradeUi> NotAvailabilityUpgradeUis => _notAvailabilityUpgradeUis;
+        public IReadOnlyList<UpgradeDescriptionView> UpgradeDescriptionViews => _upgradeDescriptionViews;
         
         public IReadOnlyList<PlayerWalletView> PlayerWalletViews => _playerWalletViews;
 

@@ -64,6 +64,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
 
         public FormId FormId => _formId;
         public CustomFormId CustomFormId => _customFormId;
+        public bool IsActive => gameObject.activeSelf;
 
         [TabGroup("OnEnable")]
         [Button(ButtonSizes.Medium)]

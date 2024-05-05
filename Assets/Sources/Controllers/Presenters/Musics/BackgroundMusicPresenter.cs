@@ -39,7 +39,7 @@ namespace Sources.Controllers.Presenters.Musics
             
             // _pauseService.PauseSoundActivated += OnPauseActivated;
             // _pauseService.ContinueSoundActivated += OnContinueSoundActivated;
-            _volumeService.VolumeChanged += OnVolumeChanged;
+            _volumeService.MusicVolumeChanged += OnMusicVolumeChanged;
             StartMusic(_cancellationTokenSource.Token);
         }
 
@@ -47,7 +47,7 @@ namespace Sources.Controllers.Presenters.Musics
         {
             // _pauseService.PauseSoundActivated -= OnPauseActivated;
             // _pauseService.ContinueSoundActivated -= OnContinueSoundActivated;
-            _volumeService.VolumeChanged -= OnVolumeChanged;
+            _volumeService.MusicVolumeChanged -= OnMusicVolumeChanged;
             _cancellationTokenSource.Cancel();
         }
 
@@ -57,8 +57,8 @@ namespace Sources.Controllers.Presenters.Musics
         private void OnContinueSoundActivated() =>
             _backgroundMusicView.BackgroundMusicAudioSource.UnPause();
 
-        private void OnVolumeChanged() =>
-            _backgroundMusicView.BackgroundMusicAudioSource.SetVolume(_volumeService.Volume);
+        private void OnMusicVolumeChanged() =>
+            _backgroundMusicView.BackgroundMusicAudioSource.SetVolume(_volumeService.MusicVolume);
 
         //TODO коллекцию клипов можно брать с вьюшки?
         public async void StartMusic(CancellationToken cancellationToken)

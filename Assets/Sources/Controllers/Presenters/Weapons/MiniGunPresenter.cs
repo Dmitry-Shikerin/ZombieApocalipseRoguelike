@@ -31,13 +31,12 @@ namespace Sources.Controllers.Presenters.Weapons
             _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
         }
 
-        //TODO сделать отдельную громкость для минигана
         public override void Enable()
         {
             _miniGunView.ShootAudioSource.SetLoop();
             _miniGun.Attacked += OnAttack;
             _miniGun.AttackEnded += OnAttackEnded;
-            _volumeService.VolumeChanged += OnVolumeChanged;
+            _volumeService.MiniGunVolumeChanged += OnMiniGunVolumeChanged;
             _pauseService.PauseActivated += OnPauseActivated;
             _pauseService.ContinueActivated += ContinueActivated;
         }
@@ -46,7 +45,7 @@ namespace Sources.Controllers.Presenters.Weapons
         {
             _miniGun.Attacked -= OnAttack;
             _miniGun.AttackEnded -= OnAttackEnded;
-            _volumeService.VolumeChanged -= OnVolumeChanged;
+            _volumeService.MiniGunVolumeChanged -= OnMiniGunVolumeChanged;
             _pauseService.PauseActivated -= OnPauseActivated;
             _pauseService.ContinueActivated -= ContinueActivated;
         }
@@ -63,10 +62,10 @@ namespace Sources.Controllers.Presenters.Weapons
             _miniGunView.EndShootAudioSource.Pause();
         }
 
-        private void OnVolumeChanged()
+        private void OnMiniGunVolumeChanged()
         {
-            _miniGunView.ShootAudioSource.SetVolume(_volumeService.Volume);
-            _miniGunView.EndShootAudioSource.SetVolume(_volumeService.Volume);
+            _miniGunView.ShootAudioSource.SetVolume(_volumeService.MiniGunVolume);
+            _miniGunView.EndShootAudioSource.SetVolume(_volumeService.MiniGunVolume);
         }
 
         private void OnAttackEnded()
@@ -78,7 +77,6 @@ namespace Sources.Controllers.Presenters.Weapons
             _miniGunView.ShootAudioSource.Stop();
             _miniGunView.EndShootAudioSource.Play();
         }
-        //TODO в сервисе для музыки сделать вейтАнтил и проверять аудиокли на ис Плеинг
 
         private void OnAttack()
         {

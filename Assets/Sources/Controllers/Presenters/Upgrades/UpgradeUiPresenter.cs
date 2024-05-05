@@ -6,7 +6,7 @@ using Sources.PresentationsInterfaces.UI.Images;
 using Sources.PresentationsInterfaces.Views.Upgrades;
 using UnityEngine;
 
-namespace Sources.Controllers.Upgrades
+namespace Sources.Controllers.Presenters.Upgrades
 {
     public class UpgradeUiPresenter : PresenterBase
     {
@@ -39,9 +39,10 @@ namespace Sources.Controllers.Upgrades
 
         private void OnLevelChanged()
         {
-            Debug.Log($"Upgrade: {_upgrader.CurrentLevel}");
+            // Debug.Log($"Upgrade: {_upgrader.CurrentLevel}");
             UpdatePrice();
             UpdateImages();
+            AbilityImageChanged();
         }
 
         private void UpdatePrice()

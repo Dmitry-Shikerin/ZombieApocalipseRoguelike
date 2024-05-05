@@ -23,7 +23,7 @@ namespace Sources.Controllers.Upgrades
             _upgradeView.UpgradeButton.AddClickListener(OnUpgrade);
 
         public override void Disable() =>
-            _upgradeView.UpgradeButton.AddClickListener(OnUpgrade);
+            _upgradeView.UpgradeButton.RemoveClickListener(OnUpgrade);
 
         private void OnUpgrade() =>
             _upgrader.Upgrade(_playerWallet);
