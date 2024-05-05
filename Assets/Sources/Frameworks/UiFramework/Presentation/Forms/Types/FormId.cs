@@ -24,5 +24,6 @@
         Save = 19,
         FirstKitAidTutorial = 20,
         AdTutorial = 21,
+        SettingsTutorial = 22,
     }
 }
