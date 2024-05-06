@@ -98,7 +98,7 @@ namespace Sources.Infrastructure.Services.Upgrades
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    Debug.Log($"Avaiable upgrader: {awaiableUpgraders[i].Id}");
+                    // Debug.Log($"Avaiable upgrader: {awaiableUpgraders[i].Id}");
                     _upgradeUiFactory.Create(awaiableUpgraders[i], _upgradeUis[i]);
                     _upgradeViewFactory.Create(awaiableUpgraders[i], PlayerWallet, _upgradeViews[i]);
                     _upgradeDescriptionViewFactory.Create(awaiableUpgraders[i], _gameplayHud.UpgradeDescriptionViews[i]);
