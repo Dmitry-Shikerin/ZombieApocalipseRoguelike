@@ -27,6 +27,8 @@ namespace Sources.Infrastructure.Services.Upgrades
         private readonly IReadOnlyList<UpgradeUi> _upgradeUis;
         private readonly IReadOnlyList<UpgradeView> _upgradeViews;
 
+        private int numberOfFilledAbilities;
+
         public UpgradeService(
             PlayerWalletProvider playerWalletProvider,
             IUpgradeCollectionService upgradeCollectionService,
@@ -81,7 +83,7 @@ namespace Sources.Infrastructure.Services.Upgrades
             //TODO сделать провайдер коллекций от Т и использовать его вместо создания отдельных классов для коллекций
             //TODO сделать у этого класса индексатор
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
-            List<Upgrader> awaiableUpgraders = new List<Upgrader>();
+            List<Upgrader> availableUpgraders = new List<Upgrader>();
 
             foreach (Upgrader upgrader in upgraders)
             {
@@ -89,23 +91,41 @@ namespace Sources.Infrastructure.Services.Upgrades
                     continue;
                 
                 if(upgrader.MoneyPerUpgrades[upgrader.CurrentLevel] <= PlayerWallet.Coins)
-                    awaiableUpgraders.Add(upgrader);
+                    availableUpgraders.Add(upgrader);
             }
 
-            awaiableUpgraders = awaiableUpgraders.OrderBy(upgrader => upgrader.CurrentLevel).ToList();
+            availableUpgraders = availableUpgraders.OrderBy(upgrader => upgrader.CurrentLevel).ToList();
 
-            if (awaiableUpgraders.Count >= 3)
+            //if (availableUpgraders.Count >= 3)
+            //{
+            //    for (int i = 0; i < 3; i++)
+            //    {
+            //        Debug.Log($"Avaiable upgrader: {availableUpgraders[i].Id}");
+            //        _upgradeUiFactory.Create(availableUpgraders[i], _upgradeUis[i]);
+            //        _upgradeViewFactory.Create(availableUpgraders[i], PlayerWallet, _upgradeViews[i]);
+            //        _upgradeDescriptionViewFactory.Create(availableUpgraders[i], _gameplayHud.UpgradeDescriptionViews[i]);
+            //    }
+            //    
+            //    _formService.Show(FormId.Upgrade);
+            //}
+            
+            if (availableUpgraders.Count >= 3)
+                numberOfFilledAbilities = 3;
+            
+            else if (availableUpgraders.Count is < 3 and > 0)
+                numberOfFilledAbilities = availableUpgraders.Count;
+            
+            else
+                return;
+            
+            for (int i = 0; i < numberOfFilledAbilities; i++)
             {
-                for (int i = 0; i < 3; i++)
-                {
-                    Debug.Log($"Avaiable upgrader: {awaiableUpgraders[i].Id}");
-                    _upgradeUiFactory.Create(awaiableUpgraders[i], _upgradeUis[i]);
-                    _upgradeViewFactory.Create(awaiableUpgraders[i], PlayerWallet, _upgradeViews[i]);
-                    _upgradeDescriptionViewFactory.Create(awaiableUpgraders[i], _gameplayHud.UpgradeDescriptionViews[i]);
-                }
-                
-                _formService.Show(FormId.Upgrade);
+                _upgradeUiFactory.Create(availableUpgraders[i], _upgradeUis[i]);
+                _upgradeViewFactory.Create(availableUpgraders[i], PlayerWallet, _upgradeViews[i]);
+                _upgradeDescriptionViewFactory.Create(availableUpgraders[i], _gameplayHud.UpgradeDescriptionViews[i]);
             }
+                
+            _formService.Show(FormId.Upgrade);
         }
     }
 }
