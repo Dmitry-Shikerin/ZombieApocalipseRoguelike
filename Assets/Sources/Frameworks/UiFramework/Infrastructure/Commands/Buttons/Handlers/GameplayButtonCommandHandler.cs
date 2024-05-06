@@ -12,11 +12,15 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
         public GameplayButtonCommandHandler(
             ShowFormCommand showFormCommand,
             CompleteTutorialCommand completeTutorialCommand,
-            LoadMainMenuSceneCommand loadMainMenuSceneCommand)
+            LoadMainMenuSceneCommand loadMainMenuSceneCommand,
+            UnPauseButtonCommand unPauseButtonCommand,
+            HideFormCommand hideFormCommand)
         {
             _commands[showFormCommand.Id] = showFormCommand;
             _commands[completeTutorialCommand.Id] = completeTutorialCommand;
             _commands[loadMainMenuSceneCommand.Id] = loadMainMenuSceneCommand;
+            _commands[unPauseButtonCommand.Id] = unPauseButtonCommand;
+            _commands[hideFormCommand.Id] = hideFormCommand;
         }
 
         public void Handle(UiButton uiButton, ButtonCommandId buttonCommandId)
