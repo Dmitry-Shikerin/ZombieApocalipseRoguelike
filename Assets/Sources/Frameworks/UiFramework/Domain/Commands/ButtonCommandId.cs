@@ -9,5 +9,7 @@
         NewGame = 4,
         Leaderboard = 5,
         EnableLoadGameButton = 6,
+        UnPause = 7,
+        HideForm = 8,
     }
 }

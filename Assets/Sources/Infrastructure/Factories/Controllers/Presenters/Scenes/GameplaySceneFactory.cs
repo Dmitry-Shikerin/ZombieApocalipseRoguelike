@@ -19,6 +19,7 @@ using Sources.InfrastructureInterfaces.Services.Tutorials;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
+using Sources.Presentations.UI.Curtains;
 
 namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
 {
@@ -37,6 +38,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly ILevelCompletedService _levelCompletedService;
         private readonly ITutorialService _tutorialService;
         private readonly IEnemyCollectorService _enemyCollectorService;
+        private readonly CurtainView _curtainView;
 
         public GameplaySceneFactory(
             IUpdateService updateService,
@@ -51,7 +53,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             ISaveService saveService,
             ILevelCompletedService levelCompletedService,
             ITutorialService tutorialService,
-            IEnemyCollectorService enemyCollectorService) 
+            IEnemyCollectorService enemyCollectorService,
+            CurtainView curtainView) 
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -66,6 +69,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _levelCompletedService = levelCompletedService ?? throw new ArgumentNullException(nameof(levelCompletedService));
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
+            _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
 
         public async UniTask<IScene> Create(object payload)
@@ -82,7 +86,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _saveService,
                 _levelCompletedService,
                 _tutorialService,
-                _enemyCollectorService);
+                _enemyCollectorService,
+                _curtainView);
         }
 
         private ILoadSceneService CreateLoadSceneService(object payload)
