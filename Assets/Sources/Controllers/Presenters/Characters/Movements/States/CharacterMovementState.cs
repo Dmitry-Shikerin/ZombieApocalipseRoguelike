@@ -11,8 +11,6 @@ namespace Sources.Controllers.Presenters.Characters.Movements.States
     public class CharacterMovementState : ContextStateBase
     {
         private const float MovementSpeed = 0.7f;
-        private const float Delta = 1;
-        private const float Scalar = 2;
 
         private readonly CharacterMovement _characterMovement;
         private readonly ICharacterAnimationView _characterAnimationView;

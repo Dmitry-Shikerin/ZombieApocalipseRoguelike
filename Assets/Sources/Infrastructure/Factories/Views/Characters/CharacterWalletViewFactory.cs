@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Controllers.Characters;
+using Sources.Controllers.Presenters.Characters;
 using Sources.Domain.Models.Players;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Presentations.Views.Characters;
