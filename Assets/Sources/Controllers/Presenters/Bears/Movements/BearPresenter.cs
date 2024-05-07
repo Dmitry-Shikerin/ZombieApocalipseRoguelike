@@ -4,7 +4,7 @@ using Sources.Infrastructure.StateMachines.FiniteStateMachines;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 
-namespace Sources.Controllers.Bears.Movements
+namespace Sources.Controllers.Presenters.Bears.Movements
 {
     public class BearPresenter : FiniteStateMachine, IPresenter
     {

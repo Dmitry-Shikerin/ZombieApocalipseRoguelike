@@ -1,9 +1,10 @@
 ﻿using System;
-using Sources.Controllers.Bears.Movements;
-using Sources.Controllers.Bears.Movements.States;
+using Sources.Controllers.Presenters.Bears.Movements;
+using Sources.Controllers.Presenters.Bears.Movements.States;
 using Sources.Domain.Models.Bears;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
+using Sources.InfrastructureInterfaces.Services.Bears;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Bears;
 using UnityEngine;
@@ -14,13 +15,16 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Bears
     {
         private readonly IUpdateRegister _updateRegister;
         private readonly OverlapService _overlapService;
+        private readonly IBearMovementService _bearMovementService;
 
         public BearPresenterFactory(
             IUpdateRegister updateRegister,
-            OverlapService overlapService)
+            OverlapService overlapService,
+            IBearMovementService bearMovementService)
         {
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
             _overlapService = overlapService ?? throw new ArgumentNullException(nameof(overlapService));
+            _bearMovementService = bearMovementService ?? throw new ArgumentNullException(nameof(bearMovementService));
         }
 
         public BearPresenter Create(Bear bear, IBearView bearView, IBearAnimationView bearAnimationView)
@@ -29,7 +33,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Bears
             BearFollowCharacterState followCharacterState = new BearFollowCharacterState(
                 bear, bearAnimationView, bearView);
             BearMoveToEnemyState moveToEnemyState = new BearMoveToEnemyState(bear, bearAnimationView, bearView);
-            BearAttackState attackState = new BearAttackState(bear, bear.BearAttacker, bearView, bearAnimationView);
+            BearAttackState attackState = new BearAttackState(
+                bear, bear.BearAttacker, bearView, bearAnimationView, _bearMovementService);
             
             FiniteTransitionBase toFollowTransition = new FiniteTransitionBase(
                 followCharacterState,

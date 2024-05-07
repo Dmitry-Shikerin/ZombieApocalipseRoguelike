@@ -3,10 +3,12 @@ using Sources.Domain.Models.Bears;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.PresentationsInterfaces.Views.Bears;
 
-namespace Sources.Controllers.Bears.Movements.States
+namespace Sources.Controllers.Presenters.Bears.Movements.States
 {
     public class BearFollowCharacterState : FiniteState
     {
+        private const float StopDistance = 3f;
+        
         private readonly Bear _bear;
         private readonly IBearAnimationView _bearAnimationView;
         private readonly IBearView _bearView;
@@ -23,10 +25,8 @@ namespace Sources.Controllers.Bears.Movements.States
 
         public override void Enter()
         {
-            // Debug.Log($"Bear enter Follow state");
-            
             _bearView.SetTarget(null);
-            _bearView.SetStoppingDistance(3f);
+            _bearView.SetStoppingDistance(StopDistance);
             _bearAnimationView.PlayWalk();
         }
 

@@ -1,12 +1,11 @@
 ﻿using System;
-using Sources.Infrastructure.Services.Cameras;
 using Sources.Infrastructure.StateMachines.ContextStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.Presentations.Views.Cameras.Points;
 using Sources.PresentationsInterfaces.Views.Cameras;
 using UnityEngine;
 
-namespace Sources.Controllers.Cameras.States
+namespace Sources.Controllers.Presenters.Cameras.States
 {
     public class CameraFollowAllMap : ContextStateBase
     {

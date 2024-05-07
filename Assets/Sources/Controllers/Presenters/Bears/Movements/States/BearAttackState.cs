@@ -2,10 +2,10 @@
 using Sources.Controllers.Bears.Attacks;
 using Sources.Domain.Models.Bears;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
+using Sources.InfrastructureInterfaces.Services.Bears;
 using Sources.PresentationsInterfaces.Views.Bears;
-using UnityEngine;
 
-namespace Sources.Controllers.Bears.Movements.States
+namespace Sources.Controllers.Presenters.Bears.Movements.States
 {
     public class BearAttackState : FiniteState
     {
@@ -13,22 +13,24 @@ namespace Sources.Controllers.Bears.Movements.States
         private readonly BearAttacker _bearAttacker;
         private readonly IBearView _bearView;
         private readonly IBearAnimationView _bearAnimationView;
+        private readonly IBearMovementService _bearMovementService;
 
         public BearAttackState(
             Bear bear,
             BearAttacker bearAttacker,
             IBearView bearView,
-            IBearAnimationView bearAnimationView)
+            IBearAnimationView bearAnimationView,
+            IBearMovementService bearMovementService)
         {
             _bear = bear ?? throw new ArgumentNullException(nameof(bear));
             _bearAttacker = bearAttacker ?? throw new ArgumentNullException(nameof(bearAttacker));
             _bearView = bearView ?? throw new ArgumentNullException(nameof(bearView));
             _bearAnimationView = bearAnimationView ?? throw new ArgumentNullException(nameof(bearAnimationView));
+            _bearMovementService = bearMovementService ?? throw new ArgumentNullException(nameof(bearMovementService));
         }
 
         public override void Enter()
         {
-            // Debug.Log($"Bear enter attack state");
             _bearAnimationView.Attacking += OnAttack;
 
             _bearAnimationView.PlayAttack();
@@ -45,35 +47,23 @@ namespace Sources.Controllers.Bears.Movements.States
                 _bearView.SetTarget(null);
         }
 
-        //TODO вынести в MVC и сервис или чисто в сервис
         private void OnAttack()
         {
+            ChangeLookDirection();
             _bearView.TargetEnemyHealth.TakeDamage(_bearAttacker.Damage);
-            var lookDirection = _bearView.TargetEnemyHealth.Position - _bearView.Position;
-            lookDirection.y = _bearView.Position.y;
-            float distance = lookDirection.magnitude;
-            
-            float angle = Vector3.SignedAngle(Vector3.forward, lookDirection, Vector3.up);
-            
-            if(distance < 0.7f)
-                return;
-            
-            _bearView.SetLookRotation(angle);
         }
 
-        private void ChangeForwardPosition()
+        private void ChangeLookDirection()
         {
-            Vector3 targetDirection = _bearView.TargetEnemyHealth.Position - _bearView.Position;
-
-            if (_bearView.Forward == targetDirection)
-                return;
-
-            while (_bearView.Forward != targetDirection)
+            try
             {
-                Vector3 direction = Vector3.MoveTowards(
-                    _bearView.Forward, targetDirection, 0.1f);
-
-                Quaternion look = Quaternion.LookRotation(direction);
+                //TODO сделать плавный поворот к противнику
+                float angle = _bearMovementService.GetAngleRotation(
+                    _bearView.TargetEnemyHealth.Position, _bearView.Position);
+                _bearView.SetLookRotation(angle);
+            }
+            catch(InvalidOperationException)
+            {
             }
         }
     }

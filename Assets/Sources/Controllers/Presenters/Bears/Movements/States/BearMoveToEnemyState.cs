@@ -3,7 +3,7 @@ using Sources.Domain.Models.Bears;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.PresentationsInterfaces.Views.Bears;
 
-namespace Sources.Controllers.Bears.Movements.States
+namespace Sources.Controllers.Presenters.Bears.Movements.States
 {
     public class BearMoveToEnemyState : FiniteState
     {
@@ -23,8 +23,6 @@ namespace Sources.Controllers.Bears.Movements.States
 
         public override void Enter()
         {
-            // Debug.Log($"Bear enter moveToEnemy state");
-            
             _bearView.SetStoppingDistance(2f);
             _bearAnimationView.PlayWalk();
         }
@@ -33,9 +31,7 @@ namespace Sources.Controllers.Bears.Movements.States
         {
         }
 
-        public override void Update(float deltaTime)
-        {
+        public override void Update(float deltaTime) =>
             _bearView.Move(_bearView.TargetEnemyHealth.Position);
-        }
     }
 }

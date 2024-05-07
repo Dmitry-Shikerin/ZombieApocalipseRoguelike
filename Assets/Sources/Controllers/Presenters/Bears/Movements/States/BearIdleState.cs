@@ -6,12 +6,13 @@ using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.Presentations.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Bears;
-using UnityEngine;
 
-namespace Sources.Controllers.Bears.Movements.States
+namespace Sources.Controllers.Presenters.Bears.Movements.States
 {
     public class BearIdleState : FiniteState
     {
+        private const float FindRadius = 5f;
+        
         private readonly IBearAnimationView _bearAnimationView;
         private readonly OverlapService _overlapService;
         private readonly IBearView _bearView;
@@ -30,7 +31,6 @@ namespace Sources.Controllers.Bears.Movements.States
 
         public override void Enter()
         {
-            // Debug.Log($"Bear enter idle state");
             _bearAnimationView.PlayIdle();
             _bearView.SetTarget(null);
         }
@@ -46,15 +46,15 @@ namespace Sources.Controllers.Bears.Movements.States
 
         private void FindEnemy()
         {
+            //TODO порефакторить попозже когда доделается логика
             if (_bearView.TargetEnemyHealth != null)
                 return;
 
             IReadOnlyList<EnemyHealthView> enemies = _overlapService.OverlapSphere<EnemyHealthView>(
-                _bearView.CharacterMovementView.Position, 5f, Layer.Enemy, Layer.Obstacle);
+                _bearView.CharacterMovementView.Position, FindRadius, Layer.Enemy, Layer.Obstacle);
 
             EnemyHealthView enemy = enemies.FirstOrDefault();
-            if (enemy != null)
-                Debug.Log($"{Vector3.Distance(enemy.Position, _bearView.Position)}");
+            
             if(enemy != null && enemy.enabled == false)
                 enemy = null;
 
