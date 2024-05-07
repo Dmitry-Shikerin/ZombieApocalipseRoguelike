@@ -19,10 +19,12 @@ namespace Sources.Presentations.Views.Enemies.Bosses
         [Required] [SerializeField] private BossEnemyAnimation _enemyAnimation;
         [Required] [SerializeField] private ParticleSystem _massAttackParticle;
         [Required] [SerializeField] private CharacterHealthParticleCollision _characterHealthParticleCollision;
+        [Required] [SerializeField] private HealthUiText _healthUiText;
         
         public EnemyHealthView EnemyHealthView => _healthView;
         public HealthUi HealthUi => _healthUi;
         public BossEnemyAnimation EnemyAnimation => _enemyAnimation;
+        public HealthUiText HealthUiText => _healthUiText;
         public float StoppingDistance => _navMeshAgent.stoppingDistance;
         public Vector3 Position => transform.position;
         public ICharacterMovementView CharacterMovementView { get; private set; }

@@ -10,6 +10,8 @@ namespace Sources.Infrastructure.Services.GameOvers
     {
         private readonly IFormService _formService;
         private CharacterHealth _characterHealth;
+        
+        private bool _isGameOver;
 
         public GameOverService(IFormService formService)
         {
@@ -37,7 +39,11 @@ namespace Sources.Infrastructure.Services.GameOvers
             if(_characterHealth.CurrentHealth > 0)
                 return;
             
+            if(_isGameOver)
+                return;
+            
             _formService.Show(FormId.GameOver);
+            _isGameOver = true;
         }
     }
 }

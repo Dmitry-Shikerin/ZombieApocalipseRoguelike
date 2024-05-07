@@ -19,7 +19,7 @@ namespace Sources.Controllers.Spawners
         private CancellationTokenSource _cancellationTokenSource;
 
         public ItemSpawnerPresenter(
-            ItemSpawner itemSpawner, 
+            ItemSpawner itemSpawner,
             IItemSpawnerView itemSpawnerView,
             IFirstAidKitSpawnService firstAidKitSpawnService)
         {
@@ -45,14 +45,15 @@ namespace Sources.Controllers.Spawners
             {
                 while (cancellationToken.IsCancellationRequested == false)
                 {
-                    foreach (IItemSpawnPoint itemSpawnPoint in _itemSpawnerView.SpawnPoints)
-                    {
-                        IFirstAidKitView firstAidKitView = _firstAidKitSpawnService.Spawn(itemSpawnPoint.Position);
-                        
-                        firstAidKitView.SetHealAmount(15);
-
-                        await UniTask.Delay(TimeSpan.FromSeconds(30), cancellationToken: cancellationToken);
-                    }
+                    Random random = new Random();
+                    int i = random.Next(0, _itemSpawnerView.SpawnPoints.Count);
+                    
+                    IItemSpawnPoint itemSpawnPoint = _itemSpawnerView.SpawnPoints[i];
+                    IFirstAidKitView firstAidKitView = _firstAidKitSpawnService.Spawn(itemSpawnPoint.Position);
+                    
+                    firstAidKitView.SetHealAmount(15);
+                    
+                    await UniTask.Delay(TimeSpan.FromSeconds(30), cancellationToken: cancellationToken);
                 }
             }
             catch (OperationCanceledException)

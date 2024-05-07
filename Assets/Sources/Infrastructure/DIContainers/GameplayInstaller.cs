@@ -223,6 +223,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<LoadGameCommand>().AsSingle();
             Container.Bind<ShowLeaderboardCommand>().AsSingle();
             Container.Bind<EnableLoadGameButtonCommand>().AsSingle();
+            Container.Bind<UnPauseButtonCommand>().AsSingle();
+            Container.Bind<HideFormCommand>().AsSingle();
             
             //Views
             Container.Bind<UiViewService>().AsSingle();
