@@ -68,6 +68,7 @@ using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.Bears;
 using Sources.Infrastructure.Services.Cameras;
+using Sources.Infrastructure.Services.Characters;
 using Sources.Infrastructure.Services.EnemyCollectors;
 using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.Infrastructure.Services.GameOvers;
@@ -86,6 +87,7 @@ using Sources.Infrastructure.Services.Spawners;
 using Sources.Infrastructure.Services.Tutorials;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Infrastructure.Services.Upgrades;
+using Sources.InfrastructureInterfaces.Characters;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Views.Bullets;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
@@ -203,6 +205,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ITutorialService>().To<TutorialService>().AsSingle();
             Container.Bind<IEnemySpawnerConfigCollectionService>().To<EnemySpawnerConfigCollectionService>().AsSingle();
             Container.Bind<IBearMovementService>().To<BearMovementService>().AsSingle();
+            Container.Bind<ICharacterMovementService>().To<CharacterMovementService>().AsSingle();
         }
 
         private void BindFormFactories()

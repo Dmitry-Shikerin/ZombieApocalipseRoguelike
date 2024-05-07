@@ -43,7 +43,7 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
 
         public override void Update(float deltaTime)
         {
-            if(_bearView.TargetEnemyHealth.CurrentHealth <= 0)
+            if (_bearView.TargetEnemyHealth.CurrentHealth <= 0)
                 _bearView.SetTarget(null);
         }
 
@@ -55,16 +55,10 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
 
         private void ChangeLookDirection()
         {
-            try
-            {
-                //TODO сделать плавный поворот к противнику
-                float angle = _bearMovementService.GetAngleRotation(
-                    _bearView.TargetEnemyHealth.Position, _bearView.Position);
-                _bearView.SetLookRotation(angle);
-            }
-            catch(InvalidOperationException)
-            {
-            }
+            //TODO сделать плавный поворот к противнику
+            float angle = _bearMovementService.GetAngleRotation(
+                _bearView.TargetEnemyHealth.Position, _bearView.Position);
+            _bearView.SetLookRotation(angle);
         }
     }
 }

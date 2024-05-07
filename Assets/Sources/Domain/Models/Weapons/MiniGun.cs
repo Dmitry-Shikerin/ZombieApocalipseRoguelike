@@ -2,7 +2,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Domain.Models.Upgrades;
-using Sources.DomainInterfaces.Weapons;
+using Sources.DomainInterfaces.Models.Weapons;
 
 namespace Sources.Domain.Models.Weapons
 {
@@ -26,6 +26,7 @@ namespace Sources.Domain.Models.Weapons
         public bool IsEnded { get; set; }
         public bool IsShooting { get; set; }
 
+        //TODO подумать над тем чтобы упростить
         public async void AttackAsync(CancellationToken cancellationToken)
         {
             try

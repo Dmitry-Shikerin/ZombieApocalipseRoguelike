@@ -33,13 +33,13 @@ namespace Sources.Controllers.Presenters.Characters.Attackers
         public override void Enable()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-
             _updateRegister.Register(OnUpdate);
         }
 
         public override void Disable()
         {
             _cancellationTokenSource.Cancel();
+            _updateRegister.UnRegister(OnUpdate);
         }
 
         private void OnUpdate(float deltaTime)

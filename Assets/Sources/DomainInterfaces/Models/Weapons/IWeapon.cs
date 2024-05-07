@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace Sources.DomainInterfaces.Weapons
+namespace Sources.DomainInterfaces.Models.Weapons
 {
     public interface IWeapon
     {

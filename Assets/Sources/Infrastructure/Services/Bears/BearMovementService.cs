@@ -10,10 +10,6 @@ namespace Sources.Infrastructure.Services.Bears
         {
             Vector3 lookDirection = enemyPosition - bearPosition;
             lookDirection.y = bearPosition.y;
-            float distance = lookDirection.magnitude;
-            
-            if (distance < 0.7f)
-                throw new InvalidOperationException(nameof(distance));
             
             return Vector3.SignedAngle(Vector3.forward, lookDirection, Vector3.up);
         }

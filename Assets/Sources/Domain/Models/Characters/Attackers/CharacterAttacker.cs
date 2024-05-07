@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using Sources.DomainInterfaces.Weapons;
+using Sources.DomainInterfaces.Models.Weapons;
 
 namespace Sources.Domain.Models.Characters.Attackers
 {
