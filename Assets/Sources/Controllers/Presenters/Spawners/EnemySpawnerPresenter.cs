@@ -133,10 +133,7 @@ namespace Sources.Controllers.Presenters.Spawners
 
         private void SpawnEnemy(Vector3 position, CharacterView characterView)
         {
-            IEnemyView enemyView = _enemySpawnService.Spawn(_killEnemyCounter);
-            enemyView.DisableNavmeshAgent();
-            enemyView.SetPosition(position);
-            enemyView.EnableNavmeshAgent();
+            IEnemyView enemyView = _enemySpawnService.Spawn(_killEnemyCounter, position);
             enemyView.SetCharacterHealth(characterView.CharacterHealthView);
             enemyView.SetTargetFollow(characterView.CharacterMovementView);
 

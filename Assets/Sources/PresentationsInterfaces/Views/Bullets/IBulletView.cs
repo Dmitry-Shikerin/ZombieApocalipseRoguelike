@@ -4,7 +4,7 @@ using Sources.PresentationsInterfaces.Views.Weapons;
 
 namespace Sources.PresentationsInterfaces.Views.Bullets
 {
-    public interface IBulletView : IConstruct<IMiniGunView>
+    public interface IBulletView : IConstruct<IMiniGunView>, IView
     {
     }
 }

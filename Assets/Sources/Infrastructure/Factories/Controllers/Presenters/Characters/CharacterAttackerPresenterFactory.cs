@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Controllers.Characters.Attackers;
+using Sources.Controllers.Presenters.Characters.Attackers;
 using Sources.Domain.Models.Characters.Attackers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;

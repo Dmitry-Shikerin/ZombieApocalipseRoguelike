@@ -66,7 +66,9 @@ using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Weapons;
+using Sources.Infrastructure.Services.Bears;
 using Sources.Infrastructure.Services.Cameras;
+using Sources.Infrastructure.Services.Characters;
 using Sources.Infrastructure.Services.EnemyCollectors;
 using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.Infrastructure.Services.GameOvers;
@@ -85,12 +87,14 @@ using Sources.Infrastructure.Services.Spawners;
 using Sources.Infrastructure.Services.Tutorials;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Infrastructure.Services.Upgrades;
+using Sources.InfrastructureInterfaces.Characters;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Views.Bullets;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Factories.Views.ExplosionBodyBloodyViews;
 using Sources.InfrastructureInterfaces.Factories.Views.FirstAidKits;
 using Sources.InfrastructureInterfaces.Factories.Views.RewardItems;
+using Sources.InfrastructureInterfaces.Services.Bears;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
@@ -200,6 +204,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ILevelCompletedService>().To<LevelCompletedService>().AsSingle();
             Container.Bind<ITutorialService>().To<TutorialService>().AsSingle();
             Container.Bind<IEnemySpawnerConfigCollectionService>().To<EnemySpawnerConfigCollectionService>().AsSingle();
+            Container.Bind<IBearMovementService>().To<BearMovementService>().AsSingle();
+            Container.Bind<ICharacterMovementService>().To<CharacterMovementService>().AsSingle();
         }
 
         private void BindFormFactories()

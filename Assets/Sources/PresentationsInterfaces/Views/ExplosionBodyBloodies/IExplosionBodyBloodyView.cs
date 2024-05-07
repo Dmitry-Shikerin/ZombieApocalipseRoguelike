@@ -1,6 +1,6 @@
 ﻿namespace Sources.PresentationsInterfaces.Views.ExplosionBodyBloodies
 {
-    public interface IExplosionBodyBloodyView
+    public interface IExplosionBodyBloodyView : IView
     {
     }
 }

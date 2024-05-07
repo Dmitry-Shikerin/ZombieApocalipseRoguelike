@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Bears;
-using Sources.Controllers.Bears.Movements;
+using Sources.Controllers.Presenters.Bears.Movements;
 using Sources.Domain.Models.Bears;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Bears;
 using Sources.Presentations.Views.Bears;

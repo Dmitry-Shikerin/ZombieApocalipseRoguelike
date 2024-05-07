@@ -4,7 +4,7 @@ using Sources.Domain.Models.Players;
 using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.RewardItems;
 
-namespace Sources.Controllers.Characters
+namespace Sources.Controllers.Presenters.Characters
 {
     public class CharacterWalletPresenter : PresenterBase
     {
@@ -14,7 +14,8 @@ namespace Sources.Controllers.Characters
         public CharacterWalletPresenter(PlayerWallet playerWallet, ICharacterWalletView characterWalletView)
         {
             _playerWallet = playerWallet ?? throw new ArgumentNullException(nameof(playerWallet));
-            _characterWalletView = characterWalletView ?? throw new ArgumentNullException(nameof(characterWalletView));
+            _characterWalletView = characterWalletView ?? 
+                                   throw new ArgumentNullException(nameof(characterWalletView));
         }
         
         public void AddRewardItem(IRewardItemView rewardItemView)

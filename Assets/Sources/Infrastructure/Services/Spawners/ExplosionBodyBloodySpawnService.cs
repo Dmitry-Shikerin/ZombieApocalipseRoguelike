@@ -23,7 +23,12 @@ namespace Sources.Infrastructure.Services.Spawners
 
         public IExplosionBodyBloodyView Spawn(Vector3 position)
         {
-            return SpawnFromPool(position) ?? _viewFactory.Create(position);
+            IExplosionBodyBloodyView view = SpawnFromPool(position) ?? _viewFactory.Create(position);
+            
+            view.SetPosition(position);
+            view.Show();
+
+            return view;
         }
         
         private IExplosionBodyBloodyView SpawnFromPool(Vector3 position)

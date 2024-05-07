@@ -1,5 +1,4 @@
 ﻿using System;
-using Sources.Controllers.Characters;
 using Sources.Controllers.Players;
 using Sources.DomainInterfaces.Players;
 using Sources.Infrastructure.Factories.Controllers.Characters;

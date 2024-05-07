@@ -23,6 +23,9 @@ namespace Sources.Presentations.Views
         //TODO должно ли это быть здесь?
         public void SetRotation(Vector3 rotation) =>
             transform.rotation = Quaternion.Euler(rotation);
+        
+        public void SetRotation(Quaternion rotation) =>
+            transform.rotation = rotation;
 
         public virtual void Destroy() =>
             Destroy(gameObject);

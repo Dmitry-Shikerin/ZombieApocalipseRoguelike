@@ -1,5 +1,4 @@
 ﻿using System;
-using Sources.Controllers.Characters;
 using Sources.Controllers.Presenters.Characters;
 using Sources.Infrastructure.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;

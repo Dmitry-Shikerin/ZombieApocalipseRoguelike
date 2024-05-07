@@ -5,12 +5,13 @@ using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Cameras;
 using UnityEngine;
 
-namespace Sources.Controllers.Cameras.States
+namespace Sources.Controllers.Presenters.Cameras.States
 {
     public class CameraFollowCharacterState : ContextStateBase
     {
         private readonly ICinemachineCameraView _cinemachineCameraView;
         private readonly ICameraService _cameraService;
+        private readonly Vector3 _cameraPosition = new Vector3(60, 45, 0);
 
         public CameraFollowCharacterState(
             ICinemachineCameraView cinemachineCameraView,
@@ -25,16 +26,7 @@ namespace Sources.Controllers.Cameras.States
         {
             Transform target = _cameraService.Get<CharacterView>().Transform;
             _cinemachineCameraView.Follow(target);
-            
-            _cinemachineCameraView.SetRotation(new Vector3(60, 45, 0));
-        }
-
-        public override void Exit()
-        {
-        }
-
-        public override void Update(float deltaTime)
-        {
+            _cinemachineCameraView.SetRotation(_cameraPosition);
         }
     }
 }

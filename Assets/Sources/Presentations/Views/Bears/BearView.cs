@@ -1,6 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Controllers.Bears;
-using Sources.Controllers.Bears.Movements;
+using Sources.Controllers.Presenters.Bears.Movements;
 using Sources.PresentationsInterfaces.Views.Bears;
 using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.Enemies;

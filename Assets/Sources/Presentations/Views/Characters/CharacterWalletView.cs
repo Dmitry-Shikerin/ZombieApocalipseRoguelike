@@ -1,4 +1,4 @@
-﻿using Sources.Controllers.Characters;
+﻿using Sources.Controllers.Presenters.Characters;
 using Sources.Presentations.Triggers;
 using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.RewardItems;

@@ -1,4 +1,4 @@
-﻿using Sources.Controllers.Characters.Attackers;
+﻿using Sources.Controllers.Presenters.Characters.Attackers;
 using Sources.PresentationsInterfaces.Views.Character;
 
 namespace Sources.Presentations.Views.Characters

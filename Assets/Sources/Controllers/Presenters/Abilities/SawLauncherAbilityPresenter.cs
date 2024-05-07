@@ -42,13 +42,15 @@ namespace Sources.Controllers.Abilities
 
         private void OnUpdate(float deltaTime)
         {
-            _sawLauncherAbilityView.Rotate(new Vector3(0, 1, 0));
+            _sawLauncherAbilityView.Rotate(Vector3.up);
             _sawLauncherAbilityView.Follow();
         }
 
         //TODO порефакторить проэкт и вынести логику в сервисы
+        //TODO вся эта логика может остаться здесь
         private void OnSawLauncherViewsEnable()
         {
+            //TODO в дополнительный конфиг
             int sawLauncherCount = _sawLauncherAbility.Upgrader.CurrentLevel switch
             {
                 0 => 0,
