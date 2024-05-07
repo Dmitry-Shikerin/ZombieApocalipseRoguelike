@@ -31,8 +31,8 @@ namespace Sources.Infrastructure.Factories.Views.Bullets
         {
             bulletView.Construct(miniGunView);
             bulletView.SetParent(null);
-            bulletView.SetPosition(miniGunView.BulletSpawnPoint.Transform.position);
-            bulletView.SetRotation(miniGunView.BulletSpawnPoint.Transform.rotation);
+            // bulletView.SetPosition(miniGunView.BulletSpawnPoint.Transform.position);
+            // bulletView.SetRotation(miniGunView.BulletSpawnPoint.Transform.rotation);
             
             return bulletView;
         }

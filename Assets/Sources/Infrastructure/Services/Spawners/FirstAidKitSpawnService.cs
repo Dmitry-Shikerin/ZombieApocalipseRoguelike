@@ -22,7 +22,12 @@ namespace Sources.Infrastructure.Services.Spawners
         }
         public IFirstAidKitView Spawn(Vector3 position)
         {
-            return SpawnFromPool(position) ?? _viewFactory.Create(position);
+            IFirstAidKitView view = SpawnFromPool(position) ?? _viewFactory.Create(position);
+            
+            view.SetPosition(position);
+            view.Show();
+            
+            return view;
         }
         
         private FirstAidKitView SpawnFromPool(Vector3 position)
@@ -31,8 +36,6 @@ namespace Sources.Infrastructure.Services.Spawners
 
             if (firstAidKitView == null)
                 return null;
-            
-            firstAidKitView.SetPosition(position);
 
             return firstAidKitView;
         }

@@ -29,8 +29,8 @@ namespace Sources.Infrastructure.Services.ObjectPools
             @object.SetParent(null);
             ObjectCountChanged?.Invoke(_objects.Count);
 
-            @object.Show();
-
+            // @object.Show();
+            //
             return @object;
         }
 

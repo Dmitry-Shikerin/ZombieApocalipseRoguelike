@@ -42,6 +42,9 @@ namespace Sources.Presentations.Views.Forms.Common
         public void SetRotation(Vector3 rotation) =>
             _formView.SetRotation(rotation);
 
+        public void SetRotation(Quaternion rotation) =>
+            _formView.SetRotation(rotation);
+
         public void Destroy() =>
             _formView.Destroy();
     }

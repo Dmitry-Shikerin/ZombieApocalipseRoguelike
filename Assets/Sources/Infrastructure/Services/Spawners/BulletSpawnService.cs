@@ -21,8 +21,16 @@ namespace Sources.Infrastructure.Services.Spawners
             _bulletViewFactory = bulletViewFactory ?? throw new ArgumentNullException(nameof(bulletViewFactory));
         }
 
-        public IBulletView Spawn(IMiniGunView miniGunView) =>
-            SpawnFromPool(miniGunView) ?? _bulletViewFactory.Create(miniGunView);
+        public IBulletView Spawn(IMiniGunView miniGunView)
+        {
+            IBulletView bulletView = SpawnFromPool(miniGunView) ?? _bulletViewFactory.Create(miniGunView);
+            
+            bulletView.SetPosition(miniGunView.BulletSpawnPoint.Transform.position);
+            bulletView.SetRotation(miniGunView.BulletSpawnPoint.Transform.rotation);
+            bulletView.Show();
+            
+            return bulletView;
+        }
 
         private IBulletView SpawnFromPool(IMiniGunView miniGunView)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sources.Domain.Models.Constants.LayerMasks;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.Presentations.Views.Enemies;
@@ -31,6 +32,7 @@ namespace Sources.Controllers.Bears.Movements.States
         {
             // Debug.Log($"Bear enter idle state");
             _bearAnimationView.PlayIdle();
+            _bearView.SetTarget(null);
         }
 
         public override void Exit()
@@ -44,16 +46,18 @@ namespace Sources.Controllers.Bears.Movements.States
 
         private void FindEnemy()
         {
-            if(_bearView.TargetEnemyHealth != null)
+            if (_bearView.TargetEnemyHealth != null)
                 return;
-            
-            var enemies = _overlapService.OverlapSphere<EnemyHealthView>(
-                _bearView.CharacterMovementView.Position, 5f, 
-                1 << LayerMask.NameToLayer("Enemy"),
-                1 << LayerMask.NameToLayer("Obstacle"));
+
+            IReadOnlyList<EnemyHealthView> enemies = _overlapService.OverlapSphere<EnemyHealthView>(
+                _bearView.CharacterMovementView.Position, 5f, Layer.Enemy, Layer.Obstacle);
 
             EnemyHealthView enemy = enemies.FirstOrDefault();
-            
+            if (enemy != null)
+                Debug.Log($"{Vector3.Distance(enemy.Position, _bearView.Position)}");
+            if(enemy != null && enemy.enabled == false)
+                enemy = null;
+
             _bearView.SetTarget(enemy);
         }
     }

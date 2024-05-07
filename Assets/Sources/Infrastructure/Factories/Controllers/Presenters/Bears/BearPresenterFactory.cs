@@ -33,13 +33,13 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Bears
             
             FiniteTransitionBase toFollowTransition = new FiniteTransitionBase(
                 followCharacterState,
-                () => Vector3.Distance(bearView.CharacterMovementView.Position, bearView.Position) > 4f);
+                () => Vector3.Distance(bearView.CharacterMovementView.Position, bearView.Position) > 5f);
             idleState.AddTransition(toFollowTransition);
             attackState.AddTransition(toFollowTransition);
             
             FiniteTransitionBase toIdleTransition = new FiniteTransitionBase(
                 idleState, ()=> bearView.TargetEnemyHealth == null &&  Vector3.Distance(
-                    bearView.CharacterMovementView.Position, bearView.Position) < 4f);
+                    bearView.CharacterMovementView.Position, bearView.Position) < 5f);
             followCharacterState.AddTransition(toIdleTransition);
             moveToEnemyState.AddTransition(toIdleTransition);
             attackState.AddTransition(toIdleTransition);
@@ -47,7 +47,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Bears
             FiniteTransitionBase toMoveToEnemyTransition = new FiniteTransitionBase(
                 moveToEnemyState, 
                 () => bearView.TargetEnemyHealth != null && 
-                      Vector3.Distance(bearView.CharacterMovementView.Position, bearView.Position) < 4f);
+                      Vector3.Distance(bearView.CharacterMovementView.Position, bearView.Position) < 5f &&
+                      Vector3.Distance(bearView.TargetEnemyHealth.Position, bearView.Position) < 5f);
             idleState.AddTransition(toMoveToEnemyTransition);
             // followState.AddTransition(toMoveToEnemyTransition);
             
@@ -55,7 +56,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Bears
                 attackState, 
                 () => bearView.TargetEnemyHealth != null &&
                       Vector3.Distance(bearView.CharacterMovementView.Position,
-                          bearView.Position) < 4f && 
+                          bearView.Position) < 5f && 
                       Vector3.Distance(bearView.Position,
                           bearView.TargetEnemyHealth.Position) <= bearView.StoppingDistance);
             moveToEnemyState.AddTransition(toAttackTransition);

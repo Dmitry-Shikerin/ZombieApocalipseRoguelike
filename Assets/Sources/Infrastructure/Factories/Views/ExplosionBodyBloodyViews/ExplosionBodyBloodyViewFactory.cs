@@ -21,7 +21,7 @@ namespace Sources.Infrastructure.Factories.Views.ExplosionBodyBloodyViews
 
         public IExplosionBodyBloodyView Create(ExplosionBodyBloodyView explosionBodyBloodyView, Vector3 position)
         {
-            explosionBodyBloodyView.SetPosition(position);
+            // explosionBodyBloodyView.SetPosition(position);
             
             return explosionBodyBloodyView;
         }
@@ -30,12 +30,12 @@ namespace Sources.Infrastructure.Factories.Views.ExplosionBodyBloodyViews
         {
             ExplosionBodyBloodyView explosionBodyBloodyView = CreateView();
             
-            explosionBodyBloodyView.SetPosition(position);
+            // explosionBodyBloodyView.SetPosition(position);
             
             return explosionBodyBloodyView;
         }
-        
-        public ExplosionBodyBloodyView CreateView()
+
+        private ExplosionBodyBloodyView CreateView()
         {
             ExplosionBodyBloodyView explosionBodyBloodyView = 
                 Object.Instantiate(Resources.Load<ExplosionBodyBloodyView>("Views/ExplosionBodyBloodyView"));
