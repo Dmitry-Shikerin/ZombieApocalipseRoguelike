@@ -6,7 +6,7 @@ using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Character;
 
-namespace Sources.Controllers.Characters.Attackers
+namespace Sources.Controllers.Presenters.Characters.Attackers
 {
     public class CharacterAttackerPresenter : PresenterBase
     {
