@@ -9,7 +9,6 @@ using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.Bears;
 using Sources.Presentations.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Bears;
-using UnityEngine;
 
 namespace Sources.Controllers.Presenters.Bears.Movements.States
 {
@@ -43,7 +42,6 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
         public override void Enter()
         {
             _bearAnimationView.Attacking += OnAttack;
-
             _bearAnimationView.PlayAttack();
         }
 
@@ -59,9 +57,6 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
 
         private void OnAttack()
         {
-            ChangeLookDirection();
-            
-            // Debug.Log($"Bear mass attack count {_bearAttacker.UnitsPerAttack}");
             IReadOnlyList<EnemyHealthView> enemies = _overlapService.OverlapSphere<EnemyHealthView>(
                 _bearView.TargetEnemyHealth.Position, FindRadius, Layer.Enemy, Layer.Obstacle);
 
@@ -77,7 +72,6 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
 
         private void ChangeLookDirection()
         {
-            //TODO сделать плавный поворот к противнику
             if(_bearView.TargetEnemyHealth == null)
                 return;
 

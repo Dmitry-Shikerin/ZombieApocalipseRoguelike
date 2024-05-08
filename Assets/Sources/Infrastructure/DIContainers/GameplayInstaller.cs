@@ -13,6 +13,7 @@ using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
 using Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Services.Forms;
+using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Views.Handlers;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Services.Forms;
 using Sources.Frameworks.UiFramework.Services.Localizations;
@@ -231,15 +232,19 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<EnableLoadGameButtonCommand>().AsSingle();
             Container.Bind<UnPauseButtonCommand>().AsSingle();
             Container.Bind<HideFormCommand>().AsSingle();
+            Container.Bind<SetAllMapCameraFollowCommand>().AsSingle();
+            Container.Bind<SetCharacterCameraFollowCommand>().AsSingle();
             
             //Views
             Container.Bind<UiViewService>().AsSingle();
-            Container.Bind<UiViewCommandHandler>().AsSingle();
+            Container.Bind<IUiViewCommandHandler>().To<GameplayUiViewCommandHandler>().AsSingle();
             
             Container.Bind<UnPauseCommand>().AsSingle();
             Container.Bind<PauseCommand>().AsSingle();
             Container.Bind<SaveVolumeCommand>().AsSingle();
             Container.Bind<ClearSavesCommand>().AsSingle();
+            Container.Bind<SetAllMapCameraFollowViewCommand>().AsSingle();
+            Container.Bind<SetCharacterCameraFollowViewCommand>().AsSingle();
         }
 
         private void BindSdcServices()

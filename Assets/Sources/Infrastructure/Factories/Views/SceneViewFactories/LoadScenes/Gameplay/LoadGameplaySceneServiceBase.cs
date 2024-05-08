@@ -166,10 +166,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             //SaveService
             _saveService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
             
-            //FormService
-            _uiCollectorFactory.Create();
-            _formService.Show(FormId.Hud);
-
             //Upgrades
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
             
@@ -214,6 +210,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _cameraService.SetFollower<CharacterView>();
             
             _cameraViewFactory.Create(_gameplayHud.CinemachineCameraView);
+            
+            //FormService
+            _uiCollectorFactory.Create();
+            _formService.Show(FormId.Hud);
         }
 
         protected abstract GameModels LoadModels(IScenePayload scenePayload);

@@ -12,6 +12,7 @@ using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
 using Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Services.Forms;
+using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Views.Handlers;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Services.Forms;
 using Sources.Frameworks.UiFramework.Services.Localizations;
@@ -78,7 +79,7 @@ namespace Sources.Infrastructure.DIContainers
                 .Bind<EnemySpawnerConfigContainer>()
                 .FromResource("Configs/EnemySpawners/Containers/EnemySpawnerConfigContainer")
                 .AsSingle();
-            
+
             BindServices();
             BindSettings();
             BindLevelAvailability();
@@ -93,7 +94,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<BackgroundMusicPresenterFactory>().AsSingle();
             Container.Bind<BackgroundMusicViewFactory>().AsSingle();
         }
-        
+
         private void BindServices()
         {
             Container.Bind<ITutorialService>().To<TutorialService>().AsSingle();
@@ -111,11 +112,11 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<LeaderBoardElementViewFactory>().AsSingle();
             Container.Bind<LeaderBoardElementPresenterFactory>().AsSingle();
         }
-        
+
         private void BindFormFactories()
         {
             Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
-            
+
             Container.Bind<UiCollectorFactory>().AsSingle();
 
             Container.Bind<FormButtonViewFactory>().AsSingle();
@@ -125,19 +126,19 @@ namespace Sources.Infrastructure.DIContainers
             //Buttons
             Container.Bind<UiButtonViewService>().AsSingle();
             Container.Bind<IButtonCommandHandler>().To<MainMenuButtonCommandHandler>().AsSingle();
-            
+
             Container.Bind<ShowFormCommand>().AsSingle();
             Container.Bind<CompleteTutorialCommand>().AsSingle();
-            Container.Bind<LoadMainMenuSceneCommand>().AsSingle(); 
+            Container.Bind<LoadMainMenuSceneCommand>().AsSingle();
             Container.Bind<NewGameCommand>().AsSingle();
             Container.Bind<LoadGameCommand>().AsSingle();
             Container.Bind<ShowLeaderboardCommand>().AsSingle();
             Container.Bind<EnableLoadGameButtonCommand>().AsSingle();
-            
+
             //Views
             Container.Bind<UiViewService>().AsSingle();
-            Container.Bind<UiViewCommandHandler>().AsSingle();
-            
+            Container.Bind<IUiViewCommandHandler>().To<MainMenuUiViewCommandHandler>().AsSingle();
+
             Container.Bind<UnPauseCommand>().AsSingle();
             Container.Bind<PauseCommand>().AsSingle();
             Container.Bind<SaveVolumeCommand>().AsSingle();
@@ -149,7 +150,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<CreateMainMenuSceneService>().AsSingle();
             Container.Bind<LoadMainMenuSceneService>().AsSingle();
         }
-        
+
         private void BindDtoFactories()
         {
             Container.Bind<IUpgradeDtoMapper>().To<UpgradeDtoMapper>().AsSingle();

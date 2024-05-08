@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Handlers;
+using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Views.Handlers;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Services.Forms
 {
     public class UiViewService
     {
-        private readonly UiViewCommandHandler _uiViewCommandHandler;
+        private readonly IUiViewCommandHandler _uiViewCommandHandler;
 
-        public UiViewService(UiViewCommandHandler uiViewCommandHandler)
+        public UiViewService(IUiViewCommandHandler uiViewCommandHandler)
         {
             _uiViewCommandHandler = uiViewCommandHandler;
         }
