@@ -54,8 +54,7 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
 
         public override void Update(float deltaTime)
         {
-            if (_bearView.TargetEnemyHealth.CurrentHealth <= 0)
-                _bearView.SetTarget(null);
+            ChangeLookDirection();
         }
 
         private void OnAttack()
@@ -63,7 +62,6 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
             ChangeLookDirection();
             
             // Debug.Log($"Bear mass attack count {_bearAttacker.UnitsPerAttack}");
-            //
             IReadOnlyList<EnemyHealthView> enemies = _overlapService.OverlapSphere<EnemyHealthView>(
                 _bearView.TargetEnemyHealth.Position, FindRadius, Layer.Enemy, Layer.Obstacle);
 
@@ -72,11 +70,17 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
                 .Take(_bearAttacker.UnitsPerAttack)
                 .ToList()
                 .ForEach(health => health.TakeDamage(_bearAttacker.Damage));
+            
+            if (_bearView.TargetEnemyHealth.CurrentHealth <= 0)
+                _bearView.SetTarget(null);
         }
 
         private void ChangeLookDirection()
         {
             //TODO сделать плавный поворот к противнику
+            if(_bearView.TargetEnemyHealth == null)
+                return;
+
             float angle = _bearMovementService.GetAngleRotation(
                 _bearView.TargetEnemyHealth.Position, _bearView.Position);
             _bearView.SetLookRotation(angle);
