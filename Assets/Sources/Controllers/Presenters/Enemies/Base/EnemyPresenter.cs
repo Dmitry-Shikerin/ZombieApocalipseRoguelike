@@ -4,7 +4,7 @@ using Sources.Infrastructure.StateMachines.FiniteStateMachines;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 
-namespace Sources.Controllers.Enemies.Base
+namespace Sources.Controllers.Presenters.Enemies.Base
 {
     public class EnemyPresenter : FiniteStateMachine, IPresenter
     {
@@ -23,14 +23,12 @@ namespace Sources.Controllers.Enemies.Base
         {
             Start(_firstState);
             _updateRegister.UpdateChanged += Update;
-            // _updateRegister.Register(Update);
         }
 
         public void Disable()
         {
             Stop();
             _updateRegister.UpdateChanged -= Update;
-            // _updateRegister.UnRegister(Update);
         }
     }
 }

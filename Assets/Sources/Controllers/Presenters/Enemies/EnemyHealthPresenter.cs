@@ -3,7 +3,7 @@ using Sources.Controllers.Common;
 using Sources.Domain.Models.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies;
 
-namespace Sources.Controllers.Enemies
+namespace Sources.Controllers.Presenters.Enemies
 {
     public class EnemyHealthPresenter : PresenterBase
     {
@@ -17,15 +17,7 @@ namespace Sources.Controllers.Enemies
         }
 
         public float CurrentHealth => _enemyHealth.CurrentHealth;
-
-        public override void Enable()
-        {
-        }
-
-        public override void Disable()
-        {
-        }
-
+        
         public void TakeDamage(float damage)
         {
             _enemyHealth.TakeDamage(damage);

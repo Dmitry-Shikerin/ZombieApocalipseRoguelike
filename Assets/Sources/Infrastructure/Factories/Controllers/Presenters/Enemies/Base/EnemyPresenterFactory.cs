@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Enemies;
-using Sources.Controllers.Enemies.Base;
-using Sources.Controllers.Enemies.Base.States;
+using Sources.Controllers.Presenters.Enemies.Base;
+using Sources.Controllers.Presenters.Enemies.Base.States;
 using Sources.Domain.Models.Enemies.Base;
 using Sources.Domain.Models.Gameplay;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;

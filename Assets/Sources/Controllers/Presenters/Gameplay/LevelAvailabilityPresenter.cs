@@ -6,7 +6,6 @@ using Sources.Domain.Models.Payloads;
 using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.SceneServices;
 using Sources.PresentationsInterfaces.Views.Gameplay;
-using UnityEngine;
 
 namespace Sources.Controllers.Presenters.Gameplay
 {
@@ -44,7 +43,6 @@ namespace Sources.Controllers.Presenters.Gameplay
             RemoveButtonListeners();
         }
 
-        //TODO затемнять картинки если они не доступны
         private void ShowAvailableLevels()
         {
             for (int i = 0; i < _levelAvailability.Levels.Count; i++)

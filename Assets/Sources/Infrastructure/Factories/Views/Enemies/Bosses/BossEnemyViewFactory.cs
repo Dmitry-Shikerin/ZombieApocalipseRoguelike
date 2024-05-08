@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Controllers.Enemies.Base;
+using Sources.Controllers.Presenters.Enemies.Base;
 using Sources.Domain.Models.Enemies.Bosses;
 using Sources.Domain.Models.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Enemies.Bosses;

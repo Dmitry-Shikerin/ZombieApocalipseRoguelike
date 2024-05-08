@@ -56,14 +56,8 @@ namespace Sources.Controllers.Presenters.Enemies.Bosses.States
             _enemyAnimation.Attacking -= OnAttack;
         }
 
-        public override void Update(float deltaTime)
-        {
-        }
-
-        private void OnAttack()
-        {
+        private void OnAttack() =>
             _enemyView.CharacterHealthView.TakeDamage(_enemy.EnemyAttacker.Damage);
-        }
 
         private async void StartTimer(CancellationToken cancellationToken)
         {

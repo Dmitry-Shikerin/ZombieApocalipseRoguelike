@@ -3,11 +3,10 @@ using Sources.Domain.Models.Gameplay;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.Spawners;
-using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using UnityEngine;
 
-namespace Sources.Controllers.Enemies.Base.States
+namespace Sources.Controllers.Presenters.Enemies.Base.States
 {
     public class EnemyDieState : FiniteState
     {
@@ -46,14 +45,6 @@ namespace Sources.Controllers.Enemies.Base.States
             _rewardItemSpawnService.Spawn(_enemyView.Position, 3);
             _enemyCollectorService.Remove(_enemyView);
             _enemyView.Destroy();
-        }
-
-        public override void Exit()
-        {
-        }
-
-        public override void Update(float deltaTime)
-        {
         }
     }
 }

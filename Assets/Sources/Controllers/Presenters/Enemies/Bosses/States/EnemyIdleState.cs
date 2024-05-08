@@ -24,22 +24,13 @@ namespace Sources.Controllers.Enemies.Bosses.States
         public override void Enter()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            
             _bossEnemyAnimation.PlayIdle();
-            
             StartTimer(_cancellationTokenSource.Token);
         }
 
-        public override void Exit()
-        {
+        public override void Exit() =>
             _cancellationTokenSource.Cancel();
-        }
-
-        public override void Update(float deltaTime)
-        {
-            
-        }
-
+        
         private async void StartTimer(CancellationToken cancellationToken)
         {
             try
