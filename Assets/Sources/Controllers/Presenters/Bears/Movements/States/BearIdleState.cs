@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sources.Controllers.Bears.Attacks;
 using Sources.Domain.Models.Constants.LayerMasks;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
@@ -12,16 +13,19 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
     public class BearIdleState : FiniteState
     {
         private const float FindRadius = 5f;
-        
+
+        private readonly BearAttacker _bearAttacker;
         private readonly IBearAnimationView _bearAnimationView;
         private readonly OverlapService _overlapService;
         private readonly IBearView _bearView;
 
         public BearIdleState(
+            BearAttacker bearAttacker,
             IBearView bearView,
             IBearAnimationView bearAnimationView,
             OverlapService overlapService)
         {
+            _bearAttacker = bearAttacker ?? throw new ArgumentNullException(nameof(bearAttacker));
             _bearAnimationView = bearAnimationView ?? throw new ArgumentNullException(nameof(bearAnimationView));
             _overlapService = overlapService ?? throw new ArgumentNullException(nameof(overlapService));
             _bearView = bearView ?? throw new ArgumentNullException(nameof(bearView));
