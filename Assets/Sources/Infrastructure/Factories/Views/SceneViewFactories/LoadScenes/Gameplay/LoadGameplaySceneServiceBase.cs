@@ -25,6 +25,7 @@ using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
+using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
@@ -72,6 +73,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ITutorialService _tutorialService;
         private readonly IAdvertisingService _advertisingService;
         private readonly IFormService _formService;
+        private readonly IInterstitialShowerService _interstitialShowerService;
 
         protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
             UiCollectorFactory uiCollectorFactory,
@@ -100,7 +102,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ILevelCompletedService levelCompletedService,
             ITutorialService tutorialService,
             IAdvertisingService advertisingService,
-            IFormService formService)
+            IFormService formService,
+            IInterstitialShowerService interstitialShowerService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _uiCollectorFactory = uiCollectorFactory ?? throw new ArgumentNullException(nameof(uiCollectorFactory));
@@ -140,11 +143,15 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _advertisingService = advertisingService ?? throw new ArgumentNullException(nameof(advertisingService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _interstitialShowerService = interstitialShowerService ?? throw new ArgumentNullException(nameof(interstitialShowerService));
         }
 
         public void Load(IScenePayload scenePayload)
         {
             GameModels gameModels = LoadModels(scenePayload);
+            
+            //InterstitialShower
+            _interstitialShowerService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
             
             //AdvertisingService
             _advertisingService.Construct(gameModels.PlayerWallet);

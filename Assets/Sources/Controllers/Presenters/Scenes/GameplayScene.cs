@@ -7,6 +7,7 @@ using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
+using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
@@ -32,6 +33,7 @@ namespace Sources.Controllers.Presenters.Scenes
         private readonly ILevelCompletedService _levelCompletedService;
         private readonly ITutorialService _tutorialService;
         private readonly IEnemyCollectorService _enemyCollectorService;
+        private readonly IInterstitialShowerService _interstitialShowerService;
         private readonly CurtainView _curtainView;
 
         public GameplayScene(
@@ -47,12 +49,15 @@ namespace Sources.Controllers.Presenters.Scenes
             ILevelCompletedService levelCompletedService,
             ITutorialService tutorialService,
             IEnemyCollectorService enemyCollectorService,
-            CurtainView curtainView)
+            CurtainView curtainView,
+            IInterstitialShowerService interstitialShowerService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
-            _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
+            _inputServiceUpdater = inputServiceUpdater ?? 
+                                   throw new ArgumentNullException(nameof(inputServiceUpdater));
             _loadSceneService = loadSceneService ?? throw new ArgumentNullException(nameof(loadSceneService));
-            _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
+            _localizationService = localizationService ?? 
+                                   throw new ArgumentNullException(nameof(localizationService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
             _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
@@ -61,12 +66,16 @@ namespace Sources.Controllers.Presenters.Scenes
             _levelCompletedService = levelCompletedService ?? 
                                      throw new ArgumentNullException(nameof(levelCompletedService));
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
-            _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
+            _enemyCollectorService = enemyCollectorService ?? 
+                                     throw new ArgumentNullException(nameof(enemyCollectorService));
+            _interstitialShowerService = interstitialShowerService ?? 
+                                         throw new ArgumentNullException(nameof(interstitialShowerService));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
 
         public async void Enter(object payload = null)
         {
+            //TODO что лучше делать у сервисов Enter или Enable
             _loadSceneService.Load(payload as IScenePayload);
             _localizationService.Translate();
             await _curtainView.HideCurtain();
@@ -75,6 +84,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _saveService.Enter();
             _levelCompletedService.Enable();
             _tutorialService.Enable();
+            _interstitialShowerService.Enter();
             //TODO раскоментировать UpgradeService
             _upgradeService.Enable();
         }
@@ -86,6 +96,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _volumeService.Exit();
             _saveService.Exit();
             _levelCompletedService.Disable();
+            _interstitialShowerService.Exit();
             _enemyCollectorService.Clear();
         }
 

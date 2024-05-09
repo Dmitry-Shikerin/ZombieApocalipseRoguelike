@@ -32,6 +32,7 @@ using Sources.Infrastructure.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
+using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
@@ -81,7 +82,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ITutorialService tutorialService,
             IEnemySpawnerDtoMapper enemySpawnerDtoMapper,
             IAdvertisingService advertisingService,
-            IFormService formService)
+            IFormService formService,
+            IInterstitialShowerService interstitialShowerService)
             : base(
                 gameplayHud,
                 uiCollectorFactory,
@@ -110,7 +112,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 levelCompletedService,
                 tutorialService,
                 advertisingService,
-                formService)
+                formService,
+                interstitialShowerService)
         {
             _loadService = loadService;
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));

@@ -74,6 +74,7 @@ using Sources.Infrastructure.Services.EnemyCollectors;
 using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.Infrastructure.Services.GameOvers;
 using Sources.Infrastructure.Services.InputServices;
+using Sources.Infrastructure.Services.Interstitials;
 using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.Infrastructure.Services.Linecasts;
 using Sources.Infrastructure.Services.LoadServices;
@@ -99,6 +100,7 @@ using Sources.InfrastructureInterfaces.Services.Bears;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
+using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
@@ -207,6 +209,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IEnemySpawnerConfigCollectionService>().To<EnemySpawnerConfigCollectionService>().AsSingle();
             Container.Bind<IBearMovementService>().To<BearMovementService>().AsSingle();
             Container.Bind<ICharacterMovementService>().To<CharacterMovementService>().AsSingle();
+            Container.Bind<IInterstitialShowerService>().To<InterstitialShowerService>().AsSingle();
         }
 
         private void BindFormFactories()
