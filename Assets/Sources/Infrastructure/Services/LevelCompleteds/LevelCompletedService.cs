@@ -53,6 +53,7 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
             level.Complete();
             Debug.Log($"Current level : {level.Id}, is completed: {level.IsCompleted}");
             _loadService.Save(level);
+            _loadService.ClearAll();
             _formService.Show(FormId.LevelCompleted);
         }
 
