@@ -1,8 +1,8 @@
 ﻿using System;
 using JetBrains.Annotations;
-using Sources.Controllers.Enemies.Base;
-using Sources.Controllers.Enemies.Base.States;
 using Sources.Controllers.Enemies.Bosses.States;
+using Sources.Controllers.Presenters.Enemies.Base;
+using Sources.Controllers.Presenters.Enemies.Base.States;
 using Sources.Controllers.Presenters.Enemies.Bosses.States;
 using Sources.Domain.Models.Enemies.Bosses;
 using Sources.Domain.Models.Gameplay;

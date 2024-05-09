@@ -37,7 +37,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 
             _sceneService.ChangeSceneAsync(
                 savedLevel.SavedLevelId,
-                new ScenePayload(savedLevel.SavedLevelId, true));
+                new ScenePayload(savedLevel.SavedLevelId, true, false));
         }
     }
 }

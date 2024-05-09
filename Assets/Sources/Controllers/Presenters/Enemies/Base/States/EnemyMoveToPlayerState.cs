@@ -1,11 +1,9 @@
 ﻿using System;
 using Sources.Domain.Models.Enemies.Base;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
-using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
-using UnityEngine;
 
-namespace Sources.Controllers.Enemies.Base.States
+namespace Sources.Controllers.Presenters.Enemies.Base.States
 {
     public class EnemyMoveToPlayerState : FiniteState
     {
@@ -20,20 +18,10 @@ namespace Sources.Controllers.Enemies.Base.States
             _enemyAnimation = enemyAnimation ?? throw new ArgumentNullException(nameof(enemyAnimation));
         }
 
-        public override void Enter()
-        {
+        public override void Enter() =>
             _enemyAnimation.PlayWalk();
-            // Debug.Log($"Play walk");
-        }
 
-        public override void Exit()
-        {
-        }
-
-        public override void Update(float deltaTime)
-        {
-            _enemyAnimation.PlayWalk();
+        public override void Update(float deltaTime) =>
             _enemyView.Move(_enemyView.CharacterMovementView.Position);
-        }
     }
 }

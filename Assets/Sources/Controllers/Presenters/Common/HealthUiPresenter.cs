@@ -1,9 +1,9 @@
 ﻿using System;
+using Sources.Controllers.Common;
 using Sources.DomainInterfaces.Healths;
 using Sources.PresentationsInterfaces.Views.Common;
-using UnityEngine;
 
-namespace Sources.Controllers.Common
+namespace Sources.Controllers.Presenters.Common
 {
     public class HealthUiPresenter : PresenterBase
     {
@@ -22,10 +22,8 @@ namespace Sources.Controllers.Common
             _health.HealthChanged += OnHealthChanged;
         }
 
-        public override void Disable()
-        {
+        public override void Disable() =>
             _health.HealthChanged -= OnHealthChanged;
-        }
 
         private void OnHealthChanged()
         {

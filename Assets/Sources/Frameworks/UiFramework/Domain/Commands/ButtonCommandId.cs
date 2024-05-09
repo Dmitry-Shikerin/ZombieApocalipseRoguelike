@@ -11,5 +11,9 @@
         EnableLoadGameButton = 6,
         UnPause = 7,
         HideForm = 8,
+        SetAllMapCameraFollow = 9,
+        SetCharacterCameraFollow = 10,
+        ShowRewardedAdvertising = 11,
+        ClearSaves = 12,
     }
 }

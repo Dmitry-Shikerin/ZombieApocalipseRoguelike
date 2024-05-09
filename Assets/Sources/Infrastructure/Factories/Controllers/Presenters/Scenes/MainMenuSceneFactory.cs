@@ -3,10 +3,9 @@ using Cysharp.Threading.Tasks;
 using Sources.Controllers.Presenters.Scenes;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.Domain.Models.Data.Ids;
-using Sources.DomainInterfaces.Payloads;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
-using Sources.Infrastructure.Factories.Services.FormServices;
-using Sources.Infrastructure.Factories.Views.SceneViewFactories;
+using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.MainMenu;
 using Sources.InfrastructureInterfaces.Factories.Controllers.Scenes;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
@@ -23,6 +22,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly IVolumeService _volumeService;
         private readonly ILoadService _loadService;
         private readonly ILocalizationService _localizationService;
+        private readonly ISdcInitializeService _sdcInitializeService;
+        private readonly IStickyService _stickyService;
         private readonly CurtainView _curtainView;
 
         public MainMenuSceneFactory(
@@ -31,7 +32,9 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             IVolumeService volumeService,
             ILoadService loadService,
             ILocalizationService localizationService,
-            CurtainView curtainView)
+            CurtainView curtainView,
+            ISdcInitializeService sdcInitializeService,
+            IStickyService stickyService)
         {
             _createMainMenuSceneService = createMainMenuSceneService ?? 
                                           throw new ArgumentNullException(nameof(createMainMenuSceneService));
@@ -41,6 +44,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _localizationService = localizationService ??
                                    throw new ArgumentNullException(nameof(localizationService));
+            _sdcInitializeService = sdcInitializeService ?? throw new ArgumentNullException(nameof(sdcInitializeService));
+            _stickyService = stickyService ?? throw new ArgumentNullException(nameof(stickyService));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
         
@@ -50,7 +55,9 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 CreateLoadSceneService(payload),
                 _volumeService,
                 _localizationService,
-                _curtainView);
+                _curtainView,
+                _sdcInitializeService,
+                _stickyService);
         }
         
         private ILoadSceneService CreateLoadSceneService(object payload)

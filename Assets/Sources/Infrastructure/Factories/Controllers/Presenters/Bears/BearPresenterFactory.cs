@@ -29,12 +29,13 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Bears
 
         public BearPresenter Create(Bear bear, IBearView bearView, IBearAnimationView bearAnimationView)
         {
-            BearIdleState idleState = new BearIdleState(bearView, bearAnimationView, _overlapService);
+            BearIdleState idleState = new BearIdleState(
+                bear.BearAttacker,bearView, bearAnimationView, _overlapService);
             BearFollowCharacterState followCharacterState = new BearFollowCharacterState(
                 bear, bearAnimationView, bearView);
             BearMoveToEnemyState moveToEnemyState = new BearMoveToEnemyState(bear, bearAnimationView, bearView);
             BearAttackState attackState = new BearAttackState(
-                bear, bear.BearAttacker, bearView, bearAnimationView, _bearMovementService);
+                bear, bear.BearAttacker, bearView, bearAnimationView, _bearMovementService, _overlapService);
             
             FiniteTransitionBase toFollowTransition = new FiniteTransitionBase(
                 followCharacterState,

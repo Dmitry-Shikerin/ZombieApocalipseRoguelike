@@ -2,7 +2,7 @@
 using Cysharp.Threading.Tasks;
 using Sources.Controllers.Presenters.Scenes;
 using Sources.ControllersInterfaces.Scenes;
-using Sources.DomainInterfaces.Payloads;
+using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes;
@@ -13,6 +13,7 @@ using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
+using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
@@ -38,6 +39,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly ILevelCompletedService _levelCompletedService;
         private readonly ITutorialService _tutorialService;
         private readonly IEnemyCollectorService _enemyCollectorService;
+        private readonly IInterstitialShowerService _interstitialShowerService;
         private readonly CurtainView _curtainView;
 
         public GameplaySceneFactory(
@@ -54,7 +56,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             ILevelCompletedService levelCompletedService,
             ITutorialService tutorialService,
             IEnemyCollectorService enemyCollectorService,
-            CurtainView curtainView) 
+            CurtainView curtainView,
+            IInterstitialShowerService interstitialShowerService) 
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -69,6 +72,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _levelCompletedService = levelCompletedService ?? throw new ArgumentNullException(nameof(levelCompletedService));
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
+            _interstitialShowerService = interstitialShowerService ?? throw new ArgumentNullException(nameof(interstitialShowerService));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
 
@@ -87,7 +91,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _levelCompletedService,
                 _tutorialService,
                 _enemyCollectorService,
-                _curtainView);
+                _curtainView,
+                _interstitialShowerService);
         }
 
         private ILoadSceneService CreateLoadSceneService(object payload)

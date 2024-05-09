@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Setting;
-using Sources.DomainInterfaces.Payloads;
+using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Infrastructure.Factories.Views.Gameplay;
@@ -58,6 +58,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             
             //LevelAvailability
             Level firstLevel = _loadService.Load<Level>(ModelId.Gameplay);
+            // Debug.Log($"First level completed: {firstLevel.IsCompleted}");
             Level secondLevel = _loadService.Load<Level>(ModelId.Gameplay2);
             Level thirdLevel = _loadService.Load<Level>(ModelId.Gameplay3);
             Level fourthLevel = _loadService.Load<Level>(ModelId.Gameplay4);

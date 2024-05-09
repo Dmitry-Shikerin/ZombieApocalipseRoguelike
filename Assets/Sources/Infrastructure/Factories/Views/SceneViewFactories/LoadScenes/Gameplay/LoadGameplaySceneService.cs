@@ -12,7 +12,7 @@ using Sources.Domain.Models.Setting;
 using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
 using Sources.Domain.Models.Weapons;
-using Sources.DomainInterfaces.Payloads;
+using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
@@ -31,6 +31,7 @@ using Sources.Infrastructure.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
+using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
@@ -78,7 +79,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ILevelCompletedService levelCompletedService,
             ITutorialService tutorialService,
             IAdvertisingService advertisingService,
-            IFormService formService) 
+            IFormService formService,
+            IInterstitialShowerService interstitialShowerService) 
             : base(
                 gameplayHud, 
                 uiCollectorFactory, 
@@ -107,7 +109,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 levelCompletedService,
                 tutorialService,
                 advertisingService,
-                formService)
+                formService,
+                interstitialShowerService)
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));

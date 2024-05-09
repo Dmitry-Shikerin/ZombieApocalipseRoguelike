@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using Sources.Domain.Models.Constants;
@@ -12,6 +13,7 @@ namespace Sources.Presentations.UI.Curtains
         [Required] [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private float _duration = 1f;
         
+        private CancellationTokenSource _cancellationTokenSource;
         public bool IsInProgress { get; private set; }
 
         private void Awake()
@@ -20,37 +22,46 @@ namespace Sources.Presentations.UI.Curtains
             _canvasGroup.alpha = 0;
         }
 
+        private void OnEnable() =>
+            _cancellationTokenSource = new CancellationTokenSource();
+        
+        private void OnDisable() =>
+            _cancellationTokenSource.Cancel();
+
         public async UniTask ShowCurtain()
         {
             IsInProgress = true;
             Show();
-            await Fade(0, 1);
+            await Fade(0, CurtainConstant.Max, _cancellationTokenSource.Token);
         }
 
         public async UniTask HideCurtain()
         {
-            await Fade(1, 0);
+            await Fade(CurtainConstant.Max, 0, _cancellationTokenSource.Token);
             Hide();
             IsInProgress = false;
         }
 
-        private async UniTask Fade(float start, float end)
+        private async UniTask Fade(float start, float end, CancellationToken cancellationToken)
         {
-            _canvasGroup.alpha = start;
-            
-            while (Mathf.Abs(_canvasGroup.alpha - end) > MathConstant.Epsilon)
+            try
             {
-                _canvasGroup.alpha = Mathf.MoveTowards(
-                    _canvasGroup.alpha,
-                    end,
-                    Time.deltaTime / _duration);
+                _canvasGroup.alpha = start;
 
-                // await UniTask.Yield();
-                //TODO как заигнорить TimeScale?
-                await UniTask.Delay(TimeSpan.FromMilliseconds(1), ignoreTimeScale: true);
+                while (Mathf.Abs(_canvasGroup.alpha - end) > MathConstant.Epsilon)
+                {
+                    _canvasGroup.alpha = Mathf.MoveTowards(
+                        _canvasGroup.alpha, end, Time.deltaTime / _duration);
+
+                    await UniTask.Yield(cancellationToken);
+                }
+
+                _canvasGroup.alpha = end;
             }
-
-            _canvasGroup.alpha = end;
+            catch (OperationCanceledException)
+            {
+                Hide();
+            }
         }
     }
 }

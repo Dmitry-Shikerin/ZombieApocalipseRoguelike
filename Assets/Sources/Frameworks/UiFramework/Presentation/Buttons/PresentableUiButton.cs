@@ -3,7 +3,7 @@ using Sources.ControllersInterfaces;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 {
-    public class PresentableFormUiUiButton<T> : UiUiButtonSoundView where T : IPresenter
+    public class PresentableUiButton<T> : UiButtonSoundView where T : IPresenter
     {
         protected T Presenter { get; private set; }
 

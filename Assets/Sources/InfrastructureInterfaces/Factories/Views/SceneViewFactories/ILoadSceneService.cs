@@ -1,4 +1,4 @@
-﻿using Sources.DomainInterfaces.Payloads;
+﻿using Sources.DomainInterfaces.Models.Payloads;
 
 namespace Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories
 {

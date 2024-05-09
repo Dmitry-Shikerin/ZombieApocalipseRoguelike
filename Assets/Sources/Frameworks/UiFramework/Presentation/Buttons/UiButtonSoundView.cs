@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 {
-    public class UiUiButtonSoundView : UiButtonView, IButtonView
+    public class UiButtonSoundView : UiButtonView, IButtonView
     {
         [TabGroup("Components")]
         [SerializeField] private AudioSource _audioSource;

@@ -13,6 +13,7 @@ using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
 using Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Services.Forms;
+using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Views.Handlers;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Services.Forms;
 using Sources.Frameworks.UiFramework.Services.Localizations;
@@ -73,6 +74,7 @@ using Sources.Infrastructure.Services.EnemyCollectors;
 using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.Infrastructure.Services.GameOvers;
 using Sources.Infrastructure.Services.InputServices;
+using Sources.Infrastructure.Services.Interstitials;
 using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.Infrastructure.Services.Linecasts;
 using Sources.Infrastructure.Services.LoadServices;
@@ -98,6 +100,7 @@ using Sources.InfrastructureInterfaces.Services.Bears;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
+using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
@@ -206,6 +209,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IEnemySpawnerConfigCollectionService>().To<EnemySpawnerConfigCollectionService>().AsSingle();
             Container.Bind<IBearMovementService>().To<BearMovementService>().AsSingle();
             Container.Bind<ICharacterMovementService>().To<CharacterMovementService>().AsSingle();
+            Container.Bind<IInterstitialShowerService>().To<InterstitialShowerService>().AsSingle();
         }
 
         private void BindFormFactories()
@@ -231,15 +235,21 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<EnableLoadGameButtonCommand>().AsSingle();
             Container.Bind<UnPauseButtonCommand>().AsSingle();
             Container.Bind<HideFormCommand>().AsSingle();
+            Container.Bind<SetAllMapCameraFollowCommand>().AsSingle();
+            Container.Bind<SetCharacterCameraFollowCommand>().AsSingle();
+            Container.Bind<ShowRewardedAdvertisingButtonCommand>().AsSingle();
+            Container.Bind<ClearSavesButtonCommand>().AsSingle();
             
             //Views
             Container.Bind<UiViewService>().AsSingle();
-            Container.Bind<UiViewCommandHandler>().AsSingle();
+            Container.Bind<IUiViewCommandHandler>().To<GameplayUiViewCommandHandler>().AsSingle();
             
             Container.Bind<UnPauseCommand>().AsSingle();
             Container.Bind<PauseCommand>().AsSingle();
             Container.Bind<SaveVolumeCommand>().AsSingle();
             Container.Bind<ClearSavesCommand>().AsSingle();
+            Container.Bind<SetAllMapCameraFollowViewCommand>().AsSingle();
+            Container.Bind<SetCharacterCameraFollowViewCommand>().AsSingle();
         }
 
         private void BindSdcServices()

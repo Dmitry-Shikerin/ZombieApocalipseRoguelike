@@ -1,33 +1,24 @@
 using System;
+using JetBrains.Annotations;
 using NodeCanvas.Framework;
-using ParadoxNotion.Design;
 using UnityEngine;
 
-
-namespace NodeCanvas.Tasks.Conditions
+namespace Sources.Presentations.Views.Environments.Swings.Transitions
 {
+    [UsedImplicitly]
     public class BackwardRotateTransition : ConditionTask
     {
-        private float _currentAngle;
-        private float _targetAngle;
+        private const float TargetAngle = 0;
+        
         private Transform _transform;
 
         protected override string OnInit()
         {
-            _transform = blackboard.GetVariable<Transform>("_transform").value;
-            _targetAngle = 0;
+            _transform = blackboard.GetVariableValue<Transform>("_transform");
             return null;
         }
 
-        protected override void OnEnable()
-        {
-        }
-
-        protected override void OnDisable()
-        {
-        }
-
         protected override bool OnCheck() =>
-            Math.Abs(_targetAngle - _transform.rotation.eulerAngles.x) < 0.1f;
+            Math.Abs(TargetAngle - _transform.rotation.eulerAngles.x) < 0.1f;
     }
 }

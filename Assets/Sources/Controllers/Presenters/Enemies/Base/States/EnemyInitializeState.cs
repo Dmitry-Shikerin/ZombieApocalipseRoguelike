@@ -4,7 +4,7 @@ using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 
-namespace Sources.Controllers.Enemies.Base.States
+namespace Sources.Controllers.Presenters.Enemies.Base.States
 {
     public class EnemyInitializeState : FiniteState
     {
@@ -30,16 +30,6 @@ namespace Sources.Controllers.Enemies.Base.States
             _enemy.IsInitialized = true;
             _enemyAnimation.PlayIdle();
             _enemyCollectorService.Add(_enemyView);
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
-        }
-
-        public override void Update(float deltaTime)
-        {
-            base.Update(deltaTime);
         }
     }
 }

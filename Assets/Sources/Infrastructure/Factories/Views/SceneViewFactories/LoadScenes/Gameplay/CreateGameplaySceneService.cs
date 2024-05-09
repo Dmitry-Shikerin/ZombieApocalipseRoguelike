@@ -13,7 +13,7 @@ using Sources.Domain.Models.Setting;
 using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
 using Sources.Domain.Models.Weapons;
-using Sources.DomainInterfaces.Payloads;
+using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
@@ -32,6 +32,7 @@ using Sources.Infrastructure.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
+using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
@@ -81,7 +82,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ITutorialService tutorialService,
             IEnemySpawnerDtoMapper enemySpawnerDtoMapper,
             IAdvertisingService advertisingService,
-            IFormService formService)
+            IFormService formService,
+            IInterstitialShowerService interstitialShowerService)
             : base(
                 gameplayHud,
                 uiCollectorFactory,
@@ -110,7 +112,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 levelCompletedService,
                 tutorialService,
                 advertisingService,
-                formService)
+                formService,
+                interstitialShowerService)
         {
             _loadService = loadService;
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
@@ -149,8 +152,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 _entityRepository.Add(volume);
             }
             
-            Level level = new Level(scenePayload.SceneId, false);
-            _entityRepository.Add(level);
+            // Level level = new Level(scenePayload.SceneId, false);
+            Level level = _loadService.Load<Level>(scenePayload.SceneId);
+            // _entityRepository.Add(level);
 
             SavedLevel savedLevel = new SavedLevel(ModelId.SavedLevel, false, scenePayload.SceneId);
             _entityRepository.Add(savedLevel);

@@ -6,7 +6,7 @@ using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using UnityEngine;
 
-namespace Sources.Controllers.Enemies.Bosses.States
+namespace Sources.Controllers.Presenters.Enemies.Bosses.States
 {
     public class EnemyMassAttackState : FiniteState
     {
@@ -24,20 +24,12 @@ namespace Sources.Controllers.Enemies.Bosses.States
         public override void Enter()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            
             _bossEnemyView.PlayMassAttackParticle();
-            
             StartTimer(_cancellationTokenSource.Token);
         }
 
-        public override void Exit()
-        {
+        public override void Exit() =>
             _cancellationTokenSource.Cancel();
-        }
-
-        public override void Update(float deltaTime)
-        {
-        }
         
         private async void StartTimer(CancellationToken cancellationToken)
         {

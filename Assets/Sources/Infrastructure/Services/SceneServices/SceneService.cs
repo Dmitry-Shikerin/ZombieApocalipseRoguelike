@@ -37,22 +37,29 @@ namespace Sources.Infrastructure.Services.SceneServices
 
         public async UniTask ChangeSceneAsync(string sceneName, object payload = null)
         {
-            if (_sceneFactories.TryGetValue(
-                    sceneName,
-                    out Func<object, SceneContext, UniTask<IScene>> sceneFactory) == false)
-                throw new InvalidOperationException(nameof(sceneName));
+            //TODO это тоже обернул трай кетчем
+            try
+            {
+                if (_sceneFactories.TryGetValue(
+                        sceneName,
+                        out Func<object, SceneContext, UniTask<IScene>> sceneFactory) == false)
+                    throw new InvalidOperationException(nameof(sceneName));
 
-            foreach (Func<string, UniTask> enteringHandler in _enteringHandlers)
-                await enteringHandler.Invoke(sceneName);
+                foreach (Func<string, UniTask> enteringHandler in _enteringHandlers)
+                    await enteringHandler.Invoke(sceneName);
 
-            SceneContext sceneContext = Object.FindObjectOfType<SceneContext>();
+                SceneContext sceneContext = Object.FindObjectOfType<SceneContext>();
 
-            IScene scene = await sceneFactory.Invoke(payload, sceneContext);
-            
-            _stateMachine.ChangeState(scene, payload);
+                IScene scene = await sceneFactory.Invoke(payload, sceneContext);
 
-            foreach (Func<UniTask> exitingHandler in _exitingHandlers) 
-                await exitingHandler.Invoke();
+                _stateMachine.ChangeState(scene, payload);
+
+                foreach (Func<UniTask> exitingHandler in _exitingHandlers)
+                    await exitingHandler.Invoke();
+            }
+            catch (OperationCanceledException)
+            {
+            }
         }
 
         public void Disable() =>

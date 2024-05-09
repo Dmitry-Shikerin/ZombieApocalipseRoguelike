@@ -52,7 +52,8 @@ namespace Sources.Controllers.ModelViews.Components
         [MethodBinding(typeof(IButtonClickMethodBind), "LoadGame_Button")]
         private void OnClick(Vector3 position)
         {
-            _sceneService.ChangeSceneAsync("Gameplay", new ScenePayload("Gameplay", true));
+            _sceneService.ChangeSceneAsync(
+                "Gameplay", new ScenePayload("Gameplay", true, false));
         }
     }
 }
