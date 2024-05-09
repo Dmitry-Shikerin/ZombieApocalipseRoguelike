@@ -4,6 +4,7 @@ using Sources.ControllersInterfaces.Scenes;
 using Sources.Domain.Models.Forms.MainMenu;
 using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
+using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
@@ -18,6 +19,7 @@ namespace Sources.Controllers.Presenters.Scenes
         private readonly IVolumeService _volumeService;
         private readonly ILocalizationService _localizationService;
         private readonly ISdcInitializeService _sdcInitializeService;
+        private readonly IStickyService _stickyService;
         private readonly CurtainView _curtainView;
 
         public MainMenuScene(
@@ -25,12 +27,14 @@ namespace Sources.Controllers.Presenters.Scenes
             IVolumeService volumeService,
             ILocalizationService localizationService,
             CurtainView curtainView,
-            ISdcInitializeService sdcInitializeService)
+            ISdcInitializeService sdcInitializeService,
+            IStickyService stickyService)
         {
             _loadSceneService = loadSceneService ?? throw new ArgumentNullException(nameof(loadSceneService));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
             _sdcInitializeService = sdcInitializeService ?? throw new ArgumentNullException(nameof(sdcInitializeService));
+            _stickyService = stickyService ?? throw new ArgumentNullException(nameof(stickyService));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
         
@@ -40,6 +44,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _loadSceneService.Load(payload as IScenePayload);
             _localizationService.Translate();
             await _curtainView.HideCurtain();
+            await GameReady(payload as IScenePayload);
             _volumeService.Enter();
         }
 
@@ -67,6 +72,15 @@ namespace Sources.Controllers.Presenters.Scenes
             
             _sdcInitializeService.EnableCallbackLogging();
             await _sdcInitializeService.Initialize();
+        }
+
+        private async UniTask GameReady(IScenePayload payload)
+        {
+            if (payload.CanFromGameplay)
+                return;
+
+            _stickyService.ShowSticky();
+            _sdcInitializeService.GameReady();
         }
     }
 }
