@@ -16,7 +16,7 @@ namespace Sources.App.Core
         private async void Start() =>
             await _sceneService.ChangeSceneAsync(
                 SceneManager.GetActiveScene().name, 
-                new ScenePayload(SceneManager.GetActiveScene().name, false));
+                new ScenePayload(SceneManager.GetActiveScene().name, false, false));
 
         private void Update() =>
             _sceneService.Update(Time.deltaTime);

@@ -19,8 +19,11 @@ using Sources.Frameworks.UiFramework.Services.Localizations;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Frameworks.YandexSdcFramework.Services.Leaderboards;
 using Sources.Frameworks.YandexSdcFramework.Services.PlayerAccounts;
+using Sources.Frameworks.YandexSdcFramework.Services.SdcInitializeServices;
+using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.PlayerAccounts;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
@@ -109,6 +112,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
             Container.Bind<ILocalizationService>().To<LocalizationService>().AsSingle();
             Container.Bind<IPlayerAccountAuthorizeService>().To<PlayerAccountAuthorizeService>().AsSingle();
+            Container.Bind<ISdcInitializeService>().To<SdcInitializeService>().AsSingle();
+            Container.Bind<IStickyService>().To<StickyService>().AsSingle();
             Container.Bind<LeaderBoardElementViewFactory>().AsSingle();
             Container.Bind<LeaderBoardElementPresenterFactory>().AsSingle();
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons

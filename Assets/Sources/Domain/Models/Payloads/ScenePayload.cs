@@ -4,7 +4,7 @@ namespace Sources.Domain.Models.Payloads
 {
     public class ScenePayload : IScenePayload
     {
-        public ScenePayload(string sceneId, bool canLoad, bool canFromGameplay = false)
+        public ScenePayload(string sceneId, bool canLoad, bool canFromGameplay)
         {
             SceneId = sceneId;
             CanLoad = canLoad;

@@ -69,13 +69,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             _entityRepository.Add(savedLevel);
 
             //LevelAvailability
-            Level firstLevel = new Level(ModelId.Gameplay, true);
+            Level firstLevel = new Level(ModelId.Gameplay, false);
             _entityRepository.Add(firstLevel);
-            Level secondLevel = new Level(ModelId.Gameplay2, true);
+            Level secondLevel = new Level(ModelId.Gameplay2, false);
             _entityRepository.Add(secondLevel);
-            Level thirdLevel = new Level(ModelId.Gameplay3, true);
+            Level thirdLevel = new Level(ModelId.Gameplay3, false);
             _entityRepository.Add(thirdLevel);
-            Level fourthLevel = new Level(ModelId.Gameplay4, true);
+            Level fourthLevel = new Level(ModelId.Gameplay4, false);
             _entityRepository.Add(fourthLevel);
 
             LevelAvailability levelAvailability = new LevelAvailability(

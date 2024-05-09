@@ -6,8 +6,6 @@ using Sources.Domain.Models.Data.Ids;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
-using Sources.Infrastructure.Factories.Services.FormServices;
-using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.MainMenu;
 using Sources.InfrastructureInterfaces.Factories.Controllers.Scenes;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;

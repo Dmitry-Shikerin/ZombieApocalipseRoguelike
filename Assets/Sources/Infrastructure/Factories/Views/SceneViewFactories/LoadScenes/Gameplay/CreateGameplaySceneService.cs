@@ -149,8 +149,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 _entityRepository.Add(volume);
             }
             
-            Level level = new Level(scenePayload.SceneId, false);
-            _entityRepository.Add(level);
+            // Level level = new Level(scenePayload.SceneId, false);
+            Level level = _loadService.Load<Level>(scenePayload.SceneId);
+            // _entityRepository.Add(level);
 
             SavedLevel savedLevel = new SavedLevel(ModelId.SavedLevel, false, scenePayload.SceneId);
             _entityRepository.Add(savedLevel);
