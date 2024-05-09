@@ -238,6 +238,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<SetAllMapCameraFollowCommand>().AsSingle();
             Container.Bind<SetCharacterCameraFollowCommand>().AsSingle();
             Container.Bind<ShowRewardedAdvertisingButtonCommand>().AsSingle();
+            Container.Bind<ClearSavesButtonCommand>().AsSingle();
             
             //Views
             Container.Bind<UiViewService>().AsSingle();

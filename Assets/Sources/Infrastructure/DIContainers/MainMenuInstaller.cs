@@ -139,6 +139,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<LoadGameCommand>().AsSingle();
             Container.Bind<ShowLeaderboardCommand>().AsSingle();
             Container.Bind<EnableLoadGameButtonCommand>().AsSingle();
+            Container.Bind<ClearSavesButtonCommand>().AsSingle();
 
             //Views
             Container.Bind<UiViewService>().AsSingle();

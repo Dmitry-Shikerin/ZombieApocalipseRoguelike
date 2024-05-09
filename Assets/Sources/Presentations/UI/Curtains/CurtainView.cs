@@ -44,19 +44,24 @@ namespace Sources.Presentations.UI.Curtains
 
         private async UniTask Fade(float start, float end, CancellationToken cancellationToken)
         {
-            _canvasGroup.alpha = start;
-            
-            while (Mathf.Abs(_canvasGroup.alpha - end) > MathConstant.Epsilon)
+            try
             {
-                _canvasGroup.alpha = Mathf.MoveTowards(
-                    _canvasGroup.alpha,
-                    end,
-                    Time.deltaTime / _duration);
+                _canvasGroup.alpha = start;
 
-                await UniTask.Yield(cancellationToken);
+                while (Mathf.Abs(_canvasGroup.alpha - end) > MathConstant.Epsilon)
+                {
+                    _canvasGroup.alpha = Mathf.MoveTowards(
+                        _canvasGroup.alpha, end, Time.deltaTime / _duration);
+
+                    await UniTask.Yield(cancellationToken);
+                }
+
+                _canvasGroup.alpha = end;
             }
-
-            _canvasGroup.alpha = end;
+            catch (OperationCanceledException)
+            {
+                Hide();
+            }
         }
     }
 }

@@ -14,5 +14,6 @@
         SetAllMapCameraFollow = 9,
         SetCharacterCameraFollow = 10,
         ShowRewardedAdvertising = 11,
+        ClearSaves = 12,
     }
 }

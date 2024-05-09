@@ -41,9 +41,9 @@ namespace Sources.Controllers.Presenters.Scenes
             await Initialize(payload as IScenePayload);
             _loadSceneService.Load(payload as IScenePayload);
             _localizationService.Translate();
+            _volumeService.Enter();
             await _curtainView.HideCurtain();
             await GameReady(payload as IScenePayload);
-            _volumeService.Enter();
         }
 
         public void Exit()

@@ -17,7 +17,8 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
             HideFormCommand hideFormCommand,
             SetAllMapCameraFollowCommand setAllMapCameraFollowCommand,
             SetCharacterCameraFollowCommand setCharacterCameraFollowCommand,
-            ShowRewardedAdvertisingButtonCommand showRewardedAdvertisingButtonCommand)
+            ShowRewardedAdvertisingButtonCommand showRewardedAdvertisingButtonCommand,
+            ClearSavesButtonCommand clearSavesButtonCommand)
         {
             _commands[showFormCommand.Id] = showFormCommand;
             _commands[completeTutorialCommand.Id] = completeTutorialCommand;
@@ -27,6 +28,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
             _commands[setAllMapCameraFollowCommand.Id] = setAllMapCameraFollowCommand;
             _commands[setCharacterCameraFollowCommand.Id] = setCharacterCameraFollowCommand;
             _commands[showRewardedAdvertisingButtonCommand.Id] = showRewardedAdvertisingButtonCommand;
+            _commands[clearSavesButtonCommand.Id] = clearSavesButtonCommand;
         }
 
         public void Handle(UiButton uiButton, ButtonCommandId buttonCommandId)

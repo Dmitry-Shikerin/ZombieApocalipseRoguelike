@@ -58,7 +58,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             
             //LevelAvailability
             Level firstLevel = _loadService.Load<Level>(ModelId.Gameplay);
-            Debug.Log($"First level completed: {firstLevel.IsCompleted}");
+            // Debug.Log($"First level completed: {firstLevel.IsCompleted}");
             Level secondLevel = _loadService.Load<Level>(ModelId.Gameplay2);
             Level thirdLevel = _loadService.Load<Level>(ModelId.Gameplay3);
             Level fourthLevel = _loadService.Load<Level>(ModelId.Gameplay4);

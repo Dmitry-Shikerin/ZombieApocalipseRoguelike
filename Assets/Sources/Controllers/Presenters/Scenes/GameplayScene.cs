@@ -78,15 +78,15 @@ namespace Sources.Controllers.Presenters.Scenes
             //TODO что лучше делать у сервисов Enter или Enable
             _loadSceneService.Load(payload as IScenePayload);
             _localizationService.Translate();
-            await _curtainView.HideCurtain();
-            _gameOverService.Enter();
             _volumeService.Enter();
+            _gameOverService.Enter();
             _saveService.Enter();
             _levelCompletedService.Enable();
             _tutorialService.Enable();
             _interstitialShowerService.Enter();
-            //TODO раскоментировать UpgradeService
             _upgradeService.Enable();
+            //TODO если закрываю игру раньше чем загрузилась курточка летят ошибки с юнитасками
+            await _curtainView.HideCurtain();
         }
 
         public void Exit()
@@ -104,9 +104,6 @@ namespace Sources.Controllers.Presenters.Scenes
         {
             _updateService.Update(deltaTime);
             _inputServiceUpdater.Update(deltaTime);
-            
-            if(Input.GetKeyDown(KeyCode.P))
-                _loadService.SaveAll();
         }
 
         public void UpdateLate(float deltaTime)

@@ -84,10 +84,11 @@ namespace Sources.Infrastructure.Services.LoadServices
         //TODO загружать все дто и сразу конвертить их в модели и складировать в инстансе контейнер
 
         //todo лучше не придумал
-        public T Load<T>(string id) where T : class, IEntity
+        public T Load<T>(string id) 
+            where T : class, IEntity
         {
-            object dto = _dataService.LoadData(id, ModelId.ModelTypes[id]);
-            IEntity model = _toModelMappers[ModelId.ModelTypes[id]].Invoke((IDto)dto);
+            object dto = _dataService.LoadData(id, ModelId.DtoTypes[id]);
+            IEntity model = _toModelMappers[ModelId.DtoTypes[id]].Invoke((IDto)dto);
 
             if (model is not T concrete)
                 throw new InvalidCastException(nameof(T));
@@ -118,7 +119,7 @@ namespace Sources.Infrastructure.Services.LoadServices
         {
             foreach (string id in ModelId.ModelsIds)
             {
-                Type modelType = ModelId.ModelTypes[id];
+                Type modelType = ModelId.DtoTypes[id];
                 object dto = _dataService.LoadData(id, modelType);
                 Func<IDto, IEntity> mapper = _toModelMappers[modelType];
                 IEntity model = mapper.Invoke((IDto)dto);
