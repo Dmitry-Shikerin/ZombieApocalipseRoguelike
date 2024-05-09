@@ -234,6 +234,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<HideFormCommand>().AsSingle();
             Container.Bind<SetAllMapCameraFollowCommand>().AsSingle();
             Container.Bind<SetCharacterCameraFollowCommand>().AsSingle();
+            Container.Bind<ShowRewardedAdvertisingButtonCommand>().AsSingle();
             
             //Views
             Container.Bind<UiViewService>().AsSingle();
