@@ -7581,6 +7581,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1824836530}
   - component: {fileID: 1824836531}
+  - component: {fileID: 1824836533}
+  - component: {fileID: 1824836532}
   m_Layer: 0
   m_Name: GameTesterService
   m_TagString: Untagged
@@ -7615,6 +7617,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc9cd07831df4dd69cf3f305c6a324a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1824836532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824836529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 063b81896c37e5e4f9a5c8ee90d48da7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NameA: 
+  NameB: 
+  NameC: 
+  ValueA: 0
+  ValueB: 0
+  ValueC: 0
+--- !u!114 &1824836533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824836529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2e8df167ae546a449b5d205d85dc5e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _label: <size=24><b><color=#9370DB><i>UiView</i></color></b></size>
+  _enabledGameObject: 0
+  _EnabledCanvasGroup: 0
+  _containerType: 0
+  _formId: 0
+  _customFormId: 0
+  _onEnableEnabledForms: 
+  _onEnableDisabledForms: 
+  _onDisableEnabledForms: 
+  _onDisableDisabledForms: 
+  _enabledFormCommands: 
+  _disabledFormCommands: 
 --- !u!1001 &1825076332
 PrefabInstance:
   m_ObjectHideFlags: 0

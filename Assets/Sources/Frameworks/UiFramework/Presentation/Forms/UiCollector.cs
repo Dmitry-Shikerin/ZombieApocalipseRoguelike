@@ -76,16 +76,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         public IReadOnlyList<IUiText> UiTexts => _uiTexts;
         public IReadOnlyList<UiAudioSource> UiAudioSources => _uiAudioSources;
         public IReadOnlyList<UiAnimator> UiAnimators => _uiAnimators;
-
-        // private void Awake()
-        // {
-        //     _uiFormButtons = GetComponentsInChildren<UiButton>(IncludeButtons).ToList();
-        //     _uiContainers = GetComponentsInChildren<UiView>(IncludeContainers).ToList();
-        //     _uiTexts = GetComponentsInChildren<UiText>(IncludeTexts).ToList();
-        //     _uiAudioSources = GetComponentsInChildren<UiAudioSource>(IncludeAudioSources).ToList();
-        //     _uiAnimators = GetComponentsInChildren<UiAnimator>(IncludeAnimators).ToList();
-        // }
-
+        
         [TabGroup("Tab1","Texts", true, 1)] 
         [Button(ButtonSizes.Large)] 
         private void AddTexts() =>

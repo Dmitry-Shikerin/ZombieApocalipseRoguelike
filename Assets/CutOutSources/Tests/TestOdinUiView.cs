@@ -1,19 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
-using Sources.Frameworks.UiFramework.Controllers.Forms;
 using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.Domain.Constants;
 using Sources.Frameworks.UiFramework.Presentation.CommonTypes;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
-using Sources.Presentations.Views;
-using Sources.PresentationsInterfaces.Views.Forms.Common;
 using UnityEngine;
 
-namespace Sources.Frameworks.UiFramework.Presentation.Forms
+namespace CutOutSources.Tests
 {
-    public class UiView : PresentableView<UiViewPresenter>, IUiView
+    public class TestOdinUiView : MonoBehaviour
     {
         [DisplayAsString(false)] [HideLabel] [Indent(8)] [SerializeField]
         private string _label = UiConstant.UiContainerLabel;
@@ -77,7 +74,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         private void AddAllOnEnableEnabledForms() =>
             _onEnableEnabledForms = AddAllForms();
         
-        [TabGroup("Tabs/Split","OnEnable")]
+        [TabGroup("Tabs/Split" ,"OnEnable")]
         [ResponsiveButtonGroup("Tabs/Split/OnEnable/Responsive")]
         [Button(ButtonSizes.Medium)]
         private void AddAllOnEnableDisabledForms() =>
@@ -96,6 +93,5 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
             _onDisableDisabledForms = AddAllForms();
 
         private List<FormId> AddAllForms() =>
-            Enum.GetValues(typeof(FormId)).Cast<FormId>().ToList();
-    }
+            Enum.GetValues(typeof(FormId)).Cast<FormId>().ToList();}
 }
