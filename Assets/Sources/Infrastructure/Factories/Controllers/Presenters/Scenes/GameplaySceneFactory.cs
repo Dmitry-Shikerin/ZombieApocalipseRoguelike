@@ -2,7 +2,7 @@
 using Cysharp.Threading.Tasks;
 using Sources.Controllers.Presenters.Scenes;
 using Sources.ControllersInterfaces.Scenes;
-using Sources.DomainInterfaces.Payloads;
+using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes;

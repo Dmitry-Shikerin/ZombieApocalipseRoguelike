@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.ControllersInterfaces.Scenes;
-using Sources.DomainInterfaces.Payloads;
+using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;

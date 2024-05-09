@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
-using Sources.DomainInterfaces.Payloads;
+using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
