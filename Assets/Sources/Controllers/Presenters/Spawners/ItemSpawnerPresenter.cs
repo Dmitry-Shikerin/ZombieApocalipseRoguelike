@@ -2,11 +2,13 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Controllers.Common;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Spawners;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.Views.Spawners;
 using Sources.PresentationsInterfaces.Views.FirstAidKits;
 using Sources.PresentationsInterfaces.Views.Spawners;
+using Random = UnityEngine.Random;
 
 namespace Sources.Controllers.Spawners
 {
@@ -15,6 +17,7 @@ namespace Sources.Controllers.Spawners
         private readonly ItemSpawner _itemSpawner;
         private readonly IItemSpawnerView _itemSpawnerView;
         private readonly IFirstAidKitSpawnService _firstAidKitSpawnService;
+        private readonly TimeSpan _delay = TimeSpan.FromSeconds(ItemSpawnerConstant.SpawnDelay);
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -39,21 +42,20 @@ namespace Sources.Controllers.Spawners
             _cancellationTokenSource.Cancel();
         }
 
-        public async void Spawn(CancellationToken cancellationToken)
+        private async void Spawn(CancellationToken cancellationToken)
         {
             try
             {
                 while (cancellationToken.IsCancellationRequested == false)
                 {
-                    Random random = new Random();
-                    int i = random.Next(0, _itemSpawnerView.SpawnPoints.Count);
+                    int index = Random.Range(0, _itemSpawnerView.SpawnPoints.Count);
                     
-                    IItemSpawnPoint itemSpawnPoint = _itemSpawnerView.SpawnPoints[i];
+                    IItemSpawnPoint itemSpawnPoint = _itemSpawnerView.SpawnPoints[index];
                     IFirstAidKitView firstAidKitView = _firstAidKitSpawnService.Spawn(itemSpawnPoint.Position);
                     
-                    firstAidKitView.SetHealAmount(15);
+                    firstAidKitView.SetHealAmount(FirstAidKitConstant.HealAmount);
                     
-                    await UniTask.Delay(TimeSpan.FromSeconds(30), cancellationToken: cancellationToken);
+                    await UniTask.Delay(_delay, cancellationToken: cancellationToken);
                 }
             }
             catch (OperationCanceledException)

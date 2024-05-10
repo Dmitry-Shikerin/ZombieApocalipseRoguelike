@@ -3,6 +3,7 @@ using Sources.Controllers.Presenters.Upgrades;
 using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades;
+using Sources.Domain.Models.Upgrades.Configs;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Frameworks.UiFramework.Domain.Configs.Localizations;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons;
@@ -154,6 +155,10 @@ namespace Sources.Infrastructure.DIContainers
             Container
                 .Bind<EnemySpawnerConfigContainer>()
                 .FromResource("Configs/EnemySpawners/Containers/EnemySpawnerConfigContainer")
+                .AsSingle();
+            Container
+                .Bind<SawLauncherAbilityUpgradeMap>()
+                .FromResource("Configs/Upgrades/SawLauncherAbilityUpgradeMap")
                 .AsSingle();
             Container.BindInterfacesAndSelfTo<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<UiCollector>().FromInstance(_gameplayHud.UiCollector).AsSingle();

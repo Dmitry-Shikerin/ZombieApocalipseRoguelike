@@ -1,6 +1,8 @@
 ﻿using System;
 using Sources.Controllers.Common;
 using Sources.Domain.Models.Abilities;
+using Sources.Domain.Models.Constants;
+using Sources.Domain.Models.Upgrades.Configs;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.Presentations.Views.Abilities;
 using Sources.PresentationsInterfaces.Views.Abilities;
@@ -13,16 +15,21 @@ namespace Sources.Controllers.Abilities
         private readonly SawLauncherAbility _sawLauncherAbility;
         private readonly ISawLauncherAbilityView _sawLauncherAbilityView;
         private readonly IUpdateRegister _updateRegister;
+        private readonly SawLauncherAbilityUpgradeMap _sawLauncherAbilityUpgradeMap;
 
         public SawLauncherAbilityPresenter(
             SawLauncherAbility sawLauncherAbility,
             ISawLauncherAbilityView sawLauncherAbilityView,
-            IUpdateRegister updateRegister)
+            IUpdateRegister updateRegister,
+            SawLauncherAbilityUpgradeMap sawLauncherAbilityUpgradeMap)
         {
             _sawLauncherAbility = sawLauncherAbility ?? throw new ArgumentNullException(nameof(sawLauncherAbility));
             _sawLauncherAbilityView = sawLauncherAbilityView ??
                                       throw new ArgumentNullException(nameof(sawLauncherAbilityView));
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
+            _sawLauncherAbilityUpgradeMap = sawLauncherAbilityUpgradeMap 
+                ? sawLauncherAbilityUpgradeMap 
+                : throw new ArgumentNullException(nameof(sawLauncherAbilityUpgradeMap));
         }
 
         public override void Enable()
@@ -46,20 +53,20 @@ namespace Sources.Controllers.Abilities
             _sawLauncherAbilityView.Follow();
         }
 
-        //TODO порефакторить проэкт и вынести логику в сервисы
-        //TODO вся эта логика может остаться здесь
         private void OnSawLauncherViewsEnable()
         {
             //TODO в дополнительный конфиг
-            int sawLauncherCount = _sawLauncherAbility.Upgrader.CurrentLevel switch
-            {
-                0 => 0,
-                1 => 1,
-                2 => 2,
-                3 => 4,
-                _ => throw new ArgumentOutOfRangeException(nameof(_sawLauncherAbility.Upgrader.CurrentLevel))
-            };
-            
+            // int sawLauncherCount = _sawLauncherAbility.Upgrader.CurrentLevel switch
+            // {
+            //     SLAConstant.ZeroLevel => SLAConstant.ZeroLevelCount,
+            //     SLAConstant.FirstLevel => SLAConstant.FirstLevelCount,
+            //     SLAConstant.SecondLevel => SLAConstant.SecondLevelCount,
+            //     SLAConstant.ThirdLevel => SLAConstant.ThirdLevelCount,
+            //     _ => throw new ArgumentOutOfRangeException(nameof(_sawLauncherAbility.Upgrader.CurrentLevel))
+            // };
+            //
+            int currentLevel = _sawLauncherAbility.Upgrader.CurrentLevel;
+            int sawLauncherCount = _sawLauncherAbilityUpgradeMap.Map[currentLevel];
             ShowSawLauncherViews(sawLauncherCount);
         }
 
