@@ -154,7 +154,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             GameModels gameModels = LoadModels(scenePayload);
             
             //InterstitialShower
-            _interstitialShowerService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
+            _interstitialShowerService.Register(gameModels.EnemySpawner);
             
             //AdvertisingService
             _advertisingService.Construct(gameModels.PlayerWallet);

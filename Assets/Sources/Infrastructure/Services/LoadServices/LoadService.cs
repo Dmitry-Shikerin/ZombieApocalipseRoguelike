@@ -1,8 +1,11 @@
 ﻿using System;
+using Sirenix.OdinInspector;
+using Sirenix.OdinValidator.Editor;
 using Sources.Domain.Models.Data.Ids;
 using Sources.DomainInterfaces.Entities;
 using Sources.DomainInterfaces.Models.Data;
 using Sources.Infrastructure.Services.Repositories;
+using Sources.Infrastructure.Services.Volumes;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Collectors;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
@@ -14,15 +17,18 @@ namespace Sources.Infrastructure.Services.LoadServices
         private readonly IEntityRepository _entityRepository;
         private readonly IDataService _dataService;
         private readonly IMapperCollector _mapperCollector;
+        private readonly CustomValidator _customValidator;
 
         public LoadService(
             IEntityRepository entityRepository,
             IDataService dataService,
-            IMapperCollector mapperCollector)
+            IMapperCollector mapperCollector,
+            CustomValidator customValidator)
         {
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
             _mapperCollector = mapperCollector ?? throw new ArgumentNullException(nameof(mapperCollector));
+            _customValidator = customValidator ?? throw new ArgumentNullException(nameof(customValidator));
         }
 
         //TODO загружать все дто и сразу конвертить их в модели и складировать в инстансе контейнер
@@ -32,7 +38,8 @@ namespace Sources.Infrastructure.Services.LoadServices
             where T : class, IEntity
         {
             object dto = _dataService.LoadData(id, ModelId.DtoTypes[id]);
-            IEntity model = _mapperCollector.GetToModelMapper(ModelId.DtoTypes[id]).Invoke((IDto)dto);
+            Func<IDto, IEntity> modelMapper = _mapperCollector.GetToModelMapper(ModelId.DtoTypes[id]);
+            IEntity model = modelMapper.Invoke((IDto)dto);
 
             if (model is not T concrete)
                 throw new InvalidCastException(nameof(T));
@@ -55,7 +62,6 @@ namespace Sources.Infrastructure.Services.LoadServices
             Func<IEntity, IDto> dtoMapper = _mapperCollector.GetToDtoMapper(entity.Type);
             IDto dto = dtoMapper.Invoke(entity);
             _dataService.SaveData(dto, entity.Id);
-            // Debug.Log($"Model saved {entity.Id}");
         }
 
         public void LoadAll()
@@ -67,7 +73,6 @@ namespace Sources.Infrastructure.Services.LoadServices
                 Func<IDto, IEntity> mapper = _mapperCollector.GetToModelMapper(dtoType);
                 IEntity model = mapper.Invoke((IDto)dto);
                 _entityRepository.Add(model);
-                // Debug.Log($"Saved {model.Type}");
             }
         }
 
@@ -78,7 +83,6 @@ namespace Sources.Infrastructure.Services.LoadServices
                 Func<IEntity, IDto> dtoMapper = _mapperCollector.GetToDtoMapper(dataModel.Type);
                 IDto dto = dtoMapper.Invoke(dataModel);
                 _dataService.SaveData(dto, dataModel.Id);
-                //TOdo сделать валидацию на сохранение
                 // Debug.Log($"Saved {dataModel.GetType()}");
             }
         }

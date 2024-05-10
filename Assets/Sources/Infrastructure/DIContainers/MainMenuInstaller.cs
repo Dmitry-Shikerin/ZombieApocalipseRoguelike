@@ -119,6 +119,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<LeaderBoardElementViewFactory>().AsSingle();
             Container.Bind<LeaderBoardElementPresenterFactory>().AsSingle();
             Container.Bind<IMapperCollector>().To<MapperCollector>().AsSingle();
+            Container.Bind<CustomValidator>().AsSingle();
         }
 
         private void BindFormFactories()

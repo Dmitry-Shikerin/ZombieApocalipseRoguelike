@@ -6,6 +6,6 @@ namespace Sources.InfrastructureInterfaces.Services.Interstitials
 {
     public interface IInterstitialShowerService : IEnterable, IExitable
     {
-        void Register(KillEnemyCounter killEnemyCounter, EnemySpawner enemySpawner);
+        void Register(EnemySpawner enemySpawner);
     }
 }

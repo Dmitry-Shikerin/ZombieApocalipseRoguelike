@@ -30,7 +30,6 @@ using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.PlayerAccounts;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
 using Sources.Infrastructure.Factories.Controllers.Abilities;
-using Sources.Infrastructure.Factories.Controllers.Cameras;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Common;
 using Sources.Infrastructure.Factories.Controllers.Enemies;
@@ -38,6 +37,7 @@ using Sources.Infrastructure.Factories.Controllers.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Players;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Bears;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Cameras;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Characters;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Base;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
@@ -92,6 +92,7 @@ using Sources.Infrastructure.Services.Spawners;
 using Sources.Infrastructure.Services.Tutorials;
 using Sources.Infrastructure.Services.UpdateServices;
 using Sources.Infrastructure.Services.Upgrades;
+using Sources.Infrastructure.Services.Volumes;
 using Sources.InfrastructureInterfaces.Characters;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Views.Bullets;
@@ -217,6 +218,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ICharacterMovementService>().To<CharacterMovementService>().AsSingle();
             Container.Bind<IInterstitialShowerService>().To<InterstitialShowerService>().AsSingle();
             Container.Bind<IMapperCollector>().To<MapperCollector>().AsSingle();
+            Container.Bind<CustomValidator>().AsSingle();
         }
 
         private void BindFormFactories()

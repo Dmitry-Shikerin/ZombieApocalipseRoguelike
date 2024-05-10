@@ -2,6 +2,7 @@
 using Sources.Controllers.Presenters.Characters.Attackers;
 using Sources.Domain.Models.Characters.Attackers;
 using Sources.Infrastructure.Factories.Controllers.Characters;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Characters;
 using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Character;
 

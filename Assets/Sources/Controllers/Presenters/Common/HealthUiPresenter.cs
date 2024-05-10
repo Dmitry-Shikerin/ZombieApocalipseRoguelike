@@ -2,6 +2,7 @@
 using Sources.Controllers.Common;
 using Sources.DomainInterfaces.Healths;
 using Sources.PresentationsInterfaces.Views.Common;
+using Sources.Utils.Extentions;
 
 namespace Sources.Controllers.Presenters.Common
 {
@@ -27,17 +28,9 @@ namespace Sources.Controllers.Presenters.Common
 
         private void OnHealthChanged()
         {
-            float percent = _health.MaxHealth / 100f;
-            int currentPercents = 0;
-            float currentHealth = 0;
-
-            while (currentHealth < _health.CurrentHealth)
-            {
-                currentHealth += percent;
-                currentPercents++;
-            }
+            float percent = _health.CurrentHealth.ToPercent(_health.MaxHealth);
             
-            _healthUi.HealthImage.SetFillAmount(currentPercents * 0.01f);
+            _healthUi.HealthImage.SetFillAmount(percent * 0.01f);
         }
     }
 }
