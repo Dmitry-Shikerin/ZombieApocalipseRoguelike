@@ -54,12 +54,9 @@ namespace Sources.Domain.Models.Spawners
         public int SumEnemies => GetSumEnemies();
         public int BossesInLevel { get; }
         public int SumAllEnemies => GetSumEnemies() + BossesInLevel;
-        //TODO это тоже сохранять
         public int SpawnedBosses { get; set; }
         public int SpawnedEnemies { get; set; }
         public int CurrentWave { get; set; }
-        
-        //TODO это не сохранять
         public bool IsSpawnEnemy => SpawnedEnemies < SumEnemies;
         public bool IsSpawnBoss => SpawnedEnemies >= SumEnemies && SpawnedBosses == 0;
 

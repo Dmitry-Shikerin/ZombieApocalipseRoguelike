@@ -57,8 +57,6 @@ namespace Sources.Controllers.Presenters.Spawners
 
         private async void Spawn(CancellationToken cancellationToken)
         {
-            CharacterView characterView = Object.FindObjectOfType<CharacterView>();
-
             try
             {
                 while (_cancellationTokenSource.IsCancellationRequested == false)
@@ -67,18 +65,10 @@ namespace Sources.Controllers.Presenters.Spawners
                     {
                         //TODO передаю в спавнер модель каунтера
                         _enemySpawner.SetCurrentWave(_killEnemyCounter.KillZombies);
-                        
-                        if (_enemySpawner.IsSpawnEnemy)
-                            SpawnEnemy(spawnPoint.Position, characterView);
-                        
-                        if (_enemySpawner.IsSpawnBoss)
-                        {
-                            SpawnBoss(spawnPoint.Position, characterView);
-                            _cancellationTokenSource.Cancel();
-                        }
+                        SpawnEnemy(spawnPoint.Position, _enemySpawnerView.CharacterView);
+                        SpawnBoss(spawnPoint.Position, _enemySpawnerView.CharacterView);
                         
                         await _enemySpawner.WaitWave(_killEnemyCounter, cancellationToken);
-
                         await UniTask.Delay(
                             TimeSpan.FromSeconds(
                                 _enemySpawner.SpawnDelays[_enemySpawner.CurrentWave]),
@@ -93,6 +83,9 @@ namespace Sources.Controllers.Presenters.Spawners
         
         private void SpawnEnemy(Vector3 position, CharacterView characterView)
         {
+            if (_enemySpawner.IsSpawnEnemy == false)
+                  return;
+            
             IEnemyView enemyView = _enemySpawnService.Spawn(_killEnemyCounter, position);
             enemyView.SetCharacterHealth(characterView.CharacterHealthView);
             enemyView.SetTargetFollow(characterView.CharacterMovementView);
@@ -102,11 +95,15 @@ namespace Sources.Controllers.Presenters.Spawners
 
         private void SpawnBoss(Vector3 position, CharacterView characterView)
         {
+            if (_enemySpawner.IsSpawnBoss == false)
+                return;
+            
             IBossEnemyView bossEnemyView = _bossEnemySpawnService.Spawn(_killEnemyCounter, position);
             bossEnemyView.SetCharacterHealth(characterView.CharacterHealthView);
             bossEnemyView.SetTargetFollow(characterView.CharacterMovementView);
 
             _enemySpawner.SpawnedBosses++;
+            _cancellationTokenSource.Cancel();
         }
     }
 }

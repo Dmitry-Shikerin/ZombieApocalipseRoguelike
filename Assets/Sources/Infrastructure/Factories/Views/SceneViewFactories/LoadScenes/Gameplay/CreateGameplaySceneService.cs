@@ -41,6 +41,7 @@ using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.RootGameObjects;
+using Sources.Utils.CustomCollections;
 using UnityEngine;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay
@@ -50,7 +51,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ILoadService _loadService;
         private readonly IEntityRepository _entityRepository;
         private readonly IUpgradeDtoMapper _upgradeDtoMapper;
-        private readonly IUpgradeCollectionService _upgradeCollectionService;
+        private readonly CustomList<Upgrader> _upgradeCollection;
         private readonly IEnemySpawnerDtoMapper _enemySpawnerDtoMapper;
 
         public CreateGameplaySceneService(
@@ -68,7 +69,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ItemSpawnerViewFactory itemSpawnerViewFactory,
             IUpgradeConfigCollectionService upgradeConfigCollectionService,
             IUpgradeDtoMapper upgradeDtoMapper,
-            IUpgradeCollectionService upgradeCollectionService,
+            CustomList<Upgrader> upgradeCollection,
             PlayerWalletProvider playerWalletProvider,
             KillEnemyCounterViewFactory killEnemyCounterViewFactory,
             BackgroundMusicViewFactory backgroundMusicViewFactory,
@@ -99,7 +100,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 itemSpawnerViewFactory,
                 upgradeConfigCollectionService,
                 upgradeDtoMapper,
-                upgradeCollectionService,
+                upgradeCollection,
                 playerWalletProvider,
                 killEnemyCounterViewFactory,
                 backgroundMusicViewFactory,
@@ -118,8 +119,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _loadService = loadService;
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));
-            _upgradeCollectionService = upgradeCollectionService ??
-                                        throw new ArgumentNullException(nameof(upgradeCollectionService));
+            _upgradeCollection = upgradeCollection ?? throw new ArgumentNullException(nameof(upgradeCollection));
             _enemySpawnerDtoMapper =
                 enemySpawnerDtoMapper ?? throw new ArgumentNullException(nameof(enemySpawnerDtoMapper));
         }
@@ -231,7 +231,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             UpgradeDto upgradeDto = _upgradeDtoMapper.MapIdToDto(id);
             Upgrader upgrader = _upgradeDtoMapper.MapDtoToModel(upgradeDto);
             _entityRepository.Add(upgrader);
-            _upgradeCollectionService.AddUpgrader(upgrader);
+            _upgradeCollection.Add(upgrader);
 
             return upgrader;
         }

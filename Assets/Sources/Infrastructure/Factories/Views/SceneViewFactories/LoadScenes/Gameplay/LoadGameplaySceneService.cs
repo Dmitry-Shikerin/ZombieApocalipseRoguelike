@@ -40,6 +40,7 @@ using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.RootGameObjects;
+using Sources.Utils.CustomCollections;
 using UnityEngine;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay
@@ -49,7 +50,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         //TODO можно ли сохранять в поле то что мы передаем дальше?
         private readonly ILoadService _loadService;
         private readonly IEntityRepository _entityRepository;
-        private readonly IUpgradeCollectionService _upgradeCollectionService;
+        private readonly CustomList<Upgrader> _upgradeCollection;
 
         public LoadGameplaySceneService(
             GameplayHud gameplayHud, 
@@ -66,7 +67,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ItemSpawnerViewFactory itemSpawnerViewFactory, 
             IUpgradeConfigCollectionService upgradeConfigCollectionService, 
             IUpgradeDtoMapper upgradeDtoMapper, 
-            IUpgradeCollectionService upgradeCollectionService, 
+            CustomList<Upgrader> upgradeCollection, 
             PlayerWalletProvider playerWalletProvider, 
             KillEnemyCounterViewFactory killEnemyCounterViewFactory, 
             BackgroundMusicViewFactory backgroundMusicViewFactory, 
@@ -96,7 +97,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 itemSpawnerViewFactory,
                 upgradeConfigCollectionService, 
                 upgradeDtoMapper, 
-                upgradeCollectionService, 
+                upgradeCollection, 
                 playerWalletProvider, 
                 killEnemyCounterViewFactory, 
                 backgroundMusicViewFactory, 
@@ -114,7 +115,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
-            _upgradeCollectionService = upgradeCollectionService ?? throw new ArgumentNullException(nameof(upgradeCollectionService));
+            _upgradeCollection = upgradeCollection ?? throw new ArgumentNullException(nameof(upgradeCollection));
         }
 
         protected override GameModels LoadModels(IScenePayload scenePayload)
@@ -122,28 +123,28 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             Debug.Log("Load Models");
             _loadService.LoadAll();
             
-            Tutorial tutorial = _entityRepository.Get(ModelId.Tutorial) as Tutorial;
+            Tutorial tutorial = _entityRepository.Get<Tutorial>(ModelId.Tutorial);
             
-            Volume volume = _entityRepository.Get(ModelId.Volume) as Volume;
+            Volume volume = _entityRepository.Get<Volume>(ModelId.Volume);
 
-            Level level = _entityRepository.Get(scenePayload.SceneId) as Level;
+            Level level = _entityRepository.Get<Level>(scenePayload.SceneId);
             
-            SavedLevel savedLevel = _entityRepository.Get(ModelId.SavedLevel) as SavedLevel;
+            SavedLevel savedLevel = _entityRepository.Get<SavedLevel>(ModelId.SavedLevel);
             
-            PlayerWallet playerWallet = _entityRepository.Get(ModelId.PlayerWallet) as PlayerWallet;
+            PlayerWallet playerWallet = _entityRepository.Get<PlayerWallet>(ModelId.PlayerWallet);
             
             Upgrader bearMassAttackUpgrader = _entityRepository.Get(ModelId.BearMassAttackUpgrader) as Upgrader;
-            _upgradeCollectionService.AddUpgrader(bearMassAttackUpgrader);
+            _upgradeCollection.Add(bearMassAttackUpgrader);
             Upgrader bearAttackUpgrader = _entityRepository.Get(ModelId.BearAttackUpgrader) as Upgrader;
-            _upgradeCollectionService.AddUpgrader(bearAttackUpgrader);
+            _upgradeCollection.Add(bearAttackUpgrader);
             Upgrader characterHealthUpgrader = _entityRepository.Get(ModelId.CharacterHealthUpgrader) as Upgrader;
-            _upgradeCollectionService.AddUpgrader(characterHealthUpgrader);
+            _upgradeCollection.Add(characterHealthUpgrader);
             Upgrader sawLauncherUpgrader = _entityRepository.Get(ModelId.SawLauncherUpgrader) as Upgrader;
-            _upgradeCollectionService.AddUpgrader(sawLauncherUpgrader);
+            _upgradeCollection.Add(sawLauncherUpgrader);
             Upgrader sawLauncherAbilityUpgrader = _entityRepository.Get(ModelId.SawLauncherAbilityUpgrader) as Upgrader;
-            _upgradeCollectionService.AddUpgrader(sawLauncherAbilityUpgrader);
+            _upgradeCollection.Add(sawLauncherAbilityUpgrader);
             Upgrader miniGunAttackUpgrader = _entityRepository.Get(ModelId.MiniGunAttackUpgrader) as Upgrader;
-            _upgradeCollectionService.AddUpgrader(miniGunAttackUpgrader);
+            _upgradeCollection.Add(miniGunAttackUpgrader);
 
             KillEnemyCounter killEnemyCounter = _entityRepository.Get(ModelId.KillEnemyCounter) as KillEnemyCounter;
             EnemySpawner enemySpawner = _entityRepository.Get(ModelId.GameplayEnemySpawner) as EnemySpawner;

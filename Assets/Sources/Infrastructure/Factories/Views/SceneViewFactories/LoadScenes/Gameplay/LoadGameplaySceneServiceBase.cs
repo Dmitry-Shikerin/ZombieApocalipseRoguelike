@@ -37,7 +37,10 @@ using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.RootGameObjects;
+using Sources.Presentations.Views.Spawners;
 using Sources.Presentations.Views.Upgrades;
+using Sources.PresentationsInterfaces.Views.Spawners;
+using Sources.Utils.CustomCollections;
 using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay
@@ -59,7 +62,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ItemSpawnerViewFactory _itemSpawnerViewFactory;
         private readonly IUpgradeConfigCollectionService _upgradeConfigCollectionService;
         private readonly IUpgradeDtoMapper _upgradeDtoMapper;
-        private readonly IUpgradeCollectionService _upgradeCollectionService;
+        private readonly CustomList<Upgrader> _upgradeCollection;
         private readonly PlayerWalletProvider _playerWalletProvider;
         private readonly KillEnemyCounterViewFactory _killEnemyCounterViewFactory;
         private readonly BackgroundMusicViewFactory _backgroundMusicViewFactory;
@@ -89,7 +92,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ItemSpawnerViewFactory itemSpawnerViewFactory,
             IUpgradeConfigCollectionService upgradeConfigCollectionService,
             IUpgradeDtoMapper upgradeDtoMapper,
-            IUpgradeCollectionService upgradeCollectionService,
+            CustomList<Upgrader> upgradeCollection,
             PlayerWalletProvider playerWalletProvider,
             KillEnemyCounterViewFactory killEnemyCounterViewFactory,
             BackgroundMusicViewFactory backgroundMusicViewFactory,
@@ -125,8 +128,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _upgradeConfigCollectionService = upgradeConfigCollectionService ?? 
                                               throw new ArgumentNullException(nameof(upgradeConfigCollectionService));
             _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));
-            _upgradeCollectionService = upgradeCollectionService ?? 
-                                        throw new ArgumentNullException(nameof(upgradeCollectionService));
+            _upgradeCollection = upgradeCollection ?? 
+                                        throw new ArgumentNullException(nameof(upgradeCollection));
             _playerWalletProvider = playerWalletProvider ?? 
                                     throw new ArgumentNullException(nameof(playerWalletProvider));
             _killEnemyCounterViewFactory = killEnemyCounterViewFactory ?? 
@@ -174,12 +177,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _saveService.Register(gameModels.EnemySpawner);
             
             //Upgrades
-            IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
-            
             for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
             {
                 UpgradeUi view = _gameplayHud.NotAvailabilityUpgradeUis[i];
-                Upgrader upgrader = upgraders[i];
+                Upgrader upgrader = _upgradeCollection[i];
             
                 _upgradeUiFactory.Create(upgrader, view);
             }
@@ -199,8 +200,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _gameOverService.Register(gameModels.CharacterHealth);;
 
             //Spawners
+            EnemySpawnerView enemySpawnView = _rootGameObject.EnemySpawnerView;
+            enemySpawnView.SetCharacterView(characterView);
             _enemySpawnViewFactory.Create(
-                gameModels.EnemySpawner, gameModels.KillEnemyCounter, _rootGameObject.EnemySpawnerView);
+                gameModels.EnemySpawner, gameModels.KillEnemyCounter, enemySpawnView);
             _itemSpawnerViewFactory.Create(new ItemSpawner(), _rootGameObject.ItemSpawnerView);
             
             //Gameplay
