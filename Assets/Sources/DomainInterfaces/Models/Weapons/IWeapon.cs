@@ -8,7 +8,6 @@ namespace Sources.DomainInterfaces.Models.Weapons
         event Action Attacked;
         
         float Damage { get; }
-        float AttackSpeed { get; }
         bool IsReady { get; }
 
         void AttackAsync(CancellationToken cancellationToken);

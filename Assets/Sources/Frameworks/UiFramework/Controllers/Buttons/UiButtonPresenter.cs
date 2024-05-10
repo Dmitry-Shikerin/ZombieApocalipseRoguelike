@@ -8,19 +8,19 @@ using Sources.Frameworks.UiFramework.Presentation.Buttons.Types;
 
 namespace Sources.Frameworks.UiFramework.Controllers.Buttons
 {
-    public class UiFormButtonPresenter : PresenterBase
+    public class UiButtonPresenter : PresenterBase
     {
-        private readonly UiButtonViewService _uiButtonViewService;
+        private readonly IUiButtonService _uiButtonService;
         private readonly UiButton _view;
 
         private CancellationTokenSource _cancellationTokenSource;
 
-        public UiFormButtonPresenter(
+        public UiButtonPresenter(
             UiButton view,
-            UiButtonViewService uiButtonViewService)
+            IUiButtonService uiButtonService)
         {
-            _uiButtonViewService = uiButtonViewService ??
-                                   throw new ArgumentNullException(nameof(uiButtonViewService));
+            _uiButtonService = uiButtonService ??
+                                   throw new ArgumentNullException(nameof(uiButtonService));
             _view = view ? view : throw new ArgumentNullException(nameof(view));
         }
 
@@ -28,13 +28,13 @@ namespace Sources.Frameworks.UiFramework.Controllers.Buttons
         {
             _cancellationTokenSource = new CancellationTokenSource();
             _view.AddClickListener(ShowForm);
-            _uiButtonViewService.Handle(_view.EnableCommandId, _view);
+            _uiButtonService.Handle(_view.EnableCommandId, _view);
         }
 
         public override void Disable()
         {
             _view.RemoveClickListener(ShowForm);
-            _uiButtonViewService.Handle(_view.DisableCommandId, _view);
+            _uiButtonService.Handle(_view.DisableCommandId, _view);
             _cancellationTokenSource.Cancel();
         }
 
@@ -50,7 +50,7 @@ namespace Sources.Frameworks.UiFramework.Controllers.Buttons
                         cancellationToken: _cancellationTokenSource.Token,
                         ignoreTimeScale: true);
 
-                _uiButtonViewService.Handle(_view.OnClickCommandId, _view);
+                _uiButtonService.Handle(_view.OnClickCommandId, _view);
             }
             catch (OperationCanceledException)
             {

@@ -55,16 +55,6 @@ namespace Sources.Controllers.Abilities
 
         private void OnSawLauncherViewsEnable()
         {
-            //TODO в дополнительный конфиг
-            // int sawLauncherCount = _sawLauncherAbility.Upgrader.CurrentLevel switch
-            // {
-            //     SLAConstant.ZeroLevel => SLAConstant.ZeroLevelCount,
-            //     SLAConstant.FirstLevel => SLAConstant.FirstLevelCount,
-            //     SLAConstant.SecondLevel => SLAConstant.SecondLevelCount,
-            //     SLAConstant.ThirdLevel => SLAConstant.ThirdLevelCount,
-            //     _ => throw new ArgumentOutOfRangeException(nameof(_sawLauncherAbility.Upgrader.CurrentLevel))
-            // };
-            //
             int currentLevel = _sawLauncherAbility.Upgrader.CurrentLevel;
             int sawLauncherCount = _sawLauncherAbilityUpgradeMap.Map[currentLevel];
             ShowSawLauncherViews(sawLauncherCount);

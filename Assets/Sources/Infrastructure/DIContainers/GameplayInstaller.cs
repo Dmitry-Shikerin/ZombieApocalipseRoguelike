@@ -10,6 +10,8 @@ using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handlers;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Handlers;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Controllers.Buttons;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Controllers.Views;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
@@ -233,12 +235,14 @@ namespace Sources.Infrastructure.DIContainers
             
             Container.Bind<UiCollectorFactory>().AsSingle();
 
-            Container.Bind<FormButtonViewFactory>().AsSingle();
+            Container.Bind<UiButtonFactory>().AsSingle();
+            Container.Bind<UiButtonPresenterFactory>().AsSingle();
 
-            Container.Bind<UiContainerFactory>().AsSingle();
+            Container.Bind<UiViewFactory>().AsSingle();
+            Container.Bind<UiViewPresenterFactory>().AsSingle();
 
             //Buttons
-            Container.Bind<UiButtonViewService>().AsSingle();
+            Container.Bind<IUiButtonService>().To<UiButtonService>().AsSingle();
             Container.Bind<IButtonCommandHandler>().To<GameplayButtonCommandHandler>().AsSingle();
             
             Container.Bind<ShowFormCommand>().AsSingle();
@@ -256,7 +260,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ClearSavesButtonCommand>().AsSingle();
             
             //Views
-            Container.Bind<UiViewService>().AsSingle();
+            Container.Bind<IUiViewService>().To<UiViewService>().AsSingle();
             Container.Bind<IUiViewCommandHandler>().To<GameplayUiViewCommandHandler>().AsSingle();
             
             Container.Bind<UnPauseCommand>().AsSingle();

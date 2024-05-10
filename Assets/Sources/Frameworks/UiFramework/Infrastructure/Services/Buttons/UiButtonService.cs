@@ -5,11 +5,11 @@ using Sources.Frameworks.UiFramework.Presentation.Buttons;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons
 {
-    public class UiButtonViewService
+    public class UiButtonService : IUiButtonService
     {
         private readonly IButtonCommandHandler _commandHandler;
 
-        public UiButtonViewService(IButtonCommandHandler commandHandler)
+        public UiButtonService(IButtonCommandHandler commandHandler)
         {
             _commandHandler = commandHandler;
         }

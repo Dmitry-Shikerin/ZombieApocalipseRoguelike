@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Sources.Controllers.Common;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
+using Sources.DomainInterfaces.Models.Gameplay;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.Views.Characters;

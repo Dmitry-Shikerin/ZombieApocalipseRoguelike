@@ -10,18 +10,18 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms
 {
     public class UiCollectorFactory
     {
-        private readonly FormButtonViewFactory _formButtonViewFactory;
-        private readonly UiContainerFactory _uiContainerFactory;
+        private readonly UiButtonFactory _uiButtonFactory;
+        private readonly UiViewFactory _uiViewFactory;
         private readonly IHud _hud;
 
         protected UiCollectorFactory(
-            FormButtonViewFactory formButtonViewFactory,
-            UiContainerFactory uiContainerFactory,
+            UiButtonFactory uiButtonFactory,
+            UiViewFactory uiViewFactory,
             IHud hud)
         {
-            _formButtonViewFactory = formButtonViewFactory ??
-                                     throw new ArgumentNullException(nameof(formButtonViewFactory));
-            _uiContainerFactory = uiContainerFactory ?? throw new ArgumentNullException(nameof(uiContainerFactory));
+            _uiButtonFactory = uiButtonFactory ??
+                                     throw new ArgumentNullException(nameof(uiButtonFactory));
+            _uiViewFactory = uiViewFactory ?? throw new ArgumentNullException(nameof(uiViewFactory));
             _hud = hud ?? throw new ArgumentNullException(nameof(hud));
         }
 
@@ -35,7 +35,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms
         {
             foreach (UiButton formButton in formButtons)
             {
-                _formButtonViewFactory.Create(formButton);
+                _uiButtonFactory.Create(formButton);
             }
         }
 
@@ -43,7 +43,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms
         {
             foreach (UiView container in containers)
             {
-                _uiContainerFactory.Create(container);
+                _uiViewFactory.Create(container);
             }
         }
     }

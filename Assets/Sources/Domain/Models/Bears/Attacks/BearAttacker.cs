@@ -5,20 +5,20 @@ namespace Sources.Controllers.Bears.Attacks
 {
     public class BearAttacker
     {
+        private readonly Upgrader _attackUpgrader;
+        private readonly Upgrader _massAttackUpgrader;
+
         public BearAttacker(
             Upgrader bearAttackUpgrader, 
             Upgrader bearMassAttackUpgrader)
         {
-            BearAttackUpgrader = bearAttackUpgrader ?? 
+            _attackUpgrader = bearAttackUpgrader ?? 
                                  throw new ArgumentNullException(nameof(bearAttackUpgrader));
-            BearMassAttackUpgrader = bearMassAttackUpgrader ??
+            _massAttackUpgrader = bearMassAttackUpgrader ??
                                      throw new ArgumentNullException(nameof(bearMassAttackUpgrader));
         }
 
-        public Upgrader BearAttackUpgrader { get; }
-        public Upgrader BearMassAttackUpgrader { get; }
-
-        public float Damage => BearAttackUpgrader.CurrentAmount;
-        public int UnitsPerAttack => (int)BearMassAttackUpgrader.CurrentAmount;
+        public float Damage => _attackUpgrader.CurrentAmount;
+        public int UnitsPerAttack => (int)_massAttackUpgrader.CurrentAmount;
     }
 }

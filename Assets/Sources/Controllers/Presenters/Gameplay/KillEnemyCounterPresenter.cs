@@ -3,6 +3,7 @@ using Sources.Controllers.Common;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
+using Sources.DomainInterfaces.Models.Spawners;
 using Sources.PresentationsInterfaces.UI.Sliders;
 using Sources.PresentationsInterfaces.Views.Gameplay;
 using Sources.Utils.Extentions;
@@ -12,12 +13,12 @@ namespace Sources.Controllers.Presenters.Gameplay
     public class KillEnemyCounterPresenter : PresenterBase
     {
         private readonly KillEnemyCounter _killEnemyCounter;
-        private readonly EnemySpawner _enemySpawner;
+        private readonly IEnemySpawner _enemySpawner;
         private readonly IKillEnemyCounterView _killEnemyCounterView;
 
         public KillEnemyCounterPresenter(
             KillEnemyCounter killEnemyCounter,
-            EnemySpawner enemySpawner,
+            IEnemySpawner enemySpawner,
             IKillEnemyCounterView killEnemyCounterView)
         {
             _killEnemyCounter = killEnemyCounter ?? 

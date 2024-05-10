@@ -3,6 +3,7 @@ using System.Threading;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
+using Sources.DomainInterfaces.Models.Spawners;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 using Sources.InfrastructureInterfaces.Services.Interstitials;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace Sources.Infrastructure.Services.Interstitials
     {
         private readonly IInterstitialAdService _interstitialAdService;
         private KillEnemyCounter _killEnemyCounter;
-        private EnemySpawner _enemySpawner;
+        private IEnemySpawner _enemySpawner;
         private CancellationTokenSource _cancellationTokenSource;
         private TimeSpan _advertisementTimeSpan = TimeSpan.FromMinutes(InterstitialConstant.ShowDelay);
         private TimeSpan _timerTimeSpan = TimeSpan.FromSeconds(AdvertisingConstant.Delay);
@@ -36,7 +37,7 @@ namespace Sources.Infrastructure.Services.Interstitials
             _enemySpawner.CurrentWaveChanged -= OnCurrentWaveChanged;
         }
 
-        public void Register(EnemySpawner enemySpawner)
+        public void Register(IEnemySpawner enemySpawner)
         {
             _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));
         }

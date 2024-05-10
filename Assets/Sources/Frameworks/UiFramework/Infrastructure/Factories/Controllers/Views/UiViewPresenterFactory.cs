@@ -4,29 +4,24 @@ using Sources.Frameworks.UiFramework.Infrastructure.Services.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 
-namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms
+namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Controllers.Views
 {
-    public class UiContainerFactory
+    public class UiViewPresenterFactory
     {
-        private readonly UiViewService _uiViewService;
+        private readonly IUiViewService _uiViewService;
         private readonly IFormService _formService;
 
-        public UiContainerFactory(UiViewService uiViewService, IFormService formService)
+        public UiViewPresenterFactory(
+            IUiViewService uiViewService, 
+            IFormService formService)
         {
             _uiViewService = uiViewService ?? throw new ArgumentNullException(nameof(uiViewService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
-        public UiView Create(UiView view)
+        public UiViewPresenter Create(UiView view)
         {
-            UiViewPresenter presenter = new UiViewPresenter(
-                view,
-                _uiViewService,
-                _formService);
-            
-            view.Construct(presenter);   
-            
-            return view;
+            return new UiViewPresenter(view, _uiViewService, _formService);
         }
     }
 }

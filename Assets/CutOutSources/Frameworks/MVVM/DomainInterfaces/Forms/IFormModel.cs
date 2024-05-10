@@ -5,6 +5,5 @@ namespace Sources.DomainInterfaces.Models.Forms
 {
     public interface IFormModel : IComposite
     {
-        
     }
 }

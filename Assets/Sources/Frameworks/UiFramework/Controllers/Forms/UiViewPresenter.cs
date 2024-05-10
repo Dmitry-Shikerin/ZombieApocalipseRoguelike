@@ -10,12 +10,12 @@ namespace Sources.Frameworks.UiFramework.Controllers.Forms
     public class UiViewPresenter : PresenterBase
     {
         private readonly UiView _uiView;
-        private readonly UiViewService _uiViewService;
+        private readonly IUiViewService _uiViewService;
         private readonly IFormService _formService;
 
         public UiViewPresenter(
             UiView uiView,
-            UiViewService uiViewService,
+            IUiViewService uiViewService,
             IFormService formService)
         {
             _uiView = uiView ? uiView : throw new ArgumentNullException(nameof(uiView));

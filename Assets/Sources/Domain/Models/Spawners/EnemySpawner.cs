@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Domain.Models.Data;
-using Sources.Domain.Models.Gameplay;
 using Sources.DomainInterfaces.Entities;
-using UnityEngine;
+using Sources.DomainInterfaces.Models.Gameplay;
+using Sources.DomainInterfaces.Models.Spawners;
 
 namespace Sources.Domain.Models.Spawners
 {
-    public class EnemySpawner : IEntity
+    public class EnemySpawner : IEntity, IEnemySpawner
     {
         private List<int> _sumEnemiesInWave;
 
@@ -75,7 +75,7 @@ namespace Sources.Domain.Models.Spawners
             }
         }
 
-        public async UniTask WaitWave(KillEnemyCounter killEnemyCounter, CancellationToken cancellationToken)
+        public async UniTask WaitWave(IKillEnemyCounter killEnemyCounter, CancellationToken cancellationToken)
         {
             if (SpawnedEnemies != SumEnemiesInWave[CurrentWave])
                 return;

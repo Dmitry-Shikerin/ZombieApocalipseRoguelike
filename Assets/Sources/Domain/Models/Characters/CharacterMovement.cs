@@ -21,6 +21,5 @@ namespace Sources.Domain.Models.Characters
         }
         
         public Vector2 AnimationDirection { get; set; }
-        public float AnimationDirectionSpeed { get; } = 10f;
     }
 }
