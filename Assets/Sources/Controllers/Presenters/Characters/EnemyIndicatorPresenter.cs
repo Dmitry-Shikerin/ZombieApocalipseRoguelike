@@ -13,13 +13,13 @@ namespace Sources.Controllers.Presenters.Characters
     public class EnemyIndicatorPresenter : PresenterBase
     {
         private readonly IEnemyIndicatorView _enemyIndicatorView;
-        private readonly ICustomList<IEnemyView> _enemyCollection;
+        private readonly ICustomCollection<IEnemyView> _enemyCollection;
         private readonly IUpdateRegister _updateRegister;
         private readonly IEnemyIndicatorService _enemyIndicatorService;
 
         public EnemyIndicatorPresenter(
             IEnemyIndicatorView enemyIndicatorView,
-            ICustomList<IEnemyView> enemyCollection,
+            ICustomCollection<IEnemyView> enemyCollection,
             IUpdateRegister updateRegister,
             IEnemyIndicatorService enemyIndicatorService)
         {

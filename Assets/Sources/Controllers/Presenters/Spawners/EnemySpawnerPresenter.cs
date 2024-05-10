@@ -23,7 +23,7 @@ namespace Sources.Controllers.Presenters.Spawners
         private readonly IEnemySpawnerView _enemySpawnerView;
         private readonly IEnemySpawnService _enemySpawnService;
         private readonly IBossEnemySpawnService _bossEnemySpawnService;
-        private readonly ICustomList<IEnemyView> _enemyCollection;
+        private readonly ICustomCollection<IEnemyView> _enemyCollection;
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -33,7 +33,7 @@ namespace Sources.Controllers.Presenters.Spawners
             IEnemySpawnerView enemySpawnerView,
             IEnemySpawnService enemySpawnService,
             IBossEnemySpawnService bossEnemySpawnService,
-            ICustomList<IEnemyView> enemyCollection)
+            ICustomCollection<IEnemyView> enemyCollection)
         {
             _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
             _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));

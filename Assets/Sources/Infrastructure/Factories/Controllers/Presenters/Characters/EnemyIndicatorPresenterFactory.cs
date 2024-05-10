@@ -14,12 +14,12 @@ namespace Sources.Infrastructure.Factories.Controllers.Characters
 {
     public class EnemyIndicatorPresenterFactory
     {
-        private readonly ICustomList<IEnemyView> _enemyCollection;
+        private readonly ICustomCollection<IEnemyView> _enemyCollection;
         private readonly IUpdateRegister _updateRegister;
         private readonly IEnemyIndicatorService _enemyIndicatorService;
 
         public EnemyIndicatorPresenterFactory(
-            ICustomList<IEnemyView> enemyCollection,
+            ICustomCollection<IEnemyView> enemyCollection,
             IUpdateRegister updateRegister,
             IEnemyIndicatorService enemyIndicatorService)
         {

@@ -1,9 +1,11 @@
 ﻿using System;
 using Sources.Controllers.Common;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
 using Sources.PresentationsInterfaces.UI.Sliders;
 using Sources.PresentationsInterfaces.Views.Gameplay;
+using Sources.Utils.Extentions;
 
 namespace Sources.Controllers.Presenters.Gameplay
 {
@@ -38,43 +40,21 @@ namespace Sources.Controllers.Presenters.Gameplay
             _killEnemyCounter.KillZombiesCountChanged -= OnKillZombieCountChanged;
         }
 
-        //TODO очень похож на HealthUI
         private void OnKillZombieCountChanged()
         {
-            float percent = _enemySpawner.SumEnemies / 100f;
-            int currentPercents = 0;
-            float currentHealth = 0;
-
-            while (currentHealth < _killEnemyCounter.KillZombies)
-            {
-                currentHealth += percent;
-                currentPercents++;
-            }
-            
-            _killEnemyCounterView.KillEnemyBar.SetFillAmount(currentPercents * 0.01f);
+            float percent = _killEnemyCounter.KillZombies.IntToPercent(_enemySpawner.SumEnemies);
+            float fillAmount = percent.FloatPercentToUnitPercent();
+            _killEnemyCounterView.KillEnemyBar.SetFillAmount(fillAmount);
         }
 
         private void SetSeparators()
         {
-            int currentEnemyCount = 0;
-            
             for (int i = 0; i < _enemySpawner.EnemyInWave.Count; i++)
             {
                 _killEnemyCounterView.WaveSeparators[i].Show();
-                
-                currentEnemyCount += _enemySpawner.EnemyInWave[i];
-                
-                float percent = _enemySpawner.SumEnemies / 100f;
-                int currentPercents = 0;
-                float currentHealth = 0;
-
-                while (currentHealth < currentEnemyCount)
-                {
-                    currentHealth += percent;
-                    currentPercents++;
-                }
-                
-                _killEnemyCounterView.WaveSeparators[i].SetValue(currentPercents * 0.01f);
+                float percent = _enemySpawner.SumEnemiesInWave[i].IntToPercent(_enemySpawner.SumEnemies);
+                float fillAmount = percent.FloatPercentToUnitPercent();
+                _killEnemyCounterView.WaveSeparators[i].SetValue(fillAmount);
             }
         }
 

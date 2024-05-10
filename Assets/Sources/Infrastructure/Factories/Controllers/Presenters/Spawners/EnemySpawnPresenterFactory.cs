@@ -14,13 +14,13 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Spawners
     {
         private readonly IEnemySpawnService _enemySpawnService;
         private readonly IBossEnemySpawnService _bossEnemySpawnService;
-        private readonly ICustomList<IEnemyView> _enemyCollection;
+        private readonly ICustomCollection<IEnemyView> _enemyCollection;
         private readonly IDomainFormService _domainFormService;
 
         public EnemySpawnPresenterFactory(
             IEnemySpawnService enemySpawnService,
             IBossEnemySpawnService bossEnemySpawnService,
-            ICustomList<IEnemyView> enemyCollection)
+            ICustomCollection<IEnemyView> enemyCollection)
         {
             _enemySpawnService = enemySpawnService ?? throw new ArgumentNullException(nameof(enemySpawnService));
             _bossEnemySpawnService = bossEnemySpawnService ?? 

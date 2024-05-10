@@ -19,7 +19,7 @@ namespace Sources.Infrastructure.Services.Upgrades
     {
         private PlayerWallet _playerWallet;
         private readonly PlayerWalletProvider _playerWalletProvider;
-        private readonly ICustomList<Upgrader> _upgradeCollection;
+        private readonly ICustomCollection<Upgrader> _upgradeCollection;
         private readonly GameplayHud _gameplayHud;
         private readonly UpgradeViewFactory _upgradeViewFactory;
         private readonly UpgradeUiFactory _upgradeUiFactory;
@@ -32,7 +32,7 @@ namespace Sources.Infrastructure.Services.Upgrades
 
         public UpgradeService(
             PlayerWalletProvider playerWalletProvider,
-            ICustomList<Upgrader> upgradeCollection,
+            ICustomCollection<Upgrader> upgradeCollection,
             GameplayHud gameplayHud,
             UpgradeViewFactory upgradeViewFactory,
             UpgradeUiFactory upgradeUiFactory,
