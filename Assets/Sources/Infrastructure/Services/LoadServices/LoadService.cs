@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Data.Ids;
-using Sources.Domain.Models.Gameplay;
-using Sources.Domain.Models.Players;
-using Sources.Domain.Models.Setting;
-using Sources.Domain.Models.Spawners;
-using Sources.Domain.Models.Upgrades;
 using Sources.DomainInterfaces.Entities;
 using Sources.DomainInterfaces.Models.Data;
 using Sources.Infrastructure.Services.Repositories;
-using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Collectors;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
-using UnityEngine;
 
 namespace Sources.Infrastructure.Services.LoadServices
 {
@@ -53,19 +44,18 @@ namespace Sources.Infrastructure.Services.LoadServices
 
         public void Save(IEntity entity)
         {
-            _dataService.SaveData(_mapperCollector.GetToDtoMapper(entity.Type).Invoke(entity), entity.Id);
+            Func<IEntity, IDto> dtoMapper = _mapperCollector.GetToDtoMapper(entity.Type);
+            IDto dto = dtoMapper.Invoke(entity);
+            _dataService.SaveData(dto, entity.Id);
         }
 
         public void Save(string id)
         {
-            if (_entityRepository.Get(id) == null)
-                throw new NullReferenceException(nameof(id));
-            
             IEntity entity = _entityRepository.Get(id);
-            
+            Func<IEntity, IDto> dtoMapper = _mapperCollector.GetToDtoMapper(entity.Type);
+            IDto dto = dtoMapper.Invoke(entity);
+            _dataService.SaveData(dto, entity.Id);
             // Debug.Log($"Model saved {entity.Id}");
-            
-            _dataService.SaveData(_mapperCollector.GetToDtoMapper(entity.Type).Invoke(entity), entity.Id);
         }
 
         public void LoadAll()
@@ -85,8 +75,9 @@ namespace Sources.Infrastructure.Services.LoadServices
         {
             foreach (IEntity dataModel in _entityRepository.Entities.Values)
             {
-                _dataService.SaveData(_mapperCollector.GetToDtoMapper(dataModel.Type).Invoke(dataModel), dataModel.Id);
-                
+                Func<IEntity, IDto> dtoMapper = _mapperCollector.GetToDtoMapper(dataModel.Type);
+                IDto dto = dtoMapper.Invoke(dataModel);
+                _dataService.SaveData(dto, dataModel.Id);
                 //TOdo сделать валидацию на сохранение
                 // Debug.Log($"Saved {dataModel.GetType()}");
             }
