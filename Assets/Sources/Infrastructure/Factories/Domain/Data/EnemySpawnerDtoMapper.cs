@@ -39,7 +39,6 @@ namespace Sources.Infrastructure.Factories.Domain.Data
 
         public EnemySpawnerDto MapModelToDto(EnemySpawner enemySpawner)
         {
-            //TODO сработает ли сохранение сразу массива
             return new EnemySpawnerDto()
             {
                 Id = enemySpawner.Id,

@@ -14,7 +14,8 @@ namespace Sources.Infrastructure.Factories.Views.Gameplay
 
         public LevelAvailabilityViewFactory(LevelAvailabilityPresenterFactory presenterFactory)
         {
-            _presenterFactory = presenterFactory ?? throw new ArgumentNullException(nameof(presenterFactory));
+            _presenterFactory = presenterFactory ?? 
+                                throw new ArgumentNullException(nameof(presenterFactory));
         }
 
         public ILevelAvailabilityView Create(

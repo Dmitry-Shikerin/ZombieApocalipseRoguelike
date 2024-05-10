@@ -127,42 +127,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         protected override GameModels LoadModels(IScenePayload scenePayload)
         {
             //TODO потом нужно сделать загрузку туториала
-            Tutorial tutorial;
+            Tutorial tutorial = CreateTutorial();
 
-            if (_loadService.HasKey(ModelId.Tutorial))
-            {
-                tutorial = _loadService.Load<Tutorial>(ModelId.Tutorial);
-            }
-            else
-            {
-                tutorial = new Tutorial();
-                _entityRepository.Add(tutorial);
-            }
+            Volume volume = CreateVolume();
 
-            Volume volume;
-
-            //TODO покашто такая вилка
-            if (_loadService.HasKey(ModelId.Volume))
-            {
-                volume = _loadService.Load<Volume>(ModelId.Volume);
-            }
-            else
-            {
-                volume = new Volume();
-                _entityRepository.Add(volume);
-            }
-
-            Level level;
-
-            if (_loadService.HasKey(scenePayload.SceneId))
-            {
-                level = _loadService.Load<Level>(scenePayload.SceneId);
-            }
-            else
-            {
-                level = new Level(scenePayload.SceneId, false);
-                _entityRepository.Add(level);
-            }
+            Level level = CreateLevel(scenePayload.SceneId);
 
             SavedLevel savedLevel = new SavedLevel(ModelId.SavedLevel, false, scenePayload.SceneId);
             _entityRepository.Add(savedLevel);
@@ -203,7 +172,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 bearAttackUpgrader,
                 bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
-            
+
             Debug.Log("CreateModels");
             return new GameModels(
                 bearMassAttackUpgrader,
@@ -243,6 +212,39 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _entityRepository.Add(enemySpawner);
 
             return enemySpawner;
+        }
+
+        private Tutorial CreateTutorial()
+        {
+            if (_loadService.HasKey(ModelId.Tutorial))
+                return _loadService.Load<Tutorial>(ModelId.Tutorial);
+
+            Tutorial tutorial = new Tutorial();
+            _entityRepository.Add(tutorial);
+
+            return tutorial;
+        }
+
+        private Volume CreateVolume()
+        {
+            if (_loadService.HasKey(ModelId.Volume))
+                return _loadService.Load<Volume>(ModelId.Volume);
+
+            Volume volume = new Volume();
+            _entityRepository.Add(volume);
+
+            return volume;
+        }
+
+        private Level CreateLevel(string sceneId)
+        {
+            if (_loadService.HasKey(sceneId))
+                return _loadService.Load<Level>(sceneId);
+            
+            Level level = new Level(sceneId, false);
+            _entityRepository.Add(level);
+
+            return level;
         }
     }
 }
