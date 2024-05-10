@@ -1,5 +1,4 @@
 ﻿using System;
-using Sources.Controllers.Enemies;
 using Sources.Controllers.Presenters.Enemies.Base;
 using Sources.Controllers.Presenters.Enemies.Base.States;
 using Sources.Domain.Models.Enemies.Base;
@@ -9,35 +8,36 @@ using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
+using Sources.Utils.CustomCollections;
 using UnityEngine;
 
-namespace Sources.Infrastructure.Factories.Controllers.Enemies.Base
+namespace Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Base
 {
     public class EnemyPresenterFactory
     {
         private readonly IUpdateRegister _updateRegister;
         private readonly IExplosionBodyBloodySpawnService _explosionBodyBloodySpawnService;
         private readonly IRewardItemSpawnService _rewardItemSpawnService;
-        private readonly IEnemyCollectorService _enemyCollectorService;
+        private readonly CustomCollection<IEnemyView> _enemyCollection;
 
         public EnemyPresenterFactory(
             IUpdateRegister updateRegister,
             IExplosionBodyBloodySpawnService explosionBodyBloodySpawnService,
             IRewardItemSpawnService rewardItemSpawnService,
-            IEnemyCollectorService enemyCollectorService)
+            CustomCollection<IEnemyView> enemyCollection)
         {
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
             _explosionBodyBloodySpawnService = explosionBodyBloodySpawnService ?? 
                                           throw new ArgumentNullException(nameof(explosionBodyBloodySpawnService));
             _rewardItemSpawnService = rewardItemSpawnService ?? 
                                       throw new ArgumentNullException(nameof(rewardItemSpawnService));
-            _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
+            _enemyCollection = enemyCollection ?? throw new ArgumentNullException(nameof(enemyCollection));
         }
 
         public EnemyPresenter Create(Enemy enemy, KillEnemyCounter killEnemyCounter, IEnemyView enemyView, IEnemyAnimation enemyAnimation)
         {
             EnemyInitializeState initializeState = new EnemyInitializeState(
-                enemy, enemyAnimation, enemyView, _enemyCollectorService);
+                enemy, enemyAnimation, enemyView, _enemyCollection);
             EnemyMoveToPlayerState moveToPlayerState = new EnemyMoveToPlayerState(enemy, enemyView, enemyAnimation);
             EnemyAttackState attackState = new EnemyAttackState(enemy, enemyView, enemyAnimation);
             EnemyDieState dieState = new EnemyDieState(
@@ -45,7 +45,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Base
                 enemyView, 
                 _explosionBodyBloodySpawnService, 
                 _rewardItemSpawnService,
-                _enemyCollectorService);
+                _enemyCollection);
 
             FiniteTransition toMoveToPlayerTransition = new FiniteTransitionBase(
                 moveToPlayerState,

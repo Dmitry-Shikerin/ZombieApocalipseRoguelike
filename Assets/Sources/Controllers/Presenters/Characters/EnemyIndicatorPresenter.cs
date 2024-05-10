@@ -3,6 +3,8 @@ using Sources.Controllers.Common;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Character.EnemyIndicators;
+using Sources.PresentationsInterfaces.Views.Enemies.Base;
+using Sources.Utils.CustomCollections;
 using UnityEngine;
 
 namespace Sources.Controllers.Presenters.Characters
@@ -10,30 +12,30 @@ namespace Sources.Controllers.Presenters.Characters
     public class EnemyIndicatorPresenter : PresenterBase
     {
         private readonly IEnemyIndicatorView _enemyIndicatorView;
-        private readonly IEnemyCollectorService _enemyCollectorService;
+        private readonly ICustomList<IEnemyView> _enemyCollection;
         private readonly IUpdateRegister _updateRegister;
 
         public EnemyIndicatorPresenter(
             IEnemyIndicatorView enemyIndicatorView,
-            IEnemyCollectorService enemyCollectorService,
+            ICustomList<IEnemyView> enemyCollection,
             IUpdateRegister updateRegister)
         {
             _enemyIndicatorView = enemyIndicatorView ??
                                   throw new ArgumentNullException(nameof(enemyIndicatorView));
-            _enemyCollectorService = enemyCollectorService ??
-                                     throw new ArgumentNullException(nameof(enemyCollectorService));
+            _enemyCollection = enemyCollection ??
+                                     throw new ArgumentNullException(nameof(enemyCollection));
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
         }
 
         public override void Enable()
         {
-            _enemyCollectorService.EnemiesCountChanged += OnEnemyCountChanged;
+            _enemyCollection.CountChanged += OnEnemyCountChanged;
             _updateRegister.UpdateChanged += OnUpdate;
         }
 
         public override void Disable()
         {
-            _enemyCollectorService.EnemiesCountChanged -= OnEnemyCountChanged;
+            _enemyCollection.CountChanged -= OnEnemyCountChanged;
             _updateRegister.UpdateChanged -= OnUpdate;
         }
 
@@ -56,31 +58,31 @@ namespace Sources.Controllers.Presenters.Characters
 
         private void ShowViews()
         {
-            if (_enemyIndicatorView.Arrows.Count < _enemyCollectorService.Enemies.Count)
+            if (_enemyIndicatorView.Arrows.Count < _enemyCollection.Count)
                 return; //убрать
             
             //todo вылетает out of range exception
-            for (int i = 0; i < _enemyCollectorService.Enemies.Count; i++)
+            for (int i = 0; i < _enemyCollection.Count; i++)
                 _enemyIndicatorView.Arrows[i].Show();
         }
 
         private void ChangeArrowPositions()
         {
-            if (_enemyIndicatorView.Arrows.Count < _enemyCollectorService.Enemies.Count)
+            if (_enemyIndicatorView.Arrows.Count < _enemyCollection.Count)
                 return; //убрать
             
-            if (_enemyCollectorService.Enemies.Count == 0)
+            if (_enemyCollection.Count == 0)
                 return;
             
-            for (int i = 0; i < _enemyCollectorService.Enemies.Count; i++)
+            for (int i = 0; i < _enemyCollection.Count; i++)
             {
-                if(_enemyCollectorService.Enemies[i] == null)
+                if(_enemyCollection[i] == null)
                     return;
                 
                 if(_enemyIndicatorView.Arrows[i] == null)
                     return;
                 
-                Vector3 lookDirection = _enemyCollectorService.Enemies[i].Position -
+                Vector3 lookDirection = _enemyCollection[i].Position -
                                         _enemyIndicatorView.Position;
                 lookDirection.y = _enemyIndicatorView.Position.y;
 

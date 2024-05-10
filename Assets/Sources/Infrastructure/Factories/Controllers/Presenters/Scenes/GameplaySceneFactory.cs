@@ -21,6 +21,8 @@ using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Curtains;
+using Sources.PresentationsInterfaces.Views.Enemies.Base;
+using Sources.Utils.CustomCollections;
 
 namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
 {
@@ -38,7 +40,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly ISaveService _saveService;
         private readonly ILevelCompletedService _levelCompletedService;
         private readonly ITutorialService _tutorialService;
-        private readonly IEnemyCollectorService _enemyCollectorService;
+        private readonly CustomCollection<IEnemyView> _enemyCollection;
         private readonly IInterstitialShowerService _interstitialShowerService;
         private readonly CurtainView _curtainView;
 
@@ -55,7 +57,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             ISaveService saveService,
             ILevelCompletedService levelCompletedService,
             ITutorialService tutorialService,
-            IEnemyCollectorService enemyCollectorService,
+            CustomCollection<IEnemyView> enemyCollection,
             CurtainView curtainView,
             IInterstitialShowerService interstitialShowerService) 
         {
@@ -71,7 +73,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
             _levelCompletedService = levelCompletedService ?? throw new ArgumentNullException(nameof(levelCompletedService));
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
-            _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
+            _enemyCollection = enemyCollection ?? throw new ArgumentNullException(nameof(enemyCollection));
             _interstitialShowerService = interstitialShowerService ?? throw new ArgumentNullException(nameof(interstitialShowerService));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
@@ -90,7 +92,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _saveService,
                 _levelCompletedService,
                 _tutorialService,
-                _enemyCollectorService,
+                _enemyCollection,
                 _curtainView,
                 _interstitialShowerService);
         }

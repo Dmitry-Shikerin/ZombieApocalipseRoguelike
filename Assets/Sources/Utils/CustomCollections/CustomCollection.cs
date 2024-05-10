@@ -1,23 +1,32 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 
 namespace Sources.Utils.CustomCollections
 {
-    public class CustomList<T> : ICustomList<T>
+    public class CustomCollection<T> : ICustomList<T>
     {
         private List<T> _collection = new List<T>();
 
+        public event Action CountChanged;
+        
         public int Count => _collection.Count;
 
         public T this[int index] => _collection[index];
 
-        public void Add(T item) =>
+        public void Add(T item)
+        {
             _collection.Add(item);
+            CountChanged?.Invoke();
+        }
 
-        public bool Remove(T item) =>
-            _collection.Remove(item);
-        
+        public bool Remove(T item)
+        {
+            bool result = _collection.Remove(item);
+            CountChanged?.Invoke();
+            return result;
+        }
+
         public void Clear() =>
             _collection.Clear();
 

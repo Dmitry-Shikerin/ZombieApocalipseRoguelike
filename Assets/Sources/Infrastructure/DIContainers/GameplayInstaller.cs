@@ -2,6 +2,7 @@
 using Sources.Controllers.Presenters.Upgrades;
 using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Spawners.Configs.Containers;
+using Sources.Domain.Models.Upgrades;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Frameworks.UiFramework.Domain.Configs.Localizations;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons;
@@ -33,14 +34,15 @@ using Sources.Infrastructure.Factories.Controllers.Cameras;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Common;
 using Sources.Infrastructure.Factories.Controllers.Enemies;
-using Sources.Infrastructure.Factories.Controllers.Enemies.Base;
 using Sources.Infrastructure.Factories.Controllers.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Players;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Bears;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Characters;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Base;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Weapons;
 using Sources.Infrastructure.Factories.Controllers.Settings;
@@ -119,6 +121,8 @@ using Sources.Presentations.Views.ExplosionBodyBloodies;
 using Sources.Presentations.Views.FirstAidKits;
 using Sources.Presentations.Views.RewardItems;
 using Sources.Presentations.Views.RootGameObjects;
+using Sources.PresentationsInterfaces.Views.Enemies.Base;
+using Sources.Utils.CustomCollections;
 using UnityEngine;
 using Zenject;
 
@@ -153,7 +157,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
             Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
-            Container.Bind<IUpgradeCollectionService>().To<UpgradeCollectionService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CustomCollection<Upgrader>>().AsSingle();
             Container.Bind<IUpgradeService>().To<UpgradeService>().AsSingle();
             Container.Bind<PlayerWalletProvider>().AsSingle();
             
@@ -198,7 +202,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
             Container.Bind<IPauseService>().To<PauseService>().AsSingle();
-            Container.Bind<IEnemyCollectorService>().To<EnemyCollectorService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<CustomCollection<IEnemyView>>().AsSingle();
             Container.Bind<IGameOverService>().To<GameOverService>().AsSingle();
             Container.Bind<ICameraService>().To<CameraService>().AsSingle();
             Container.Bind<LoadGameplaySceneService>().AsSingle();

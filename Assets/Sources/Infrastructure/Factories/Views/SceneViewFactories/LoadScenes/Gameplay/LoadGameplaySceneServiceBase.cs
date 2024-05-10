@@ -62,7 +62,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ItemSpawnerViewFactory _itemSpawnerViewFactory;
         private readonly IUpgradeConfigCollectionService _upgradeConfigCollectionService;
         private readonly IUpgradeDtoMapper _upgradeDtoMapper;
-        private readonly CustomList<Upgrader> _upgradeCollection;
+        private readonly CustomCollection<Upgrader> _upgradeCollection;
         private readonly PlayerWalletProvider _playerWalletProvider;
         private readonly KillEnemyCounterViewFactory _killEnemyCounterViewFactory;
         private readonly BackgroundMusicViewFactory _backgroundMusicViewFactory;
@@ -92,7 +92,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ItemSpawnerViewFactory itemSpawnerViewFactory,
             IUpgradeConfigCollectionService upgradeConfigCollectionService,
             IUpgradeDtoMapper upgradeDtoMapper,
-            CustomList<Upgrader> upgradeCollection,
+            CustomCollection<Upgrader> upgradeCollection,
             PlayerWalletProvider playerWalletProvider,
             KillEnemyCounterViewFactory killEnemyCounterViewFactory,
             BackgroundMusicViewFactory backgroundMusicViewFactory,

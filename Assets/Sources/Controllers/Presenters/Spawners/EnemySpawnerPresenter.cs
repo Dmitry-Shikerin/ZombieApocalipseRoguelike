@@ -10,6 +10,7 @@ using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using Sources.PresentationsInterfaces.Views.Spawners;
+using Sources.Utils.CustomCollections;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -22,7 +23,7 @@ namespace Sources.Controllers.Presenters.Spawners
         private readonly IEnemySpawnerView _enemySpawnerView;
         private readonly IEnemySpawnService _enemySpawnService;
         private readonly IBossEnemySpawnService _bossEnemySpawnService;
-        private readonly IEnemyCollectorService _enemyCollectorService;
+        private readonly ICustomList<IEnemyView> _enemyCollection;
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -32,7 +33,7 @@ namespace Sources.Controllers.Presenters.Spawners
             IEnemySpawnerView enemySpawnerView,
             IEnemySpawnService enemySpawnService,
             IBossEnemySpawnService bossEnemySpawnService,
-            IEnemyCollectorService enemyCollectorService)
+            ICustomList<IEnemyView> enemyCollection)
         {
             _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
             _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));
@@ -40,8 +41,8 @@ namespace Sources.Controllers.Presenters.Spawners
             _enemySpawnService = enemySpawnService ?? throw new ArgumentNullException(nameof(enemySpawnService));
             _bossEnemySpawnService = bossEnemySpawnService ??
                                      throw new ArgumentNullException(nameof(bossEnemySpawnService));
-            _enemyCollectorService = enemyCollectorService ??
-                                     throw new ArgumentNullException(nameof(enemyCollectorService));
+            _enemyCollection = enemyCollection ??
+                                     throw new ArgumentNullException(nameof(enemyCollection));
         }
 
         public override void Enable()

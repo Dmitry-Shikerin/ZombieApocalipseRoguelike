@@ -50,7 +50,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         //TODO можно ли сохранять в поле то что мы передаем дальше?
         private readonly ILoadService _loadService;
         private readonly IEntityRepository _entityRepository;
-        private readonly CustomList<Upgrader> _upgradeCollection;
+        private readonly CustomCollection<Upgrader> _upgradeCollection;
 
         public LoadGameplaySceneService(
             GameplayHud gameplayHud, 
@@ -67,7 +67,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ItemSpawnerViewFactory itemSpawnerViewFactory, 
             IUpgradeConfigCollectionService upgradeConfigCollectionService, 
             IUpgradeDtoMapper upgradeDtoMapper, 
-            CustomList<Upgrader> upgradeCollection, 
+            CustomCollection<Upgrader> upgradeCollection, 
             PlayerWalletProvider playerWalletProvider, 
             KillEnemyCounterViewFactory killEnemyCounterViewFactory, 
             BackgroundMusicViewFactory backgroundMusicViewFactory, 
@@ -133,21 +133,21 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             
             PlayerWallet playerWallet = _entityRepository.Get<PlayerWallet>(ModelId.PlayerWallet);
             
-            Upgrader bearMassAttackUpgrader = _entityRepository.Get(ModelId.BearMassAttackUpgrader) as Upgrader;
+            Upgrader bearMassAttackUpgrader = _entityRepository.Get<Upgrader>(ModelId.BearMassAttackUpgrader);
             _upgradeCollection.Add(bearMassAttackUpgrader);
-            Upgrader bearAttackUpgrader = _entityRepository.Get(ModelId.BearAttackUpgrader) as Upgrader;
+            Upgrader bearAttackUpgrader = _entityRepository.Get<Upgrader>(ModelId.BearAttackUpgrader);
             _upgradeCollection.Add(bearAttackUpgrader);
-            Upgrader characterHealthUpgrader = _entityRepository.Get(ModelId.CharacterHealthUpgrader) as Upgrader;
+            Upgrader characterHealthUpgrader = _entityRepository.Get<Upgrader>(ModelId.CharacterHealthUpgrader);
             _upgradeCollection.Add(characterHealthUpgrader);
-            Upgrader sawLauncherUpgrader = _entityRepository.Get(ModelId.SawLauncherUpgrader) as Upgrader;
+            Upgrader sawLauncherUpgrader = _entityRepository.Get<Upgrader>(ModelId.SawLauncherUpgrader);
             _upgradeCollection.Add(sawLauncherUpgrader);
-            Upgrader sawLauncherAbilityUpgrader = _entityRepository.Get(ModelId.SawLauncherAbilityUpgrader) as Upgrader;
+            Upgrader sawLauncherAbilityUpgrader = _entityRepository.Get<Upgrader>(ModelId.SawLauncherAbilityUpgrader);
             _upgradeCollection.Add(sawLauncherAbilityUpgrader);
-            Upgrader miniGunAttackUpgrader = _entityRepository.Get(ModelId.MiniGunAttackUpgrader) as Upgrader;
+            Upgrader miniGunAttackUpgrader = _entityRepository.Get<Upgrader>(ModelId.MiniGunAttackUpgrader);
             _upgradeCollection.Add(miniGunAttackUpgrader);
 
-            KillEnemyCounter killEnemyCounter = _entityRepository.Get(ModelId.KillEnemyCounter) as KillEnemyCounter;
-            EnemySpawner enemySpawner = _entityRepository.Get(ModelId.GameplayEnemySpawner) as EnemySpawner;
+            KillEnemyCounter killEnemyCounter = _entityRepository.Get<KillEnemyCounter>(ModelId.KillEnemyCounter);
+            EnemySpawner enemySpawner = _entityRepository.Get<EnemySpawner>(ModelId.GameplayEnemySpawner);
             
             MiniGun minigun = new MiniGun(miniGunAttackUpgrader, 0.1f);
 
@@ -168,9 +168,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                     new SawLauncher(sawLauncherUpgrader),
                 });
 
-            BearAttacker bearAttacker = new BearAttacker(
-                bearAttackUpgrader,
-                bearMassAttackUpgrader);
+            BearAttacker bearAttacker = new BearAttacker(bearAttackUpgrader, bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
 
             return new GameModels(

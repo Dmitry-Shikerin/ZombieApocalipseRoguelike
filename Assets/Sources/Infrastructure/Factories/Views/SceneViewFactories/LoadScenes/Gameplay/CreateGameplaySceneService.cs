@@ -51,7 +51,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ILoadService _loadService;
         private readonly IEntityRepository _entityRepository;
         private readonly IUpgradeDtoMapper _upgradeDtoMapper;
-        private readonly CustomList<Upgrader> _upgradeCollection;
+        private readonly CustomCollection<Upgrader> _upgradeCollection;
         private readonly IEnemySpawnerDtoMapper _enemySpawnerDtoMapper;
 
         public CreateGameplaySceneService(
@@ -69,7 +69,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ItemSpawnerViewFactory itemSpawnerViewFactory,
             IUpgradeConfigCollectionService upgradeConfigCollectionService,
             IUpgradeDtoMapper upgradeDtoMapper,
-            CustomList<Upgrader> upgradeCollection,
+            CustomCollection<Upgrader> upgradeCollection,
             PlayerWalletProvider playerWalletProvider,
             KillEnemyCounterViewFactory killEnemyCounterViewFactory,
             BackgroundMusicViewFactory backgroundMusicViewFactory,

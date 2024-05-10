@@ -119,9 +119,9 @@ namespace Sources.Infrastructure.Services.LoadServices
         {
             foreach (string id in ModelId.ModelsIds)
             {
-                Type modelType = ModelId.DtoTypes[id];
-                object dto = _dataService.LoadData(id, modelType);
-                Func<IDto, IEntity> mapper = _toModelMappers[modelType];
+                Type dtoType = ModelId.DtoTypes[id];
+                object dto = _dataService.LoadData(id, dtoType);
+                Func<IDto, IEntity> mapper = _toModelMappers[dtoType];
                 IEntity model = mapper.Invoke((IDto)dto);
                 _entityRepository.Add(model);
                 // Debug.Log($"Saved {model.Type}");
@@ -133,7 +133,7 @@ namespace Sources.Infrastructure.Services.LoadServices
             foreach (IEntity dataModel in _entityRepository.Entities.Values)
             {
                 if (_toDtoMappers.ContainsKey(dataModel.Type) == false)
-                    throw new NullReferenceException("DtaModel Id is not registered in LoadService");
+                    throw new NullReferenceException($"DtaModel Id {dataModel.Id} not registered in LoadService");
 
                 _dataService.SaveData(_toDtoMappers[dataModel.Type].Invoke(dataModel), dataModel.Id);
                 

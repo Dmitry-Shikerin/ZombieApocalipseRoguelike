@@ -2,7 +2,7 @@
 using Sources.Controllers.Presenters.Enemies.Base;
 using Sources.Domain.Models.Enemies.Base;
 using Sources.Domain.Models.Gameplay;
-using Sources.Infrastructure.Factories.Controllers.Enemies.Base;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
