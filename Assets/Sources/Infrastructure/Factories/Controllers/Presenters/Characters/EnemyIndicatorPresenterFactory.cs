@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Presenters.Characters;
+using Sources.Infrastructure.Services.Characters;
 using Sources.Infrastructure.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
@@ -15,20 +16,24 @@ namespace Sources.Infrastructure.Factories.Controllers.Characters
     {
         private readonly ICustomList<IEnemyView> _enemyCollection;
         private readonly IUpdateRegister _updateRegister;
+        private readonly IEnemyIndicatorService _enemyIndicatorService;
 
         public EnemyIndicatorPresenterFactory(
             ICustomList<IEnemyView> enemyCollection,
-            IUpdateRegister updateRegister)
+            IUpdateRegister updateRegister,
+            IEnemyIndicatorService enemyIndicatorService)
         {
             _enemyCollection = enemyCollection ?? 
                                      throw new ArgumentNullException(nameof(enemyCollection));
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
+            _enemyIndicatorService = enemyIndicatorService ?? 
+                                     throw new ArgumentNullException(nameof(enemyIndicatorService));
         }
 
         public EnemyIndicatorPresenter Create(IEnemyIndicatorView enemyIndicatorView)
         {
             return new EnemyIndicatorPresenter(
-                enemyIndicatorView, _enemyCollection, _updateRegister);
+                enemyIndicatorView, _enemyCollection, _updateRegister, _enemyIndicatorService);
         }
     }
 }

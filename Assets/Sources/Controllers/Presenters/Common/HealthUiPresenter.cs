@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Common;
+using Sources.Domain.Models.Constants;
 using Sources.DomainInterfaces.Healths;
 using Sources.PresentationsInterfaces.Views.Common;
 using Sources.Utils.Extentions;
@@ -29,8 +30,9 @@ namespace Sources.Controllers.Presenters.Common
         private void OnHealthChanged()
         {
             float percent = _health.CurrentHealth.ToPercent(_health.MaxHealth);
+            float fillAmount = percent * MathConstant.UnitMultiplier;
             
-            _healthUi.HealthImage.SetFillAmount(percent * 0.01f);
+            _healthUi.HealthImage.SetFillAmount(fillAmount);
         }
     }
 }

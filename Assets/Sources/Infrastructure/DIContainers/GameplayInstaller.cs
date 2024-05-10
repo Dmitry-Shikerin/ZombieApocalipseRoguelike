@@ -219,6 +219,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IInterstitialShowerService>().To<InterstitialShowerService>().AsSingle();
             Container.Bind<IMapperCollector>().To<MapperCollector>().AsSingle();
             Container.Bind<CustomValidator>().AsSingle();
+            Container.Bind<IEnemyIndicatorService>().To<EnemyIndicatorService>().AsSingle();
         }
 
         private void BindFormFactories()

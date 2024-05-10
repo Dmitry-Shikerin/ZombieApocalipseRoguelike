@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Common;
+using Sources.Infrastructure.Services.Characters;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Character.EnemyIndicators;
@@ -14,18 +15,24 @@ namespace Sources.Controllers.Presenters.Characters
         private readonly IEnemyIndicatorView _enemyIndicatorView;
         private readonly ICustomList<IEnemyView> _enemyCollection;
         private readonly IUpdateRegister _updateRegister;
+        private readonly IEnemyIndicatorService _enemyIndicatorService;
 
         public EnemyIndicatorPresenter(
             IEnemyIndicatorView enemyIndicatorView,
             ICustomList<IEnemyView> enemyCollection,
-            IUpdateRegister updateRegister)
+            IUpdateRegister updateRegister,
+            IEnemyIndicatorService enemyIndicatorService)
         {
             _enemyIndicatorView = enemyIndicatorView ??
                                   throw new ArgumentNullException(nameof(enemyIndicatorView));
             _enemyCollection = enemyCollection ??
                                      throw new ArgumentNullException(nameof(enemyCollection));
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
+            _enemyIndicatorService = enemyIndicatorService ?? 
+                                     throw new ArgumentNullException(nameof(enemyIndicatorService));
         }
+
+        private bool CanAvailableArrows => _enemyIndicatorView.Arrows.Count > _enemyCollection.Count;
 
         public override void Enable()
         {
@@ -58,7 +65,7 @@ namespace Sources.Controllers.Presenters.Characters
 
         private void ShowViews()
         {
-            if (_enemyIndicatorView.Arrows.Count < _enemyCollection.Count)
+            if (CanAvailableArrows == false)
                 return; //убрать
             
             //todo вылетает out of range exception
@@ -68,7 +75,7 @@ namespace Sources.Controllers.Presenters.Characters
 
         private void ChangeArrowPositions()
         {
-            if (_enemyIndicatorView.Arrows.Count < _enemyCollection.Count)
+            if (CanAvailableArrows == false)
                 return; //убрать
             
             if (_enemyCollection.Count == 0)
@@ -81,15 +88,15 @@ namespace Sources.Controllers.Presenters.Characters
                 
                 if(_enemyIndicatorView.Arrows[i] == null)
                     return;
+                //
+                // Vector3 lookDirection = _enemyCollection[i].Position - _enemyIndicatorView.Position;
+                // lookDirection.y = _enemyIndicatorView.Position.y;
+                //
+                // float angle = Vector3.SignedAngle(Vector3.forward, lookDirection, Vector3.up);
+                //
+                float angle =_enemyIndicatorService.GetAngleRotation(
+                    _enemyIndicatorView.Position, _enemyCollection[i].Position);
                 
-                Vector3 lookDirection = _enemyCollection[i].Position -
-                                        _enemyIndicatorView.Position;
-                lookDirection.y = _enemyIndicatorView.Position.y;
-
-                float angle = Vector3.SignedAngle(Vector3.forward, lookDirection, Vector3.up);
-
-                //TODO почему приходится доворачиввать X и почему я  кручу Y а не Z
-                // _enemyIndicatorView.Arrows[i].SetAngleEuler(new Vector3(0, angle, 0));
                 _enemyIndicatorView.Arrows[i].SetAngleEuler(new Vector3(90, angle, 0));
             }
         }
