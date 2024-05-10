@@ -18,5 +18,16 @@ namespace Sources.Domain.Models.Data
         //TODO можно ли сохранять массив примитивов?
         [JsonProperty("spawnDelays")]
         public int[] SpawnDelays { get; set; }
+        
+        //TODO не забыть это сохранить
+        [JsonProperty("spawnedEnemies")]
+        public int SpawnedEnemies { get; set; }
+        
+        [JsonProperty("SpawnedBosses")]
+        public int SpawnedBosses { get; set; }
+        
+        [JsonProperty("currentWave")] 
+        public int CurrentWave { get; set; }
+
     }
 }

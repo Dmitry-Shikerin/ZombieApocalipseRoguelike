@@ -47,7 +47,6 @@ namespace Sources.Controllers.Presenters.Spawners
         public override void Enable()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-
             Spawn(_cancellationTokenSource.Token);
         }
 
@@ -66,11 +65,19 @@ namespace Sources.Controllers.Presenters.Spawners
                 {
                     foreach (IEnemySpawnPoint spawnPoint in _enemySpawnerView.SpawnPoints)
                     {
-                        SetCurrentWave();
-                        TrySpawnEnemy(spawnPoint, characterView);
-                        TrySpawnBoss(spawnPoint, characterView);
-
-                        await WaitWave(cancellationToken);
+                        //TODO передаю в спавнер модель каунтера
+                        _enemySpawner.SetCurrentWave(_killEnemyCounter.KillZombies);
+                        
+                        if (_enemySpawner.IsSpawnEnemy)
+                            SpawnEnemy(spawnPoint.Position, characterView);
+                        
+                        if (_enemySpawner.IsSpawnBoss)
+                        {
+                            SpawnBoss(spawnPoint.Position, characterView);
+                            _cancellationTokenSource.Cancel();
+                        }
+                        
+                        await _enemySpawner.WaitWave(_killEnemyCounter, cancellationToken);
 
                         await UniTask.Delay(
                             TimeSpan.FromSeconds(
@@ -83,54 +90,7 @@ namespace Sources.Controllers.Presenters.Spawners
             {
             }
         }
-
-        private async UniTask WaitWave(CancellationToken cancellationToken)
-        {
-            foreach (int sumEnemies in _enemySpawner.SumEnemiesInWave)
-            {
-                if (_enemySpawner.SpawnedEnemies == sumEnemies)
-                {
-                    await UniTask.WaitUntil(() =>
-                            _killEnemyCounter.KillZombies == sumEnemies,
-                        cancellationToken: cancellationToken);
-                }
-            }
-        }
-
-        private void SetCurrentWave()
-        {
-            for (int i = 0; i < _enemySpawner.SumEnemiesInWave.Count; i++)
-            {
-                if (_killEnemyCounter.KillZombies >= _enemySpawner.SumEnemiesInWave[i])
-                {
-                    //TODO будет ли тут out of range?
-                    if(i == _enemySpawner.SumEnemiesInWave.Count)
-                        return;
-                    
-                    _enemySpawner.CurrentWave = i + 1;
-                    // Debug.Log($"Kill zombies: {_killEnemyCounter.KillZombies}");
-                    // Debug.Log($"Sum enemies: {_enemySpawner.SumEnemiesInWave[i]}");
-                    // Debug.Log($"Current wave: {_enemySpawner.CurrentWave}");
-                }
-            }
-        }
-
-        private void TrySpawnEnemy(IEnemySpawnPoint spawnPoint, CharacterView characterView)
-        {
-            if (_enemySpawner.SpawnedEnemies < _enemySpawner.SumEnemies)
-                SpawnEnemy(spawnPoint.Position, characterView);
-        }
-
-        private void TrySpawnBoss(IEnemySpawnPoint spawnPoint, CharacterView characterView)
-        {
-            if (_enemySpawner.SpawnedEnemies >= _enemySpawner.SumEnemies && _enemySpawner.BossCounter == 0)
-            {
-                SpawnBoss(spawnPoint.Position, characterView);
-
-                _cancellationTokenSource.Cancel();
-            }
-        }
-
+        
         private void SpawnEnemy(Vector3 position, CharacterView characterView)
         {
             IEnemyView enemyView = _enemySpawnService.Spawn(_killEnemyCounter, position);
@@ -143,13 +103,10 @@ namespace Sources.Controllers.Presenters.Spawners
         private void SpawnBoss(Vector3 position, CharacterView characterView)
         {
             IBossEnemyView bossEnemyView = _bossEnemySpawnService.Spawn(_killEnemyCounter, position);
-            bossEnemyView.DisableNavmeshAgent();
-            bossEnemyView.SetPosition(position);
-            bossEnemyView.EnableNavmeshAgent();
             bossEnemyView.SetCharacterHealth(characterView.CharacterHealthView);
             bossEnemyView.SetTargetFollow(characterView.CharacterMovementView);
 
-            _enemySpawner.BossCounter++;
+            _enemySpawner.SpawnedBosses++;
         }
     }
 }

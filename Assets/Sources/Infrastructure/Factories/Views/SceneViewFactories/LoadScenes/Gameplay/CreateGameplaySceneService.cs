@@ -151,10 +151,18 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 volume = new Volume();
                 _entityRepository.Add(volume);
             }
-            
-            // Level level = new Level(scenePayload.SceneId, false);
-            Level level = _loadService.Load<Level>(scenePayload.SceneId);
-            // _entityRepository.Add(level);
+
+            Level level;
+
+            if (_loadService.HasKey(scenePayload.SceneId))
+            {
+                level = _loadService.Load<Level>(scenePayload.SceneId);
+            }
+            else
+            {
+                level = new Level(scenePayload.SceneId, false);
+                _entityRepository.Add(level);
+            }
 
             SavedLevel savedLevel = new SavedLevel(ModelId.SavedLevel, false, scenePayload.SceneId);
             _entityRepository.Add(savedLevel);
@@ -195,8 +203,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 bearAttackUpgrader,
                 bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
-
-
+            
             Debug.Log("CreateModels");
             return new GameModels(
                 bearMassAttackUpgrader,

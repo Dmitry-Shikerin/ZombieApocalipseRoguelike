@@ -86,7 +86,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _interstitialShowerService.Enter();
             _upgradeService.Enable();
             //TODO если закрываю игру раньше чем загрузилась курточка летят ошибки с юнитасками
-            await _curtainView.HideCurtain();
+            // await _curtainView.HideCurtain();
         }
 
         public void Exit()

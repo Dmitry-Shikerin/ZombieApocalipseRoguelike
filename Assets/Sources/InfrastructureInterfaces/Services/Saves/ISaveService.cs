@@ -6,6 +6,6 @@ namespace Sources.InfrastructureInterfaces.Services.Saves
 {
     public interface ISaveService : IEnterable, IExitable
     {
-        void Register(KillEnemyCounter killEnemyCounter, EnemySpawner enemySpawner);
+        void Register(EnemySpawner enemySpawner);
     }
 }

@@ -171,7 +171,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _volumeViewFactory.Create(gameModels.Volume, _gameplayHud.VolumeView);
             
             //SaveService
-            _saveService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
+            _saveService.Register(gameModels.EnemySpawner);
             
             //Upgrades
             IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
