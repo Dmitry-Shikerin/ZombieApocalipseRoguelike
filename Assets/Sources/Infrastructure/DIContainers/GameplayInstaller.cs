@@ -80,6 +80,7 @@ using Sources.Infrastructure.Services.Interstitials;
 using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.Infrastructure.Services.Linecasts;
 using Sources.Infrastructure.Services.LoadServices;
+using Sources.Infrastructure.Services.LoadServices.Collectors;
 using Sources.Infrastructure.Services.LoadServices.Data;
 using Sources.Infrastructure.Services.ObjectPools;
 using Sources.Infrastructure.Services.Overlaps;
@@ -104,6 +105,7 @@ using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
+using Sources.InfrastructureInterfaces.Services.LoadServices.Collectors;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
@@ -214,6 +216,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IBearMovementService>().To<BearMovementService>().AsSingle();
             Container.Bind<ICharacterMovementService>().To<CharacterMovementService>().AsSingle();
             Container.Bind<IInterstitialShowerService>().To<InterstitialShowerService>().AsSingle();
+            Container.Bind<IMapperCollector>().To<MapperCollector>().AsSingle();
         }
 
         private void BindFormFactories()

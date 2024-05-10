@@ -37,6 +37,7 @@ using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.YandexSDK;
 using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.Infrastructure.Services.LoadServices;
+using Sources.Infrastructure.Services.LoadServices.Collectors;
 using Sources.Infrastructure.Services.LoadServices.Data;
 using Sources.Infrastructure.Services.PauseServices;
 using Sources.Infrastructure.Services.Repositories;
@@ -45,6 +46,7 @@ using Sources.Infrastructure.Services.Upgrades;
 using Sources.Infrastructure.Services.Volumes;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
+using Sources.InfrastructureInterfaces.Services.LoadServices.Collectors;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
@@ -116,6 +118,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IStickyService>().To<StickyService>().AsSingle();
             Container.Bind<LeaderBoardElementViewFactory>().AsSingle();
             Container.Bind<LeaderBoardElementPresenterFactory>().AsSingle();
+            Container.Bind<IMapperCollector>().To<MapperCollector>().AsSingle();
         }
 
         private void BindFormFactories()
