@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Presenters.Enemies.Base;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Enemies.Bosses;
 using Sources.Domain.Models.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Enemies.Bosses;
@@ -64,9 +65,7 @@ namespace Sources.Infrastructure.Factories.Views.Enemies.Bosses
         private BossEnemyView CreateView()
         {
             BossEnemyView bossEnemyView = Object.Instantiate(
-                Resources.Load<BossEnemyView>("Views/BossEnemyView"));
-            //TODO не забыть поменять
-            // EnemyView enemyView = Object.FindObjectOfType<EnemyView>();
+                Resources.Load<BossEnemyView>(PrefabPath.BossEnemy));
 
             bossEnemyView
                 .AddComponent<PoolableObject>()

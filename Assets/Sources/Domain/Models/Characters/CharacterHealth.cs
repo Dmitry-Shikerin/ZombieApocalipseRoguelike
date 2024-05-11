@@ -7,19 +7,19 @@ namespace Sources.Domain.Models.Characters
 {
     public class CharacterHealth : IHealth
     {
-        public Upgrader HealthUpgrader { get; }
+        private readonly Upgrader _healthUpgrader;
         private float _currentHealth;
 
         public CharacterHealth(Upgrader healthUpgrader)
         {
-            HealthUpgrader = healthUpgrader;
+            _healthUpgrader = healthUpgrader;
             CurrentHealth = MaxHealth;
         }
 
         public event Action HealthChanged;
         public event Action<float> DamageReceived;
 
-        public float MaxHealth => HealthUpgrader.CurrentAmount;
+        public float MaxHealth => _healthUpgrader.CurrentAmount;
         public float CurrentHealth
         {
             get => _currentHealth;
@@ -37,9 +37,7 @@ namespace Sources.Domain.Models.Characters
             DamageReceived?.Invoke(damage);
         }
 
-        public void TakeHeal(int heal)
-        {
+        public void TakeHeal(int heal) =>
             CurrentHealth += heal;
-        }
     }
 }

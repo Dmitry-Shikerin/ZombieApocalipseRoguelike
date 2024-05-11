@@ -62,6 +62,7 @@ namespace Sources.Domain.Models.Data.Ids
             Tutorial,
         };
 
+        //TODO заменить такую запись на поиск из ассембли
         public static IReadOnlyDictionary<string, Type> DtoTypes = new Dictionary<string, Type>()
         {
             [GameplayEnemySpawner] = typeof(EnemySpawnerDto),

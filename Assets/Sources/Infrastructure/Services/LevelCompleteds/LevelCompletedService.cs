@@ -3,6 +3,8 @@ using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Forms.Gameplay;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
+using Sources.DomainInterfaces.Models.Gameplay;
+using Sources.DomainInterfaces.Models.Spawners;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Infrastructure.Services.Repositories;
@@ -19,8 +21,8 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
         private readonly IFormService _formService;
         private readonly IEntityRepository _entityRepository;
         private readonly ILoadService _loadService;
-        private KillEnemyCounter _killEnemyCounter;
-        private EnemySpawner _enemySpawner;
+        private IKillEnemyCounter _killEnemyCounter;
+        private IEnemySpawner _enemySpawner;
 
         public LevelCompletedService(
             IFormService formService,
@@ -44,7 +46,7 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
 
         private void OnKillZombiesCountChanged()
         {
-            if (_killEnemyCounter.KillZombies < _enemySpawner.SumEnemies + _enemySpawner.BossesInLevel)
+            if (_killEnemyCounter.KillZombies < _enemySpawner.SumAllEnemies)
                 return;
 
             SavedLevel savedLevel = _entityRepository.Get<SavedLevel>(ModelId.SavedLevel);
@@ -57,7 +59,7 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
             _formService.Show(FormId.LevelCompleted);
         }
 
-        public void Register(KillEnemyCounter killEnemyCounter, EnemySpawner enemySpawner)
+        public void Register(IKillEnemyCounter killEnemyCounter, IEnemySpawner enemySpawner)
         {
             _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
             _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));

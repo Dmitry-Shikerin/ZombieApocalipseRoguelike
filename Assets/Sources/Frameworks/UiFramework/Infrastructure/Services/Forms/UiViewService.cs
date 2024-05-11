@@ -2,11 +2,12 @@
 using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Handlers;
 using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Views.Handlers;
+using Sources.Frameworks.UiFramework.ServicesInterfaces;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Services.Forms
 {
-    public class UiViewService
+    public class UiViewService : IUiViewService
     {
         private readonly IUiViewCommandHandler _uiViewCommandHandler;
 

@@ -1,8 +1,9 @@
 ﻿using System;
 using Sources.Controllers.Presenters.Enemies.Base;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Enemies.Base;
 using Sources.Domain.Models.Gameplay;
-using Sources.Infrastructure.Factories.Controllers.Enemies.Base;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Base;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
@@ -65,9 +66,7 @@ namespace Sources.Infrastructure.Factories.Views.Enemies.Base
         private EnemyView CreateView()
         {
             EnemyView enemyView = Object.Instantiate(
-                Resources.Load<EnemyView>("Views/EnemyView"));
-            //TODO не забыть поменять
-            // EnemyView enemyView = Object.FindObjectOfType<EnemyView>();
+                Resources.Load<EnemyView>(PrefabPath.Enemy));
 
             enemyView
                 .AddComponent<PoolableObject>()

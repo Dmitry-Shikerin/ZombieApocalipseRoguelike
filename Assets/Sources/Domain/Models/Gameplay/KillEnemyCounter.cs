@@ -1,11 +1,12 @@
 ﻿using System;
 using Sources.Domain.Models.Data;
 using Sources.DomainInterfaces.Entities;
-using Sources.DomainInterfaces.FirstActions;
+using Sources.DomainInterfaces.Models.Gameplay;
+using Sources.PresentationsInterfaces.Views.Gameplay;
 
 namespace Sources.Domain.Models.Gameplay
 {
-    public class KillEnemyCounter : IEntity, IFirstActionModel
+    public class KillEnemyCounter : IEntity, IKillEnemyCounter
     {
         public KillEnemyCounter(KillEnemyCounterDto dto)
         {
@@ -22,7 +23,6 @@ namespace Sources.Domain.Models.Gameplay
         }
 
         public event Action KillZombiesCountChanged;
-        public event Action FirstActionActivate;
 
         public int KillZombies { get; private set; }
         public string Id { get; }
@@ -30,9 +30,6 @@ namespace Sources.Domain.Models.Gameplay
 
         public void IncreaseKillCount()
         {
-            if (KillZombies == 0)
-                FirstActionActivate?.Invoke();
-
             KillZombies++;
             KillZombiesCountChanged?.Invoke();
         }

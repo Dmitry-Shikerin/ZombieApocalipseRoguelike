@@ -41,6 +41,7 @@ using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.RootGameObjects;
+using Sources.Utils.CustomCollections;
 using UnityEngine;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay
@@ -50,7 +51,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ILoadService _loadService;
         private readonly IEntityRepository _entityRepository;
         private readonly IUpgradeDtoMapper _upgradeDtoMapper;
-        private readonly IUpgradeCollectionService _upgradeCollectionService;
+        private readonly CustomCollection<Upgrader> _upgradeCollection;
         private readonly IEnemySpawnerDtoMapper _enemySpawnerDtoMapper;
 
         public CreateGameplaySceneService(
@@ -68,7 +69,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ItemSpawnerViewFactory itemSpawnerViewFactory,
             IUpgradeConfigCollectionService upgradeConfigCollectionService,
             IUpgradeDtoMapper upgradeDtoMapper,
-            IUpgradeCollectionService upgradeCollectionService,
+            CustomCollection<Upgrader> upgradeCollection,
             PlayerWalletProvider playerWalletProvider,
             KillEnemyCounterViewFactory killEnemyCounterViewFactory,
             BackgroundMusicViewFactory backgroundMusicViewFactory,
@@ -99,7 +100,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 itemSpawnerViewFactory,
                 upgradeConfigCollectionService,
                 upgradeDtoMapper,
-                upgradeCollectionService,
+                upgradeCollection,
                 playerWalletProvider,
                 killEnemyCounterViewFactory,
                 backgroundMusicViewFactory,
@@ -118,8 +119,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _loadService = loadService;
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));
-            _upgradeCollectionService = upgradeCollectionService ??
-                                        throw new ArgumentNullException(nameof(upgradeCollectionService));
+            _upgradeCollection = upgradeCollection ?? throw new ArgumentNullException(nameof(upgradeCollection));
             _enemySpawnerDtoMapper =
                 enemySpawnerDtoMapper ?? throw new ArgumentNullException(nameof(enemySpawnerDtoMapper));
         }
@@ -127,34 +127,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         protected override GameModels LoadModels(IScenePayload scenePayload)
         {
             //TODO потом нужно сделать загрузку туториала
-            Tutorial tutorial;
+            Tutorial tutorial = CreateTutorial();
 
-            if (_loadService.HasKey(ModelId.Tutorial))
-            {
-                tutorial = _loadService.Load<Tutorial>(ModelId.Tutorial);
-            }
-            else
-            {
-                tutorial = new Tutorial();
-                _entityRepository.Add(tutorial);
-            }
+            Volume volume = CreateVolume();
 
-            Volume volume;
-
-            //TODO покашто такая вилка
-            if (_loadService.HasKey(ModelId.Volume))
-            {
-                volume = _loadService.Load<Volume>(ModelId.Volume);
-            }
-            else
-            {
-                volume = new Volume();
-                _entityRepository.Add(volume);
-            }
-            
-            // Level level = new Level(scenePayload.SceneId, false);
-            Level level = _loadService.Load<Level>(scenePayload.SceneId);
-            // _entityRepository.Add(level);
+            Level level = CreateLevel(scenePayload.SceneId);
 
             SavedLevel savedLevel = new SavedLevel(ModelId.SavedLevel, false, scenePayload.SceneId);
             _entityRepository.Add(savedLevel);
@@ -196,7 +173,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
 
-
             Debug.Log("CreateModels");
             return new GameModels(
                 bearMassAttackUpgrader,
@@ -224,7 +200,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             UpgradeDto upgradeDto = _upgradeDtoMapper.MapIdToDto(id);
             Upgrader upgrader = _upgradeDtoMapper.MapDtoToModel(upgradeDto);
             _entityRepository.Add(upgrader);
-            _upgradeCollectionService.AddUpgrader(upgrader);
+            _upgradeCollection.Add(upgrader);
 
             return upgrader;
         }
@@ -236,6 +212,39 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _entityRepository.Add(enemySpawner);
 
             return enemySpawner;
+        }
+
+        private Tutorial CreateTutorial()
+        {
+            if (_loadService.HasKey(ModelId.Tutorial))
+                return _loadService.Load<Tutorial>(ModelId.Tutorial);
+
+            Tutorial tutorial = new Tutorial();
+            _entityRepository.Add(tutorial);
+
+            return tutorial;
+        }
+
+        private Volume CreateVolume()
+        {
+            if (_loadService.HasKey(ModelId.Volume))
+                return _loadService.Load<Volume>(ModelId.Volume);
+
+            Volume volume = new Volume();
+            _entityRepository.Add(volume);
+
+            return volume;
+        }
+
+        private Level CreateLevel(string sceneId)
+        {
+            if (_loadService.HasKey(sceneId))
+                return _loadService.Load<Level>(sceneId);
+            
+            Level level = new Level(sceneId, false);
+            _entityRepository.Add(level);
+
+            return level;
         }
     }
 }

@@ -26,6 +26,8 @@ namespace Sources.Infrastructure.Factories.App
                 Object.Instantiate(Resources.Load<CurtainView>(PrefabPath.Curtain)) ??
                 throw new NullReferenceException(nameof(CurtainView));
             projectContext.Container.Bind<CurtainView>().FromInstance(curtainView);
+            //TODO потом убрать
+            curtainView.Hide();
 
             Dictionary<string, Func<object, SceneContext, UniTask<IScene>>> sceneFactories =
                 new Dictionary<string, Func<object, SceneContext, UniTask<IScene>>>();
@@ -46,7 +48,7 @@ namespace Sources.Infrastructure.Factories.App
                 sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
 
             
-            sceneService.AddBeforeSceneChangeHandler(async _ => await curtainView.ShowCurtain());
+            // sceneService.AddBeforeSceneChangeHandler(async _ => await curtainView.ShowCurtain());
             
             sceneService.AddBeforeSceneChangeHandler(async sceneName => 
                 await projectContext.Container.Resolve<ISceneLoaderService>().LoadSceneAsync(sceneName));

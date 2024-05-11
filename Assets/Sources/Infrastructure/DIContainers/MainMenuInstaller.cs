@@ -7,6 +7,8 @@ using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handlers;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Handlers;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Controllers.Buttons;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Controllers.Views;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
@@ -37,6 +39,7 @@ using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.YandexSDK;
 using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.Infrastructure.Services.LoadServices;
+using Sources.Infrastructure.Services.LoadServices.Collectors;
 using Sources.Infrastructure.Services.LoadServices.Data;
 using Sources.Infrastructure.Services.PauseServices;
 using Sources.Infrastructure.Services.Repositories;
@@ -45,6 +48,7 @@ using Sources.Infrastructure.Services.Upgrades;
 using Sources.Infrastructure.Services.Volumes;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
+using Sources.InfrastructureInterfaces.Services.LoadServices.Collectors;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
@@ -116,6 +120,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IStickyService>().To<StickyService>().AsSingle();
             Container.Bind<LeaderBoardElementViewFactory>().AsSingle();
             Container.Bind<LeaderBoardElementPresenterFactory>().AsSingle();
+            Container.Bind<IMapperCollector>().To<MapperCollector>().AsSingle();
+            Container.Bind<CustomValidator>().AsSingle();
         }
 
         private void BindFormFactories()
@@ -124,12 +130,14 @@ namespace Sources.Infrastructure.DIContainers
 
             Container.Bind<UiCollectorFactory>().AsSingle();
 
-            Container.Bind<FormButtonViewFactory>().AsSingle();
+            Container.Bind<UiButtonFactory>().AsSingle();
+            Container.Bind<UiButtonPresenterFactory>().AsSingle();
 
-            Container.Bind<UiContainerFactory>().AsSingle();
+            Container.Bind<UiViewFactory>().AsSingle();
+            Container.Bind<UiViewPresenterFactory>().AsSingle();
 
             //Buttons
-            Container.Bind<UiButtonViewService>().AsSingle();
+            Container.Bind<IUiButtonService>().To<UiButtonService>().AsSingle();
             Container.Bind<IButtonCommandHandler>().To<MainMenuButtonCommandHandler>().AsSingle();
 
             Container.Bind<ShowFormCommand>().AsSingle();
@@ -142,7 +150,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ClearSavesButtonCommand>().AsSingle();
 
             //Views
-            Container.Bind<UiViewService>().AsSingle();
+            Container.Bind<IUiViewService>().To<UiViewService>().AsSingle();
             Container.Bind<IUiViewCommandHandler>().To<MainMenuUiViewCommandHandler>().AsSingle();
 
             Container.Bind<UnPauseCommand>().AsSingle();

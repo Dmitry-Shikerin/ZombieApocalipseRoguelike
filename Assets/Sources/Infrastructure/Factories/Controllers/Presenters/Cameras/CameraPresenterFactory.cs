@@ -9,7 +9,7 @@ using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Cameras;
 using Sources.PresentationsInterfaces.Views.Cameras.Points;
 
-namespace Sources.Infrastructure.Factories.Controllers.Cameras
+namespace Sources.Infrastructure.Factories.Controllers.Presenters.Cameras
 {
     public class CameraPresenterFactory
     {
