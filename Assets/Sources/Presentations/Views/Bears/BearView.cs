@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using Sources.Controllers.Bears;
 using Sources.Controllers.Presenters.Bears.Movements;
 using Sources.PresentationsInterfaces.Views.Bears;
@@ -20,7 +21,7 @@ namespace Sources.Presentations.Views.Bears
         public float StoppingDistance => _navMeshAgent.stoppingDistance;
         public IEnemyHealthView TargetEnemyHealth { get; private set; }
         public ICharacterMovementView CharacterMovementView { get; private set; }
-
+        
         public void Move(Vector3 position) =>
             _navMeshAgent.SetDestination(position);
 
