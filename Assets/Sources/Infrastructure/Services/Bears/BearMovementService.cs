@@ -1,5 +1,4 @@
-﻿using System;
-using Sources.InfrastructureInterfaces.Services.Bears;
+﻿using Sources.InfrastructureInterfaces.Services.Bears;
 using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Bears

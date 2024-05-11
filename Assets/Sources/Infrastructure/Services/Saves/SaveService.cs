@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Sources.Domain.Models.Gameplay;
-using Sources.Domain.Models.Spawners;
+using Sources.Domain.Models.Constants;
 using Sources.DomainInterfaces.Models.Spawners;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
@@ -16,8 +15,9 @@ namespace Sources.Infrastructure.Services.Saves
     {
         private readonly ILoadService _loadService;
         private readonly IFormService _formService; 
+        private readonly TimeSpan _showedFormDelay = TimeSpan.FromSeconds(SaveConstant.ShowedFormDelay);
+        
         private IEnemySpawner _enemySpawner;
-
         private CancellationTokenSource _cancellationTokenSource;
 
         public SaveService(
@@ -59,7 +59,7 @@ namespace Sources.Infrastructure.Services.Saves
             try
             {
                 _formService.Show(FormId.Save);
-                await UniTask.Delay(TimeSpan.FromSeconds(5f), cancellationToken: cancellationToken);
+                await UniTask.Delay(_showedFormDelay, cancellationToken: cancellationToken);
                 _formService.Hide(FormId.Save);
             }
             catch (OperationCanceledException)

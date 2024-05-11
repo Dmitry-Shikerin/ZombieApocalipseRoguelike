@@ -39,6 +39,8 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Phrases
         public string English => _english;
         public string Turkish => _turkish;
         
+        public string GuId { get; set; }
+        
         [Button(ButtonSizes.Large)]
         private void ChangeName()
         {
@@ -53,7 +55,7 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Phrases
         private void AddTextId()
         {
             var localizationIds = AssetDatabase
-                .FindAssets("t:LocalizationConfigSecond")
+                .FindAssets("t:LocalizationConfig")
                 .Select(path => AssetDatabase.GUIDToAssetPath(path))
                 .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
                 .ToList()
@@ -72,7 +74,7 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Phrases
         private List<string> GetDropdownValues()
         {
            return AssetDatabase
-                .FindAssets("t:LocalizationConfigSecond")
+                .FindAssets("t:LocalizationConfig")
                 .Select(path => AssetDatabase.GUIDToAssetPath(path))
                 .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
                 .ToList()

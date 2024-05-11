@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Sources.Frameworks.UiFramework.Domain.Dictionaries;
 using Sources.Frameworks.UiFramework.Domain.Localizations.Phrases;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -35,37 +37,30 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Configs
                 .ToList()
                 .ForEach(phrase => _localizationPhrases.Add(phrase));
         }
+        
+        [Button]
+        private void FillIds()
+        {
+            _localizationIds.Clear();
+            _localizationPhrases.ForEach(phrase => _localizationIds.Add(phrase.LocalizationId));
+        }
 
         [Button]
-        private void FillAllPhrases()
+        private void CreateLocalizationPhrase()
         {
-            var phrases = AssetDatabase
-                .FindAssets("t:LocalizationPhrase")
-                .Select(path => AssetDatabase.GUIDToAssetPath(path))
-                .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationPhrase>(path))
-                .ToList();
-
-            var localizationConfig = AssetDatabase
-                .FindAssets("t:LocalizationConfig")
-                .Select(path => AssetDatabase.GUIDToAssetPath(path))
-                .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
-                .ToList()
-                .FirstOrDefault();
+            LocalizationPhrase phrase = ScriptableObject.CreateInstance(typeof(LocalizationPhrase)) as LocalizationPhrase;
             
-            if(localizationConfig == null)
-                Debug.Log($"Config not found");
-
-            foreach (var phrase in _localizationPhrase)
-            {
-                phrase.Value.SetLocalizationId(phrase.Key);
-            }
+            AssetDatabase.CreateAsset(phrase, 
+                "Assets/Resources/Configs/Localizations/LocalizationPhrase.asset");
+            AssetDatabase.SaveAssets();
         }
         
         [UsedImplicitly]
         private List<string> GetDropdownValues()
         {
+            //TODO как убрать эту ошибку
             return AssetDatabase
-                .FindAssets("t:LocalizationConfigSecond")
+                .FindAssets("t:LocalizationConfig")
                 .Select(path => AssetDatabase.GUIDToAssetPath(path))
                 .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
                 .ToList()

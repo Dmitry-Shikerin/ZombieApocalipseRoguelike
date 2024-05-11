@@ -28,7 +28,7 @@ namespace Sources.Infrastructure.Services.Upgrades
         private readonly IReadOnlyList<UpgradeUi> _upgradeUis;
         private readonly IReadOnlyList<UpgradeView> _upgradeViews;
 
-        private int numberOfFilledAbilities;
+        private int _numberOfFilledAbilities;
 
         public UpgradeService(
             PlayerWalletProvider playerWalletProvider,
@@ -97,13 +97,13 @@ namespace Sources.Infrastructure.Services.Upgrades
             
             //TODO фига себе запись
             if (availableUpgraders.Count >= 3)
-                numberOfFilledAbilities = 3;
+                _numberOfFilledAbilities = 3;
             else if (availableUpgraders.Count is < 3 and > 0)
-                numberOfFilledAbilities = availableUpgraders.Count;
+                _numberOfFilledAbilities = availableUpgraders.Count;
             else
                 return;
             
-            for (int i = 0; i < numberOfFilledAbilities; i++)
+            for (int i = 0; i < _numberOfFilledAbilities; i++)
             {
                 _upgradeUiFactory.Create(availableUpgraders[i], _upgradeUis[i]);
                 _upgradeViewFactory.Create(availableUpgraders[i], PlayerWallet, _upgradeViews[i]);

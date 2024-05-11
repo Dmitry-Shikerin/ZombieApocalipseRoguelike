@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
@@ -20,7 +19,6 @@ using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.Infrastructure.Services.Providers;
 using Sources.Infrastructure.Services.Repositories;
-using Sources.Infrastructure.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.Cameras;
@@ -38,8 +36,6 @@ using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.RootGameObjects;
 using Sources.Presentations.Views.Spawners;
-using Sources.Presentations.Views.Upgrades;
-using Sources.PresentationsInterfaces.Views.Spawners;
 using Sources.Utils.CustomCollections;
 using Object = UnityEngine.Object;
 

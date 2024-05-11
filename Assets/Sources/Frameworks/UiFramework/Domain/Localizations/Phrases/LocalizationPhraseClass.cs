@@ -13,7 +13,7 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Phrases
     [Serializable]
     public class LocalizationPhraseClass
     {
-                [ValueDropdown("GetDropdownValues")]
+        [ValueDropdown("GetDropdownValues")]
         [SerializeField] private string _localizationId;
         [SerializeField] private string _textId;
         
@@ -35,28 +35,16 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Phrases
         [FoldoutGroup("Turkish")][TextArea(1, 20)]
         [SerializeField] private string _turkish;
 
+        public string Russian => _russian;
+        public string English => _english;
+        public string Turkish => _turkish;
         public string LocalizationId => _localizationId;
-        
-        public void SetRussian(string russian) => _russian = russian;
-        public void SetEnglish(string english) => _english = english;
-        public void SetTurkish(string turkish) => _turkish = turkish;
-        public void SetLocalizationId(string localizationId) => _localizationId = localizationId;
-        
-        // [Button(ButtonSizes.Large)]
-        // private void ChangeName()
-        // {
-        //     if(string.IsNullOrWhiteSpace(_localizationId))
-        //         return;
-        //     
-        //     string path = AssetDatabase.GetAssetPath(this);
-        //     AssetDatabase.RenameAsset(path, _localizationId);
-        // }
         
         [Button(ButtonSizes.Large)]
         private void AddTextId()
         {
             var localizationIds = AssetDatabase
-                .FindAssets("t:LocalizationConfigSecond")
+                .FindAssets("t:LocalizationConfig")
                 .Select(path => AssetDatabase.GUIDToAssetPath(path))
                 .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
                 .ToList()
@@ -75,7 +63,7 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Phrases
         private List<string> GetDropdownValues()
         {
            return AssetDatabase
-                .FindAssets("t:LocalizationConfigSecond")
+                .FindAssets("t:LocalizationConfig")
                 .Select(path => AssetDatabase.GUIDToAssetPath(path))
                 .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
                 .ToList()

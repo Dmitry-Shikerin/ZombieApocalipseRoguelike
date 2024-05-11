@@ -13,7 +13,8 @@ namespace Sources.Infrastructure.Factories.Views.Settings
 
         public VolumeViewFactory(VolumePresenterFactory presenterFactory)
         {
-            _presenterFactory = presenterFactory ?? throw new ArgumentNullException(nameof(presenterFactory));
+            _presenterFactory = presenterFactory ?? 
+                                throw new ArgumentNullException(nameof(presenterFactory));
         }
 
         public IVolumeView Create(Volume volume, VolumeView volumeView)

@@ -2,7 +2,6 @@
 using System.Threading;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Gameplay;
-using Sources.Domain.Models.Spawners;
 using Sources.DomainInterfaces.Models.Spawners;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 using Sources.InfrastructureInterfaces.Services.Interstitials;

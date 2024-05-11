@@ -11,17 +11,17 @@ namespace Sources.Infrastructure.Factories.Views.Upgrades
 {
     public class UpgradeUiFactory
     {
-        private readonly UpgradeUiPresenterFactory _upgradeUiPresenterFactory;
+        private readonly UpgradeUiPresenterFactory _presenterFactory;
 
-        public UpgradeUiFactory(UpgradeUiPresenterFactory upgradeUiPresenterFactory)
+        public UpgradeUiFactory(UpgradeUiPresenterFactory presenterFactory)
         {
-            _upgradeUiPresenterFactory = upgradeUiPresenterFactory ??
-                                         throw new ArgumentNullException(nameof(upgradeUiPresenterFactory));
+            _presenterFactory = presenterFactory ??
+                                         throw new ArgumentNullException(nameof(presenterFactory));
         }
 
         public IUpgradeUi Create(IUpgrader upgrader, UpgradeUi upgradeUi)
         {
-            UpgradeUiPresenter upgradeUiPresenter = _upgradeUiPresenterFactory.Create(upgrader, upgradeUi);
+            UpgradeUiPresenter upgradeUiPresenter = _presenterFactory.Create(upgrader, upgradeUi);
             
             upgradeUi.Construct(upgradeUiPresenter);
             

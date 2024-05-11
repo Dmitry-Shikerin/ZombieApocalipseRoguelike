@@ -50,18 +50,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             Tutorial tutorial = new Tutorial();
             _entityRepository.Add(tutorial);
 
-            Volume volume;
+            Volume volume = CreateVolume();
             
-            if (_loadService.HasKey(ModelId.Volume))
-            {
-                volume = _loadService.Load<Volume>(ModelId.Volume);
-            }
-            else
-            {
-                volume = new Volume();
-                _entityRepository.Add(volume);
-            }
-
             GameData gameData = new GameData(ModelId.GameData, true);
             _entityRepository.Add(gameData);
 
@@ -101,6 +91,17 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
                 gameData,
                 savedLevel,
                 tutorial);
+        }
+
+        private Volume CreateVolume()
+        {
+            if (_loadService.HasKey(ModelId.Volume))
+                return _loadService.Load<Volume>(ModelId.Volume);
+
+            Volume volume = new Volume();
+            _entityRepository.Add(volume);
+            
+            return volume;
         }
     }
 }

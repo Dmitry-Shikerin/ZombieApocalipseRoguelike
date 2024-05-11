@@ -1,17 +1,12 @@
 ﻿using System;
 using Sources.Domain.Models.Data.Ids;
-using Sources.Domain.Models.Forms.Gameplay;
 using Sources.Domain.Models.Gameplay;
-using Sources.Domain.Models.Spawners;
 using Sources.DomainInterfaces.Models.Gameplay;
 using Sources.DomainInterfaces.Models.Spawners;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Infrastructure.Services.Repositories;
-using Sources.InfrastructureInterfaces.Services;
-using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
-using Sources.Presentations.Views.Forms.Gameplay;
 using UnityEngine;
 
 namespace Sources.Infrastructure.Services.LevelCompleteds

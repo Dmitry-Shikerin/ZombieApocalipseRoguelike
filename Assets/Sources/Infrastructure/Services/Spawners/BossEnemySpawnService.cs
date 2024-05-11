@@ -30,8 +30,8 @@ namespace Sources.Infrastructure.Services.Spawners
             BossEnemy bossEnemy = new BossEnemy(
                 new EnemyHealth(200), 
                 new EnemyAttacker(10), 
-                2f, 
-                2f, 
+                2f,
+                2f,
                 5f);
             IBossEnemyView bossEnemyView = SpawnFromPool(bossEnemy, killEnemyCounter) ?? 
                                            _bossEnemyViewFactory.Create(bossEnemy, killEnemyCounter);

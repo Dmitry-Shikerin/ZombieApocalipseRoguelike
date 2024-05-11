@@ -30,9 +30,7 @@ namespace Sources.Infrastructure.Services.LoadServices
             _mapperCollector = mapperCollector ?? throw new ArgumentNullException(nameof(mapperCollector));
             _customValidator = customValidator ?? throw new ArgumentNullException(nameof(customValidator));
         }
-
-        //TODO загружать все дто и сразу конвертить их в модели и складировать в инстансе контейнер
-
+        
         //todo лучше не придумал
         public T Load<T>(string id) 
             where T : class, IEntity

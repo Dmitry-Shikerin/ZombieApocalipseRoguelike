@@ -126,7 +126,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
         protected override GameModels LoadModels(IScenePayload scenePayload)
         {
-            //TODO потом нужно сделать загрузку туториала
             Tutorial tutorial = CreateTutorial();
 
             Volume volume = CreateVolume();
