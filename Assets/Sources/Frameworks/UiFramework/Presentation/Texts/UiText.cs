@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Sources.Domain.Models.TextViewTypes;
 using Sources.Frameworks.UiFramework.Domain.Constants;
+using Sources.Frameworks.UiFramework.Domain.Localizations.Configs;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.UI.Texts;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Texts
@@ -19,8 +24,10 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
         [SerializeField] private TextMeshProUGUI _tmpText;
         [TabGroup("Settings")] [SerializeField]
         private TextViewType _textViewType;
-        [TabGroup("Ids")] [TextArea] //TODO атрибут для большей видимости текста
+        [TabGroup("Ids")]
         [SerializeField] private string _textId;
+        [TabGroup("Ids")] [ValueDropdown("GetDropdownValues")]
+        [SerializeField] private string _localizationId;
         
         public TextViewType TextViewType => _textViewType;
         public bool IsHide { get; private set; }
@@ -68,5 +75,38 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
         [Button(ButtonSizes.Large)] [ButtonGroup("Settings")]
         public void SetTmpText() =>
             _tmpText = GetComponent<TextMeshProUGUI>();
+
+        [TabGroup("Ids")]
+        [Button(ButtonSizes.Large)]
+        private void AddTextId()
+        {
+            var localizationIds = AssetDatabase
+                .FindAssets("t:LocalizationConfig")
+                .Select(path => AssetDatabase.GUIDToAssetPath(path))
+                .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
+                .ToList()
+                .FirstOrDefault()
+                .LocalizationIds;
+
+            if(localizationIds.Contains(_textId))
+                return;
+            
+            localizationIds.Add(_textId);
+            
+            _textId = "";
+        }
+
+        [UsedImplicitly]
+        private List<string> GetDropdownValues()
+        {
+            return AssetDatabase
+                .FindAssets("t:LocalizationConfig")
+                .Select(path => AssetDatabase.GUIDToAssetPath(path))
+                .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
+                .ToList()
+                .FirstOrDefault()
+                .LocalizationIds;
+        }
+
     }
 }

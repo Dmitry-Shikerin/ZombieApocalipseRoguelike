@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Agava.WebUtility;
 using Agava.YandexGames;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Localizations;
 using Sources.Domain.Models.TextViewTypes;
-using Sources.Frameworks.UiFramework.Domain.Configs.Localizations;
+using Sources.Frameworks.UiFramework.Domain.Localizations.Configs;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
-using Sources.Frameworks.UiFramework.Presentation.Texts;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.PresentationsInterfaces.UI.Texts;
-using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Services.Localizations
 {
@@ -29,17 +28,14 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
 
             _textDictionary = new Dictionary<string, IReadOnlyDictionary<string, string>>()
             {
-                [LocalizationConstant.RussianCode] = localizationConfig.Russian,
-                [LocalizationConstant.EnglishCode] = localizationConfig.English,
-                [LocalizationConstant.TurkishCode] = localizationConfig.Turkish,
+                [LocalizationConstant.RussianCode] = localizationConfig.LocalizationPhrases
+                    .ToDictionary(phrase => phrase.LocalizationId, phrase => phrase.Russian),
+                [LocalizationConstant.EnglishCode] = localizationConfig.LocalizationPhrases
+                    .ToDictionary(phrase => phrase.LocalizationId, phrase => phrase.English),
+                [LocalizationConstant.TurkishCode] = localizationConfig.LocalizationPhrases
+                    .ToDictionary(phrase => phrase.LocalizationId, phrase => phrase.Turkish),
             };
         }
-
-        //TODO сделать на UiText выпадающий список из ключей
-        //TODO контейтер для локализаций сделать списком и добавлять в него обьекты в которых будут переводы на 3 языка
-        //TODO сделать на контейнере возможность создавать новый обьект и указывать путь где он будет храниться
-        //TODO добавить кнопку для добавления всех дочерних объектов
-        //TODO добавить возможность автоматического добавления всех дочерних объектов через изменение OnInspectorGui
         
         public void Translate()
         {

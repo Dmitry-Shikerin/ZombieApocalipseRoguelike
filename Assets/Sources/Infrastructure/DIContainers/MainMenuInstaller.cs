@@ -2,7 +2,7 @@
 using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
-using Sources.Frameworks.UiFramework.Domain.Configs.Localizations;
+using Sources.Frameworks.UiFramework.Domain.Localizations.Configs;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handlers;
 using Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms;
