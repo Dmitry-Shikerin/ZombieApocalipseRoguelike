@@ -142,11 +142,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _volumeViewFactory = volumeViewFactory ?? throw new ArgumentNullException(nameof(volumeViewFactory));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
-            _levelCompletedService = levelCompletedService ?? throw new ArgumentNullException(nameof(levelCompletedService));
+            _levelCompletedService = levelCompletedService ?? 
+                                     throw new ArgumentNullException(nameof(levelCompletedService));
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _advertisingService = advertisingService ?? throw new ArgumentNullException(nameof(advertisingService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
-            _interstitialShowerService = interstitialShowerService ?? throw new ArgumentNullException(nameof(interstitialShowerService));
+            _interstitialShowerService = interstitialShowerService ?? 
+                                         throw new ArgumentNullException(nameof(interstitialShowerService));
         }
 
         public void Load(IScenePayload scenePayload)
@@ -164,7 +166,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
             //SavedLevel
             SavedLevel savedLevel = gameModels.SavedLevel;
-            savedLevel.SavedLevelId = scenePayload.SceneId;
+            gameModels.SavedLevel.SavedLevelId = scenePayload.SceneId;
             
             //Tutorial
             _tutorialService.Construct(gameModels.Tutorial, savedLevel);
@@ -178,14 +180,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             
             //Upgrades
             for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
-            {
-                UpgradeUi view = _gameplayHud.NotAvailabilityUpgradeUis[i];
-                Upgrader upgrader = _upgradeCollection[i];
-            
-                _upgradeUiFactory.Create(upgrader, view);
-            }
+                _upgradeUiFactory.Create(_upgradeCollection[i], _gameplayHud.NotAvailabilityUpgradeUis[i]);
 
-            //TODO можно ли это все дело сделать на компонентах?
             //Character
             _playerWalletProvider.PlayerWallet = gameModels.PlayerWallet;
             CharacterView characterView = Object.FindObjectOfType<CharacterView>();
@@ -216,9 +212,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             //Camera
             _cameraService.Add<CharacterView>(characterView);
             _cameraService.Add<AllMapPoint>(_rootGameObject.AllMapPoint);
-            
             _cameraService.SetFollower<CharacterView>();
-            
             _cameraViewFactory.Create(_gameplayHud.CinemachineCameraView);
             
             //FormService
