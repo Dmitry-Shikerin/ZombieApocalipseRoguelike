@@ -25,8 +25,6 @@ namespace Sources.Domain.Models.Enemies.Bosses
         public float RunSpeed { get; }
         public bool IsIdle { get; set; } = true;
         public bool IsMassAttack { get; set; } = true;
-        public bool IsRage { get; set; }
-        public Vector3 Destination { get; set; }
         public float CurrentTimeAbility { get; set; }
         public float CurrentTimeRunning { get; set; }
         public bool IsRun { get; set; }

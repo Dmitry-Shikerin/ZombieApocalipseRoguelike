@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
-using Sources.DomainInterfaces.Payloads;
+using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
@@ -25,6 +25,7 @@ using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
+using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
@@ -36,7 +37,10 @@ using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.RootGameObjects;
+using Sources.Presentations.Views.Spawners;
 using Sources.Presentations.Views.Upgrades;
+using Sources.PresentationsInterfaces.Views.Spawners;
+using Sources.Utils.CustomCollections;
 using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay
@@ -58,7 +62,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ItemSpawnerViewFactory _itemSpawnerViewFactory;
         private readonly IUpgradeConfigCollectionService _upgradeConfigCollectionService;
         private readonly IUpgradeDtoMapper _upgradeDtoMapper;
-        private readonly IUpgradeCollectionService _upgradeCollectionService;
+        private readonly CustomCollection<Upgrader> _upgradeCollection;
         private readonly PlayerWalletProvider _playerWalletProvider;
         private readonly KillEnemyCounterViewFactory _killEnemyCounterViewFactory;
         private readonly BackgroundMusicViewFactory _backgroundMusicViewFactory;
@@ -72,6 +76,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ITutorialService _tutorialService;
         private readonly IAdvertisingService _advertisingService;
         private readonly IFormService _formService;
+        private readonly IInterstitialShowerService _interstitialShowerService;
 
         protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
             UiCollectorFactory uiCollectorFactory,
@@ -87,7 +92,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ItemSpawnerViewFactory itemSpawnerViewFactory,
             IUpgradeConfigCollectionService upgradeConfigCollectionService,
             IUpgradeDtoMapper upgradeDtoMapper,
-            IUpgradeCollectionService upgradeCollectionService,
+            CustomCollection<Upgrader> upgradeCollection,
             PlayerWalletProvider playerWalletProvider,
             KillEnemyCounterViewFactory killEnemyCounterViewFactory,
             BackgroundMusicViewFactory backgroundMusicViewFactory,
@@ -100,7 +105,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ILevelCompletedService levelCompletedService,
             ITutorialService tutorialService,
             IAdvertisingService advertisingService,
-            IFormService formService)
+            IFormService formService,
+            IInterstitialShowerService interstitialShowerService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _uiCollectorFactory = uiCollectorFactory ?? throw new ArgumentNullException(nameof(uiCollectorFactory));
@@ -122,8 +128,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _upgradeConfigCollectionService = upgradeConfigCollectionService ?? 
                                               throw new ArgumentNullException(nameof(upgradeConfigCollectionService));
             _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));
-            _upgradeCollectionService = upgradeCollectionService ?? 
-                                        throw new ArgumentNullException(nameof(upgradeCollectionService));
+            _upgradeCollection = upgradeCollection ?? 
+                                        throw new ArgumentNullException(nameof(upgradeCollection));
             _playerWalletProvider = playerWalletProvider ?? 
                                     throw new ArgumentNullException(nameof(playerWalletProvider));
             _killEnemyCounterViewFactory = killEnemyCounterViewFactory ?? 
@@ -136,15 +142,21 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _volumeViewFactory = volumeViewFactory ?? throw new ArgumentNullException(nameof(volumeViewFactory));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
-            _levelCompletedService = levelCompletedService ?? throw new ArgumentNullException(nameof(levelCompletedService));
+            _levelCompletedService = levelCompletedService ?? 
+                                     throw new ArgumentNullException(nameof(levelCompletedService));
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _advertisingService = advertisingService ?? throw new ArgumentNullException(nameof(advertisingService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _interstitialShowerService = interstitialShowerService ?? 
+                                         throw new ArgumentNullException(nameof(interstitialShowerService));
         }
 
         public void Load(IScenePayload scenePayload)
         {
             GameModels gameModels = LoadModels(scenePayload);
+            
+            //InterstitialShower
+            _interstitialShowerService.Register(gameModels.EnemySpawner);
             
             //AdvertisingService
             _advertisingService.Construct(gameModels.PlayerWallet);
@@ -154,7 +166,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
             //SavedLevel
             SavedLevel savedLevel = gameModels.SavedLevel;
-            savedLevel.SavedLevelId = scenePayload.SceneId;
+            gameModels.SavedLevel.SavedLevelId = scenePayload.SceneId;
             
             //Tutorial
             _tutorialService.Construct(gameModels.Tutorial, savedLevel);
@@ -164,24 +176,12 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _volumeViewFactory.Create(gameModels.Volume, _gameplayHud.VolumeView);
             
             //SaveService
-            _saveService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
+            _saveService.Register(gameModels.EnemySpawner);
             
-            //FormService
-            _uiCollectorFactory.Create();
-            _formService.Show(FormId.Hud);
-
             //Upgrades
-            IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
-            
             for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
-            {
-                UpgradeUi view = _gameplayHud.NotAvailabilityUpgradeUis[i];
-                Upgrader upgrader = upgraders[i];
-            
-                _upgradeUiFactory.Create(upgrader, view);
-            }
+                _upgradeUiFactory.Create(_upgradeCollection[i], _gameplayHud.NotAvailabilityUpgradeUis[i]);
 
-            //TODO можно ли это все дело сделать на компонентах?
             //Character
             _playerWalletProvider.PlayerWallet = gameModels.PlayerWallet;
             CharacterView characterView = Object.FindObjectOfType<CharacterView>();
@@ -196,8 +196,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _gameOverService.Register(gameModels.CharacterHealth);;
 
             //Spawners
+            EnemySpawnerView enemySpawnView = _rootGameObject.EnemySpawnerView;
+            enemySpawnView.SetCharacterView(characterView);
             _enemySpawnViewFactory.Create(
-                gameModels.EnemySpawner, gameModels.KillEnemyCounter, _rootGameObject.EnemySpawnerView);
+                gameModels.EnemySpawner, gameModels.KillEnemyCounter, enemySpawnView);
             _itemSpawnerViewFactory.Create(new ItemSpawner(), _rootGameObject.ItemSpawnerView);
             
             //Gameplay
@@ -210,10 +212,12 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             //Camera
             _cameraService.Add<CharacterView>(characterView);
             _cameraService.Add<AllMapPoint>(_rootGameObject.AllMapPoint);
-            
             _cameraService.SetFollower<CharacterView>();
-            
             _cameraViewFactory.Create(_gameplayHud.CinemachineCameraView);
+            
+            //FormService
+            _uiCollectorFactory.Create();
+            _formService.Show(FormId.Hud);
         }
 
         protected abstract GameModels LoadModels(IScenePayload scenePayload);

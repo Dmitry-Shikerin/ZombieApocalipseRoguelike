@@ -35,7 +35,10 @@ namespace Sources.Infrastructure.Services.Spawners
                 5f);
             IBossEnemyView bossEnemyView = SpawnFromPool(bossEnemy, killEnemyCounter) ?? 
                                            _bossEnemyViewFactory.Create(bossEnemy, killEnemyCounter);
+            bossEnemyView.DisableNavmeshAgent();
             bossEnemyView.SetPosition(position);
+            bossEnemyView.EnableNavmeshAgent();
+            bossEnemyView.Show();
 
             return bossEnemyView;
         }

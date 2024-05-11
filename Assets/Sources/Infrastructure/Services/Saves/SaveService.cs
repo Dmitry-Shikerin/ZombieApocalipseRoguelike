@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
+using Sources.DomainInterfaces.Models.Spawners;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
@@ -14,12 +15,11 @@ namespace Sources.Infrastructure.Services.Saves
     public class SaveService : ISaveService
     {
         private readonly ILoadService _loadService;
-        private readonly IFormService _formService;
-        private KillEnemyCounter _killEnemyCounter;
-        private EnemySpawner _enemySpawner;
-        
+        private readonly IFormService _formService; 
+        private IEnemySpawner _enemySpawner;
+
         private CancellationTokenSource _cancellationTokenSource;
-        
+
         public SaveService(
             ILoadService loadService,
             IFormService formService)
@@ -32,37 +32,26 @@ namespace Sources.Infrastructure.Services.Saves
         {
             _cancellationTokenSource = new CancellationTokenSource();
             _formService.Hide(FormId.Save);
-            
-            _killEnemyCounter.KillZombiesCountChanged += OnKillEnemyCounterChanged;
+
+            _enemySpawner.CurrentWaveChanged += OnCurrentWaveChanged;
         }
 
         public void Exit()
         {
+            _enemySpawner.CurrentWaveChanged -= OnCurrentWaveChanged;
             _cancellationTokenSource.Cancel();
         }
 
-        public void Register(KillEnemyCounter killEnemyCounter, EnemySpawner enemySpawner)
+        public void Register(IEnemySpawner enemySpawner)
         {
-            _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
             _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));
         }
 
-        private void OnKillEnemyCounterChanged()
+        private void OnCurrentWaveChanged()
         {
-            int sum = 0;
-            
-            for (int i = 0; i < _enemySpawner.EnemyInWave.Count; i++)
-            {
-                sum += _enemySpawner.EnemyInWave[i];
-                
-                if (_killEnemyCounter.KillZombies == sum)
-                {
-                    _loadService.SaveAll();
-                    ShowSaveForm(_cancellationTokenSource.Token);
-                    Debug.Log("Game saved");
-                    return;
-                }
-            }
+            _loadService.SaveAll();
+            ShowSaveForm(_cancellationTokenSource.Token);
+            Debug.Log("Game saved");
         }
 
         private async void ShowSaveForm(CancellationToken cancellationToken)

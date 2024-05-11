@@ -1,10 +1,10 @@
 ﻿using System;
 using Sources.Domain.Models.Enemies.Base;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
-using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
+using UnityEngine;
 
-namespace Sources.Controllers.Enemies.Base.States
+namespace Sources.Controllers.Presenters.Enemies.Base.States
 {
     public class EnemyAttackState : FiniteState
     {
@@ -28,18 +28,10 @@ namespace Sources.Controllers.Enemies.Base.States
             _enemyAnimation.Attacking += OnAttack;
         }
 
-        public override void Exit()
-        {
+        public override void Exit() =>
             _enemyAnimation.Attacking -= OnAttack;
-        }
 
-        public override void Update(float deltaTime)
-        {
-        }
-
-        private void OnAttack()
-        {
+        private void OnAttack() =>
             _enemyView.CharacterHealthView.TakeDamage(_enemy.EnemyAttacker.Damage);
-        }
     }
 }

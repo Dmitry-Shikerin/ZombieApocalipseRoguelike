@@ -26,13 +26,5 @@ namespace Sources.Controllers.Presenters.Cameras.States
             Transform target = _cameraService.Get<CharacterView>().Transform;
             _cinemachineCameraView.Follow(target);
         }
-
-        public override void Exit()
-        {
-        }
-
-        public override void Update(float deltaTime)
-        {
-        }
     }
 }

@@ -1,33 +1,39 @@
 ﻿using System;
-using Sources.Controllers.Characters;
 using Sources.Controllers.Presenters.Characters;
+using Sources.Infrastructure.Services.Characters;
 using Sources.Infrastructure.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.Characters.EnemyIndicators;
 using Sources.PresentationsInterfaces.Views.Character.EnemyIndicators;
+using Sources.PresentationsInterfaces.Views.Enemies.Base;
+using Sources.Utils.CustomCollections;
 
 namespace Sources.Infrastructure.Factories.Controllers.Characters
 {
     public class EnemyIndicatorPresenterFactory
     {
-        private readonly IEnemyCollectorService _enemyCollectorService;
+        private readonly ICustomCollection<IEnemyView> _enemyCollection;
         private readonly IUpdateRegister _updateRegister;
+        private readonly IEnemyIndicatorService _enemyIndicatorService;
 
         public EnemyIndicatorPresenterFactory(
-            IEnemyCollectorService enemyCollectorService,
-            IUpdateRegister updateRegister)
+            ICustomCollection<IEnemyView> enemyCollection,
+            IUpdateRegister updateRegister,
+            IEnemyIndicatorService enemyIndicatorService)
         {
-            _enemyCollectorService = enemyCollectorService ?? 
-                                     throw new ArgumentNullException(nameof(enemyCollectorService));
+            _enemyCollection = enemyCollection ?? 
+                                     throw new ArgumentNullException(nameof(enemyCollection));
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
+            _enemyIndicatorService = enemyIndicatorService ?? 
+                                     throw new ArgumentNullException(nameof(enemyIndicatorService));
         }
 
         public EnemyIndicatorPresenter Create(IEnemyIndicatorView enemyIndicatorView)
         {
             return new EnemyIndicatorPresenter(
-                enemyIndicatorView, _enemyCollectorService, _updateRegister);
+                enemyIndicatorView, _enemyCollection, _updateRegister, _enemyIndicatorService);
         }
     }
 }

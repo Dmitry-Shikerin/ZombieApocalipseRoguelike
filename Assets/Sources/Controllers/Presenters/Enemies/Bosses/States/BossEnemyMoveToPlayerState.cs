@@ -10,7 +10,7 @@ using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using UnityEngine;
 
-namespace Sources.Controllers.Enemies.Bosses.States
+namespace Sources.Controllers.Presenters.Enemies.Bosses.States
 {
     public class BossEnemyMoveToPlayerState : FiniteState
     {
@@ -44,15 +44,11 @@ namespace Sources.Controllers.Enemies.Bosses.States
             StartRunTimer(_cancellationTokenSource.Token);
         }
 
-        public override void Exit()
-        {
+        public override void Exit() =>
             _cancellationTokenSource.Cancel();
-        }
 
-        public override void Update(float deltaTime)
-        {
+        public override void Update(float deltaTime) =>
             _enemyView.Move(_enemyView.CharacterMovementView.Position);
-        }
 
         private async void StartMassAttackTimer(CancellationToken cancellationToken)
         {

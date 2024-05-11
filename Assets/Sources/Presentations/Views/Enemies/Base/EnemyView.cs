@@ -1,5 +1,5 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.Controllers.Enemies.Base;
+using Sources.Controllers.Presenters.Enemies.Base;
 using Sources.Presentations.Views.Common;
 using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;

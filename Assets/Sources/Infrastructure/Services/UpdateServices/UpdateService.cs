@@ -16,7 +16,6 @@ namespace Sources.Infrastructure.Services.UpdateServices
         public void UnRegister(Action<float> action) => 
             _actions.Remove(action);
 
-        //TODO ошибка в апдейте
         public void Update(float deltaTime)
         {
             UpdateChanged?.Invoke(deltaTime);
@@ -24,7 +23,9 @@ namespace Sources.Infrastructure.Services.UpdateServices
             if(_actions.Count == 0)
                 return;
             
-            _actions.ForEach(action => action.Invoke(deltaTime));
+            //TODO переделать на вот это
+            for (int i = _actions.Count - 1; i >= 0; i--)
+                _actions[i].Invoke(deltaTime);
         }
 
         public void UnregisterAll() => 

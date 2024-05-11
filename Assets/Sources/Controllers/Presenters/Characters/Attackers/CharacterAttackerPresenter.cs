@@ -6,7 +6,7 @@ using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Character;
 
-namespace Sources.Controllers.Characters.Attackers
+namespace Sources.Controllers.Presenters.Characters.Attackers
 {
     public class CharacterAttackerPresenter : PresenterBase
     {
@@ -33,13 +33,13 @@ namespace Sources.Controllers.Characters.Attackers
         public override void Enable()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-
             _updateRegister.Register(OnUpdate);
         }
 
         public override void Disable()
         {
             _cancellationTokenSource.Cancel();
+            _updateRegister.UnRegister(OnUpdate);
         }
 
         private void OnUpdate(float deltaTime)

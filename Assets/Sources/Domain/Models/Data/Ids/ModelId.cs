@@ -7,9 +7,6 @@ namespace Sources.Domain.Models.Data.Ids
     {
         //gameModels
         public const string GameplayEnemySpawner = "GameplayEnemySpawner";
-        // public const string Gameplay1EnemySpawner = "Gameplay1EnemySpawner";
-        // public const string Gameplay2EnemySpawner = "Gameplay2EnemySpawner";
-        // public const string Gameplay3EnemySpawner = "Gameplay3EnemySpawner";
         public const string SawLauncherAbilityUpgrader = "SawLauncherAbilityUpgrader";
         public const string SawLauncherUpgrader = "SawLauncherUpgrader";
         public const string PlayerWallet = "PlayerWallet";
@@ -33,9 +30,6 @@ namespace Sources.Domain.Models.Data.Ids
         public static IReadOnlyList<string> DeletedModelsIds = new List<string>()
         {
             GameplayEnemySpawner,
-            // Gameplay1EnemySpawner,
-            // Gameplay2EnemySpawner,
-            // Gameplay3EnemySpawner,
             SawLauncherAbilityUpgrader,
             SawLauncherUpgrader,
             PlayerWallet,
@@ -50,9 +44,6 @@ namespace Sources.Domain.Models.Data.Ids
         public static IReadOnlyList<string> ModelsIds = new List<string>()
         {
             GameplayEnemySpawner,
-            // Gameplay1EnemySpawner,
-            // Gameplay2EnemySpawner,
-            // Gameplay3EnemySpawner,
             SavedLevel,
             GameData,
             Gameplay,
@@ -68,9 +59,11 @@ namespace Sources.Domain.Models.Data.Ids
             BearAttackUpgrader,
             BearMassAttackUpgrader,
             KillEnemyCounter,
+            Tutorial,
         };
 
-        public static IReadOnlyDictionary<string, Type> ModelTypes = new Dictionary<string, Type>()
+        //TODO заменить такую запись на поиск из ассембли
+        public static IReadOnlyDictionary<string, Type> DtoTypes = new Dictionary<string, Type>()
         {
             [GameplayEnemySpawner] = typeof(EnemySpawnerDto),
             [SavedLevel] = typeof(SavedLevelDto),

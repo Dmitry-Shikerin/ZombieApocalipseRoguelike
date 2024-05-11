@@ -10,6 +10,7 @@ using Sources.Presentations.Views.Enemies;
 using Sources.Presentations.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
+using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Spawners
 {
@@ -24,11 +25,19 @@ namespace Sources.Infrastructure.Services.Spawners
             _enemyViewFactory = enemyViewFactory ?? throw new ArgumentNullException(nameof(enemyViewFactory));
         }
 
-        public IEnemyView Spawn(KillEnemyCounter killEnemyCounter)
+        public IEnemyView Spawn(KillEnemyCounter killEnemyCounter, Vector3 position)
         {
             Enemy enemy = new Enemy(new EnemyHealth(50), new EnemyAttacker(5));
             
-            return SpawnFromPool(enemy, killEnemyCounter) ?? _enemyViewFactory.Create(enemy, killEnemyCounter);
+            IEnemyView enemyView = SpawnFromPool(enemy, killEnemyCounter) ?? 
+                                   _enemyViewFactory.Create(enemy, killEnemyCounter);
+            
+            enemyView.DisableNavmeshAgent();
+            enemyView.SetPosition(position);
+            enemyView.EnableNavmeshAgent();
+            enemyView.Show();
+            
+            return enemyView;
         }
 
         private IEnemyView SpawnFromPool(Enemy enemy, KillEnemyCounter killEnemyCounter)

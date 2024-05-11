@@ -2,30 +2,34 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Domain.Models.Upgrades;
-using Sources.DomainInterfaces.Weapons;
+using Sources.DomainInterfaces.Models.Weapons;
 
 namespace Sources.Domain.Models.Weapons
 {
     public class MiniGun : IWeapon
     {
+        private readonly Upgrader _upgrader;
+        private readonly float _attackSpeed;
+
+        private bool _isEnded;
+
+
         public MiniGun(
-            Upgrader miniGunAttackUpgrader,
+            Upgrader upgrader,
             float attackSpeed)
         {
-            MiniGunAttackUpgrader = miniGunAttackUpgrader;
-            AttackSpeed = attackSpeed;
+            _upgrader = upgrader;
+            _attackSpeed = attackSpeed;
         }
 
         public event Action Attacked;
         public event Action AttackEnded;
 
-        public Upgrader MiniGunAttackUpgrader { get; }
-        public float Damage => MiniGunAttackUpgrader.CurrentAmount;
-        public float AttackSpeed { get; }
+        public float Damage => _upgrader.CurrentAmount;
         public bool IsReady { get; private set; } = true;
-        public bool IsEnded { get; set; }
         public bool IsShooting { get; set; }
 
+        //TODO подумать над тем чтобы упростить
         public async void AttackAsync(CancellationToken cancellationToken)
         {
             try
@@ -35,7 +39,7 @@ namespace Sources.Domain.Models.Weapons
 
                 await StartTimer(cancellationToken);
 
-                IsEnded = false;
+                _isEnded = false;
                 Attacked?.Invoke();
             }
             catch (OperationCanceledException)
@@ -45,21 +49,20 @@ namespace Sources.Domain.Models.Weapons
 
         public void EndAttack()
         {
-            if(IsEnded)
+            if(_isEnded)
                 return;
                 
             AttackEnded?.Invoke();
-            IsEnded = true;
+            _isEnded = true;
         }
 
         private async UniTask StartTimer(CancellationToken cancellationToken)
         {
             IsReady = false;
             
-            await UniTask.Delay(TimeSpan.FromSeconds(AttackSpeed), cancellationToken: cancellationToken);
+            await UniTask.Delay(TimeSpan.FromSeconds(_attackSpeed), cancellationToken: cancellationToken);
             
             IsReady = true;
         }
-
     }
 }

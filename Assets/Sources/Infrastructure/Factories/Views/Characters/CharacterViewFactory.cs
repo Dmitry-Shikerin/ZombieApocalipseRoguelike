@@ -1,5 +1,4 @@
 ﻿using System;
-using Sources.Controllers.Characters;
 using Sources.Domain.Models.Characters;
 using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Commons;

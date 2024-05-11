@@ -14,13 +14,15 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
             LoadGameCommand loadGameCommand,
             NewGameCommand newGameCommand,
             ShowLeaderboardCommand showLeaderBoardCommand,
-            EnableLoadGameButtonCommand enableLoadGameButtonCommand)
+            EnableLoadGameButtonCommand enableLoadGameButtonCommand,
+            ClearSavesButtonCommand clearSavesButtonCommand)
         {
             _commands[showFormCommand.Id] = showFormCommand;
             _commands[loadGameCommand.Id] = loadGameCommand;
             _commands[newGameCommand.Id] = newGameCommand;
             _commands[showLeaderBoardCommand.Id] = showLeaderBoardCommand;
             _commands[enableLoadGameButtonCommand.Id] = enableLoadGameButtonCommand;
+            _commands[clearSavesButtonCommand.Id] = clearSavesButtonCommand;
         }
         
         public void Handle(UiButton uiButton, ButtonCommandId buttonCommandId)

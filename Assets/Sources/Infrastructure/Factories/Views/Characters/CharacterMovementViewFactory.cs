@@ -1,8 +1,6 @@
 ﻿using System;
-using Sources.Controllers.Characters.Movements;
 using Sources.Controllers.Presenters.Characters.Movements;
 using Sources.Domain.Models.Characters;
-using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Characters;
 using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Character;

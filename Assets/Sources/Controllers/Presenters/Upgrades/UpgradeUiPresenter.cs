@@ -39,7 +39,6 @@ namespace Sources.Controllers.Presenters.Upgrades
 
         private void OnLevelChanged()
         {
-            // Debug.Log($"Upgrade: {_upgrader.CurrentLevel}");
             UpdatePrice();
             UpdateImages();
             AbilityImageChanged();

@@ -1,6 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Controllers.Bears;
-using Sources.Controllers.Bears.Movements;
+using Sources.Controllers.Presenters.Bears.Movements;
 using Sources.PresentationsInterfaces.Views.Bears;
 using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.Enemies;
@@ -32,8 +32,11 @@ namespace Sources.Presentations.Views.Bears
 
         public void SetStoppingDistance(float stoppingDistance) =>
             _navMeshAgent.stoppingDistance = stoppingDistance;
-
-        public void SetLookRotation(float angle) =>
-            transform.rotation = Quaternion.Euler(0, angle, 0);
+        
+        public void SetLookRotation(float angle)
+        {
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation, Quaternion.Euler(0, angle, 0), 4f);
+        }
     }
 }

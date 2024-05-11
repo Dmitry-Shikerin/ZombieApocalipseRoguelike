@@ -2,6 +2,7 @@
 using Sources.Controllers.Presenters.Gameplay;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
+using Sources.DomainInterfaces.Models.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Presentations.Views.Gameplay;
 using Sources.PresentationsInterfaces.Views.Gameplay;
@@ -19,7 +20,7 @@ namespace Sources.Infrastructure.Factories.Views.Gameplay
 
         public IKillEnemyCounterView Create(
             KillEnemyCounter killEnemyCounter,
-            EnemySpawner enemySpawner,
+            IEnemySpawner enemySpawner,
             KillEnemyCounterView killEnemyCounterView)
         {
             KillEnemyCounterPresenter killEnemyCounterPresenter =

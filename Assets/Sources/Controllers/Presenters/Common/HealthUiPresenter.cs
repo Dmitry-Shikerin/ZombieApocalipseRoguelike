@@ -1,9 +1,11 @@
 ﻿using System;
+using Sources.Controllers.Common;
+using Sources.Domain.Models.Constants;
 using Sources.DomainInterfaces.Healths;
 using Sources.PresentationsInterfaces.Views.Common;
-using UnityEngine;
+using Sources.Utils.Extentions;
 
-namespace Sources.Controllers.Common
+namespace Sources.Controllers.Presenters.Common
 {
     public class HealthUiPresenter : PresenterBase
     {
@@ -22,24 +24,15 @@ namespace Sources.Controllers.Common
             _health.HealthChanged += OnHealthChanged;
         }
 
-        public override void Disable()
-        {
+        public override void Disable() =>
             _health.HealthChanged -= OnHealthChanged;
-        }
 
         private void OnHealthChanged()
         {
-            float percent = _health.MaxHealth / 100f;
-            int currentPercents = 0;
-            float currentHealth = 0;
-
-            while (currentHealth < _health.CurrentHealth)
-            {
-                currentHealth += percent;
-                currentPercents++;
-            }
+            float percent = _health.CurrentHealth.FloatToPercent(_health.MaxHealth);
+            float fillAmount = percent * MathConstant.UnitMultiplier;
             
-            _healthUi.HealthImage.SetFillAmount(currentPercents * 0.01f);
+            _healthUi.HealthImage.SetFillAmount(fillAmount);
         }
     }
 }

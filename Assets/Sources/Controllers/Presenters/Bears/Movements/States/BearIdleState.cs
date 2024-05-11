@@ -1,25 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sources.Controllers.Bears.Attacks;
+using Sources.Domain.Models.Constants.LayerMasks;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.Presentations.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Bears;
-using UnityEngine;
 
-namespace Sources.Controllers.Bears.Movements.States
+namespace Sources.Controllers.Presenters.Bears.Movements.States
 {
     public class BearIdleState : FiniteState
     {
+        private const float FindRadius = 5f;
+
+        private readonly BearAttacker _bearAttacker;
         private readonly IBearAnimationView _bearAnimationView;
         private readonly OverlapService _overlapService;
         private readonly IBearView _bearView;
 
         public BearIdleState(
+            BearAttacker bearAttacker,
             IBearView bearView,
             IBearAnimationView bearAnimationView,
             OverlapService overlapService)
         {
+            _bearAttacker = bearAttacker ?? throw new ArgumentNullException(nameof(bearAttacker));
             _bearAnimationView = bearAnimationView ?? throw new ArgumentNullException(nameof(bearAnimationView));
             _overlapService = overlapService ?? throw new ArgumentNullException(nameof(overlapService));
             _bearView = bearView ?? throw new ArgumentNullException(nameof(bearView));
@@ -29,8 +35,8 @@ namespace Sources.Controllers.Bears.Movements.States
 
         public override void Enter()
         {
-            // Debug.Log($"Bear enter idle state");
             _bearAnimationView.PlayIdle();
+            _bearView.SetTarget(null);
         }
 
         public override void Exit()
@@ -44,16 +50,18 @@ namespace Sources.Controllers.Bears.Movements.States
 
         private void FindEnemy()
         {
-            if(_bearView.TargetEnemyHealth != null)
+            //TODO порефакторить попозже когда доделается логика
+            if (_bearView.TargetEnemyHealth != null)
                 return;
-            
-            var enemies = _overlapService.OverlapSphere<EnemyHealthView>(
-                _bearView.CharacterMovementView.Position, 5f, 
-                1 << LayerMask.NameToLayer("Enemy"),
-                1 << LayerMask.NameToLayer("Obstacle"));
+
+            IReadOnlyList<EnemyHealthView> enemies = _overlapService.OverlapSphere<EnemyHealthView>(
+                _bearView.CharacterMovementView.Position, FindRadius, Layer.Enemy, Layer.Obstacle);
 
             EnemyHealthView enemy = enemies.FirstOrDefault();
             
+            if(enemy != null && enemy.enabled == false)
+                enemy = null;
+
             _bearView.SetTarget(enemy);
         }
     }

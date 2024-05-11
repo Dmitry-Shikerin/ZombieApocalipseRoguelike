@@ -2,12 +2,13 @@
 using System.Linq;
 using System.Threading;
 using Sirenix.Utilities;
+using Sources.Controllers.Common;
 using Sources.DomainInterfaces.Healths;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.Common;
 using UnityEngine;
 
-namespace Sources.Controllers.Common
+namespace Sources.Controllers.Presenters.Common
 {
     public class HealthUiTextPresenter : PresenterBase
     {
@@ -25,7 +26,6 @@ namespace Sources.Controllers.Common
         public override void Enable()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            
             HideAllTexts();
             _health.DamageReceived += OnDamageReceived;
         }
@@ -33,7 +33,6 @@ namespace Sources.Controllers.Common
         public override void Disable()
         {
             _health.DamageReceived -= OnDamageReceived;
-            
             _cancellationTokenSource.Cancel();
         }
 

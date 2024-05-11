@@ -1,12 +1,13 @@
 ﻿using System;
 using Sources.ControllersInterfaces.Scenes;
-using Sources.DomainInterfaces.Payloads;
+using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
+using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
@@ -14,6 +15,8 @@ using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Curtains;
+using Sources.PresentationsInterfaces.Views.Enemies.Base;
+using Sources.Utils.CustomCollections;
 using UnityEngine;
 
 namespace Sources.Controllers.Presenters.Scenes
@@ -31,7 +34,8 @@ namespace Sources.Controllers.Presenters.Scenes
         private readonly ISaveService _saveService;
         private readonly ILevelCompletedService _levelCompletedService;
         private readonly ITutorialService _tutorialService;
-        private readonly IEnemyCollectorService _enemyCollectorService;
+        private readonly CustomCollection<IEnemyView> _enemyCollection;
+        private readonly IInterstitialShowerService _interstitialShowerService;
         private readonly CurtainView _curtainView;
 
         public GameplayScene(
@@ -46,13 +50,16 @@ namespace Sources.Controllers.Presenters.Scenes
             ISaveService saveService,
             ILevelCompletedService levelCompletedService,
             ITutorialService tutorialService,
-            IEnemyCollectorService enemyCollectorService,
-            CurtainView curtainView)
+            CustomCollection<IEnemyView> enemyCollection,
+            CurtainView curtainView,
+            IInterstitialShowerService interstitialShowerService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
-            _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
+            _inputServiceUpdater = inputServiceUpdater ?? 
+                                   throw new ArgumentNullException(nameof(inputServiceUpdater));
             _loadSceneService = loadSceneService ?? throw new ArgumentNullException(nameof(loadSceneService));
-            _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
+            _localizationService = localizationService ?? 
+                                   throw new ArgumentNullException(nameof(localizationService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
             _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
@@ -61,22 +68,27 @@ namespace Sources.Controllers.Presenters.Scenes
             _levelCompletedService = levelCompletedService ?? 
                                      throw new ArgumentNullException(nameof(levelCompletedService));
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
-            _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
+            _enemyCollection = enemyCollection ?? 
+                                     throw new ArgumentNullException(nameof(enemyCollection));
+            _interstitialShowerService = interstitialShowerService ?? 
+                                         throw new ArgumentNullException(nameof(interstitialShowerService));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
 
         public async void Enter(object payload = null)
         {
+            //TODO что лучше делать у сервисов Enter или Enable
             _loadSceneService.Load(payload as IScenePayload);
             _localizationService.Translate();
-            await _curtainView.HideCurtain();
-            _gameOverService.Enter();
             _volumeService.Enter();
+            _gameOverService.Enter();
             _saveService.Enter();
             _levelCompletedService.Enable();
             _tutorialService.Enable();
-            //TODO раскоментировать UpgradeService
+            _interstitialShowerService.Enter();
             _upgradeService.Enable();
+            //TODO если закрываю игру раньше чем загрузилась курточка летят ошибки с юнитасками
+            // await _curtainView.HideCurtain();
         }
 
         public void Exit()
@@ -86,16 +98,14 @@ namespace Sources.Controllers.Presenters.Scenes
             _volumeService.Exit();
             _saveService.Exit();
             _levelCompletedService.Disable();
-            _enemyCollectorService.Clear();
+            _interstitialShowerService.Exit();
+            _enemyCollection.Clear();
         }
 
         public void Update(float deltaTime)
         {
             _updateService.Update(deltaTime);
             _inputServiceUpdater.Update(deltaTime);
-            
-            if(Input.GetKeyDown(KeyCode.P))
-                _loadService.SaveAll();
         }
 
         public void UpdateLate(float deltaTime)

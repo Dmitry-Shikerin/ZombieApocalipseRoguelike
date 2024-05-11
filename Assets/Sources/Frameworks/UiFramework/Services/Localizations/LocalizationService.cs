@@ -17,7 +17,7 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
     public class LocalizationService : ILocalizationService
     {
         private readonly UiCollector _uiCollector;
-        private readonly List<UiText> _textViews = new List<UiText>();
+        private readonly List<IUiText> _textViews = new List<IUiText>();
         private readonly Dictionary<string, IReadOnlyDictionary<string, string>> _textDictionary;
         private IReadOnlyDictionary<string, string> _currentLanguageDictionary;
 
@@ -35,6 +35,12 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
             };
         }
 
+        //TODO сделать на UiText выпадающий список из ключей
+        //TODO контейтер для локализаций сделать списком и добавлять в него обьекты в которых будут переводы на 3 языка
+        //TODO сделать на контейнере возможность создавать новый обьект и указывать путь где он будет храниться
+        //TODO добавить кнопку для добавления всех дочерних объектов
+        //TODO добавить возможность автоматического добавления всех дочерних объектов через изменение OnInspectorGui
+        
         public void Translate()
         {
             //todo вынести в отдельный сервис
@@ -70,7 +76,7 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
 
         private void AddTextViews(UiCollector uiCollector)
         {
-            foreach (UiText textView in uiCollector.UiTexts)
+            foreach (IUiText textView in uiCollector.UiTexts)
             {
                 _textViews.Add(textView);
             }

@@ -4,9 +4,8 @@ using Sources.Infrastructure.StateMachines.ContextStateMachines;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.InfrastructureInterfaces.StateMachines.ContextStateMachines.States;
-using UnityEngine;
 
-namespace Sources.Controllers.Cameras
+namespace Sources.Controllers.Presenters.Cameras
 {
     public class CameraPresenter : ContextStateMachine, IPresenter
     {
@@ -39,9 +38,7 @@ namespace Sources.Controllers.Cameras
             Stop();
         }
 
-        private void OnFollowableChanged()
-        {
+        private void OnFollowableChanged() =>
             Apply(_cameraService.CurrentFollower);
-        }
     }
 }

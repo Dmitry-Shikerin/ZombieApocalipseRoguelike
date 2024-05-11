@@ -5,6 +5,7 @@ using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Players;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
+using UnityEngine;
 
 namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
 {
@@ -14,13 +15,12 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
 
         private PlayerWallet _playerWallet;
 
-        public AdvertisingService(
-            IPauseService pauseService)
+        public AdvertisingService(IPauseService pauseService)
         {
             _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
         }
 
-
+//TODO добавить показ интерститиала
         public void ShowInterstitial()
         {
             if (WebApplication.IsRunningOnWebGL == false)
@@ -44,6 +44,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
 
         public void ShowVideo(Action onCloseCallback)
         {
+            Debug.Log("ShowVideoAd");
             if (WebApplication.IsRunningOnWebGL == false)
             {
                 onCloseCallback?.Invoke();

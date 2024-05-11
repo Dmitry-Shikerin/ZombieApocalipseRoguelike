@@ -14,13 +14,21 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
             CompleteTutorialCommand completeTutorialCommand,
             LoadMainMenuSceneCommand loadMainMenuSceneCommand,
             UnPauseButtonCommand unPauseButtonCommand,
-            HideFormCommand hideFormCommand)
+            HideFormCommand hideFormCommand,
+            SetAllMapCameraFollowCommand setAllMapCameraFollowCommand,
+            SetCharacterCameraFollowCommand setCharacterCameraFollowCommand,
+            ShowRewardedAdvertisingButtonCommand showRewardedAdvertisingButtonCommand,
+            ClearSavesButtonCommand clearSavesButtonCommand)
         {
             _commands[showFormCommand.Id] = showFormCommand;
             _commands[completeTutorialCommand.Id] = completeTutorialCommand;
             _commands[loadMainMenuSceneCommand.Id] = loadMainMenuSceneCommand;
             _commands[unPauseButtonCommand.Id] = unPauseButtonCommand;
             _commands[hideFormCommand.Id] = hideFormCommand;
+            _commands[setAllMapCameraFollowCommand.Id] = setAllMapCameraFollowCommand;
+            _commands[setCharacterCameraFollowCommand.Id] = setCharacterCameraFollowCommand;
+            _commands[showRewardedAdvertisingButtonCommand.Id] = showRewardedAdvertisingButtonCommand;
+            _commands[clearSavesButtonCommand.Id] = clearSavesButtonCommand;
         }
 
         public void Handle(UiButton uiButton, ButtonCommandId buttonCommandId)

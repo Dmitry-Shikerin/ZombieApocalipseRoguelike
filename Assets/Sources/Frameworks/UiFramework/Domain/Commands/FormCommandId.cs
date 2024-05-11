@@ -7,5 +7,7 @@
         UnPause = 2,
         SaveVolume = 3,
         ClearSaves = 4,
+        SetAllMapCameraFollow = 5,
+        SetCharacterCameraFollow = 6,
     }
 }

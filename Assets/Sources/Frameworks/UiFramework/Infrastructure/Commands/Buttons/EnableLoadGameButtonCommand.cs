@@ -3,6 +3,7 @@ using Sources.Domain.Models.Data.Ids;
 using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
+using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 {
@@ -24,6 +25,8 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
             
             if (_loadService.HasKey(ModelId.PlayerWallet) == false)
                 uiButton.Hide();
+            
+            // Debug.Log($"Enable load game, player wallet: {_loadService.HasKey(ModelId.PlayerWallet)}");
         }
     }
 }

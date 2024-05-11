@@ -47,17 +47,21 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Forms.MainMenu
         }
 
         private void LoadFirstLevel() =>
-            _sceneService.ChangeSceneAsync(ModelId.Gameplay, new ScenePayload(ModelId.Gameplay, false));
+            _sceneService.ChangeSceneAsync(
+                ModelId.Gameplay, new ScenePayload(ModelId.Gameplay, false, false));
 
         private void LoadSecondLevel() =>
-            _sceneService.ChangeSceneAsync(ModelId.Gameplay2, new ScenePayload(ModelId.Gameplay2, false));
+            _sceneService.ChangeSceneAsync(
+                ModelId.Gameplay2, new ScenePayload(ModelId.Gameplay2, false, false));
 
         private void LoadThirdLevel() =>
-            _sceneService.ChangeSceneAsync(ModelId.Gameplay3, new ScenePayload(ModelId.Gameplay3, false));
+            _sceneService.ChangeSceneAsync(
+                ModelId.Gameplay3, new ScenePayload(ModelId.Gameplay3, false, false));
 
 
         private void LoadFourthLevel() =>
-            _sceneService.ChangeSceneAsync(ModelId.Gameplay4, new ScenePayload(ModelId.Gameplay4, false));
+            _sceneService.ChangeSceneAsync(
+                ModelId.Gameplay4, new ScenePayload(ModelId.Gameplay4, false, false));
 
         private void ShowMainMenuForm() =>
             _imvpFormService.Show<MainMenuHudFormView>();

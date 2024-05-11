@@ -25,20 +25,20 @@ namespace Sources.Infrastructure.Services.Spawners
 
         public IRewardItemView Spawn(Vector3 position, int amount = 1)
         {
-            IRewardItemView rewardItemView = SpawnFromPool(position) ?? _viewFactory.Create(position, amount);
+            IRewardItemView rewardItemView = SpawnFromPool() ?? _viewFactory.Create(position, amount);
             rewardItemView.SetRewardAmount(amount);
+            rewardItemView.SetPosition(position);
+            rewardItemView.Show();
             
             return rewardItemView;
         }
         
-        private RewardItemView SpawnFromPool(Vector3 position)
+        private RewardItemView SpawnFromPool()
         {
             RewardItemView rewardItemView = _objectPool.Get<RewardItemView>();
 
             if (rewardItemView == null)
                 return null;
-            
-            rewardItemView.SetPosition(position);
 
             return rewardItemView;
         }

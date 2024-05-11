@@ -1,78 +1,61 @@
 ﻿using System;
 using Sources.Domain.Models.Characters;
 using Sources.Infrastructure.StateMachines.ContextStateMachines.States;
+using Sources.InfrastructureInterfaces.Characters;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.PresentationsInterfaces.Views.Character;
 using UnityEngine;
 
-namespace Sources.Controllers.Characters.Movements.States
+namespace Sources.Controllers.Presenters.Characters.Movements.States
 {
     public class CharacterMovementState : ContextStateBase
     {
+        private const float MovementSpeed = 0.7f;
+
         private readonly CharacterMovement _characterMovement;
         private readonly ICharacterAnimationView _characterAnimationView;
         private readonly ICharacterMovementView _characterMovementView;
         private readonly IInputService _inputService;
+        private readonly ICharacterMovementService _movementService;
 
         public CharacterMovementState(
             CharacterMovement characterMovement,
             ICharacterAnimationView characterAnimationView,
             ICharacterMovementView characterMovementView,
-            IInputService inputService)
+            IInputService inputService,
+            ICharacterMovementService characterMovementService)
         {
             _characterMovement = characterMovement ?? throw new ArgumentNullException(nameof(characterMovement));
-            _characterAnimationView = characterAnimationView ?? throw new ArgumentNullException(nameof(characterAnimationView));
+            _characterAnimationView =
+                characterAnimationView ?? throw new ArgumentNullException(nameof(characterAnimationView));
             _inputService = inputService ?? throw new ArgumentNullException(nameof(inputService));
-            _characterMovementView = characterMovementView ?? throw new ArgumentNullException(nameof(characterMovementView));
-        }
-
-        public override void Enter(object payload = null)
-        {
-            // _characterAnimationView.PlayRightward();
-        }
-
-        public override void Exit()
-        {
+            _movementService = characterMovementService ??
+                                        throw new ArgumentNullException(nameof(characterMovementService));
+            _characterMovementView =
+                characterMovementView ?? throw new ArgumentNullException(nameof(characterMovementView));
         }
 
         public override void Update(float deltaTime)
         {
-            float targetSpeed = _inputService.InputData.Speed > 0 
-                ? _inputService.InputData.Speed 
-                : 0.7f;
+            try
+            {
+                _movementService.SetSpeed(_characterMovement, MovementSpeed, deltaTime);
+                _movementService.SetDirection(
+                    _characterMovement, _inputService.InputData.MoveDirection, deltaTime);
 
-            _characterMovement.Speed = Mathf.MoveTowards(
-                _characterMovement.Speed, targetSpeed, 0.01f);
-            
-            _characterMovement.Direction = _characterMovement.Speed * 2 *
-                                           deltaTime * 
-                                           _inputService.InputData.MoveDirection.normalized + 
-                                           Physics.gravity;
-            
-            if(_inputService.InputData.LookPosition == Vector3.zero)
-                return;
+                if (_inputService.InputData.LookPosition == Vector3.zero)
+                    return;
 
-            var lookDirection = _inputService.InputData.LookPosition - _characterMovementView.Position;
-            lookDirection.y = _characterMovementView.Position.y;
-            float distance = lookDirection.magnitude;
-            
-            float angle = Vector3.SignedAngle(Vector3.forward, lookDirection, Vector3.up);
-            
-            Vector3 direction = Quaternion.Euler(0, -angle, 0) * _inputService.InputData.MoveDirection;
-            
-            Vector2 direction2 = new Vector2(direction.x, direction.z).normalized;
-            _characterMovement.AnimationDirection = 
-                Vector2.MoveTowards(
-                    _characterMovement.AnimationDirection,
-                    direction2, 
-                    _characterMovement.AnimationDirectionSpeed * deltaTime);
-            
-            _characterAnimationView.SetDirection(_characterMovement.AnimationDirection);
-            
-            if(distance < 0.7f)
-                return;
-            
-            _characterMovementView.SetLookRotation(angle);
+                float angle = _movementService.GetAngleRotation(
+                    _characterMovementView.Position, _inputService.InputData.LookPosition);
+                _movementService.SetAnimationDirection(
+                    _characterMovement, _inputService.InputData.MoveDirection, angle, deltaTime);
+                _characterAnimationView.SetDirection(_characterMovement.AnimationDirection);
+                _characterMovementView.SetLookRotation(angle);
+            }
+            catch (InvalidOperationException)
+            {
+            }
         }
     }
 }

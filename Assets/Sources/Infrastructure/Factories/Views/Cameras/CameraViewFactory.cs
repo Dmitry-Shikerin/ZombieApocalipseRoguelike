@@ -1,6 +1,6 @@
 ﻿using System;
-using Sources.Controllers.Cameras;
-using Sources.Infrastructure.Factories.Controllers.Cameras;
+using Sources.Controllers.Presenters.Cameras;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Cameras;
 using Sources.Presentations.Views.Cameras;
 using Sources.PresentationsInterfaces.Views.Cameras;
 

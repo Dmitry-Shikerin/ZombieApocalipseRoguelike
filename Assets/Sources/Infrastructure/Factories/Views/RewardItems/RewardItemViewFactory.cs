@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Domain.Models.Constants;
 using Sources.InfrastructureInterfaces.Factories.Views.RewardItems;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.Presentations.Views.RewardItems;
@@ -22,7 +23,6 @@ namespace Sources.Infrastructure.Factories.Views.RewardItems
         public IRewardItemView Create(Vector3 position, int amount)
         {
             RewardItemView rewardItemView = CreateView();
-            rewardItemView.SetPosition(position);
             
             return rewardItemView;
         }
@@ -30,7 +30,7 @@ namespace Sources.Infrastructure.Factories.Views.RewardItems
         private RewardItemView CreateView()
         {
             RewardItemView rewardItemView =
-                Object.Instantiate(Resources.Load<RewardItemView>("Views/RewardItemView"));
+                Object.Instantiate(Resources.Load<RewardItemView>(PrefabPath.RewardItem));
 
             rewardItemView
                 .AddComponent<PoolableObject>()

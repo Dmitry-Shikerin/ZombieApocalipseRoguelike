@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Domain.Models.Constants;
 using Sources.InfrastructureInterfaces.Factories.Views.Bullets;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.Presentations.Views.Bullets;
@@ -31,8 +32,6 @@ namespace Sources.Infrastructure.Factories.Views.Bullets
         {
             bulletView.Construct(miniGunView);
             bulletView.SetParent(null);
-            bulletView.SetPosition(miniGunView.BulletSpawnPoint.Transform.position);
-            bulletView.SetRotation(miniGunView.BulletSpawnPoint.Transform.rotation);
             
             return bulletView;
         }
@@ -40,7 +39,7 @@ namespace Sources.Infrastructure.Factories.Views.Bullets
         private BulletView CreateView()
         {
             BulletView bulletView = Object.Instantiate(
-                Resources.Load<BulletView>("Views/BulletView"));
+                Resources.Load<BulletView>(PrefabPath.Bullet));
 
             bulletView
                 .AddComponent<PoolableObject>()

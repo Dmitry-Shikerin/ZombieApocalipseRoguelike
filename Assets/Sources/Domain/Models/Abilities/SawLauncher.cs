@@ -4,13 +4,13 @@ namespace Sources.Domain.Models.Abilities
 {
     public class SawLauncher
     {
-        public IUpgrader Upgrader { get; }
+        private IUpgrader _upgrader;
 
         public SawLauncher(IUpgrader upgrader)
         {
-            Upgrader = upgrader;
+            _upgrader = upgrader;
         }
 
-        public float Damage => Upgrader.CurrentAmount;
+        public float Damage => _upgrader.CurrentAmount;
     }
 }

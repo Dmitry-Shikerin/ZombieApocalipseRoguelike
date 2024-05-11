@@ -1,30 +1,24 @@
 ﻿using System;
+using JetBrains.Annotations;
 using NodeCanvas.Framework;
 using UnityEngine;
 
 namespace Sources.Presentations.Views.Environments.Swings.Transitions
 {
+    [UsedImplicitly]
     public class ForwardRotateTransition : ConditionTask
     {
-        private float _targetAngle;
+        private const float TargetAngle = 20;
+        
         private Transform _transform;
 
         protected override string OnInit()
         {
-            _transform = blackboard.GetVariable<Transform>("_transform").value;
-            _targetAngle = 20;
+            _transform = blackboard.GetVariableValue<Transform>("_transform");
             return null;
         }
 
-        protected override void OnEnable()
-        {
-        }
-
-        protected override void OnDisable()
-        {
-        }
-
         protected override bool OnCheck() =>
-            Math.Abs(_targetAngle - _transform.rotation.eulerAngles.x) < 0.1f;
+            Math.Abs(TargetAngle - _transform.rotation.eulerAngles.x) < 0.1f;
     }
 }

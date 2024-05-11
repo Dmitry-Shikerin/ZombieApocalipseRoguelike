@@ -1,8 +1,8 @@
 ﻿using System;
 using JetBrains.Annotations;
-using Sources.Controllers.Enemies.Base;
-using Sources.Controllers.Enemies.Base.States;
 using Sources.Controllers.Enemies.Bosses.States;
+using Sources.Controllers.Presenters.Enemies.Base;
+using Sources.Controllers.Presenters.Enemies.Base.States;
 using Sources.Controllers.Presenters.Enemies.Bosses.States;
 using Sources.Domain.Models.Enemies.Bosses;
 using Sources.Domain.Models.Gameplay;
@@ -11,7 +11,9 @@ using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
+using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
+using Sources.Utils.CustomCollections;
 using UnityEngine;
 
 namespace Sources.Infrastructure.Factories.Controllers.Enemies.Bosses
@@ -22,14 +24,14 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Bosses
         private readonly IExplosionBodyBloodySpawnService _explosionBodyBloodySpawnService;
         private readonly IRewardItemSpawnService _rewardItemSpawnService;
         private readonly OverlapService _overlapService;
-        private readonly IEnemyCollectorService _enemyCollectorService;
+        private readonly CustomCollection<IEnemyView> _enemyCollection;
 
         public BossEnemyPresenterFactory(
             IUpdateRegister updateRegister,
             IExplosionBodyBloodySpawnService explosionBodyBloodySpawnService,
             IRewardItemSpawnService rewardItemSpawnService,
             OverlapService overlapService,
-            IEnemyCollectorService enemyCollectorService)
+            CustomCollection<IEnemyView> enemyCollection)
         {
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
             _explosionBodyBloodySpawnService = explosionBodyBloodySpawnService ?? 
@@ -37,7 +39,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Bosses
             _rewardItemSpawnService = rewardItemSpawnService ?? 
                                       throw new ArgumentNullException(nameof(rewardItemSpawnService));
             _overlapService = overlapService ?? throw new ArgumentNullException(nameof(overlapService));
-            _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
+            _enemyCollection = enemyCollection ?? throw new ArgumentNullException(nameof(enemyCollection));
         }
 
         public EnemyPresenter Create(
@@ -48,7 +50,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Bosses
         {
             EnemyIdleState idleState = new EnemyIdleState(bossEnemy, bossEnemyAnimation);
             EnemyInitializeState initializeState = new EnemyInitializeState(
-                bossEnemy, bossEnemyAnimation, bossEnemyView, _enemyCollectorService);
+                bossEnemy, bossEnemyAnimation, bossEnemyView, _enemyCollection);
             // BossEnemyMoveToPlayerState bossEnemyMoveToPlayerState = new BossEnemyMoveToPlayerState(
             //     bossEnemy, bossEnemyView, bossEnemyAnimation);
             BossEnemyMoveToPlayerState moveToPlayerState = new BossEnemyMoveToPlayerState(
@@ -60,7 +62,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Enemies.Bosses
                 bossEnemyView, 
                 _explosionBodyBloodySpawnService, 
                 _rewardItemSpawnService,
-                _enemyCollectorService);
+                _enemyCollection);
             EnemyRunState enemyRunState = new EnemyRunState(bossEnemy, bossEnemyView, bossEnemyAnimation);
             
             FiniteTransition toMoveToPlayerTransition = new FiniteTransitionBase(

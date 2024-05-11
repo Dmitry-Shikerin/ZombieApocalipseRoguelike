@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Threading;
-using Sources.DomainInterfaces.Weapons;
+using Sources.DomainInterfaces.Models.Weapons;
 
 namespace Sources.Domain.Models.Characters.Attackers
 {
     public class CharacterAttacker
     {
+        private readonly IWeapon _weapon;
+
         public CharacterAttacker(IWeapon weapon)
         {
-            Weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
+            _weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
         }
 
-        public IWeapon Weapon { get; }
-
         public void Attack(CancellationToken cancellationToken) =>
-            Weapon.AttackAsync(cancellationToken);
+            _weapon.AttackAsync(cancellationToken);
 
         public void EndAttack() =>
-            Weapon.EndAttack();
+            _weapon.EndAttack();
     }
 }

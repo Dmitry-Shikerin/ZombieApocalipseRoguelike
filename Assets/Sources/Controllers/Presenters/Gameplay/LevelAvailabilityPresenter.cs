@@ -6,7 +6,6 @@ using Sources.Domain.Models.Payloads;
 using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.SceneServices;
 using Sources.PresentationsInterfaces.Views.Gameplay;
-using UnityEngine;
 
 namespace Sources.Controllers.Presenters.Gameplay
 {
@@ -44,28 +43,23 @@ namespace Sources.Controllers.Presenters.Gameplay
             RemoveButtonListeners();
         }
 
-        //TODO затемнять картинки если они не доступны
         private void ShowAvailableLevels()
         {
             for (int i = 0; i < _levelAvailability.Levels.Count; i++)
             {
                 if (i == 0)
-                {
-                    _levelAvailabilityView.Levels[i].ImageView.HideImage();
-                    _levelAvailabilityView.Levels[i].ButtonView.Enable();
-                }
+                    SetAvailableLevel(i);
+
+                if (_levelAvailability.Levels[i].IsCompleted == false)
+                    continue;
                 
-                if (_levelAvailability.Levels[i].IsCompleted)
-                {
-                    _levelAvailabilityView.Levels[i].ImageView.HideImage();
-                    _levelAvailabilityView.Levels[i].ButtonView.Enable();
+                SetAvailableLevel(i);
                     
-                    if(i == _levelAvailabilityView.Levels.Count - 1)
+                if(i == _levelAvailabilityView.Levels.Count - 1)
                         return;
                     
-                    _levelAvailabilityView.Levels[i + 1].ImageView.HideImage();
-                    _levelAvailabilityView.Levels[i + 1].ButtonView.Enable();
-                }
+                int correctIndex = i + 1;
+                SetAvailableLevel(correctIndex);
             }
         }
 
@@ -76,6 +70,12 @@ namespace Sources.Controllers.Presenters.Gameplay
                 levelView.ImageView.ShowImage();
                 levelView.ButtonView.Disable();
             }
+        }
+
+        private void SetAvailableLevel(int index)
+        {
+            _levelAvailabilityView.Levels[index].ImageView.HideImage();
+            _levelAvailabilityView.Levels[index].ButtonView.Enable();
         }
 
         private void AddButtonListeners()
@@ -95,15 +95,19 @@ namespace Sources.Controllers.Presenters.Gameplay
         }
 
         private void ShowFirstLevel() =>
-            _sceneService.ChangeSceneAsync(ModelId.Gameplay, new ScenePayload(ModelId.Gameplay, false));
+            _sceneService.ChangeSceneAsync(
+                ModelId.Gameplay, new ScenePayload(ModelId.Gameplay, false, false));
 
         private void ShowSecondLevel() =>
-            _sceneService.ChangeSceneAsync(ModelId.Gameplay2, new ScenePayload(ModelId.Gameplay2, false));
+            _sceneService.ChangeSceneAsync(
+                ModelId.Gameplay2, new ScenePayload(ModelId.Gameplay2, false, false));
         
         private void ShowThirdLevel() =>
-            _sceneService.ChangeSceneAsync(ModelId.Gameplay3, new ScenePayload(ModelId.Gameplay3, false));
+            _sceneService.ChangeSceneAsync(
+                ModelId.Gameplay3, new ScenePayload(ModelId.Gameplay3, false, false));
         
         private void ShowFourthLevel() =>
-            _sceneService.ChangeSceneAsync(ModelId.Gameplay4, new ScenePayload(ModelId.Gameplay4, false));
+            _sceneService.ChangeSceneAsync(
+                ModelId.Gameplay4, new ScenePayload(ModelId.Gameplay4, false, false));
     }
 }
