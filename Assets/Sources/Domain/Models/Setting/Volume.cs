@@ -19,7 +19,7 @@ namespace Sources.Domain.Models.Setting
         }
 
         public Volume()
-            : this(VolumeConstant.BaseMusciValue, VolumeConstant.BaseMusciValue, ModelId.Volume)
+            : this(VolumeConst.BaseMusciValue, VolumeConst.BaseMusciValue, ModelId.Volume)
         {
         }
 

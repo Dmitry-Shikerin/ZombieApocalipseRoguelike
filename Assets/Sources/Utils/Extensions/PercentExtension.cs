@@ -23,6 +23,6 @@ namespace Sources.Utils.Extentions
             (int)FloatToPercent((int)value, (int)max);
 
         public static float FloatPercentToUnitPercent(this float value) =>
-            value * MathConstant.UnitMultiplier;
+            value * MathConst.UnitMultiplier;
     }
 }

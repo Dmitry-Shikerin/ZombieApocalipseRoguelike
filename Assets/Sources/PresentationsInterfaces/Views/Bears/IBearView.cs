@@ -10,7 +10,6 @@ namespace Sources.PresentationsInterfaces.Views.Bears
     {
         BearAnimationView BearAnimationView { get; }
         Vector3 Position { get; }
-        Vector3 Forward { get; }
         float StoppingDistance { get; }
         IEnemyHealthView TargetEnemyHealth { get; }
         ICharacterMovementView CharacterMovementView { get; }

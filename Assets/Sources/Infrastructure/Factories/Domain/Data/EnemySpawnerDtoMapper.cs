@@ -6,6 +6,7 @@ using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Spawners.Configs;
 using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
+using Sources.InfrastructureInterfaces.Services.EnemySpawners;
 
 namespace Sources.Infrastructure.Factories.Domain.Data
 {

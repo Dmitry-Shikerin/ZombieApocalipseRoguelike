@@ -1,7 +1,7 @@
 ﻿using Sources.Domain.Models.Characters;
 using UnityEngine;
 
-namespace Sources.InfrastructureInterfaces.Characters
+namespace Sources.InfrastructureInterfaces.Services.Characters
 {
     public interface ICharacterMovementService
     {

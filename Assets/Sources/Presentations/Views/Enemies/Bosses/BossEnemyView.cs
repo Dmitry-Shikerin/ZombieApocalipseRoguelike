@@ -1,5 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.Controllers.Enemies;
 using Sources.Controllers.Presenters.Enemies.Base;
 using Sources.Presentations.Triggers;
 using Sources.Presentations.Views.Common;
@@ -18,7 +17,6 @@ namespace Sources.Presentations.Views.Enemies.Bosses
         [Required] [SerializeField] private HealthUi _healthUi;
         [Required] [SerializeField] private BossEnemyAnimation _enemyAnimation;
         [Required] [SerializeField] private ParticleSystem _massAttackParticle;
-        [Required] [SerializeField] private CharacterHealthParticleCollision _characterHealthParticleCollision;
         [Required] [SerializeField] private HealthUiText _healthUiText;
         
         public EnemyHealthView EnemyHealthView => _healthView;
@@ -64,21 +62,5 @@ namespace Sources.Presentations.Views.Enemies.Bosses
 
         public void SetAgentSpeed(float speed) =>
             _navMeshAgent.speed = speed;
-
-        protected override void OnAfterEnable()
-        {
-            _characterHealthParticleCollision.Entered += OnEntered;
-        }
-
-        protected override void OnAfterDisable()
-        {
-            _characterHealthParticleCollision.Entered += OnEntered;
-        }
-
-        private void OnEntered(ICharacterHealthView characterHealthView)
-        {
-            Debug.Log("particleCollision DealDamege 10");
-            characterHealthView.TakeDamage(10);
-        }
     }
 }

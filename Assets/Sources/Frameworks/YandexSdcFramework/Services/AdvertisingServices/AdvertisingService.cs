@@ -66,7 +66,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
                     _pauseService.PauseSound();
                 },
                 () =>
-                    _playerWallet.AddCoins(AdvertisingConstant.CoinsAmount),
+                    _playerWallet.AddCoins(AdvertisingConst.CoinsAmount),
                 () =>
                 {
                     _pauseService.Continue();

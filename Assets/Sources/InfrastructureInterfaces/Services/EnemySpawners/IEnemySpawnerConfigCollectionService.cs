@@ -1,6 +1,6 @@
 ﻿using Sources.Domain.Models.Spawners.Configs;
 
-namespace Sources.Infrastructure.Services.EnemySpawners
+namespace Sources.InfrastructureInterfaces.Services.EnemySpawners
 {
     public interface IEnemySpawnerConfigCollectionService
     {

@@ -23,7 +23,6 @@ namespace Sources.Infrastructure.Services.UpdateServices
             if(_actions.Count == 0)
                 return;
             
-            //TODO переделать на вот это
             for (int i = _actions.Count - 1; i >= 0; i--)
                 _actions[i].Invoke(deltaTime);
         }

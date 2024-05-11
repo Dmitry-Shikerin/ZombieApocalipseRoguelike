@@ -28,11 +28,11 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
 
             _textDictionary = new Dictionary<string, IReadOnlyDictionary<string, string>>()
             {
-                [LocalizationConstant.RussianCode] = localizationConfig.LocalizationPhrases
+                [LocalizationConst.RussianCode] = localizationConfig.LocalizationPhrases
                     .ToDictionary(phrase => phrase.LocalizationId, phrase => phrase.Russian),
-                [LocalizationConstant.EnglishCode] = localizationConfig.LocalizationPhrases
+                [LocalizationConst.EnglishCode] = localizationConfig.LocalizationPhrases
                     .ToDictionary(phrase => phrase.LocalizationId, phrase => phrase.English),
-                [LocalizationConstant.TurkishCode] = localizationConfig.LocalizationPhrases
+                [LocalizationConst.TurkishCode] = localizationConfig.LocalizationPhrases
                     .ToDictionary(phrase => phrase.LocalizationId, phrase => phrase.Turkish),
             };
         }
@@ -82,10 +82,10 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
         {
             string key = _uiCollector.Localization switch
             {
-                Localization.English => LocalizationConstant.EnglishCode,
-                Localization.Turkish => LocalizationConstant.TurkishCode,
-                Localization.Russian => LocalizationConstant.RussianCode,
-                _ => LocalizationConstant.EnglishCode,
+                Localization.English => LocalizationConst.EnglishCode,
+                Localization.Turkish => LocalizationConst.TurkishCode,
+                Localization.Russian => LocalizationConst.RussianCode,
+                _ => LocalizationConst.EnglishCode,
             };
 
             TranslateViews(key);
@@ -98,10 +98,10 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
 
             string languageCode = YandexGamesSdk.Environment.i18n.lang switch
             {
-                LocalizationConstant.English => LocalizationConstant.EnglishCode,
-                LocalizationConstant.Turkish => LocalizationConstant.TurkishCode,
-                LocalizationConstant.Russian => LocalizationConstant.RussianCode,
-                _ => LocalizationConstant.EnglishCode
+                LocalizationConst.English => LocalizationConst.EnglishCode,
+                LocalizationConst.Turkish => LocalizationConst.TurkishCode,
+                LocalizationConst.Russian => LocalizationConst.RussianCode,
+                _ => LocalizationConst.EnglishCode
             };
 
             TranslateViews(languageCode);

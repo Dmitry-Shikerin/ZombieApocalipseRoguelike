@@ -1,5 +1,5 @@
 ﻿using Sources.ControllersInterfaces.ControllerLifetimes;
-using Sources.InfrastructureInterfaces.Services.Updates;
+using Sources.InfrastructureInterfaces.Services.UpdateServices.Methods;
 using Sources.InfrastructureInterfaces.StateMachines.States;
 
 namespace Sources.InfrastructureInterfaces.StateMachines.SceneStateMachines

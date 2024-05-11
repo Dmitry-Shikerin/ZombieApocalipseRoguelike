@@ -1,5 +1,6 @@
 ﻿using Sources.Infrastructure.Services.SceneLoaderServices;
 using Sources.Infrastructure.Services.Volumes;
+using Sources.InfrastructureInterfaces.Services.SceneLoaderService;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Zenject;
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Presenters.Characters;
 using Sources.Infrastructure.Services.Characters;
+using Sources.InfrastructureInterfaces.Services.Characters;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Character.EnemyIndicators;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;

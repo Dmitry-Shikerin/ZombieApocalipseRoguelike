@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using Sources.Controllers.Presenters.Gameplay;
-using Sources.Presentations.UI.Buttons;
-using Sources.PresentationsInterfaces.UI.Buttons;
 using Sources.PresentationsInterfaces.Views.Gameplay;
 using UnityEngine;
 

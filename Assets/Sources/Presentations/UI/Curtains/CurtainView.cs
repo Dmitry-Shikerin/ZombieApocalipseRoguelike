@@ -32,12 +32,12 @@ namespace Sources.Presentations.UI.Curtains
         {
             IsInProgress = true;
             Show();
-            await Fade(0, CurtainConstant.Max, _cancellationTokenSource.Token);
+            await Fade(0, CurtainConst.Max, _cancellationTokenSource.Token);
         }
 
         public async UniTask HideCurtain()
         {
-            await Fade(CurtainConstant.Max, 0, _cancellationTokenSource.Token);
+            await Fade(CurtainConst.Max, 0, _cancellationTokenSource.Token);
             Hide();
             IsInProgress = false;
         }
@@ -48,7 +48,7 @@ namespace Sources.Presentations.UI.Curtains
             {
                 _canvasGroup.alpha = start;
 
-                while (Mathf.Abs(_canvasGroup.alpha - end) > MathConstant.Epsilon)
+                while (Mathf.Abs(_canvasGroup.alpha - end) > MathConst.Epsilon)
                 {
                     _canvasGroup.alpha = Mathf.MoveTowards(
                         _canvasGroup.alpha, end, Time.deltaTime / _duration);

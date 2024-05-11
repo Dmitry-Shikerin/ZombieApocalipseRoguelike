@@ -8,14 +8,14 @@ namespace Sources.Presentations.Views.Characters
     public class CharacterMovementView : PresentableView<CharacterMovementPresenter>, ICharacterMovementView
     {
         [Required] [SerializeField] private CharacterController _characterController;
+        [SerializeField] private float _maxDegreesRotationDelta = 4f;
 
-        public Vector3 Forward => transform.forward;
         public Vector3 Position => transform.position;
         
         public void SetLookRotation(float angle)
         {
             transform.rotation = Quaternion.RotateTowards(
-                transform.rotation, Quaternion.Euler(0, angle, 0), 4f);
+                transform.rotation, Quaternion.Euler(0, angle, 0), _maxDegreesRotationDelta);
         }
 
         public void Move(Vector3 direction) =>

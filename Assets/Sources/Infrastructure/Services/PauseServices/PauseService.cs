@@ -45,7 +45,7 @@ namespace Sources.Infrastructure.Services.PauseServices
 
             IsPaused = false;
             ContinueActivated?.Invoke();
-            Time.timeScale = TimeScaleValue.Max;
+            Time.timeScale = TimeScaleConst.Max;
         }
 
         public void PauseSound()
@@ -68,7 +68,7 @@ namespace Sources.Infrastructure.Services.PauseServices
 
             IsPaused = true;
             PauseActivated?.Invoke();
-            Time.timeScale = TimeScaleValue.Min;
+            Time.timeScale = TimeScaleConst.Min;
         }
 
         public async UniTask Yield(CancellationToken cancellationToken)

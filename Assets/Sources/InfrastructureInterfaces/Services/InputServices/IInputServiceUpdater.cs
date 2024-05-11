@@ -1,4 +1,4 @@
-using Sources.InfrastructureInterfaces.Services.Updates;
+using Sources.InfrastructureInterfaces.Services.UpdateServices.Methods;
 
 namespace Sources.InfrastructureInterfaces.Services.InputServices
 {

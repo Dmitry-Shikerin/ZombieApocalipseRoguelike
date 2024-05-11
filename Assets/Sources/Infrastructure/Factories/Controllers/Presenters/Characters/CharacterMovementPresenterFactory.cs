@@ -5,7 +5,7 @@ using Sources.Domain.Models.Characters;
 using Sources.Domain.Models.Inputs;
 using Sources.Infrastructure.Services.Characters;
 using Sources.Infrastructure.StateMachines.ContextStateMachines.Transitions;
-using Sources.InfrastructureInterfaces.Characters;
+using Sources.InfrastructureInterfaces.Services.Characters;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Character;

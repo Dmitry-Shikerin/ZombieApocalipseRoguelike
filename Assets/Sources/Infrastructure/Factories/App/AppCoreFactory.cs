@@ -8,6 +8,7 @@ using Sources.Domain.Models.Data.Ids;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
 using Sources.Infrastructure.Services.SceneLoaderServices;
 using Sources.Infrastructure.Services.SceneServices;
+using Sources.InfrastructureInterfaces.Services.SceneLoaderService;
 using Sources.Presentations.UI.Curtains;
 using UnityEngine;
 using Zenject;

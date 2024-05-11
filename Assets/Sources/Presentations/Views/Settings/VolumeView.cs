@@ -4,7 +4,6 @@ using Sources.Presentations.UI.Sliders;
 using Sources.PresentationsInterfaces.UI.Sliders;
 using Sources.PresentationsInterfaces.Views.Settings;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Presentations.Views.Settings
 {

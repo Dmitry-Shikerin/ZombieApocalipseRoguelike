@@ -11,10 +11,6 @@ namespace Sources.Presentations.UI.AudioSources
 
         public bool IsPlaying => _audioSource.isPlaying;
 
-        private void Awake()
-        {
-        }
-
         public void Mute() =>
             _audioSource.mute = true;
 
@@ -44,9 +40,5 @@ namespace Sources.Presentations.UI.AudioSources
 
         public void SetVolume(float volume) =>
             _audioSource.volume = volume;
-
-        public void Set()
-        {
-        }
     }
 }

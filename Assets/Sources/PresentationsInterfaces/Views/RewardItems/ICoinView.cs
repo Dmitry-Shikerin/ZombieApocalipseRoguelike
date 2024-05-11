@@ -1,6 +1,6 @@
 ﻿using Sources.PresentationsInterfaces.Views.Character;
 
-namespace Sources.PresentationsInterfaces.Views.Coins
+namespace Sources.PresentationsInterfaces.Views.RewardItems
 {
     public interface ICoinView
     {

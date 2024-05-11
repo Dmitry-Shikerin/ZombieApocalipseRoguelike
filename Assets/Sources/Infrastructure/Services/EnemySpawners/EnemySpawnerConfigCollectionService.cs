@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sources.Domain.Models.Spawners.Configs;
 using Sources.Domain.Models.Spawners.Configs.Containers;
+using Sources.InfrastructureInterfaces.Services.EnemySpawners;
 
 namespace Sources.Infrastructure.Services.EnemySpawners
 {

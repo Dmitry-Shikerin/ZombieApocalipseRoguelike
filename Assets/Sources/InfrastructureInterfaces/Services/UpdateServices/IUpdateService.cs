@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Sources.InfrastructureInterfaces.Services.Registers;
-using Sources.InfrastructureInterfaces.Services.Updates;
+﻿using Sources.InfrastructureInterfaces.Services.Registers;
+using Sources.InfrastructureInterfaces.Services.UpdateServices.Methods;
 
 namespace Sources.InfrastructureInterfaces.Services.UpdateServices
 {

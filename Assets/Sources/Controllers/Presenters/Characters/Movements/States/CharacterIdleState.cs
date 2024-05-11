@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.Domain.Models.Characters;
 using Sources.Infrastructure.StateMachines.ContextStateMachines.States;
-using Sources.InfrastructureInterfaces.Characters;
+using Sources.InfrastructureInterfaces.Services.Characters;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.PresentationsInterfaces.Views.Character;
 using UnityEngine;

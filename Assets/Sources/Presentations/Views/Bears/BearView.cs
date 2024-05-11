@@ -16,7 +16,6 @@ namespace Sources.Presentations.Views.Bears
 
         public BearAnimationView BearAnimationView => _bearAnimationView;
         public Vector3 Position => transform.position;
-        public Vector3 Forward => transform.forward;
         public float StoppingDistance => _navMeshAgent.stoppingDistance;
         public IEnemyHealthView TargetEnemyHealth { get; private set; }
         public ICharacterMovementView CharacterMovementView { get; private set; }

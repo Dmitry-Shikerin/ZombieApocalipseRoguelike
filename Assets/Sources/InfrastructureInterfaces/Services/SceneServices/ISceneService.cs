@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Sources.ControllersInterfaces.ControllerLifetimes;
-using Sources.InfrastructureInterfaces.Services.Updates;
+using Sources.InfrastructureInterfaces.Services.UpdateServices.Methods;
 
 namespace Sources.InfrastructureInterfaces.Services.SceneServices
 {

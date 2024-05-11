@@ -13,26 +13,19 @@ namespace Sources.Presentations.Views.Characters
         [Required] [SerializeField] private FirstAidKitTrigger _firstAidKitTrigger;
         
         
-        
         public void TakeDamage(int damage) =>
             Presenter.TakeDamage(damage);
 
         public void PlayHealParticle() =>
             _healParticleSystem.Play();
 
-        protected override void OnAfterEnable()
-        {
+        protected override void OnAfterEnable() =>
             _firstAidKitTrigger.Entered += OnEnter;
-        }
 
-        protected override void OnAfterDisable()
-        {
+        protected override void OnAfterDisable() =>
             _firstAidKitTrigger.Entered -= OnEnter;
-        }
 
-        private void OnEnter(IFirstAidKitView firstAidKitView)
-        {
+        private void OnEnter(IFirstAidKitView firstAidKitView) =>
             Presenter.TakeHeal(firstAidKitView);
-        }
     }
 }
