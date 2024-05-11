@@ -17,10 +17,7 @@ namespace Sources.Infrastructure.Services.LoadServices.Data
             string json = PlayerPrefs.GetString(key, string.Empty);
 
             if (string.IsNullOrEmpty(json))
-            {
-                Debug.Log($"{key}");
-                throw new NullReferenceException(nameof(json));
-            }
+                throw new NullReferenceException(nameof(key));
 
             return JsonConvert.DeserializeObject(json, dtoType) ?? 
                    throw new NullReferenceException(nameof(json));

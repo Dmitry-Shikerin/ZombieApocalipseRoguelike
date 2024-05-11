@@ -3,6 +3,7 @@ using System.Threading;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
+using Sources.DomainInterfaces.Models.Spawners;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 using Sources.InfrastructureInterfaces.Services.Interstitials;
 using UnityEngine;
@@ -13,57 +14,40 @@ namespace Sources.Infrastructure.Services.Interstitials
     {
         private readonly IInterstitialAdService _interstitialAdService;
         private KillEnemyCounter _killEnemyCounter;
-        private EnemySpawner _enemySpawner;
-        private TimeSpan _advertisementTimeSpan;
+        private IEnemySpawner _enemySpawner;
         private CancellationTokenSource _cancellationTokenSource;
-        private TimeSpan _timerTimeSpan;
-        
+        private TimeSpan _advertisementTimeSpan = TimeSpan.FromMinutes(InterstitialConstant.ShowDelay);
+        private TimeSpan _timerTimeSpan = TimeSpan.FromSeconds(AdvertisingConstant.Delay);
+
         public InterstitialShowerService(IInterstitialAdService interstitialAdService)
         {
-            _interstitialAdService = interstitialAdService ?? 
+            _interstitialAdService = interstitialAdService ??
                                      throw new ArgumentNullException(nameof(interstitialAdService));
         }
 
         public async void Enter(object payload = null)
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            _advertisementTimeSpan = TimeSpan.FromMinutes(InterstitialConstant.ShowDelay);
-            _timerTimeSpan = TimeSpan.FromSeconds(AdvertisingConstant.Delay);
-
-            _killEnemyCounter.KillZombiesCountChanged += OnKillEnemyCounterChanged;
+            _enemySpawner.CurrentWaveChanged += OnCurrentWaveChanged;
         }
 
         public void Exit()
         {
-            _killEnemyCounter.KillZombiesCountChanged -= OnKillEnemyCounterChanged;
+            _cancellationTokenSource.Cancel();
+            _enemySpawner.CurrentWaveChanged -= OnCurrentWaveChanged;
         }
 
-        public void Register(KillEnemyCounter killEnemyCounter, EnemySpawner enemySpawner)
+        public void Register(IEnemySpawner enemySpawner)
         {
-            _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
             _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));
         }
 
-        //TODO вынести этот метов в отдельный сервис 
-        //TODO он используется здесь в энеми спавнере и в сервисе сохранения
-        private void OnKillEnemyCounterChanged()
+        private void OnCurrentWaveChanged()
         {
-            int sum = 0;
-            
-            for (int i = 0; i < _enemySpawner.EnemyInWave.Count; i++)
-            {
-                sum += _enemySpawner.EnemyInWave[i];
-                
-                if (_killEnemyCounter.KillZombies == sum)
-                {
-                    //TODO добавить 
-                    _interstitialAdService.ShowInterstitial();
-                    Debug.Log("Show interstitial");
-                    return;
-                }
-            }
+            Debug.Log("Show interstitial");
+            _interstitialAdService.ShowInterstitial();
         }
-        
+
         // private async UniTask ShowInterstitialAsync(CancellationToken cancellationToken)
         // {
         //     try

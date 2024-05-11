@@ -20,7 +20,6 @@ namespace Sources.Domain.Models.Gameplay
             IsCompleted = isCompleted;
         }
 
-        //TODO сохранять пройденные уровни
         public bool IsCompleted { get; private set; }
         public string Id { get; }
         public Type Type => GetType();

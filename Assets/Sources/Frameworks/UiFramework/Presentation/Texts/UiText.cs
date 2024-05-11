@@ -19,7 +19,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
         [SerializeField] private TextMeshProUGUI _tmpText;
         [TabGroup("Settings")] [SerializeField]
         private TextViewType _textViewType;
-        [TabGroup("Ids")] 
+        [TabGroup("Ids")] [TextArea] //TODO атрибут для большей видимости текста
         [SerializeField] private string _textId;
         
         public TextViewType TextViewType => _textViewType;

@@ -4,6 +4,7 @@ using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
+using Sources.Utils.CustomCollections;
 using UnityEngine;
 
 namespace Sources.Controllers.Presenters.Enemies.Base.States
@@ -14,14 +15,14 @@ namespace Sources.Controllers.Presenters.Enemies.Base.States
         private readonly IEnemyView _enemyView;
         private readonly IExplosionBodyBloodySpawnService _explosionBodyBloodySpawnService;
         private readonly IRewardItemSpawnService _rewardItemSpawnService;
-        private readonly IEnemyCollectorService _enemyCollectorService;
+        private readonly CustomCollection<IEnemyView> _enemyCollection;
 
         public EnemyDieState(
             KillEnemyCounter killEnemyCounter,
             IEnemyView enemyView, 
             IExplosionBodyBloodySpawnService explosionBodyBloodySpawnService,
             IRewardItemSpawnService rewardItemSpawnService,
-            IEnemyCollectorService enemyCollectorService)
+            CustomCollection<IEnemyView> enemyCollection)
         {
             _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
             _enemyView = enemyView ?? throw new ArgumentNullException(nameof(enemyView));
@@ -29,7 +30,7 @@ namespace Sources.Controllers.Presenters.Enemies.Base.States
                                           throw new ArgumentNullException(nameof(explosionBodyBloodySpawnService));
             _rewardItemSpawnService = rewardItemSpawnService ?? 
                                       throw new ArgumentNullException(nameof(rewardItemSpawnService));
-            _enemyCollectorService = enemyCollectorService ?? throw new ArgumentNullException(nameof(enemyCollectorService));
+            _enemyCollection = enemyCollection ?? throw new ArgumentNullException(nameof(enemyCollection));
         }
 
         public override void Enter()
@@ -43,7 +44,7 @@ namespace Sources.Controllers.Presenters.Enemies.Base.States
             _killEnemyCounter.IncreaseKillCount();
             _explosionBodyBloodySpawnService.Spawn(spawnPosition);
             _rewardItemSpawnService.Spawn(_enemyView.Position, 3);
-            _enemyCollectorService.Remove(_enemyView);
+            _enemyCollection.Remove(_enemyView);
             _enemyView.Destroy();
         }
     }

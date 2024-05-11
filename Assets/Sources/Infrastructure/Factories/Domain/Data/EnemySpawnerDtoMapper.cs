@@ -31,18 +31,23 @@ namespace Sources.Infrastructure.Factories.Domain.Data
                 EnemyInWave = enemySpawnerConfig.EnemyInWave.ToArray(),
                 SpawnDelays = enemySpawnerConfig.SpawnDelays.ToArray(),
                 BossesInLevel = enemySpawnerConfig.BossesInLevel,
+                SpawnedEnemies = 0,
+                SpawnedBosses = 0,
+                CurrentWave = 0,
             };
         }
 
         public EnemySpawnerDto MapModelToDto(EnemySpawner enemySpawner)
         {
-            //TODO сработает ли сохранение сразу массива
             return new EnemySpawnerDto()
             {
                 Id = enemySpawner.Id,
                 EnemyInWave = enemySpawner.EnemyInWave.ToArray(),
                 SpawnDelays = enemySpawner.SpawnDelays.ToArray(),
-                BossesInLevel = enemySpawner.BossesInLevel
+                BossesInLevel = enemySpawner.BossesInLevel,
+                SpawnedEnemies = enemySpawner.SpawnedEnemies,
+                SpawnedBosses = enemySpawner.SpawnedBosses,
+                CurrentWave = enemySpawner.CurrentWave,
             };
         }
 

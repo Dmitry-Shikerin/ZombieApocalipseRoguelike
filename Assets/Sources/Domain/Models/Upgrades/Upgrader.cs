@@ -8,7 +8,6 @@ namespace Sources.Domain.Models.Upgrades
 {
     public class Upgrader : IUpgrader, IEntity
     {
-        
         public Upgrader(
             float startAmount,
             int currentLevel,
@@ -33,8 +32,7 @@ namespace Sources.Domain.Models.Upgrades
         public int CurrentLevel { get; private set; }
         public int MaxLevel => MoneyPerUpgrades.Count;
         public float AddedAmount { get; }
-
-
+        
         public void Upgrade(PlayerWallet wallet)
         {
             if (CurrentLevel >= MaxLevel)

@@ -42,7 +42,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _loadSceneService.Load(payload as IScenePayload);
             _localizationService.Translate();
             _volumeService.Enter();
-            await _curtainView.HideCurtain();
+            // await _curtainView.HideCurtain();
             await GameReady(payload as IScenePayload);
         }
 

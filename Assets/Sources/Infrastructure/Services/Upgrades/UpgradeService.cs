@@ -10,6 +10,7 @@ using Sources.Infrastructure.Services.Providers;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Upgrades;
+using Sources.Utils.CustomCollections;
 using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Upgrades
@@ -18,7 +19,7 @@ namespace Sources.Infrastructure.Services.Upgrades
     {
         private PlayerWallet _playerWallet;
         private readonly PlayerWalletProvider _playerWalletProvider;
-        private readonly IUpgradeCollectionService _upgradeCollectionService;
+        private readonly ICustomCollection<Upgrader> _upgradeCollection;
         private readonly GameplayHud _gameplayHud;
         private readonly UpgradeViewFactory _upgradeViewFactory;
         private readonly UpgradeUiFactory _upgradeUiFactory;
@@ -31,7 +32,7 @@ namespace Sources.Infrastructure.Services.Upgrades
 
         public UpgradeService(
             PlayerWalletProvider playerWalletProvider,
-            IUpgradeCollectionService upgradeCollectionService,
+            ICustomCollection<Upgrader> upgradeCollection,
             GameplayHud gameplayHud,
             UpgradeViewFactory upgradeViewFactory,
             UpgradeUiFactory upgradeUiFactory,
@@ -44,8 +45,8 @@ namespace Sources.Infrastructure.Services.Upgrades
 
             _playerWalletProvider = playerWalletProvider ?? 
                                     throw new ArgumentNullException(nameof(playerWalletProvider));
-            _upgradeCollectionService = upgradeCollectionService ?? 
-                                        throw new ArgumentNullException(nameof(upgradeCollectionService));
+            _upgradeCollection = upgradeCollection ?? 
+                                        throw new ArgumentNullException(nameof(upgradeCollection));
             _gameplayHud = gameplayHud;
             _upgradeViewFactory = upgradeViewFactory ?? 
                                   throw new ArgumentNullException(nameof(upgradeViewFactory));
@@ -76,16 +77,14 @@ namespace Sources.Infrastructure.Services.Upgrades
 
         private void OnUpgradeFormChanged()
         {
-            //TODO получится ли за счет этого починить?
             if(_formService.IsActive(FormId.Upgrade))
                 return;
             
             //TODO сделать провайдер коллекций от Т и использовать его вместо создания отдельных классов для коллекций
             //TODO сделать у этого класса индексатор
-            IReadOnlyList<Upgrader> upgraders = _upgradeCollectionService.Get();
             List<Upgrader> availableUpgraders = new List<Upgrader>();
 
-            foreach (Upgrader upgrader in upgraders)
+            foreach (Upgrader upgrader in _upgradeCollection)
             {
                 if(upgrader.CurrentLevel == 3)
                     continue;
@@ -95,26 +94,12 @@ namespace Sources.Infrastructure.Services.Upgrades
             }
 
             availableUpgraders = availableUpgraders.OrderBy(upgrader => upgrader.CurrentLevel).ToList();
-
-            //if (availableUpgraders.Count >= 3)
-            //{
-            //    for (int i = 0; i < 3; i++)
-            //    {
-            //        Debug.Log($"Avaiable upgrader: {availableUpgraders[i].Id}");
-            //        _upgradeUiFactory.Create(availableUpgraders[i], _upgradeUis[i]);
-            //        _upgradeViewFactory.Create(availableUpgraders[i], PlayerWallet, _upgradeViews[i]);
-            //        _upgradeDescriptionViewFactory.Create(availableUpgraders[i], _gameplayHud.UpgradeDescriptionViews[i]);
-            //    }
-            //    
-            //    _formService.Show(FormId.Upgrade);
-            //}
             
+            //TODO фига себе запись
             if (availableUpgraders.Count >= 3)
                 numberOfFilledAbilities = 3;
-            
             else if (availableUpgraders.Count is < 3 and > 0)
                 numberOfFilledAbilities = availableUpgraders.Count;
-            
             else
                 return;
             
