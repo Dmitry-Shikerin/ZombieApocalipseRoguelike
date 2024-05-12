@@ -25,5 +25,6 @@
         FirstKitAidTutorial = 20,
         AdTutorial = 21,
         SettingsTutorial = 22,
+        ShowAd,
     }
 }
