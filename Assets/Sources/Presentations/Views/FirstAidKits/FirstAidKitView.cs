@@ -1,4 +1,6 @@
 ﻿using System;
+using Sources.Infrastructure.Services.ObjectPools;
+using Sources.InfrastructureInterfaces.Services.ObjectPools;
 using Sources.PresentationsInterfaces.Views.FirstAidKits;
 using Sources.PresentationsInterfaces.Views.ObjectPools;
 
@@ -8,19 +10,12 @@ namespace Sources.Presentations.Views.FirstAidKits
     {
         public int HealAmount { get; private set; }
         
-        public override void Destroy()
-        {
-            if (TryGetComponent(out PoolableObject poolableObject) == false)
-            {
-                Destroy(gameObject);
-                
-                return;
-            }
-            
-            poolableObject.ReturnToPool();
-            Hide();
-        }
+        private readonly IPoolableObjectDestroyerService _poolableObjectDestroyerService = 
+            new PoolableObjectDestroyerService();
         
+        public override void Destroy() =>
+            _poolableObjectDestroyerService.Destroy(this);
+
         public void SetHealAmount(int healAmount)
         {
             if(healAmount < 0)

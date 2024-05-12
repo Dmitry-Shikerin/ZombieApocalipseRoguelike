@@ -1,5 +1,7 @@
 ﻿using System;
 using Sirenix.OdinInspector;
+using Sources.Infrastructure.Services.ObjectPools;
+using Sources.InfrastructureInterfaces.Services.ObjectPools;
 using Sources.PresentationsInterfaces.Views.ExplosionBodyBloodies;
 using Sources.PresentationsInterfaces.Views.ObjectPools;
 using UnityEngine;
@@ -10,20 +12,13 @@ namespace Sources.Presentations.Views.ExplosionBodyBloodies
     {
         [Required] [SerializeField] private ParticleSystem _particleSystem;
         
+        private readonly IPoolableObjectDestroyerService _poolableObjectDestroyerService = 
+            new PoolableObjectDestroyerService();
+        
         private void OnEnable() =>
             _particleSystem.Play();
 
-        private void OnParticleSystemStopped()
-        {
-            if (TryGetComponent(out PoolableObject poolableObject) == false)
-            {
-                Destroy(gameObject);
-                
-                return;
-            }
-            
-            poolableObject.ReturnToPool();
-            Hide();
-        }
+        private void OnParticleSystemStopped() =>
+            _poolableObjectDestroyerService.Destroy(this);
     }
 }

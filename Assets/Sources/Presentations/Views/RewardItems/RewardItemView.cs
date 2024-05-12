@@ -1,26 +1,21 @@
 ﻿using System;
-using Sources.PresentationsInterfaces.Views.ObjectPools;
+using Sources.Infrastructure.Services.ObjectPools;
+using Sources.InfrastructureInterfaces.Services.ObjectPools;
 using Sources.PresentationsInterfaces.Views.RewardItems;
 
 namespace Sources.Presentations.Views.RewardItems
 {
     public class RewardItemView : View, IRewardItemView
     {
+        private readonly IPoolableObjectDestroyerService _poolableObjectDestroyerService = 
+            new PoolableObjectDestroyerService();
+
         public int RewardAmount { get; private set; }
-        
-        public override void Destroy()
-        {
-            if (TryGetComponent(out PoolableObject poolableObject) == false)
-            {
-                Destroy(gameObject);
-                
-                return;
-            }
-            
-            poolableObject.ReturnToPool();
-            Hide();
-        }
-        
+
+
+        public override void Destroy() =>
+            _poolableObjectDestroyerService.Destroy(this);
+
         public void SetRewardAmount(int rewardAmount)
         {
             if(rewardAmount < 0)

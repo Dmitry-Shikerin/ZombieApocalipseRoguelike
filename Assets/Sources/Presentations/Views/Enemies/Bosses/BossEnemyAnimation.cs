@@ -3,7 +3,6 @@ using JetBrains.Annotations;
 using Sources.Presentations.Views.Enemies.Base;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Presentations.Views.Enemies.Bosses
 {

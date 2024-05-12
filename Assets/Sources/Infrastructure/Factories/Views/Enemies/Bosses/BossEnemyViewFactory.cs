@@ -54,7 +54,7 @@ namespace Sources.Infrastructure.Factories.Views.Enemies.Bosses
             BossEnemyView bossEnemyView)
         {
             EnemyPresenter enemyPresenter = _bossEnemyPresenterFactory.Create(
-                bossEnemy, killEnemyCounter, bossEnemyView, bossEnemyView.EnemyAnimation);
+                bossEnemy, killEnemyCounter, bossEnemyView, bossEnemyView.BossEnemyAnimation);
             
             bossEnemyView.Construct(enemyPresenter);
             
