@@ -112,6 +112,7 @@ using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Collectors;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
+using Sources.InfrastructureInterfaces.Services.Overlaps;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.Saves;
@@ -144,10 +145,6 @@ namespace Sources.Infrastructure.DIContainers
         public override void InstallBindings()
         {
             Container
-                .Bind<UpgradeConfigContainer>()
-                .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer")
-                .AsSingle();
-            Container
                 .Bind<AudioClipCollection>()
                 .FromResource("Configs/GameplayAudioClipContainer")
                 .AsSingle();
@@ -155,37 +152,19 @@ namespace Sources.Infrastructure.DIContainers
                 .Bind<LocalizationConfig>()
                 .FromResource("Configs/Localizations/LocalizationConfig")
                 .AsSingle();
-            Container
-                .Bind<EnemySpawnerConfigContainer>()
-                .FromResource("Configs/EnemySpawners/Containers/EnemySpawnerConfigContainer")
-                .AsSingle();
-            Container
-                .Bind<SawLauncherAbilityUpgradeMap>()
-                .FromResource("Configs/Upgrades/SawLauncherAbilityUpgradeMap")
-                .AsSingle();
             Container.BindInterfacesAndSelfTo<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<UiCollector>().FromInstance(_gameplayHud.UiCollector).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
             Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
-            Container.BindInterfacesAndSelfTo<CustomCollection<Upgrader>>().AsSingle();
-            Container.Bind<IUpgradeService>().To<UpgradeService>().AsSingle();
             Container.Bind<PlayerWalletProvider>().AsSingle();
             
             BindServices();
-            BindCharacters();
-            BindWeapons();
             BindBear();
-            BindEnemy();
-            BindUpgrades();
-            BindDtoFactories();
-            BindItems();
-            BindSpawners();
             BindGameplay();
             BindMusic();
             BindSettings();
             BindFormFactories();
-            BindSdcServices();
         }
 
         //TODO разбить все на отдельные моноинсталлеры
@@ -194,26 +173,12 @@ namespace Sources.Infrastructure.DIContainers
             Container.BindInterfacesAndSelfTo<UpdateService>().AsSingle();
             Container.BindInterfacesAndSelfTo<NewInputService>().AsSingle();
             Container.Bind<LinecastService>().AsSingle();
-            Container.Bind<OverlapService>().AsSingle();
-            Container.Bind<IUpgradeConfigCollectionService>().To<UpgradeConfigCollectionService>().AsSingle();
-            Container.Bind<IObjectPool<BulletView>>().To<ObjectPool<BulletView>>().AsSingle();
-            Container.Bind<IObjectPool<EnemyView>>().To<ObjectPool<EnemyView>>().AsSingle();
-            Container.Bind<IObjectPool<ExplosionBodyBloodyView>>().To<ObjectPool<ExplosionBodyBloodyView>>().AsSingle();
-            Container.Bind<IObjectPool<FirstAidKitView>>().To<ObjectPool<FirstAidKitView>>().AsSingle();
-            Container.Bind<IObjectPool<RewardItemView>>().To<ObjectPool<RewardItemView>>().AsSingle();
-            Container.Bind<IObjectPool<BossEnemyView>>().To<ObjectPool<BossEnemyView>>().AsSingle();
-            Container.Bind<IBulletSpawnService>().To<BulletSpawnService>().AsSingle();
-            Container.Bind<IEnemySpawnService>().To<EnemySpawnService>().AsSingle();
-            Container.Bind<IBossEnemySpawnService>().To<BossEnemySpawnService>().AsSingle();
-            Container.Bind<IExplosionBodyBloodySpawnService>().To<ExplosionBodyBloodySpawnService>().AsSingle();
-            Container.Bind<IFirstAidKitSpawnService>().To<FirstAidKitSpawnService>().AsSingle();
-            Container.Bind<IRewardItemSpawnService>().To<RewardItemSpawnService>().AsSingle();
+            Container.Bind<IOverlapService>().To<OverlapService>().AsSingle();
             Container.Bind<ILocalizationService>().To<LocalizationService>().AsSingle();
             Container.Bind<ILoadService>().To<LoadService>().AsSingle();
             Container.Bind<IDataService>().To<PlayerPrefsDataService>().AsSingle();
             Container.Bind<IEntityRepository>().To<EntityRepository>().AsSingle();
             Container.Bind<IPauseService>().To<PauseService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<CustomCollection<IEnemyView>>().AsSingle();
             Container.Bind<IGameOverService>().To<GameOverService>().AsSingle();
             Container.Bind<ICameraService>().To<CameraService>().AsSingle();
             Container.Bind<LoadGameplaySceneService>().AsSingle();
@@ -221,14 +186,8 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<ISaveService>().To<SaveService>().AsSingle();
             Container.Bind<ILevelCompletedService>().To<LevelCompletedService>().AsSingle();
             Container.Bind<ITutorialService>().To<TutorialService>().AsSingle();
-            Container.Bind<IEnemySpawnerConfigCollectionService>().To<EnemySpawnerConfigCollectionService>().AsSingle();
-            Container.Bind<IBearMovementService>().To<BearMovementService>().AsSingle();
-            Container.Bind<ICharacterMovementService>().To<CharacterMovementService>().AsSingle();
             Container.Bind<IInterstitialShowerService>().To<InterstitialShowerService>().AsSingle();
-            Container.Bind<IMapperCollector>().To<MapperCollector>().AsSingle();
             Container.Bind<CustomValidator>().AsSingle();
-            Container.Bind<IEnemyIndicatorService>().To<EnemyIndicatorService>().AsSingle();
-            Container.Bind<IEnemyAttackService>().To<EnemyAttackService>().AsSingle();
         }
 
         private void BindFormFactories()
@@ -273,17 +232,6 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<SetCharacterCameraFollowViewCommand>().AsSingle();
         }
 
-        private void BindSdcServices()
-        {
-            Container.BindInterfacesTo<AdvertisingService>().AsSingle();
-            Container.Bind<IFocusService>().To<FocusService>().AsSingle();
-            Container.Bind<ILeaderboardInitializeService>().To<YandexLeaderboardInitializeService>().AsSingle();
-            Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
-            Container.Bind<IPlayerAccountAuthorizeService>().To<PlayerAccountAuthorizeService>().AsSingle();
-            Container.Bind<ISdcInitializeService>().To<SdcInitializeService>().AsSingle();
-            Container.Bind<IStickyService>().To<StickyService>().AsSingle();
-        }
-
         private void BindGameplay()
         {
             Container.Bind<KillEnemyCounterPresenterFactory>().AsSingle();
@@ -302,110 +250,12 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<BackgroundMusicViewFactory>().AsSingle();
         }
 
-        private void BindDtoFactories()
-        {
-            Container.Bind<IUpgradeDtoMapper>().To<UpgradeDtoMapper>().AsSingle();
-            Container.Bind<IPlayerWalletDtoMapper>()
-                .To<PlayerWalletDtoMapper>().AsSingle();
-            Container.Bind<ILevelDtoMapper>().To<LevelDtoMapper>().AsSingle();
-            Container.Bind<IVolumeDtoMapper>().To<VolumeDtoMapper>().AsSingle();
-            Container.Bind<ITutorialDtoMapper>().To<TutorialDtoMapper>().AsSingle();
-            Container.Bind<IGameDataDtoMapper>().To<GameDataDtoMapper>().AsSingle();
-            Container.Bind<IKillEnemyCounterDtoMapper>().To<KillEnemyCounterDtoMapper>().AsSingle();
-            Container.Bind<ISavedLevelDtoMapper>().To<SavedLevelDtoMapper>().AsSingle();
-            Container.Bind<IEnemySpawnerDtoMapper>().To<EnemySpawnerDtoMapper>().AsSingle();
-        }
-        
-        
-        private void BindCharacters()
-        {
-            Container.Bind<CharacterViewFactory>().AsSingle();
-            
-            Container.Bind<CharacterMovementPresenterFactory>().AsSingle();
-            Container.Bind<CharacterMovementViewFactory>().AsSingle();
-
-            Container.Bind<CharacterAttackerPresenterFactory>().AsSingle();
-            Container.Bind<CharacterAttackerViewFactory>().AsSingle();
-
-            Container.Bind<CharacterHealthPresenterFactory>().AsSingle();
-            Container.Bind<CharacterHealthViewFactory>().AsSingle();
-
-            Container.Bind<CharacterWalletPresenterFactory>().AsSingle();
-            Container.Bind<CharacterWalletViewFactory>().AsSingle();
-
-            Container.Bind<PlayerWalletPresenterFactory>().AsSingle();
-            Container.Bind<PlayerWalletViewFactory>().AsSingle();
-
-            Container.Bind<EnemyIndicatorPresenterFactory>().AsSingle();
-            Container.Bind<EnemyIndicatorViewFactory>().AsSingle();
-
-            Container.Bind<CameraPresenterFactory>().AsSingle();
-            Container.Bind<CameraViewFactory>().AsSingle();
-        }
-
-        private void BindItems()
-        {
-            Container.Bind<IFirstAidKitViewFactory>().To<FirstAidKitViewFactory>().AsSingle();
-            Container.Bind<IRewardItemViewFactory>().To<RewardItemViewFactory>().AsSingle();
-        }
-
         private void BindBear()
         {
+            Container.Bind<IBearMovementService>().To<BearMovementService>().AsSingle();
+            
             Container.Bind<BearPresenterFactory>().AsSingle();
             Container.Bind<BearViewFactory>().AsSingle();
-        }
-
-        private void BindWeapons()
-        {
-            Container.Bind<MiniGunPresenterFactory>().AsSingle();
-            Container.Bind<MiniGunViewFactory>().AsSingle();
-
-            Container.Bind<IBulletViewFactory>().To<BulletViewFactory>().AsSingle();
-
-            Container.Bind<SawLauncherAbilityPresenterFactory>().AsSingle();
-            Container.Bind<SawLauncherAbilityViewFactory>().AsSingle();
-
-            Container.Bind<SawLauncherPresenterFactory>().AsSingle();
-            Container.Bind<SawLauncherViewFactory>().AsSingle();
-        }
-
-        private void BindSpawners()
-        {
-            Container.Bind<EnemySpawnPresenterFactory>().AsSingle();
-            Container.Bind<EnemySpawnViewFactory>().AsSingle();
-
-            Container.Bind<ItemSpawnerPresenterFactory>().AsSingle();
-            Container.Bind<ItemSpawnerViewFactory>().AsSingle();
-        }
-        
-        private void BindEnemy()
-        {
-            Container.Bind<HealthUiPresenterFactory>().AsSingle();
-            Container.Bind<HealthUiFactory>().AsSingle();
-
-            Container.Bind<HealthUiTextPresenterFactory>().AsSingle();
-            Container.Bind<HealthUiTextViewFactory>().AsSingle();
-
-            Container.Bind<BossEnemyPresenterFactory>().AsSingle();
-            Container.Bind<IBossEnemyViewFactory>().To<BossEnemyViewFactory>().AsSingle();
-            
-            Container.Bind<EnemyHealthPresenterFactory>().AsSingle();
-            Container.Bind<EnemyHealthViewFactory>().AsSingle();
-            Container.Bind<EnemyPresenterFactory>().AsSingle();
-            Container.Bind<IEnemyViewFactory>().To<EnemyViewFactory>().AsSingle();
-            Container.Bind<IExplosionBodyBloodyViewFactory>().To<ExplosionBodyBloodyViewFactory>().AsSingle();
-        }
-
-        private void BindUpgrades()
-        {
-            Container.Bind<UpgradePresenterFactory>().AsSingle();
-            Container.Bind<UpgradeViewFactory>().AsSingle();
-
-            Container.Bind<UpgradeUiPresenterFactory>().AsSingle();
-            Container.Bind<UpgradeUiFactory>().AsSingle();
-
-            Container.Bind<UpgradeDescriptionPresenterFactory>().AsSingle();
-            Container.Bind<UpgradeDescriptionViewFactory>().AsSingle();
         }
     }
 }

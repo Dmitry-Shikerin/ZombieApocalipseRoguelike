@@ -94,7 +94,7 @@ namespace Sources.Infrastructure.DIContainers
             BindLevelAvailability();
             BindMusic();
             BindMainMenuLoadService();
-            BindDtoFactories();
+            // BindDtoFactories();
             BindFormFactories();
         }
 
@@ -167,19 +167,19 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<LoadMainMenuSceneService>().AsSingle();
         }
 
-        private void BindDtoFactories()
-        {
-            Container.Bind<IUpgradeDtoMapper>().To<UpgradeDtoMapper>().AsSingle();
-            Container.Bind<IPlayerWalletDtoMapper>()
-                .To<PlayerWalletDtoMapper>().AsSingle();
-            Container.Bind<ILevelDtoMapper>().To<LevelDtoMapper>().AsSingle();
-            Container.Bind<IVolumeDtoMapper>().To<VolumeDtoMapper>().AsSingle();
-            Container.Bind<ITutorialDtoMapper>().To<TutorialDtoMapper>().AsSingle();
-            Container.Bind<IGameDataDtoMapper>().To<GameDataDtoMapper>().AsSingle();
-            Container.Bind<IKillEnemyCounterDtoMapper>().To<KillEnemyCounterDtoMapper>().AsSingle();
-            Container.Bind<ISavedLevelDtoMapper>().To<SavedLevelDtoMapper>().AsSingle();
-            Container.Bind<IEnemySpawnerDtoMapper>().To<EnemySpawnerDtoMapper>().AsSingle();
-        }
+        // private void BindDtoFactories()
+        // {
+        //     Container.Bind<IUpgradeDtoMapper>().To<UpgradeDtoMapper>().AsSingle();
+        //     Container.Bind<IPlayerWalletDtoMapper>()
+        //         .To<PlayerWalletDtoMapper>().AsSingle();
+        //     Container.Bind<ILevelDtoMapper>().To<LevelDtoMapper>().AsSingle();
+        //     Container.Bind<IVolumeDtoMapper>().To<VolumeDtoMapper>().AsSingle();
+        //     Container.Bind<ITutorialDtoMapper>().To<TutorialDtoMapper>().AsSingle();
+        //     Container.Bind<IGameDataDtoMapper>().To<GameDataDtoMapper>().AsSingle();
+        //     Container.Bind<IKillEnemyCounterDtoMapper>().To<KillEnemyCounterDtoMapper>().AsSingle();
+        //     Container.Bind<ISavedLevelDtoMapper>().To<SavedLevelDtoMapper>().AsSingle();
+        //     Container.Bind<IEnemySpawnerDtoMapper>().To<EnemySpawnerDtoMapper>().AsSingle();
+        // }
 
         private void BindSettings()
         {

@@ -5,7 +5,6 @@ using Sources.Controllers.Presenters.Enemies.Bosses.States;
 using Sources.Domain.Models.Enemies.Bosses;
 using Sources.Domain.Models.Gameplay;
 using Sources.Infrastructure.Services.Enemies;
-using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
@@ -21,7 +20,6 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Bosses
         private readonly IUpdateRegister _updateRegister;
         private readonly IExplosionBodyBloodySpawnService _explosionBodyBloodySpawnService;
         private readonly IRewardItemSpawnService _rewardItemSpawnService;
-        private readonly OverlapService _overlapService;
         private readonly CustomCollection<IEnemyView> _enemyCollection;
         private readonly IEnemyAttackService _enemyAttackService;
 
@@ -29,7 +27,6 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Bosses
             IUpdateRegister updateRegister,
             IExplosionBodyBloodySpawnService explosionBodyBloodySpawnService,
             IRewardItemSpawnService rewardItemSpawnService,
-            OverlapService overlapService,
             CustomCollection<IEnemyView> enemyCollection,
             IEnemyAttackService enemyAttackService)
         {
@@ -38,7 +35,6 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Bosses
                                                throw new ArgumentNullException(nameof(explosionBodyBloodySpawnService));
             _rewardItemSpawnService = rewardItemSpawnService ?? 
                                       throw new ArgumentNullException(nameof(rewardItemSpawnService));
-            _overlapService = overlapService ?? throw new ArgumentNullException(nameof(overlapService));
             _enemyCollection = enemyCollection ?? 
                                throw new ArgumentNullException(nameof(enemyCollection));
             _enemyAttackService = enemyAttackService ?? 

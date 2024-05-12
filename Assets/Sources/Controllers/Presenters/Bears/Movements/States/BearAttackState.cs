@@ -7,6 +7,7 @@ using Sources.Domain.Models.Constants.LayerMasks;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.Bears;
+using Sources.InfrastructureInterfaces.Services.Overlaps;
 using Sources.Presentations.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Bears;
 
@@ -21,7 +22,7 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
         private readonly IBearView _bearView;
         private readonly IBearAnimationView _bearAnimationView;
         private readonly IBearMovementService _bearMovementService;
-        private readonly OverlapService _overlapService;
+        private readonly IOverlapService _overlapService;
 
         public BearAttackState(
             Bear bear,
@@ -29,7 +30,7 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
             IBearView bearView,
             IBearAnimationView bearAnimationView,
             IBearMovementService bearMovementService,
-            OverlapService overlapService)
+            IOverlapService overlapService)
         {
             _bear = bear ?? throw new ArgumentNullException(nameof(bear));
             _bearAttacker = bearAttacker ?? throw new ArgumentNullException(nameof(bearAttacker));

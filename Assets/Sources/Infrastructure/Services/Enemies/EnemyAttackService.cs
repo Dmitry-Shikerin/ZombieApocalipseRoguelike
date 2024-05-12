@@ -4,6 +4,7 @@ using System.Linq;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Constants.LayerMasks;
 using Sources.Infrastructure.Services.Overlaps;
+using Sources.InfrastructureInterfaces.Services.Overlaps;
 using Sources.Presentations.Views.Characters;
 using UnityEngine;
 
@@ -11,9 +12,9 @@ namespace Sources.Infrastructure.Services.Enemies
 {
     public class EnemyAttackService : IEnemyAttackService
     {
-        private readonly OverlapService _overlapService;
+        private readonly IOverlapService _overlapService;
 
-        public EnemyAttackService(OverlapService overlapService)
+        public EnemyAttackService(IOverlapService overlapService)
         {
             _overlapService = overlapService ?? throw new ArgumentNullException(nameof(overlapService));
         }

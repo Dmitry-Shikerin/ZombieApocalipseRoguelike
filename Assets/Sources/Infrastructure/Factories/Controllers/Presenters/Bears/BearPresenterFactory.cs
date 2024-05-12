@@ -5,6 +5,7 @@ using Sources.Domain.Models.Bears;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.Bears;
+using Sources.InfrastructureInterfaces.Services.Overlaps;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Bears;
 using UnityEngine;
@@ -14,12 +15,12 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Bears
     public class BearPresenterFactory
     {
         private readonly IUpdateRegister _updateRegister;
-        private readonly OverlapService _overlapService;
+        private readonly IOverlapService _overlapService;
         private readonly IBearMovementService _bearMovementService;
 
         public BearPresenterFactory(
             IUpdateRegister updateRegister,
-            OverlapService overlapService,
+            IOverlapService overlapService,
             IBearMovementService bearMovementService)
         {
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
