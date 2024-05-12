@@ -8,6 +8,8 @@ using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.PlayerAccounts;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
+using Sources.Infrastructure.Services.Interstitials;
+using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 using Zenject;
 
@@ -24,7 +26,6 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
             Container.Bind<IPlayerAccountAuthorizeService>().To<PlayerAccountAuthorizeService>().AsSingle();
             Container.Bind<ISdcInitializeService>().To<SdcInitializeService>().AsSingle();
             Container.Bind<IStickyService>().To<StickyService>().AsSingle();
-
         }
     }
 }

@@ -4,7 +4,7 @@ using Sources.InfrastructureInterfaces.Services.SceneLoaderService;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Zenject;
 
-namespace Sources.Infrastructure.DIContainers
+namespace Sources.Infrastructure.DIContainers.Projects
 {
     public class ProjectInstaller : MonoInstaller
     {
