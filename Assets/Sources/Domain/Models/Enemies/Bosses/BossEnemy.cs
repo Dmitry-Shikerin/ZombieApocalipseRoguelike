@@ -23,10 +23,6 @@ namespace Sources.Domain.Models.Enemies.Bosses
         public float StunTime { get; }
         public float WalkSpeed { get; }
         public float RunSpeed { get; }
-        public bool IsIdle { get; set; } = true;
-        public bool IsMassAttack { get; set; } = true;
-        public float CurrentTimeAbility { get; set; }
-        public float CurrentTimeRunning { get; set; }
         public bool IsRun { get; set; }
     }
 }

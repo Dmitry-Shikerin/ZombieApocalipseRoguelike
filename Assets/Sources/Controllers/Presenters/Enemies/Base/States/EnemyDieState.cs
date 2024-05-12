@@ -1,7 +1,7 @@
 ﻿using System;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Gameplay;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
-using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.Utils.CustomCollections;
@@ -43,7 +43,7 @@ namespace Sources.Controllers.Presenters.Enemies.Base.States
             
             _killEnemyCounter.IncreaseKillCount();
             _explosionBodyBloodySpawnService.Spawn(spawnPosition);
-            _rewardItemSpawnService.Spawn(_enemyView.Position, 3);
+            _rewardItemSpawnService.Spawn(_enemyView.Position, RewardItemConst.Amount);
             _enemyCollection.Remove(_enemyView);
             _enemyView.Destroy();
         }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Overlaps
 {
+    //TODO сделать интерфейс
     public class OverlapService
     {
         private readonly Collider[] _colliders = new Collider[32];

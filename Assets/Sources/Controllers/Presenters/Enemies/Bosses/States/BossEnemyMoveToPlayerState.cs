@@ -1,68 +1,63 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Sources.Domain.Models.Constants.LayerMasks;
+using Sources.Controllers.Presenters.Enemies.Base.States;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Enemies.Bosses;
-using Sources.Infrastructure.Services.Overlaps;
-using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
-using Sources.Presentations.Views.Characters;
+using Sources.Infrastructure.Services.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
-using UnityEngine;
 
 namespace Sources.Controllers.Presenters.Enemies.Bosses.States
 {
-    public class BossEnemyMoveToPlayerState : FiniteState
+    public class BossEnemyMoveToPlayerState : EnemyMoveToPlayerState
     {
         private readonly BossEnemy _enemy;
         private readonly IBossEnemyView _enemyView;
-        private readonly IBossEnemyAnimation _enemyAnimation;
-        private readonly OverlapService _overlapService;
+        private readonly IEnemyAttackService _enemyAttackService;
 
         private CancellationTokenSource _cancellationTokenSource;
+        private TimeSpan _runDelay;
+        private TimeSpan _massAttackDelay;
         
         public BossEnemyMoveToPlayerState(
             BossEnemy enemy, 
             IBossEnemyView enemyView, 
             IBossEnemyAnimation enemyAnimation,
-            OverlapService overlapService)
+            IEnemyAttackService enemyAttackService) 
+            : base(
+                enemyView, 
+                enemyAnimation)
         {
             _enemy = enemy ?? throw new ArgumentNullException(nameof(enemy));
             _enemyView = enemyView ?? throw new ArgumentNullException(nameof(enemyView));
-            _enemyAnimation = enemyAnimation ?? throw new ArgumentNullException(nameof(enemyAnimation));
-            _overlapService = overlapService ?? throw new ArgumentNullException(nameof(overlapService));
+            _enemyAttackService = enemyAttackService ?? throw new ArgumentNullException(nameof(enemyAttackService));
         }
 
         public override void Enter()
         {
+            base.Enter();
+            
             _cancellationTokenSource = new CancellationTokenSource();
+            _runDelay = TimeSpan.FromSeconds(EnemyConst.RunDelay);
+            _massAttackDelay = TimeSpan.FromSeconds(EnemyConst.MassAttackAbilityDelay);
             
             _enemy.IsRun = false;
-            _enemyView.SetAgentSpeed(1.8f);
-            _enemyAnimation.PlayWalk();
-            StartMassAttackTimer(_cancellationTokenSource.Token);
+            _enemyView.SetAgentSpeed(_enemy.WalkSpeed);
             StartRunTimer(_cancellationTokenSource.Token);
+            StartMassAttackTimer(_cancellationTokenSource.Token);
         }
 
         public override void Exit() =>
             _cancellationTokenSource.Cancel();
 
-        public override void Update(float deltaTime) =>
-            _enemyView.Move(_enemyView.CharacterMovementView.Position);
-
-        private async void StartMassAttackTimer(CancellationToken cancellationToken)
+        private async void StartRunTimer(CancellationToken cancellationToken)
         {
             try
             {
                 while (cancellationToken.IsCancellationRequested == false)
                 {
-                    while (_enemy.CurrentTimeRunning <= 5)
-                    {
-                        _enemy.CurrentTimeRunning += Time.deltaTime;
-                        await UniTask.Yield(cancellationToken);
-                    }
-
-                    _enemy.CurrentTimeRunning = 0;
+                    await UniTask.Delay(_runDelay, cancellationToken: cancellationToken);
+                    
                     _enemy.IsRun = true;
                 }
             }
@@ -71,41 +66,21 @@ namespace Sources.Controllers.Presenters.Enemies.Bosses.States
             }
         }
         
-        private async void StartRunTimer(CancellationToken cancellationToken)
+        private async void StartMassAttackTimer(CancellationToken cancellationToken)
         {
             try
             {
                 while (cancellationToken.IsCancellationRequested == false)
                 {
-                    while (_enemy.CurrentTimeAbility <= 5)
-                    {
-                        _enemy.CurrentTimeAbility += Time.deltaTime;
-                        await UniTask.Yield(cancellationToken);
-                    }
-
-                    _enemy.CurrentTimeAbility = 0;
+                    await UniTask.Delay(_massAttackDelay, cancellationToken: cancellationToken);
+                    
                     _enemyView.PlayMassAttackParticle();
-                    TryAttack();
+                    _enemyAttackService.TryAttack(_enemyView.Position, EnemyConst.MassAttackDamage);
                 }
             }
             catch (OperationCanceledException)
             {
             }
-        }
-        
-        private void TryAttack()
-        {
-            if(_enemyView == null)
-                return;
-            
-            var characterHealthViews =
-                _overlapService.OverlapSphere<CharacterHealthView>(
-                    _enemyView.Position, 5f, Layer.Character, Layer.Default);
-
-            if (characterHealthViews.Count == 0)
-                return;
-
-            characterHealthViews.First().TakeDamage(10);
         }
     }
 }

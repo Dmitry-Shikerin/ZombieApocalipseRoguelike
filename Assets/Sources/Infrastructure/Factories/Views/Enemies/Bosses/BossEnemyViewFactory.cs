@@ -3,7 +3,7 @@ using Sources.Controllers.Presenters.Enemies.Base;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Enemies.Bosses;
 using Sources.Domain.Models.Gameplay;
-using Sources.Infrastructure.Factories.Controllers.Enemies.Bosses;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
@@ -48,7 +48,10 @@ namespace Sources.Infrastructure.Factories.Views.Enemies.Bosses
             return Create(bossEnemy, killEnemyCounter, bossEnemyView);
         }
         
-        public IBossEnemyView Create(BossEnemy bossEnemy, KillEnemyCounter killEnemyCounter, BossEnemyView bossEnemyView)
+        public IBossEnemyView Create(
+            BossEnemy bossEnemy, 
+            KillEnemyCounter killEnemyCounter, 
+            BossEnemyView bossEnemyView)
         {
             EnemyPresenter enemyPresenter = _bossEnemyPresenterFactory.Create(
                 bossEnemy, killEnemyCounter, bossEnemyView, bossEnemyView.EnemyAnimation);

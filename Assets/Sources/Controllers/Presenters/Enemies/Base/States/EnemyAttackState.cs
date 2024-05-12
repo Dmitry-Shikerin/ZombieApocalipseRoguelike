@@ -2,7 +2,6 @@
 using Sources.Domain.Models.Enemies.Base;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
-using UnityEngine;
 
 namespace Sources.Controllers.Presenters.Enemies.Base.States
 {

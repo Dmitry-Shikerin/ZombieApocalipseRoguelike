@@ -10,18 +10,14 @@ namespace Sources.Presentations.Views.Enemies.Base
 {
     public class EnemyAnimation : AnimationViewBase, IEnemyAnimation
     {
-        [Required] [SerializeField] private Animator _animator;
-        
         private static int s_isIdle = Animator.StringToHash("IsIdle");
         private static int s_isWalk = Animator.StringToHash("IsWalk");
         private static int s_isAttack = Animator.StringToHash("IsAttack");
-        private static int s_isDeath = Animator.StringToHash("IsDeath");
         
         private void Awake()
         {
             StoppingAnimations.Add(StopIdle);
             StoppingAnimations.Add(StopAttack);
-            StoppingAnimations.Add(StopDie);
             StoppingAnimations.Add(StopWalk);
             OnAfterAwake();
         }
@@ -35,25 +31,19 @@ namespace Sources.Presentations.Views.Enemies.Base
         public void PlayWalk()
         {
             ExceptAnimation(StopWalk);
-            _animator.SetBool(s_isWalk, true);
+            Animator.SetBool(s_isWalk, true);
         }
 
         public void PlayIdle()
         {
             ExceptAnimation(StopIdle);
-            _animator.SetBool(s_isIdle, true);
-        }
-
-        public void PlayDie()
-        {
-            ExceptAnimation(StopDie);
-            _animator.SetBool(s_isDeath, true);
+            Animator.SetBool(s_isIdle, true);
         }
 
         public void PlayAttack()
         {
             ExceptAnimation(StopAttack);
-            _animator.SetBool(s_isAttack, true);
+            Animator.SetBool(s_isAttack, true);
         }
         
         [UsedImplicitly]
@@ -62,37 +52,29 @@ namespace Sources.Presentations.Views.Enemies.Base
         
         private void StopWalk()
         {
-            if(_animator.GetBool(s_isWalk) == false)
+            if(Animator.GetBool(s_isWalk) == false)
                 return;
             
-            _animator.SetBool(s_isWalk, false);
+            Animator.SetBool(s_isWalk, false);
         
         }
         
         private void StopIdle()
         {
-            if(_animator.GetBool(s_isIdle) == false)
+            if(Animator.GetBool(s_isIdle) == false)
                 return;
             
-            _animator.SetBool(s_isIdle, false);
+            Animator.SetBool(s_isIdle, false);
         
         }
         
         private void StopAttack()
         {
-            if(_animator.GetBool(s_isAttack) == false)
+            if(Animator.GetBool(s_isAttack) == false)
                 return;
             
-            _animator.SetBool(s_isAttack, false);
+            Animator.SetBool(s_isAttack, false);
         
-        }
-        
-        private void StopDie()
-        {
-            if(_animator.GetBool(s_isDeath) == false)
-                return;
-            
-            _animator.SetBool(s_isDeath, false);
         }
     }
 }

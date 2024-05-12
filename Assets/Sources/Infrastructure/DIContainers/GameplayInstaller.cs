@@ -35,13 +35,13 @@ using Sources.Infrastructure.Factories.Controllers.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Characters;
 using Sources.Infrastructure.Factories.Controllers.Common;
 using Sources.Infrastructure.Factories.Controllers.Enemies;
-using Sources.Infrastructure.Factories.Controllers.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Controllers.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Players;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Bears;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Cameras;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Characters;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Base;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Spawners;
@@ -74,6 +74,7 @@ using Sources.Infrastructure.Factories.Views.Weapons;
 using Sources.Infrastructure.Services.Bears;
 using Sources.Infrastructure.Services.Cameras;
 using Sources.Infrastructure.Services.Characters;
+using Sources.Infrastructure.Services.Enemies;
 using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.Infrastructure.Services.GameOvers;
 using Sources.Infrastructure.Services.InputServices;
@@ -227,6 +228,7 @@ namespace Sources.Infrastructure.DIContainers
             Container.Bind<IMapperCollector>().To<MapperCollector>().AsSingle();
             Container.Bind<CustomValidator>().AsSingle();
             Container.Bind<IEnemyIndicatorService>().To<EnemyIndicatorService>().AsSingle();
+            Container.Bind<IEnemyAttackService>().To<EnemyAttackService>().AsSingle();
         }
 
         private void BindFormFactories()
