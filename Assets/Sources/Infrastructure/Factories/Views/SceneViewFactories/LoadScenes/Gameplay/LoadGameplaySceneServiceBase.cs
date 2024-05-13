@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
@@ -12,6 +13,7 @@ using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Gameplay;
+using Sources.Infrastructure.Factories.Views.InterstitialShowers;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
@@ -23,7 +25,6 @@ using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
-using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Repositories;
@@ -74,7 +75,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ITutorialService _tutorialService;
         private readonly IAdvertisingService _advertisingService;
         private readonly IFormService _formService;
-        private readonly IInterstitialShowerService _interstitialShowerService;
+        private readonly InterstitialShowerViewFactory _interstitialShowerViewFactory;
 
         protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
             UiCollectorFactory uiCollectorFactory,
@@ -104,7 +105,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ITutorialService tutorialService,
             IAdvertisingService advertisingService,
             IFormService formService,
-            IInterstitialShowerService interstitialShowerService)
+            InterstitialShowerViewFactory interstitialShowerViewFactory)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _uiCollectorFactory = uiCollectorFactory ?? throw new ArgumentNullException(nameof(uiCollectorFactory));
@@ -145,16 +146,13 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _advertisingService = advertisingService ?? throw new ArgumentNullException(nameof(advertisingService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
-            _interstitialShowerService = interstitialShowerService ?? 
-                                         throw new ArgumentNullException(nameof(interstitialShowerService));
+            _interstitialShowerViewFactory = interstitialShowerViewFactory ??
+                                             throw new ArgumentNullException(nameof(interstitialShowerViewFactory));
         }
 
         public void Load(IScenePayload scenePayload)
         {
             GameModels gameModels = LoadModels(scenePayload);
-            
-            //InterstitialShower
-            _interstitialShowerService.Register(gameModels.EnemySpawner);
             
             //AdvertisingService
             _advertisingService.Construct(gameModels.PlayerWallet);
@@ -216,6 +214,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             //FormService
             _uiCollectorFactory.Create();
             _formService.Show(FormId.Hud);
+            
+            //InterstitialShower
+            _interstitialShowerViewFactory.Create(gameModels.EnemySpawner, _gameplayHud.InterstitialShowerView);
         }
 
         protected abstract GameModels LoadModels(IScenePayload scenePayload);

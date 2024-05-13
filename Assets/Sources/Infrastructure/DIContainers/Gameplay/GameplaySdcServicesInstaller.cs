@@ -8,8 +8,6 @@ using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.PlayerAccounts;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
-using Sources.Infrastructure.Services.Interstitials;
-using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 using Zenject;
 
