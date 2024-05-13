@@ -100,18 +100,17 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
 
         private async UniTask PlayRotateAnimationAsync(CancellationToken token)
         {
-            while (_uiAnimator != null && token.IsCancellationRequested == false && _uiAnimator.enabled)
-            {
-                if(_uiAnimator == null)
-                    return;
-                    
-                _uiAnimator?.transform.Rotate(_uiAnimator.RotationVector);
-
-                await UniTask.Yield(token);
-            }
-
             try
             {
+                while (_uiAnimator != null && token.IsCancellationRequested == false && _uiAnimator.enabled)
+                {
+                    if (_uiAnimator == null)
+                        return;
+
+                    _uiAnimator?.transform.Rotate(_uiAnimator.RotationVector);
+
+                    await UniTask.Yield(token);
+                }
             }
             catch (OperationCanceledException)
             {
