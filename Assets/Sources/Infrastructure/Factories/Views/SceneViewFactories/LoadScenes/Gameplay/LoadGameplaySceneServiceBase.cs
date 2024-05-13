@@ -25,7 +25,6 @@ using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
-using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Repositories;
@@ -76,7 +75,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ITutorialService _tutorialService;
         private readonly IAdvertisingService _advertisingService;
         private readonly IFormService _formService;
-        private readonly IInterstitialShowerService _interstitialShowerService;
         private readonly InterstitialShowerViewFactory _interstitialShowerViewFactory;
 
         protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
@@ -107,7 +105,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ITutorialService tutorialService,
             IAdvertisingService advertisingService,
             IFormService formService,
-            IInterstitialShowerService interstitialShowerService,
             InterstitialShowerViewFactory interstitialShowerViewFactory)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
@@ -149,8 +146,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _advertisingService = advertisingService ?? throw new ArgumentNullException(nameof(advertisingService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
-            _interstitialShowerService = interstitialShowerService ?? 
-                                         throw new ArgumentNullException(nameof(interstitialShowerService));
             _interstitialShowerViewFactory = interstitialShowerViewFactory ??
                                              throw new ArgumentNullException(nameof(interstitialShowerViewFactory));
         }
@@ -221,7 +216,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _formService.Show(FormId.Hud);
             
             //InterstitialShower
-            //_interstitialShowerService.Register(gameModels.EnemySpawner);
             _interstitialShowerViewFactory.Create(gameModels.EnemySpawner, _gameplayHud.InterstitialShowerView);
         }
 
