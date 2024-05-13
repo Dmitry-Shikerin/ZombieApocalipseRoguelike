@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Gameplay;
 using Sources.DomainInterfaces.Models.Spawners;
@@ -12,7 +13,6 @@ namespace Sources.Infrastructure.Services.Interstitials
     public class InterstitialShowerService : IInterstitialShowerService
     {
         private readonly IInterstitialAdService _interstitialAdService;
-        private KillEnemyCounter _killEnemyCounter;
         private IEnemySpawner _enemySpawner;
         private CancellationTokenSource _cancellationTokenSource;
         private TimeSpan _advertisementTimeSpan = TimeSpan.FromMinutes(InterstitialConst.ShowDelay);
@@ -47,57 +47,57 @@ namespace Sources.Infrastructure.Services.Interstitials
             _interstitialAdService.ShowInterstitial();
         }
 
-        // private async UniTask ShowInterstitialAsync(CancellationToken cancellationToken)
-        // {
-        //     try
-        //     {
-        //         while (cancellationToken.IsCancellationRequested == false)
-        //         {
-        //             await UniTask.Delay(_advertisementTimeSpan, cancellationToken: cancellationToken);
+         //private async UniTask ShowInterstitialAsync(CancellationToken cancellationToken)
+         //{
+         //    try
+         //    {
+         //        while (cancellationToken.IsCancellationRequested == false)
+         //        {
+         //            await UniTask.Delay(_advertisementTimeSpan, cancellationToken: cancellationToken);
         //
-        //             EnableTimer();
+         //            EnableTimer();
         //
-        //             await ShowTimerAsync(cancellationToken);
+         //            await ShowTimerAsync(cancellationToken);
         //
-        //             DisableTimer();
-        //         }
-        //     }
-        //     catch (OperationCanceledException)
-        //     {
-        //     }
-        // }
+         //            DisableTimer();
+         //        }
+         //    }
+         //    catch (OperationCanceledException)
+         //    {
+         //    }
+         //}
+        
+         //private async UniTask ShowTimerAsync(CancellationToken cancellationToken)
+         //{
+         //    //TODO перевести текст
+         //    _viewContainer.Title.SetText(AdvertisingConstant.ContentText);
+         //    _viewContainer.Timer.SetText("3");
         //
-        // private async UniTask ShowTimerAsync(CancellationToken cancellationToken)
-        // {
-        //     //TODO перевести текст
-        //     _viewContainer.Title.SetText(AdvertisingConstant.ContentText);
-        //     _viewContainer.Timer.SetText("3");
+         //    await UniTask.Delay(_timerTimeSpan, cancellationToken: cancellationToken);
+         //    _viewContainer.Timer.SetText("2");
         //
-        //     await UniTask.Delay(_timerTimeSpan, cancellationToken: cancellationToken);
-        //     _viewContainer.Timer.SetText("2");
+         //    await UniTask.Delay(_timerTimeSpan, cancellationToken: cancellationToken);
+         //    _viewContainer.Timer.SetText("1");
         //
-        //     await UniTask.Delay(_timerTimeSpan, cancellationToken: cancellationToken);
-        //     _viewContainer.Timer.SetText("1");
+         //    await UniTask.Delay(_timerTimeSpan, cancellationToken: cancellationToken);
         //
-        //     await UniTask.Delay(_timerTimeSpan, cancellationToken: cancellationToken);
+         //    _interstitialAdService.ShowInterstitial();
+         //}
         //
-        //     _interstitialAdService.ShowInterstitial();
-        // }
+         //private void DisableTimer()
+         //{
+         //    _viewContainer.Hide();
         //
-        // private void DisableTimer()
-        // {
-        //     _viewContainer.Hide();
+         //    _viewContainer.Title.Disable();
+         //    _viewContainer.Timer.Disable();
+         //}
         //
-        //     _viewContainer.Title.Disable();
-        //     _viewContainer.Timer.Disable();
-        // }
+         //private void EnableTimer()
+         //{
+         //    _viewContainer.Show();
         //
-        // private void EnableTimer()
-        // {
-        //     _viewContainer.Show();
-        //
-        //     _viewContainer.Title.Enable();
-        //     _viewContainer.Timer.Enable();
-        // }
+         //    _viewContainer.Title.Enable();
+         //    _viewContainer.Timer.Enable();
+         //}
     }
 }

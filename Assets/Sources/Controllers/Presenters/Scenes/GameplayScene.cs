@@ -86,7 +86,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _saveService.Enter();
             _levelCompletedService.Enable();
             _tutorialService.Enable();
-            _interstitialShowerService.Enter();
+            //_interstitialShowerService.Enter();
             _upgradeService.Enable();
             //TODO если закрываю игру раньше чем загрузилась курточка летят ошибки с юнитасками
             // await _curtainView.HideCurtain();
@@ -99,7 +99,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _volumeService.Exit();
             _saveService.Exit();
             _levelCompletedService.Disable();
-            _interstitialShowerService.Exit();
+            //_interstitialShowerService.Exit();
             _enemyCollection.Clear();
         }
 

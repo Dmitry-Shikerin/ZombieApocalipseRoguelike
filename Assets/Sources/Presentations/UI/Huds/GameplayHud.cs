@@ -5,6 +5,7 @@ using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
 using Sources.Presentations.Views.Common;
 using Sources.Presentations.Views.Gameplay;
+using Sources.Presentations.Views.InterstitialShowers;
 using Sources.Presentations.Views.Music;
 using Sources.Presentations.Views.Players;
 using Sources.Presentations.Views.Settings;
@@ -44,6 +45,9 @@ namespace Sources.Presentations.UI.Huds
         
         [FoldoutGroup("Volume")] [Required] 
         [SerializeField] private VolumeView _volumeView;
+
+        [FoldoutGroup("InterstitialShower")][Required]
+        [SerializeField] private InterstitialShowerView _interstitialShowerView;
         
         public UiCollector UiCollector => _uiCollector;
         
@@ -63,5 +67,6 @@ namespace Sources.Presentations.UI.Huds
         public HealthUi CharacterHealthUi => _characterHealthUi;
         
         public VolumeView VolumeView => _volumeView;
+        public InterstitialShowerView InterstitialShowerView => _interstitialShowerView;
     }
 }

@@ -5485,6 +5485,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4875637729294848, guid: 4ddd90be11a7cfc48883cf91ce12f49c, type: 3}
   m_PrefabInstance: {fileID: 1442281270}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1455984327 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4432642384830469043, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
+  m_PrefabInstance: {fileID: 6132093211177799334}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30579fbe46874361b0994c9136606739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1510452935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9008,6 +9019,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayHud
       objectReference: {fileID: 0}
+    - target: {fileID: 669561367274281653, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
+      propertyPath: _uiContainers.Array.size
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 669561367274281653, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
+      propertyPath: _uiContainers.Array.data[18]
+      value: 
+      objectReference: {fileID: 1455984327}
     - target: {fileID: 1254176919875117635, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -9124,6 +9143,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4432642384830469043, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
+      propertyPath: _enabledFormCommands.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432642384830469043, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
+      propertyPath: _disabledFormCommands.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4797300454352774407, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -9148,10 +9175,6 @@ PrefabInstance:
       propertyPath: _cinemachineCameraView
       value: 
       objectReference: {fileID: 723613285}
-    - target: {fileID: 6598893087787163400, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7587351474599976697, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
