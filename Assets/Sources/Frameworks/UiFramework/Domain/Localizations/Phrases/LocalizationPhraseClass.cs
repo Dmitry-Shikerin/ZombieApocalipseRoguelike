@@ -40,35 +40,36 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Phrases
         public string Turkish => _turkish;
         public string LocalizationId => _localizationId;
         
-        [Button(ButtonSizes.Large)]
-        private void AddTextId()
-        {
-            var localizationIds = AssetDatabase
-                .FindAssets("t:LocalizationConfig")
-                .Select(path => AssetDatabase.GUIDToAssetPath(path))
-                .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
-                .ToList()
-                .FirstOrDefault()
-                .LocalizationIds;
-
-            if(localizationIds.Contains(_textId))
-                return;
-            
-            localizationIds.Add(_textId);
-            
-            _textId = "";
-        }
+        //TODO это должно быть в Юните эдиторе
+        // [Button(ButtonSizes.Large)]
+        // private void AddTextId()
+        // {
+        //     var localizationIds = AssetDatabase
+        //         .FindAssets("t:LocalizationConfig")
+        //         .Select(path => AssetDatabase.GUIDToAssetPath(path))
+        //         .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
+        //         .ToList()
+        //         .FirstOrDefault()
+        //         .LocalizationIds;
+        //
+        //     if(localizationIds.Contains(_textId))
+        //         return;
+        //     
+        //     localizationIds.Add(_textId);
+        //     
+        //     _textId = "";
+        // }
         
-        [UsedImplicitly]
-        private List<string> GetDropdownValues()
-        {
-           return AssetDatabase
-                .FindAssets("t:LocalizationConfig")
-                .Select(path => AssetDatabase.GUIDToAssetPath(path))
-                .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
-                .ToList()
-                .FirstOrDefault()
-                .LocalizationIds;
-        }
+        // [UsedImplicitly]
+        // private List<string> GetDropdownValues()
+        // {
+        //    return AssetDatabase
+        //         .FindAssets("t:LocalizationConfig")
+        //         .Select(path => AssetDatabase.GUIDToAssetPath(path))
+        //         .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
+        //         .ToList()
+        //         .FirstOrDefault()
+        //         .LocalizationIds;
+        // }
     }
 }
