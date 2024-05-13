@@ -9,7 +9,6 @@ namespace Sources.Presentations.Triggers.Common
     {
         public event Action<T> Entered;
         
-        //TODO можно ли как то получить точкку с которой я столкнулся?
         private void OnParticleCollision(GameObject other)
         {
             if (other.TryGetComponent(out T component))

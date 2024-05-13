@@ -1,79 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Sources.Domain.Models.Constants.LayerMasks;
+using Sources.Controllers.Presenters.Enemies.Base.States;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Enemies.Bosses;
-using Sources.Infrastructure.Services.Overlaps;
-using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
-using Sources.Presentations.Views.Characters;
+using Sources.Infrastructure.Services.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
-using UnityEngine;
 
 namespace Sources.Controllers.Presenters.Enemies.Bosses.States
 {
-    public class BossEnemyAttackState : FiniteState
+    public class BossEnemyAttackState : EnemyAttackState
     {
         private readonly BossEnemy _enemy;
         private readonly IBossEnemyView _enemyView;
-        private readonly IBossEnemyAnimation _enemyAnimation;
-        private readonly OverlapService _overlapService;
+        private readonly IEnemyAttackService _enemyAttackService;
 
         private CancellationTokenSource _cancellationTokenSource;
+        private TimeSpan _massAttackDelay;
 
         public BossEnemyAttackState(
             BossEnemy enemy,
             IBossEnemyView enemyView,
             IBossEnemyAnimation enemyAnimation,
-            OverlapService overlapService)
+            IEnemyAttackService enemyAttackService) : 
+            base(
+                enemy, 
+                enemyView, 
+                enemyAnimation)
         {
             _enemy = enemy ?? throw new ArgumentNullException(nameof(enemy));
             _enemyView = enemyView ?? throw new ArgumentNullException(nameof(enemyView));
-            _enemyAnimation = enemyAnimation ?? throw new ArgumentNullException(nameof(enemyAnimation));
-            _overlapService = overlapService ?? throw new ArgumentNullException(nameof(overlapService));
+            _enemyAttackService = enemyAttackService ?? throw new ArgumentNullException(nameof(enemyAttackService));
         }
 
         public override void Enter()
         {
+            base.Enter();
+            
             _cancellationTokenSource = new CancellationTokenSource();
+            _massAttackDelay = TimeSpan.FromSeconds(EnemyConst.MassAttackAbilityDelay);
 
-            if (_enemy.IsRun)
-            {
-                TryAttack();
-                _enemyView.PlayMassAttackParticle();
-                _enemy.IsRun = false;
-            }
-
-            _enemyAnimation.PlayAttack();
-            _enemyAnimation.Attacking += OnAttack;
-            StartTimer(_cancellationTokenSource.Token);
+            CheckIsRun();
+            StartMassAttackTimer(_cancellationTokenSource.Token);
         }
 
         public override void Exit()
         {
+            base.Exit();
             _cancellationTokenSource.Cancel();
-            _enemyAnimation.Attacking -= OnAttack;
         }
 
-        private void OnAttack() =>
-            _enemyView.CharacterHealthView.TakeDamage(_enemy.EnemyAttacker.Damage);
-
-        private async void StartTimer(CancellationToken cancellationToken)
+        private async void StartMassAttackTimer(CancellationToken cancellationToken)
         {
             try
             {
                 while (cancellationToken.IsCancellationRequested == false)
                 {
-                    while (_enemy.CurrentTimeAbility <= 5)
-                    {
-                        _enemy.CurrentTimeAbility += Time.deltaTime;
-                        await UniTask.Yield(cancellationToken);
-                    }
-
-                    _enemy.CurrentTimeAbility = 0;
-                    _enemyView.PlayMassAttackParticle();
-                    TryAttack();
+                    await UniTask.Delay(_massAttackDelay, cancellationToken: cancellationToken);
+                    
+                    ApplyMassAttack();
                 }
             }
             catch (OperationCanceledException)
@@ -81,19 +66,19 @@ namespace Sources.Controllers.Presenters.Enemies.Bosses.States
             }
         }
 
-        private void TryAttack()
+        private void ApplyMassAttack()
         {
-            if(_enemyView == null)
-                return;
-            
-            IReadOnlyList<CharacterHealthView> characterHealthViews =
-                _overlapService.OverlapSphere<CharacterHealthView>(
-                    _enemyView.Position, 7f, Layer.Character, Layer.Default);
+            _enemyView.PlayMassAttackParticle();
+            _enemyAttackService.TryAttack(_enemyView.Position, EnemyConst.MassAttackDamage);
+        }
 
-            if (characterHealthViews.Count == 0)
+        private void CheckIsRun()
+        {
+            if (_enemy.IsRun == false)
                 return;
 
-            characterHealthViews.First().TakeDamage(10);
+            ApplyMassAttack();
+            _enemy.IsRun = false;
         }
     }
 }

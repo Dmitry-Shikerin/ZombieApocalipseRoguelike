@@ -13,14 +13,6 @@ namespace Sources.Infrastructure.Services.Cameras
         
         public ICameraFollowable CurrentFollower { get; private set; }
 
-        public void Enable()
-        {
-        }
-
-        public void Disable()
-        {
-        }
-
         public void SetFollower<T>() where T : ICameraFollowable
         {
             if (_cameraTargets.ContainsKey(typeof(T)) == false)

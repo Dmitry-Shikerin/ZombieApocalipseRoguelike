@@ -38,7 +38,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.Leaderboards
             if (PlayerAccount.IsAuthorized == false)
                 return;
             
-            Leaderboard.GetEntries(LeaderBoardName.Leaderboard, result =>
+            Leaderboard.GetEntries(LeaderBoardNameConst.Leaderboard, result =>
             {
                 var count = result.entries.Length < _leaderBoardElementViews.Count
                     ? result.entries.Length
@@ -53,10 +53,10 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.Leaderboards
                     if (string.IsNullOrEmpty(name))
                         name = YandexGamesSdk.Environment.i18n.lang switch
                         {
-                            LocalizationConstant.English => Anonymous.English,
-                            LocalizationConstant.Turkish => Anonymous.Turkish,
-                            LocalizationConstant.Russian => Anonymous.Russian,
-                            _ => Anonymous.English
+                            LocalizationConst.English => AnonymousConst.English,
+                            LocalizationConst.Turkish => AnonymousConst.Turkish,
+                            LocalizationConst.Russian => AnonymousConst.Russian,
+                            _ => AnonymousConst.English
                         };
 
                     _leaderBoardElementViewFactory.Create(

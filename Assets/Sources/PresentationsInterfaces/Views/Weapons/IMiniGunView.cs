@@ -1,4 +1,3 @@
-using Sources.Presentations.Views.Weapons;
 using Sources.PresentationsInterfaces.UI.AudioSources;
 
 namespace Sources.PresentationsInterfaces.Views.Weapons

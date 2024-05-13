@@ -13,7 +13,8 @@ namespace Sources.Infrastructure.Factories.Views.Upgrades
 
         public UpgradeDescriptionViewFactory(UpgradeDescriptionPresenterFactory presenterFactory)
         {
-            _presenterFactory = presenterFactory ?? throw new ArgumentNullException(nameof(presenterFactory));
+            _presenterFactory = presenterFactory ?? 
+                                throw new ArgumentNullException(nameof(presenterFactory));
         }
 
         public IUpgradeDescriptionView Create(IUpgrader upgrader, UpgradeDescriptionView view)

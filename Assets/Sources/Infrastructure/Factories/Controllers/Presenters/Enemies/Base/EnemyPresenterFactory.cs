@@ -38,7 +38,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Base
         {
             EnemyInitializeState initializeState = new EnemyInitializeState(
                 enemy, enemyAnimation, enemyView, _enemyCollection);
-            EnemyMoveToPlayerState moveToPlayerState = new EnemyMoveToPlayerState(enemy, enemyView, enemyAnimation);
+            EnemyMoveToPlayerState moveToPlayerState = new EnemyMoveToPlayerState(
+                enemyView, enemyAnimation);
             EnemyAttackState attackState = new EnemyAttackState(enemy, enemyView, enemyAnimation);
             EnemyDieState dieState = new EnemyDieState(
                 killEnemyCounter,

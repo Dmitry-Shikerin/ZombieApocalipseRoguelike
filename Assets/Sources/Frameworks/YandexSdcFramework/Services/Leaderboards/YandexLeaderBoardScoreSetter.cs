@@ -15,10 +15,10 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.Leaderboards
             if (PlayerAccount.IsAuthorized == false)
                 return;
             
-            Leaderboard.GetPlayerEntry(LeaderBoardName.Leaderboard, result =>
+            Leaderboard.GetPlayerEntry(LeaderBoardNameConst.Leaderboard, result =>
             {
                 if (result.score < score)
-                    Leaderboard.SetScore(LeaderBoardName.Leaderboard, score);
+                    Leaderboard.SetScore(LeaderBoardNameConst.Leaderboard, score);
             });
         }
     }

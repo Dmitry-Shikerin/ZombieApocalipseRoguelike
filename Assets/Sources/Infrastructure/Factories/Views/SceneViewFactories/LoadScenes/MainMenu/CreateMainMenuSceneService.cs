@@ -11,6 +11,7 @@ using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
+using Sources.InfrastructureInterfaces.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
 using UnityEngine;
@@ -50,18 +51,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             Tutorial tutorial = new Tutorial();
             _entityRepository.Add(tutorial);
 
-            Volume volume;
+            Volume volume = CreateVolume();
             
-            if (_loadService.HasKey(ModelId.Volume))
-            {
-                volume = _loadService.Load<Volume>(ModelId.Volume);
-            }
-            else
-            {
-                volume = new Volume();
-                _entityRepository.Add(volume);
-            }
-
             GameData gameData = new GameData(ModelId.GameData, true);
             _entityRepository.Add(gameData);
 
@@ -101,6 +92,17 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
                 gameData,
                 savedLevel,
                 tutorial);
+        }
+
+        private Volume CreateVolume()
+        {
+            if (_loadService.HasKey(ModelId.Volume))
+                return _loadService.Load<Volume>(ModelId.Volume);
+
+            Volume volume = new Volume();
+            _entityRepository.Add(volume);
+            
+            return volume;
         }
     }
 }

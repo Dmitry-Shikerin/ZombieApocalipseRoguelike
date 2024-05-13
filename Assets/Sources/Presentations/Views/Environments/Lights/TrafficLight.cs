@@ -1,4 +1,4 @@
-﻿namespace Sources.Presentations.Views.Environments.Lights
+﻿ namespace Sources.Presentations.Views.Environments.Lights
 {
     public class TrafficLight : View
     {

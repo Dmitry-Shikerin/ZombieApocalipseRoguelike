@@ -2,11 +2,11 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.PresentationsInterfaces.Views.Character;
-using Sources.PresentationsInterfaces.Views.Coins;
 using Sources.PresentationsInterfaces.Views.ObjectPools;
+using Sources.PresentationsInterfaces.Views.RewardItems;
 using UnityEngine;
 
-namespace Sources.Presentations.Views.Coins
+namespace Sources.Presentations.Views.RewardItems
 {
     public class CoinView : View, ICoinView
     {
@@ -21,15 +21,11 @@ namespace Sources.Presentations.Views.Coins
 
         public int Amount { get; private set; }
 
-        private void OnEnable()
-        {
+        private void OnEnable() =>
             _cancellationTokenSource = new CancellationTokenSource();
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() =>
             _cancellationTokenSource.Cancel();
-        }
 
         public override void Destroy()
         {

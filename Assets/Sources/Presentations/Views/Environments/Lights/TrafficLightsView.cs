@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
+using Sources.Domain.Models.Constants;
 using UnityEngine;
 
 namespace Sources.Presentations.Views.Environments.Lights
@@ -12,23 +13,19 @@ namespace Sources.Presentations.Views.Environments.Lights
     {
         [Required] [SerializeField] private List<TrafficLight> _trafficLights;
         
-        private TimeSpan _blinkDelay = TimeSpan.FromSeconds(0.5f);
+        private TimeSpan _blinkDelayTimeSpan = TimeSpan.FromSeconds(TrafficLightConst.BlinkDelay);
+        private TimeSpan _hideDelayTimeSpan = TimeSpan.FromSeconds(TrafficLightConst.HideDelay);
 
         private CancellationTokenSource _cancellationTokenSource;
-
-        private float _currentTime = 0f;
-
+        
         private void OnEnable()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-
             StartTrafficLights(_cancellationTokenSource.Token);
         }
 
-        private void OnDisable()
-        {
+        private void OnDisable() =>
             _cancellationTokenSource.Cancel();
-        }
 
         private async void StartTrafficLights(CancellationToken cancellationToken)
         {
@@ -36,34 +33,43 @@ namespace Sources.Presentations.Views.Environments.Lights
             {
                 while (cancellationToken.IsCancellationRequested == false)
                 {
-                    foreach (TrafficLight trafficLight in _trafficLights)
-                    {
-                        _trafficLights
-                            .Except(new List<TrafficLight> { trafficLight })
-                            .ToList()
-                            .ForEach(trafficLight => trafficLight.Hide());
-
-                        trafficLight.Show();
-                        
-                        await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: cancellationToken);
-                    }
-
-                    for (int i = 0; i < 4; i++)
-                    {
-                        foreach (TrafficLight trafficLight in _trafficLights)
-                            trafficLight.Show();
-                    
-                        await UniTask.Delay(_blinkDelay, cancellationToken: cancellationToken);
-                    
-                        foreach (TrafficLight trafficLight in _trafficLights)
-                            trafficLight.Hide();
-                    
-                        await UniTask.Delay(_blinkDelay, cancellationToken: cancellationToken);
-                    }
+                    await ChangeColor(cancellationToken);
+                    await Blink(cancellationToken);
                 }
             }
             catch (OperationCanceledException)
             {
+            }
+        }
+
+        private async UniTask ChangeColor(CancellationToken cancellationToken)
+        {
+            foreach (TrafficLight trafficLight in _trafficLights)
+            {
+                _trafficLights
+                    .Except(new List<TrafficLight> { trafficLight })
+                    .ToList()
+                    .ForEach(trafficLight => trafficLight.Hide());
+
+                trafficLight.Show();
+                        
+                await UniTask.Delay(_hideDelayTimeSpan, cancellationToken: cancellationToken);
+            }
+        }
+
+        private async UniTask Blink(CancellationToken cancellationToken)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                foreach (TrafficLight trafficLight in _trafficLights)
+                    trafficLight.Show();
+                    
+                await UniTask.Delay(_blinkDelayTimeSpan, cancellationToken: cancellationToken);
+                    
+                foreach (TrafficLight trafficLight in _trafficLights)
+                    trafficLight.Hide();
+                    
+                await UniTask.Delay(_blinkDelayTimeSpan, cancellationToken: cancellationToken);
             }
         }
     }

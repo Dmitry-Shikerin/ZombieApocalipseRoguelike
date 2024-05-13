@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Sources.Infrastructure.Services.Characters
+namespace Sources.InfrastructureInterfaces.Services.Characters
 {
     public interface IEnemyIndicatorService
     {

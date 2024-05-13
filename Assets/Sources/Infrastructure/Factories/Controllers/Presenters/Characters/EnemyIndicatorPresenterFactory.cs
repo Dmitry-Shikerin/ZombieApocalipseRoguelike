@@ -1,16 +1,13 @@
 ﻿using System;
 using Sources.Controllers.Presenters.Characters;
 using Sources.Infrastructure.Services.Characters;
-using Sources.Infrastructure.Services.EnemyCollectors;
-using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
+using Sources.InfrastructureInterfaces.Services.Characters;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
-using Sources.Presentations.Views.Characters;
-using Sources.Presentations.Views.Characters.EnemyIndicators;
 using Sources.PresentationsInterfaces.Views.Character.EnemyIndicators;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.Utils.CustomCollections;
 
-namespace Sources.Infrastructure.Factories.Controllers.Characters
+namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
 {
     public class EnemyIndicatorPresenterFactory
     {

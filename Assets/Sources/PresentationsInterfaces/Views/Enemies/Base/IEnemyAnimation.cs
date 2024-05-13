@@ -8,7 +8,6 @@ namespace Sources.PresentationsInterfaces.Views.Enemies.Base
         
         void PlayWalk();
         void PlayIdle();
-        // void PlayDie();
         void PlayAttack();
     }
 }

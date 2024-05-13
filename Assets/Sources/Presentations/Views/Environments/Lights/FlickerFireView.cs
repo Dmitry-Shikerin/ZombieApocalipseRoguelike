@@ -18,14 +18,11 @@ namespace Sources.Presentations.Views.Environments.Lights
         private void OnEnable()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            
             StartFlicker(_cancellationTokenSource.Token);
         }
 
-        private void OnDisable()
-        {
+        private void OnDisable() =>
             _cancellationTokenSource.Cancel();
-        }
 
         private async void StartFlicker(CancellationToken cancellationToken)
         {

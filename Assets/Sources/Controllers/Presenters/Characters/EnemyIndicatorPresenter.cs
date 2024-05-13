@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Common;
 using Sources.Infrastructure.Services.Characters;
+using Sources.InfrastructureInterfaces.Services.Characters;
 using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Character.EnemyIndicators;
@@ -88,12 +89,7 @@ namespace Sources.Controllers.Presenters.Characters
                 
                 if(_enemyIndicatorView.Arrows[i] == null)
                     return;
-                //
-                // Vector3 lookDirection = _enemyCollection[i].Position - _enemyIndicatorView.Position;
-                // lookDirection.y = _enemyIndicatorView.Position.y;
-                //
-                // float angle = Vector3.SignedAngle(Vector3.forward, lookDirection, Vector3.up);
-                //
+                
                 float angle =_enemyIndicatorService.GetAngleRotation(
                     _enemyIndicatorView.Position, _enemyCollection[i].Position);
                 

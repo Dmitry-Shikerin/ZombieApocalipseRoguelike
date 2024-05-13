@@ -1,44 +1,20 @@
 ﻿using Sirenix.OdinInspector;
+using Sources.Presentations.Views.Animations;
 using Sources.PresentationsInterfaces.Views.Character;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sources.Presentations.Views.Characters
 {
-    public class CharacterAnimationView : View, ICharacterAnimationView
+    public class CharacterAnimationView : AnimationViewBase, ICharacterAnimationView
     {
-        [Required] [SerializeField] private Animator _animator;
-
+        private static int s_positionX = Animator.StringToHash("PositionX");
+        private static int s_positionZ = Animator.StringToHash("PositionZ");
+        
         public void SetDirection(Vector2 position)
         {
-            _animator.SetFloat("PositionX", position.x);
-            _animator.SetFloat("PositionZ", position.y);
+            Animator.SetFloat(s_positionX, position.x);
+            Animator.SetFloat(s_positionZ, position.y);
         }
-
-        public void PlayIdle() =>
-            _animator.Play("Idle");
-
-        public void PlayForward() =>
-            _animator.Play("Forward");
-
-        public void PlayBackward() =>
-            _animator.Play("Backward");
-
-        public void PlayLeftward() =>
-            _animator.Play("Leftward");
-
-        public void PlayRightward() =>
-            _animator.Play("Rightward");
-
-        public void PlayForwardRight() =>
-            _animator.Play("ForwardRight");
-
-        public void PlayForwardLeft() =>
-            _animator.Play("ForwardLeft");
-
-        public void PlayBackwardRight() =>
-            _animator.Play("BackwardRight");
-
-        public void PlayBackwardLeft() =>
-            _animator.Play("BackwardLeft");
     }
 }

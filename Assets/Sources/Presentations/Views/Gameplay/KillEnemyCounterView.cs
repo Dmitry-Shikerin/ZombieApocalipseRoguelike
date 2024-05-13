@@ -13,7 +13,6 @@ namespace Sources.Presentations.Views.Gameplay
     public class KillEnemyCounterView : PresentableView<KillEnemyCounterPresenter>, IKillEnemyCounterView
     {
         [Required] [SerializeField] private ImageView _killEnemyBarImageView;
-        //TODO по хорошему инстанциировать
         [SerializeField] private List<SliderView> _waveSeparators;
 
         public IReadOnlyList<ISliderView> WaveSeparators => _waveSeparators;

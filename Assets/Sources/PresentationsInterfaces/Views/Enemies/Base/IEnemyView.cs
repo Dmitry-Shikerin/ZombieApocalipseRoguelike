@@ -1,19 +1,8 @@
-using Sources.PresentationsInterfaces.Views.Character;
-using UnityEngine;
+using Sources.Presentations.Views.Enemies;
 
 namespace Sources.PresentationsInterfaces.Views.Enemies.Base
 {
-    public interface IEnemyView : IView
+    public interface IEnemyView : IEnemyViewBase
     {
-        float StoppingDistance { get; }
-        Vector3 Position { get; }
-        ICharacterMovementView CharacterMovementView { get; }
-        ICharacterHealthView CharacterHealthView { get; }
-        
-        void Move(Vector3 direction);
-        void SetTargetFollow(ICharacterMovementView target);
-        void SetCharacterHealth(ICharacterHealthView characterHealthView);
-        void EnableNavmeshAgent();
-        void DisableNavmeshAgent();
     }
 }

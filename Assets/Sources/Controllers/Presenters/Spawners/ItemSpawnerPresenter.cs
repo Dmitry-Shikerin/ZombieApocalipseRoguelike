@@ -17,7 +17,7 @@ namespace Sources.Controllers.Spawners
         private readonly ItemSpawner _itemSpawner;
         private readonly IItemSpawnerView _itemSpawnerView;
         private readonly IFirstAidKitSpawnService _firstAidKitSpawnService;
-        private readonly TimeSpan _delay = TimeSpan.FromSeconds(ItemSpawnerConstant.SpawnDelay);
+        private readonly TimeSpan _delay = TimeSpan.FromSeconds(ItemSpawnerConst.SpawnDelay);
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -53,7 +53,7 @@ namespace Sources.Controllers.Spawners
                     IItemSpawnPoint itemSpawnPoint = _itemSpawnerView.SpawnPoints[index];
                     IFirstAidKitView firstAidKitView = _firstAidKitSpawnService.Spawn(itemSpawnPoint.Position);
                     
-                    firstAidKitView.SetHealAmount(FirstAidKitConstant.HealAmount);
+                    firstAidKitView.SetHealAmount(FirstAidKitConst.HealAmount);
                     
                     await UniTask.Delay(_delay, cancellationToken: cancellationToken);
                 }

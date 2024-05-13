@@ -1,4 +1,4 @@
-﻿namespace Sources.InfrastructureInterfaces.Services.Updates
+﻿namespace Sources.InfrastructureInterfaces.Services.UpdateServices.Methods
 {
     public interface IFixedUpdatable
     {

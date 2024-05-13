@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sources.InfrastructureInterfaces.Services.Characters;
+using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Characters
 {

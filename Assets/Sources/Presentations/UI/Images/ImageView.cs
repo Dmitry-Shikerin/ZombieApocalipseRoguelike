@@ -20,10 +20,8 @@ namespace Sources.Presentations.UI.Images
         public void SetFillAmount(float fillAmount) =>
             _image.fillAmount = fillAmount;
 
-        public UniTask FillMoveTowardsAsync(float duration, CancellationToken cancellationToken)
-        {
-            return UniTask.CompletedTask;
-        }
+        public UniTask FillMoveTowardsAsync(float duration, CancellationToken cancellationToken) =>
+            UniTask.CompletedTask;
 
         public void ShowImage() => 
             _image.fillAmount = 1f;

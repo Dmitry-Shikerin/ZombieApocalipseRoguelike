@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.Domain.Models.Characters;
 using Sources.Domain.Models.Constants;
-using Sources.InfrastructureInterfaces.Characters;
+using Sources.InfrastructureInterfaces.Services.Characters;
 using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Characters
@@ -50,7 +50,7 @@ namespace Sources.Infrastructure.Services.Characters
                 Vector2.MoveTowards(
                     characterMovement.AnimationDirection,
                     direction2,
-                    CharacterConstant.AnimationDirectionSpeed * deltaTime);
+                    CharacterConst.AnimationDirectionSpeed * deltaTime);
         }
     }
 }

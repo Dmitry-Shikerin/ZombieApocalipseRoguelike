@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Agava.WebUtility;
 using Agava.YandexGames;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Localizations;
 using Sources.Domain.Models.TextViewTypes;
-using Sources.Frameworks.UiFramework.Domain.Configs.Localizations;
+using Sources.Frameworks.UiFramework.Domain.Localizations.Configs;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
-using Sources.Frameworks.UiFramework.Presentation.Texts;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.PresentationsInterfaces.UI.Texts;
-using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Services.Localizations
 {
@@ -29,17 +28,14 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
 
             _textDictionary = new Dictionary<string, IReadOnlyDictionary<string, string>>()
             {
-                [LocalizationConstant.RussianCode] = localizationConfig.Russian,
-                [LocalizationConstant.EnglishCode] = localizationConfig.English,
-                [LocalizationConstant.TurkishCode] = localizationConfig.Turkish,
+                [LocalizationConst.RussianCode] = localizationConfig.LocalizationPhrases
+                    .ToDictionary(phrase => phrase.LocalizationId, phrase => phrase.Russian),
+                [LocalizationConst.EnglishCode] = localizationConfig.LocalizationPhrases
+                    .ToDictionary(phrase => phrase.LocalizationId, phrase => phrase.English),
+                [LocalizationConst.TurkishCode] = localizationConfig.LocalizationPhrases
+                    .ToDictionary(phrase => phrase.LocalizationId, phrase => phrase.Turkish),
             };
         }
-
-        //TODO сделать на UiText выпадающий список из ключей
-        //TODO контейтер для локализаций сделать списком и добавлять в него обьекты в которых будут переводы на 3 языка
-        //TODO сделать на контейнере возможность создавать новый обьект и указывать путь где он будет храниться
-        //TODO добавить кнопку для добавления всех дочерних объектов
-        //TODO добавить возможность автоматического добавления всех дочерних объектов через изменение OnInspectorGui
         
         public void Translate()
         {
@@ -86,10 +82,10 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
         {
             string key = _uiCollector.Localization switch
             {
-                Localization.English => LocalizationConstant.EnglishCode,
-                Localization.Turkish => LocalizationConstant.TurkishCode,
-                Localization.Russian => LocalizationConstant.RussianCode,
-                _ => LocalizationConstant.EnglishCode,
+                Localization.English => LocalizationConst.EnglishCode,
+                Localization.Turkish => LocalizationConst.TurkishCode,
+                Localization.Russian => LocalizationConst.RussianCode,
+                _ => LocalizationConst.EnglishCode,
             };
 
             TranslateViews(key);
@@ -102,10 +98,10 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
 
             string languageCode = YandexGamesSdk.Environment.i18n.lang switch
             {
-                LocalizationConstant.English => LocalizationConstant.EnglishCode,
-                LocalizationConstant.Turkish => LocalizationConstant.TurkishCode,
-                LocalizationConstant.Russian => LocalizationConstant.RussianCode,
-                _ => LocalizationConstant.EnglishCode
+                LocalizationConst.English => LocalizationConst.EnglishCode,
+                LocalizationConst.Turkish => LocalizationConst.TurkishCode,
+                LocalizationConst.Russian => LocalizationConst.RussianCode,
+                _ => LocalizationConst.EnglishCode
             };
 
             TranslateViews(languageCode);

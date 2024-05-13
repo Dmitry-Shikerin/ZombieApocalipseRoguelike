@@ -2,7 +2,6 @@
 using System.Threading;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Gameplay;
-using Sources.Domain.Models.Spawners;
 using Sources.DomainInterfaces.Models.Spawners;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 using Sources.InfrastructureInterfaces.Services.Interstitials;
@@ -16,8 +15,8 @@ namespace Sources.Infrastructure.Services.Interstitials
         private KillEnemyCounter _killEnemyCounter;
         private IEnemySpawner _enemySpawner;
         private CancellationTokenSource _cancellationTokenSource;
-        private TimeSpan _advertisementTimeSpan = TimeSpan.FromMinutes(InterstitialConstant.ShowDelay);
-        private TimeSpan _timerTimeSpan = TimeSpan.FromSeconds(AdvertisingConstant.Delay);
+        private TimeSpan _advertisementTimeSpan = TimeSpan.FromMinutes(InterstitialConst.ShowDelay);
+        private TimeSpan _timerTimeSpan = TimeSpan.FromSeconds(AdvertisingConst.Delay);
 
         public InterstitialShowerService(IInterstitialAdService interstitialAdService)
         {

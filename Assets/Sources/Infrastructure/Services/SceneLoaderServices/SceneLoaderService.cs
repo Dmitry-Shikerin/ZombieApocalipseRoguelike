@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using Sources.InfrastructureInterfaces.Services.SceneLoaderService;
 using UnityEngine.SceneManagement;
 
 namespace Sources.Infrastructure.Services.SceneLoaderServices

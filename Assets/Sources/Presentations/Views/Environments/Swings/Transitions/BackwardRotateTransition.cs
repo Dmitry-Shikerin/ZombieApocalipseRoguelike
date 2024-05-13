@@ -1,6 +1,7 @@
 using System;
 using JetBrains.Annotations;
 using NodeCanvas.Framework;
+using Sources.Domain.Models.Constants;
 using UnityEngine;
 
 namespace Sources.Presentations.Views.Environments.Swings.Transitions
@@ -19,6 +20,6 @@ namespace Sources.Presentations.Views.Environments.Swings.Transitions
         }
 
         protected override bool OnCheck() =>
-            Math.Abs(TargetAngle - _transform.rotation.eulerAngles.x) < 0.1f;
+            Math.Abs(TargetAngle - _transform.rotation.eulerAngles.x) < MathConst.Epsilon;
     }
 }

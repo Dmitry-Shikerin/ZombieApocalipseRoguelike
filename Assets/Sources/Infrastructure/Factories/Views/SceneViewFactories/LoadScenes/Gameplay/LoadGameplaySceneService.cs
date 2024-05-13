@@ -5,6 +5,7 @@ using Sources.Domain.Models.Abilities;
 using Sources.Domain.Models.Bears;
 using Sources.Domain.Models.Characters;
 using Sources.Domain.Models.Characters.Attackers;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Players;
@@ -32,7 +33,9 @@ using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.Interstitials;
+using Sources.InfrastructureInterfaces.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
+using Sources.InfrastructureInterfaces.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
@@ -149,7 +152,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             KillEnemyCounter killEnemyCounter = _entityRepository.Get<KillEnemyCounter>(ModelId.KillEnemyCounter);
             EnemySpawner enemySpawner = _entityRepository.Get<EnemySpawner>(ModelId.GameplayEnemySpawner);
             
-            MiniGun minigun = new MiniGun(miniGunAttackUpgrader, 0.1f);
+            MiniGun miniGun = new MiniGun(miniGunAttackUpgrader, WeaponConst.AttackCooldown);
 
             CharacterHealth characterHealth = new CharacterHealth(characterHealthUpgrader);
 
@@ -157,8 +160,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 playerWallet,
                 characterHealth,
                 new CharacterMovement(),
-                new CharacterAttacker(minigun),
-                minigun,
+                new CharacterAttacker(miniGun),
+                miniGun,
                 new SawLauncherAbility(sawLauncherAbilityUpgrader),
                 new List<SawLauncher>()
                 {
@@ -178,7 +181,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 sawLauncherUpgrader,
                 sawLauncherAbilityUpgrader,
                 miniGunAttackUpgrader,
-                minigun,
+                miniGun,
                 characterHealth,
                 playerWallet,
                 volume,

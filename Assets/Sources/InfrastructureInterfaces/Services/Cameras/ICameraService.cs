@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Sources.InfrastructureInterfaces.Services.Cameras
 {
-    public interface ICameraService : IEnable, IDisable
+    public interface ICameraService
     {
         event Action FollowableChanged;
         
