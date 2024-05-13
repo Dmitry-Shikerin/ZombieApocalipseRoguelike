@@ -21,18 +21,15 @@ using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Gameplay;
+using Sources.Infrastructure.Factories.Views.InterstitialShowers;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
-using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.Infrastructure.Services.Providers;
-using Sources.Infrastructure.Services.Repositories;
-using Sources.Infrastructure.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
-using Sources.InfrastructureInterfaces.Services.Interstitials;
 using Sources.InfrastructureInterfaces.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Repositories;
@@ -86,7 +83,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IEnemySpawnerDtoMapper enemySpawnerDtoMapper,
             IAdvertisingService advertisingService,
             IFormService formService,
-            IInterstitialShowerService interstitialShowerService)
+            InterstitialShowerViewFactory interstitialShowerViewFactory)
             : base(
                 gameplayHud,
                 uiCollectorFactory,
@@ -116,7 +113,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 tutorialService,
                 advertisingService,
                 formService,
-                interstitialShowerService)
+                interstitialShowerViewFactory)
         {
             _loadService = loadService;
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
