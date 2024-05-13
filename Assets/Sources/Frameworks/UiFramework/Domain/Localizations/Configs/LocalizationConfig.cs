@@ -46,7 +46,7 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Configs
         [Button]
         private void CreateLocalizationPhrase()
         {
-            LocalizationPhrase phrase = ScriptableObject.CreateInstance(typeof(LocalizationPhrase)) as LocalizationPhrase;
+            LocalizationPhrase phrase = CreateInstance<LocalizationPhrase>();
             
             AssetDatabase.CreateAsset(phrase, 
                 "Assets/Resources/Configs/Localizations/LocalizationPhrase.asset");

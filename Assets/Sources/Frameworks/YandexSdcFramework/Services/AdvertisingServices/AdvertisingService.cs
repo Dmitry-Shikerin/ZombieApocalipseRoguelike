@@ -20,7 +20,6 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
             _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
         }
 
-//TODO добавить показ интерститиала
         public void ShowInterstitial()
         {
             if (WebApplication.IsRunningOnWebGL == false)
@@ -74,11 +73,9 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
 
                     onCloseCallback?.Invoke();
                 });
-
         }
 
         public void Construct(PlayerWallet playerWallet) =>
             _playerWallet = playerWallet ?? throw new ArgumentNullException(nameof(playerWallet));
-
     }
 }
