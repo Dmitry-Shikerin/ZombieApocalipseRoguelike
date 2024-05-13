@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using Sources.Presentations.Views.Bears;
 using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.Enemies;
