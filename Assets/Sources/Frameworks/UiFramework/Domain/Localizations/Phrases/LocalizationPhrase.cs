@@ -41,46 +41,47 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Phrases
         
         public string GuId { get; set; }
         
-        [Button(ButtonSizes.Large)]
-        private void ChangeName()
-        {
-            if(string.IsNullOrWhiteSpace(_localizationId))
-                return;
-            
-            string path = AssetDatabase.GetAssetPath(this);
-            AssetDatabase.RenameAsset(path, _localizationId);
-        }
+        //TODO это должно быть в юнитиэдиторе
+        // [Button(ButtonSizes.Large)]
+        // private void ChangeName()
+        // {
+        //     if(string.IsNullOrWhiteSpace(_localizationId))
+        //         return;
+        //     
+        //     string path = AssetDatabase.GetAssetPath(this);
+        //     AssetDatabase.RenameAsset(path, _localizationId);
+        // }
         
-        [Button(ButtonSizes.Large)]
-        private void AddTextId()
-        {
-            var localizationIds = AssetDatabase
-                .FindAssets("t:LocalizationConfig")
-                .Select(path => AssetDatabase.GUIDToAssetPath(path))
-                .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
-                .ToList()
-                .FirstOrDefault()
-                .LocalizationIds;
-
-            if(localizationIds.Contains(_textId))
-                return;
-            
-            localizationIds.Add(_textId);
-            localizationIds.Sort();
-            
-            _textId = "";
-        }
+        // [Button(ButtonSizes.Large)]
+        // private void AddTextId()
+        // {
+        //     var localizationIds = AssetDatabase
+        //         .FindAssets("t:LocalizationConfig")
+        //         .Select(path => AssetDatabase.GUIDToAssetPath(path))
+        //         .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
+        //         .ToList()
+        //         .FirstOrDefault()
+        //         .LocalizationIds;
+        //
+        //     if(localizationIds.Contains(_textId))
+        //         return;
+        //     
+        //     localizationIds.Add(_textId);
+        //     localizationIds.Sort();
+        //     
+        //     _textId = "";
+        // }
         
-        [UsedImplicitly]
-        private List<string> GetDropdownValues()
-        {
-           return AssetDatabase
-                .FindAssets("t:LocalizationConfig")
-                .Select(path => AssetDatabase.GUIDToAssetPath(path))
-                .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
-                .ToList()
-                .FirstOrDefault()
-                .LocalizationIds;
-        }
+    //     [UsedImplicitly]
+    //     private List<string> GetDropdownValues()
+    //     {
+    //        return AssetDatabase
+    //             .FindAssets("t:LocalizationConfig")
+    //             .Select(path => AssetDatabase.GUIDToAssetPath(path))
+    //             .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
+    //             .ToList()
+    //             .FirstOrDefault()
+    //             .LocalizationIds;
+    //     }
     }
 }

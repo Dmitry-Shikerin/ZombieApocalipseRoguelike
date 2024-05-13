@@ -76,37 +76,37 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
         public void SetTmpText() =>
             _tmpText = GetComponent<TextMeshProUGUI>();
 
-        [TabGroup("Ids")]
-        [Button(ButtonSizes.Large)]
-        private void AddTextId()
-        {
-            var localizationIds = AssetDatabase
-                .FindAssets("t:LocalizationConfig")
-                .Select(path => AssetDatabase.GUIDToAssetPath(path))
-                .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
-                .ToList()
-                .FirstOrDefault()
-                .LocalizationIds;
-
-            if(localizationIds.Contains(_textId))
-                return;
-            
-            localizationIds.Add(_textId);
-            
-            _textId = "";
-        }
-
-        [UsedImplicitly]
-        private List<string> GetDropdownValues()
-        {
-            return AssetDatabase
-                .FindAssets("t:LocalizationConfig")
-                .Select(path => AssetDatabase.GUIDToAssetPath(path))
-                .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
-                .ToList()
-                .FirstOrDefault()
-                .LocalizationIds;
-        }
+        // [TabGroup("Ids")]
+        // [Button(ButtonSizes.Large)]
+        // private void AddTextId()
+        // {
+        //     var localizationIds = AssetDatabase
+        //         .FindAssets("t:LocalizationConfig")
+        //         .Select(path => AssetDatabase.GUIDToAssetPath(path))
+        //         .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
+        //         .ToList()
+        //         .FirstOrDefault()
+        //         .LocalizationIds;
+        //
+        //     if(localizationIds.Contains(_textId))
+        //         return;
+        //     
+        //     localizationIds.Add(_textId);
+        //     
+        //     _textId = "";
+        // }
+        //
+        // [UsedImplicitly]
+        // private List<string> GetDropdownValues()
+        // {
+        //     return AssetDatabase
+        //         .FindAssets("t:LocalizationConfig")
+        //         .Select(path => AssetDatabase.GUIDToAssetPath(path))
+        //         .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
+        //         .ToList()
+        //         .FirstOrDefault()
+        //         .LocalizationIds;
+        // }
 
     }
 }
