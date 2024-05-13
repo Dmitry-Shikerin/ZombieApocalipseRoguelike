@@ -91,6 +91,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee092d88979f4afeb5c0e6efdd991e63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2434336334666722177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4288889099762984785}
+  - component: {fileID: 5386096405888456209}
+  m_Layer: 0
+  m_Name: UiFrameworkInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4288889099762984785
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2434336334666722177}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6534070591052120742}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5386096405888456209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2434336334666722177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6561df9ba40b44c0bdc47d02271c96f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2474292241895950234
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,6 +708,7 @@ Transform:
   - {fileID: 2981919061289291831}
   - {fileID: 1427656343173461462}
   - {fileID: 8050534146908435243}
+  - {fileID: 4288889099762984785}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2367044339194378390
@@ -695,6 +740,7 @@ MonoBehaviour:
   - {fileID: 234783598983139624}
   - {fileID: 6770384649287887492}
   - {fileID: 2970039902000171447}
+  - {fileID: 5386096405888456209}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:

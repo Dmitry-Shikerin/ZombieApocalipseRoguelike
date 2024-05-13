@@ -66,6 +66,7 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Phrases
                 return;
             
             localizationIds.Add(_textId);
+            localizationIds.Sort();
             
             _textId = "";
         }

@@ -6,7 +6,7 @@ using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Presentations.UI.Huds;
 
-namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Forms
+namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Collectors
 {
     public class UiCollectorFactory
     {

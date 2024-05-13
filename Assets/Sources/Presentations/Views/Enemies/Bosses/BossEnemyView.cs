@@ -8,6 +8,7 @@ namespace Sources.Presentations.Views.Enemies.Bosses
     {
         [Required] [SerializeField] private BossEnemyAnimation bossEnemyAnimation;
         [Required] [SerializeField] private ParticleSystem _massAttackParticle;
+        
         public BossEnemyAnimation BossEnemyAnimation => bossEnemyAnimation;
         
         public void PlayMassAttackParticle() =>

@@ -24,7 +24,6 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
             Container.Bind<ISaveService>().To<SaveService>().AsSingle();
             Container.Bind<ILevelCompletedService>().To<LevelCompletedService>().AsSingle();
             Container.Bind<ITutorialService>().To<TutorialService>().AsSingle();
-            Container.Bind<IPauseService>().To<PauseService>().AsSingle();
             Container.Bind<IGameOverService>().To<GameOverService>().AsSingle();
             
             Container.Bind<KillEnemyCounterPresenterFactory>().AsSingle();
