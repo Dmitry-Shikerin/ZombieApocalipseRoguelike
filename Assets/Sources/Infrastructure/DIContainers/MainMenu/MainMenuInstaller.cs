@@ -69,6 +69,7 @@ namespace Sources.Infrastructure.DIContainers
         [Required] [SerializeField] private MainMenuHud _mainMenuHud;
         [Required] [SerializeField] private ContainerView _containerView;
 
+        //TODO разделить этот мусор в отдельные файлы
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<MainMenuHud>().FromInstance(_mainMenuHud).AsSingle();
