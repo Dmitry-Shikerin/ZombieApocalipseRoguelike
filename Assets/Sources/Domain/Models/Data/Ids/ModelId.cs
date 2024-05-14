@@ -23,9 +23,9 @@ namespace Sources.Domain.Models.Data.Ids
         public const string GameData = "GameData";
         public const string Tutorial = "Tutorial";
         public const string Gameplay = "Gameplay";
-        public const string Gameplay2 = "Gameplay2";
-        public const string Gameplay3 = "Gameplay3";
-        public const string Gameplay4 = "Gameplay4";
+        public const string Gameplay2 = "GamePlay2";
+        public const string Gameplay3 = "GamePlay3";
+        public const string Gameplay4 = "GamePlay4";
 
         public static IReadOnlyList<string> DeletedModelsIds = new List<string>()
         {
