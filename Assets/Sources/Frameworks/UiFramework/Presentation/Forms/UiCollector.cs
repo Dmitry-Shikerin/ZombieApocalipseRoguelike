@@ -74,7 +74,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         public IReadOnlyList<UiButton> UiFormButtons => _uiFormButtons;
         public IReadOnlyList<UiView> UiContainers => _uiContainers;
         public IReadOnlyList<IUiText> UiTexts => _uiTexts;
-        public IReadOnlyList<UiAudioSource> UiAudioSources => _uiAudioSources;
+        public IReadOnlyList<IUiAudioSource> UiAudioSources => _uiAudioSources;
         public IReadOnlyList<UiAnimator> UiAnimators => _uiAnimators;
         
         [TabGroup("Tab1","Texts", true, 1)] 

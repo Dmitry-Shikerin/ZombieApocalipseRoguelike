@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Sources.Domain.Models.TextViewTypes;
 using Sources.Frameworks.UiFramework.Domain.Constants;
-using Sources.Frameworks.UiFramework.Domain.Localizations.Configs;
+using Sources.Frameworks.UiFramework.Extensions;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.UI.Texts;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Texts
@@ -76,36 +74,22 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
         public void SetTmpText() =>
             _tmpText = GetComponent<TextMeshProUGUI>();
 
-        // [TabGroup("Ids")]
-        // [Button(ButtonSizes.Large)]
-        // private void AddTextId()
-        // {
-        //     var localizationIds = AssetDatabase
-        //         .FindAssets("t:LocalizationConfig")
-        //         .Select(path => AssetDatabase.GUIDToAssetPath(path))
-        //         .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
-        //         .ToList()
-        //         .FirstOrDefault()
-        //         .LocalizationIds;
-        //
-        //     if(localizationIds.Contains(_textId))
-        //         return;
-        //     
-        //     localizationIds.Add(_textId);
-        //     
-        //     _textId = "";
-        // }
-        //
-        // [UsedImplicitly]
-        // private List<string> GetDropdownValues()
-        // {
-        //     return AssetDatabase
-        //         .FindAssets("t:LocalizationConfig")
-        //         .Select(path => AssetDatabase.GUIDToAssetPath(path))
-        //         .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
-        //         .ToList()
-        //         .FirstOrDefault()
-        //         .LocalizationIds;
-        // }
+        [TabGroup("Ids")]
+        [Button(ButtonSizes.Large)]
+        private void AddTextId()
+        {
+            var localizationIds = TextExtension.GetTranslateId();
+        
+            if(localizationIds.Contains(_textId))
+                return;
+            
+            localizationIds.Add(_textId);
+            
+            _textId = "";
+        }
+        
+        [UsedImplicitly]
+        private List<string> GetDropdownValues() =>
+            TextExtension.GetTranslateId();
     }
 }

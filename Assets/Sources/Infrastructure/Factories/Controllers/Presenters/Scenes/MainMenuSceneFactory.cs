@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Sources.Controllers.Presenters.Scenes;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.Domain.Models.Data.Ids;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.AudioSources;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
@@ -24,6 +25,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly ILocalizationService _localizationService;
         private readonly ISdcInitializeService _sdcInitializeService;
         private readonly IStickyService _stickyService;
+        private readonly IAudioService _audioService;
         private readonly CurtainView _curtainView;
 
         public MainMenuSceneFactory(
@@ -34,7 +36,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             ILocalizationService localizationService,
             CurtainView curtainView,
             ISdcInitializeService sdcInitializeService,
-            IStickyService stickyService)
+            IStickyService stickyService,
+            IAudioService audioService)
         {
             _createMainMenuSceneService = createMainMenuSceneService ?? 
                                           throw new ArgumentNullException(nameof(createMainMenuSceneService));
@@ -46,6 +49,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                                    throw new ArgumentNullException(nameof(localizationService));
             _sdcInitializeService = sdcInitializeService ?? throw new ArgumentNullException(nameof(sdcInitializeService));
             _stickyService = stickyService ?? throw new ArgumentNullException(nameof(stickyService));
+            _audioService = audioService ?? throw new ArgumentNullException(nameof(audioService));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
         
@@ -57,7 +61,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _localizationService,
                 _curtainView,
                 _sdcInitializeService,
-                _stickyService);
+                _stickyService,
+                _audioService);
         }
         
         private ILoadSceneService CreateLoadSceneService(object payload)
