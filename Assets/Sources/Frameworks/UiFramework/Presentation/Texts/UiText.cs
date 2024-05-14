@@ -107,6 +107,5 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
         //         .FirstOrDefault()
         //         .LocalizationIds;
         // }
-
     }
 }
