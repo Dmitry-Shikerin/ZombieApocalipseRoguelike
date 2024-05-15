@@ -8,6 +8,8 @@ using Sources.Frameworks.UiFramework.Presentation.AudioSources;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.CommonTypes;
 using Sources.Frameworks.UiFramework.Presentation.Texts;
+using Sources.Frameworks.UiFramework.Presentation.Views;
+using Sources.Frameworks.UiFramework.PresentationsInterfaces.AudioSources;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.UI.Texts;
 using UnityEngine;
@@ -74,7 +76,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         public IReadOnlyList<UiButton> UiFormButtons => _uiFormButtons;
         public IReadOnlyList<UiView> UiContainers => _uiContainers;
         public IReadOnlyList<IUiText> UiTexts => _uiTexts;
-        public IReadOnlyList<UiAudioSource> UiAudioSources => _uiAudioSources;
+        public IReadOnlyList<IUiAudioSource> UiAudioSources => _uiAudioSources;
         public IReadOnlyList<UiAnimator> UiAnimators => _uiAnimators;
         
         [TabGroup("Tab1","Texts", true, 1)] 

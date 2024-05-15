@@ -1,7 +1,10 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.DomainInterfaces.Models.Payloads;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.AudioSources;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
@@ -32,6 +35,8 @@ namespace Sources.Controllers.Presenters.Scenes
         private readonly ILevelCompletedService _levelCompletedService;
         private readonly ITutorialService _tutorialService;
         private readonly CustomCollection<IEnemyView> _enemyCollection;
+        private readonly IAudioService _audioService;
+        private readonly IFocusService _focusService;
         private readonly CurtainView _curtainView;
 
         public GameplayScene(
@@ -47,7 +52,9 @@ namespace Sources.Controllers.Presenters.Scenes
             ILevelCompletedService levelCompletedService,
             ITutorialService tutorialService,
             CustomCollection<IEnemyView> enemyCollection,
-            CurtainView curtainView)
+            CurtainView curtainView,
+            IAudioService audioService,
+            IFocusService focusService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? 
@@ -65,6 +72,8 @@ namespace Sources.Controllers.Presenters.Scenes
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _enemyCollection = enemyCollection ?? 
                                      throw new ArgumentNullException(nameof(enemyCollection));
+            _audioService = audioService ?? throw new ArgumentNullException(nameof(audioService));
+            _focusService = focusService ?? throw new ArgumentNullException(nameof(focusService));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
 
@@ -79,6 +88,8 @@ namespace Sources.Controllers.Presenters.Scenes
             _levelCompletedService.Enable();
             _tutorialService.Enable();
             _upgradeService.Enable();
+            _audioService.Enter();
+            _focusService.Enable();
             //TODO если закрываю игру раньше чем загрузилась курточка летят ошибки с юнитасками
             // await _curtainView.HideCurtain();
         }
@@ -90,6 +101,8 @@ namespace Sources.Controllers.Presenters.Scenes
             _volumeService.Exit();
             _saveService.Exit();
             _levelCompletedService.Disable();
+            _audioService.Exit();
+            _focusService.Disable();
             _enemyCollection.Clear();
         }
 

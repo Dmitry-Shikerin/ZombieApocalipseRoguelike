@@ -1,7 +1,9 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Domain.Commands;
+using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.PlayerAccounts;
@@ -30,7 +32,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 
         public ButtonCommandId Id => ButtonCommandId.Leaderboard;
         
-        public void Handle(UiButton uiButton)
+        public void Handle(IUiButton uiButton)
         {
             if (_playerAccountAuthorizeService.IsAuthorized() == false)
             {

@@ -4,6 +4,7 @@ using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
+using Sources.Frameworks.UiFramework.Presentation.Views;
 using Sources.Presentations.UI.Huds;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Collectors
