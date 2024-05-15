@@ -1,6 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Frameworks.UiFramework.Domain.Constants;
 using Sources.Frameworks.UiFramework.Presentation.AudioSources.Types;
+using Sources.Frameworks.UiFramework.PresentationsInterfaces.AudioSources;
 using Sources.Presentations.Views;
 using UnityEngine;
 
@@ -30,13 +31,5 @@ namespace Sources.Frameworks.UiFramework.Presentation.AudioSources
 
         public void SetVolume(float volume) =>
             _audioSource.volume = volume;
-    }
-
-    public interface IUiAudioSource
-    {
-        AudioSourceId AudioSourceId { get; }
-        
-        void Play();
-        void SetVolume(float volume);
     }
 }

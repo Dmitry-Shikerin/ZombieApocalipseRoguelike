@@ -3,7 +3,9 @@ using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Payloads;
 using Sources.Frameworks.UiFramework.Domain.Commands;
+using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
+using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.SceneServices;
@@ -25,7 +27,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 
         public ButtonCommandId Id => ButtonCommandId.LoadMainMenuScene;
         
-        public void Handle(UiButton uiButton)
+        public void Handle(IUiButton uiButton)
         {
             SavedLevel savedLevel = _entityRepository.Get<SavedLevel>(ModelId.SavedLevel);
             _sceneService.ChangeSceneAsync(

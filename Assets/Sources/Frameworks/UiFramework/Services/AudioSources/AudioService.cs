@@ -4,6 +4,7 @@ using System.Linq;
 using Sources.Frameworks.UiFramework.Presentation.AudioSources;
 using Sources.Frameworks.UiFramework.Presentation.AudioSources.Types;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
+using Sources.Frameworks.UiFramework.PresentationsInterfaces.AudioSources;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.AudioSources;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 
@@ -23,8 +24,11 @@ namespace Sources.Frameworks.UiFramework.Services.AudioSources
                 uiAudioSource => uiAudioSource.AudioSourceId, uiAudioSource => uiAudioSource);
         }
 
-        public void Enter(object payload = null) =>
+        public void Enter(object payload = null)
+        {
+            OnVolumeChanged();
             _volumeService.MusicVolumeChanged += OnVolumeChanged;
+        }
 
         public void Exit() =>
             _volumeService.MusicVolumeChanged -= OnVolumeChanged;

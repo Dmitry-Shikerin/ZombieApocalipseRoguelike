@@ -13749,6 +13749,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayHud
       objectReference: {fileID: 0}
+    - target: {fileID: 669561367274281653, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
+      propertyPath: _uiAudioSources.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 669561367274281653, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
+      propertyPath: _uiAudioSources.Array.data[0]
+      value: 
+      objectReference: {fileID: 6132093211177799336}
     - target: {fileID: 2532097500609710334, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -13836,8 +13844,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 794879933209412353, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6132093211177799336}
   m_SourcePrefab: {fileID: 100100000, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
+--- !u!1 &6132093211177799335 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 794879933209412353, guid: 0e3caa3265dbeb44e90ccabe59c93983, type: 3}
+  m_PrefabInstance: {fileID: 6132093211177799334}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6132093211177799336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6132093211177799335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b681056ecdfe40c08fb84d157f23f926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lebel: <size=24><b><color=#FFD700><i>UiAudioSource</i></color></b></size>
+  _audioSourceId: 1
 --- !u!1 &6388020759036567290
 GameObject:
   m_ObjectHideFlags: 0

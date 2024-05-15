@@ -9,10 +9,9 @@ using Sources.Frameworks.UiFramework.Presentation.CommonTypes;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.PresentationsInterfaces;
 using Sources.Presentations.Views;
-using Sources.PresentationsInterfaces.Views.Forms.Common;
 using UnityEngine;
 
-namespace Sources.Frameworks.UiFramework.Presentation.Forms
+namespace Sources.Frameworks.UiFramework.Presentation.Views
 {
     public class UiView : PresentableView<UiViewPresenter>, IUiView
     {

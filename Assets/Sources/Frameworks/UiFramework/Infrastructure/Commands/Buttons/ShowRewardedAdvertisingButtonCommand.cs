@@ -1,6 +1,8 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Domain.Commands;
+using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
+using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
@@ -17,7 +19,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 
         public ButtonCommandId Id => ButtonCommandId.ShowRewardedAdvertising;
         
-        public void Handle(UiButton uiButton)
+        public void Handle(IUiButton uiButton)
         {
             uiButton.Hide();
             _videoAdService.ShowVideo(uiButton.Show);

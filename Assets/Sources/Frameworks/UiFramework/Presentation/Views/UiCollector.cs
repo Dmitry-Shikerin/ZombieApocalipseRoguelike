@@ -8,6 +8,8 @@ using Sources.Frameworks.UiFramework.Presentation.AudioSources;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.CommonTypes;
 using Sources.Frameworks.UiFramework.Presentation.Texts;
+using Sources.Frameworks.UiFramework.Presentation.Views;
+using Sources.Frameworks.UiFramework.PresentationsInterfaces.AudioSources;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.UI.Texts;
 using UnityEngine;
