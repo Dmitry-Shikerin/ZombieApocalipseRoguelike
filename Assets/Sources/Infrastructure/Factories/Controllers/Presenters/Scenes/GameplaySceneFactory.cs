@@ -6,6 +6,7 @@ using Sources.ControllersInterfaces.Scenes;
 using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.AudioSources;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay;
 using Sources.InfrastructureInterfaces.Factories.Controllers.Scenes;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
@@ -40,6 +41,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly ITutorialService _tutorialService;
         private readonly CustomCollection<IEnemyView> _enemyCollection;
         private readonly IAudioService _audioService;
+        private readonly IFocusService _focusService;
         private readonly CurtainView _curtainView;
 
         public GameplaySceneFactory(
@@ -57,7 +59,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             ITutorialService tutorialService,
             CustomCollection<IEnemyView> enemyCollection,
             CurtainView curtainView,
-            IAudioService audioService) 
+            IAudioService audioService,
+            IFocusService focusService) 
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -73,6 +76,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _enemyCollection = enemyCollection ?? throw new ArgumentNullException(nameof(enemyCollection));
             _audioService = audioService ?? throw new ArgumentNullException(nameof(audioService));
+            _focusService = focusService ?? throw new ArgumentNullException(nameof(focusService));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
 
@@ -92,7 +96,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _tutorialService,
                 _enemyCollection,
                 _curtainView,
-                _audioService);
+                _audioService,
+                _focusService);
         }
 
         private ILoadSceneService CreateLoadSceneService(object payload)

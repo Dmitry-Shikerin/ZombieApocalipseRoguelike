@@ -5,6 +5,7 @@ using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.AudioSources;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.Volumes;
@@ -20,6 +21,7 @@ namespace Sources.Controllers.Presenters.Scenes
         private readonly ISdcInitializeService _sdcInitializeService;
         private readonly IStickyService _stickyService;
         private readonly IAudioService _audioService;
+        private readonly IFocusService _focusService;
         private readonly CurtainView _curtainView;
 
         public MainMenuScene(
@@ -29,7 +31,8 @@ namespace Sources.Controllers.Presenters.Scenes
             CurtainView curtainView,
             ISdcInitializeService sdcInitializeService,
             IStickyService stickyService,
-            IAudioService audioService)
+            IAudioService audioService,
+            IFocusService focusService)
         {
             _loadSceneService = loadSceneService ?? throw new ArgumentNullException(nameof(loadSceneService));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
@@ -37,6 +40,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _sdcInitializeService = sdcInitializeService ?? throw new ArgumentNullException(nameof(sdcInitializeService));
             _stickyService = stickyService ?? throw new ArgumentNullException(nameof(stickyService));
             _audioService = audioService ?? throw new ArgumentNullException(nameof(audioService));
+            _focusService = focusService ?? throw new ArgumentNullException(nameof(focusService));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
         
@@ -47,6 +51,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _localizationService.Translate();
             _volumeService.Enter();
             _audioService.Enter();
+            _focusService.Enable();
             // await _curtainView.HideCurtain();
             await GameReady(payload as IScenePayload);
         }
@@ -55,6 +60,7 @@ namespace Sources.Controllers.Presenters.Scenes
         {
             _volumeService.Exit();
             _audioService.Exit();
+            _focusService.Disable();
         }
 
         public void Update(float deltaTime)

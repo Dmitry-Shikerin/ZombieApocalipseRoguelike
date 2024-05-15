@@ -12,19 +12,7 @@ namespace Sources.Infrastructure.DIContainers.MainMenu.UiFramework
     {
         public override void InstallBindings()
         {
-            // Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
-            // Container.Bind<ILocalizationService>().To<LocalizationService>().AsSingle();
-            //
-            // Container.Bind<UiCollectorFactory>().AsSingle();
-            //
-            // Container.Bind<UiButtonFactory>().AsSingle();
-            // Container.Bind<UiButtonPresenterFactory>().AsSingle();
-            //
-            // Container.Bind<UiViewFactory>().AsSingle();
-            // Container.Bind<UiViewPresenterFactory>().AsSingle();
-
             //Buttons
-            // Container.Bind<IUiButtonService>().To<UiButtonService>().AsSingle();
             Container.Bind<IButtonCommandHandler>().To<MainMenuButtonCommandHandler>().AsSingle();
 
             Container.Bind<ShowFormCommand>().AsSingle();
@@ -37,7 +25,6 @@ namespace Sources.Infrastructure.DIContainers.MainMenu.UiFramework
             Container.Bind<ClearSavesButtonCommand>().AsSingle();
 
             //Views
-            // Container.Bind<IUiViewService>().To<UiViewService>().AsSingle();
             Container.Bind<IUiViewCommandHandler>().To<MainMenuUiViewCommandHandler>().AsSingle();
 
             Container.Bind<UnPauseCommand>().AsSingle();
