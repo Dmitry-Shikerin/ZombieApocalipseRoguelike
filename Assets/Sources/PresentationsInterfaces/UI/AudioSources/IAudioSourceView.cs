@@ -7,7 +7,9 @@ namespace Sources.PresentationsInterfaces.UI.AudioSources
     public interface IAudioSourceView
     {
         bool IsPlaying { get; }
+        float Time { get; }
 
+        void SetTime(float time);
         void Mute();
         void UnMute();
         void Pause();

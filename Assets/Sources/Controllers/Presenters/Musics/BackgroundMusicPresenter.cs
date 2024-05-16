@@ -5,7 +5,6 @@ using Sources.Controllers.Common;
 using Sources.Domain.Models.AudioSources;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Volumes;
-using Sources.Presentations.Views.Music;
 using Sources.PresentationsInterfaces.UI.AudioSources;
 using Sources.PresentationsInterfaces.Views.Music;
 using UnityEngine;
@@ -20,6 +19,7 @@ namespace Sources.Controllers.Presenters.Musics
         private readonly IPauseService _pauseService;
 
         private CancellationTokenSource _cancellationTokenSource;
+        private float _savedTime;
 
         public BackgroundMusicPresenter(
             AudioClipCollection audioClipCollection, 
@@ -54,12 +54,14 @@ namespace Sources.Controllers.Presenters.Musics
 
         private void OnPauseSoundActivated()
         {
+            _savedTime = _backgroundMusicView.BackgroundMusicAudioSource.Time;
             _backgroundMusicView.BackgroundMusicAudioSource.Pause();
             Debug.Log($"Background music paused");
         }
 
         private void OnContinueSoundActivated()
         {
+            _backgroundMusicView.BackgroundMusicAudioSource.SetTime(_savedTime);
             _backgroundMusicView.BackgroundMusicAudioSource.UnPause();
             Debug.Log($"background music unpaused");
         }
@@ -78,12 +80,27 @@ namespace Sources.Controllers.Presenters.Musics
                     foreach (AudioClip audioClip in _audioClipCollection.AudioClips)
                     {
                         audioSourceView.SetClip(audioClip);
-                        await audioSourceView.PlayToEnd(cancellationToken);
+                        audioSourceView.Play();
+                        await WaitEnd(audioClip, audioSourceView, cancellationToken);
                     }
                 }
             }
             catch (OperationCanceledException)
             {
+            }
+        }
+
+        private async UniTask WaitEnd(
+            AudioClip audioClip, 
+            IAudioSourceView audioSourceView, 
+            CancellationToken cancellationToken)
+        {
+            //TODO Approximately is not working
+            while (audioSourceView.Time + 0.15f < audioClip.length)
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(0.1f), 
+                    ignoreTimeScale: true, 
+                    cancellationToken: cancellationToken);
             }
         }
     }

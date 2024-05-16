@@ -75,13 +75,24 @@ namespace Sources.Infrastructure.Services.PauseServices
             Time.timeScale = TimeScaleConst.Min;
         }
 
-        public async UniTask Yield(CancellationToken cancellationToken)
+        public async UniTask PauseYield(CancellationToken cancellationToken)
         {
             do
             {
                 await UniTask.Yield(cancellationToken);
             }
             while (IsPaused);
+        }
+        
+        public async UniTask SoundPauseYield(CancellationToken cancellationToken)
+        {
+            do
+            {
+                await UniTask.Delay(
+                    TimeSpan.FromSeconds(0.05f), ignoreTimeScale: true, cancellationToken: cancellationToken);
+                // await UniTask.Yield(cancellationToken);
+            }
+            while (IsSoundPaused);
         }
     }
 }

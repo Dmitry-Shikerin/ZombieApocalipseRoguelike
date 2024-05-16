@@ -123,20 +123,20 @@ namespace Sources.Controllers.Presenters.Scenes
         {
             _updateService.Update(deltaTime);
             _inputServiceUpdater.Update(deltaTime);
-            //
-            // if (Input.GetKeyDown(KeyCode.P))
-            // {
-            //     if (_pauseService.IsPaused == false)
-            //     {
-            //         _pauseService.Pause();
-            //         _pauseService.PauseSound();
-            //     }
-            //     else
-            //     {
-            //         _pauseService.Continue();
-            //         _pauseService.ContinueSound();
-            //     }
-            // }
+            
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                if (_pauseService.IsPaused == false)
+                {
+                    _pauseService.Pause();
+                    _pauseService.PauseSound();
+                }
+                else
+                {
+                    _pauseService.Continue();
+                    _pauseService.ContinueSound();
+                }
+            }
         }
 
         public void UpdateLate(float deltaTime)
