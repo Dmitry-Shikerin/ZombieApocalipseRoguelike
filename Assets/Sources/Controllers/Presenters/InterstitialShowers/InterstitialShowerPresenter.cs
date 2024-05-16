@@ -34,6 +34,8 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
                                      throw new ArgumentNullException(nameof(interstitialAdService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
+        
+        private bool CanShow => _enemySpawner.CurrentWave < _enemySpawner.EnemyInWave.Count;
 
         public override void Enable()
         {
@@ -50,6 +52,9 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
         
         private void OnCurrentWaveChanged()
         {
+            if(CanShow == false)
+                return;
+            
             Debug.Log("Show interstitial");
             ShowInterstitialAsync(_cancellationTokenSource.Token);
         }
