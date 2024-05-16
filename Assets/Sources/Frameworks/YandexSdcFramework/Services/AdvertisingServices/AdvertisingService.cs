@@ -7,7 +7,6 @@ using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Players;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
-using UnityEngine;
 
 namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
 {
@@ -79,7 +78,6 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
 
         public void ShowVideo(Action onCloseCallback)
         {
-            Debug.Log("ShowVideoAd");
             if (WebApplication.IsRunningOnWebGL == false)
             {
                 onCloseCallback?.Invoke();
