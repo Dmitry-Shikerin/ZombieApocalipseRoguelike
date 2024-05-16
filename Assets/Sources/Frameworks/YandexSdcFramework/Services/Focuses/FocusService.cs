@@ -22,7 +22,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.Focuses
 
             OnInBackgroundChangeWeb(WebApplication.InBackground);
             OnInBackgroundChangeApp(Application.isFocused);
-
+            
             Application.focusChanged += OnInBackgroundChangeApp;
             WebApplication.InBackgroundChangeEvent += OnInBackgroundChangeWeb;
         }
@@ -31,13 +31,15 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.Focuses
         {
             if (WebApplication.IsRunningOnWebGL == false)
                 return;
-
+            
             Application.focusChanged -= OnInBackgroundChangeApp;
             WebApplication.InBackgroundChangeEvent -= OnInBackgroundChangeWeb;
         }
 
         private void OnInBackgroundChangeApp(bool inApp)
         {
+            // Debug.Log($"FocusService: {inApp}");
+            //
             if (inApp == false)
             {
                 _pauseService.Pause();
@@ -55,6 +57,8 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.Focuses
 
         private void OnInBackgroundChangeWeb(bool isBackground)
         {
+            // Debug.Log($"FocusService: {isBackground}");
+            //
             if (isBackground)
             {
                 _pauseService.Pause();

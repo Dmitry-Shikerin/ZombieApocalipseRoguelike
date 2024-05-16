@@ -1,11 +1,11 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using JetBrains.Annotations;
 using Sources.Controllers.Presenters.Scenes;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.AudioSources;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay;
 using Sources.InfrastructureInterfaces.Factories.Controllers.Scenes;
@@ -14,6 +14,7 @@ using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
+using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Saves;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
@@ -42,6 +43,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly CustomCollection<IEnemyView> _enemyCollection;
         private readonly IAudioService _audioService;
         private readonly IFocusService _focusService;
+        private readonly IAdvertisingService _advertisingService;
+        private readonly IPauseService _pauseService;
         private readonly CurtainView _curtainView;
 
         public GameplaySceneFactory(
@@ -60,7 +63,9 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             CustomCollection<IEnemyView> enemyCollection,
             CurtainView curtainView,
             IAudioService audioService,
-            IFocusService focusService) 
+            IFocusService focusService,
+            IAdvertisingService advertisingService,
+            IPauseService pauseService) 
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -77,6 +82,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _enemyCollection = enemyCollection ?? throw new ArgumentNullException(nameof(enemyCollection));
             _audioService = audioService ?? throw new ArgumentNullException(nameof(audioService));
             _focusService = focusService ?? throw new ArgumentNullException(nameof(focusService));
+            _advertisingService = advertisingService ?? throw new ArgumentNullException(nameof(advertisingService));
+            _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
 
@@ -97,7 +104,9 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _enemyCollection,
                 _curtainView,
                 _audioService,
-                _focusService);
+                _focusService,
+                _advertisingService,
+                _pauseService);
         }
 
         private ILoadSceneService CreateLoadSceneService(object payload)

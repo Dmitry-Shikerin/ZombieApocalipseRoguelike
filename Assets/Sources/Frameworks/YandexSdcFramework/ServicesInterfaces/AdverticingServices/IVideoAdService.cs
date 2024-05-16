@@ -4,6 +4,8 @@ namespace Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingSe
 {
     public interface IVideoAdService
     {
+        bool IsAvailable { get; }
+        
         void ShowVideo(Action onCloseCallback);
     }
 }

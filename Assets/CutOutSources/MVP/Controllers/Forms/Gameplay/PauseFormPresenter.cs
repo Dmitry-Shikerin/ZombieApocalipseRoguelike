@@ -31,8 +31,8 @@ namespace Sources.Controllers.Presenters.Forms.Gameplay
 
         public override void Enable()
         {
-            _pauseService.Pause();
-            _pauseService.PauseSound();
+            // _pauseService.Pause();
+            // _pauseService.PauseSound();
             
             _view.HudButtonView.AddClickListener(ShowHudForm);
             _view.SettingsButtonView.AddClickListener(ShowSettingsForm);
@@ -42,8 +42,8 @@ namespace Sources.Controllers.Presenters.Forms.Gameplay
 
         public override void Disable()
         {
-            _pauseService.Continue();
-            _pauseService.ContinueSound();
+            // _pauseService.Continue();
+            // _pauseService.ContinueSound();
             
             _view.HudButtonView.RemoveClickListener(ShowHudForm);
             _view.SettingsButtonView.RemoveClickListener(ShowSettingsForm);

@@ -2,6 +2,7 @@
 using Sources.Controllers.Presenters.Musics;
 using Sources.Presentations.UI.AudioSources;
 using Sources.PresentationsInterfaces.UI.AudioSources;
+using Sources.PresentationsInterfaces.Views.Music;
 using UnityEngine;
 
 namespace Sources.Presentations.Views.Music
