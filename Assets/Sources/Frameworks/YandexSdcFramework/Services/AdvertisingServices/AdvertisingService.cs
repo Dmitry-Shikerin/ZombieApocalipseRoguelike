@@ -45,21 +45,34 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
                 return;
 
             if (IsAvailable == false)
-            {
-                Debug.Log($"Interstitial is not available. Available: {IsAvailable}");
                 return;
-            }
+
+            bool isContinue = false;
+            bool isContinueSound = false;
 
             InterstitialAd.Show(
                 () =>
                 {
-                    _pauseService.Pause();
-                    _pauseService.PauseSound();
+                    if (_pauseService.IsPaused == false)
+                    {
+                        isContinue = true;
+                        _pauseService.Pause();
+                    }
+
+                    if (_pauseService.IsSoundPaused == false)
+                    {
+                        isContinueSound = true;
+                        _pauseService.PauseSound();
+                    }
                 },
                 _ =>
                 {
-                    _pauseService.Continue();
-                    _pauseService.ContinueSound();
+                    if (isContinue)
+                        _pauseService.Continue();
+
+                    if (isContinueSound)
+                        _pauseService.ContinueSound();
+                    
                     StartTimer(_cancellationTokenSource.Token);
                 });
         }
@@ -80,19 +93,34 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
 
                 return;
             }
+            
+            bool isContinue = false;
+            bool isContinueSound = false;
 
             VideoAd.Show(
                 () =>
                 {
-                    _pauseService.Pause();
-                    _pauseService.PauseSound();
+                    if (_pauseService.IsPaused == false)
+                    {
+                        isContinue = true;
+                        _pauseService.Pause();
+                    }
+
+                    if (_pauseService.IsSoundPaused == false)
+                    {
+                        isContinueSound = true;
+                        _pauseService.PauseSound();
+                    }
                 },
                 () =>
                     _playerWallet.AddCoins(AdvertisingConst.CoinsAmount),
                 () =>
                 {
-                    _pauseService.Continue();
-                    _pauseService.ContinueSound();
+                    if (isContinue)
+                        _pauseService.Continue();
+
+                    if (isContinueSound)
+                        _pauseService.ContinueSound();
 
                     onCloseCallback?.Invoke();
                 });

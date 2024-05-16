@@ -56,14 +56,12 @@ namespace Sources.Controllers.Presenters.Musics
         {
             _savedTime = _backgroundMusicView.BackgroundMusicAudioSource.Time;
             _backgroundMusicView.BackgroundMusicAudioSource.Pause();
-            Debug.Log($"Background music paused");
         }
 
         private void OnContinueSoundActivated()
         {
             _backgroundMusicView.BackgroundMusicAudioSource.SetTime(_savedTime);
             _backgroundMusicView.BackgroundMusicAudioSource.UnPause();
-            Debug.Log($"background music unpaused");
         }
 
         private void OnMusicVolumeChanged() =>
