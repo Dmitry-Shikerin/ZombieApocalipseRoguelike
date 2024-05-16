@@ -6,6 +6,8 @@ using Sources.Domain.Models.AudioSources;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.Views.Music;
+using Sources.PresentationsInterfaces.UI.AudioSources;
+using Sources.PresentationsInterfaces.Views.Music;
 using UnityEngine;
 
 namespace Sources.Controllers.Presenters.Musics
@@ -36,8 +38,7 @@ namespace Sources.Controllers.Presenters.Musics
         public override void Enable()
         {
             _cancellationTokenSource = new CancellationTokenSource();
-            
-            _pauseService.PauseSoundActivated += OnPauseActivated;
+            _pauseService.PauseSoundActivated += OnPauseSoundActivated;
             _pauseService.ContinueSoundActivated += OnContinueSoundActivated;
             _volumeService.MusicVolumeChanged += OnMusicVolumeChanged;
             StartMusic(_cancellationTokenSource.Token);
@@ -45,35 +46,39 @@ namespace Sources.Controllers.Presenters.Musics
 
         public override void Disable()
         {
-            _pauseService.PauseSoundActivated -= OnPauseActivated;
+            _pauseService.PauseSoundActivated -= OnPauseSoundActivated;
             _pauseService.ContinueSoundActivated -= OnContinueSoundActivated;
             _volumeService.MusicVolumeChanged -= OnMusicVolumeChanged;
             _cancellationTokenSource.Cancel();
         }
 
-        private void OnPauseActivated() =>
+        private void OnPauseSoundActivated()
+        {
             _backgroundMusicView.BackgroundMusicAudioSource.Pause();
+            Debug.Log($"Background music paused");
+        }
 
-        private void OnContinueSoundActivated() =>
+        private void OnContinueSoundActivated()
+        {
             _backgroundMusicView.BackgroundMusicAudioSource.UnPause();
+            Debug.Log($"background music unpaused");
+        }
 
         private void OnMusicVolumeChanged() =>
             _backgroundMusicView.BackgroundMusicAudioSource.SetVolume(_volumeService.MusicVolume);
 
         private async void StartMusic(CancellationToken cancellationToken)
         {
+            IAudioSourceView audioSourceView = _backgroundMusicView.BackgroundMusicAudioSource;
+            
             try
             {
                 while (cancellationToken.IsCancellationRequested == false)
                 {
                     foreach (AudioClip audioClip in _audioClipCollection.AudioClips)
                     {
-                        _backgroundMusicView.BackgroundMusicAudioSource.SetClip(audioClip);
-                        _backgroundMusicView.BackgroundMusicAudioSource.Play();
-                        
-                        await UniTask.WaitUntil(
-                            () => _backgroundMusicView.BackgroundMusicAudioSource.IsPlaying == false,
-                            cancellationToken: cancellationToken);
+                        audioSourceView.SetClip(audioClip);
+                        await audioSourceView.PlayToEnd(cancellationToken);
                     }
                 }
             }

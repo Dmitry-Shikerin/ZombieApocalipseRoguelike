@@ -21,8 +21,8 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
         
         public void Handle(IUiButton uiButton)
         {
-            uiButton.Hide();
-            _videoAdService.ShowVideo(uiButton.Show);
+            uiButton.Disable();
+            _videoAdService.ShowVideo(uiButton.Enable);
         }
     }
 }

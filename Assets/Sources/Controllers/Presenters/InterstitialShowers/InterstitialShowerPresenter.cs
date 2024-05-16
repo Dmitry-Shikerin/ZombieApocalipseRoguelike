@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using JetBrains.Annotations;
+using Sources.Controllers.Common;
 using Sources.Domain.Models.Constants;
 using Sources.DomainInterfaces.Models.Spawners;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
@@ -10,7 +10,7 @@ using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServic
 using Sources.PresentationsInterfaces.Views.InterstitialShowers;
 using UnityEngine;
 
-namespace Sources.Controllers.Common.InterstitialShowers
+namespace Sources.Controllers.Presenters.InterstitialShowers
 {
     public class InterstitialShowerPresenter : PresenterBase
     {

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Sources.PresentationsInterfaces.UI.AudioSources
 {
@@ -11,6 +13,7 @@ namespace Sources.PresentationsInterfaces.UI.AudioSources
         void Pause();
         void UnPause();
         void Play();
+        UniTask PlayToEnd(CancellationToken cancellationToken);
         void SetLoop();
         void SetUnLoop();
         void Stop();

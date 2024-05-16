@@ -47,20 +47,20 @@ namespace Sources.Controllers.Presenters.Scenes
         public async void Enter(object payload = null)
         {
             await Initialize(payload as IScenePayload);
+            _focusService.Enable();
             _loadSceneService.Load(payload as IScenePayload);
             _localizationService.Translate();
             _volumeService.Enter();
             _audioService.Enter();
-            _focusService.Enable();
             // await _curtainView.HideCurtain();
             await GameReady(payload as IScenePayload);
         }
 
         public void Exit()
         {
+            _focusService.Disable();
             _volumeService.Exit();
             _audioService.Exit();
-            _focusService.Disable();
         }
 
         public void Update(float deltaTime)

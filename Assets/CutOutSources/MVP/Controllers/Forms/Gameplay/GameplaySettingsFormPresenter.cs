@@ -30,13 +30,13 @@ namespace Sources.Controllers.Presenters.Forms.Gameplay
 
         public override void Enable()
         {
-            _pauseService.Pause();
+            // _pauseService.Pause();
             _view.PauseFormButtonView.AddClickListener(ShowPauseForm);
         }
 
         public override void Disable()
         {
-            _pauseService.Continue();
+            // _pauseService.Continue();
             _view.PauseFormButtonView.RemoveClickListener(ShowPauseForm);
         }
 

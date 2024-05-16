@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading;
 using Agava.WebUtility;
 using Agava.YandexGames;
+using Cysharp.Threading.Tasks;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Players;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
@@ -15,10 +17,24 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
 
         private PlayerWallet _playerWallet;
 
+        private CancellationTokenSource _cancellationTokenSource;
+        private TimeSpan _timeSpan = TimeSpan.FromSeconds(35);
+
         public AdvertisingService(IPauseService pauseService)
         {
             _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
         }
+
+        public bool IsAvailable { get; private set; } = true;
+
+        public void Enable() =>
+            _cancellationTokenSource = new CancellationTokenSource();
+
+        public void Disable() =>
+            _cancellationTokenSource.Cancel();
+
+        public void Construct(PlayerWallet playerWallet) =>
+            _playerWallet = playerWallet ?? throw new ArgumentNullException(nameof(playerWallet));
 
         public void ShowInterstitial()
         {
@@ -27,6 +43,12 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
 
             if (AdBlock.Enabled)
                 return;
+
+            if (IsAvailable == false)
+            {
+                Debug.Log($"Interstitial is not available. Available: {IsAvailable}");
+                return;
+            }
 
             InterstitialAd.Show(
                 () =>
@@ -38,6 +60,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
                 {
                     _pauseService.Continue();
                     _pauseService.ContinueSound();
+                    StartTimer(_cancellationTokenSource.Token);
                 });
         }
 
@@ -75,7 +98,17 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
                 });
         }
 
-        public void Construct(PlayerWallet playerWallet) =>
-            _playerWallet = playerWallet ?? throw new ArgumentNullException(nameof(playerWallet));
+        private async void StartTimer(CancellationToken cancellationToken)
+        {
+            try
+            {
+                IsAvailable = false;
+                await UniTask.Delay(_timeSpan, cancellationToken: cancellationToken);
+                IsAvailable = true;
+            }
+            catch (OperationCanceledException)
+            {
+            }
+        }
     }
 }
