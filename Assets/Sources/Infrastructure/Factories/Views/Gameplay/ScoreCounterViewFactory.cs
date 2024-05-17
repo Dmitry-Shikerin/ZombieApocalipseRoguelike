@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Presenters.Gameplay;
 using Sources.Domain.Models.Gameplay;
+using Sources.DomainInterfaces.Models.Characters;
 using Sources.DomainInterfaces.Models.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Gameplay;
 using Sources.Presentations.Views.Gameplay;
@@ -21,9 +22,11 @@ namespace Sources.Infrastructure.Factories.Views.Gameplay
             ScoreCounter scoreCounter, 
             IKillEnemyCounter killEnemyCounter, 
             ILevel level, 
+            ICharacterHealth characterHealth,
             ScoreCounterView view)
         {
-            ScoreCounterPresenter presenter = _presenterFactory.Create(scoreCounter, killEnemyCounter, level, view);
+            ScoreCounterPresenter presenter = _presenterFactory.Create(
+                scoreCounter, killEnemyCounter, level, characterHealth, view);
             view.Construct(presenter);
 
             return view;

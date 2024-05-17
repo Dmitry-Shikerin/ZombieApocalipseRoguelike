@@ -220,7 +220,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             
             //ScoreCounter
             _scoreCounterViewFactory.Create(
-                gameModels.ScoreCounter, gameModels.KillEnemyCounter, gameModels.Level, _gameplayHud.ScoreCounterView);
+                gameModels.ScoreCounter, 
+                gameModels.KillEnemyCounter, 
+                gameModels.Level, 
+                gameModels.CharacterHealth,
+                _gameplayHud.ScoreCounterView);
         }
 
         protected abstract GameModels LoadModels(IScenePayload scenePayload);

@@ -150,6 +150,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
             KillEnemyCounter killEnemyCounter = _entityRepository.Get<KillEnemyCounter>(ModelId.KillEnemyCounter);
             EnemySpawner enemySpawner = _entityRepository.Get<EnemySpawner>(ModelId.GameplayEnemySpawner);
+
+            ScoreCounter scoreCounter = _entityRepository.Get<ScoreCounter>(ModelId.ScoreCounter);
             
             MiniGun miniGun = new MiniGun(miniGunAttackUpgrader, WeaponConst.AttackCooldown);
 
@@ -173,7 +175,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             BearAttacker bearAttacker = new BearAttacker(bearAttackUpgrader, bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
 
-            ScoreCounter scoreCounter = new ScoreCounter();
 
             return new GameModels(
                 bearMassAttackUpgrader,

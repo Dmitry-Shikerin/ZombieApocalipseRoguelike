@@ -151,6 +151,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
             EnemySpawner enemySpawner = CreateEnemySpawner(scenePayload.SceneId);
 
+            ScoreCounter scoreCounter = CreateScoreCounter();
+            
             MiniGun minigun = new MiniGun(miniGunAttackUpgrader, 0.1f);
             CharacterHealth characterHealth = new CharacterHealth(characterHealthUpgrader);
             Character character = new Character(
@@ -173,8 +175,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
 
-            ScoreCounter scoreCounter = new ScoreCounter();
-
             Debug.Log("CreateModels");
             return new GameModels(
                 bearMassAttackUpgrader,
@@ -196,6 +196,18 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 savedLevel,
                 tutorial,
                 scoreCounter);
+        }
+
+        private ScoreCounter CreateScoreCounter()
+        {
+            
+            if (_loadService.HasKey(ModelId.ScoreCounter))
+                return _loadService.Load<ScoreCounter>(ModelId.ScoreCounter);
+
+            ScoreCounter scoreCounter = new ScoreCounter(0, ModelId.ScoreCounter);
+            _entityRepository.Add(scoreCounter);
+            
+            return scoreCounter;
         }
 
         private Upgrader CreateUpgrader(string id)

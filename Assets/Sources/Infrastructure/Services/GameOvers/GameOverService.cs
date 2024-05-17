@@ -31,10 +31,8 @@ namespace Sources.Infrastructure.Services.GameOvers
             _characterHealth.HealthChanged += OnHealthChanged;
         }
 
-        public void Exit()
-        {
+        public void Exit() =>
             _characterHealth.HealthChanged -= OnHealthChanged;
-        }
 
         public void Register(CharacterHealth characterHealth) =>
             _characterHealth = characterHealth ?? throw new ArgumentNullException(nameof(characterHealth));

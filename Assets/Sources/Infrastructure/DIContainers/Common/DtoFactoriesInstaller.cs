@@ -22,6 +22,7 @@ namespace Sources.Infrastructure.DIContainers.Common
             Container.Bind<IKillEnemyCounterDtoMapper>().To<KillEnemyCounterDtoMapper>().AsSingle();
             Container.Bind<ISavedLevelDtoMapper>().To<SavedLevelDtoMapper>().AsSingle();
             Container.Bind<IEnemySpawnerDtoMapper>().To<EnemySpawnerDtoMapper>().AsSingle();
+            Container.Bind<IScoreCounterDtoMapper>().To<ScoreCounterDtoMapper>().AsSingle();
         }
     }
 }
