@@ -18,13 +18,8 @@ namespace Sources.Frameworks.UiFramework.Presentation.AudioSources
         
         public AudioSourceId AudioSourceId => _audioSourceId;
 
-        private void Awake()
-        {
+        private void Awake() =>
             _audioSource = GetComponent<AudioSource>();
-
-            if (_audioSource.clip == null)
-                Debug.Log($"Missing audio clip in {nameof(UiAudioSource)}");
-        }
 
         public void Play() =>
             _audioSource.Play();

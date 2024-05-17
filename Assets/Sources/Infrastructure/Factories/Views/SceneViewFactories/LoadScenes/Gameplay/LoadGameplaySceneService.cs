@@ -81,7 +81,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ITutorialService tutorialService,
             IAdvertisingService advertisingService,
             IFormService formService,
-            InterstitialShowerViewFactory interstitialShowerViewFactory) 
+            InterstitialShowerViewFactory interstitialShowerViewFactory,
+            ScoreCounterViewFactory scoreCounterViewFactory) 
             : base(
                 gameplayHud, 
                 uiCollectorFactory, 
@@ -111,7 +112,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 tutorialService,
                 advertisingService,
                 formService,
-                interstitialShowerViewFactory)
+                interstitialShowerViewFactory,
+                scoreCounterViewFactory)
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
@@ -171,6 +173,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             BearAttacker bearAttacker = new BearAttacker(bearAttackUpgrader, bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
 
+            ScoreCounter scoreCounter = new ScoreCounter();
+
             return new GameModels(
                 bearMassAttackUpgrader,
                 bearAttackUpgrader,
@@ -189,7 +193,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 killEnemyCounter,
                 enemySpawner,
                 savedLevel,
-                tutorial);
+                tutorial,
+                scoreCounter);
         }
     }
 }

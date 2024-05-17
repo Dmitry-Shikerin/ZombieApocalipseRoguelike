@@ -1,4 +1,5 @@
 ﻿using Sources.Infrastructure.Factories.Controllers.Gameplay;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Presenters.InterstitialShowers;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.InterstitialShowers;
@@ -27,6 +28,8 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
             Container.Bind<KillEnemyCounterViewFactory>().AsSingle();
             Container.Bind<InterstitialShowerPresenterFactory>().AsSingle();
             Container.Bind<InterstitialShowerViewFactory>().AsSingle();
+            Container.Bind<ScoreCounterPresenterFactory>().AsSingle();
+            Container.Bind<ScoreCounterViewFactory>().AsSingle();
         }
     }
 }

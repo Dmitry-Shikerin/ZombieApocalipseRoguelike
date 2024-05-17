@@ -83,7 +83,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IEnemySpawnerDtoMapper enemySpawnerDtoMapper,
             IAdvertisingService advertisingService,
             IFormService formService,
-            InterstitialShowerViewFactory interstitialShowerViewFactory)
+            InterstitialShowerViewFactory interstitialShowerViewFactory,
+            ScoreCounterViewFactory scoreCounterViewFactory)
             : base(
                 gameplayHud,
                 uiCollectorFactory,
@@ -113,7 +114,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 tutorialService,
                 advertisingService,
                 formService,
-                interstitialShowerViewFactory)
+                interstitialShowerViewFactory,
+                scoreCounterViewFactory)
         {
             _loadService = loadService;
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
@@ -171,6 +173,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
 
+            ScoreCounter scoreCounter = new ScoreCounter();
+
             Debug.Log("CreateModels");
             return new GameModels(
                 bearMassAttackUpgrader,
@@ -190,7 +194,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 killEnemyCounter,
                 enemySpawner,
                 savedLevel,
-                tutorial);
+                tutorial,
+                scoreCounter);
         }
 
         private Upgrader CreateUpgrader(string id)

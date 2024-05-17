@@ -1,16 +1,12 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Sources.Domain.Models.Forms.MainMenu;
-using Sources.Frameworks.UiFramework.Presentation.Forms;
+using Sources.Frameworks.UiFramework.Presentation.Views;
 using Sources.Frameworks.YandexSdcFramework.Presentations.Views;
-using Sources.Presentations.BindableViews.Forms.MainMenu;
 using Sources.Presentations.Views;
-using Sources.Presentations.Views.Forms.MainMenu;
 using Sources.Presentations.Views.Gameplay;
 using Sources.Presentations.Views.Music;
 using Sources.Presentations.Views.Settings;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Presentations.UI.Huds
 {

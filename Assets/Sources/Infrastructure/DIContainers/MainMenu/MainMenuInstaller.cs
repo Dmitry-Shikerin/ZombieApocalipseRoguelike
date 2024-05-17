@@ -4,6 +4,7 @@ using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Frameworks.UiFramework.Domain.Localizations.Configs;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
+using Sources.Frameworks.UiFramework.Presentation.Views;
 using Sources.Frameworks.YandexSdcFramework.Services.Focuses;
 using Sources.Frameworks.YandexSdcFramework.Services.Leaderboards;
 using Sources.Frameworks.YandexSdcFramework.Services.PlayerAccounts;

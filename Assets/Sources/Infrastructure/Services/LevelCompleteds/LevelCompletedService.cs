@@ -30,6 +30,8 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
         }
+        
+        private bool IsCompleted => _killEnemyCounter.KillZombies >= _enemySpawner.SumAllEnemies;
 
         public void Enable()
         {
@@ -47,10 +49,10 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
                 return;
 
             SavedLevel savedLevel = _entityRepository.Get<SavedLevel>(ModelId.SavedLevel);
-            Debug.Log("Saved level: " + savedLevel.SavedLevelId);
+            // Debug.Log("Saved level: " + savedLevel.SavedLevelId);
             Level level = _entityRepository.Get<Level>(savedLevel.SavedLevelId);
             level.Complete();
-            Debug.Log($"Current level : {level.Id}, is completed: {level.IsCompleted}");
+            // Debug.Log($"Current level : {level.Id}, is completed: {level.IsCompleted}");
             _loadService.Save(level);
             _loadService.ClearAll();
             _formService.Show(FormId.LevelCompleted);
