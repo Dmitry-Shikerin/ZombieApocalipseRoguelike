@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.DomainInterfaces.Healths;
+using Sources.DomainInterfaces.Models.Healths;
 using UnityEngine;
 
 namespace Sources.Domain.Models.Enemies

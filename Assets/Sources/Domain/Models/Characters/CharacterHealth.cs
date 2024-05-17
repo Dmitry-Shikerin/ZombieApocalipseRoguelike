@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.Domain.Models.Upgrades;
-using Sources.DomainInterfaces.Healths;
 using Sources.DomainInterfaces.Models.Characters;
+using Sources.DomainInterfaces.Models.Healths;
 using Sources.PresentationsInterfaces.Views.Character;
 using UnityEngine;
 
@@ -38,6 +38,9 @@ namespace Sources.Domain.Models.Characters
 
         public void TakeDamage(float damage)
         {
+            if(CurrentHealth <= 0)
+                return;
+            
             CurrentHealth -= damage;
             DamageReceived?.Invoke(damage);
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Domain.Models.Characters;
+using Sources.DomainInterfaces.Models.Characters;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
@@ -11,9 +11,7 @@ namespace Sources.Infrastructure.Services.GameOvers
     {
         private readonly IFormService _formService;
         private readonly ILoadService _loadService;
-        private CharacterHealth _characterHealth;
-
-        private bool _isGameOver;
+        private ICharacterHealth _characterHealth;
 
         public GameOverService(
             IFormService formService,
@@ -28,26 +26,19 @@ namespace Sources.Infrastructure.Services.GameOvers
             if (_characterHealth == null)
                 throw new ArgumentNullException(nameof(_characterHealth));
 
-            _characterHealth.HealthChanged += OnHealthChanged;
+            _characterHealth.CharacterDie += OnCharacterDie;
         }
 
         public void Exit() =>
-            _characterHealth.HealthChanged -= OnHealthChanged;
+            _characterHealth.CharacterDie -= OnCharacterDie;
 
-        public void Register(CharacterHealth characterHealth) =>
+        public void Register(ICharacterHealth characterHealth) =>
             _characterHealth = characterHealth ?? throw new ArgumentNullException(nameof(characterHealth));
 
-        private void OnHealthChanged()
+        private void OnCharacterDie()
         {
-            if (_characterHealth.CurrentHealth > 0)
-                return;
-
-            if (_isGameOver)
-                return;
-
             _loadService.ClearAll();
             _formService.Show(FormId.GameOver);
-            _isGameOver = true;
         }
     }
 }

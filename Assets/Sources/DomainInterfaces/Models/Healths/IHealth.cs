@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sources.DomainInterfaces.Healths
+namespace Sources.DomainInterfaces.Models.Healths
 {
     public interface IHealth
     {
