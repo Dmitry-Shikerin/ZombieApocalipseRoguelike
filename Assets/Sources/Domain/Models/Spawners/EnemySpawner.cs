@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Domain.Models.Data;
 using Sources.DomainInterfaces.Entities;
 using Sources.DomainInterfaces.Models.Gameplay;
 using Sources.DomainInterfaces.Models.Spawners;
+using UnityEngine;
 
 namespace Sources.Domain.Models.Spawners
 {
     public class EnemySpawner : IEntity, IEnemySpawner
     {
-        private List<int> _sumEnemiesInWave;
-
         public EnemySpawner(EnemySpawnerDto enemySpawnerDto)
         {
             Id = enemySpawnerDto.Id;
@@ -23,7 +23,7 @@ namespace Sources.Domain.Models.Spawners
             SpawnedBosses = enemySpawnerDto.SpawnedBosses;
             CurrentWave = enemySpawnerDto.CurrentWave;
 
-            _sumEnemiesInWave = FillEnemySums();
+            SumEnemiesInWave = FillEnemySums();
         }
 
         public EnemySpawner(
@@ -41,7 +41,7 @@ namespace Sources.Domain.Models.Spawners
             SpawnDelays = spawnDelays;
             BossesInLevel = bossesInLevel;
 
-            _sumEnemiesInWave = FillEnemySums();
+            SumEnemiesInWave = FillEnemySums();
         }
 
         public event Action CurrentWaveChanged;
@@ -50,10 +50,10 @@ namespace Sources.Domain.Models.Spawners
         public Type Type => GetType();
         public IReadOnlyList<int> EnemyInWave { get; }
         public IReadOnlyList<int> SpawnDelays { get; }
-        public IReadOnlyList<int> SumEnemiesInWave => _sumEnemiesInWave;
-        public int SumEnemies => GetSumEnemies();
+        public IReadOnlyList<int> SumEnemiesInWave { get; }
+        public int SumEnemies => EnemyInWave.Sum();
         public int BossesInLevel { get; }
-        public int SumAllEnemies => GetSumEnemies() + BossesInLevel;
+        public int SumAllEnemies => EnemyInWave.Sum() + BossesInLevel;
         public int SpawnedBosses { get; set; }
         public int SpawnedEnemies { get; set; }
         public int CurrentWave { get; set; }
@@ -62,15 +62,19 @@ namespace Sources.Domain.Models.Spawners
 
         public void SetCurrentWave(int killZombies)
         {
-            for (int i = 0; i < _sumEnemiesInWave.Count; i++)
+            for (int i = 0; i < SumEnemiesInWave.Count; i++)
             {
-                if (killZombies >= SumEnemiesInWave[i])
+                if (killZombies == SumEnemiesInWave[i])
                 {
-                    if (i == _sumEnemiesInWave.Count)
+                    if (i == SumEnemiesInWave.Count)
+                        return;
+                    
+                    if(i + 1 <= CurrentWave)
                         return;
 
                     CurrentWave = i + 1;
                     CurrentWaveChanged?.Invoke();
+                    Debug.Log($"CurrentWaveChanged: {CurrentWave}");
                 }
             }
         }

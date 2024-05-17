@@ -5,23 +5,24 @@ using Sources.Controllers.Common;
 using Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Buttons.Types;
+using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
 
 namespace Sources.Frameworks.UiFramework.Controllers.Buttons
 {
     public class UiButtonPresenter : PresenterBase
     {
         private readonly IUiButtonService _uiButtonService;
-        private readonly UiButton _view;
+        private readonly IUiButton _view;
 
         private CancellationTokenSource _cancellationTokenSource;
 
         public UiButtonPresenter(
-            UiButton view,
+            IUiButton view,
             IUiButtonService uiButtonService)
         {
             _uiButtonService = uiButtonService ??
                                    throw new ArgumentNullException(nameof(uiButtonService));
-            _view = view ? view : throw new ArgumentNullException(nameof(view));
+            _view = view ?? throw new ArgumentNullException(nameof(view));
         }
 
         public override void Enable()

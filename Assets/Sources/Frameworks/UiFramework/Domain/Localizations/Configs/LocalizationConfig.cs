@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Sources.Frameworks.UiFramework.Domain.Dictionaries;
 using Sources.Frameworks.UiFramework.Domain.Localizations.Phrases;
+using Sources.Frameworks.UiFramework.Extensions;
 using UnityEditor;
 using UnityEngine;
 
@@ -23,47 +24,29 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Configs
         public List<string> LocalizationIds => _localizationIds;
         public List<LocalizationPhrase> LocalizationPhrases => _localizationPhrases;
         
-        // [Button]
-        // private void AddAllPhrases()
-        // {
-        //     _localizationPhrases.Clear();
-        //     
-        //     AssetDatabase
-        //         .FindAssets("t:LocalizationPhrase")
-        //         .Select(path => AssetDatabase.GUIDToAssetPath(path))
-        //         .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationPhrase>(path))
-        //         .ToList()
-        //         .ForEach(phrase => _localizationPhrases.Add(phrase));
-        // }
-        //
-        // [Button]
-        // private void FillIds()
-        // {
-        //     _localizationIds.Clear();
-        //     _localizationPhrases.ForEach(phrase => _localizationIds.Add(phrase.LocalizationId));
-        // }
-        //
-        // [Button]
-        // private void CreateLocalizationPhrase()
-        // {
-        //     LocalizationPhrase phrase = CreateInstance<LocalizationPhrase>();
-        //     
-        //     AssetDatabase.CreateAsset(phrase, 
-        //         "Assets/Resources/Configs/Localizations/LocalizationPhrase.asset");
-        //     AssetDatabase.SaveAssets();
-        // }
-        //
-        // [UsedImplicitly]
-        // private List<string> GetDropdownValues()
-        // {
-        //     //TODO как убрать эту ошибку
-        //     return AssetDatabase
-        //         .FindAssets("t:LocalizationConfig")
-        //         .Select(path => AssetDatabase.GUIDToAssetPath(path))
-        //         .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
-        //         .ToList()
-        //         .FirstOrDefault()
-        //         .LocalizationIds;
-        // }
+        [Button]
+        private void AddAllPhrases()
+        {
+            _localizationPhrases.Clear();
+            
+                TextExtension
+                    .FindAllLocalizationPhrases()
+                    .ForEach(phrase => _localizationPhrases.Add(phrase));
+        }
+        
+        [Button]
+        private void FillIds()
+        {
+            _localizationIds.Clear();
+            _localizationPhrases.ForEach(phrase => _localizationIds.Add(phrase.LocalizationId));
+        }
+        
+        [Button]
+        private void CreateLocalizationPhrase() =>
+            TextExtension.CreateLocalizationPhrase();
+
+        [UsedImplicitly]
+        private List<string> GetDropdownValues() =>
+            TextExtension.GetTranslateId();
     }
 }

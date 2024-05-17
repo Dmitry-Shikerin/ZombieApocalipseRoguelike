@@ -4,10 +4,12 @@ using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Frameworks.UiFramework.Domain.Localizations.Configs;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
+using Sources.Frameworks.YandexSdcFramework.Services.Focuses;
 using Sources.Frameworks.YandexSdcFramework.Services.Leaderboards;
 using Sources.Frameworks.YandexSdcFramework.Services.PlayerAccounts;
 using Sources.Frameworks.YandexSdcFramework.Services.SdcInitializeServices;
 using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.PlayerAccounts;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
@@ -63,6 +65,7 @@ namespace Sources.Infrastructure.DIContainers.MainMenu
             BindMainMenuLoadService();
         }
 
+        //TODO вытащить в отделтный инсталлер
         private void BindServices()
         {
             Container.Bind<IPauseService>().To<PauseService>().AsSingle();
@@ -73,6 +76,7 @@ namespace Sources.Infrastructure.DIContainers.MainMenu
             Container.Bind<IPlayerAccountAuthorizeService>().To<PlayerAccountAuthorizeService>().AsSingle();
             Container.Bind<ISdcInitializeService>().To<SdcInitializeService>().AsSingle();
             Container.Bind<IStickyService>().To<StickyService>().AsSingle();
+            Container.Bind<IFocusService>().To<FocusService>().AsSingle();
             Container.Bind<LeaderBoardElementViewFactory>().AsSingle();
             Container.Bind<LeaderBoardElementPresenterFactory>().AsSingle();
             Container.Bind<CustomValidator>().AsSingle();

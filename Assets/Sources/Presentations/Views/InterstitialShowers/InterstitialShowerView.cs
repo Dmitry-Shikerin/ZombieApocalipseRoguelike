@@ -1,5 +1,5 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.Controllers.Common.InterstitialShowers;
+using Sources.Controllers.Presenters.InterstitialShowers;
 using Sources.Frameworks.UiFramework.Presentation.Texts;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.InterstitialShowers;

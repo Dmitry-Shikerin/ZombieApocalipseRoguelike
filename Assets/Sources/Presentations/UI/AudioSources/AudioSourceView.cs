@@ -1,4 +1,7 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using Sirenix.OdinInspector;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.UI.AudioSources;
 using UnityEngine;
@@ -8,8 +11,13 @@ namespace Sources.Presentations.UI.AudioSources
     public class AudioSourceView : View, IAudioSourceView
     {
         [Required] [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioListener _audioListener;
 
         public bool IsPlaying => _audioSource.isPlaying;
+        public float Time => _audioSource.time;
+
+        public void SetTime(float time) =>
+            _audioSource.time = time;
 
         public void Mute() =>
             _audioSource.mute = true;
@@ -40,5 +48,13 @@ namespace Sources.Presentations.UI.AudioSources
 
         public void SetVolume(float volume) =>
             _audioSource.volume = volume;
+
+        public async UniTask PlayToEnd(CancellationToken cancellationToken)
+        {
+            Play();
+            await UniTask.WaitUntil(
+                () => Mathf.Approximately(_audioSource.time, _audioSource.clip.length),
+                cancellationToken: cancellationToken);
+        }
     }
 }

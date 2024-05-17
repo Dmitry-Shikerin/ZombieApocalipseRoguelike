@@ -18,6 +18,7 @@ namespace Sources.InfrastructureInterfaces.Services.PauseServices
         void Continue();
         void PauseSound();
         void Pause();
-        UniTask Yield(CancellationToken cancellationToken);
+        UniTask PauseYield(CancellationToken cancellationToken);
+        UniTask SoundPauseYield(CancellationToken cancellationToken);
     }
 }

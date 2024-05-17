@@ -1,10 +1,10 @@
 using Sources.Frameworks.UiFramework.Domain.Commands;
-using Sources.Frameworks.UiFramework.Presentation.Buttons;
+using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
 
-namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handlers
+namespace Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Buttons.Handlers
 {
     public interface IButtonCommandHandler
     {
-        void Handle(UiButton uiButton, ButtonCommandId buttonCommandId);
+        void Handle(IUiButton uiButton, ButtonCommandId buttonCommandId);
     }
 }

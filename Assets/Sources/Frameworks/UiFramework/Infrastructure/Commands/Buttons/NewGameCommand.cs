@@ -1,8 +1,9 @@
 ﻿using System;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Frameworks.UiFramework.Domain.Commands;
-using Sources.Frameworks.UiFramework.Presentation.Buttons;
+using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 
@@ -21,7 +22,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 
         public ButtonCommandId Id => ButtonCommandId.NewGame;
         
-        public void Handle(UiButton uiButton)
+        public void Handle(IUiButton uiButton)
         {
             if (_loadService.HasKey(ModelId.PlayerWallet))
             {

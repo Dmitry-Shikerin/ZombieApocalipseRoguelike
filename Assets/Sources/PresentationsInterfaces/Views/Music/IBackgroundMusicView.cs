@@ -1,6 +1,6 @@
 ﻿using Sources.PresentationsInterfaces.UI.AudioSources;
 
-namespace Sources.Presentations.Views.Music
+namespace Sources.PresentationsInterfaces.Views.Music
 {
     public interface IBackgroundMusicView
     {

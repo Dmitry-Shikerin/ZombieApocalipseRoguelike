@@ -1,6 +1,6 @@
 ﻿using System;
 using JetBrains.Annotations;
-using Sources.Controllers.Common.InterstitialShowers;
+using Sources.Controllers.Presenters.InterstitialShowers;
 using Sources.DomainInterfaces.Models.Spawners;
 using Sources.Infrastructure.Factories.Controllers.Presenters.InterstitialShowers;
 using Sources.Presentations.Views.InterstitialShowers;
