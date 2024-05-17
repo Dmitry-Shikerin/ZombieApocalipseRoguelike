@@ -2248,8 +2248,9 @@ MonoBehaviour:
   _navMeshAgent: {fileID: 5687517746226441073}
   _healthView: {fileID: 1252745950413925276}
   _healthUi: {fileID: 2588897192417013927}
-  _enemyAnimation: {fileID: 9220085964439420491}
   _healthUiText: {fileID: 4518278128009916493}
+  _skins:
+  - {fileID: 2972457647037391440}
   bossEnemyAnimation: {fileID: 9220085964439420491}
   _massAttackParticle: {fileID: 945649008539658765}
 --- !u!195 &5687517746226441073
@@ -3105,6 +3106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6119777975705401954}
   - component: {fileID: 2306707759956599064}
+  - component: {fileID: 2972457647037391440}
   m_Layer: 11
   m_Name: SM_Chr_ZombieBoss_Slobber_01
   m_TagString: Untagged
@@ -3231,6 +3233,18 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0034577847, y: 0.89850813, z: -0.02378729}
     m_Extent: {x: 1.4695306, y: 0.9802905, z: 0.5060855}
   m_DirtyAABB: 0
+--- !u!114 &2972457647037391440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5795392906897173953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8449b2577034676bf4d9f9dec292060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5818745151742851079
 GameObject:
   m_ObjectHideFlags: 0

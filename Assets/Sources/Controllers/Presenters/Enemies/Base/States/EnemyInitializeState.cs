@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Sources.Domain.Models.Enemies.Base;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
+using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.Utils.CustomCollections;
+using Sources.Utils.Extensions;
 
 namespace Sources.Controllers.Presenters.Enemies.Base.States
 {
@@ -28,8 +32,21 @@ namespace Sources.Controllers.Presenters.Enemies.Base.States
         public override void Enter()
         {
             _enemy.IsInitialized = true;
+            ChangeSkin();
             _enemyAnimation.PlayIdle();
             _enemyCollection.Add(_enemyView);
+        }
+
+        private void ChangeSkin()
+        {
+            IEnemySkin skin = _enemyView.Skins.GetRandomItem();
+            
+            _enemyView.Skins
+                .Except(new List<IEnemySkin>() { skin })
+                .ToList()
+                .ForEach(concreteSkin => concreteSkin.Hide());
+            
+            skin.Show();
         }
     }
 }
