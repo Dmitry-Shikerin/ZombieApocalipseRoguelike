@@ -83,7 +83,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IEnemySpawnerDtoMapper enemySpawnerDtoMapper,
             IAdvertisingService advertisingService,
             IFormService formService,
-            InterstitialShowerViewFactory interstitialShowerViewFactory)
+            InterstitialShowerViewFactory interstitialShowerViewFactory,
+            ScoreCounterViewFactory scoreCounterViewFactory,
+            IUpgradeService upgradeService)
             : base(
                 gameplayHud,
                 uiCollectorFactory,
@@ -113,7 +115,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 tutorialService,
                 advertisingService,
                 formService,
-                interstitialShowerViewFactory)
+                interstitialShowerViewFactory,
+                scoreCounterViewFactory,
+                upgradeService)
         {
             _loadService = loadService;
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
@@ -149,6 +153,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
             EnemySpawner enemySpawner = CreateEnemySpawner(scenePayload.SceneId);
 
+            ScoreCounter scoreCounter = CreateScoreCounter();
+            
             MiniGun minigun = new MiniGun(miniGunAttackUpgrader, 0.1f);
             CharacterHealth characterHealth = new CharacterHealth(characterHealthUpgrader);
             Character character = new Character(
@@ -190,7 +196,20 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 killEnemyCounter,
                 enemySpawner,
                 savedLevel,
-                tutorial);
+                tutorial,
+                scoreCounter);
+        }
+
+        private ScoreCounter CreateScoreCounter()
+        {
+            
+            if (_loadService.HasKey(ModelId.ScoreCounter))
+                return _loadService.Load<ScoreCounter>(ModelId.ScoreCounter);
+
+            ScoreCounter scoreCounter = new ScoreCounter(0, ModelId.ScoreCounter);
+            _entityRepository.Add(scoreCounter);
+            
+            return scoreCounter;
         }
 
         private Upgrader CreateUpgrader(string id)

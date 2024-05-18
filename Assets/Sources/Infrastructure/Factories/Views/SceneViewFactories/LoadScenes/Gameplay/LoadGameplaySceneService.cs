@@ -81,7 +81,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ITutorialService tutorialService,
             IAdvertisingService advertisingService,
             IFormService formService,
-            InterstitialShowerViewFactory interstitialShowerViewFactory) 
+            InterstitialShowerViewFactory interstitialShowerViewFactory,
+            ScoreCounterViewFactory scoreCounterViewFactory,
+            IUpgradeService upgradeService) 
             : base(
                 gameplayHud, 
                 uiCollectorFactory, 
@@ -111,7 +113,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 tutorialService,
                 advertisingService,
                 formService,
-                interstitialShowerViewFactory)
+                interstitialShowerViewFactory,
+                scoreCounterViewFactory,
+                upgradeService)
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
@@ -148,6 +152,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
             KillEnemyCounter killEnemyCounter = _entityRepository.Get<KillEnemyCounter>(ModelId.KillEnemyCounter);
             EnemySpawner enemySpawner = _entityRepository.Get<EnemySpawner>(ModelId.GameplayEnemySpawner);
+
+            ScoreCounter scoreCounter = _entityRepository.Get<ScoreCounter>(ModelId.ScoreCounter);
             
             MiniGun miniGun = new MiniGun(miniGunAttackUpgrader, WeaponConst.AttackCooldown);
 
@@ -171,6 +177,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             BearAttacker bearAttacker = new BearAttacker(bearAttackUpgrader, bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
 
+
             return new GameModels(
                 bearMassAttackUpgrader,
                 bearAttackUpgrader,
@@ -189,7 +196,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 killEnemyCounter,
                 enemySpawner,
                 savedLevel,
-                tutorial);
+                tutorial,
+                scoreCounter);
         }
     }
 }

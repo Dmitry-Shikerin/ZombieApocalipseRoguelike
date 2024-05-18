@@ -8,14 +8,12 @@ using Sources.Frameworks.UiFramework.Presentation.AudioSources;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.CommonTypes;
 using Sources.Frameworks.UiFramework.Presentation.Texts;
-using Sources.Frameworks.UiFramework.Presentation.Views;
 using Sources.Frameworks.UiFramework.PresentationsInterfaces.AudioSources;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.UI.Texts;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Sources.Frameworks.UiFramework.Presentation.Forms
+namespace Sources.Frameworks.UiFramework.Presentation.Views
 {
     public class UiCollector : View
     {
@@ -64,7 +62,6 @@ namespace Sources.Frameworks.UiFramework.Presentation.Forms
         [TabGroup("Tab1", "Animators", true, 1)] 
         [EnumToggleButtons] [HideLabel] [LabelText("IncludeInactive", SdfIconType.Search)]
         [SerializeField] private Enable _includeAnimators = Enable.Enable;
-        
         
         private bool IncludeTexts => _includeTexts == Enable.Enable;
         private bool IncludeContainers => _includeContainers == Enable.Enable;

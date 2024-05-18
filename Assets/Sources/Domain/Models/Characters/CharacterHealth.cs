@@ -1,11 +1,13 @@
 ﻿using System;
 using Sources.Domain.Models.Upgrades;
-using Sources.DomainInterfaces.Healths;
+using Sources.DomainInterfaces.Models.Characters;
+using Sources.DomainInterfaces.Models.Healths;
+using Sources.PresentationsInterfaces.Views.Character;
 using UnityEngine;
 
 namespace Sources.Domain.Models.Characters
 {
-    public class CharacterHealth : IHealth
+    public class CharacterHealth : IHealth, ICharacterHealth
     {
         private readonly Upgrader _healthUpgrader;
         private float _currentHealth;
@@ -18,8 +20,11 @@ namespace Sources.Domain.Models.Characters
 
         public event Action HealthChanged;
         public event Action<float> DamageReceived;
+        public event Action CharacterDie;
 
         public float MaxHealth => _healthUpgrader.CurrentAmount;
+
+
         public float CurrentHealth
         {
             get => _currentHealth;
@@ -33,8 +38,16 @@ namespace Sources.Domain.Models.Characters
 
         public void TakeDamage(float damage)
         {
+            if(CurrentHealth <= 0)
+                return;
+            
             CurrentHealth -= damage;
             DamageReceived?.Invoke(damage);
+
+            if (CurrentHealth > 0)
+                return;
+
+            CharacterDie?.Invoke();
         }
 
         public void TakeHeal(int heal) =>

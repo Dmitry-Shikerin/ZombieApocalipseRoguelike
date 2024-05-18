@@ -17,6 +17,7 @@ namespace Sources.Domain.Models.Data.Ids
         public const string KillEnemyCounter = "KillEnemyCounter";
 
         //commonModels
+        public const string ScoreCounter = "ScoreCounter";
         public const string MainMenu = "MainMenu";
         public const string SavedLevel = "SavedLevel";
         public const string Volume = "Volume";
@@ -43,6 +44,7 @@ namespace Sources.Domain.Models.Data.Ids
         //todo переделать
         public static IReadOnlyList<string> ModelsIds = new List<string>()
         {
+            ScoreCounter,
             GameplayEnemySpawner,
             SavedLevel,
             GameData,
@@ -65,6 +67,7 @@ namespace Sources.Domain.Models.Data.Ids
         //TODO заменить такую запись на поиск из ассембли
         public static IReadOnlyDictionary<string, Type> DtoTypes = new Dictionary<string, Type>()
         {
+            [ScoreCounter] = typeof(ScoreCounterDto),
             [GameplayEnemySpawner] = typeof(EnemySpawnerDto),
             [SavedLevel] = typeof(SavedLevelDto),
             [KillEnemyCounter] = typeof(KillEnemyCounterDto),

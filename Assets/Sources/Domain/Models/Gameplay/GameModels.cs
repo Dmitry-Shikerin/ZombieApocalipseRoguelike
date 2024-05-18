@@ -29,7 +29,8 @@ namespace Sources.Domain.Models.Gameplay
             KillEnemyCounter killEnemyCounter,
             EnemySpawner enemySpawner,
             SavedLevel savedLevel,
-            Tutorial tutorial)
+            Tutorial tutorial,
+            ScoreCounter scoreCounter)
         {
             BearMassAttackUpgrader = bearMassAttackUpgrader;
             BearAttackUpgrader = bearAttackUpgrader;
@@ -49,6 +50,7 @@ namespace Sources.Domain.Models.Gameplay
             EnemySpawner = enemySpawner;
             SavedLevel = savedLevel;
             Tutorial = tutorial;
+            ScoreCounter = scoreCounter;
         }
 
         public Upgrader BearMassAttackUpgrader { get; }
@@ -69,5 +71,6 @@ namespace Sources.Domain.Models.Gameplay
         public EnemySpawner EnemySpawner { get; }
         public SavedLevel SavedLevel { get; }
         public Tutorial Tutorial { get; }
+        public ScoreCounter ScoreCounter { get; }
     }
 }

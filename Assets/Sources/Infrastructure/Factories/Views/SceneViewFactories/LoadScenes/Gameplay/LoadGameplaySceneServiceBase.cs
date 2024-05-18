@@ -1,5 +1,4 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
@@ -18,9 +17,7 @@ using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
-using Sources.Infrastructure.Services.LevelCompleteds;
 using Sources.Infrastructure.Services.Providers;
-using Sources.Infrastructure.Services.Repositories;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.Cameras;
@@ -76,6 +73,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly IAdvertisingService _advertisingService;
         private readonly IFormService _formService;
         private readonly InterstitialShowerViewFactory _interstitialShowerViewFactory;
+        private readonly ScoreCounterViewFactory _scoreCounterViewFactory;
+        private readonly IUpgradeService _upgradeService;
 
         protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
             UiCollectorFactory uiCollectorFactory,
@@ -105,7 +104,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ITutorialService tutorialService,
             IAdvertisingService advertisingService,
             IFormService formService,
-            InterstitialShowerViewFactory interstitialShowerViewFactory)
+            InterstitialShowerViewFactory interstitialShowerViewFactory,
+            ScoreCounterViewFactory scoreCounterViewFactory,
+            IUpgradeService upgradeService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _uiCollectorFactory = uiCollectorFactory ?? throw new ArgumentNullException(nameof(uiCollectorFactory));
@@ -148,6 +149,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _interstitialShowerViewFactory = interstitialShowerViewFactory ??
                                              throw new ArgumentNullException(nameof(interstitialShowerViewFactory));
+            _scoreCounterViewFactory = scoreCounterViewFactory ?? throw new ArgumentNullException(nameof(scoreCounterViewFactory));
+            _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
         }
 
         public void Load(IScenePayload scenePayload)
@@ -177,6 +180,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             //Upgrades
             for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
                 _upgradeUiFactory.Create(_upgradeCollection[i], _gameplayHud.NotAvailabilityUpgradeUis[i]);
+            
+            _upgradeService.Construct(gameModels.PlayerWallet);
 
             //Character
             _playerWalletProvider.PlayerWallet = gameModels.PlayerWallet;
@@ -217,6 +222,14 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             
             //InterstitialShower
             _interstitialShowerViewFactory.Create(gameModels.EnemySpawner, _gameplayHud.InterstitialShowerView);
+            
+            //ScoreCounter
+            _scoreCounterViewFactory.Create(
+                gameModels.ScoreCounter, 
+                gameModels.KillEnemyCounter, 
+                gameModels.Level, 
+                gameModels.CharacterHealth,
+                _gameplayHud.ScoreCounterView);
         }
 
         protected abstract GameModels LoadModels(IScenePayload scenePayload);
