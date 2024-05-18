@@ -11,7 +11,7 @@ namespace Sources.Frameworks.UiFramework.Extensions
     {
         public static List<string> GetTranslateId()
         {
-#if UNITY_EDITOR && !UNITY_WEBGL
+#if UNITY_EDITOR
             
             return AssetDatabase
                 .FindAssets("t:LocalizationConfig")
@@ -26,7 +26,7 @@ namespace Sources.Frameworks.UiFramework.Extensions
 
         public static List<LocalizationPhrase> FindAllLocalizationPhrases()
         {
-#if UNITY_EDITOR && !UNITY_WEBGL
+#if UNITY_EDITOR
             return AssetDatabase
                 .FindAssets("t:LocalizationPhrase")
                 .Select(path => AssetDatabase.GUIDToAssetPath(path))
@@ -38,7 +38,7 @@ namespace Sources.Frameworks.UiFramework.Extensions
 
         public static void CreateLocalizationPhrase()
         {
-#if UNITY_EDITOR && !UNITY_WEBGL
+#if UNITY_EDITOR
             LocalizationPhrase phrase = ScriptableObject.CreateInstance<LocalizationPhrase>();
             
             AssetDatabase.CreateAsset(phrase, 
@@ -49,7 +49,7 @@ namespace Sources.Frameworks.UiFramework.Extensions
 
         public static void RenameAsset(Object asset, string newName)
         {
-#if UNITY_EDITOR && !UNITY_WEBGL
+#if UNITY_EDITOR
             string path = AssetDatabase.GetAssetPath(asset);
             AssetDatabase.RenameAsset(path, newName);
 #endif
