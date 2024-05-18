@@ -42,7 +42,7 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
             if (_uiAnimator.ReactionAnimationType == ReactionAnimationType.ButtonClick)
                 _uiUiUiButton.RemoveClickListener(PlayAnimation);
 
-            _cancellationTokenSource = new CancellationTokenSource();
+            _cancellationTokenSource.Cancel();
         }
 
         public void Construct(UiAnimator playerWallet)

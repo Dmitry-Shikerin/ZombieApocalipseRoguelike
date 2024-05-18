@@ -11,6 +11,7 @@ using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Views;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.PresentationsInterfaces.UI.Texts;
+using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Services.Localizations
 {
@@ -63,6 +64,13 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
             {
                 if (textView.TextViewType == TextViewType.Default)
                     continue;
+
+                if (textView.TextViewType == TextViewType.Translate && string.IsNullOrWhiteSpace(textView.Id))
+                {
+                    if (textView is MonoBehaviour concrete)
+                        throw new NullReferenceException(nameof(concrete.gameObject.name));
+                }
+                    
 
                 if (_currentLanguageDictionary.ContainsKey(textView.Id) == false)
                     throw new KeyNotFoundException(nameof(textView.Id));

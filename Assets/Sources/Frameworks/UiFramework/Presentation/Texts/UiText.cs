@@ -31,6 +31,12 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
         public bool IsHide { get; private set; }
         public string Id => _textId;
 
+        private void Awake()
+        {
+            if (_tmpText == null)
+                throw new NullReferenceException(nameof(gameObject.name));
+        }
+
         public void SetText(string text) =>
             _tmpText.text = text;
 
