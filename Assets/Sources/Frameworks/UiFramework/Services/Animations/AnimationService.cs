@@ -20,8 +20,8 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
             if (_uiAnimator.ReactionAnimationType == ReactionAnimationType.ButtonClick)
             {
                 _uiUiUiButton = _uiAnimator.GetComponent<UiButton>();
-                
-                if(_uiUiUiButton == null)
+
+                if (_uiUiUiButton == null)
                     throw new NullReferenceException(nameof(_uiUiUiButton));
             }
         }
@@ -57,35 +57,41 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
 
             if (_uiAnimator.AnimationType == AnimationType.Scale)
             {
-                await PlayScaleAnimationAsync(_cancellationTokenSource.Token);
-
+                if (_uiAnimator.ScaleAnimationType == ScaleAnimationType.PopUp)
+                    await PlayScaleAnimationAsync(_uiAnimator.transform, _cancellationTokenSource.Token);
+                if (_uiAnimator.ScaleAnimationType == ScaleAnimationType.Infinitely)
+                {
+                    while (_cancellationTokenSource.Token.IsCancellationRequested == false)
+                    {
+                        await PlayScaleAnimationAsync(_uiAnimator.transform, _cancellationTokenSource.Token);
+                    }
+                }
+                
                 return;
             }
 
             if (_uiAnimator.AnimationType == AnimationType.Rotate)
-            {
                 await PlayRotateAnimationAsync(_cancellationTokenSource.Token);
-            }
         }
 
-        private async UniTask PlayScaleAnimationAsync(CancellationToken token)
+        private async UniTask PlayScaleAnimationAsync(Transform transform, CancellationToken token)
         {
             try
             {
-                while (Vector3.Distance(_uiUiUiButton.transform.localScale, _uiAnimator.TargetScale) > 0.01f)
+                while (transform != null && Vector3.Distance(transform.localScale, _uiAnimator.TargetScale) > 0.01f)
                 {
-                    _uiUiUiButton.transform.localScale = Vector3.MoveTowards(
-                        _uiUiUiButton.transform.localScale,
+                    transform.localScale = Vector3.MoveTowards(
+                        transform.localScale,
                         _uiAnimator.TargetScale,
                         _uiAnimator.AnimationDuration);
 
                     await UniTask.Yield(token);
                 }
 
-                while (Vector3.Distance(_uiUiUiButton.transform.localScale, _uiAnimator.FromScale) > 0.01f)
+                while ( transform != null && Vector3.Distance(transform.localScale, _uiAnimator.FromScale) > 0.01f)
                 {
-                    _uiUiUiButton.transform.localScale = Vector3.MoveTowards(
-                        _uiUiUiButton.transform.localScale,
+                    transform.localScale = Vector3.MoveTowards(
+                        transform.localScale,
                         _uiAnimator.FromScale,
                         _uiAnimator.AnimationDuration);
 
@@ -94,7 +100,7 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
             }
             catch (OperationCanceledException)
             {
-                _uiUiUiButton.transform.localScale = _uiAnimator.FromScale;
+                transform.localScale = _uiAnimator.FromScale;
             }
         }
 
