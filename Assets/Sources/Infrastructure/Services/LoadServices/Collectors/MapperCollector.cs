@@ -27,7 +27,8 @@ namespace Sources.Infrastructure.Services.LoadServices.Collectors
             ITutorialDtoMapper tutorialDtoMapper,
             IKillEnemyCounterDtoMapper killEnemyCounterDtoMapper,
             ISavedLevelDtoMapper savedLevelDtoMapper,
-            IEnemySpawnerDtoMapper enemySpawnerDtoMapper)
+            IEnemySpawnerDtoMapper enemySpawnerDtoMapper,
+            IScoreCounterDtoMapper scoreCounterDtoMapper)
         {
             _toDtoMappers = new Dictionary<Type, Func<IEntity, IDto>>();
             _toDtoMappers[typeof(Upgrader)] =
@@ -48,6 +49,8 @@ namespace Sources.Infrastructure.Services.LoadServices.Collectors
                 model => savedLevelDtoMapper.MapModelToDto(model as SavedLevel);
             _toDtoMappers[typeof(EnemySpawner)] =
                 model => enemySpawnerDtoMapper.MapModelToDto(model as EnemySpawner);
+            _toDtoMappers[typeof(ScoreCounter)] =
+                model => scoreCounterDtoMapper.MapModelToDto(model as ScoreCounter);
 
             _toModelMappers = new Dictionary<Type, Func<IDto, IEntity>>();
             _toModelMappers[typeof(UpgradeDto)] =
@@ -68,6 +71,8 @@ namespace Sources.Infrastructure.Services.LoadServices.Collectors
                 dto => savedLevelDtoMapper.MapDtoToModel(dto as SavedLevelDto);
             _toModelMappers[typeof(EnemySpawnerDto)] =
                 dto => enemySpawnerDtoMapper.MapDtoToModel(dto as EnemySpawnerDto);
+            _toModelMappers[typeof(ScoreCounterDto)] =
+                dto => scoreCounterDtoMapper.MapDtoToModel(dto as ScoreCounterDto);
         }
 
         public Func<IEntity, IDto> GetToDtoMapper(Type type)

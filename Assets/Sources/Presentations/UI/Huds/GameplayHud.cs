@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Sources.Frameworks.UiFramework.Presentation.Forms;
+using Sources.Frameworks.UiFramework.Presentation.Views;
 using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
 using Sources.Presentations.Views.Common;
@@ -49,6 +49,9 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("InterstitialShower")][Required]
         [SerializeField] private InterstitialShowerView _interstitialShowerView;
         
+        [FoldoutGroup("ScoreCounter")][Required]
+        [SerializeField] private ScoreCounterView _scoreCounterView;
+        
         public UiCollector UiCollector => _uiCollector;
         
         public CinemachineCameraView CinemachineCameraView => _cinemachineCameraView;
@@ -68,5 +71,7 @@ namespace Sources.Presentations.UI.Huds
         
         public VolumeView VolumeView => _volumeView;
         public InterstitialShowerView InterstitialShowerView => _interstitialShowerView;
+        
+        public ScoreCounterView ScoreCounterView => _scoreCounterView;
     }
 }

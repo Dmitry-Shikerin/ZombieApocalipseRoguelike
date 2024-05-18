@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Controllers.Common;
@@ -7,6 +8,7 @@ using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.PresentationsInterfaces.UI.AudioSources;
 using Sources.PresentationsInterfaces.Views.Music;
+using Sources.Utils.Extensions;
 using UnityEngine;
 
 namespace Sources.Controllers.Presenters.Musics
@@ -70,12 +72,14 @@ namespace Sources.Controllers.Presenters.Musics
         private async void StartMusic(CancellationToken cancellationToken)
         {
             IAudioSourceView audioSourceView = _backgroundMusicView.BackgroundMusicAudioSource;
+            IReadOnlyList<AudioClip> audioClips = _audioClipCollection.AudioClips;
+            audioClips.Shuffle();
             
             try
             {
                 while (cancellationToken.IsCancellationRequested == false)
                 {
-                    foreach (AudioClip audioClip in _audioClipCollection.AudioClips)
+                    foreach (AudioClip audioClip in audioClips)
                     {
                         audioSourceView.SetClip(audioClip);
                         audioSourceView.Play();

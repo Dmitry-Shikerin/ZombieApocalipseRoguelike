@@ -6,19 +6,15 @@ using Sources.Domain.Models.Upgrades;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Infrastructure.Factories.Views.Upgrades;
-using Sources.Infrastructure.Services.Providers;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Upgrades;
 using Sources.Utils.CustomCollections;
-using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Upgrades
 {
     public class UpgradeService : IUpgradeService
     {
-        private PlayerWallet _playerWallet;
-        private readonly PlayerWalletProvider _playerWalletProvider;
         private readonly ICustomCollection<Upgrader> _upgradeCollection;
         private readonly GameplayHud _gameplayHud;
         private readonly UpgradeViewFactory _upgradeViewFactory;
@@ -28,10 +24,10 @@ namespace Sources.Infrastructure.Services.Upgrades
         private readonly IReadOnlyList<UpgradeUi> _upgradeUis;
         private readonly IReadOnlyList<UpgradeView> _upgradeViews;
 
+        private PlayerWallet _playerWallet;
         private int _numberOfFilledAbilities;
 
         public UpgradeService(
-            PlayerWalletProvider playerWalletProvider,
             ICustomCollection<Upgrader> upgradeCollection,
             GameplayHud gameplayHud,
             UpgradeViewFactory upgradeViewFactory,
@@ -39,15 +35,9 @@ namespace Sources.Infrastructure.Services.Upgrades
             IFormService formService,
             UpgradeDescriptionViewFactory upgradeDescriptionViewFactory)
         {
-            if (gameplayHud == null) throw new ArgumentNullException(nameof(gameplayHud));
-            if (gameplayHud == null) 
-                throw new ArgumentNullException(nameof(gameplayHud));
-
-            _playerWalletProvider = playerWalletProvider ?? 
-                                    throw new ArgumentNullException(nameof(playerWalletProvider));
             _upgradeCollection = upgradeCollection ?? 
                                         throw new ArgumentNullException(nameof(upgradeCollection));
-            _gameplayHud = gameplayHud;
+            _gameplayHud = gameplayHud ?? throw new ArgumentNullException(nameof(gameplayHud));
             _upgradeViewFactory = upgradeViewFactory ?? 
                                   throw new ArgumentNullException(nameof(upgradeViewFactory));
             _upgradeUiFactory = upgradeUiFactory ?? 
@@ -61,27 +51,57 @@ namespace Sources.Infrastructure.Services.Upgrades
                           throw new NullReferenceException(nameof(gameplayHud.UpgradeUis));
         }
 
-        private PlayerWallet PlayerWallet => _playerWallet ??= _playerWalletProvider.PlayerWallet;
+        public event Action UpgradeFormShowed;
 
         //TODO это должен быть контроллер?
+
+        public void Construct(PlayerWallet playerWallet)
+        {
+            _playerWallet = playerWallet ?? throw new ArgumentNullException(nameof(playerWallet));
+        }
+
         public void Enable()
         {
             OnUpgradeFormChanged();
-            PlayerWallet.CoinsChanged += OnUpgradeFormChanged;
+            _playerWallet.CoinsChanged += OnUpgradeFormChanged;
         }
 
         public void Disable()
         {
-            PlayerWallet.CoinsChanged -= OnUpgradeFormChanged;
+            _playerWallet.CoinsChanged -= OnUpgradeFormChanged;
         }
 
         private void OnUpgradeFormChanged()
         {
-            if(_formService.IsActive(FormId.Upgrade))
-                return;
+            try
+            {
+                if (_formService.IsActive(FormId.Upgrade))
+                    return;
+
+                List<Upgrader> availableUpgraders = GetAvailableUpgraders();
+                int upgradersCount = GetUpgradersCount(availableUpgraders);
+                CreateFactories(availableUpgraders, upgradersCount);
+                _formService.Show(FormId.Upgrade);
+                UpgradeFormShowed?.Invoke();
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+        }
+        
+        private int GetUpgradersCount(List<Upgrader> availableUpgraders)
+        {
+            if (availableUpgraders.Count >= 3)
+                return 3;
             
-            //TODO сделать провайдер коллекций от Т и использовать его вместо создания отдельных классов для коллекций
-            //TODO сделать у этого класса индексатор
+            if (availableUpgraders.Count is < 3 and > 0)
+                return availableUpgraders.Count;
+
+            throw new IndexOutOfRangeException();
+        }
+        
+        private List<Upgrader> GetAvailableUpgraders()
+        {
             List<Upgrader> availableUpgraders = new List<Upgrader>();
 
             foreach (Upgrader upgrader in _upgradeCollection)
@@ -89,28 +109,21 @@ namespace Sources.Infrastructure.Services.Upgrades
                 if(upgrader.CurrentLevel == 3)
                     continue;
                 
-                if(upgrader.MoneyPerUpgrades[upgrader.CurrentLevel] <= PlayerWallet.Coins)
+                if(upgrader.MoneyPerUpgrades[upgrader.CurrentLevel] <= _playerWallet.Coins)
                     availableUpgraders.Add(upgrader);
             }
 
-            availableUpgraders = availableUpgraders.OrderBy(upgrader => upgrader.CurrentLevel).ToList();
-            
-            //TODO фига себе запись
-            if (availableUpgraders.Count >= 3)
-                _numberOfFilledAbilities = 3;
-            else if (availableUpgraders.Count is < 3 and > 0)
-                _numberOfFilledAbilities = availableUpgraders.Count;
-            else
-                return;
-            
-            for (int i = 0; i < _numberOfFilledAbilities; i++)
+            return availableUpgraders.OrderBy(upgrader => upgrader.CurrentLevel).ToList();
+        }
+
+        private void CreateFactories(List<Upgrader> availableUpgraders, int count)
+        {
+            for (int i = 0; i < count; i++)
             {
                 _upgradeUiFactory.Create(availableUpgraders[i], _upgradeUis[i]);
-                _upgradeViewFactory.Create(availableUpgraders[i], PlayerWallet, _upgradeViews[i]);
+                _upgradeViewFactory.Create(availableUpgraders[i], _playerWallet, _upgradeViews[i]);
                 _upgradeDescriptionViewFactory.Create(availableUpgraders[i], _gameplayHud.UpgradeDescriptionViews[i]);
             }
-                
-            _formService.Show(FormId.Upgrade);
         }
     }
 }

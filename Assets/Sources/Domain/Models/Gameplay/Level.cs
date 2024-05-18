@@ -2,10 +2,11 @@
 using Sources.Domain.Data;
 using Sources.Domain.Models.Data;
 using Sources.DomainInterfaces.Entities;
+using Sources.DomainInterfaces.Models.Gameplay;
 
 namespace Sources.Domain.Models.Gameplay
 {
-    public class Level : IEntity
+    public class Level : IEntity, ILevel
     {
         public Level(LevelDto levelDto)
         {
@@ -20,11 +21,16 @@ namespace Sources.Domain.Models.Gameplay
             IsCompleted = isCompleted;
         }
 
+        public event Action Completed;
+        
         public bool IsCompleted { get; private set; }
         public string Id { get; }
         public Type Type => GetType();
 
-        public void Complete() =>
+        public void Complete()
+        {
             IsCompleted = true;
+            Completed?.Invoke();
+        }
     }
 }

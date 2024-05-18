@@ -7,6 +7,7 @@ using Sources.DomainInterfaces.Models.Spawners;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
+using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.PresentationsInterfaces.Views.InterstitialShowers;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
         private readonly IInterstitialShowerView _view;
         private readonly IInterstitialAdService _interstitialAdService;
         private readonly IFormService _formService;
+        private readonly IUpgradeService _upgradeService;
 
         private CancellationTokenSource _cancellationTokenSource;
         private TimeSpan _timerTimeSpan = TimeSpan.FromSeconds(AdvertisingConst.Delay);
@@ -26,13 +28,15 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
             IEnemySpawner enemySpawner, 
             IInterstitialShowerView view,
             IInterstitialAdService interstitialAdService,
-            IFormService formService)
+            IFormService formService,
+            IUpgradeService upgradeService)
         {
             _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));
             _view = view ?? throw new ArgumentNullException(nameof(view));
             _interstitialAdService = interstitialAdService ??
                                      throw new ArgumentNullException(nameof(interstitialAdService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
         }
         
         private bool CanShow => _enemySpawner.CurrentWave < _enemySpawner.EnemyInWave.Count;
@@ -41,6 +45,7 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
         {
             _cancellationTokenSource = new CancellationTokenSource();
             _enemySpawner.CurrentWaveChanged += OnCurrentWaveChanged;
+            _upgradeService.UpgradeFormShowed += OnUpgradeFormShowed;
             _formService.Hide(FormId.ShowAd);
         }
 
@@ -48,14 +53,25 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
         {
             _cancellationTokenSource.Cancel();
             _enemySpawner.CurrentWaveChanged -= OnCurrentWaveChanged;
+            _upgradeService.UpgradeFormShowed -= OnUpgradeFormShowed;
         }
-        
+
+        private async void OnUpgradeFormShowed()
+        {
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _cancellationTokenSource.Token);
+            Debug.Log("Отложил показ рекламы");
+            OnCurrentWaveChanged();
+        }
+
         private void OnCurrentWaveChanged()
         {
             if(CanShow == false)
                 return;
             
-            Debug.Log("Show interstitial");
+            // Debug.Log("Show interstitial");
             ShowInterstitialAsync(_cancellationTokenSource.Token);
         }
 
@@ -69,6 +85,7 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
             }
             catch (OperationCanceledException)
             {
+                DisableTimer();
             }
         }
         

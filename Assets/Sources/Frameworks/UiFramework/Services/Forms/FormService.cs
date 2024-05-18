@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.Presentation.Views;
 using Sources.Frameworks.UiFramework.PresentationsInterfaces;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Presentations.Views;

@@ -12,7 +12,7 @@ namespace Sources.Utils.Extensions
             if (objects == null)
                 throw new InvalidOperationException(nameof(objects));
 
-            var enumerable = objects as T[] ?? objects.ToArray();
+            T[] enumerable = objects as T[] ?? objects.ToArray();
 
             if (enumerable.Any() == false)
                 throw new InvalidOperationException(nameof(objects));
@@ -27,7 +27,7 @@ namespace Sources.Utils.Extensions
             if (objects == null)
                 throw new InvalidOperationException(nameof(objects));
 
-            var enumerable = objects as T[] ?? objects.ToArray();
+            T[] enumerable = objects as T[] ?? objects.ToArray();
 
             if (enumerable.Length == 0)
                 throw new Exception();
@@ -35,7 +35,7 @@ namespace Sources.Utils.Extensions
             if (enumerable.Any(@object => @object == null))
                 throw new InvalidOperationException(nameof(enumerable));
 
-            var index = Random.Range(0, enumerable.Length);
+            int index = Random.Range(0, enumerable.Length);
 
             if (enumerable[index] == null)
                 throw new InvalidOperationException(nameof(enumerable));
@@ -45,7 +45,7 @@ namespace Sources.Utils.Extensions
 
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> objects)
         {
-            var enumerable = objects as T[] ?? objects.ToArray();
+            T[] enumerable = objects as T[] ?? objects.ToArray();
 
             for (var i = 0; i < enumerable.Length; i++)
             {
@@ -56,9 +56,7 @@ namespace Sources.Utils.Extensions
             return enumerable;
         }
 
-        public static bool GetRandomChance(int positiveRange, int maximumRange)
-        {
-            return positiveRange >= Random.Range(0, maximumRange);
-        }
+        public static bool GetRandomChance(int positiveRange, int maximumRange) =>
+            positiveRange >= Random.Range(0, maximumRange);
     }
 }
