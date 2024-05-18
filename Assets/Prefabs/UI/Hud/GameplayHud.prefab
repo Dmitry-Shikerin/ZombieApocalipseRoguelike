@@ -1054,6 +1054,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9070772374905218285}
+  - {fileID: 418482799618118852}
   - {fileID: 1243035671106925173}
   - {fileID: 4252847942470651746}
   - {fileID: 8387435416470484265}
@@ -1149,14 +1150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiCollector: {fileID: 669561367274281653}
   _cinemachineCameraView: {fileID: 0}
-  _upgradeViews:
-  - {fileID: 1160233026374061998}
-  - {fileID: 1436995978341550266}
-  - {fileID: 8382897889848348856}
-  _upgradeUis:
-  - {fileID: 189904879287968411}
-  - {fileID: 5237887888748909760}
-  - {fileID: 8299720404349088980}
   _notAvailabilityUpgradeUis:
   - {fileID: 4693031234663698639}
   - {fileID: 8137311053617835514}
@@ -1164,10 +1157,7 @@ MonoBehaviour:
   - {fileID: 7549920098749596277}
   - {fileID: 1288341931615076322}
   - {fileID: 3437213489193375536}
-  _upgradeDescriptionViews:
-  - {fileID: 9077234343449114849}
-  - {fileID: 501695567323092218}
-  - {fileID: 3038600960815124290}
+  _upgradeControllerView: {fileID: 844192112778346495}
   _playerWalletViews:
   - {fileID: 2682689112222699556}
   - {fileID: 102191121033949733}
@@ -22594,6 +22584,57 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _rotationVector: {x: 0, y: 0, z: -0.5}
+--- !u!1 &9161505391732353858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 418482799618118852}
+  - component: {fileID: 844192112778346495}
+  m_Layer: 5
+  m_Name: UpgradeControllerView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &418482799618118852
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9161505391732353858}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2532097500609710334}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &844192112778346495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9161505391732353858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180c5cadd5a943e6a82d1ecfe9be800a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _upgradeUis: []
+  _upgradeViews: []
+  _upgradeUisDescriptionViews: []
 --- !u!1 &9211437639073785533
 GameObject:
   m_ObjectHideFlags: 0

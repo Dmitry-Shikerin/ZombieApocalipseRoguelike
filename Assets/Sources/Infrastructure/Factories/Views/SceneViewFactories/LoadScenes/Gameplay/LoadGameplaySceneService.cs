@@ -12,6 +12,7 @@ using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Setting;
 using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
+using Sources.Domain.Models.Upgrades.Controllers;
 using Sources.Domain.Models.Weapons;
 using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Collectors;
@@ -26,8 +27,10 @@ using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades;
+using Sources.Infrastructure.Factories.Views.Upgrades.Controllers;
 using Sources.Infrastructure.Services.Providers;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
+using Sources.InfrastructureInterfaces.Factories.Views.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LevelCompleteds;
@@ -57,8 +60,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             UiCollectorFactory uiCollectorFactory, 
             CharacterViewFactory characterViewFactory, 
             BearViewFactory bearViewFactory, 
-            UpgradeViewFactory upgradeViewFactory, 
-            UpgradeUiFactory upgradeUiFactory, 
+            IUpgradeViewFactory upgradeViewFactory, 
+            IUpgradeUiFactory upgradeUiFactory, 
             ILoadService loadService, 
             IEntityRepository entityRepository, 
             IEnemySpawnService enemySpawnService, 
@@ -83,7 +86,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IFormService formService,
             InterstitialShowerViewFactory interstitialShowerViewFactory,
             ScoreCounterViewFactory scoreCounterViewFactory,
-            IUpgradeService upgradeService) 
+            IUpgradeService upgradeService,
+            UpgradeControllerViewFactory upgradeControllerViewFactory) 
             : base(
                 gameplayHud, 
                 uiCollectorFactory, 
@@ -115,7 +119,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 formService,
                 interstitialShowerViewFactory,
                 scoreCounterViewFactory,
-                upgradeService)
+                upgradeService,
+                upgradeControllerViewFactory)
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
@@ -149,6 +154,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _upgradeCollection.Add(sawLauncherAbilityUpgrader);
             Upgrader miniGunAttackUpgrader = _entityRepository.Get<Upgrader>(ModelId.MiniGunAttackUpgrader);
             _upgradeCollection.Add(miniGunAttackUpgrader);
+
+            UpgradeController upgradeController = new UpgradeController();
 
             KillEnemyCounter killEnemyCounter = _entityRepository.Get<KillEnemyCounter>(ModelId.KillEnemyCounter);
             EnemySpawner enemySpawner = _entityRepository.Get<EnemySpawner>(ModelId.GameplayEnemySpawner);
@@ -197,7 +204,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 enemySpawner,
                 savedLevel,
                 tutorial,
-                scoreCounter);
+                scoreCounter,
+                upgradeController);
         }
     }
 }
