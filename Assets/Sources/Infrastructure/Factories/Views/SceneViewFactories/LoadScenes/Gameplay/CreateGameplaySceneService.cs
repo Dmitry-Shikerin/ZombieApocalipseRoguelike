@@ -84,7 +84,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IAdvertisingService advertisingService,
             IFormService formService,
             InterstitialShowerViewFactory interstitialShowerViewFactory,
-            ScoreCounterViewFactory scoreCounterViewFactory)
+            ScoreCounterViewFactory scoreCounterViewFactory,
+            IUpgradeService upgradeService)
             : base(
                 gameplayHud,
                 uiCollectorFactory,
@@ -115,7 +116,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 advertisingService,
                 formService,
                 interstitialShowerViewFactory,
-                scoreCounterViewFactory)
+                scoreCounterViewFactory,
+                upgradeService)
         {
             _loadService = loadService;
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));

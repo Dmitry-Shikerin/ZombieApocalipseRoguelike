@@ -74,6 +74,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly IFormService _formService;
         private readonly InterstitialShowerViewFactory _interstitialShowerViewFactory;
         private readonly ScoreCounterViewFactory _scoreCounterViewFactory;
+        private readonly IUpgradeService _upgradeService;
 
         protected LoadGameplaySceneServiceBase(GameplayHud gameplayHud,
             UiCollectorFactory uiCollectorFactory,
@@ -104,7 +105,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IAdvertisingService advertisingService,
             IFormService formService,
             InterstitialShowerViewFactory interstitialShowerViewFactory,
-            ScoreCounterViewFactory scoreCounterViewFactory)
+            ScoreCounterViewFactory scoreCounterViewFactory,
+            IUpgradeService upgradeService)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _uiCollectorFactory = uiCollectorFactory ?? throw new ArgumentNullException(nameof(uiCollectorFactory));
@@ -148,6 +150,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _interstitialShowerViewFactory = interstitialShowerViewFactory ??
                                              throw new ArgumentNullException(nameof(interstitialShowerViewFactory));
             _scoreCounterViewFactory = scoreCounterViewFactory ?? throw new ArgumentNullException(nameof(scoreCounterViewFactory));
+            _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
         }
 
         public void Load(IScenePayload scenePayload)
@@ -177,6 +180,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             //Upgrades
             for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
                 _upgradeUiFactory.Create(_upgradeCollection[i], _gameplayHud.NotAvailabilityUpgradeUis[i]);
+            
+            _upgradeService.Construct(gameModels.PlayerWallet);
 
             //Character
             _playerWalletProvider.PlayerWallet = gameModels.PlayerWallet;
