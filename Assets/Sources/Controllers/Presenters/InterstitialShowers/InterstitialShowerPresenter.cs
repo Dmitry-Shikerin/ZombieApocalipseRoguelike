@@ -23,6 +23,8 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
 
         private CancellationTokenSource _cancellationTokenSource;
         private TimeSpan _timerTimeSpan = TimeSpan.FromSeconds(AdvertisingConst.Delay);
+        
+        private bool _canCancelled;
 
         public InterstitialShowerPresenter(
             IEnemySpawner enemySpawner, 
@@ -56,14 +58,10 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
             _upgradeService.UpgradeFormShowed -= OnUpgradeFormShowed;
         }
 
-        private async void OnUpgradeFormShowed()
+        private void OnUpgradeFormShowed()
         {
             _cancellationTokenSource.Cancel();
             _cancellationTokenSource = new CancellationTokenSource();
-            
-            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _cancellationTokenSource.Token);
-            Debug.Log("Отложил показ рекламы");
-            OnCurrentWaveChanged();
         }
 
         private void OnCurrentWaveChanged()
@@ -71,7 +69,6 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
             if(CanShow == false)
                 return;
             
-            // Debug.Log("Show interstitial");
             ShowInterstitialAsync(_cancellationTokenSource.Token);
         }
 
@@ -85,7 +82,10 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
             }
             catch (OperationCanceledException)
             {
+                //TODO помоему получается рекурсия
                 DisableTimer();
+                await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _cancellationTokenSource.Token);
+                OnCurrentWaveChanged();
             }
         }
         
