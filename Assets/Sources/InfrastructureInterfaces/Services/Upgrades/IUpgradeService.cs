@@ -1,13 +1,16 @@
-using System;
-using Sources.ControllersInterfaces.ControllerLifetimes;
-using Sources.Domain.Models.Players;
+using System.Collections.Generic;
+using Sources.Domain.Models.Upgrades;
 using Sources.DomainInterfaces.Players;
-using Sources.InfrastructureInterfaces.Services.StatesLifetimes;
-using Sources.PresentationsInterfaces.Views.Constructors;
+using Sources.Utils.CustomCollections;
 
 namespace Sources.InfrastructureInterfaces.Services.Upgrades
 {
     public interface IUpgradeService
     {
+        int GetUpgradesCount(IReadOnlyList<Upgrader> availableUpgrades);
+
+        IReadOnlyList<Upgrader> GetAvailableUpgrades(
+            IPlayerWallet playerWallet,
+            ICustomCollection<Upgrader> upgradeCollection);
     }
 }

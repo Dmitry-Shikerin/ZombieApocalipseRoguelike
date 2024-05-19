@@ -8,6 +8,7 @@ using Sources.Domain.Models.Upgrades.Controllers;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.InfrastructureInterfaces.Factories.Views.Upgrades;
+using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.PresentationsInterfaces.Views.Upgrades.Controllers;
 using Sources.Utils.CustomCollections;
 
@@ -23,6 +24,7 @@ namespace Sources.Controllers.Presenters.Upgrades.Controllers
         private readonly IUpgradeUiFactory _upgradeUiFactory;
         private readonly IUpgradeDescriptionViewFactory _upgradeDescriptionViewFactory;
         private readonly IFormService _formService;
+        private readonly IUpgradeService _upgradeService;
 
         public UpgradeControllerPresenter(
             UpgradeController upgradeController, 
@@ -32,7 +34,8 @@ namespace Sources.Controllers.Presenters.Upgrades.Controllers
             IUpgradeViewFactory upgradeViewFactory,
             IUpgradeUiFactory upgradeUiFactory,
             IUpgradeDescriptionViewFactory upgradeDescriptionViewFactory,
-            IFormService formService)
+            IFormService formService,
+            IUpgradeService upgradeService)
         {
             _upgradeController = upgradeController ?? throw new ArgumentNullException(nameof(upgradeController));
             _playerWallet = playerWallet ?? throw new ArgumentNullException(nameof(playerWallet));
@@ -44,6 +47,7 @@ namespace Sources.Controllers.Presenters.Upgrades.Controllers
             _upgradeDescriptionViewFactory = upgradeDescriptionViewFactory ?? 
                                              throw new ArgumentNullException(nameof(upgradeDescriptionViewFactory));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
         }
 
         public override void Enable()
@@ -64,8 +68,9 @@ namespace Sources.Controllers.Presenters.Upgrades.Controllers
                 if (_formService.IsActive(FormId.Upgrade))
                     return;
 
-                List<Upgrader> availableUpgraders = GetAvailableUpgraders();
-                int upgradersCount = GetUpgradersCount(availableUpgraders);
+                IReadOnlyList<Upgrader> availableUpgraders = _upgradeService.GetAvailableUpgrades(
+                    _playerWallet, _upgradeCollection);
+                int upgradersCount = _upgradeService.GetUpgradesCount(availableUpgraders);
                 CreateFactories(availableUpgraders, upgradersCount);
                 _formService.Show(FormId.Upgrade);
                 _upgradeController.ShowUpgradeForm();
@@ -74,36 +79,8 @@ namespace Sources.Controllers.Presenters.Upgrades.Controllers
             {
             }
         }
-        
-        //TODO вынести эти 2 метода в сервис
-        private int GetUpgradersCount(List<Upgrader> availableUpgraders)
-        {
-            if (availableUpgraders.Count >= 3)
-                return 3;
-            
-            if (availableUpgraders.Count is < 3 and > 0)
-                return availableUpgraders.Count;
 
-            throw new IndexOutOfRangeException();
-        }
-        
-        private List<Upgrader> GetAvailableUpgraders()
-        {
-            List<Upgrader> availableUpgraders = new List<Upgrader>();
-
-            foreach (Upgrader upgrader in _upgradeCollection)
-            {
-                if(upgrader.CurrentLevel == 3)
-                    continue;
-                
-                if(upgrader.MoneyPerUpgrades[upgrader.CurrentLevel] <= _playerWallet.Coins)
-                    availableUpgraders.Add(upgrader);
-            }
-
-            return availableUpgraders.OrderBy(upgrader => upgrader.CurrentLevel).ToList();
-        }
-
-        private void CreateFactories(List<Upgrader> availableUpgraders, int count)
+        private void CreateFactories(IReadOnlyList<Upgrader> availableUpgraders, int count)
         {
             for (int i = 0; i < count; i++)
             {
