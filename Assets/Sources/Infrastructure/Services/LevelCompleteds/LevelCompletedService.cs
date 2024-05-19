@@ -43,6 +43,12 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
             _killEnemyCounter.KillZombiesCountChanged -= OnKillZombiesCountChanged;
         }
 
+        public void Register(IKillEnemyCounter killEnemyCounter, IEnemySpawner enemySpawner)
+        {
+            _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
+            _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));
+        }
+
         private void OnKillZombiesCountChanged()
         {
             if (_killEnemyCounter.KillZombies < _enemySpawner.SumAllEnemies)
@@ -56,12 +62,6 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
             _loadService.Save(level);
             _loadService.ClearAll();
             _formService.Show(FormId.LevelCompleted);
-        }
-
-        public void Register(IKillEnemyCounter killEnemyCounter, IEnemySpawner enemySpawner)
-        {
-            _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
-            _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));
         }
     }
 }

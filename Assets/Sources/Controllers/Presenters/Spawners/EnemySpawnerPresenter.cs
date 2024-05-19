@@ -65,7 +65,6 @@ namespace Sources.Controllers.Presenters.Spawners
                 {
                     foreach (IEnemySpawnPoint spawnPoint in _enemySpawnerView.SpawnPoints)
                     {
-                        //TODO передаю в спавнер модель каунтера
                         _enemySpawner.SetCurrentWave(_killEnemyCounter.KillZombies);
                         SpawnEnemy(spawnPoint.Position, _enemySpawnerView.CharacterView);
                         SpawnBoss(spawnPoint.Position, _enemySpawnerView.CharacterView);

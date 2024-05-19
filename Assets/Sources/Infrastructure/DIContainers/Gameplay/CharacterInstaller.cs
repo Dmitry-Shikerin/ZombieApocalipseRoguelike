@@ -4,7 +4,6 @@ using Sources.Infrastructure.Factories.Controllers.Presenters.Characters;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Players;
 using Sources.Infrastructure.Services.Characters;
-using Sources.Infrastructure.Services.Providers;
 using Sources.InfrastructureInterfaces.Services.Characters;
 using Zenject;
 
@@ -16,8 +15,6 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
         {
             Container.Bind<ICharacterMovementService>().To<CharacterMovementService>().AsSingle();
             Container.Bind<IEnemyIndicatorService>().To<EnemyIndicatorService>().AsSingle();
-            
-            Container.Bind<PlayerWalletProvider>().AsSingle();
             
             Container.Bind<CharacterViewFactory>().AsSingle();
             

@@ -17,7 +17,6 @@ using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades.Controllers;
-using Sources.Infrastructure.Services.Providers;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Factories.Views.Upgrades;
@@ -37,6 +36,7 @@ using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.RootGameObjects;
 using Sources.Presentations.Views.Spawners;
+using Sources.PresentationsInterfaces.Views.Bears;
 using Sources.Utils.CustomCollections;
 using Object = UnityEngine.Object;
 
@@ -60,7 +60,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly IUpgradeConfigCollectionService _upgradeConfigCollectionService;
         private readonly IUpgradeDtoMapper _upgradeDtoMapper;
         private readonly CustomCollection<Upgrader> _upgradeCollection;
-        private readonly PlayerWalletProvider _playerWalletProvider;
         private readonly KillEnemyCounterViewFactory _killEnemyCounterViewFactory;
         private readonly BackgroundMusicViewFactory _backgroundMusicViewFactory;
         private readonly IGameOverService _gameOverService;
@@ -94,7 +93,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IUpgradeConfigCollectionService upgradeConfigCollectionService,
             IUpgradeDtoMapper upgradeDtoMapper,
             CustomCollection<Upgrader> upgradeCollection,
-            PlayerWalletProvider playerWalletProvider,
             KillEnemyCounterViewFactory killEnemyCounterViewFactory,
             BackgroundMusicViewFactory backgroundMusicViewFactory,
             IGameOverService gameOverService,
@@ -134,8 +132,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));
             _upgradeCollection = upgradeCollection ?? 
                                         throw new ArgumentNullException(nameof(upgradeCollection));
-            _playerWalletProvider = playerWalletProvider ?? 
-                                    throw new ArgumentNullException(nameof(playerWalletProvider));
             _killEnemyCounterViewFactory = killEnemyCounterViewFactory ?? 
                                            throw new ArgumentNullException(nameof(killEnemyCounterViewFactory));
             _backgroundMusicViewFactory = backgroundMusicViewFactory ?? 
@@ -193,13 +189,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 gameModels.UpgradeController, gameModels.PlayerWallet, _gameplayHud.UpgradeControllerView);
 
             //Character
-            _playerWalletProvider.PlayerWallet = gameModels.PlayerWallet;
-            CharacterView characterView = Object.FindObjectOfType<CharacterView>();
-            _characterViewFactory.Create(gameModels.Character, characterView);
+            CharacterView characterView = _characterViewFactory.Create(gameModels.Character);
 
             //Bear
-            BearView bearView = Object.FindObjectOfType<BearView>();
-            _bearViewFactory.Create(gameModels.Bear, bearView);
+            // BearView bearView = Object.FindObjectOfType<BearView>();
+            IBearView bearView = _bearViewFactory.Create(gameModels.Bear);
             bearView.SetTargetFollow(characterView.CharacterMovementView);
 
             //GameOverService

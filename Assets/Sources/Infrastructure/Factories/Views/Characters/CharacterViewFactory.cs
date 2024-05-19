@@ -8,6 +8,8 @@ using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Abilities;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.Players;
+using Sources.Presentations.Views.RootGameObjects;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.Characters
@@ -15,6 +17,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
     public class CharacterViewFactory
     {
         private readonly GameplayHud _gameplayHud;
+        private readonly RootGameObject _rootGameObject;
         private readonly CharacterMovementViewFactory _characterMovementViewFactory;
         private readonly CharacterAttackerViewFactory _characterAttackerViewFactory;
         private readonly MiniGunViewFactory _miniGunViewFactory;
@@ -27,6 +30,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
         private readonly EnemyIndicatorViewFactory _enemyIndicatorViewFactory;
 
         public CharacterViewFactory(
+            RootGameObject rootGameObject,
             GameplayHud gameplayHud,
             CharacterMovementViewFactory characterMovementViewFactory,
             CharacterAttackerViewFactory characterAttackerViewFactory,
@@ -40,6 +44,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
             EnemyIndicatorViewFactory enemyIndicatorViewFactory)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
+            _rootGameObject = rootGameObject ?? throw new ArgumentNullException(nameof(rootGameObject));
             _characterMovementViewFactory = characterMovementViewFactory 
                                             ?? throw new ArgumentNullException(nameof(characterMovementViewFactory));
             _characterAttackerViewFactory = characterAttackerViewFactory ??
@@ -60,8 +65,14 @@ namespace Sources.Infrastructure.Factories.Views.Characters
                                          throw new ArgumentNullException(nameof(enemyIndicatorViewFactory));
         }
 
-        public CharacterView Create(Character character, CharacterView characterView)
+        public CharacterView Create(Character character)
         {
+            CharacterView characterView = 
+                Object.Instantiate(
+                    Resources.Load<CharacterView>("Views/CharacterView"),
+                    _rootGameObject.CharacterSpawnPoint.Position, 
+                    Quaternion.identity);
+            
             _characterMovementViewFactory.Create(
                 character.CharacterMovement, 
                 characterView.CharacterMovementView, 
@@ -72,7 +83,10 @@ namespace Sources.Infrastructure.Factories.Views.Characters
             _characterHealthViewFactory.Create(character.CharacterHealth, characterView.CharacterHealthView);
             _healthUiFactory.Create(character.CharacterHealth, _gameplayHud.CharacterHealthUi);
 
-            SawLauncherAbilityView sawLauncherAbilityView = Object.FindObjectOfType<SawLauncherAbilityView>();
+            SawLauncherAbilityView sawLauncherAbilityView = Object.Instantiate(
+                Resources.Load<SawLauncherAbilityView>("Views/SawLauncherAbilityView"),
+                _rootGameObject.CharacterSpawnPoint.Position,
+                Quaternion.identity);
             sawLauncherAbilityView.SetTargetFollow(characterView.transform);
 
             for (int i = 0; i < sawLauncherAbilityView.SawLauncherViews.Count; i++)

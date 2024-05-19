@@ -11,6 +11,11 @@ namespace Sources.Presentations.Views.RootGameObjects
         [SerializeField] private EnemySpawnerView _enemySpawnerView;
         [FoldoutGroup("Spawners")] [Required] [ChildGameObjectsOnly] 
         [SerializeField] private ItemSpawnerView _itemSpawnerView;
+        
+        [FoldoutGroup("SpawnPoints")] [Required] [ChildGameObjectsOnly] 
+        [SerializeField] private CharacterSpawnPoint _characterSpawnPoint;
+        [FoldoutGroup("SpawnPoints")] [Required] [ChildGameObjectsOnly] 
+        [SerializeField] private BearSpawnPoint _bearSpawnPoint;
 
         [FoldoutGroup("CameraPoints")] [Required] [ChildGameObjectsOnly] 
         [SerializeField] private AllMapPoint _allMapPoint;
@@ -19,5 +24,8 @@ namespace Sources.Presentations.Views.RootGameObjects
         public ItemSpawnerView ItemSpawnerView => _itemSpawnerView;
         
         public AllMapPoint AllMapPoint => _allMapPoint;
+        
+        public CharacterSpawnPoint CharacterSpawnPoint => _characterSpawnPoint;
+        public BearSpawnPoint BearSpawnPoint => _bearSpawnPoint;
     }
 }
