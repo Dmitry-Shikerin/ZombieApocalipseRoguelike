@@ -2213,6 +2213,50 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9ed9a815b7d3f1d4da85e28284e03739, type: 3}
+--- !u!1 &258542044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 258542046}
+  - component: {fileID: 258542045}
+  m_Layer: 0
+  m_Name: BearSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &258542045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258542044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f216387bff457a8462ec73e4c5fa70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &258542046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258542044}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.87, y: 0, z: 11.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1310868050}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &259981403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7785,6 +7829,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BearView
       objectReference: {fileID: 0}
+    - target: {fileID: 1417913322802879313, guid: 5df893d1e657ea94d98d8324ef73b38a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2332027895410411091, guid: 5df893d1e657ea94d98d8324ef73b38a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.07
@@ -12765,6 +12813,7 @@ Transform:
   - {fileID: 2026972957}
   - {fileID: 1256002565}
   - {fileID: 615640664}
+  - {fileID: 258542046}
   - {fileID: 988710147}
   - {fileID: 836205022}
   - {fileID: 1313749751}
@@ -12792,6 +12841,7 @@ MonoBehaviour:
   _enemySpawnerView: {fileID: 2026972958}
   _itemSpawnerView: {fileID: 1256002564}
   _characterSpawnPoint: {fileID: 615640665}
+  _bearSpawnPoint: {fileID: 258542045}
   _allMapPoint: {fileID: 0}
 --- !u!1 &1313749750
 GameObject:

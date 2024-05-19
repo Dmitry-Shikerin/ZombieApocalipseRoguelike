@@ -83,7 +83,6 @@ namespace Sources.Infrastructure.Factories.Views.Characters
             _characterHealthViewFactory.Create(character.CharacterHealth, characterView.CharacterHealthView);
             _healthUiFactory.Create(character.CharacterHealth, _gameplayHud.CharacterHealthUi);
 
-            // SawLauncherAbilityView sawLauncherAbilityView = Object.FindObjectOfType<SawLauncherAbilityView>();
             SawLauncherAbilityView sawLauncherAbilityView = Object.Instantiate(
                 Resources.Load<SawLauncherAbilityView>("Views/SawLauncherAbilityView"),
                 _rootGameObject.CharacterSpawnPoint.Position,

@@ -5257,6 +5257,7 @@ Transform:
   - {fileID: 1070367727}
   - {fileID: 395194398}
   - {fileID: 123186394}
+  - {fileID: 1024321527}
   - {fileID: 266536319}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5275,6 +5276,7 @@ MonoBehaviour:
   _enemySpawnerView: {fileID: 1554169519}
   _itemSpawnerView: {fileID: 91202472}
   _characterSpawnPoint: {fileID: 123186395}
+  _bearSpawnPoint: {fileID: 1024321528}
   _allMapPoint: {fileID: 2066661782}
 --- !u!1001 &556655059
 PrefabInstance:
@@ -11004,6 +11006,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4473265925434808, guid: 4cc8530dc87574c4dba24b6604f8e49f, type: 3}
   m_PrefabInstance: {fileID: 1010323664}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1024321526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1024321527}
+  - component: {fileID: 1024321528}
+  m_Layer: 0
+  m_Name: BearSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1024321527
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024321526}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.22, y: 0, z: 26.09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 556228542}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1024321528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024321526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40f216387bff457a8462ec73e4c5fa70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1030642524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15991,6 +16037,10 @@ PrefabInstance:
     - target: {fileID: 1417913322802879313, guid: 5df893d1e657ea94d98d8324ef73b38a, type: 3}
       propertyPath: m_Name
       value: BearView
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417913322802879313, guid: 5df893d1e657ea94d98d8324ef73b38a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2332027895410411091, guid: 5df893d1e657ea94d98d8324ef73b38a, type: 3}
       propertyPath: m_LocalPosition.x

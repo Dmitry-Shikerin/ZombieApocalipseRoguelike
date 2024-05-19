@@ -36,6 +36,7 @@ using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.RootGameObjects;
 using Sources.Presentations.Views.Spawners;
+using Sources.PresentationsInterfaces.Views.Bears;
 using Sources.Utils.CustomCollections;
 using Object = UnityEngine.Object;
 
@@ -191,8 +192,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             CharacterView characterView = _characterViewFactory.Create(gameModels.Character);
 
             //Bear
-            BearView bearView = Object.FindObjectOfType<BearView>();
-            _bearViewFactory.Create(gameModels.Bear, bearView);
+            // BearView bearView = Object.FindObjectOfType<BearView>();
+            IBearView bearView = _bearViewFactory.Create(gameModels.Bear);
             bearView.SetTargetFollow(characterView.CharacterMovementView);
 
             //GameOverService

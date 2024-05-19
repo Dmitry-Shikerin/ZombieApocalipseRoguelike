@@ -14,6 +14,8 @@ namespace Sources.Presentations.Views.RootGameObjects
         
         [FoldoutGroup("SpawnPoints")] [Required] [ChildGameObjectsOnly] 
         [SerializeField] private CharacterSpawnPoint _characterSpawnPoint;
+        [FoldoutGroup("SpawnPoints")] [Required] [ChildGameObjectsOnly] 
+        [SerializeField] private BearSpawnPoint _bearSpawnPoint;
 
         [FoldoutGroup("CameraPoints")] [Required] [ChildGameObjectsOnly] 
         [SerializeField] private AllMapPoint _allMapPoint;
@@ -24,5 +26,6 @@ namespace Sources.Presentations.Views.RootGameObjects
         public AllMapPoint AllMapPoint => _allMapPoint;
         
         public CharacterSpawnPoint CharacterSpawnPoint => _characterSpawnPoint;
+        public BearSpawnPoint BearSpawnPoint => _bearSpawnPoint;
     }
 }
