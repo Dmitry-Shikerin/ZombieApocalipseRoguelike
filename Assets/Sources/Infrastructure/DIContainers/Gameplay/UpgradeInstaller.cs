@@ -25,6 +25,8 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
             Container.Bind<IUpgradeConfigCollectionService>().To<UpgradeConfigCollectionService>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<CustomCollection<Upgrader>>().AsSingle();
+
+            Container.Bind<IUpgradeService>().To<UpgradeService>().AsSingle();
             
             Container.Bind<UpgradePresenterFactory>().AsSingle();
             Container.Bind<IUpgradeViewFactory>().To<UpgradeViewFactory>().AsSingle();

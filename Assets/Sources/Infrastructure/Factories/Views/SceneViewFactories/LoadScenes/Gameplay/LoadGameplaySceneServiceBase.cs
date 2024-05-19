@@ -16,7 +16,6 @@ using Sources.Infrastructure.Factories.Views.InterstitialShowers;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
-using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Upgrades.Controllers;
 using Sources.Infrastructure.Services.Providers;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
@@ -163,6 +162,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         public void Load(IScenePayload scenePayload)
         {
             GameModels gameModels = LoadModels(scenePayload);
+            
+            object test = new object();
             
             //AdvertisingService
             _advertisingService.Construct(gameModels.PlayerWallet);
