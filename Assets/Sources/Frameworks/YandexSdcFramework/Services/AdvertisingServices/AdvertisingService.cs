@@ -111,7 +111,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
                     }
                 },
                 () =>
-                    _playerWallet.AddCoins(AdvertisingConst.CoinsAmount),
+                    _playerWallet.AddCoins(AdvertisingConst.ScullsAmount),
                 () =>
                 {
                     if (isContinue)
