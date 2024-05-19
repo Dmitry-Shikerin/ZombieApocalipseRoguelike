@@ -5,6 +5,7 @@ using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Setting;
 using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
+using Sources.Domain.Models.Upgrades.Controllers;
 using Sources.Domain.Models.Weapons;
 
 namespace Sources.Domain.Models.Gameplay
@@ -30,7 +31,8 @@ namespace Sources.Domain.Models.Gameplay
             EnemySpawner enemySpawner,
             SavedLevel savedLevel,
             Tutorial tutorial,
-            ScoreCounter scoreCounter)
+            ScoreCounter scoreCounter,
+            UpgradeController upgradeController)
         {
             BearMassAttackUpgrader = bearMassAttackUpgrader;
             BearAttackUpgrader = bearAttackUpgrader;
@@ -51,6 +53,7 @@ namespace Sources.Domain.Models.Gameplay
             SavedLevel = savedLevel;
             Tutorial = tutorial;
             ScoreCounter = scoreCounter;
+            UpgradeController = upgradeController;
         }
 
         public Upgrader BearMassAttackUpgrader { get; }
@@ -72,5 +75,6 @@ namespace Sources.Domain.Models.Gameplay
         public SavedLevel SavedLevel { get; }
         public Tutorial Tutorial { get; }
         public ScoreCounter ScoreCounter { get; }
+        public UpgradeController UpgradeController { get; }
     }
 }

@@ -7,8 +7,7 @@ using Sources.PresentationsInterfaces.Views.Constructors;
 
 namespace Sources.InfrastructureInterfaces.Services.Upgrades
 {
-    public interface IUpgradeService : IEnable, IDisable, IConstruct<PlayerWallet>
+    public interface IUpgradeService
     {
-        event Action UpgradeFormShowed;
     }
 }

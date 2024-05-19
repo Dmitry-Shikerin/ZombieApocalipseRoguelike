@@ -100,7 +100,6 @@ namespace Sources.Controllers.Presenters.Scenes
             _saveService.Enter();
             _levelCompletedService.Enable();
             _tutorialService.Enable();
-            _upgradeService.Enable();
             _audioService.Enter();
             //TODO если закрываю игру раньше чем загрузилась курточка летят ошибки с юнитасками
             // await _curtainView.HideCurtain();

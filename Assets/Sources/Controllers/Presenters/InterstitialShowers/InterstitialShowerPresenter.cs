@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Sources.Controllers.Common;
 using Sources.Domain.Models.Constants;
 using Sources.DomainInterfaces.Models.Spawners;
+using Sources.DomainInterfaces.Models.Upgrades;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
@@ -16,6 +17,7 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
     public class InterstitialShowerPresenter : PresenterBase
     {
         private readonly IEnemySpawner _enemySpawner;
+        private readonly IUpgradeController _upgradeController;
         private readonly IInterstitialShowerView _view;
         private readonly IInterstitialAdService _interstitialAdService;
         private readonly IFormService _formService;
@@ -28,12 +30,14 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
 
         public InterstitialShowerPresenter(
             IEnemySpawner enemySpawner, 
+            IUpgradeController upgradeController,
             IInterstitialShowerView view,
             IInterstitialAdService interstitialAdService,
             IFormService formService,
             IUpgradeService upgradeService)
         {
             _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));
+            _upgradeController = upgradeController ?? throw new ArgumentNullException(nameof(upgradeController));
             _view = view ?? throw new ArgumentNullException(nameof(view));
             _interstitialAdService = interstitialAdService ??
                                      throw new ArgumentNullException(nameof(interstitialAdService));
@@ -47,7 +51,7 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
         {
             _cancellationTokenSource = new CancellationTokenSource();
             _enemySpawner.CurrentWaveChanged += OnCurrentWaveChanged;
-            _upgradeService.UpgradeFormShowed += OnUpgradeFormShowed;
+            _upgradeController.UpgradeFormShowed += OnUpgradeFormShowed;
             _formService.Hide(FormId.ShowAd);
         }
 
@@ -55,7 +59,7 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
         {
             _cancellationTokenSource.Cancel();
             _enemySpawner.CurrentWaveChanged -= OnCurrentWaveChanged;
-            _upgradeService.UpgradeFormShowed -= OnUpgradeFormShowed;
+            _upgradeController.UpgradeFormShowed -= OnUpgradeFormShowed;
         }
 
         private void OnUpgradeFormShowed()

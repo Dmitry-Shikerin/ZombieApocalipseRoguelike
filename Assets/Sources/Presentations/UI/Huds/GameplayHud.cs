@@ -10,6 +10,7 @@ using Sources.Presentations.Views.Music;
 using Sources.Presentations.Views.Players;
 using Sources.Presentations.Views.Settings;
 using Sources.Presentations.Views.Upgrades;
+using Sources.Presentations.Views.Upgrades.Controllers;
 using UnityEngine;
 
 namespace Sources.Presentations.UI.Huds
@@ -22,14 +23,16 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("Camera")] [Required] 
         [SerializeField] private CinemachineCameraView _cinemachineCameraView;
         
-        [FoldoutGroup("Upgrades")] [Required] 
-        [SerializeField] private List<UpgradeView> _upgradeViews;
-        [FoldoutGroup("Upgrades")] [Required] 
-        [SerializeField] private List<UpgradeUi> _upgradeUis;
-        [FoldoutGroup("Upgrades")] [Required] 
+        // [FoldoutGroup("Upgrades")] [Required] 
+        // [SerializeField] private List<UpgradeView> _upgradeViews;
+        // [FoldoutGroup("Upgrades")] [Required] 
+        // [SerializeField] private List<UpgradeUi> _upgradeUis;
+        [FoldoutGroup("Upgrades")] [Required]
         [SerializeField] private List<UpgradeUi> _notAvailabilityUpgradeUis;
+        // [FoldoutGroup("Upgrades")] [Required] 
+        // [SerializeField] private List<UpgradeDescriptionView> _upgradeDescriptionViews;
         [FoldoutGroup("Upgrades")] [Required] 
-        [SerializeField] private List<UpgradeDescriptionView> _upgradeDescriptionViews;
+        [SerializeField] private UpgradeControllerView _upgradeControllerView;
         
         [FoldoutGroup("PlayerWallet")] [Required] 
         [SerializeField] private List<PlayerWalletView> _playerWalletViews;
@@ -56,10 +59,11 @@ namespace Sources.Presentations.UI.Huds
         
         public CinemachineCameraView CinemachineCameraView => _cinemachineCameraView;
 
-        public IReadOnlyList<UpgradeView> UpgradeViews => _upgradeViews;
-        public IReadOnlyList<UpgradeUi> UpgradeUis => _upgradeUis;
+        // public IReadOnlyList<UpgradeView> UpgradeViews => _upgradeViews;
+        // public IReadOnlyList<UpgradeUi> UpgradeUis => _upgradeUis;
         public IReadOnlyList<UpgradeUi> NotAvailabilityUpgradeUis => _notAvailabilityUpgradeUis;
-        public IReadOnlyList<UpgradeDescriptionView> UpgradeDescriptionViews => _upgradeDescriptionViews;
+        // public IReadOnlyList<UpgradeDescriptionView> UpgradeDescriptionViews => _upgradeDescriptionViews;
+        public UpgradeControllerView UpgradeControllerView => _upgradeControllerView;
         
         public IReadOnlyList<PlayerWalletView> PlayerWalletViews => _playerWalletViews;
 

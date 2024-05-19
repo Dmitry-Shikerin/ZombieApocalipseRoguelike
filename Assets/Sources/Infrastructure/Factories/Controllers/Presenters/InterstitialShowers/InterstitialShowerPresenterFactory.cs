@@ -2,6 +2,7 @@
 using JetBrains.Annotations;
 using Sources.Controllers.Presenters.InterstitialShowers;
 using Sources.DomainInterfaces.Models.Spawners;
+using Sources.DomainInterfaces.Models.Upgrades;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
@@ -26,10 +27,14 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.InterstitialSh
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
         }
         
-        public InterstitialShowerPresenter Create(IEnemySpawner enemySpawner, IInterstitialShowerView view)
+        public InterstitialShowerPresenter Create(
+            IEnemySpawner enemySpawner, 
+            IUpgradeController upgradeController,
+            IInterstitialShowerView view)
         {
             return new InterstitialShowerPresenter(
                 enemySpawner, 
+                upgradeController,
                 view, 
                 _interstitialAdService, 
                 _formService,

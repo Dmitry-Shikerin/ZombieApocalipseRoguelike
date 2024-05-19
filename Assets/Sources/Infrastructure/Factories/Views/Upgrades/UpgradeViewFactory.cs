@@ -3,12 +3,13 @@ using Sources.Controllers.Upgrades;
 using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Upgrades;
+using Sources.InfrastructureInterfaces.Factories.Views.Upgrades;
 using Sources.Presentations.Views.Upgrades;
 using Sources.PresentationsInterfaces.Views.Upgrades;
 
 namespace Sources.Infrastructure.Factories.Views.Upgrades
 {
-    public class UpgradeViewFactory
+    public class UpgradeViewFactory : IUpgradeViewFactory
     {
         private readonly UpgradePresenterFactory _upgradePresenterFactory;
 
