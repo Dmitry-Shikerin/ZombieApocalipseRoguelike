@@ -23,14 +23,8 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("Camera")] [Required] 
         [SerializeField] private CinemachineCameraView _cinemachineCameraView;
         
-        // [FoldoutGroup("Upgrades")] [Required] 
-        // [SerializeField] private List<UpgradeView> _upgradeViews;
-        // [FoldoutGroup("Upgrades")] [Required] 
-        // [SerializeField] private List<UpgradeUi> _upgradeUis;
         [FoldoutGroup("Upgrades")] [Required]
         [SerializeField] private List<UpgradeUi> _notAvailabilityUpgradeUis;
-        // [FoldoutGroup("Upgrades")] [Required] 
-        // [SerializeField] private List<UpgradeDescriptionView> _upgradeDescriptionViews;
         [FoldoutGroup("Upgrades")] [Required] 
         [SerializeField] private UpgradeControllerView _upgradeControllerView;
         
@@ -59,10 +53,7 @@ namespace Sources.Presentations.UI.Huds
         
         public CinemachineCameraView CinemachineCameraView => _cinemachineCameraView;
 
-        // public IReadOnlyList<UpgradeView> UpgradeViews => _upgradeViews;
-        // public IReadOnlyList<UpgradeUi> UpgradeUis => _upgradeUis;
         public IReadOnlyList<UpgradeUi> NotAvailabilityUpgradeUis => _notAvailabilityUpgradeUis;
-        // public IReadOnlyList<UpgradeDescriptionView> UpgradeDescriptionViews => _upgradeDescriptionViews;
         public UpgradeControllerView UpgradeControllerView => _upgradeControllerView;
         
         public IReadOnlyList<PlayerWalletView> PlayerWalletViews => _playerWalletViews;

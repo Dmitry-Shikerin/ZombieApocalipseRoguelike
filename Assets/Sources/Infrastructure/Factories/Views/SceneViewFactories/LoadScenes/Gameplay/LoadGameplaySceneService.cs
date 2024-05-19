@@ -26,9 +26,7 @@ using Sources.Infrastructure.Factories.Views.InterstitialShowers;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
-using Sources.Infrastructure.Factories.Views.Upgrades;
 using Sources.Infrastructure.Factories.Views.Upgrades.Controllers;
-using Sources.Infrastructure.Services.Providers;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Views.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Cameras;
@@ -71,7 +69,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IUpgradeConfigCollectionService upgradeConfigCollectionService, 
             IUpgradeDtoMapper upgradeDtoMapper, 
             CustomCollection<Upgrader> upgradeCollection, 
-            PlayerWalletProvider playerWalletProvider, 
             KillEnemyCounterViewFactory killEnemyCounterViewFactory, 
             BackgroundMusicViewFactory backgroundMusicViewFactory, 
             IGameOverService gameOverService, 
@@ -104,7 +101,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 upgradeConfigCollectionService, 
                 upgradeDtoMapper, 
                 upgradeCollection, 
-                playerWalletProvider, 
                 killEnemyCounterViewFactory, 
                 backgroundMusicViewFactory, 
                 gameOverService, 
