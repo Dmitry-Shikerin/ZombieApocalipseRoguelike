@@ -49,7 +49,7 @@ namespace Sources.Controllers.Abilities
 
         private void OnUpdate(float deltaTime)
         {
-            _sawLauncherAbilityView.Rotate(Vector3.up);
+            _sawLauncherAbilityView.Rotate(new Vector3(0, 1.5f, 0));
             _sawLauncherAbilityView.Follow();
         }
 
