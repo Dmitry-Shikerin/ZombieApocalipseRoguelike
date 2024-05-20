@@ -86,7 +86,6 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
             }
             catch (OperationCanceledException)
             {
-                //TODO помоему получается рекурсия
                 DisableTimer();
                 await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _cancellationTokenSource.Token);
                 OnCurrentWaveChanged();
