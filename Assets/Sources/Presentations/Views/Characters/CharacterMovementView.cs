@@ -8,7 +8,7 @@ namespace Sources.Presentations.Views.Characters
     public class CharacterMovementView : PresentableView<CharacterMovementPresenter>, ICharacterMovementView
     {
         [Required] [SerializeField] private CharacterController _characterController;
-        [SerializeField] private float _maxDegreesRotationDelta = 4f;
+        [SerializeField] private float _maxDegreesRotationDelta = 7f;
 
         public Vector3 Position => transform.position;
         
