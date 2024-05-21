@@ -100,6 +100,9 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
             }
             catch (OperationCanceledException)
             {
+                if(transform == null)
+                    return;
+                
                 transform.localScale = _uiAnimator.FromScale;
             }
         }
