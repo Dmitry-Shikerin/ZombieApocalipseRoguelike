@@ -186,7 +186,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 _upgradeUiFactory.Create(_upgradeCollection[i], _gameplayHud.NotAvailabilityUpgradeUis[i]);
 
             _upgradeControllerViewFactory.Create(
-                gameModels.UpgradeController, gameModels.PlayerWallet, _gameplayHud.UpgradeControllerView);
+                gameModels.UpgradeController,
+                gameModels.CharacterHealth,
+                gameModels.PlayerWallet,
+                _gameplayHud.UpgradeControllerView);
 
             //Character
             CharacterView characterView = _characterViewFactory.Create(gameModels.Character);
@@ -221,6 +224,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             
             //FormService
             _uiCollectorFactory.Create();
+            //_formService.HideAll();
             _formService.Show(FormId.Hud);
             
             //InterstitialShower

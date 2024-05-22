@@ -16,6 +16,7 @@ namespace Sources.App.Core
         private async void Start()
         {
             //Todo ловлю Аргумент нал
+            //Todo добавить переход на main menu
             try
             {
                 await _sceneService.ChangeSceneAsync(

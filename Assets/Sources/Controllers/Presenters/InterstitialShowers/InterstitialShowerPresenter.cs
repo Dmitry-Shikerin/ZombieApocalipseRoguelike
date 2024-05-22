@@ -87,8 +87,20 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
             catch (OperationCanceledException)
             {
                 DisableTimer();
-                await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _cancellationTokenSource.Token);
+                await Delay(cancellationToken);
                 OnCurrentWaveChanged();
+            }
+        }
+
+        private async UniTask Delay(CancellationToken cancellationToken)
+        {
+            try
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _cancellationTokenSource.Token);
+            }
+            catch (OperationCanceledException)
+            {
+                
             }
         }
         

@@ -72,8 +72,8 @@ namespace Sources.Controllers.Presenters.Musics
         private async void StartMusic(CancellationToken cancellationToken)
         {
             IAudioSourceView audioSourceView = _backgroundMusicView.BackgroundMusicAudioSource;
-            IReadOnlyList<AudioClip> audioClips = _audioClipCollection.AudioClips;
-            audioClips.Shuffle();
+            IEnumerable<AudioClip> audioClips = _audioClipCollection.AudioClips.Shuffle();
+            //audioClips.Shuffle();
             
             try
             {

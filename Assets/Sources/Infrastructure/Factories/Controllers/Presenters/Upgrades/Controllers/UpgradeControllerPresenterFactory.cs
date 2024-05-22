@@ -1,8 +1,10 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Sources.Controllers.Presenters.Upgrades.Controllers;
 using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Upgrades;
 using Sources.Domain.Models.Upgrades.Controllers;
+using Sources.DomainInterfaces.Models.Characters;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.InfrastructureInterfaces.Factories.Views.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
@@ -42,11 +44,13 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades.Contr
 
         public UpgradeControllerPresenter Create(
             UpgradeController upgradeController,
+            ICharacterHealth characterHealth,
             PlayerWallet playerWallet,
             IUpgradeControllerView upgradeControllerView)
         {
             return new UpgradeControllerPresenter(
                 upgradeController,
+                characterHealth,
                 playerWallet, 
                 upgradeControllerView,
                 _upgradersCollection,

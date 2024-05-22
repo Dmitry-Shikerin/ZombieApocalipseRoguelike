@@ -7,6 +7,8 @@ namespace Sources.Frameworks.UiFramework.ServicesInterfaces.Forms
     {
         void Show(FormId formId);
         void Hide(FormId formId);
+        void ShowAll();
+        void HideAll();
         bool IsActive(FormId formId);
     }
 }
