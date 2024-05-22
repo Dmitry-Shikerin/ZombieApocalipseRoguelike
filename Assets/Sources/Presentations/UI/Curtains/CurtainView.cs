@@ -60,10 +60,13 @@ namespace Sources.Presentations.UI.Curtains
             }
             catch (OperationCanceledException)
             {
-                if(_canvasGroup == null)
+                if (_canvasGroup == null)
                     return;
-                
+
                 Hide();
+            }
+            catch (MissingReferenceException)
+            {
             }
         }
     }
