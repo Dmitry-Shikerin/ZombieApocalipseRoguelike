@@ -7,6 +7,7 @@ using Sources.Frameworks.UiFramework.Presentation.Views;
 using Sources.Frameworks.UiFramework.PresentationsInterfaces;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Presentations.Views;
+using Sources.Presentations.Views.Forms.Common;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
 using UnityEngine;
 
@@ -42,6 +43,22 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
                 return;
             
             _forms[formId].Hide();
+        }
+
+        public void ShowAll()
+        {
+            foreach (IUiView form in _forms.Values)
+            {
+                form.Show();
+            }
+        }
+
+        public void HideAll()
+        {
+            foreach (IUiView form in _forms.Values)
+            {
+                form.Hide();
+            }
         }
 
         public bool IsActive(FormId formId)

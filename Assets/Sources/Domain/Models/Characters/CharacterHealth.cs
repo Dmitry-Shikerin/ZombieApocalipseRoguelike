@@ -23,6 +23,7 @@ namespace Sources.Domain.Models.Characters
         public event Action CharacterDie;
 
         public float MaxHealth => _healthUpgrader.CurrentAmount;
+        public bool IsDied { get; private set; }
 
 
         public float CurrentHealth
@@ -47,6 +48,7 @@ namespace Sources.Domain.Models.Characters
             if (CurrentHealth > 0)
                 return;
 
+            IsDied = true;
             CharacterDie?.Invoke();
         }
 

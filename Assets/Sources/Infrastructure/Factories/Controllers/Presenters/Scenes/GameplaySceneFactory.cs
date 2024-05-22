@@ -1,9 +1,12 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using Sources.Controllers.Presenters.Scenes;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.DomainInterfaces.Models.Payloads;
+using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Collectors;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.AudioSources;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
@@ -45,6 +48,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly IFocusService _focusService;
         private readonly IAdvertisingService _advertisingService;
         private readonly IPauseService _pauseService;
+        private readonly IFormService _formService;
+        private readonly UiCollectorFactory _uiCollectorFactory;
         private readonly CurtainView _curtainView;
 
         public GameplaySceneFactory(
@@ -65,7 +70,9 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             IAudioService audioService,
             IFocusService focusService,
             IAdvertisingService advertisingService,
-            IPauseService pauseService) 
+            IPauseService pauseService,
+            IFormService formService,
+            UiCollectorFactory uiCollectorFactory) 
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
@@ -84,6 +91,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _focusService = focusService ?? throw new ArgumentNullException(nameof(focusService));
             _advertisingService = advertisingService ?? throw new ArgumentNullException(nameof(advertisingService));
             _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
+            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
+            _uiCollectorFactory = uiCollectorFactory ?? throw new ArgumentNullException(nameof(uiCollectorFactory));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
 
@@ -106,7 +115,9 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _audioService,
                 _focusService,
                 _advertisingService,
-                _pauseService);
+                _pauseService,
+                _formService,
+                _uiCollectorFactory);
         }
 
         private ILoadSceneService CreateLoadSceneService(object payload)

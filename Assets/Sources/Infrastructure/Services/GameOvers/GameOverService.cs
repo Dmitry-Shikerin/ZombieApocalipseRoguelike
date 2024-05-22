@@ -12,6 +12,7 @@ namespace Sources.Infrastructure.Services.GameOvers
         private readonly IFormService _formService;
         private readonly ILoadService _loadService;
         private ICharacterHealth _characterHealth;
+        private bool _isGameOver;
 
         public GameOverService(
             IFormService formService,
@@ -37,6 +38,10 @@ namespace Sources.Infrastructure.Services.GameOvers
 
         private void OnCharacterDie()
         {
+            if (_isGameOver)
+                return;
+            
+            _isGameOver = true;
             _loadService.ClearAll();
             _formService.Show(FormId.GameOver);
         }

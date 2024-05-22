@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using Sources.Controllers.Common;
 using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Upgrades;
 using Sources.Domain.Models.Upgrades.Controllers;
+using Sources.DomainInterfaces.Models.Characters;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.InfrastructureInterfaces.Factories.Views.Upgrades;
@@ -17,6 +19,7 @@ namespace Sources.Controllers.Presenters.Upgrades.Controllers
     public class UpgradeControllerPresenter : PresenterBase
     {
         private readonly UpgradeController _upgradeController;
+        private readonly ICharacterHealth _characterHealth;
         private readonly PlayerWallet _playerWallet;
         private readonly IUpgradeControllerView _upgradeControllerView;
         private readonly ICustomCollection<Upgrader> _upgradeCollection;
@@ -27,7 +30,8 @@ namespace Sources.Controllers.Presenters.Upgrades.Controllers
         private readonly IUpgradeService _upgradeService;
 
         public UpgradeControllerPresenter(
-            UpgradeController upgradeController, 
+            UpgradeController upgradeController,
+            ICharacterHealth characterHealth,
             PlayerWallet playerWallet,
             IUpgradeControllerView upgradeControllerView,
             ICustomCollection<Upgrader> upgradeCollection,
@@ -38,6 +42,7 @@ namespace Sources.Controllers.Presenters.Upgrades.Controllers
             IUpgradeService upgradeService)
         {
             _upgradeController = upgradeController ?? throw new ArgumentNullException(nameof(upgradeController));
+            _characterHealth = characterHealth ?? throw new ArgumentNullException(nameof(characterHealth));
             _playerWallet = playerWallet ?? throw new ArgumentNullException(nameof(playerWallet));
             _upgradeControllerView = upgradeControllerView ?? 
                                      throw new ArgumentNullException(nameof(upgradeControllerView));
@@ -65,6 +70,9 @@ namespace Sources.Controllers.Presenters.Upgrades.Controllers
         {
             try
             {
+                if (_characterHealth.IsDied)
+                    return;
+                
                 if (_formService.IsActive(FormId.Upgrade))
                     return;
 

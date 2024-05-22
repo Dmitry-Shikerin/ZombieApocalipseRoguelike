@@ -53,7 +53,8 @@ namespace Sources.Presentations.UI.Curtains
                     _canvasGroup.alpha = Mathf.MoveTowards(
                         _canvasGroup.alpha, end, Time.deltaTime / _duration);
 
-                    await UniTask.Yield(cancellationToken);
+                    //await UniTask.Yield(cancellationToken);
+                    await UniTask.Delay(TimeSpan.FromMilliseconds(1), ignoreTimeScale:true, cancellationToken: cancellationToken);
                 }
 
                 _canvasGroup.alpha = end;
