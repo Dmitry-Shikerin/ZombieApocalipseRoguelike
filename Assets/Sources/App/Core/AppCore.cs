@@ -13,10 +13,22 @@ namespace Sources.App.Core
         private void Awake() =>
             DontDestroyOnLoad(this);
 
-        private async void Start() =>
-            await _sceneService.ChangeSceneAsync(
-                SceneManager.GetActiveScene().name, 
-                new ScenePayload(SceneManager.GetActiveScene().name, false, false));
+        private async void Start()
+        {
+            //Todo ловлю Аргумент нал
+            try
+            {
+                await _sceneService.ChangeSceneAsync(
+                    SceneManager.GetActiveScene().name,
+                    new ScenePayload(SceneManager.GetActiveScene().name, false, false));
+            }
+            catch(ArgumentNullException)
+            {
+            }
+            catch (OperationCanceledException)
+            {
+            }
+        }
 
         private void Update() =>
             _sceneService.Update(Time.deltaTime);

@@ -102,7 +102,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _tutorialService.Enable();
             _audioService.Enter();
             //TODO если закрываю игру раньше чем загрузилась курточка летят ошибки с юнитасками
-            // await _curtainView.HideCurtain();
+            await _curtainView.HideCurtain();
         }
 
         public void Exit()
@@ -123,19 +123,19 @@ namespace Sources.Controllers.Presenters.Scenes
             _updateService.Update(deltaTime);
             _inputServiceUpdater.Update(deltaTime);
             
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                if (_pauseService.IsPaused == false)
-                {
-                    _pauseService.Pause();
-                    _pauseService.PauseSound();
-                }
-                else
-                {
-                    _pauseService.Continue();
-                    _pauseService.ContinueSound();
-                }
-            }
+            // if (Input.GetKeyDown(KeyCode.P))
+            // {
+            //     if (_pauseService.IsPaused == false)
+            //     {
+            //         _pauseService.Pause();
+            //         _pauseService.PauseSound();
+            //     }
+            //     else
+            //     {
+            //         _pauseService.Continue();
+            //         _pauseService.ContinueSound();
+            //     }
+            // }
         }
 
         public void UpdateLate(float deltaTime)
