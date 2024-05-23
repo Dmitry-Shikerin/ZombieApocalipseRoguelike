@@ -142,11 +142,11 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             PlayerWallet playerWallet = new PlayerWallet(0, ModelId.PlayerWallet);
             _entityRepository.Add(playerWallet);
 
+            Upgrader sawLauncherAbilityUpgrader = CreateUpgrader(ModelId.SawLauncherAbilityUpgrader);
             Upgrader bearMassAttackUpgrader = CreateUpgrader(ModelId.BearMassAttackUpgrader);
             Upgrader bearAttackUpgrader = CreateUpgrader(ModelId.BearAttackUpgrader);
             Upgrader characterHealthUpgrader = CreateUpgrader(ModelId.CharacterHealthUpgrader);
             Upgrader sawLauncherUpgrader = CreateUpgrader(ModelId.SawLauncherUpgrader);
-            Upgrader sawLauncherAbilityUpgrader = CreateUpgrader(ModelId.SawLauncherAbilityUpgrader);
             Upgrader miniGunAttackUpgrader = CreateUpgrader(ModelId.MiniGunAttackUpgrader);
 
             UpgradeController upgradeController = new UpgradeController();
