@@ -7,7 +7,7 @@ namespace Sources.InfrastructureInterfaces.Services.Upgrades
 {
     public interface IUpgradeService
     {
-        int GetUpgradesCount(IReadOnlyList<Upgrader> availableUpgrades);
+        int GetUpgradesCount(int availableUpgradesCount, IReadOnlyList<Upgrader> upgraders);
 
         IReadOnlyList<Upgrader> GetAvailableUpgrades(
             IPlayerWallet playerWallet,
