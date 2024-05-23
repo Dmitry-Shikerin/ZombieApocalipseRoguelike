@@ -138,6 +138,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             
             PlayerWallet playerWallet = _entityRepository.Get<PlayerWallet>(ModelId.PlayerWallet);
             
+            Upgrader sawLauncherAbilityUpgrader = _entityRepository.Get<Upgrader>(ModelId.SawLauncherAbilityUpgrader);
+            _upgradeCollection.Add(sawLauncherAbilityUpgrader);
             Upgrader bearMassAttackUpgrader = _entityRepository.Get<Upgrader>(ModelId.BearMassAttackUpgrader);
             _upgradeCollection.Add(bearMassAttackUpgrader);
             Upgrader bearAttackUpgrader = _entityRepository.Get<Upgrader>(ModelId.BearAttackUpgrader);
@@ -146,8 +148,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _upgradeCollection.Add(characterHealthUpgrader);
             Upgrader sawLauncherUpgrader = _entityRepository.Get<Upgrader>(ModelId.SawLauncherUpgrader);
             _upgradeCollection.Add(sawLauncherUpgrader);
-            Upgrader sawLauncherAbilityUpgrader = _entityRepository.Get<Upgrader>(ModelId.SawLauncherAbilityUpgrader);
-            _upgradeCollection.Add(sawLauncherAbilityUpgrader);
             Upgrader miniGunAttackUpgrader = _entityRepository.Get<Upgrader>(ModelId.MiniGunAttackUpgrader);
             _upgradeCollection.Add(miniGunAttackUpgrader);
 

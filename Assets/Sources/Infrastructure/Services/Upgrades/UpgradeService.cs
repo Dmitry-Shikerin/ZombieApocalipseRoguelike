@@ -10,13 +10,18 @@ namespace Sources.Infrastructure.Services.Upgrades
 {
     public class UpgradeService : IUpgradeService
     {
-        public int GetUpgradesCount(IReadOnlyList<Upgrader> availableUpgrades)
+        public int GetUpgradesCount(int availableUpgradesCount, IReadOnlyList<Upgrader> upgraders)
         {
-            if (availableUpgrades.Count >= 3)
+            if (availableUpgradesCount >= 3)
                 return 3;
             
-            if (availableUpgrades.Count is < 3 and > 0)
-                return availableUpgrades.Count;
+            //if (availableUpgradesCount is < 3 and > 0)
+                //return availableUpgradesCount;
+
+            var count = upgraders.Count(upgrader => upgrader.CurrentLevel == 3);
+
+            if (count >= 4 && availableUpgradesCount > 0)
+                return availableUpgradesCount;
 
             throw new IndexOutOfRangeException();
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Payloads;
 using Sources.InfrastructureInterfaces.Services.SceneServices;
 using UnityEngine;
@@ -20,8 +21,8 @@ namespace Sources.App.Core
             try
             {
                 await _sceneService.ChangeSceneAsync(
-                    SceneManager.GetActiveScene().name,
-                    new ScenePayload(SceneManager.GetActiveScene().name, false, false));
+                    ModelId.MainMenu,
+                    new ScenePayload(ModelId.MainMenu, false, false));
             }
             catch(ArgumentNullException)
             {
@@ -32,13 +33,13 @@ namespace Sources.App.Core
         }
 
         private void Update() =>
-            _sceneService.Update(Time.deltaTime);
+            _sceneService?.Update(Time.deltaTime);
 
         private void LateUpdate() =>
-            _sceneService.UpdateLate(Time.deltaTime);
+            _sceneService?.UpdateLate(Time.deltaTime);
 
         private void FixedUpdate() =>
-            _sceneService.UpdateFixed(Time.fixedDeltaTime);
+            _sceneService?.UpdateFixed(Time.fixedDeltaTime);
 
         public void Construct(ISceneService sceneService) =>
             _sceneService = sceneService ?? throw new ArgumentNullException(nameof(sceneService));

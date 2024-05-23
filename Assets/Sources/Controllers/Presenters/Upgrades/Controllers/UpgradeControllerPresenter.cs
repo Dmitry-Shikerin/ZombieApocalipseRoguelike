@@ -78,7 +78,7 @@ namespace Sources.Controllers.Presenters.Upgrades.Controllers
 
                 IReadOnlyList<Upgrader> availableUpgraders = _upgradeService.GetAvailableUpgrades(
                     _playerWallet, _upgradeCollection);
-                int upgradersCount = _upgradeService.GetUpgradesCount(availableUpgraders);
+                int upgradersCount = _upgradeService.GetUpgradesCount(availableUpgraders.Count, _upgradeCollection);
                 CreateFactories(availableUpgraders, upgradersCount);
                 _formService.Show(FormId.Upgrade);
                 _upgradeController.ShowUpgradeForm();
