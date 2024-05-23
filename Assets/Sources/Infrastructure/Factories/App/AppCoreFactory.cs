@@ -23,6 +23,7 @@ namespace Sources.Infrastructure.Factories.App
             AppCore appCore = new GameObject(nameof(AppCore)).AddComponent<AppCore>();
 
             ProjectContext projectContext = Object.FindObjectOfType<ProjectContext>();
+            
             CurtainView curtainView =
                 Object.Instantiate(Resources.Load<CurtainView>(PrefabPath.Curtain)) ??
                 throw new NullReferenceException(nameof(CurtainView));
