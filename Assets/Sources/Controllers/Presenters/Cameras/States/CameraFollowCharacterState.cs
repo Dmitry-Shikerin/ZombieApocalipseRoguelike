@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Infrastructure.StateMachines.ContextStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.Cameras;
+using Sources.Presentations.Views.Cameras.Types;
 using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Cameras;
 using UnityEngine;
@@ -24,7 +25,7 @@ namespace Sources.Controllers.Presenters.Cameras.States
 
         public override void Enter(object payload = null)
         {
-            Transform target = _cameraService.Get<CharacterView>().Transform;
+            Transform target = _cameraService.Get(FollowableId.Character).Transform;
             _cinemachineCameraView.Follow(target);
             _cinemachineCameraView.SetRotation(_cameraPosition);
         }

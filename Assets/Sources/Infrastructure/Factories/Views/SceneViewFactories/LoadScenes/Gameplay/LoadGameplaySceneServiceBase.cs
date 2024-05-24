@@ -33,6 +33,7 @@ using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.Cameras.Points;
+using Sources.Presentations.Views.Cameras.Types;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.RootGameObjects;
 using Sources.Presentations.Views.Spawners;
@@ -217,9 +218,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _backgroundMusicViewFactory.Create(_gameplayHud.BackgroundMusicView);
 
             //Camera
-            _cameraService.Add<CharacterView>(characterView);
-            _cameraService.Add<AllMapPoint>(_rootGameObject.AllMapPoint);
-            _cameraService.SetFollower<CharacterView>();
+            _cameraService.Add(characterView);
+            _cameraService.Add(_rootGameObject.AllMapPoint);
+            _cameraService.SetFollower(FollowableId.Character);
             _cameraViewFactory.Create(_gameplayHud.CinemachineCameraView);
             
             //FormService

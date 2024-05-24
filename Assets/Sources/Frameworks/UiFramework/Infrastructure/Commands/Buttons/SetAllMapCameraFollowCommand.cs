@@ -5,6 +5,7 @@ using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.Presentations.Views.Cameras.Points;
+using Sources.Presentations.Views.Cameras.Types;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 {
@@ -21,7 +22,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
         
         public void Handle(IUiButton uiButton)
         {
-            _cameraService.SetFollower<AllMapPoint>();
+            _cameraService.SetFollower(FollowableId.AllMap);
         }
     }
 }
