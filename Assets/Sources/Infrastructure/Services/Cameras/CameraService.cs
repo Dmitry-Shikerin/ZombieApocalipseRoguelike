@@ -1,41 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sources.InfrastructureInterfaces.Services.Cameras;
+using Sources.Presentations.Views.Cameras.Types;
 using Sources.PresentationsInterfaces.Views.Cameras.Points;
 
 namespace Sources.Infrastructure.Services.Cameras
 {
     public class CameraService : ICameraService
     {
-        private Dictionary<Type, ICameraFollowable> _cameraTargets = new Dictionary<Type, ICameraFollowable>();
+        private Dictionary<FollowableId, ICameraFollowable> _cameraTargets = new Dictionary<FollowableId, ICameraFollowable>();
 
         public event Action FollowableChanged;
         
         public ICameraFollowable CurrentFollower { get; private set; }
 
-        public void SetFollower<T>() where T : ICameraFollowable
+        public void SetFollower(FollowableId id)
         {
-            if (_cameraTargets.ContainsKey(typeof(T)) == false)
-                throw new InvalidOperationException(nameof(T));
+            if (_cameraTargets.ContainsKey(id) == false)
+                throw new InvalidOperationException(nameof(id));
             
-            CurrentFollower = _cameraTargets[typeof(T)];
+            CurrentFollower = _cameraTargets[id];
             FollowableChanged?.Invoke();
         }
 
-        public void Add<T>(ICameraFollowable cameraFollowable) where T : ICameraFollowable
+        public void Add(ICameraFollowable cameraFollowable)
         {
-            if (_cameraTargets.ContainsKey(typeof(T)))
-                throw new InvalidOperationException(nameof(T));
+            if (_cameraTargets.ContainsKey(cameraFollowable.Id))
+                throw new InvalidOperationException(nameof(cameraFollowable.Id));
             
-            _cameraTargets[typeof(T)] = cameraFollowable;
+            _cameraTargets[cameraFollowable.Id] = cameraFollowable;
         }
 
-        public ICameraFollowable Get<T>() where T : ICameraFollowable
+        public ICameraFollowable Get(FollowableId id)
         {
-            if (_cameraTargets.ContainsKey(typeof(T)) == false)
-                throw new InvalidOperationException(nameof(T));
+            if (_cameraTargets.ContainsKey(id) == false)
+                throw new InvalidOperationException(nameof(id));
 
-            return _cameraTargets[typeof(T)];
+            return _cameraTargets[id];
         }
     }
 }

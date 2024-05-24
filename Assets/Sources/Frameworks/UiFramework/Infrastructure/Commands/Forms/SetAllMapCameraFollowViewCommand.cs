@@ -3,6 +3,7 @@ using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.Presentations.Views.Cameras.Points;
+using Sources.Presentations.Views.Cameras.Types;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms
 {
@@ -20,7 +21,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms
         //TODO чепуха при смене точек в туториале
         public void Handle()
         {
-            _cameraService.SetFollower<AllMapPoint>();
+            _cameraService.SetFollower(FollowableId.AllMap);
         }
     }
 }

@@ -4,8 +4,7 @@ using Sources.Controllers.Presenters.Cameras.States;
 using Sources.Infrastructure.StateMachines.ContextStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
-using Sources.Presentations.Views.Cameras.Points;
-using Sources.Presentations.Views.Characters;
+using Sources.Presentations.Views.Cameras.Types;
 using Sources.PresentationsInterfaces.Views.Cameras;
 using Sources.PresentationsInterfaces.Views.Cameras.Points;
 
@@ -24,7 +23,6 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Cameras
             _cameraService = cameraService ?? throw new ArgumentNullException(nameof(cameraService));
         }
 
-        //TODO почему не переключаются стейты
         public CameraPresenter Create(ICinemachineCameraView cinemachineCameraView)
         {
             CameraInitializeState initializeState = new CameraInitializeState(
@@ -41,7 +39,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Cameras
                     if (context is not ICameraFollowable cameraFollowable)
                         return false;
 
-                    if (cameraFollowable is not CharacterView characterView)
+                    if (cameraFollowable.Id != FollowableId.Character)
                         return false;
 
                     return true;
@@ -56,7 +54,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Cameras
                     if (context is not ICameraFollowable cameraFollowable)
                         return false;
 
-                    if (cameraFollowable is not AllMapPoint allMapPoint)
+                    if (cameraFollowable.Id != FollowableId.AllMap)
                         return false;
 
                     return true;

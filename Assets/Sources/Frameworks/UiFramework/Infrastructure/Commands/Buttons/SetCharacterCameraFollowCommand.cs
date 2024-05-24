@@ -4,6 +4,7 @@ using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
 using Sources.InfrastructureInterfaces.Services.Cameras;
+using Sources.Presentations.Views.Cameras.Types;
 using Sources.Presentations.Views.Characters;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
@@ -21,7 +22,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
         
         public void Handle(IUiButton uiButton)
         {
-            _cameraService.SetFollower<CharacterView>();
+            _cameraService.SetFollower(FollowableId.Character);
         }
     }
 }
