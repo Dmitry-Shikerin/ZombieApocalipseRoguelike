@@ -1,10 +1,12 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.DomainInterfaces.Models.Gameplay;
 using Sources.DomainInterfaces.Models.Spawners;
 using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
 using Sources.Infrastructure.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
@@ -18,17 +20,20 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
         private readonly IFormService _formService;
         private readonly IEntityRepository _entityRepository;
         private readonly ILoadService _loadService;
+        private readonly IInterstitialAdService _interstitialAdService;
         private IKillEnemyCounter _killEnemyCounter;
         private IEnemySpawner _enemySpawner;
 
         public LevelCompletedService(
             IFormService formService,
             IEntityRepository entityRepository,
-            ILoadService loadService)
+            ILoadService loadService,
+            IInterstitialAdService interstitialAdService)
         {
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
+            _interstitialAdService = interstitialAdService ?? throw new ArgumentNullException(nameof(interstitialAdService));
         }
         
         private bool IsCompleted => _killEnemyCounter.KillZombies >= _enemySpawner.SumAllEnemies;
@@ -62,6 +67,7 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
             _loadService.Save(level);
             _loadService.ClearAll();
             _formService.Show(FormId.LevelCompleted);
+            _interstitialAdService.ShowInterstitial();
         }
     }
 }

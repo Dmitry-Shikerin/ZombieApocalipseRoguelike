@@ -229,8 +229,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _formService.Show(FormId.Hud);
             
             //InterstitialShower
-            _interstitialShowerViewFactory.Create(
-                gameModels.EnemySpawner, gameModels.UpgradeController, _gameplayHud.InterstitialShowerView);
+            //_interstitialShowerViewFactory.Create(
+            //    gameModels.EnemySpawner, gameModels.UpgradeController, _gameplayHud.InterstitialShowerView);
+            
             
             //ScoreCounter
             _scoreCounterViewFactory.Create(
