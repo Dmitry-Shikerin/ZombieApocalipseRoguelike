@@ -43,8 +43,8 @@ namespace Sources.Presentations.UI.Huds
         [FoldoutGroup("Volume")] [Required] 
         [SerializeField] private VolumeView _volumeView;
 
-        [FoldoutGroup("InterstitialShower")][Required]
-        [SerializeField] private InterstitialShowerView _interstitialShowerView;
+        //[FoldoutGroup("InterstitialShower")][Required]
+        //[SerializeField] private InterstitialShowerView _interstitialShowerView;
         
         [FoldoutGroup("ScoreCounter")][Required]
         [SerializeField] private ScoreCounterView _scoreCounterView;
@@ -65,7 +65,7 @@ namespace Sources.Presentations.UI.Huds
         public HealthUi CharacterHealthUi => _characterHealthUi;
         
         public VolumeView VolumeView => _volumeView;
-        public InterstitialShowerView InterstitialShowerView => _interstitialShowerView;
+        //public InterstitialShowerView InterstitialShowerView => _interstitialShowerView;
         
         public ScoreCounterView ScoreCounterView => _scoreCounterView;
     }

@@ -15,5 +15,6 @@
         SetCharacterCameraFollow = 10,
         ShowRewardedAdvertising = 11,
         ClearSaves = 12,
+        PlayerAccountAuthorize = 13,
     }
 }

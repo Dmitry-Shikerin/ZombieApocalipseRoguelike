@@ -18,7 +18,8 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
             NewGameCommand newGameCommand,
             ShowLeaderboardCommand showLeaderBoardCommand,
             EnableLoadGameButtonCommand enableLoadGameButtonCommand,
-            ClearSavesButtonCommand clearSavesButtonCommand)
+            ClearSavesButtonCommand clearSavesButtonCommand,
+            PlayerAccountAuthorizeButtonCommand playerAccountAuthorizeButtonCommand)
         {
             _commands[showFormCommand.Id] = showFormCommand;
             _commands[loadGameCommand.Id] = loadGameCommand;
@@ -26,6 +27,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
             _commands[showLeaderBoardCommand.Id] = showLeaderBoardCommand;
             _commands[enableLoadGameButtonCommand.Id] = enableLoadGameButtonCommand;
             _commands[clearSavesButtonCommand.Id] = clearSavesButtonCommand;
+            _commands[playerAccountAuthorizeButtonCommand.Id] = playerAccountAuthorizeButtonCommand;
         }
         
         public void Handle(IUiButton uiButton, ButtonCommandId buttonCommandId)
