@@ -23,6 +23,7 @@ namespace Sources.Infrastructure.DIContainers.MainMenu.UiFramework
             Container.Bind<ShowLeaderboardCommand>().AsSingle();
             Container.Bind<EnableLoadGameButtonCommand>().AsSingle();
             Container.Bind<ClearSavesButtonCommand>().AsSingle();
+            Container.Bind<PlayerAccountAuthorizeButtonCommand>().AsSingle();
 
             //Views
             Container.Bind<IUiViewCommandHandler>().To<MainMenuUiViewCommandHandler>().AsSingle();
