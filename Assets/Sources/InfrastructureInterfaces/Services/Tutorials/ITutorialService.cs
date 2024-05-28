@@ -1,6 +1,6 @@
-﻿using Sources.Domain.Models.Gameplay;
+﻿using Sources.ControllersInterfaces.ControllerLifetimes;
+using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Setting;
-using Sources.InfrastructureInterfaces.Services.StatesLifetimes;
 
 namespace Sources.InfrastructureInterfaces.Services.Tutorials
 {

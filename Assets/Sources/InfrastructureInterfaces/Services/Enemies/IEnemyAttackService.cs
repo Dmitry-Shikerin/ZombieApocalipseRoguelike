@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Sources.Infrastructure.Services.Enemies
+namespace Sources.InfrastructureInterfaces.Services.Enemies
 {
     public interface IEnemyAttackService
     {

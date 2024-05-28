@@ -9,7 +9,6 @@ using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
-using Sources.Infrastructure.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.Volumes;
@@ -59,7 +58,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             SavedLevel savedLevel = new SavedLevel(ModelId.SavedLevel, false, ModelId.Gameplay);
             _entityRepository.Add(savedLevel);
 
-            //LevelAvailability
             Level firstLevel = new Level(ModelId.Gameplay, false);
             _entityRepository.Add(firstLevel);
             Level secondLevel = new Level(ModelId.Gameplay2, false);
@@ -78,8 +76,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
                     fourthLevel,
                 });
 
-            Debug.Log("Created MainMenuModels");
-            //TODO здесь сохраняю посли того  как создал все модели
             _loadService.SaveAll();
 
             return new MainMenuModels(

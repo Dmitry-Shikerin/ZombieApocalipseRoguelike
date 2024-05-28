@@ -15,9 +15,7 @@ namespace Sources.Infrastructure.Factories.Domain.Data
             };
         }
 
-        public KillEnemyCounter MapDtoToModel(KillEnemyCounterDto killEnemyCounterDto)
-        {
-            return new KillEnemyCounter(killEnemyCounterDto);
-        }
+        public KillEnemyCounter MapDtoToModel(KillEnemyCounterDto killEnemyCounterDto) =>
+            new(killEnemyCounterDto);
     }
 }

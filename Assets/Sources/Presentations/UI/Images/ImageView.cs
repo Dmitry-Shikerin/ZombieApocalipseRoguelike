@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
+using Sources.Domain.Models.Constants;
 using Sources.Presentations.Views;
 using Sources.PresentationsInterfaces.UI.Images;
 using UnityEngine;
@@ -24,7 +25,7 @@ namespace Sources.Presentations.UI.Images
             UniTask.CompletedTask;
 
         public void ShowImage() => 
-            _image.fillAmount = 1f;
+            _image.fillAmount = ImageConst.Max;
 
         public void HideImage() => 
             _image.fillAmount = 0f;

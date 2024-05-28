@@ -1,5 +1,6 @@
 ﻿using Agava.WebUtility;
 using Agava.YandexGames;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Stickies;
 
 namespace Sources.Frameworks.YandexSdcFramework.Services.Stickies
 {

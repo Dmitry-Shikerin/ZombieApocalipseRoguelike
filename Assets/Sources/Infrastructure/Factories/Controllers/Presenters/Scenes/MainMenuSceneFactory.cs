@@ -5,9 +5,9 @@ using Sources.ControllersInterfaces.Scenes;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.AudioSources;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
-using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Stickies;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.MainMenu;
 using Sources.InfrastructureInterfaces.Factories.Controllers.Scenes;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
@@ -50,7 +50,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _localizationService = localizationService ??
                                    throw new ArgumentNullException(nameof(localizationService));
-            _sdcInitializeService = sdcInitializeService ?? throw new ArgumentNullException(nameof(sdcInitializeService));
+            _sdcInitializeService = sdcInitializeService ?? 
+                                    throw new ArgumentNullException(nameof(sdcInitializeService));
             _stickyService = stickyService ?? throw new ArgumentNullException(nameof(stickyService));
             _audioService = audioService ?? throw new ArgumentNullException(nameof(audioService));
             _focusService = focusService ?? throw new ArgumentNullException(nameof(focusService));

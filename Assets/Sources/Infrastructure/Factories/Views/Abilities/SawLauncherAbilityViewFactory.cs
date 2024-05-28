@@ -1,7 +1,7 @@
 ﻿using System;
-using Sources.Controllers.Abilities;
+using Sources.Controllers.Presenters.Abilities;
 using Sources.Domain.Models.Abilities;
-using Sources.Infrastructure.Factories.Controllers.Abilities;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Abilities;
 using Sources.Presentations.Views.Abilities;
 using Sources.PresentationsInterfaces.Views.Abilities;
 

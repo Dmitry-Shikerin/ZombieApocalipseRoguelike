@@ -1,9 +1,9 @@
 ﻿using System;
-using Sources.Controllers.Common;
-using Sources.Domain.Models.YandexSDK;
-using Sources.PresentationsInterfaces.Views.YandexSDK;
+using Sources.Controllers.Presenters;
+using Sources.Frameworks.YandexSdcFramework.Domain;
+using Sources.Frameworks.YandexSdcFramework.PresentationsInterfaces.Views;
 
-namespace Sources.Controllers.YandexSDK
+namespace Sources.Frameworks.YandexSdcFramework.Controllers
 {
     public class LeaderBoardElementPresenter : PresenterBase
     {

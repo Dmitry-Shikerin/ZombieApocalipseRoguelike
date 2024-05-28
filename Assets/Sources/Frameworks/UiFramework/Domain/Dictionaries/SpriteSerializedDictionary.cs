@@ -2,7 +2,7 @@
 using Sources.Utils.Dictionaries;
 using UnityEngine;
 
-namespace Sources.Domain.Models.Dictionaries
+namespace Sources.Frameworks.UiFramework.Domain.Dictionaries
 {
     [Serializable]
     public class SpriteSerializedDictionary : SerializedDictionary<string, Sprite>

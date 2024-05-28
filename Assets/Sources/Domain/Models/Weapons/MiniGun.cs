@@ -29,7 +29,6 @@ namespace Sources.Domain.Models.Weapons
         public bool IsReady { get; private set; } = true;
         public bool IsShooting { get; set; }
 
-        //TODO подумать над тем чтобы упростить
         public async void AttackAsync(CancellationToken cancellationToken)
         {
             try

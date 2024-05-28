@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Sources.Frameworks.UiFramework.Presentation.CommonTypes;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.Presentation.Views.Types;
 using Sources.PresentationsInterfaces.Views;
 
-namespace Sources.Frameworks.UiFramework.PresentationsInterfaces
+namespace Sources.Frameworks.UiFramework.PresentationsInterfaces.Views
 {
     public interface IUiView : IView
     {

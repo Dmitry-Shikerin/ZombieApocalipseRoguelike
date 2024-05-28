@@ -2,9 +2,7 @@
 using Sources.InfrastructureInterfaces.Factories.Views.RewardItems;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.Spawners;
-using Sources.Presentations.Views.FirstAidKits;
 using Sources.Presentations.Views.RewardItems;
-using Sources.PresentationsInterfaces.Views.FirstAidKits;
 using Sources.PresentationsInterfaces.Views.RewardItems;
 using UnityEngine;
 

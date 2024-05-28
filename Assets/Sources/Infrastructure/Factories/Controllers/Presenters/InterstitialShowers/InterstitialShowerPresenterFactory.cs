@@ -4,7 +4,7 @@ using Sources.Controllers.Presenters.InterstitialShowers;
 using Sources.DomainInterfaces.Models.Spawners;
 using Sources.DomainInterfaces.Models.Upgrades;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
-using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdvertisingServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.PresentationsInterfaces.Views.InterstitialShowers;
 
@@ -37,8 +37,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.InterstitialSh
                 upgradeController,
                 view, 
                 _interstitialAdService, 
-                _formService,
-                _upgradeService);
+                _formService);
         }
     }
 }

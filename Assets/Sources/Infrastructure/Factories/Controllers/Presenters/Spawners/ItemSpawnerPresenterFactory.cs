@@ -1,10 +1,9 @@
 ﻿using System;
-using Sources.Controllers.Spawners;
-using Sources.Domain.Models.Spawners;
+using Sources.Controllers.Presenters.Spawners;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.PresentationsInterfaces.Views.Spawners;
 
-namespace Sources.Infrastructure.Factories.Controllers.Spawners
+namespace Sources.Infrastructure.Factories.Controllers.Presenters.Spawners
 {
     public class ItemSpawnerPresenterFactory
     {
@@ -16,9 +15,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Spawners
                                        throw new ArgumentNullException(nameof(firstAidKitSpawnService));
         }
 
-        public ItemSpawnerPresenter Create(ItemSpawner itemSpawner, IItemSpawnerView itemSpawnerView)
-        {
-            return new ItemSpawnerPresenter(itemSpawner, itemSpawnerView, _firstAidKitSpawnService);
-        }
+        public ItemSpawnerPresenter Create(IItemSpawnerView itemSpawnerView) =>
+            new(itemSpawnerView, _firstAidKitSpawnService);
     }
 }

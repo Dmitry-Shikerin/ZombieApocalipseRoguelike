@@ -1,5 +1,4 @@
-﻿using System;
-using Sources.Domain.Models.Inputs;
+﻿using Sources.Domain.Models.Inputs;
 
 namespace Sources.InfrastructureInterfaces.Services.InputServices
 {

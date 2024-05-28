@@ -2,7 +2,7 @@
 using Sources.Controllers.Presenters.Bears.Movements;
 using Sources.Controllers.Presenters.Bears.Movements.States;
 using Sources.Domain.Models.Bears;
-using Sources.Infrastructure.Services.Overlaps;
+using Sources.Domain.Models.Constants;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.Bears;
 using Sources.InfrastructureInterfaces.Services.Overlaps;
@@ -34,19 +34,20 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Bears
                 bear.BearAttacker,bearView, bearAnimationView, _overlapService);
             BearFollowCharacterState followCharacterState = new BearFollowCharacterState(
                 bear, bearAnimationView, bearView);
-            BearMoveToEnemyState moveToEnemyState = new BearMoveToEnemyState(bear, bearAnimationView, bearView);
+            BearMoveToEnemyState moveToEnemyState = new BearMoveToEnemyState(bearAnimationView, bearView);
             BearAttackState attackState = new BearAttackState(
-                bear, bear.BearAttacker, bearView, bearAnimationView, _bearMovementService, _overlapService);
+                bear.BearAttacker, bearView, bearAnimationView, _bearMovementService, _overlapService);
             
             FiniteTransitionBase toFollowTransition = new FiniteTransitionBase(
                 followCharacterState,
-                () => Vector3.Distance(bearView.CharacterMovementView.Position, bearView.Position) > 5f);
+                () => Vector3.Distance(
+                    bearView.CharacterMovementView.Position, bearView.Position) > BearConst.TargetDistance);
             idleState.AddTransition(toFollowTransition);
             attackState.AddTransition(toFollowTransition);
             
             FiniteTransitionBase toIdleTransition = new FiniteTransitionBase(
                 idleState, ()=> bearView.TargetEnemyHealth == null &&  Vector3.Distance(
-                    bearView.CharacterMovementView.Position, bearView.Position) < 5f);
+                    bearView.CharacterMovementView.Position, bearView.Position) < BearConst.TargetDistance);
             followCharacterState.AddTransition(toIdleTransition);
             moveToEnemyState.AddTransition(toIdleTransition);
             attackState.AddTransition(toIdleTransition);
@@ -54,16 +55,17 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Bears
             FiniteTransitionBase toMoveToEnemyTransition = new FiniteTransitionBase(
                 moveToEnemyState, 
                 () => bearView.TargetEnemyHealth != null && 
-                      Vector3.Distance(bearView.CharacterMovementView.Position, bearView.Position) < 5f &&
-                      Vector3.Distance(bearView.TargetEnemyHealth.Position, bearView.Position) < 5f);
+                      Vector3.Distance(
+                          bearView.CharacterMovementView.Position, bearView.Position) < BearConst.TargetDistance &&
+                      Vector3.Distance(
+                          bearView.TargetEnemyHealth.Position, bearView.Position) < BearConst.TargetDistance);
             idleState.AddTransition(toMoveToEnemyTransition);
-            // followState.AddTransition(toMoveToEnemyTransition);
             
             FiniteTransitionBase toAttackTransition = new FiniteTransitionBase(
                 attackState, 
                 () => bearView.TargetEnemyHealth != null &&
                       Vector3.Distance(bearView.CharacterMovementView.Position,
-                          bearView.Position) < 5f && 
+                          bearView.Position) < BearConst.TargetDistance && 
                       Vector3.Distance(bearView.Position,
                           bearView.TargetEnemyHealth.Position) <= bearView.StoppingDistance);
             moveToEnemyState.AddTransition(toAttackTransition);

@@ -1,7 +1,6 @@
 ﻿using Sources.ControllersInterfaces.ControllerLifetimes;
 using Sources.DomainInterfaces.Models.Gameplay;
 using Sources.DomainInterfaces.Models.Spawners;
-using Sources.InfrastructureInterfaces.Services.StatesLifetimes;
 
 namespace Sources.InfrastructureInterfaces.Services.LevelCompleteds
 {

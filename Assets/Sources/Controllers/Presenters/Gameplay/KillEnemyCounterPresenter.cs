@@ -1,12 +1,10 @@
 ﻿using System;
 using Sources.Controllers.Common;
-using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Gameplay;
-using Sources.Domain.Models.Spawners;
 using Sources.DomainInterfaces.Models.Spawners;
 using Sources.PresentationsInterfaces.UI.Sliders;
 using Sources.PresentationsInterfaces.Views.Gameplay;
-using Sources.Utils.Extentions;
+using Sources.Utils.Extensions;
 
 namespace Sources.Controllers.Presenters.Gameplay
 {
@@ -36,10 +34,8 @@ namespace Sources.Controllers.Presenters.Gameplay
             _killEnemyCounter.KillZombiesCountChanged += OnKillZombieCountChanged;
         }
 
-        public override void Disable()
-        {
+        public override void Disable() =>
             _killEnemyCounter.KillZombiesCountChanged -= OnKillZombieCountChanged;
-        }
 
         private void OnKillZombieCountChanged()
         {

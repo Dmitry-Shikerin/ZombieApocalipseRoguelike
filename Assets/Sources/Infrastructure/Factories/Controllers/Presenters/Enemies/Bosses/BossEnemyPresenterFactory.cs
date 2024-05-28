@@ -6,6 +6,7 @@ using Sources.Domain.Models.Enemies.Bosses;
 using Sources.Domain.Models.Gameplay;
 using Sources.Infrastructure.Services.Enemies;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
+using Sources.InfrastructureInterfaces.Services.Enemies;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;

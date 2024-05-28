@@ -1,5 +1,5 @@
 ﻿using Sources.Infrastructure.Factories.Controllers.Presenters.Musics;
-using Sources.Infrastructure.Factories.Controllers.Settings;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Settings;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Zenject;

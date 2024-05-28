@@ -2,13 +2,13 @@
 using Sources.Frameworks.YandexSdcFramework.Services.Focuses;
 using Sources.Frameworks.YandexSdcFramework.Services.Leaderboards;
 using Sources.Frameworks.YandexSdcFramework.Services.PlayerAccounts;
-using Sources.Frameworks.YandexSdcFramework.Services.SdcInitializeServices;
+using Sources.Frameworks.YandexSdcFramework.Services.SdcInitializes;
 using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.PlayerAccounts;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
-using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Stickies;
 using Zenject;
 
 namespace Sources.Infrastructure.DIContainers.Gameplay

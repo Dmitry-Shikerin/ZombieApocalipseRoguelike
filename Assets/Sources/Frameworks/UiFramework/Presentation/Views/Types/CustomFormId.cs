@@ -1,4 +1,4 @@
-﻿namespace Sources.Frameworks.UiFramework.Presentation.Forms.Types
+﻿namespace Sources.Frameworks.UiFramework.Presentation.Views.Types
 {
     public enum CustomFormId
     {

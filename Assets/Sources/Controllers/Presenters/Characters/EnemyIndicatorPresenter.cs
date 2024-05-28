@@ -1,8 +1,5 @@
 ﻿using System;
-using Sources.Controllers.Common;
-using Sources.Infrastructure.Services.Characters;
 using Sources.InfrastructureInterfaces.Services.Characters;
-using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Character.EnemyIndicators;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
@@ -53,10 +50,8 @@ namespace Sources.Controllers.Presenters.Characters
             ShowViews();
         }
 
-        private void OnUpdate(float deltaTime)
-        {
+        private void OnUpdate(float deltaTime) =>
             ChangeArrowPositions();
-        }
 
         private void HideViews()
         {
@@ -67,9 +62,8 @@ namespace Sources.Controllers.Presenters.Characters
         private void ShowViews()
         {
             if (CanAvailableArrows == false)
-                return; //убрать
+                return; 
             
-            //todo вылетает out of range exception
             for (int i = 0; i < _enemyCollection.Count; i++)
                 _enemyIndicatorView.Arrows[i].Show();
         }
@@ -77,7 +71,7 @@ namespace Sources.Controllers.Presenters.Characters
         private void ChangeArrowPositions()
         {
             if (CanAvailableArrows == false)
-                return; //убрать
+                return; 
             
             if (_enemyCollection.Count == 0)
                 return;
@@ -92,8 +86,9 @@ namespace Sources.Controllers.Presenters.Characters
                 
                 float angle =_enemyIndicatorService.GetAngleRotation(
                     _enemyIndicatorView.Position, _enemyCollection[i].Position);
+                float correctionXAngle = 90;
                 
-                _enemyIndicatorView.Arrows[i].SetAngleEuler(new Vector3(90, angle, 0));
+                _enemyIndicatorView.Arrows[i].SetAngleEuler(new Vector3(correctionXAngle, angle, 0));
             }
         }
     }

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Sources.Controllers.Common;
-using Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons;
-using Sources.Frameworks.UiFramework.Presentation.Buttons;
+using Sources.Controllers.Presenters;
 using Sources.Frameworks.UiFramework.Presentation.Buttons.Types;
 using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Buttons;
 
 namespace Sources.Frameworks.UiFramework.Controllers.Buttons
 {

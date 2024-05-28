@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.Domain.Models.Data;
-using Sources.DomainInterfaces.Entities;
-using Sources.DomainInterfaces.Players;
+using Sources.DomainInterfaces.Models.Entities;
+using Sources.DomainInterfaces.Models.Players;
 
 namespace Sources.Domain.Models.Players
 {

@@ -2,13 +2,11 @@
 using Sources.Domain.Models.Setting;
 using Sources.PresentationsInterfaces.Views.Settings;
 
-namespace Sources.Infrastructure.Factories.Controllers.Settings
+namespace Sources.Infrastructure.Factories.Controllers.Presenters.Settings
 {
     public class VolumePresenterFactory
     {
-        public VolumePresenter Create(Volume volume, IVolumeView volumeView)
-        {
-            return new VolumePresenter(volume, volumeView);
-        }
+        public VolumePresenter Create(Volume volume, IVolumeView volumeView) =>
+            new(volume, volumeView);
     }
 }

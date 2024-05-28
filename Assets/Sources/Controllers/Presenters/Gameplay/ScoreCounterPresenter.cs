@@ -1,11 +1,12 @@
 ﻿using System;
 using Sources.Controllers.Common;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.DomainInterfaces.Models.Characters;
 using Sources.DomainInterfaces.Models.Gameplay;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
-using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.Gameplay;
 
@@ -55,20 +56,18 @@ namespace Sources.Controllers.Presenters.Gameplay
             _characterHealth.CharacterDie -= OnCharacterDie;
         }
 
-        private void OnKillZombiesCountChanged()
-        {
-            SetScore(1);
-        }
+        private void OnKillZombiesCountChanged() =>
+            SetScore(ScoreConst.FailedMultiplier);
 
         private void OnCharacterDie()
         {
-            SetScore(1);
+            SetScore(ScoreConst.FailedMultiplier);
             SaveScore();
         }
 
         private void OnLevelCompleted()
         {
-            SetScore(2);
+            SetScore(ScoreConst.CompleteMultiplier);
             SaveScore();
         }
 

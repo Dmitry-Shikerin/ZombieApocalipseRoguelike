@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Presenters.Upgrades;
-using Sources.DomainInterfaces.Upgrades;
+using Sources.DomainInterfaces.Models.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades;
 using Sources.InfrastructureInterfaces.Factories.Views.Upgrades;
 using Sources.Presentations.Views.Upgrades;

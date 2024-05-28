@@ -16,9 +16,7 @@ namespace Sources.Infrastructure.Factories.Domain.Data
             };
         }
 
-        public SavedLevel MapDtoToModel(SavedLevelDto savedLevelDto)
-        {
-            return new SavedLevel(savedLevelDto);
-        }
+        public SavedLevel MapDtoToModel(SavedLevelDto savedLevelDto) =>
+            new(savedLevelDto);
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Controllers.Forms;
-using Sources.Frameworks.UiFramework.Infrastructure.Services.Forms;
-using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Views;
+using Sources.Frameworks.UiFramework.Services.Views;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Controllers.Views
@@ -20,9 +19,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Controllers.Vi
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
-        public UiViewPresenter Create(UiView view)
-        {
-            return new UiViewPresenter(view, _uiViewService, _formService);
-        }
+        public UiViewPresenter Create(UiView view) =>
+            new(view, _uiViewService, _formService);
     }
 }

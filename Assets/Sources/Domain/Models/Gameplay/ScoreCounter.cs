@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Domain.Models.Data;
-using Sources.DomainInterfaces.Entities;
+using Sources.DomainInterfaces.Models.Entities;
 
 namespace Sources.Domain.Models.Gameplay
 {

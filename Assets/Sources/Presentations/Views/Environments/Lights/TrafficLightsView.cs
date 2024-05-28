@@ -59,7 +59,7 @@ namespace Sources.Presentations.Views.Environments.Lights
 
         private async UniTask Blink(CancellationToken cancellationToken)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < TrafficLightConst.BlinkCount; i++)
             {
                 foreach (TrafficLight trafficLight in _trafficLights)
                     trafficLight.Show();

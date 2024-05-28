@@ -1,14 +1,12 @@
 ﻿using System;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Enemies;
 using Sources.Domain.Models.Enemies.Base;
 using Sources.Domain.Models.Gameplay;
-using Sources.Infrastructure.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.Spawners;
-using Sources.Presentations.Views.Enemies;
 using Sources.Presentations.Views.Enemies.Base;
-using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using UnityEngine;
 
@@ -27,7 +25,7 @@ namespace Sources.Infrastructure.Services.Spawners
 
         public IEnemyView Spawn(KillEnemyCounter killEnemyCounter, Vector3 position)
         {
-            Enemy enemy = new Enemy(new EnemyHealth(50), new EnemyAttacker(5));
+            Enemy enemy = new Enemy(new EnemyHealth(EnemyConst.Health), new EnemyAttacker(EnemyConst.Damage));
             
             IEnemyView enemyView = SpawnFromPool(enemy, killEnemyCounter) ?? 
                                    _enemyViewFactory.Create(enemy, killEnemyCounter);

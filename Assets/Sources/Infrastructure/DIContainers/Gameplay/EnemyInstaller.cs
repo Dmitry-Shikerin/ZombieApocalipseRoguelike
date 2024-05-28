@@ -1,5 +1,5 @@
-﻿using Sources.Infrastructure.Factories.Controllers.Common;
-using Sources.Infrastructure.Factories.Controllers.Enemies;
+﻿using Sources.Infrastructure.Factories.Controllers.Presenters.Common;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Enemies;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Base;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Bosses;
 using Sources.Infrastructure.Factories.Views.Commons;
@@ -12,6 +12,7 @@ using Sources.Infrastructure.Services.ObjectPools;
 using Sources.Infrastructure.Services.Spawners;
 using Sources.InfrastructureInterfaces.Factories.Views.Enemies;
 using Sources.InfrastructureInterfaces.Factories.Views.ExplosionBodyBloodyViews;
+using Sources.InfrastructureInterfaces.Services.Enemies;
 using Sources.InfrastructureInterfaces.Services.ObjectPools.Generic;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.Presentations.Views.Enemies.Base;

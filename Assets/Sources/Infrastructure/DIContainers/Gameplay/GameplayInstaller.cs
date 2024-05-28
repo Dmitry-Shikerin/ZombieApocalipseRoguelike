@@ -1,7 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Domain.Models.AudioSources;
 using Sources.Frameworks.UiFramework.Domain.Localizations.Configs;
-using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Views;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay;
@@ -9,7 +8,6 @@ using Sources.Infrastructure.Services.InputServices;
 using Sources.Infrastructure.Services.Linecasts;
 using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.Services.UpdateServices;
-using Sources.Infrastructure.Services.Volumes;
 using Sources.InfrastructureInterfaces.Services.Overlaps;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
@@ -53,7 +51,6 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
             Container.Bind<IOverlapService>().To<OverlapService>().AsSingle();
             Container.Bind<LoadGameplaySceneService>().AsSingle();
             Container.Bind<CreateGameplaySceneService>().AsSingle();
-            Container.Bind<CustomValidator>().AsSingle();
         }
     }
 }

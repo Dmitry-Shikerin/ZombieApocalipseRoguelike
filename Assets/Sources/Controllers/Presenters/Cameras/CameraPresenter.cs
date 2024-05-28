@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.ControllersInterfaces;
+using Sources.ControllersInterfaces.Presenters;
 using Sources.Infrastructure.StateMachines.ContextStateMachines;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
@@ -9,7 +10,6 @@ namespace Sources.Controllers.Presenters.Cameras
 {
     public class CameraPresenter : ContextStateMachine, IPresenter
     {
-        private readonly IContextState _firstState;
         private readonly IUpdateRegister _updateRegister;
         private readonly ICameraService _cameraService;
 
@@ -19,7 +19,6 @@ namespace Sources.Controllers.Presenters.Cameras
             ICameraService cameraService) 
             : base(firstState)
         {
-            _firstState = firstState ?? throw new ArgumentNullException(nameof(firstState));
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
             _cameraService = cameraService ?? throw new ArgumentNullException(nameof(cameraService));
         }

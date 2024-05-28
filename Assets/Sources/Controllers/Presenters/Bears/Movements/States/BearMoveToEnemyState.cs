@@ -7,16 +7,13 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
 {
     public class BearMoveToEnemyState : FiniteState
     {
-        private readonly Bear _bear;
         private readonly IBearAnimationView _bearAnimationView;
         private readonly IBearView _bearView;
 
         public BearMoveToEnemyState(
-            Bear bear,
             IBearAnimationView bearAnimationView,
             IBearView bearView)
         {
-            _bear = bear ?? throw new ArgumentNullException(nameof(bear));
             _bearAnimationView = bearAnimationView ?? throw new ArgumentNullException(nameof(bearAnimationView));
             _bearView = bearView ?? throw new ArgumentNullException(nameof(bearView));
         }
@@ -25,10 +22,6 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
         {
             _bearView.SetStoppingDistance(2f);
             _bearAnimationView.PlayWalk();
-        }
-
-        public override void Exit()
-        {
         }
 
         public override void Update(float deltaTime) =>

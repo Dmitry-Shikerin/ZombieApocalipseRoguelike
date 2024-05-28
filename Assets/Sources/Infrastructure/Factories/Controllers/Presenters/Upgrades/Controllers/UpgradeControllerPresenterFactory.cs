@@ -1,5 +1,4 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Sources.Controllers.Presenters.Upgrades.Controllers;
 using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Upgrades;
@@ -8,7 +7,6 @@ using Sources.DomainInterfaces.Models.Characters;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.InfrastructureInterfaces.Factories.Views.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
-using Sources.PresentationsInterfaces.Views.Upgrades;
 using Sources.PresentationsInterfaces.Views.Upgrades.Controllers;
 using Sources.Utils.CustomCollections;
 

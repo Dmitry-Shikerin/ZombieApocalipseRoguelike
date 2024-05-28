@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using JetBrains.Annotations;
-using Sirenix.OdinInspector;
 using Sources.Presentations.Views.Animations;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using UnityEngine;

@@ -5,12 +5,10 @@ using Sources.Controllers.Common;
 using Sources.Domain.Models.Constants;
 using Sources.DomainInterfaces.Models.Spawners;
 using Sources.DomainInterfaces.Models.Upgrades;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.Presentation.Views.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
-using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
-using Sources.InfrastructureInterfaces.Services.Upgrades;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdvertisingServices;
 using Sources.PresentationsInterfaces.Views.InterstitialShowers;
-using UnityEngine;
 
 namespace Sources.Controllers.Presenters.InterstitialShowers
 {
@@ -21,7 +19,6 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
         private readonly IInterstitialShowerView _view;
         private readonly IInterstitialAdService _interstitialAdService;
         private readonly IFormService _formService;
-        private readonly IUpgradeService _upgradeService;
 
         private CancellationTokenSource _cancellationTokenSource;
         private TimeSpan _timerTimeSpan = TimeSpan.FromSeconds(AdvertisingConst.Delay);
@@ -33,8 +30,7 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
             IUpgradeController upgradeController,
             IInterstitialShowerView view,
             IInterstitialAdService interstitialAdService,
-            IFormService formService,
-            IUpgradeService upgradeService)
+            IFormService formService)
         {
             _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));
             _upgradeController = upgradeController ?? throw new ArgumentNullException(nameof(upgradeController));
@@ -42,7 +38,6 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
             _interstitialAdService = interstitialAdService ??
                                      throw new ArgumentNullException(nameof(interstitialAdService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
-            _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
         }
         
         private bool CanShow => _enemySpawner.CurrentWave < _enemySpawner.EnemyInWave.Count;
@@ -96,7 +91,7 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
         {
             try
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: _cancellationTokenSource.Token);
+                await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: cancellationToken);
             }
             catch (OperationCanceledException)
             {

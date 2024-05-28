@@ -1,45 +1,35 @@
 ﻿using System;
 using Sources.Domain.Models.Gameplay;
-using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Upgrades;
 using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Collectors;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.Presentation.Views.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
-using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdvertisingServices;
 using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Gameplay;
-using Sources.Infrastructure.Factories.Views.InterstitialShowers;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades.Controllers;
-using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Factories.Views.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LevelCompleteds;
-using Sources.InfrastructureInterfaces.Services.LoadServices;
-using Sources.InfrastructureInterfaces.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.Saves;
-using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
-using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
-using Sources.Presentations.Views.Bears;
-using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Cameras.Types;
 using Sources.Presentations.Views.Characters;
 using Sources.Presentations.Views.RootGameObjects;
 using Sources.Presentations.Views.Spawners;
 using Sources.PresentationsInterfaces.Views.Bears;
 using Sources.Utils.CustomCollections;
-using Object = UnityEngine.Object;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay
 {
@@ -50,16 +40,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly UiCollectorFactory _uiCollectorFactory;
         private readonly CharacterViewFactory _characterViewFactory;
         private readonly BearViewFactory _bearViewFactory;
-        private readonly IUpgradeViewFactory _upgradeViewFactory;
         private readonly IUpgradeUiFactory _upgradeUiFactory;
-        private readonly ILoadService _loadService;
-        private readonly IEntityRepository _entityRepository;
-        private readonly IEnemySpawnService _enemySpawnService;
         private readonly RootGameObject _rootGameObject;
         private readonly EnemySpawnViewFactory _enemySpawnViewFactory;
         private readonly ItemSpawnerViewFactory _itemSpawnerViewFactory;
-        private readonly IUpgradeConfigCollectionService _upgradeConfigCollectionService;
-        private readonly IUpgradeDtoMapper _upgradeDtoMapper;
         private readonly CustomCollection<Upgrader> _upgradeCollection;
         private readonly KillEnemyCounterViewFactory _killEnemyCounterViewFactory;
         private readonly BackgroundMusicViewFactory _backgroundMusicViewFactory;
@@ -73,9 +57,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly ITutorialService _tutorialService;
         private readonly IAdvertisingService _advertisingService;
         private readonly IFormService _formService;
-        private readonly InterstitialShowerViewFactory _interstitialShowerViewFactory;
         private readonly ScoreCounterViewFactory _scoreCounterViewFactory;
-        private readonly IUpgradeService _upgradeService;
         private readonly UpgradeControllerViewFactory _upgradeControllerViewFactory;
 
         protected LoadGameplaySceneServiceBase(
@@ -83,16 +65,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             UiCollectorFactory uiCollectorFactory,
             CharacterViewFactory characterViewFactory,
             BearViewFactory bearViewFactory,
-            IUpgradeViewFactory upgradeViewFactory,
             IUpgradeUiFactory upgradeUiFactory,
-            ILoadService loadService,
-            IEntityRepository entityRepository,
-            IEnemySpawnService enemySpawnService,
             RootGameObject rootGameObject,
             EnemySpawnViewFactory enemySpawnViewFactory,
             ItemSpawnerViewFactory itemSpawnerViewFactory,
-            IUpgradeConfigCollectionService upgradeConfigCollectionService,
-            IUpgradeDtoMapper upgradeDtoMapper,
             CustomCollection<Upgrader> upgradeCollection,
             KillEnemyCounterViewFactory killEnemyCounterViewFactory,
             BackgroundMusicViewFactory backgroundMusicViewFactory,
@@ -106,9 +82,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ITutorialService tutorialService,
             IAdvertisingService advertisingService,
             IFormService formService,
-            InterstitialShowerViewFactory interstitialShowerViewFactory,
             ScoreCounterViewFactory scoreCounterViewFactory,
-            IUpgradeService upgradeService,
             UpgradeControllerViewFactory upgradeControllerViewFactory)
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
@@ -116,11 +90,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _characterViewFactory = characterViewFactory ?? 
                                     throw new ArgumentNullException(nameof(characterViewFactory));
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
-            _upgradeViewFactory = upgradeViewFactory ?? throw new ArgumentNullException(nameof(upgradeViewFactory));
             _upgradeUiFactory = upgradeUiFactory ?? throw new ArgumentNullException(nameof(upgradeUiFactory));
-            _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
-            _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
-            _enemySpawnService = enemySpawnService ?? throw new ArgumentNullException(nameof(enemySpawnService));
             _rootGameObject = rootGameObject 
                 ? rootGameObject 
                 : throw new ArgumentNullException(nameof(rootGameObject));
@@ -128,9 +98,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                                      throw new ArgumentNullException(nameof(enemySpawnViewFactory));
             _itemSpawnerViewFactory = itemSpawnerViewFactory ?? 
                                       throw new ArgumentNullException(nameof(itemSpawnerViewFactory));
-            _upgradeConfigCollectionService = upgradeConfigCollectionService ?? 
-                                              throw new ArgumentNullException(nameof(upgradeConfigCollectionService));
-            _upgradeDtoMapper = upgradeDtoMapper ?? throw new ArgumentNullException(nameof(upgradeDtoMapper));
             _upgradeCollection = upgradeCollection ?? 
                                         throw new ArgumentNullException(nameof(upgradeCollection));
             _killEnemyCounterViewFactory = killEnemyCounterViewFactory ?? 
@@ -148,10 +115,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _advertisingService = advertisingService ?? throw new ArgumentNullException(nameof(advertisingService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
-            _interstitialShowerViewFactory = interstitialShowerViewFactory ??
-                                             throw new ArgumentNullException(nameof(interstitialShowerViewFactory));
             _scoreCounterViewFactory = scoreCounterViewFactory ?? throw new ArgumentNullException(nameof(scoreCounterViewFactory));
-            _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
             _upgradeControllerViewFactory = upgradeControllerViewFactory ?? 
                                             throw new ArgumentNullException(nameof(upgradeControllerViewFactory));
         }
@@ -160,29 +124,20 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         {
             GameModels gameModels = LoadModels(scenePayload);
             
-            object test = new object();
-            
-            //AdvertisingService
             _advertisingService.Construct(gameModels.PlayerWallet);
             
-            //LevelCompleted
             _levelCompletedService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
 
-            //SavedLevel
             SavedLevel savedLevel = gameModels.SavedLevel;
             gameModels.SavedLevel.SavedLevelId = scenePayload.SceneId;
             
-            //Tutorial
             _tutorialService.Construct(gameModels.Tutorial, savedLevel);
 
-            //Volume
             _volumeService.Register(gameModels.Volume);
             _volumeViewFactory.Create(gameModels.Volume, _gameplayHud.VolumeView);
             
-            //SaveService
             _saveService.Register(gameModels.EnemySpawner);
             
-            //Upgrades
             for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
                 _upgradeUiFactory.Create(_upgradeCollection[i], _gameplayHud.NotAvailabilityUpgradeUis[i]);
 
@@ -192,48 +147,32 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 gameModels.PlayerWallet,
                 _gameplayHud.UpgradeControllerView);
 
-            //Character
             CharacterView characterView = _characterViewFactory.Create(gameModels.Character);
 
-            //Bear
-            // BearView bearView = Object.FindObjectOfType<BearView>();
             IBearView bearView = _bearViewFactory.Create(gameModels.Bear);
             bearView.SetTargetFollow(characterView.CharacterMovementView);
 
-            //GameOverService
             _gameOverService.Register(gameModels.CharacterHealth);;
 
-            //Spawners
             EnemySpawnerView enemySpawnView = _rootGameObject.EnemySpawnerView;
             enemySpawnView.SetCharacterView(characterView);
             _enemySpawnViewFactory.Create(
                 gameModels.EnemySpawner, gameModels.KillEnemyCounter, enemySpawnView);
-            _itemSpawnerViewFactory.Create(new ItemSpawner(), _rootGameObject.ItemSpawnerView);
+            _itemSpawnerViewFactory.Create(_rootGameObject.ItemSpawnerView);
             
-            //Gameplay
             _killEnemyCounterViewFactory.Create(
                 gameModels.KillEnemyCounter, gameModels.EnemySpawner, _gameplayHud.KillEnemyCounterView);
             
-            //BackgroundMusic
             _backgroundMusicViewFactory.Create(_gameplayHud.BackgroundMusicView);
 
-            //Camera
             _cameraService.Add(characterView);
             _cameraService.Add(_rootGameObject.AllMapPoint);
             _cameraService.SetFollower(FollowableId.Character);
             _cameraViewFactory.Create(_gameplayHud.CinemachineCameraView);
             
-            //FormService
             _uiCollectorFactory.Create();
-            //_formService.HideAll();
             _formService.Show(FormId.Hud);
             
-            //InterstitialShower
-            //_interstitialShowerViewFactory.Create(
-            //    gameModels.EnemySpawner, gameModels.UpgradeController, _gameplayHud.InterstitialShowerView);
-            
-            
-            //ScoreCounter
             _scoreCounterViewFactory.Create(
                 gameModels.ScoreCounter, 
                 gameModels.KillEnemyCounter, 

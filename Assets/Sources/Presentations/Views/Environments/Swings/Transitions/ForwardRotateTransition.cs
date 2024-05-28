@@ -16,6 +16,7 @@ namespace Sources.Presentations.Views.Environments.Swings.Transitions
         protected override string OnInit()
         {
             _transform = blackboard.GetVariableValue<Transform>("_transform");
+            
             return null;
         }
 

@@ -1,11 +1,11 @@
 ﻿using System;
-using Sources.Controllers.YandexSDK;
-using Sources.Domain.Models.YandexSDK;
+using Sources.Frameworks.YandexSdcFramework.Controllers;
+using Sources.Frameworks.YandexSdcFramework.Domain;
+using Sources.Frameworks.YandexSdcFramework.Infrastructure.Factories.Controllers;
 using Sources.Frameworks.YandexSdcFramework.Presentations.Views;
-using Sources.Infrastructure.Factories.Controllers.YandexSDK;
-using Sources.PresentationsInterfaces.Views.YandexSDK;
+using Sources.Frameworks.YandexSdcFramework.PresentationsInterfaces.Views;
 
-namespace Sources.Infrastructure.Factories.Views.YandexSDK
+namespace Sources.Frameworks.YandexSdcFramework.Infrastructure.Factories.Views
 {
     public class LeaderBoardElementViewFactory
     {

@@ -1,7 +1,7 @@
 ﻿
 using Newtonsoft.Json;
 
-namespace Sources.Domain.Data
+namespace Sources.Utils.Data
 {
     public class Vector3Data
     {

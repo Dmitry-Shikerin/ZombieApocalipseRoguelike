@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Data.Ids;
-using Sources.DomainInterfaces.Entities;
+using Sources.DomainInterfaces.Models.Entities;
 
 namespace Sources.Domain.Models.Setting
 {

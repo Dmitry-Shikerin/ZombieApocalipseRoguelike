@@ -1,7 +1,6 @@
 ﻿using System;
-using Sources.Controllers.Spawners;
-using Sources.Domain.Models.Spawners;
-using Sources.Infrastructure.Factories.Controllers.Spawners;
+using Sources.Controllers.Presenters.Spawners;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Spawners;
 using Sources.Presentations.Views.Spawners;
 using Sources.PresentationsInterfaces.Views.Spawners;
 
@@ -17,10 +16,10 @@ namespace Sources.Infrastructure.Factories.Views.Spawners
                                            throw new ArgumentNullException(nameof(itemSpawnerPresenterFactory));
         }
 
-        public IItemSpawnerView Create(ItemSpawner itemSpawner, ItemSpawnerView itemSpawnerView)
+        public IItemSpawnerView Create(ItemSpawnerView itemSpawnerView)
         {
             ItemSpawnerPresenter itemSpawnerPresenter =
-                _itemSpawnerPresenterFactory.Create(itemSpawner, itemSpawnerView);
+                _itemSpawnerPresenterFactory.Create(itemSpawnerView);
             
             itemSpawnerView.Construct(itemSpawnerPresenter);
             

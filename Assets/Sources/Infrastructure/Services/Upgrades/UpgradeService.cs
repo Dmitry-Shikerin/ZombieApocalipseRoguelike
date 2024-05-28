@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Upgrades;
-using Sources.DomainInterfaces.Players;
+using Sources.DomainInterfaces.Models.Players;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.Utils.CustomCollections;
 
@@ -12,13 +13,10 @@ namespace Sources.Infrastructure.Services.Upgrades
     {
         public int GetUpgradesCount(int availableUpgradesCount, IReadOnlyList<Upgrader> upgraders)
         {
-            if (availableUpgradesCount >= 3)
-                return 3;
+            if (availableUpgradesCount >= UpgradeConst.MaxLevel)
+                return UpgradeConst.MaxLevel;
             
-            //if (availableUpgradesCount is < 3 and > 0)
-                //return availableUpgradesCount;
-
-            var count = upgraders.Count(upgrader => upgrader.CurrentLevel == 3);
+            var count = upgraders.Count(upgrader => upgrader.CurrentLevel == UpgradeConst.MaxLevel);
 
             if (count >= 4 && availableUpgradesCount > 0)
                 return availableUpgradesCount;
@@ -34,7 +32,7 @@ namespace Sources.Infrastructure.Services.Upgrades
 
             foreach (Upgrader upgrader in upgradeCollection)
             {
-                if(upgrader.CurrentLevel == 3)
+                if(upgrader.CurrentLevel == UpgradeConst.MaxLevel)
                     continue;
                 
                 if(upgrader.MoneyPerUpgrades[upgrader.CurrentLevel] <= playerWallet.Coins)

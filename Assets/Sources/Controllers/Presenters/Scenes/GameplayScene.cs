@@ -1,13 +1,11 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Sources.ControllersInterfaces.Scenes;
 using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Collectors;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.AudioSources;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
-using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdvertisingServices;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
 using Sources.InfrastructureInterfaces.Factories.Views.SceneViewFactories;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
@@ -23,7 +21,6 @@ using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Curtains;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
 using Sources.Utils.CustomCollections;
-using UnityEngine;
 
 namespace Sources.Controllers.Presenters.Scenes
 {
@@ -33,8 +30,6 @@ namespace Sources.Controllers.Presenters.Scenes
         private readonly IInputServiceUpdater _inputServiceUpdater;
         private readonly ILoadSceneService _loadSceneService;
         private readonly ILocalizationService _localizationService;
-        private readonly ILoadService _loadService;
-        private readonly IUpgradeService _upgradeService;
         private readonly IGameOverService _gameOverService;
         private readonly IVolumeService _volumeService;
         private readonly ISaveService _saveService;
@@ -44,9 +39,6 @@ namespace Sources.Controllers.Presenters.Scenes
         private readonly IAudioService _audioService;
         private readonly IFocusService _focusService;
         private readonly IAdvertisingService _advertisingService;
-        private readonly IPauseService _pauseService;
-        private readonly IFormService _formService;
-        private readonly UiCollectorFactory _uiCollectorFactory;
         private readonly CurtainView _curtainView;
 
         public GameplayScene(
@@ -54,8 +46,6 @@ namespace Sources.Controllers.Presenters.Scenes
             IInputServiceUpdater inputServiceUpdater,
             ILoadSceneService loadSceneService,
             ILocalizationService localizationService,
-            ILoadService loadService,
-            IUpgradeService upgradeService,
             IGameOverService gameOverService,
             IVolumeService volumeService,
             ISaveService saveService,
@@ -65,10 +55,7 @@ namespace Sources.Controllers.Presenters.Scenes
             CurtainView curtainView,
             IAudioService audioService,
             IFocusService focusService,
-            IAdvertisingService advertisingService,
-            IPauseService pauseService,
-            IFormService formService,
-            UiCollectorFactory uiCollectorFactory)
+            IAdvertisingService advertisingService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ??
@@ -76,8 +63,6 @@ namespace Sources.Controllers.Presenters.Scenes
             _loadSceneService = loadSceneService ?? throw new ArgumentNullException(nameof(loadSceneService));
             _localizationService = localizationService ??
                                    throw new ArgumentNullException(nameof(localizationService));
-            _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
-            _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
             _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
@@ -90,16 +75,11 @@ namespace Sources.Controllers.Presenters.Scenes
             _focusService = focusService ?? throw new ArgumentNullException(nameof(focusService));
             _advertisingService = advertisingService ??
                                   throw new ArgumentNullException(nameof(advertisingService));
-            _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
-            _formService = formService ?? throw new ArgumentNullException(nameof(formService));
-            _uiCollectorFactory = uiCollectorFactory ?? throw new ArgumentNullException(nameof(uiCollectorFactory));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
 
         public async void Enter(object payload = null)
         {
-            //TODO что лучше делать у сервисов Enter или Enable
-            //TODO лучше наверно инитиалайз и дестрой?
             _focusService.Enable();
             _loadSceneService.Load(payload as IScenePayload);
             _advertisingService.Enable();
@@ -109,11 +89,8 @@ namespace Sources.Controllers.Presenters.Scenes
             _saveService.Enter();
             _levelCompletedService.Enable();
             _audioService.Enter();
-            //TODO если закрываю игру раньше чем загрузилась курточка летят ошибки с юнитасками
             await _curtainView.HideCurtain();
             _tutorialService.Enable();
-            
-            //_formService.Show(FormId.Hud);
         }
 
         public void Exit()
@@ -133,20 +110,6 @@ namespace Sources.Controllers.Presenters.Scenes
         {
             _updateService.Update(deltaTime);
             _inputServiceUpdater.Update(deltaTime);
-            
-            // if (Input.GetKeyDown(KeyCode.P))
-            // {
-            //     if (_pauseService.IsPaused == false)
-            //     {
-            //         _pauseService.Pause();
-            //         _pauseService.PauseSound();
-            //     }
-            //     else
-            //     {
-            //         _pauseService.Continue();
-            //         _pauseService.ContinueSound();
-            //     }
-            // }
         }
 
         public void UpdateLate(float deltaTime)

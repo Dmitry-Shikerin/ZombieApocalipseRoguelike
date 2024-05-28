@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Agava.WebUtility;
 using Agava.YandexGames;
 using Sources.Domain.Models.Constants;
-using Sources.Domain.Models.YandexSDK;
+using Sources.Frameworks.YandexSdcFramework.Domain;
+using Sources.Frameworks.YandexSdcFramework.Infrastructure.Factories.Views;
 using Sources.Frameworks.YandexSdcFramework.Presentations.Views;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
-using Sources.Infrastructure.Factories.Views.YandexSDK;
 using Sources.Presentations.UI.Huds;
 
 namespace Sources.Frameworks.YandexSdcFramework.Services.Leaderboards

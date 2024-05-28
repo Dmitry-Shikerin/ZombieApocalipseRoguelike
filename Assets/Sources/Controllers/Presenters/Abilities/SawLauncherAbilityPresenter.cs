@@ -1,14 +1,13 @@
 ﻿using System;
 using Sources.Controllers.Common;
 using Sources.Domain.Models.Abilities;
-using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Upgrades.Configs;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.Presentations.Views.Abilities;
 using Sources.PresentationsInterfaces.Views.Abilities;
 using UnityEngine;
 
-namespace Sources.Controllers.Abilities
+namespace Sources.Controllers.Presenters.Abilities
 {
     public class SawLauncherAbilityPresenter : PresenterBase
     {
@@ -49,7 +48,8 @@ namespace Sources.Controllers.Abilities
 
         private void OnUpdate(float deltaTime)
         {
-            _sawLauncherAbilityView.Rotate(new Vector3(0, 3.5f, 0));
+            float speed = _sawLauncherAbilityUpgradeMap.RotateSpeed;
+            _sawLauncherAbilityView.Rotate(new Vector3(0, speed, 0));
             _sawLauncherAbilityView.Follow();
         }
 

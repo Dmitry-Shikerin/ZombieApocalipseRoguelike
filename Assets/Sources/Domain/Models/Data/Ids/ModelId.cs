@@ -5,7 +5,6 @@ namespace Sources.Domain.Models.Data.Ids
 {
     public static class ModelId
     {
-        //gameModels
         public const string GameplayEnemySpawner = "GameplayEnemySpawner";
         public const string SawLauncherAbilityUpgrader = "SawLauncherAbilityUpgrader";
         public const string SawLauncherUpgrader = "SawLauncherUpgrader";
@@ -16,7 +15,6 @@ namespace Sources.Domain.Models.Data.Ids
         public const string BearMassAttackUpgrader = "BearMassAttackUpgrader";
         public const string KillEnemyCounter = "KillEnemyCounter";
 
-        //commonModels
         public const string ScoreCounter = "ScoreCounter";
         public const string MainMenu = "MainMenu";
         public const string SavedLevel = "SavedLevel";
@@ -41,7 +39,6 @@ namespace Sources.Domain.Models.Data.Ids
             KillEnemyCounter,
         };
         
-        //todo переделать
         public static IReadOnlyList<string> ModelsIds = new List<string>()
         {
             ScoreCounter,
@@ -64,7 +61,6 @@ namespace Sources.Domain.Models.Data.Ids
             Tutorial,
         };
 
-        //TODO заменить такую запись на поиск из ассембли
         public static IReadOnlyDictionary<string, Type> DtoTypes = new Dictionary<string, Type>()
         {
             [ScoreCounter] = typeof(ScoreCounterDto),

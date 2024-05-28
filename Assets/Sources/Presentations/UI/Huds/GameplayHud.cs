@@ -5,7 +5,6 @@ using Sources.Presentations.Views;
 using Sources.Presentations.Views.Cameras;
 using Sources.Presentations.Views.Common;
 using Sources.Presentations.Views.Gameplay;
-using Sources.Presentations.Views.InterstitialShowers;
 using Sources.Presentations.Views.Music;
 using Sources.Presentations.Views.Players;
 using Sources.Presentations.Views.Settings;
@@ -19,33 +18,22 @@ namespace Sources.Presentations.UI.Huds
     {
         [FoldoutGroup("UiCollector")] [Required] 
         [SerializeField] private UiCollector _uiCollector;
-
         [FoldoutGroup("Camera")] [Required] 
         [SerializeField] private CinemachineCameraView _cinemachineCameraView;
-        
         [FoldoutGroup("Upgrades")] [Required]
         [SerializeField] private List<UpgradeUi> _notAvailabilityUpgradeUis;
         [FoldoutGroup("Upgrades")] [Required] 
         [SerializeField] private UpgradeControllerView _upgradeControllerView;
-        
         [FoldoutGroup("PlayerWallet")] [Required] 
         [SerializeField] private List<PlayerWalletView> _playerWalletViews;
-
         [FoldoutGroup("KillEnemyCounter")] [Required] 
         [SerializeField] private KillEnemyCounterView _killEnemyCounterView;
-        
         [FoldoutGroup("BackgroundMusic")] [Required] 
         [SerializeField] private BackgroundMusicView _backgroundMusicView;
-
         [FoldoutGroup("HealthUi")] [Required] 
         [SerializeField] private HealthUi _characterHealthUi;
-        
         [FoldoutGroup("Volume")] [Required] 
         [SerializeField] private VolumeView _volumeView;
-
-        //[FoldoutGroup("InterstitialShower")][Required]
-        //[SerializeField] private InterstitialShowerView _interstitialShowerView;
-        
         [FoldoutGroup("ScoreCounter")][Required]
         [SerializeField] private ScoreCounterView _scoreCounterView;
         
@@ -65,7 +53,6 @@ namespace Sources.Presentations.UI.Huds
         public HealthUi CharacterHealthUi => _characterHealthUi;
         
         public VolumeView VolumeView => _volumeView;
-        //public InterstitialShowerView InterstitialShowerView => _interstitialShowerView;
         
         public ScoreCounterView ScoreCounterView => _scoreCounterView;
     }

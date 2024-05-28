@@ -22,7 +22,6 @@ namespace Sources.Infrastructure.Services.PauseServices
         public void ContinueSound()
         {
             SoundPauseListenersCount--;
-            // Debug.Log($"PauseService continue sound: {SoundPauseListenersCount}");
 
             if (SoundPauseListenersCount > 0)
                 return;
@@ -37,7 +36,6 @@ namespace Sources.Infrastructure.Services.PauseServices
         public void Continue()
         {
             PauseListenersCount--;
-            // Debug.Log($"PauseService continue: {PauseListenersCount}");
 
             if (PauseListenersCount > 0)
                 return;
@@ -53,7 +51,6 @@ namespace Sources.Infrastructure.Services.PauseServices
         public void PauseSound()
         {
             SoundPauseListenersCount++;
-            // Debug.Log($"PauseService pause sound: {SoundPauseListenersCount}");
             
             if (SoundPauseListenersCount < 0)
                 throw new IndexOutOfRangeException(nameof(SoundPauseListenersCount));
@@ -65,7 +62,6 @@ namespace Sources.Infrastructure.Services.PauseServices
         public void Pause()
         {
             PauseListenersCount++;
-            // Debug.Log($"PauseService pause: {PauseListenersCount}");
 
             if (PauseListenersCount < 0)
                 throw new IndexOutOfRangeException(nameof(PauseListenersCount));
@@ -90,7 +86,6 @@ namespace Sources.Infrastructure.Services.PauseServices
             {
                 await UniTask.Delay(
                     TimeSpan.FromSeconds(0.05f), ignoreTimeScale: true, cancellationToken: cancellationToken);
-                // await UniTask.Yield(cancellationToken);
             }
             while (IsSoundPaused);
         }

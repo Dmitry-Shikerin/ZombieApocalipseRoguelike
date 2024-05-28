@@ -1,6 +1,6 @@
 ﻿using Sources.Frameworks.UiFramework.Domain.Commands;
 
-namespace Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands
+namespace Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Views
 {
     public interface IViewCommand
     {

@@ -2,7 +2,7 @@
 using Sources.Domain.Models.Characters;
 using Sources.PresentationsInterfaces.Views.Character;
 
-namespace Sources.Infrastructure.Factories.Controllers.Characters
+namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
 {
     public class CharacterHealthPresenterFactory
     {

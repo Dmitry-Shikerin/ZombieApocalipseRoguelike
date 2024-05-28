@@ -4,6 +4,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Controllers.Common;
 using Sources.Domain.Models.AudioSources;
+using Sources.Domain.Models.Constants;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.PresentationsInterfaces.UI.AudioSources;
@@ -21,6 +22,7 @@ namespace Sources.Controllers.Presenters.Musics
         private readonly IPauseService _pauseService;
 
         private CancellationTokenSource _cancellationTokenSource;
+        private TimeSpan _waitTimeSpan = TimeSpan.FromSeconds(BackGroundMusicConst.WaitDaley);
         private float _savedTime;
 
         public BackgroundMusicPresenter(
@@ -73,7 +75,6 @@ namespace Sources.Controllers.Presenters.Musics
         {
             IAudioSourceView audioSourceView = _backgroundMusicView.BackgroundMusicAudioSource;
             IEnumerable<AudioClip> audioClips = _audioClipCollection.AudioClips.Shuffle();
-            //audioClips.Shuffle();
             
             try
             {
@@ -97,10 +98,9 @@ namespace Sources.Controllers.Presenters.Musics
             IAudioSourceView audioSourceView, 
             CancellationToken cancellationToken)
         {
-            //TODO Approximately is not working
-            while (audioSourceView.Time + 0.15f < audioClip.length)
+            while (audioSourceView.Time + BackGroundMusicConst.CorrectOffset < audioClip.length)
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(0.1f), 
+                await UniTask.Delay(_waitTimeSpan, 
                     ignoreTimeScale: true, 
                     cancellationToken: cancellationToken);
             }

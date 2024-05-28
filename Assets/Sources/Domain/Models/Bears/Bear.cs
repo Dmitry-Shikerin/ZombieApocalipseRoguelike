@@ -1,5 +1,5 @@
 ﻿using System;
-using Sources.Controllers.Bears.Attacks;
+using Sources.Domain.Models.Bears.Attacks;
 using UnityEngine;
 
 namespace Sources.Domain.Models.Bears

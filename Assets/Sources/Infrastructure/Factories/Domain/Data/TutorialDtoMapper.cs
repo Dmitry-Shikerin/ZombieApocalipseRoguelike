@@ -1,5 +1,4 @@
-﻿using Sources.Domain.Data;
-using Sources.Domain.Models.Data;
+﻿using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Setting;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 
@@ -16,9 +15,7 @@ namespace Sources.Infrastructure.Factories.Domain.Data
             };
         }
 
-        public Tutorial MapDtoToModel(TutorialDto tutorialDto)
-        {
-            return new Tutorial(tutorialDto);
-        }
+        public Tutorial MapDtoToModel(TutorialDto tutorialDto) =>
+            new(tutorialDto);
     }
 }

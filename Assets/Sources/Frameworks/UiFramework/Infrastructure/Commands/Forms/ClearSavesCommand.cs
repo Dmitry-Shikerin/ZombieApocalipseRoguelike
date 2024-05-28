@@ -1,6 +1,7 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands;
+using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Views;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms
@@ -16,9 +17,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms
 
         public FormCommandId Id => FormCommandId.ClearSaves;
         
-        public void Handle()
-        {
+        public void Handle() =>
             _loadService.ClearAll();
-        }
     }
 }

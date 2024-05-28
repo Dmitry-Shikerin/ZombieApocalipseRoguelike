@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Sources.Domain.Models.Data;
-using Sources.DomainInterfaces.Entities;
+using Sources.DomainInterfaces.Models.Entities;
 using Sources.DomainInterfaces.Models.Gameplay;
 using Sources.DomainInterfaces.Models.Spawners;
 using UnityEngine;
@@ -26,24 +26,6 @@ namespace Sources.Domain.Models.Spawners
             SumEnemiesInWave = FillEnemySums();
         }
 
-        public EnemySpawner(
-            string id,
-            IReadOnlyList<int> enemyInWave,
-            IReadOnlyList<int> spawnDelays,
-            int bossesInLevel)
-        {
-            Id = id;
-
-            if (enemyInWave.Count != spawnDelays.Count)
-                throw new ArgumentOutOfRangeException(nameof(spawnDelays));
-
-            EnemyInWave = enemyInWave;
-            SpawnDelays = spawnDelays;
-            BossesInLevel = bossesInLevel;
-
-            SumEnemiesInWave = FillEnemySums();
-        }
-
         public event Action CurrentWaveChanged;
 
         public string Id { get; }
@@ -56,7 +38,7 @@ namespace Sources.Domain.Models.Spawners
         public int SumAllEnemies => EnemyInWave.Sum() + BossesInLevel;
         public int SpawnedBosses { get; set; }
         public int SpawnedEnemies { get; set; }
-        public int CurrentWave { get; set; }
+        public int CurrentWave { get; private set; }
         public bool IsSpawnEnemy => SpawnedEnemies < SumEnemies;
         public bool IsSpawnBoss => SpawnedEnemies >= SumEnemies && SpawnedBosses == 0;
 
@@ -87,16 +69,6 @@ namespace Sources.Domain.Models.Spawners
             await UniTask.WaitUntil(() =>
                         killEnemyCounter.KillZombies == SumEnemiesInWave[CurrentWave],
                     cancellationToken: cancellationToken);
-        }
-
-        private int GetSumEnemies()
-        {
-            int sum = 0;
-
-            foreach (int enemies in EnemyInWave)
-                sum += enemies;
-
-            return sum;
         }
 
         private List<int> FillEnemySums()

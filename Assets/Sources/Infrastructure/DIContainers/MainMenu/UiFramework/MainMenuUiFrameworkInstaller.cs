@@ -12,7 +12,6 @@ namespace Sources.Infrastructure.DIContainers.MainMenu.UiFramework
     {
         public override void InstallBindings()
         {
-            //Buttons
             Container.Bind<IButtonCommandHandler>().To<MainMenuButtonCommandHandler>().AsSingle();
 
             Container.Bind<ShowFormCommand>().AsSingle();
@@ -25,7 +24,6 @@ namespace Sources.Infrastructure.DIContainers.MainMenu.UiFramework
             Container.Bind<ClearSavesButtonCommand>().AsSingle();
             Container.Bind<PlayerAccountAuthorizeButtonCommand>().AsSingle();
 
-            //Views
             Container.Bind<IUiViewCommandHandler>().To<MainMenuUiViewCommandHandler>().AsSingle();
 
             Container.Bind<UnPauseCommand>().AsSingle();

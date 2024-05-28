@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using JetBrains.Annotations;
 using Sirenix.OdinInspector;
 using Sources.Frameworks.UiFramework.Domain.Dictionaries;
 using Sources.Frameworks.UiFramework.Domain.Localizations.Phrases;
 using Sources.Frameworks.UiFramework.Extensions;
-using UnityEditor;
 using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Domain.Localizations.Configs
@@ -28,7 +26,6 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Configs
         private void AddAllPhrases()
         {
             _localizationPhrases.Clear();
-            
                 TextExtension
                     .FindAllLocalizationPhrases()
                     .ForEach(phrase => _localizationPhrases.Add(phrase));

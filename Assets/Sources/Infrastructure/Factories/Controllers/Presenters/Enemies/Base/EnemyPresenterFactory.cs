@@ -4,7 +4,6 @@ using Sources.Controllers.Presenters.Enemies.Base.States;
 using Sources.Domain.Models.Enemies.Base;
 using Sources.Domain.Models.Gameplay;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions;
-using Sources.InfrastructureInterfaces.Services.EnemyCollectors;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
@@ -34,7 +33,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Base
             _enemyCollection = enemyCollection ?? throw new ArgumentNullException(nameof(enemyCollection));
         }
 
-        public EnemyPresenter Create(Enemy enemy, KillEnemyCounter killEnemyCounter, IEnemyView enemyView, IEnemyAnimation enemyAnimation)
+        public EnemyPresenter Create(
+            Enemy enemy, 
+            KillEnemyCounter killEnemyCounter, 
+            IEnemyView enemyView, 
+            IEnemyAnimation enemyAnimation)
         {
             EnemyInitializeState initializeState = new EnemyInitializeState(
                 enemy, enemyAnimation, enemyView, _enemyCollection);

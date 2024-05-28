@@ -12,19 +12,6 @@ namespace Sources.Infrastructure.DIContainers.Gameplay.UiFramework
     {
         public override void InstallBindings()
         {
-            // Container.Bind<ILocalizationService>().To<LocalizationService>().AsSingle();
-            // Container.BindInterfacesAndSelfTo<FormService>().AsSingle();
-            //
-            // Container.Bind<UiCollectorFactory>().AsSingle();
-            //
-            // Container.Bind<UiButtonFactory>().AsSingle();
-            // Container.Bind<UiButtonPresenterFactory>().AsSingle();
-            //
-            // Container.Bind<UiViewFactory>().AsSingle();
-            // Container.Bind<UiViewPresenterFactory>().AsSingle();
-            //
-            //Buttons
-            // Container.Bind<IUiButtonService>().To<UiButtonService>().AsSingle();
             Container.Bind<IButtonCommandHandler>().To<GameplayButtonCommandHandler>().AsSingle();
             
             Container.Bind<ShowFormCommand>().AsSingle();
@@ -41,8 +28,6 @@ namespace Sources.Infrastructure.DIContainers.Gameplay.UiFramework
             Container.Bind<ShowRewardedAdvertisingButtonCommand>().AsSingle();
             Container.Bind<ClearSavesButtonCommand>().AsSingle();
             
-            //Views
-            // Container.Bind<IUiViewService>().To<UiViewService>().AsSingle();
             Container.Bind<IUiViewCommandHandler>().To<GameplayUiViewCommandHandler>().AsSingle();
             
             Container.Bind<UnPauseCommand>().AsSingle();

@@ -6,7 +6,6 @@ using Sources.ControllersInterfaces.Scenes;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
-using Sources.Infrastructure.Services.SceneLoaderServices;
 using Sources.Infrastructure.Services.SceneServices;
 using Sources.InfrastructureInterfaces.Services.SceneLoaderService;
 using Sources.Presentations.UI.Curtains;
@@ -54,8 +53,6 @@ namespace Sources.Infrastructure.Factories.App
             
             sceneService.AddBeforeSceneChangeHandler(async sceneName => 
                 await projectContext.Container.Resolve<ISceneLoaderService>().LoadSceneAsync(sceneName));
-            //
-            // sceneService.AddAfterSceneChangeHandler(async () => await curtainView.HideCurtain());
             
             appCore.Construct(sceneService);
             

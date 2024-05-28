@@ -2,7 +2,6 @@
 using Sources.Controllers.Presenters.Spawners;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Spawners;
-using Sources.DomainInterfaces.Models.Gameplay;
 using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.PresentationsInterfaces.Views.Enemies.Base;
@@ -40,8 +39,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Spawners
                 enemySpawner,
                 enemySpawnerView,
                 _enemySpawnService,
-                _bossEnemySpawnService,
-                _enemyCollection);
+                _bossEnemySpawnService);
         }
     }
 }

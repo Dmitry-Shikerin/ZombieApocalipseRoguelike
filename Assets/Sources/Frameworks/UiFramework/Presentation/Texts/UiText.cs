@@ -20,8 +20,8 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
         [DisplayAsString(false)] [HideLabel] 
         [SerializeField] private string _label = UiConstant.UiTextLabel;
         [SerializeField] private TextMeshProUGUI _tmpText;
-        [TabGroup("Settings")] [SerializeField]
-        private TextViewType _textViewType;
+        [TabGroup("Settings")] 
+        [SerializeField] private TextViewType _textViewType;
         [TabGroup("Ids")]
         [SerializeField] private string _textId;
         [TabGroup("Ids")] [ValueDropdown("GetDropdownValues")]

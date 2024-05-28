@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Sources.Domain.Models.Upgrades;
-using Sources.DomainInterfaces.Players;
+using Sources.DomainInterfaces.Models.Players;
 using Sources.Utils.CustomCollections;
 
 namespace Sources.InfrastructureInterfaces.Services.Upgrades

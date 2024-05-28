@@ -5,7 +5,7 @@ using Agava.YandexGames;
 using Cysharp.Threading.Tasks;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Players;
-using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdvertisingServices;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 
 namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
@@ -32,8 +32,8 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
         public void Disable() =>
             _cancellationTokenSource.Cancel();
 
-        public void Construct(PlayerWallet playerWallet) =>
-            _playerWallet = playerWallet ?? throw new ArgumentNullException(nameof(playerWallet));
+        public void Construct(PlayerWallet uiAnimator) =>
+            _playerWallet = uiAnimator ?? throw new ArgumentNullException(nameof(uiAnimator));
 
         public void ShowInterstitial()
         {

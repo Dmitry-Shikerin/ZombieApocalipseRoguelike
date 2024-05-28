@@ -1,5 +1,5 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.ControllersInterfaces;
+using Sources.ControllersInterfaces.Presenters;
 using Sources.PresentationsInterfaces.Views.NawMeshAgents;
 using UnityEngine;
 using UnityEngine.AI;

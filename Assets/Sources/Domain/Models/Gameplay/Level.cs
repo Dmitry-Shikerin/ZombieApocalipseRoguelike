@@ -1,7 +1,6 @@
 ﻿using System;
-using Sources.Domain.Data;
 using Sources.Domain.Models.Data;
-using Sources.DomainInterfaces.Entities;
+using Sources.DomainInterfaces.Models.Entities;
 using Sources.DomainInterfaces.Models.Gameplay;
 
 namespace Sources.Domain.Models.Gameplay

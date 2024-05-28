@@ -1,9 +1,8 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Sources.DomainInterfaces.Models.Characters;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.Presentation.Views.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
-using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdvertisingServices;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 
@@ -24,7 +23,8 @@ namespace Sources.Infrastructure.Services.GameOvers
         {
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
-            _interstitialAdService = interstitialAdService ?? throw new ArgumentNullException(nameof(interstitialAdService));
+            _interstitialAdService = interstitialAdService ?? 
+                                     throw new ArgumentNullException(nameof(interstitialAdService));
         }
 
         public void Enter(object payload = null)

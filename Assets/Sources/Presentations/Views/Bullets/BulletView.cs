@@ -5,7 +5,6 @@ using Sources.InfrastructureInterfaces.Services.ObjectPools;
 using Sources.Presentations.Triggers;
 using Sources.PresentationsInterfaces.Views.Bullets;
 using Sources.PresentationsInterfaces.Views.Enemies;
-using Sources.PresentationsInterfaces.Views.ObjectPools;
 using Sources.PresentationsInterfaces.Views.Weapons;
 using UnityEngine;
 
@@ -26,23 +25,11 @@ namespace Sources.Presentations.Views.Bullets
         private void OnDisable() =>
             _enemyHealthParticleCollision.Entered -= OnEntered;
 
-        private void OnParticleSystemStopped()
-        {
-            if (TryGetComponent(out PoolableObject poolableObject) == false)
-            {
-                Destroy(gameObject);
-                
-                return;
-            }
-            
-            poolableObject.ReturnToPool();
-            
-            Hide();
+        private void OnParticleSystemStopped() =>
             _poolableObjectDestroyerService.Destroy(this);
-        }
-        
-        public void Construct(IMiniGunView playerWallet) =>
-            _miniGunView = playerWallet ?? throw new ArgumentNullException(nameof(playerWallet));
+
+        public void Construct(IMiniGunView uiAnimator) =>
+            _miniGunView = uiAnimator ?? throw new ArgumentNullException(nameof(uiAnimator));
 
         private void OnEntered(IEnemyHealthView enemyHealthView) =>
             _miniGunView.DealDamage(enemyHealthView);

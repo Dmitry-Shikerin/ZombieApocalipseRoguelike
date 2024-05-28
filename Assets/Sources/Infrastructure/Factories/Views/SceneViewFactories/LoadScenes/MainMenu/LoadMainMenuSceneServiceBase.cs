@@ -2,7 +2,7 @@
 using Sources.Domain.Models.Gameplay;
 using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Collectors;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.Presentation.Views.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Musics;
@@ -47,20 +47,15 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
         {
             MainMenuModels models = LoadModels(scenePayload);
             
-            //SavedLevel
             SavedLevel savedLevel = models.SavedLevel;
             
-            //Volume
             _volumeViewFactory.Create(models.Volume, _mainMenuHud.VolumeView);
             _volumeService.Register(models.Volume);
             
-            //BackgroundMusic
             _backgroundMusicViewFactory.Create(_mainMenuHud.BackgroundMusicView);
             
-            //LevelAvailability
             _levelAvailabilityViewFactory.Create(models.LevelAvailability, _mainMenuHud.LevelAvailabilityView);
             
-            //FormService
             _uiCollectorFactory.Create();
             _formService.Show(FormId.Hud);
         }

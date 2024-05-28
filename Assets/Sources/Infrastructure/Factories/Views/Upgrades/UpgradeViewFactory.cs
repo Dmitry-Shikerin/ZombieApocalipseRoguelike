@@ -1,8 +1,8 @@
 ﻿using System;
-using Sources.Controllers.Upgrades;
+using Sources.Controllers.Presenters.Upgrades;
 using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Upgrades;
-using Sources.Infrastructure.Factories.Controllers.Upgrades;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades;
 using Sources.InfrastructureInterfaces.Factories.Views.Upgrades;
 using Sources.Presentations.Views.Upgrades;
 using Sources.PresentationsInterfaces.Views.Upgrades;

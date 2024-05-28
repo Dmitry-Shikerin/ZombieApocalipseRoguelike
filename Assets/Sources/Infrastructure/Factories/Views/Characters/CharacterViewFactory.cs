@@ -1,5 +1,6 @@
 ﻿using System;
 using Sources.Domain.Models.Characters;
+using Sources.Domain.Models.Constants;
 using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Commons;
 using Sources.Infrastructure.Factories.Views.Players;
@@ -69,7 +70,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
         {
             CharacterView characterView = 
                 Object.Instantiate(
-                    Resources.Load<CharacterView>("Views/CharacterView"),
+                    Resources.Load<CharacterView>(PrefabPath.Character),
                     _rootGameObject.CharacterSpawnPoint.Position, 
                     Quaternion.identity);
             
@@ -84,7 +85,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
             _healthUiFactory.Create(character.CharacterHealth, _gameplayHud.CharacterHealthUi);
 
             SawLauncherAbilityView sawLauncherAbilityView = Object.Instantiate(
-                Resources.Load<SawLauncherAbilityView>("Views/SawLauncherAbilityView"),
+                Resources.Load<SawLauncherAbilityView>(PrefabPath.SawLauncherAbility),
                 _rootGameObject.CharacterSpawnPoint.Position,
                 Quaternion.identity);
             sawLauncherAbilityView.SetTargetFollow(characterView.transform);

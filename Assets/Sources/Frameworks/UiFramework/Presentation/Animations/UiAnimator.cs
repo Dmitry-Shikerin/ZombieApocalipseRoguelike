@@ -1,13 +1,10 @@
-﻿using JetBrains.Annotations;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using Sources.Frameworks.UiFramework.Domain.Constants;
 using Sources.Frameworks.UiFramework.Presentation.Animations.Types;
-using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.Services.Animations;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Animations;
 using Sources.Presentations.Views;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Animations
 {

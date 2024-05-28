@@ -3,23 +3,23 @@ using Sources.Domain.Models.AudioSources;
 using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Frameworks.UiFramework.Domain.Localizations.Configs;
-using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Views;
+using Sources.Frameworks.YandexSdcFramework.Infrastructure.Factories.Controllers;
+using Sources.Frameworks.YandexSdcFramework.Infrastructure.Factories.Views;
 using Sources.Frameworks.YandexSdcFramework.Services.Focuses;
 using Sources.Frameworks.YandexSdcFramework.Services.Leaderboards;
 using Sources.Frameworks.YandexSdcFramework.Services.PlayerAccounts;
-using Sources.Frameworks.YandexSdcFramework.Services.SdcInitializeServices;
+using Sources.Frameworks.YandexSdcFramework.Services.SdcInitializes;
 using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.PlayerAccounts;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Stickies;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
-using Sources.Infrastructure.Factories.Controllers.YandexSDK;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.MainMenu;
-using Sources.Infrastructure.Factories.Views.YandexSDK;
 using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.Infrastructure.Services.PauseServices;
 using Sources.Infrastructure.Services.Upgrades;
@@ -27,7 +27,6 @@ using Sources.Infrastructure.Services.Volumes;
 using Sources.InfrastructureInterfaces.Services.EnemySpawners;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
-using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views;
 using UnityEngine;
@@ -40,7 +39,6 @@ namespace Sources.Infrastructure.DIContainers.MainMenu
         [Required] [SerializeField] private MainMenuHud _mainMenuHud;
         [Required] [SerializeField] private ContainerView _containerView;
 
-        //TODO разделить этот мусор в отдельные файлы
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<MainMenuHud>().FromInstance(_mainMenuHud).AsSingle();
@@ -66,7 +64,6 @@ namespace Sources.Infrastructure.DIContainers.MainMenu
             BindMainMenuLoadService();
         }
 
-        //TODO вытащить в отделтный инсталлер
         private void BindServices()
         {
             Container.Bind<IPauseService>().To<PauseService>().AsSingle();
@@ -80,7 +77,6 @@ namespace Sources.Infrastructure.DIContainers.MainMenu
             Container.Bind<IFocusService>().To<FocusService>().AsSingle();
             Container.Bind<LeaderBoardElementViewFactory>().AsSingle();
             Container.Bind<LeaderBoardElementPresenterFactory>().AsSingle();
-            Container.Bind<CustomValidator>().AsSingle();
         }
 
         private void BindMainMenuLoadService()

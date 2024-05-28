@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Sources.ControllersInterfaces;
+using Sources.ControllersInterfaces.Presenters;
 using Sources.Domain.Models.Characters;
 using Sources.Infrastructure.StateMachines.ContextStateMachines;
 using Sources.InfrastructureInterfaces.Services.InputServices;
@@ -52,10 +53,8 @@ namespace Sources.Controllers.Presenters.Characters.Movements
             Update(deltaTime);
         }
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e) =>
             OnDirectionChanged(sender, e);
-        }
 
         private void OnDirectionChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {

@@ -7,7 +7,7 @@ namespace Sources.Infrastructure.StateMachines.ContextStateMachines.Transitions
 {
     public abstract class ContextTransitionBase : IContextTransition
     {
-        public ContextTransitionBase(IContextState nextState)
+        protected ContextTransitionBase(IContextState nextState)
         {
             NextState = nextState ?? throw new ArgumentNullException(nameof(nextState));
         }

@@ -3,7 +3,7 @@
     public enum ButtonCommandId
     {
         ShowForm = 0,
-        CompleteTutorial =1, 
+        CompleteTutorial = 1,
         LoadMainMenuScene = 2,
         LoadGame = 3,
         NewGame = 4,

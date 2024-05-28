@@ -1,5 +1,4 @@
-﻿using Sources.Domain.Data;
-using Sources.Domain.Models.Data;
+﻿using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Gameplay;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 
@@ -16,9 +15,7 @@ namespace Sources.Infrastructure.Factories.Domain.Data
             };
         }
 
-        public Level MapDtoToModel(LevelDto levelDto)
-        {
-            return new Level(levelDto);
-        }
+        public Level MapDtoToModel(LevelDto levelDto) =>
+            new(levelDto);
     }
 }

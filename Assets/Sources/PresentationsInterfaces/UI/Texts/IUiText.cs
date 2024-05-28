@@ -1,7 +1,6 @@
 using System.Threading;
 using Sources.ControllersInterfaces.ControllerLifetimes;
 using Sources.Domain.Models.TextViewTypes;
-using Sources.InfrastructureInterfaces.Services.StatesLifetimes;
 using UnityEngine;
 
 namespace Sources.PresentationsInterfaces.UI.Texts
