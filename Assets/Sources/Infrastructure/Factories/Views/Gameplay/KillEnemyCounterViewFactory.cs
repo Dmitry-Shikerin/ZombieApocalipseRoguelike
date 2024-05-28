@@ -1,9 +1,8 @@
 ﻿using System;
 using Sources.Controllers.Presenters.Gameplay;
 using Sources.Domain.Models.Gameplay;
-using Sources.Domain.Models.Spawners;
 using Sources.DomainInterfaces.Models.Spawners;
-using Sources.Infrastructure.Factories.Controllers.Gameplay;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Gameplay;
 using Sources.Presentations.Views.Gameplay;
 using Sources.PresentationsInterfaces.Views.Gameplay;
 

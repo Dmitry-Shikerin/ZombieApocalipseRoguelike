@@ -9,7 +9,7 @@ namespace Sources.Presentations.UI.Buttons
 {
     public class ButtonView : View, IButtonView
     {
-        [Required][SerializeField] private Button _button;
+        [Required] [SerializeField] private Button _button;
         
         public void AddClickListener(UnityAction onClick) =>
             _button.onClick.AddListener(onClick);

@@ -1,4 +1,4 @@
-﻿using Sources.Domain.Models.Dictionaries;
+﻿using Sources.Frameworks.UiFramework.Domain.Dictionaries;
 using UnityEngine;
 
 namespace Sources.Domain.Models.SpriteCollections

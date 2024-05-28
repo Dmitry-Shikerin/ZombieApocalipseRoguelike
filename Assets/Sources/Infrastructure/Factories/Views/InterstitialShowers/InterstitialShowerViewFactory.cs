@@ -1,5 +1,4 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Sources.Controllers.Presenters.InterstitialShowers;
 using Sources.DomainInterfaces.Models.Spawners;
 using Sources.DomainInterfaces.Models.Upgrades;

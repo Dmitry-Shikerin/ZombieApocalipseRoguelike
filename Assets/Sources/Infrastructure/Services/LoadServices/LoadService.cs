@@ -1,8 +1,7 @@
 ﻿using System;
 using Sources.Domain.Models.Data.Ids;
-using Sources.DomainInterfaces.Entities;
 using Sources.DomainInterfaces.Models.Data;
-using Sources.Infrastructure.Services.Volumes;
+using Sources.DomainInterfaces.Models.Entities;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Collectors;
 using Sources.InfrastructureInterfaces.Services.LoadServices.Data;
@@ -15,21 +14,17 @@ namespace Sources.Infrastructure.Services.LoadServices
         private readonly IEntityRepository _entityRepository;
         private readonly IDataService _dataService;
         private readonly IMapperCollector _mapperCollector;
-        private readonly CustomValidator _customValidator;
 
         public LoadService(
             IEntityRepository entityRepository,
             IDataService dataService,
-            IMapperCollector mapperCollector,
-            CustomValidator customValidator)
+            IMapperCollector mapperCollector)
         {
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
             _mapperCollector = mapperCollector ?? throw new ArgumentNullException(nameof(mapperCollector));
-            _customValidator = customValidator ?? throw new ArgumentNullException(nameof(customValidator));
         }
         
-        //todo лучше не придумал
         public T Load<T>(string id) 
             where T : class, IEntity
         {
@@ -79,7 +74,6 @@ namespace Sources.Infrastructure.Services.LoadServices
                 Func<IEntity, IDto> dtoMapper = _mapperCollector.GetToDtoMapper(dataModel.Type);
                 IDto dto = dtoMapper.Invoke(dataModel);
                 _dataService.SaveData(dto, dataModel.Id);
-                // Debug.Log($"Saved {dataModel.GetType()}");
             }
         }
 

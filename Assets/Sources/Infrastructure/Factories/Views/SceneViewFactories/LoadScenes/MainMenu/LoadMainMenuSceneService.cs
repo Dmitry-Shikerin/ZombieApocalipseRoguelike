@@ -9,18 +9,15 @@ using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Infrastructure.Factories.Views.Gameplay;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
-using Sources.Infrastructure.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
-using UnityEngine;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.MainMenu
 {
     public class LoadMainMenuSceneService : LoadMainMenuSceneServiceBase
     {
-        private readonly IEntityRepository _entityRepository;
         private readonly ILoadService _loadService;
 
         public LoadMainMenuSceneService(
@@ -42,7 +39,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
                 uiCollectorFactory,
                 formService)
         {
-            _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
         }
 
@@ -50,14 +46,12 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
         {
             Tutorial tutorial = _loadService.Load<Tutorial>(ModelId.Tutorial);
             
-            //TODO подумать над тем какие айдишки загружать
             Volume volume = _loadService.Load<Volume>(ModelId.Volume);
             
             GameData gameData = _loadService.Load<GameData>(ModelId.GameData);
             
             SavedLevel savedLevel = _loadService.Load<SavedLevel>(ModelId.SavedLevel);
             
-            //LevelAvailability
             Level firstLevel = _loadService.Load<Level>(ModelId.Gameplay);
             Level secondLevel = _loadService.Load<Level>(ModelId.Gameplay2);
             Level thirdLevel = _loadService.Load<Level>(ModelId.Gameplay3);
@@ -71,8 +65,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
                     thirdLevel,
                     fourthLevel,
                 });
-            
-            Debug.Log("LoadMainMenu models");
             
             return new MainMenuModels(
                 volume,

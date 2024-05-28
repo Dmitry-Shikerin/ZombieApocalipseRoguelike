@@ -1,9 +1,8 @@
 ﻿using System;
-using Sources.Controllers.Common;
-using Sources.Frameworks.UiFramework.Infrastructure.Services.Forms;
-using Sources.Frameworks.UiFramework.Presentation.Forms;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Controllers.Presenters;
 using Sources.Frameworks.UiFramework.Presentation.Views;
+using Sources.Frameworks.UiFramework.Presentation.Views.Types;
+using Sources.Frameworks.UiFramework.Services.Views;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 
 namespace Sources.Frameworks.UiFramework.Controllers.Forms

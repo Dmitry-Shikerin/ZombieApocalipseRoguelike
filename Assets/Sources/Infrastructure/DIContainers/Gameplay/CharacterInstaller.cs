@@ -1,6 +1,5 @@
-﻿using Sources.Infrastructure.Factories.Controllers.Characters;
-using Sources.Infrastructure.Factories.Controllers.Players;
-using Sources.Infrastructure.Factories.Controllers.Presenters.Characters;
+﻿using Sources.Infrastructure.Factories.Controllers.Presenters.Characters;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Players;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Players;
 using Sources.Infrastructure.Services.Characters;

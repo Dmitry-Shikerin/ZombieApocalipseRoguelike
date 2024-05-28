@@ -37,7 +37,6 @@ namespace Sources.Infrastructure.Services.SceneServices
 
         public async UniTask ChangeSceneAsync(string sceneName, object payload = null)
         {
-            //TODO это тоже обернул трай кетчем
             try
             {
                 if (_sceneFactories.TryGetValue(

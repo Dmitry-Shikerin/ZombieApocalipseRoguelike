@@ -2,7 +2,7 @@
 {
     public static class CurtainConst
     {
-        public const float Min = 0f;
         public const float Max = 1f;
+        public const float Daley = 1f;
     }
 }

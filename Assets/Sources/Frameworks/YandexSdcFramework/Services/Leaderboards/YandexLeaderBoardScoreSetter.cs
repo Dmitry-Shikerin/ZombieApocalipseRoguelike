@@ -1,7 +1,7 @@
 ﻿using Agava.WebUtility;
 using Agava.YandexGames;
 using Sources.Domain.Models.Constants;
-using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
 
 namespace Sources.Frameworks.YandexSdcFramework.Services.Leaderboards
 {

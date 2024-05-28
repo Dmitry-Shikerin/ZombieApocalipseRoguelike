@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using JetBrains.Annotations;
 using Sources.Controllers.Common;
 using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Upgrades;
 using Sources.Domain.Models.Upgrades.Controllers;
 using Sources.DomainInterfaces.Models.Characters;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.Presentation.Views.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.InfrastructureInterfaces.Factories.Views.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
@@ -61,10 +59,8 @@ namespace Sources.Controllers.Presenters.Upgrades.Controllers
             _playerWallet.CoinsChanged += OnUpgradeFormChanged;
         }
 
-        public override void Disable()
-        {
+        public override void Disable() =>
             _playerWallet.CoinsChanged -= OnUpgradeFormChanged;
-        }
 
         private void OnUpgradeFormChanged()
         {

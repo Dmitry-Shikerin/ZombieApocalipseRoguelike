@@ -1,6 +1,6 @@
 using System;
 
-namespace Sources.DomainInterfaces.Players
+namespace Sources.DomainInterfaces.Models.Players
 {
     public interface IPlayerWallet
     {

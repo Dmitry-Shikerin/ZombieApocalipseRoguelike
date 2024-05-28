@@ -1,5 +1,4 @@
 ﻿using Sources.Domain.Models.Enemies.Base;
-using UnityEngine;
 
 namespace Sources.Domain.Models.Enemies.Bosses
 {

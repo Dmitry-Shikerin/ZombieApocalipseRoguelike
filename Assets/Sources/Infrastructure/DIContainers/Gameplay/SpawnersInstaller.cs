@@ -1,6 +1,5 @@
 ﻿using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Spawners;
-using Sources.Infrastructure.Factories.Controllers.Spawners;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.InfrastructureInterfaces.Services.EnemySpawners;
@@ -17,7 +16,8 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
                 .FromResource("Configs/EnemySpawners/Containers/EnemySpawnerConfigContainer")
                 .AsSingle();
             
-            Container.Bind<IEnemySpawnerConfigCollectionService>().To<EnemySpawnerConfigCollectionService>().AsSingle();
+            Container.Bind<IEnemySpawnerConfigCollectionService>()
+                .To<EnemySpawnerConfigCollectionService>().AsSingle();
             
             Container.Bind<EnemySpawnPresenterFactory>().AsSingle();
             Container.Bind<EnemySpawnViewFactory>().AsSingle();

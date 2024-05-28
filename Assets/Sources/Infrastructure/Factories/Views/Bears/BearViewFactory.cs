@@ -1,7 +1,7 @@
 ﻿using System;
-using Sources.Controllers.Bears;
 using Sources.Controllers.Presenters.Bears.Movements;
 using Sources.Domain.Models.Bears;
+using Sources.Domain.Models.Constants;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Bears;
 using Sources.Presentations.Views.Bears;
 using Sources.Presentations.Views.RootGameObjects;
@@ -28,7 +28,7 @@ namespace Sources.Infrastructure.Factories.Views.Bears
         public IBearView Create(Bear bear)
         {
             BearView bearView = Object.Instantiate(
-                Resources.Load<BearView>("Views/BearView"), 
+                Resources.Load<BearView>(PrefabPath.Bear), 
                 _rootGameObject.BearSpawnPoint.Position, 
                 Quaternion.identity);
             

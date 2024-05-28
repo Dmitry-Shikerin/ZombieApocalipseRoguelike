@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.Domain.Models.Upgrades;
 
-namespace Sources.Controllers.Bears.Attacks
+namespace Sources.Domain.Models.Bears.Attacks
 {
     public class BearAttacker
     {

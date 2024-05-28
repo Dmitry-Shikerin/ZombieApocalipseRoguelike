@@ -5,6 +5,7 @@ using Sources.Controllers.Presenters.Enemies.Base.States;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Enemies.Bosses;
 using Sources.Infrastructure.Services.Enemies;
+using Sources.InfrastructureInterfaces.Services.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies.Bosses;
 
 namespace Sources.Controllers.Presenters.Enemies.Bosses.States

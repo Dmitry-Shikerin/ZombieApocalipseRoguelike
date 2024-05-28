@@ -1,6 +1,6 @@
 ﻿using Sources.Domain.Models.Constants;
 
-namespace Sources.Utils.Extentions
+namespace Sources.Utils.Extensions
 {
     public static class PercentExtension
     {

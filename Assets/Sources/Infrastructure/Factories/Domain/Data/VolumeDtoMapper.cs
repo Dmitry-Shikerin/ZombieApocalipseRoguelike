@@ -1,5 +1,4 @@
-﻿using Sources.Domain.Data;
-using Sources.Domain.Models.Data;
+﻿using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Setting;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 
@@ -17,9 +16,7 @@ namespace Sources.Infrastructure.Factories.Domain.Data
             };
         }
 
-        public Volume MapDtoToModel(VolumeDto volumeDto)
-        {
-            return new Volume(volumeDto);
-        }
+        public Volume MapDtoToModel(VolumeDto volumeDto) =>
+            new(volumeDto);
     }
 }

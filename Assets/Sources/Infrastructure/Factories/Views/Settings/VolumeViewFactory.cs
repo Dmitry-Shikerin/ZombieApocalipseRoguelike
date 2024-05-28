@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Presenters.Settings;
 using Sources.Domain.Models.Setting;
-using Sources.Infrastructure.Factories.Controllers.Settings;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Settings;
 using Sources.Presentations.Views.Settings;
 using Sources.PresentationsInterfaces.Views.Settings;
 

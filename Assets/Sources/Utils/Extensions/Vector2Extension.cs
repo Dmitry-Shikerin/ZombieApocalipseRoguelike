@@ -1,4 +1,4 @@
-﻿using Sources.Domain.Data;
+﻿using Sources.Utils.Data;
 using UnityEngine;
 
 namespace Sources.Utils.Extensions

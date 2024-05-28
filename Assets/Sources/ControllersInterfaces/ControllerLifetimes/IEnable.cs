@@ -1,4 +1,4 @@
-﻿namespace Sources.InfrastructureInterfaces.Services.StatesLifetimes
+﻿namespace Sources.ControllersInterfaces.ControllerLifetimes
 {
     public interface IEnable
     {

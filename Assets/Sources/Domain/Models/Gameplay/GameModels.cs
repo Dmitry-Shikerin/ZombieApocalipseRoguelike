@@ -1,5 +1,5 @@
-﻿using Sources.Controllers.Bears.Attacks;
-using Sources.Domain.Models.Bears;
+﻿using Sources.Domain.Models.Bears;
+using Sources.Domain.Models.Bears.Attacks;
 using Sources.Domain.Models.Characters;
 using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Setting;

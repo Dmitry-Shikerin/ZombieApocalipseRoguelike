@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sources.Domain.Models.Players;
-using Sources.DomainInterfaces.Entities;
-using Sources.DomainInterfaces.Upgrades;
+using Sources.DomainInterfaces.Models.Entities;
+using Sources.DomainInterfaces.Models.Upgrades;
 
 namespace Sources.Domain.Models.Upgrades
 {

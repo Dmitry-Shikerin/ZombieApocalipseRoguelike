@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Sources.Domain.Models.Constants;
 using Sources.Frameworks.UiFramework.Presentation.Animations;
 using Sources.Frameworks.UiFramework.Presentation.Animations.Types;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
@@ -45,10 +46,8 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
             _cancellationTokenSource.Cancel();
         }
 
-        public void Construct(UiAnimator playerWallet)
-        {
-            _uiAnimator = playerWallet;
-        }
+        public void Construct(UiAnimator uiAnimator) =>
+            _uiAnimator = uiAnimator;
 
         private async void PlayAnimation()
         {
@@ -78,7 +77,8 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
         {
             try
             {
-                while (transform != null && Vector3.Distance(transform.localScale, _uiAnimator.TargetScale) > 0.01f)
+                while (transform != null && Vector3.Distance(
+                           transform.localScale, _uiAnimator.TargetScale) > MathConst.Epsilon)
                 {
                     transform.localScale = Vector3.MoveTowards(
                         transform.localScale,
@@ -88,7 +88,8 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
                     await UniTask.Yield(token);
                 }
 
-                while ( transform != null && Vector3.Distance(transform.localScale, _uiAnimator.FromScale) > 0.01f)
+                while ( transform != null && Vector3.Distance(
+                           transform.localScale, _uiAnimator.FromScale) > MathConst.Epsilon)
                 {
                     transform.localScale = Vector3.MoveTowards(
                         transform.localScale,
@@ -126,9 +127,7 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
             }
         }
 
-        public void Destroy()
-        {
+        public void Destroy() =>
             _cancellationTokenSource.Cancel();
-        }
     }
 }

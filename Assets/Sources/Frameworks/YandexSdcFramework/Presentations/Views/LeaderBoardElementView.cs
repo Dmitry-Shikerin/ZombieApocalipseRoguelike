@@ -1,6 +1,6 @@
-﻿using Sources.Controllers.YandexSDK;
+﻿using Sources.Frameworks.YandexSdcFramework.Controllers;
+using Sources.Frameworks.YandexSdcFramework.PresentationsInterfaces.Views;
 using Sources.Presentations.Views;
-using Sources.PresentationsInterfaces.Views.YandexSDK;
 using TMPro;
 using UnityEngine;
 

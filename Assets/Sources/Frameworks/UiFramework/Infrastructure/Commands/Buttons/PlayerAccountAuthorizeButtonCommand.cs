@@ -1,8 +1,7 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Buttons;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.Presentation.Views.Types;
 using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.PlayerAccounts;

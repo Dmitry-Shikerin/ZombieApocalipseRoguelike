@@ -2,11 +2,10 @@
 using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Setting;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.Presentation.Views.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
-using UnityEngine;
 
 namespace Sources.Infrastructure.Services.Tutorials
 {
@@ -46,7 +45,6 @@ namespace Sources.Infrastructure.Services.Tutorials
         {
             _tutorial.HasCompleted = true;
             _loadService.Save(_tutorial);
-            Debug.Log($"TUTORIAL COMPLETED");
         }
     }
 }

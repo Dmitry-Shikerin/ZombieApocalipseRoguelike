@@ -43,8 +43,6 @@ namespace Sources.Controllers.Presenters.Common
 
             if (uiText == null)
             {
-                //TODO сделать добавление в очередь и вытаскивать оттуда текст
-                //TODO нужно ли создавать новый токен?
                 _cancellationTokenSource.Cancel();
 
                 _healthUiText.DamageTexts.ForEach(text => text.SetIsHide(true));

@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Presenters.Characters;
 using Sources.Domain.Models.Players;
-using Sources.Infrastructure.Factories.Controllers.Characters;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Characters;
 using Sources.Presentations.Views.Characters;
 using Sources.PresentationsInterfaces.Views.Character;
 
@@ -20,7 +20,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
         public ICharacterWalletView Create(PlayerWallet playerWallet, CharacterWalletView characterWalletView)
         {
             CharacterWalletPresenter characterWalletPresenter = 
-                _characterWalletPresenterFactory.Create(playerWallet, characterWalletView);
+                _characterWalletPresenterFactory.Create(playerWallet);
             
             characterWalletView.Construct(characterWalletPresenter);
             

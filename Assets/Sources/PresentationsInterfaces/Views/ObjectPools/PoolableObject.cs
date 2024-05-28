@@ -1,5 +1,4 @@
-﻿using Sources.Infrastructure.Services.ObjectPools;
-using Sources.InfrastructureInterfaces.Services.ObjectPools;
+﻿using Sources.InfrastructureInterfaces.Services.ObjectPools;
 using Sources.Presentations.Views;
 
 namespace Sources.PresentationsInterfaces.Views.ObjectPools

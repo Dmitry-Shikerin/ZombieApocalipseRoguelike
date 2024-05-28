@@ -3,7 +3,7 @@ using Sources.Controllers.Common;
 using Sources.Domain.Models.Constants;
 using Sources.DomainInterfaces.Models.Healths;
 using Sources.PresentationsInterfaces.Views.Common;
-using Sources.Utils.Extentions;
+using Sources.Utils.Extensions;
 
 namespace Sources.Controllers.Presenters.Common
 {

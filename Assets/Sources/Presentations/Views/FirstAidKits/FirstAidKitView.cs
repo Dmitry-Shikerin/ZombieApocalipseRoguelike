@@ -2,7 +2,6 @@
 using Sources.Infrastructure.Services.ObjectPools;
 using Sources.InfrastructureInterfaces.Services.ObjectPools;
 using Sources.PresentationsInterfaces.Views.FirstAidKits;
-using Sources.PresentationsInterfaces.Views.ObjectPools;
 
 namespace Sources.Presentations.Views.FirstAidKits
 {

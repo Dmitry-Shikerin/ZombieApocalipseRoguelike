@@ -1,11 +1,11 @@
 ﻿using System;
-using Sources.Controllers.Abilities;
+using Sources.Controllers.Presenters.Abilities;
 using Sources.Domain.Models.Abilities;
 using Sources.Domain.Models.Upgrades.Configs;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
 using Sources.PresentationsInterfaces.Views.Abilities;
 
-namespace Sources.Infrastructure.Factories.Controllers.Abilities
+namespace Sources.Infrastructure.Factories.Controllers.Presenters.Abilities
 {
     public class SawLauncherAbilityPresenterFactory
     {

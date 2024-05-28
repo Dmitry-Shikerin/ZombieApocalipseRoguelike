@@ -1,9 +1,8 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Buttons;
-using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
-using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdvertisingServices;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 {

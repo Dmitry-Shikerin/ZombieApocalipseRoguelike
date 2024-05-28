@@ -1,7 +1,6 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Buttons;
-using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
 
@@ -18,9 +17,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 
         public ButtonCommandId Id => ButtonCommandId.CompleteTutorial;
         
-        public void Handle(IUiButton uiButton)
-        {
+        public void Handle(IUiButton uiButton) =>
             _tutorialService.Complete();
-        }
     }
 }

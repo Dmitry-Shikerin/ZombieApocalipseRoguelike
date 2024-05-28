@@ -1,9 +1,8 @@
 ﻿using System;
-using Sources.Domain.Data;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Data.Ids;
-using Sources.DomainInterfaces.Entities;
+using Sources.DomainInterfaces.Models.Entities;
 using UnityEngine;
 
 namespace Sources.Domain.Models.Setting

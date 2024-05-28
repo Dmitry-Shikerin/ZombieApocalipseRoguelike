@@ -1,4 +1,4 @@
-﻿namespace Sources.Domain.Models.YandexSDK
+﻿namespace Sources.Frameworks.YandexSdcFramework.Domain
 {
     public class LeaderBoardPlayer
     {

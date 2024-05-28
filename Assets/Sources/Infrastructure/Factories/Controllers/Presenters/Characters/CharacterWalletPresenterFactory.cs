@@ -1,15 +1,13 @@
 ﻿using Sources.Controllers.Presenters.Characters;
 using Sources.Domain.Models.Players;
-using Sources.DomainInterfaces.Players;
-using Sources.PresentationsInterfaces.Views.Character;
 
-namespace Sources.Infrastructure.Factories.Controllers.Characters
+namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
 {
     public class CharacterWalletPresenterFactory
     {
-        public CharacterWalletPresenter Create(PlayerWallet playerWallet, ICharacterWalletView characterWalletView)
+        public CharacterWalletPresenter Create(PlayerWallet playerWallet)
         {
-            return new CharacterWalletPresenter(playerWallet, characterWalletView); 
+            return new CharacterWalletPresenter(playerWallet); 
         }
     }
 }

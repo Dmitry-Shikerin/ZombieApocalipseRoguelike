@@ -1,8 +1,7 @@
 ﻿using System;
-using Sources.Controllers.Players;
-using Sources.DomainInterfaces.Players;
-using Sources.Infrastructure.Factories.Controllers.Characters;
-using Sources.Infrastructure.Factories.Controllers.Players;
+using Sources.Controllers.Presenters.Players;
+using Sources.DomainInterfaces.Models.Players;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Players;
 using Sources.Presentations.Views.Players;
 using Sources.PresentationsInterfaces.Views.Players;
 

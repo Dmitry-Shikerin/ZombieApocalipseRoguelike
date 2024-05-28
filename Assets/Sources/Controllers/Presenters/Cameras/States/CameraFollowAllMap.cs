@@ -1,7 +1,6 @@
 ﻿using System;
 using Sources.Infrastructure.StateMachines.ContextStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.Cameras;
-using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Cameras.Types;
 using Sources.PresentationsInterfaces.Views.Cameras;
 using UnityEngine;

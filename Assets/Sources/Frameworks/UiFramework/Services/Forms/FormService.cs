@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Sources.Frameworks.UiFramework.Presentation.Forms;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+﻿using System.Collections.Generic;
 using Sources.Frameworks.UiFramework.Presentation.Views;
-using Sources.Frameworks.UiFramework.PresentationsInterfaces;
+using Sources.Frameworks.UiFramework.Presentation.Views.Types;
+using Sources.Frameworks.UiFramework.PresentationsInterfaces.Views;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Presentations.Views;
-using Sources.Presentations.Views.Forms.Common;
-using Sources.PresentationsInterfaces.Views.Forms.Common;
-using UnityEngine;
 
 namespace Sources.Frameworks.UiFramework.Services.Forms
 {
@@ -21,9 +15,7 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
         public FormService(UiCollector uiCollector)
         {
             foreach (IUiView form in uiCollector.UiContainers)
-            {
                 _forms.Add(form.FormId, form);
-            }
         }
 
         public void Show(FormId formId)
@@ -48,17 +40,13 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
         public void ShowAll()
         {
             foreach (IUiView form in _forms.Values)
-            {
                 form.Show();
-            }
         }
 
         public void HideAll()
         {
             foreach (IUiView form in _forms.Values)
-            {
                 form.Hide();
-            }
         }
 
         public bool IsActive(FormId formId)

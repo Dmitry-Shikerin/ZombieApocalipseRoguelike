@@ -1,6 +1,7 @@
 ﻿using Sources.ControllersInterfaces;
+using Sources.ControllersInterfaces.Presenters;
 
-namespace Sources.Controllers.Common
+namespace Sources.Controllers.Presenters
 {
     public abstract class PresenterBase : IPresenter
     {

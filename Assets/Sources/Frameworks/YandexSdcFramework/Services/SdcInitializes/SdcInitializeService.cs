@@ -3,7 +3,7 @@ using Agava.YandexGames;
 using Cysharp.Threading.Tasks;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
 
-namespace Sources.Frameworks.YandexSdcFramework.Services.SdcInitializeServices
+namespace Sources.Frameworks.YandexSdcFramework.Services.SdcInitializes
 {
     public class SdcInitializeService : ISdcInitializeService
     {

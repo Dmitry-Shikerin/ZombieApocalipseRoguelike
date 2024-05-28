@@ -4,7 +4,7 @@ using Sources.Domain.Models.Players;
 using Sources.Domain.Models.Upgrades;
 using Sources.PresentationsInterfaces.Views.Upgrades;
 
-namespace Sources.Controllers.Upgrades
+namespace Sources.Controllers.Presenters.Upgrades
 {
     public class UpgradePresenter : PresenterBase
     {

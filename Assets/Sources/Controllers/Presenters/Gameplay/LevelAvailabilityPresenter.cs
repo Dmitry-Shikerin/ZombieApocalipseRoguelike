@@ -1,11 +1,13 @@
 ﻿using System;
 using Sources.Controllers.Common;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Payloads;
 using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.SceneServices;
 using Sources.PresentationsInterfaces.Views.Gameplay;
+using UnityEngine.Events;
 
 namespace Sources.Controllers.Presenters.Gameplay
 {
@@ -54,8 +56,10 @@ namespace Sources.Controllers.Presenters.Gameplay
                     continue;
                 
                 SetAvailableLevel(i);
-                    
-                if(i == _levelAvailabilityView.Levels.Count - 1)
+
+                int correctAvailableLevels = _levelAvailabilityView.Levels.Count - 1;
+                
+                if(i == correctAvailableLevels)
                         return;
                     
                 int correctIndex = i + 1;
@@ -80,18 +84,32 @@ namespace Sources.Controllers.Presenters.Gameplay
 
         private void AddButtonListeners()
         {
-            _levelAvailabilityView.Levels[0].ButtonView.AddClickListener(ShowFirstLevel);
-            _levelAvailabilityView.Levels[1].ButtonView.AddClickListener(ShowSecondLevel);
-            _levelAvailabilityView.Levels[2].ButtonView.AddClickListener(ShowThirdLevel);
-            _levelAvailabilityView.Levels[3].ButtonView.AddClickListener(ShowFourthLevel);
+            for (int i = 0; i < _levelAvailabilityView.Levels.Count; i++)
+            {
+                UnityAction action = GetShowLevelAction(i);
+                _levelAvailabilityView.Levels[i].ButtonView.AddClickListener(action);
+            }
         }
 
         private void RemoveButtonListeners()
         {
-            _levelAvailabilityView.Levels[0].ButtonView.RemoveClickListener(ShowFirstLevel);
-            _levelAvailabilityView.Levels[1].ButtonView.RemoveClickListener(ShowSecondLevel);
-            _levelAvailabilityView.Levels[2].ButtonView.RemoveClickListener(ShowThirdLevel);
-            _levelAvailabilityView.Levels[3].ButtonView.RemoveClickListener(ShowFourthLevel);
+            for (int i = 0; i < _levelAvailabilityView.Levels.Count; i++)
+            {
+                UnityAction action = GetShowLevelAction(i);
+                _levelAvailabilityView.Levels[i].ButtonView.RemoveClickListener(action);
+            }
+        }
+
+        private UnityAction GetShowLevelAction(int index)
+        {
+            return index switch
+            {
+                LevelConst.FirstLevel => ShowFirstLevel,
+                LevelConst.SecondLevel => ShowSecondLevel,
+                LevelConst.ThirdLevel => ShowThirdLevel,
+                LevelConst.FourthLevel => ShowFourthLevel,
+                _ => throw new ArgumentOutOfRangeException(nameof(index))
+            };
         }
 
         private void ShowFirstLevel() =>

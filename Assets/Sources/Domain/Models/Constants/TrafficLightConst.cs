@@ -4,5 +4,6 @@
     {
         public const float BlinkDelay = 0.5f;
         public const float HideDelay = 0.1f;
+        public const int BlinkCount = 4;
     }
 }

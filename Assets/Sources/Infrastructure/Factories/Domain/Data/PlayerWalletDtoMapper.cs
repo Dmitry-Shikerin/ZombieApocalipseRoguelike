@@ -1,8 +1,5 @@
-﻿using System;
-using Sources.Domain.Data;
-using Sources.Domain.Models.Data;
+﻿using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Players;
-using Sources.DomainInterfaces.Players;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 
 namespace Sources.Infrastructure.Factories.Domain.Data
@@ -18,9 +15,7 @@ namespace Sources.Infrastructure.Factories.Domain.Data
             };
         }
 
-        public PlayerWallet MapDtoToModel(PlayerWalletDto playerWalletDto)
-        {
-            return new PlayerWallet(playerWalletDto);
-        }
+        public PlayerWallet MapDtoToModel(PlayerWalletDto playerWalletDto) =>
+            new(playerWalletDto);
     }
 }

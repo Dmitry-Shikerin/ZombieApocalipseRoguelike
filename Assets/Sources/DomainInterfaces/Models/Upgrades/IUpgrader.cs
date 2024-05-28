@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Sources.DomainInterfaces.Entities;
+using Sources.DomainInterfaces.Models.Entities;
 
-namespace Sources.DomainInterfaces.Upgrades
+namespace Sources.DomainInterfaces.Models.Upgrades
 {
     public interface IUpgrader : IEntity
     {

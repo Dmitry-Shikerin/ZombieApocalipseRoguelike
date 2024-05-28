@@ -1,12 +1,11 @@
 ﻿using Sirenix.OdinInspector;
-using Sources.Controllers.Bears;
 using Sources.Controllers.Presenters.Bears.Movements;
+using Sources.Domain.Models.Constants;
 using Sources.Presentations.Views.NavMeshAgents;
 using Sources.PresentationsInterfaces.Views.Bears;
 using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.Enemies;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Sources.Presentations.Views.Bears
 {
@@ -27,7 +26,7 @@ namespace Sources.Presentations.Views.Bears
         public void SetLookRotation(float angle)
         {
             transform.rotation = Quaternion.RotateTowards(
-                transform.rotation, Quaternion.Euler(0, angle, 0), 4f);
+                transform.rotation, Quaternion.Euler(0, angle, 0), BearConst.DeltaRotation);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Sources.ControllersInterfaces;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.ControllersInterfaces.Presenters;
+using Sources.Frameworks.UiFramework.Presentation.Views.Types;
 using Sources.PresentationsInterfaces.Views.Forms.Common;
 
 namespace Sources.Presentations.Views.Forms.Common

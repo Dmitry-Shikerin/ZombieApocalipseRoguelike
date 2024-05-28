@@ -4,7 +4,6 @@ using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Spawners;
 using Sources.Domain.Models.Spawners.Configs;
-using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Services.EnemySpawners;
 
@@ -52,9 +51,7 @@ namespace Sources.Infrastructure.Factories.Domain.Data
             };
         }
 
-        public EnemySpawner MapDtoToModel(EnemySpawnerDto enemySpawnerDto)
-        {
-            return new EnemySpawner(enemySpawnerDto);
-        }
+        public EnemySpawner MapDtoToModel(EnemySpawnerDto enemySpawnerDto) =>
+            new(enemySpawnerDto);
     }
 }

@@ -1,8 +1,6 @@
-﻿using Sirenix.OdinInspector;
-using Sources.Presentations.Views.Animations;
+﻿using Sources.Presentations.Views.Animations;
 using Sources.PresentationsInterfaces.Views.Character;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Presentations.Views.Characters
 {

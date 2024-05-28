@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Controllers.Buttons;
-using Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Buttons;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Controllers.Buttons
 {
@@ -15,9 +15,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Controllers.Bu
                                    throw new ArgumentNullException(nameof(uiButtonService));
         }
 
-        public UiButtonPresenter Create(UiButton view)
-        {
-            return new UiButtonPresenter(view, _uiButtonService);
-        }
+        public UiButtonPresenter Create(UiButton view) =>
+            new(view, _uiButtonService);
     }
 }

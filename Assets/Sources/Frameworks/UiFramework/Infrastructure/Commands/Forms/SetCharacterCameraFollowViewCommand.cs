@@ -1,9 +1,9 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands;
+using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Views;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.Presentations.Views.Cameras.Types;
-using Sources.Presentations.Views.Characters;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms
 {
@@ -17,9 +17,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms
         }
 
         public FormCommandId Id => FormCommandId.SetCharacterCameraFollow;
-        public void Handle()
-        {
+        public void Handle() =>
             _cameraService.SetFollower(FollowableId.Character);
-        }
     }
 }

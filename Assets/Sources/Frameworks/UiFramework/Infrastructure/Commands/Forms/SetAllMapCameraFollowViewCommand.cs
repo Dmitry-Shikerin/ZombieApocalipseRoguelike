@@ -1,8 +1,8 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands;
+using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Views;
 using Sources.InfrastructureInterfaces.Services.Cameras;
-using Sources.Presentations.Views.Cameras.Points;
 using Sources.Presentations.Views.Cameras.Types;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms
@@ -18,10 +18,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms
 
         public FormCommandId Id => FormCommandId.SetAllMapCameraFollow;
         
-        //TODO чепуха при смене точек в туториале
-        public void Handle()
-        {
+        public void Handle() =>
             _cameraService.SetFollower(FollowableId.AllMap);
-        }
     }
 }

@@ -1,17 +1,11 @@
-﻿using Sources.Controllers.Abilities;
-using Sources.Controllers.Common;
+﻿using Sources.Controllers.Presenters.Abilities;
 using Sources.Domain.Models.Abilities;
-using Sources.PresentationsInterfaces.Views.Abilities;
 
-namespace Sources.Infrastructure.Factories.Controllers.Abilities
+namespace Sources.Infrastructure.Factories.Controllers.Presenters.Abilities
 {
     public class SawLauncherPresenterFactory
     {
-        public SawLauncherPresenter Create(
-            SawLauncher sawLauncher,
-            ISawLauncherView sawLauncherView)
-        {
-            return new SawLauncherPresenter(sawLauncher, sawLauncherView);
-        }
+        public SawLauncherPresenter Create(SawLauncher sawLauncher) =>
+            new(sawLauncher);
     }
 }

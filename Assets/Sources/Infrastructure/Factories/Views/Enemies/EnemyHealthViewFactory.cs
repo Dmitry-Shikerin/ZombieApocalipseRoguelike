@@ -1,7 +1,7 @@
 ﻿using System;
 using Sources.Controllers.Presenters.Enemies;
 using Sources.Domain.Models.Enemies;
-using Sources.Infrastructure.Factories.Controllers.Enemies;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Enemies;
 using Sources.Presentations.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.Enemies;
 

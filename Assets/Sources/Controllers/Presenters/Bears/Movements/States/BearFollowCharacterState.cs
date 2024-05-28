@@ -30,10 +30,6 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
             _bearAnimationView.PlayWalk();
         }
 
-        public override void Exit()
-        {
-        }
-
         public override void Update(float deltaTime)
         {
             _bearView.Move(_bearView.CharacterMovementView.Position);

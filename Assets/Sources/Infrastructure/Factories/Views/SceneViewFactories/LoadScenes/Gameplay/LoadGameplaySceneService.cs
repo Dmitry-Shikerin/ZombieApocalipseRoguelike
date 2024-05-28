@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sources.Controllers.Bears.Attacks;
 using Sources.Domain.Models.Abilities;
 using Sources.Domain.Models.Bears;
+using Sources.Domain.Models.Bears.Attacks;
 using Sources.Domain.Models.Characters;
 using Sources.Domain.Models.Characters.Attackers;
 using Sources.Domain.Models.Constants;
@@ -17,17 +17,15 @@ using Sources.Domain.Models.Weapons;
 using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Collectors;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
-using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdvertisingServices;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Gameplay;
-using Sources.Infrastructure.Factories.Views.InterstitialShowers;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Factories.Views.Upgrades.Controllers;
-using Sources.InfrastructureInterfaces.Factories.Domain.Data;
 using Sources.InfrastructureInterfaces.Factories.Views.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Cameras;
 using Sources.InfrastructureInterfaces.Services.GameOvers;
@@ -35,20 +33,16 @@ using Sources.InfrastructureInterfaces.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.Saves;
-using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
-using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.RootGameObjects;
 using Sources.Utils.CustomCollections;
-using UnityEngine;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay
 {
     public class LoadGameplaySceneService : LoadGameplaySceneServiceBase
     {
-        //TODO можно ли сохранять в поле то что мы передаем дальше?
         private readonly ILoadService _loadService;
         private readonly IEntityRepository _entityRepository;
         private readonly CustomCollection<Upgrader> _upgradeCollection;
@@ -58,16 +52,12 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             UiCollectorFactory uiCollectorFactory, 
             CharacterViewFactory characterViewFactory, 
             BearViewFactory bearViewFactory, 
-            IUpgradeViewFactory upgradeViewFactory, 
             IUpgradeUiFactory upgradeUiFactory, 
             ILoadService loadService, 
             IEntityRepository entityRepository, 
-            IEnemySpawnService enemySpawnService, 
             RootGameObject rootGameObject, 
             EnemySpawnViewFactory enemySpawnViewFactory, 
             ItemSpawnerViewFactory itemSpawnerViewFactory, 
-            IUpgradeConfigCollectionService upgradeConfigCollectionService, 
-            IUpgradeDtoMapper upgradeDtoMapper, 
             CustomCollection<Upgrader> upgradeCollection, 
             KillEnemyCounterViewFactory killEnemyCounterViewFactory, 
             BackgroundMusicViewFactory backgroundMusicViewFactory, 
@@ -81,25 +71,17 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             ITutorialService tutorialService,
             IAdvertisingService advertisingService,
             IFormService formService,
-            InterstitialShowerViewFactory interstitialShowerViewFactory,
             ScoreCounterViewFactory scoreCounterViewFactory,
-            IUpgradeService upgradeService,
             UpgradeControllerViewFactory upgradeControllerViewFactory) 
             : base(
                 gameplayHud, 
                 uiCollectorFactory, 
                 characterViewFactory, 
                 bearViewFactory, 
-                upgradeViewFactory, 
                 upgradeUiFactory, 
-                loadService, 
-                entityRepository, 
-                enemySpawnService, 
                 rootGameObject, 
                 enemySpawnViewFactory, 
                 itemSpawnerViewFactory,
-                upgradeConfigCollectionService, 
-                upgradeDtoMapper, 
                 upgradeCollection, 
                 killEnemyCounterViewFactory, 
                 backgroundMusicViewFactory, 
@@ -113,9 +95,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 tutorialService,
                 advertisingService,
                 formService,
-                interstitialShowerViewFactory,
                 scoreCounterViewFactory,
-                upgradeService,
                 upgradeControllerViewFactory)
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
@@ -125,7 +105,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
         protected override GameModels LoadModels(IScenePayload scenePayload)
         {
-            Debug.Log("Load Models");
             _loadService.LoadAll();
             
             Tutorial tutorial = _entityRepository.Get<Tutorial>(ModelId.Tutorial);

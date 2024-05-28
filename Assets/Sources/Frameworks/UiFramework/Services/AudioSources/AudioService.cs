@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sources.Frameworks.UiFramework.Presentation.AudioSources;
 using Sources.Frameworks.UiFramework.Presentation.AudioSources.Types;
-using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Views;
 using Sources.Frameworks.UiFramework.PresentationsInterfaces.AudioSources;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.AudioSources;

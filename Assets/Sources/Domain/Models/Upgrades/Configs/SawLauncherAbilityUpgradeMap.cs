@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Sources.Domain.Models.Upgrades.Configs.Dictionaries;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Domain.Models.Upgrades.Configs
 {
@@ -12,7 +11,9 @@ namespace Sources.Domain.Models.Upgrades.Configs
     public class SawLauncherAbilityUpgradeMap : ScriptableObject
     {
         [SerializeField] private IntSerializedDictionary _map;
+        [SerializeField] private float _rotateSpeed;
         
+        public float RotateSpeed => _rotateSpeed;
         public IReadOnlyDictionary<int, int> Map => _map;
     }
 }

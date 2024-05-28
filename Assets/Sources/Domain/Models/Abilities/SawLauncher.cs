@@ -1,4 +1,4 @@
-﻿using Sources.DomainInterfaces.Upgrades;
+﻿using Sources.DomainInterfaces.Models.Upgrades;
 
 namespace Sources.Domain.Models.Abilities
 {

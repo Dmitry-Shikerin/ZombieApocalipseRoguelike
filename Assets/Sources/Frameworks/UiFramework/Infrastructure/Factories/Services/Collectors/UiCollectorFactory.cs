@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Buttons;
-using Sources.Frameworks.UiFramework.Presentation.Forms;
 using Sources.Frameworks.UiFramework.Presentation.Views;
 using Sources.Presentations.UI.Huds;
 
@@ -35,17 +34,13 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Colle
         private void CreateFormButtons(IEnumerable<UiButton> formButtons)
         {
             foreach (UiButton formButton in formButtons)
-            {
                 _uiButtonFactory.Create(formButton);
-            }
         }
 
         private void CreateUiContainers(IEnumerable<UiView> containers)
         {
             foreach (UiView container in containers)
-            {
                 _uiViewFactory.Create(container);
-            }
         }
     }
 }

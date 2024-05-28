@@ -1,4 +1,4 @@
-﻿using Sources.DomainInterfaces.Upgrades;
+﻿using Sources.DomainInterfaces.Models.Upgrades;
 using Sources.Presentations.Views.Upgrades;
 using Sources.PresentationsInterfaces.Views.Upgrades;
 

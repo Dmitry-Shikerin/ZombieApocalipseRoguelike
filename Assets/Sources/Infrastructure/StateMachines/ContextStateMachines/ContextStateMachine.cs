@@ -10,12 +10,12 @@ namespace Sources.Infrastructure.StateMachines.ContextStateMachines
         private IContextState _currentState;
         private bool _isRunning;
 
-        public ContextStateMachine(IContextState firstState)
+        protected ContextStateMachine(IContextState firstState)
         {
             _currentState = firstState ?? throw new ArgumentNullException(nameof(firstState));
         }
 
-        public void Run()
+        protected void Run()
         {
             if(_isRunning)
                 return;
@@ -24,7 +24,7 @@ namespace Sources.Infrastructure.StateMachines.ContextStateMachines
             _isRunning = true;
         }
 
-        public void Stop()
+        protected void Stop()
         {
             if(_isRunning == false)
                 return;
@@ -43,7 +43,7 @@ namespace Sources.Infrastructure.StateMachines.ContextStateMachines
         public void Apply(IContext context) => 
             _currentState?.Apply(context, this);
 
-        public void Update(float deltaTime) => 
+        protected void Update(float deltaTime) => 
             _currentState?.Update(deltaTime);
 
     }

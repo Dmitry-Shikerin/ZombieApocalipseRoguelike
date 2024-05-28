@@ -3,8 +3,8 @@ using Sources.Controllers.Presenters.Gameplay;
 using Sources.Domain.Models.Gameplay;
 using Sources.DomainInterfaces.Models.Characters;
 using Sources.DomainInterfaces.Models.Gameplay;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Leaderboads;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
-using Sources.InfrastructureInterfaces.Services.YandexSDKServices;
 using Sources.PresentationsInterfaces.Views.Gameplay;
 
 namespace Sources.Infrastructure.Factories.Controllers.Presenters.Gameplay

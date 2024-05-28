@@ -12,7 +12,6 @@ namespace Sources.Presentations.Views.Characters
         [Required] [SerializeField] private ParticleSystem _healParticleSystem;
         [Required] [SerializeField] private FirstAidKitTrigger _firstAidKitTrigger;
         
-        
         public void TakeDamage(int damage) =>
             Presenter.TakeDamage(damage);
 

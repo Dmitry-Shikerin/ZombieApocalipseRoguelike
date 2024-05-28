@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Sources.Frameworks.UiFramework.Domain.Commands;
-using Sources.Frameworks.UiFramework.Presentation.Buttons;
 using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
 
-namespace Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons
+namespace Sources.Frameworks.UiFramework.ServicesInterfaces.Buttons
 {
     public interface IUiButtonService
     {

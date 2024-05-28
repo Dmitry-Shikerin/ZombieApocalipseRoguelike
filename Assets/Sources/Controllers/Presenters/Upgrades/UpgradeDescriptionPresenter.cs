@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Common;
-using Sources.DomainInterfaces.Upgrades;
+using Sources.DomainInterfaces.Models.Upgrades;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
 using Sources.PresentationsInterfaces.Views.Upgrades;
 
@@ -22,14 +22,8 @@ namespace Sources.Controllers.Presenters.Upgrades
             _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
         }
 
-        public override void Enable()
-        {
+        public override void Enable() =>
             UpdateDescriptionText();
-        }
-
-        public override void Disable()
-        {
-        }
 
         private void UpdateDescriptionText()
         {

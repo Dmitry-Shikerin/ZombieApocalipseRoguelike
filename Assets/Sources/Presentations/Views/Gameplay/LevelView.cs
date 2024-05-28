@@ -1,5 +1,4 @@
-﻿using System;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using Sources.Presentations.UI.Buttons;
 using Sources.Presentations.UI.Images;
 using Sources.PresentationsInterfaces.UI.Buttons;

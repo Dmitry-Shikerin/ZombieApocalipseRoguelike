@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using Sirenix.OdinInspector;
-using Sources.Controllers.Abilities;
+using Sources.Controllers.Presenters.Abilities;
 using Sources.PresentationsInterfaces.Views.Abilities;
 using UnityEngine;
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using Sources.Controllers.Common;
-using Sources.DomainInterfaces.Players;
+using Sources.DomainInterfaces.Models.Players;
 using Sources.PresentationsInterfaces.Views.Players;
 
-namespace Sources.Controllers.Players
+namespace Sources.Controllers.Presenters.Players
 {
     public class PlayerWalletPresenter : PresenterBase
     {

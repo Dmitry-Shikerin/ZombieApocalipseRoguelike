@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sources.Controllers.Bears.Attacks;
+using Sources.Domain.Models.Bears.Attacks;
 using Sources.Domain.Models.Constants.LayerMasks;
-using Sources.Infrastructure.Services.Overlaps;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.InfrastructureInterfaces.Services.Overlaps;
 using Sources.Presentations.Views.Enemies;
@@ -40,18 +39,11 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
             _bearView.SetTarget(null);
         }
 
-        public override void Exit()
-        {
-        }
-
-        public override void Update(float deltaTime)
-        {
+        public override void Update(float deltaTime) =>
             FindEnemy();
-        }
 
         private void FindEnemy()
         {
-            //TODO порефакторить попозже когда доделается логика
             if (_bearView.TargetEnemyHealth != null)
                 return;
 

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Sources.Controllers.Presenters.Upgrades.Controllers;
-using Sources.PresentationsInterfaces.Views.Upgrades;
 using Sources.PresentationsInterfaces.Views.Upgrades.Controllers;
 using UnityEngine;
 

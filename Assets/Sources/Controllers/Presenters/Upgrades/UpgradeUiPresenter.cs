@@ -1,6 +1,6 @@
 ﻿using System;
 using Sources.Controllers.Common;
-using Sources.DomainInterfaces.Upgrades;
+using Sources.DomainInterfaces.Models.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.PresentationsInterfaces.UI.Images;
 using Sources.PresentationsInterfaces.Views.Upgrades;
@@ -32,10 +32,8 @@ namespace Sources.Controllers.Presenters.Upgrades
             _upgrader.LevelChanged += OnLevelChanged;
         }
 
-        public override void Disable()
-        {
+        public override void Disable() =>
             _upgrader.LevelChanged -= OnLevelChanged;
-        }
 
         private void OnLevelChanged()
         {

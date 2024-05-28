@@ -3,7 +3,6 @@ using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Payloads;
 using Sources.InfrastructureInterfaces.Services.SceneServices;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Sources.App.Core
 {
@@ -16,8 +15,6 @@ namespace Sources.App.Core
 
         private async void Start()
         {
-            //Todo ловлю Аргумент нал
-            //Todo добавить переход на main menu
             try
             {
                 await _sceneService.ChangeSceneAsync(

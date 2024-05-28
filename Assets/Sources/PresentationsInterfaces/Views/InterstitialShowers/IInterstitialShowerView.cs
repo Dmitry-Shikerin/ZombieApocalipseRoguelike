@@ -1,5 +1,4 @@
-﻿using Sources.Frameworks.UiFramework.Presentation.Texts;
-using Sources.PresentationsInterfaces.UI.Texts;
+﻿using Sources.PresentationsInterfaces.UI.Texts;
 
 namespace Sources.PresentationsInterfaces.Views.InterstitialShowers
 {

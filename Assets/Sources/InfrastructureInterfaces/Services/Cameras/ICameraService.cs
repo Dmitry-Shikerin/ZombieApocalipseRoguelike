@@ -1,9 +1,6 @@
 ﻿using System;
-using Sources.ControllersInterfaces.ControllerLifetimes;
-using Sources.InfrastructureInterfaces.Services.StatesLifetimes;
 using Sources.Presentations.Views.Cameras.Types;
 using Sources.PresentationsInterfaces.Views.Cameras.Points;
-using UnityEngine;
 
 namespace Sources.InfrastructureInterfaces.Services.Cameras
 {

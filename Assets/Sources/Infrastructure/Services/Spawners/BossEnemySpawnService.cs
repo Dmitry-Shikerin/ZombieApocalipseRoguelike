@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Enemies;
 using Sources.Domain.Models.Enemies.Bosses;
 using Sources.Domain.Models.Gameplay;
@@ -28,11 +29,11 @@ namespace Sources.Infrastructure.Services.Spawners
         public IBossEnemyView Spawn(KillEnemyCounter killEnemyCounter, Vector3 position)
         {
             BossEnemy bossEnemy = new BossEnemy(
-                new EnemyHealth(200), 
-                new EnemyAttacker(10), 
-                2f,
-                2f,
-                5f);
+                new EnemyHealth(BossEnemyConst.Health), 
+                new EnemyAttacker(BossEnemyConst.Damage), 
+                BossEnemyConst.StunTime,
+                BossEnemyConst.WalkSpeed,
+                BossEnemyConst.RunSpeed);
             IBossEnemyView bossEnemyView = SpawnFromPool(bossEnemy, killEnemyCounter) ?? 
                                            _bossEnemyViewFactory.Create(bossEnemy, killEnemyCounter);
             bossEnemyView.DisableNavmeshAgent();

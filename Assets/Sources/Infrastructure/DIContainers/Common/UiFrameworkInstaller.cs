@@ -3,14 +3,15 @@ using Sources.Frameworks.UiFramework.Infrastructure.Factories.Controllers.Views;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Collectors;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms;
-using Sources.Frameworks.UiFramework.Infrastructure.Services.Buttons;
-using Sources.Frameworks.UiFramework.Infrastructure.Services.Forms;
 using Sources.Frameworks.UiFramework.Services.AudioSources;
 using Sources.Frameworks.UiFramework.Services.Buttons;
 using Sources.Frameworks.UiFramework.Services.Forms;
 using Sources.Frameworks.UiFramework.Services.Localizations;
+using Sources.Frameworks.UiFramework.Services.Views;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.AudioSources;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Buttons;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
+using Sources.Frameworks.UiFramework.ServicesInterfaces.Views;
 using Zenject;
 
 namespace Sources.Infrastructure.DIContainers.Common
@@ -31,10 +32,8 @@ namespace Sources.Infrastructure.DIContainers.Common
             Container.Bind<UiViewFactory>().AsSingle();
             Container.Bind<UiViewPresenterFactory>().AsSingle();
             
-            //Buttons
             Container.Bind<IUiButtonService>().To<UiButtonService>().AsSingle();
             
-            //Views
             Container.Bind<IUiViewService>().To<UiViewService>().AsSingle();
         }
     }

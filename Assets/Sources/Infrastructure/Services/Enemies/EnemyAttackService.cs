@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Constants.LayerMasks;
-using Sources.Infrastructure.Services.Overlaps;
+using Sources.InfrastructureInterfaces.Services.Enemies;
 using Sources.InfrastructureInterfaces.Services.Overlaps;
 using Sources.Presentations.Views.Characters;
 using UnityEngine;

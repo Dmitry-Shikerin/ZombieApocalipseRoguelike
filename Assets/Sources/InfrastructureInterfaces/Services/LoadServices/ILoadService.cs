@@ -1,4 +1,4 @@
-﻿using Sources.DomainInterfaces.Entities;
+﻿using Sources.DomainInterfaces.Models.Entities;
 
 namespace Sources.InfrastructureInterfaces.Services.LoadServices
 {

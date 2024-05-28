@@ -2,8 +2,8 @@
 using Sources.Controllers.Presenters.Characters.Movements;
 using Sources.Controllers.Presenters.Characters.Movements.States;
 using Sources.Domain.Models.Characters;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Inputs;
-using Sources.Infrastructure.Services.Characters;
 using Sources.Infrastructure.StateMachines.ContextStateMachines.Transitions;
 using Sources.InfrastructureInterfaces.Services.Characters;
 using Sources.InfrastructureInterfaces.Services.InputServices;
@@ -63,7 +63,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
                     if (context is not InputData inputData)
                         return false;
 
-                    if (inputData.MoveDirection.magnitude < 0.01f)
+                    if (inputData.MoveDirection.magnitude < MathConst.Epsilon)
                         return false;
 
                     return true;
@@ -77,7 +77,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
                     if (context is not InputData inputData)
                         return false;
 
-                    if (inputData.MoveDirection.magnitude > 0.01f)
+                    if (inputData.MoveDirection.magnitude > MathConst.Epsilon)
                         return false;
 
                     return true;

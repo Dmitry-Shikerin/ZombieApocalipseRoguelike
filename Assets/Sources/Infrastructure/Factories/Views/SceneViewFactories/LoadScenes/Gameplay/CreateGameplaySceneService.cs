@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sources.Controllers.Bears.Attacks;
 using Sources.Domain.Models.Abilities;
 using Sources.Domain.Models.Bears;
+using Sources.Domain.Models.Bears.Attacks;
 using Sources.Domain.Models.Characters;
 using Sources.Domain.Models.Characters.Attackers;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Data;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
@@ -17,12 +18,11 @@ using Sources.Domain.Models.Weapons;
 using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Collectors;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
-using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdvertisingServices;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
 using Sources.Infrastructure.Factories.Views.Characters;
 using Sources.Infrastructure.Factories.Views.Gameplay;
-using Sources.Infrastructure.Factories.Views.InterstitialShowers;
 using Sources.Infrastructure.Factories.Views.Musics;
 using Sources.Infrastructure.Factories.Views.Settings;
 using Sources.Infrastructure.Factories.Views.Spawners;
@@ -35,14 +35,11 @@ using Sources.InfrastructureInterfaces.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.Saves;
-using Sources.InfrastructureInterfaces.Services.Spawners;
 using Sources.InfrastructureInterfaces.Services.Tutorials;
-using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
 using Sources.Presentations.Views.RootGameObjects;
 using Sources.Utils.CustomCollections;
-using UnityEngine;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.Gameplay
 {
@@ -59,15 +56,12 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             UiCollectorFactory uiCollectorFactory,
             CharacterViewFactory characterViewFactory,
             BearViewFactory bearViewFactory,
-            IUpgradeViewFactory upgradeViewFactory,
             IUpgradeUiFactory upgradeUiFactory,
             ILoadService loadService,
             IEntityRepository entityRepository,
-            IEnemySpawnService enemySpawnService,
             RootGameObject rootGameObject,
             EnemySpawnViewFactory enemySpawnViewFactory,
             ItemSpawnerViewFactory itemSpawnerViewFactory,
-            IUpgradeConfigCollectionService upgradeConfigCollectionService,
             IUpgradeDtoMapper upgradeDtoMapper,
             CustomCollection<Upgrader> upgradeCollection,
             KillEnemyCounterViewFactory killEnemyCounterViewFactory,
@@ -83,25 +77,17 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IEnemySpawnerDtoMapper enemySpawnerDtoMapper,
             IAdvertisingService advertisingService,
             IFormService formService,
-            InterstitialShowerViewFactory interstitialShowerViewFactory,
             ScoreCounterViewFactory scoreCounterViewFactory,
-            IUpgradeService upgradeService,
             UpgradeControllerViewFactory upgradeControllerViewFactory)
             : base(
                 gameplayHud,
                 uiCollectorFactory,
                 characterViewFactory,
                 bearViewFactory,
-                upgradeViewFactory,
                 upgradeUiFactory,
-                loadService,
-                entityRepository,
-                enemySpawnService,
                 rootGameObject,
                 enemySpawnViewFactory,
                 itemSpawnerViewFactory,
-                upgradeConfigCollectionService,
-                upgradeDtoMapper,
                 upgradeCollection,
                 killEnemyCounterViewFactory,
                 backgroundMusicViewFactory,
@@ -115,9 +101,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 tutorialService,
                 advertisingService,
                 formService,
-                interstitialShowerViewFactory,
                 scoreCounterViewFactory,
-                upgradeService,
                 upgradeControllerViewFactory)
         {
             _loadService = loadService;
@@ -136,7 +120,8 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
             Level level = CreateLevel(scenePayload.SceneId);
 
-            SavedLevel savedLevel = new SavedLevel(ModelId.SavedLevel, false, scenePayload.SceneId);
+            SavedLevel savedLevel = new SavedLevel(
+                ModelId.SavedLevel, false, scenePayload.SceneId);
             _entityRepository.Add(savedLevel);
 
             PlayerWallet playerWallet = new PlayerWallet(0, ModelId.PlayerWallet);
@@ -158,7 +143,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
             ScoreCounter scoreCounter = CreateScoreCounter();
             
-            MiniGun minigun = new MiniGun(miniGunAttackUpgrader, 0.1f);
+            MiniGun minigun = new MiniGun(miniGunAttackUpgrader, MiniGunConst.AttackDaley);
             CharacterHealth characterHealth = new CharacterHealth(characterHealthUpgrader);
             Character character = new Character(
                 playerWallet,
@@ -180,7 +165,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
                 bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
 
-            Debug.Log("CreateModels");
             return new GameModels(
                 bearMassAttackUpgrader,
                 bearAttackUpgrader,

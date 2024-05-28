@@ -1,5 +1,5 @@
 ﻿using Sources.Domain.Models.Upgrades.Configs;
-using Sources.Infrastructure.Factories.Controllers.Abilities;
+using Sources.Infrastructure.Factories.Controllers.Presenters.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Weapons;
 using Sources.Infrastructure.Factories.Views.Abilities;
 using Sources.Infrastructure.Factories.Views.Bullets;

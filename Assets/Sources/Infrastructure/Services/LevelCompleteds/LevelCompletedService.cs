@@ -1,17 +1,14 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.DomainInterfaces.Models.Gameplay;
 using Sources.DomainInterfaces.Models.Spawners;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.Presentation.Views.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
-using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdverticingServices;
-using Sources.Infrastructure.Services.Repositories;
+using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdvertisingServices;
 using Sources.InfrastructureInterfaces.Services.LevelCompleteds;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Repositories;
-using UnityEngine;
 
 namespace Sources.Infrastructure.Services.LevelCompleteds
 {
@@ -33,20 +30,17 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
-            _interstitialAdService = interstitialAdService ?? throw new ArgumentNullException(nameof(interstitialAdService));
+            _interstitialAdService = interstitialAdService ?? 
+                                     throw new ArgumentNullException(nameof(interstitialAdService));
         }
         
         private bool IsCompleted => _killEnemyCounter.KillZombies >= _enemySpawner.SumAllEnemies;
 
-        public void Enable()
-        {
+        public void Enable() =>
             _killEnemyCounter.KillZombiesCountChanged += OnKillZombiesCountChanged;
-        }
 
-        public void Disable()
-        {
+        public void Disable() =>
             _killEnemyCounter.KillZombiesCountChanged -= OnKillZombiesCountChanged;
-        }
 
         public void Register(IKillEnemyCounter killEnemyCounter, IEnemySpawner enemySpawner)
         {
@@ -60,10 +54,8 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
                 return;
 
             SavedLevel savedLevel = _entityRepository.Get<SavedLevel>(ModelId.SavedLevel);
-            // Debug.Log("Saved level: " + savedLevel.SavedLevelId);
             Level level = _entityRepository.Get<Level>(savedLevel.SavedLevelId);
             level.Complete();
-            // Debug.Log($"Current level : {level.Id}, is completed: {level.IsCompleted}");
             _loadService.Save(level);
             _loadService.ClearAll();
             _formService.Show(FormId.LevelCompleted);

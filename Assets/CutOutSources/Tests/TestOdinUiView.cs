@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using Sources.Frameworks.UiFramework.Domain.Commands;
 using Sources.Frameworks.UiFramework.Domain.Constants;
 using Sources.Frameworks.UiFramework.Presentation.CommonTypes;
-using Sources.Frameworks.UiFramework.Presentation.Forms.Types;
+using Sources.Frameworks.UiFramework.Presentation.Views.Types;
 using UnityEngine;
 
 namespace CutOutSources.Tests
