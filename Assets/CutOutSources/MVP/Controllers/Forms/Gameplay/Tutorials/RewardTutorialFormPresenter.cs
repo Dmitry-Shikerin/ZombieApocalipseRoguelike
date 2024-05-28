@@ -1,6 +1,4 @@
-﻿using Sources.Controllers.Common;
-
-namespace Sources.Controllers.Presenters.Forms.Gameplay.Tutorials
+﻿namespace Sources.Controllers.Presenters.Forms.Gameplay.Tutorials
 {
     public class RewardTutorialFormPresenter : PresenterBase
     {

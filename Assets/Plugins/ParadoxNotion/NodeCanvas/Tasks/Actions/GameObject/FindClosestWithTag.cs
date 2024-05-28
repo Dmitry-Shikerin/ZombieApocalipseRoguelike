@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using NodeCanvas.Framework;
+﻿using NodeCanvas.Framework;
 using ParadoxNotion.Design;
 using UnityEngine;
 

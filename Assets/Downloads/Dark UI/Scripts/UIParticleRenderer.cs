@@ -3,8 +3,6 @@
 /// http://forum.unity3d.com/threads/free-script-particle-systems-in-ui-screen-space-overlay.406862/
 /// </summary>
 
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 

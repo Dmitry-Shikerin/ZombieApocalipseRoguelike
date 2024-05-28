@@ -1,10 +1,8 @@
 ﻿using System;
-using Sources.Controllers.Common;
 using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Domain.Models.Gameplay;
 using Sources.Domain.Models.Payloads;
-using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.SceneServices;
 using Sources.PresentationsInterfaces.Views.Gameplay;
 using UnityEngine.Events;
@@ -16,7 +14,6 @@ namespace Sources.Controllers.Presenters.Gameplay
         private readonly LevelAvailability _levelAvailability;
         private readonly ILevelAvailabilityView _levelAvailabilityView;
         private readonly ISceneService _sceneService;
-        private readonly IDomainFormService _domainFormService;
 
         public LevelAvailabilityPresenter(
             LevelAvailability levelAvailability, 

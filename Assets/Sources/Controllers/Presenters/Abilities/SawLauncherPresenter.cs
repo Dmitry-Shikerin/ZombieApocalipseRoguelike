@@ -1,5 +1,4 @@
 ﻿using System;
-using Sources.Controllers.Common;
 using Sources.Domain.Models.Abilities;
 using Sources.PresentationsInterfaces.Views.Enemies;
 

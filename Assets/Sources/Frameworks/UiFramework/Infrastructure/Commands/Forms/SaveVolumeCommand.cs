@@ -1,7 +1,6 @@
 ﻿using System;
 using Sources.Domain.Models.Data.Ids;
 using Sources.Frameworks.UiFramework.Domain.Commands;
-using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands;
 using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Views;
 using Sources.InfrastructureInterfaces.Services.LoadServices;
 

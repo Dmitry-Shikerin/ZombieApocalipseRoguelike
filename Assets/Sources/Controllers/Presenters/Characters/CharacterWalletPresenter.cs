@@ -1,5 +1,4 @@
 ﻿using System;
-using Sources.Controllers.Common;
 using Sources.Domain.Models.Players;
 using Sources.PresentationsInterfaces.Views.RewardItems;
 

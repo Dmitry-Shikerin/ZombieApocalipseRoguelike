@@ -1,15 +1,9 @@
 ﻿using System;
-using Sources.Controllers.Common.Forms;
-using Sources.Controllers.Presenters.Forms.Gameplay;
-using Sources.Controllers.Presenters.Forms.Gameplay.Tutorials;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.Gameplay;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.Gameplay.Tutorials;
 using Sources.Infrastructure.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.Presentations.UI.Huds;
-using Sources.Presentations.Views.Forms.Common;
-using Sources.Presentations.Views.Forms.Gameplay;
-using Sources.Presentations.Views.Forms.Gameplay.Tutorials;
 
 namespace Sources.Infrastructure.Factories.Services.FormServices
 {

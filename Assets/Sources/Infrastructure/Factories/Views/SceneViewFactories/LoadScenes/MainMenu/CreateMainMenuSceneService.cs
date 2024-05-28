@@ -13,7 +13,6 @@ using Sources.InfrastructureInterfaces.Services.LoadServices;
 using Sources.InfrastructureInterfaces.Services.Repositories;
 using Sources.InfrastructureInterfaces.Services.Volumes;
 using Sources.Presentations.UI.Huds;
-using UnityEngine;
 
 namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.MainMenu
 {

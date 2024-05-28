@@ -23,7 +23,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
             CharacterAttackerView characterAttackerView)
         {
             CharacterAttackerPresenter characterAttackerPresenter = 
-                _characterAttackerPresenterFactory.Create(characterAttacker, characterAttackerView);
+                _characterAttackerPresenterFactory.Create(characterAttacker);
             
             characterAttackerView.Construct(characterAttackerPresenter);
             

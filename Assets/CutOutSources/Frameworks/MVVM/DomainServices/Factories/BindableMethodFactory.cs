@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using Sources.Frameworks.MVVM.Domain.Methods;
-using Sources.MVVMFrameworks.Domain.Methods;
 using Sources.MVVMFrameworks.DomainInterfaces.Services.Factories;
 
 namespace Sources.MVVMFrameworks.DomainServices.Factories

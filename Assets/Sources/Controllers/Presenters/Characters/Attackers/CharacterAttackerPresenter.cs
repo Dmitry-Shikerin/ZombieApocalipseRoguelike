@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Threading;
-using Sources.Controllers.Common;
 using Sources.Domain.Models.Characters.Attackers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
-using Sources.PresentationsInterfaces.Views.Character;
 
 namespace Sources.Controllers.Presenters.Characters.Attackers
 {
     public class CharacterAttackerPresenter : PresenterBase
     {
         private readonly CharacterAttacker _characterAttacker;
-        private readonly ICharacterAttackerView _characterAttackerView;
         private readonly IInputService _inputService;
         private readonly IUpdateRegister _updateRegister;
 
@@ -19,13 +16,10 @@ namespace Sources.Controllers.Presenters.Characters.Attackers
 
         public CharacterAttackerPresenter(
             CharacterAttacker characterAttacker,
-            ICharacterAttackerView characterAttackerView,
             IInputService inputService,
             IUpdateRegister updateRegister)
         {
             _characterAttacker = characterAttacker ?? throw new ArgumentNullException(nameof(characterAttacker));
-            _characterAttackerView = characterAttackerView ??
-                                     throw new ArgumentNullException(nameof(characterAttackerView));
             _inputService = inputService ?? throw new ArgumentNullException(nameof(inputService));
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
         }

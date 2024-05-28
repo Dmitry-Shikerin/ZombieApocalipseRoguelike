@@ -1,10 +1,6 @@
-﻿
-using System.Collections.Generic;
-using Sources.Presentations.Views.Bears;
-using Sources.PresentationsInterfaces.Views.Character;
+﻿using Sources.PresentationsInterfaces.Views.Character;
 using Sources.PresentationsInterfaces.Views.Enemies;
 using Sources.PresentationsInterfaces.Views.NawMeshAgents;
-using UnityEngine;
 
 namespace Sources.PresentationsInterfaces.Views.Bears
 {

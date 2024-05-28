@@ -1,6 +1,5 @@
 ﻿using System;
 using Sources.Frameworks.UiFramework.Domain.Commands;
-using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands;
 using Sources.Frameworks.UiFramework.InfrastructureInterfaces.Commands.Views;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 

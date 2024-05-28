@@ -6,7 +6,6 @@ using Sources.Frameworks.UiFramework.Infrastructure.Factories.Services.Collector
 using Sources.Frameworks.UiFramework.Presentation.Views.Types;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Forms;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdvertisingServices;
-using Sources.Infrastructure.Factories.Services.FormServices;
 using Sources.Infrastructure.Factories.Views.Bears;
 using Sources.Infrastructure.Factories.Views.Cameras;
 using Sources.Infrastructure.Factories.Views.Characters;
@@ -36,7 +35,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
     public abstract class LoadGameplaySceneServiceBase : ILoadSceneService
     {
         private readonly GameplayHud _gameplayHud;
-        private readonly MVPGameplayFormServiceFactory _mvpGameplayFormServiceFactory;
         private readonly UiCollectorFactory _uiCollectorFactory;
         private readonly CharacterViewFactory _characterViewFactory;
         private readonly BearViewFactory _bearViewFactory;

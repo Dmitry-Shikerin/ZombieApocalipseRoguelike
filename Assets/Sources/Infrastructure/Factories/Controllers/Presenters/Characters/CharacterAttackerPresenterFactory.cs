@@ -3,7 +3,6 @@ using Sources.Controllers.Presenters.Characters.Attackers;
 using Sources.Domain.Models.Characters.Attackers;
 using Sources.InfrastructureInterfaces.Services.InputServices;
 using Sources.InfrastructureInterfaces.Services.UpdateServices;
-using Sources.PresentationsInterfaces.Views.Character;
 
 namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
 {
@@ -21,11 +20,10 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
         }
 
         public CharacterAttackerPresenter Create(
-            CharacterAttacker characterAttacker,
-            ICharacterAttackerView characterAttackerView)
+            CharacterAttacker characterAttacker)
         {
             return new CharacterAttackerPresenter(
-                characterAttacker, characterAttackerView, _inputService, _updateRegister);
+                characterAttacker, _inputService, _updateRegister);
         }
     }
 }

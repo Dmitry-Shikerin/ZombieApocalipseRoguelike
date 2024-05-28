@@ -1,7 +1,5 @@
-﻿using System;
-using Sources.Domain.Components.Visibilities;
+﻿using Sources.Domain.Components.Visibilities;
 using Sources.Domain.Models.Forms.MainMenu;
-using Sources.InfrastructureInterfaces.Services.Forms;
 
 namespace Sources.Infrastructure.Factories.Domain.Forms.MainMenu
 {

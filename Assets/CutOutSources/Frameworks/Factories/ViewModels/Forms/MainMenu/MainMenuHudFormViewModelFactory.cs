@@ -1,5 +1,4 @@
 ﻿using System;
-using Sources.Controllers.ModelViews.Components;
 using Sources.Controllers.ModelViews.Forms.MainMenu;
 using Sources.ControllersInterfaces.ViewModels;
 using Sources.Domain.Models.Forms.MainMenu;

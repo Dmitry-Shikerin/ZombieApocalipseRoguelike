@@ -1,5 +1,4 @@
 ﻿using System;
-using Sources.Domain.Models.Bears;
 using Sources.Infrastructure.StateMachines.FiniteStateMachines.States;
 using Sources.PresentationsInterfaces.Views.Bears;
 

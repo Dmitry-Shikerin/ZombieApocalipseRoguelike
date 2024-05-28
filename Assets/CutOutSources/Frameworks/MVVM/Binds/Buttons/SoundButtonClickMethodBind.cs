@@ -1,5 +1,4 @@
-﻿using System;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using Sources.Frameworks.MVVM.Binds.Buttons;
 using UnityEngine;
 

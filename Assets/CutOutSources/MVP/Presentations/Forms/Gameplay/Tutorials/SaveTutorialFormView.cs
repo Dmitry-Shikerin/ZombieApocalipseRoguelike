@@ -4,7 +4,6 @@ using Sources.Presentations.Views.Forms.Common;
 using Sources.PresentationsInterfaces.UI.Buttons;
 using Sources.PresentationsInterfaces.Views.Forms.Gameplay.Tutorials;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Presentations.Views.Forms.Gameplay.Tutorials
 {

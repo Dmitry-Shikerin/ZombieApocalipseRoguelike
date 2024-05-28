@@ -1,5 +1,4 @@
 ﻿using System;
-using Sources.Controllers.Common;
 using Sources.Domain.Models.Weapons;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Spawners;

@@ -1,5 +1,4 @@
 ﻿using System;
-using Sources.Controllers.Common;
 using Sources.Domain.Models.Gameplay;
 using Sources.DomainInterfaces.Models.Spawners;
 using Sources.PresentationsInterfaces.UI.Sliders;

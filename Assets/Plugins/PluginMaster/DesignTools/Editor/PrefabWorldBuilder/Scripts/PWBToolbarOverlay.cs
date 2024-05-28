@@ -13,7 +13,6 @@ THE SOFTWARE.
 */
 #if UNITY_2021_2_OR_NEWER
 using UnityEngine;
-using UnityEditor.Overlays;
 using UnityEditor.Toolbars;
 using UnityEngine.UIElements;
 

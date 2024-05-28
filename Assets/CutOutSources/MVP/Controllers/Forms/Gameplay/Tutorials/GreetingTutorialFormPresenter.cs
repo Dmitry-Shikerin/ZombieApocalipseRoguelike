@@ -1,7 +1,5 @@
 ﻿using System;
-using Sources.Controllers.Common;
 using Sources.InfrastructureInterfaces.Services.Forms;
-using Sources.PresentationsInterfaces.Views.Forms.Gameplay;
 using Sources.PresentationsInterfaces.Views.Forms.Gameplay.Tutorials;
 
 namespace Sources.Controllers.Presenters.Forms.Gameplay.Tutorials

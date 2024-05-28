@@ -3,8 +3,6 @@
 using UnityEngine;
 using UnityEditor;
 #if UNITY_5_3_OR_NEWER
-using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
 #endif
 using System;
 using System.Collections.Generic;

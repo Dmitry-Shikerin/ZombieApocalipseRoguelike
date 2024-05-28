@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using NodeCanvas.Framework;
 using ParadoxNotion;
 using ParadoxNotion.Design;

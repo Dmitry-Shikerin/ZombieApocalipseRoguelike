@@ -1,5 +1,4 @@
-﻿using Sources.MVVMFrameworks.DomainInterfaces.Services;
-using Sources.MVVMFrameworks.DomainInterfaces.Services.Factories;
+﻿using Sources.MVVMFrameworks.DomainInterfaces.Services.Factories;
 
 namespace Sources.MVVMFrameworks.DomainInterfaces.Properties
 {

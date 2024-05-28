@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading;
 using Sirenix.Utilities;
-using Sources.Controllers.Common;
 using Sources.DomainInterfaces.Models.Healths;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.Common;

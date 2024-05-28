@@ -23,7 +23,6 @@ using Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.MainM
 using Sources.Infrastructure.Services.EnemySpawners;
 using Sources.Infrastructure.Services.PauseServices;
 using Sources.Infrastructure.Services.Upgrades;
-using Sources.Infrastructure.Services.Volumes;
 using Sources.InfrastructureInterfaces.Services.EnemySpawners;
 using Sources.InfrastructureInterfaces.Services.PauseServices;
 using Sources.InfrastructureInterfaces.Services.Upgrades;

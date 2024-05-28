@@ -1,7 +1,5 @@
 ﻿using NodeCanvas.Framework;
 using ParadoxNotion.Design;
-using UnityEngine.UI;
-using UnityEngine;
 
 namespace NodeCanvas.Tasks.Conditions
 {

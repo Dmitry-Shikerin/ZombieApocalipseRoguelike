@@ -1,7 +1,6 @@
 ﻿using System;
 using JetBrains.Annotations;
 using Sources.ControllersInterfaces.ViewModels;
-using Sources.Domain.Models.Forms.Gameplay;
 using Sources.Domain.Models.Forms.MainMenu;
 using Sources.InfrastructureInterfaces.Services.Forms;
 using Sources.MVVMFrameworks.Domain.Attributes;

@@ -7,7 +7,6 @@ using Sources.Frameworks.UiFramework.Presentation.Buttons.Types;
 using Sources.Frameworks.UiFramework.Presentation.Views.Types;
 using Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 {

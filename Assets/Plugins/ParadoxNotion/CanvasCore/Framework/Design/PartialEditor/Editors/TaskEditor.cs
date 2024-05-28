@@ -7,7 +7,6 @@ using ParadoxNotion;
 using ParadoxNotion.Design;
 using NodeCanvas.Framework;
 using NodeCanvas.Framework.Internal;
-using System.Linq;
 
 namespace NodeCanvas.Editor
 {

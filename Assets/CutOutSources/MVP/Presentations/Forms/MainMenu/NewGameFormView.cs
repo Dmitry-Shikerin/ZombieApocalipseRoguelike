@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Forms.MainMenu;
 using Sources.Presentations.UI.Buttons;
 using Sources.Presentations.Views.Forms.Common;

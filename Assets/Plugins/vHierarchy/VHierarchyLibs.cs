@@ -6,12 +6,9 @@ using System.IO;
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
 using System.Reflection;
 using UnityEngine.Experimental.Rendering;
 using static VHierarchy.Libs.VUtils;
-using static VHierarchy.Libs.VGUI;
 
 
 namespace VHierarchy.Libs

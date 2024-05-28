@@ -1,11 +1,6 @@
 #if UNITY_EDITOR
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using static VHierarchy.Libs.VUtils;
-using static VHierarchy.Libs.VGUI;
-
 
 
 namespace VHierarchy

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Audio;
 
 namespace Michsky.UI.Dark
 {

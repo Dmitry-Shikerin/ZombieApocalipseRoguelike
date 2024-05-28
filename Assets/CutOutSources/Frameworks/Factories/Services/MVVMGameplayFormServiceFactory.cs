@@ -5,7 +5,6 @@ using Sources.Frameworks.MVVM.InfrastructureInterfaces;
 using Sources.Infrastructure.Factories.Domain.Forms.Gameplay;
 using Sources.Infrastructure.Services.Forms;
 using Sources.InfrastructureInterfaces.Services.Forms;
-using Sources.Presentations.BindableViews.Forms.Gameplay;
 using Sources.Presentations.UI.Huds;
 
 namespace Sources.Infrastructure.Factories.Services.FormServices

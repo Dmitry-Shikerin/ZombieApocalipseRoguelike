@@ -4,7 +4,6 @@ using Sources.ControllersInterfaces.Scenes;
 using Sources.DomainInterfaces.Models.Payloads;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.AudioSources;
 using Sources.Frameworks.UiFramework.ServicesInterfaces.Localizations;
-using Sources.Frameworks.YandexSdcFramework.Services.Stickies;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Focuses;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServices;
 using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.Stickies;

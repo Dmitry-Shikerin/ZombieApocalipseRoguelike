@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Linq;
 using ParadoxNotion.Serialization;
 using ParadoxNotion.Services;
-using System.Threading.Tasks;
 
 namespace ParadoxNotion.Design
 {
