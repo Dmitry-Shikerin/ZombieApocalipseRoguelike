@@ -71,7 +71,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
 
                     if (isContinueSound)
                         _pauseService.ContinueSound();
-                    
+
                     StartTimer(_cancellationTokenSource.Token);
                 });
         }
@@ -91,7 +91,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.AdvertisingServices
 
                 return;
             }
-            
+
             bool isContinue = false;
             bool isContinueSound = false;
 

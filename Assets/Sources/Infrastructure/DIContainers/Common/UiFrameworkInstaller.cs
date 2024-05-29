@@ -31,9 +31,9 @@ namespace Sources.Infrastructure.DIContainers.Common
 
             Container.Bind<UiViewFactory>().AsSingle();
             Container.Bind<UiViewPresenterFactory>().AsSingle();
-            
+
             Container.Bind<IUiButtonService>().To<UiButtonService>().AsSingle();
-            
+
             Container.Bind<IUiViewService>().To<UiViewService>().AsSingle();
         }
     }

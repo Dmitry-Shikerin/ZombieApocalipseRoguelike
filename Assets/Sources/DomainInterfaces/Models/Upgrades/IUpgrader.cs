@@ -9,8 +9,11 @@ namespace Sources.DomainInterfaces.Models.Upgrades
         event Action LevelChanged;
 
         public int MaxLevel { get; }
+
         int CurrentLevel { get; }
+
         IReadOnlyList<int> MoneyPerUpgrades { get; }
+
         float CurrentAmount { get; }
     }
 }

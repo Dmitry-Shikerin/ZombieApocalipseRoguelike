@@ -5,7 +5,8 @@ namespace Sources.PresentationsInterfaces.Views.Character.EnemyIndicators
 {
     public interface IEnemyIndicatorView
     {
-        Vector3 Position { get;}
+        Vector3 Position { get; }
+
         IReadOnlyList<IEnemyIndicatorArrow> Arrows { get; }
     }
 }

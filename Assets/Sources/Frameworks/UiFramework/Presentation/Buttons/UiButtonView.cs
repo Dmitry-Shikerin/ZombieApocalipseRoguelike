@@ -11,7 +11,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Buttons
     {
         [TabGroup("Components")]
         [SerializeField] private Button _button;
-        
+
         public void AddClickListener(UnityAction onClick) =>
             _button.onClick.AddListener(onClick);
 
@@ -23,6 +23,5 @@ namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 
         public void Disable() =>
             _button.enabled = false;
-
     }
 }

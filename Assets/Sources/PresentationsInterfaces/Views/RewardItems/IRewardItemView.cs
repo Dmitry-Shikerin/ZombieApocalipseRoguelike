@@ -3,6 +3,7 @@
     public interface IRewardItemView : IView
     {
         int RewardAmount { get; }
+
         void SetRewardAmount(int rewardAmount);
     }
 }

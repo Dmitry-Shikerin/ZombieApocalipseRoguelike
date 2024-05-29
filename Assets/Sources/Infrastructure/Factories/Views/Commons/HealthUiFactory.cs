@@ -13,16 +13,16 @@ namespace Sources.Infrastructure.Factories.Views.Commons
 
         public HealthUiFactory(HealthUiPresenterFactory healthUiPresenterFactory)
         {
-            _healthUiPresenterFactory = healthUiPresenterFactory ?? 
+            _healthUiPresenterFactory = healthUiPresenterFactory ??
                                         throw new ArgumentNullException(nameof(healthUiPresenterFactory));
         }
 
         public IHealthUi Create(IHealth health, HealthUi healthUi)
         {
             HealthUiPresenter healthUiPresenter = _healthUiPresenterFactory.Create(health, healthUi);
-            
+
             healthUi.Construct(healthUiPresenter);
-            
+
             return healthUi;
         }
     }

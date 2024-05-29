@@ -9,7 +9,7 @@ namespace Sources.Infrastructure.Services.Bears
         {
             Vector3 lookDirection = enemyPosition - bearPosition;
             lookDirection.y = bearPosition.y;
-            
+
             return Vector3.SignedAngle(Vector3.forward, lookDirection, Vector3.up);
         }
     }

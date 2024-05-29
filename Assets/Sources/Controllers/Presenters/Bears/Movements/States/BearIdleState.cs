@@ -14,24 +14,19 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
     {
         private const float FindRadius = 5f;
 
-        private readonly BearAttacker _bearAttacker;
         private readonly IBearAnimationView _bearAnimationView;
         private readonly IOverlapService _overlapService;
         private readonly IBearView _bearView;
 
         public BearIdleState(
-            BearAttacker bearAttacker,
             IBearView bearView,
             IBearAnimationView bearAnimationView,
             IOverlapService overlapService)
         {
-            _bearAttacker = bearAttacker ?? throw new ArgumentNullException(nameof(bearAttacker));
             _bearAnimationView = bearAnimationView ?? throw new ArgumentNullException(nameof(bearAnimationView));
             _overlapService = overlapService ?? throw new ArgumentNullException(nameof(overlapService));
             _bearView = bearView ?? throw new ArgumentNullException(nameof(bearView));
         }
-
-        private IReadOnlyList<EnemyHealthView> _enemies;
 
         public override void Enter()
         {
@@ -51,8 +46,8 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
                 _bearView.CharacterMovementView.Position, FindRadius, Layer.Enemy, Layer.Obstacle);
 
             EnemyHealthView enemy = enemies.FirstOrDefault();
-            
-            if(enemy != null && enemy.enabled == false)
+
+            if (enemy != null && enemy.enabled == false)
                 enemy = null;
 
             _bearView.SetTarget(enemy);

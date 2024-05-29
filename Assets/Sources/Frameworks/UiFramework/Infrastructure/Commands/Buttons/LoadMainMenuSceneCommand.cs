@@ -24,7 +24,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
         }
 
         public ButtonCommandId Id => ButtonCommandId.LoadMainMenuScene;
-        
+
         public void Handle(IUiButton uiButton)
         {
             SavedLevel savedLevel = _entityRepository.Get<SavedLevel>(ModelId.SavedLevel);

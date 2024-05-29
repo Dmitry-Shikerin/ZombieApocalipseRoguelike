@@ -25,13 +25,13 @@ namespace Sources.Controllers.Presenters.Musics
         private float _savedTime;
 
         public BackgroundMusicPresenter(
-            AudioClipCollection audioClipCollection, 
+            AudioClipCollection audioClipCollection,
             IBackgroundMusicView backgroundMusicView,
             IVolumeService volumeService,
             IPauseService pauseService)
         {
-            _audioClipCollection = audioClipCollection 
-                ? audioClipCollection 
+            _audioClipCollection = audioClipCollection
+                ? audioClipCollection
                 : throw new ArgumentNullException(nameof(audioClipCollection));
             _backgroundMusicView = backgroundMusicView ?? throw new ArgumentNullException(nameof(backgroundMusicView));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
@@ -74,7 +74,7 @@ namespace Sources.Controllers.Presenters.Musics
         {
             IAudioSourceView audioSourceView = _backgroundMusicView.BackgroundMusicAudioSource;
             IEnumerable<AudioClip> audioClips = _audioClipCollection.AudioClips.Shuffle();
-            
+
             try
             {
                 while (cancellationToken.IsCancellationRequested == false)
@@ -93,14 +93,15 @@ namespace Sources.Controllers.Presenters.Musics
         }
 
         private async UniTask WaitEnd(
-            AudioClip audioClip, 
-            IAudioSourceView audioSourceView, 
+            AudioClip audioClip,
+            IAudioSourceView audioSourceView,
             CancellationToken cancellationToken)
         {
             while (audioSourceView.Time + BackGroundMusicConst.CorrectOffset < audioClip.length)
             {
-                await UniTask.Delay(_waitTimeSpan, 
-                    ignoreTimeScale: true, 
+                await UniTask.Delay(
+                    _waitTimeSpan,
+                    ignoreTimeScale: true,
                     cancellationToken: cancellationToken);
             }
         }

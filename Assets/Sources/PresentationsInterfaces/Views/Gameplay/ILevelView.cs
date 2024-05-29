@@ -6,6 +6,7 @@ namespace Sources.PresentationsInterfaces.Views.Gameplay
     public interface ILevelView
     {
         IButtonView ButtonView { get; }
+
         IImageView ImageView { get; }
     }
 }

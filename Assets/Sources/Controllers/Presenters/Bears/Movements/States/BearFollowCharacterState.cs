@@ -8,7 +8,7 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
     public class BearFollowCharacterState : FiniteState
     {
         private const float StopDistance = 3f;
-        
+
         private readonly Bear _bear;
         private readonly IBearAnimationView _bearAnimationView;
         private readonly IBearView _bearView;

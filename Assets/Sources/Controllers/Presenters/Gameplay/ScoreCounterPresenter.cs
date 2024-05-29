@@ -35,7 +35,7 @@ namespace Sources.Controllers.Presenters.Gameplay
             _level = level ?? throw new ArgumentNullException(nameof(level));
             _characterHealth = characterHealth ?? throw new ArgumentNullException(nameof(characterHealth));
             _view = view ?? throw new ArgumentNullException(nameof(view));
-            _leaderBoardScoreSetter = leaderBoardScoreSetter ?? 
+            _leaderBoardScoreSetter = leaderBoardScoreSetter ??
                                       throw new ArgumentNullException(nameof(leaderBoardScoreSetter));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
         }

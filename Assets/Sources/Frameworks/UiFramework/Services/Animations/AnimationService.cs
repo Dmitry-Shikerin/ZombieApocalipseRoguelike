@@ -49,6 +49,9 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
         public void Construct(UiAnimator uiAnimator) =>
             _uiAnimator = uiAnimator;
 
+        public void Destroy() =>
+            _cancellationTokenSource.Cancel();
+
         private async void PlayAnimation()
         {
             _cancellationTokenSource.Cancel();
@@ -65,7 +68,7 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
                         await PlayScaleAnimationAsync(_uiAnimator.transform, _cancellationTokenSource.Token);
                     }
                 }
-                
+
                 return;
             }
 
@@ -88,7 +91,7 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
                     await UniTask.Yield(token);
                 }
 
-                while ( transform != null && Vector3.Distance(
+                while (transform != null && Vector3.Distance(
                            transform.localScale, _uiAnimator.FromScale) > MathConst.Epsilon)
                 {
                     transform.localScale = Vector3.MoveTowards(
@@ -101,9 +104,9 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
             }
             catch (OperationCanceledException)
             {
-                if(transform == null)
+                if (transform == null)
                     return;
-                
+
                 transform.localScale = _uiAnimator.FromScale;
             }
         }
@@ -126,8 +129,5 @@ namespace Sources.Frameworks.UiFramework.Services.Animations
             {
             }
         }
-
-        public void Destroy() =>
-            _cancellationTokenSource.Cancel();
     }
 }

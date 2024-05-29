@@ -6,6 +6,7 @@ namespace Sources.InfrastructureInterfaces.Factories.Domain.Data
     public interface ITutorialDtoMapper
     {
         TutorialDto MapModelToDto(Tutorial tutorial);
+
         Tutorial MapDtoToModel(TutorialDto tutorialDto);
     }
 }

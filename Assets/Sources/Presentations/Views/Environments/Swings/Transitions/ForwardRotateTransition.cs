@@ -10,13 +10,13 @@ namespace Sources.Presentations.Views.Environments.Swings.Transitions
     public class ForwardRotateTransition : ConditionTask
     {
         private const float TargetAngle = 20;
-        
+
         private Transform _transform;
 
         protected override string OnInit()
         {
             _transform = blackboard.GetVariableValue<Transform>("_transform");
-            
+
             return null;
         }
 

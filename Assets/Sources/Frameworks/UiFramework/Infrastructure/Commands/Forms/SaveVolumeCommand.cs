@@ -16,7 +16,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms
         }
 
         public FormCommandId Id => FormCommandId.SaveVolume;
-        
+
         public void Handle() =>
             _loadService.Save(ModelId.Volume);
     }

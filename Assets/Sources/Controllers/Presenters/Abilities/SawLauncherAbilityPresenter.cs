@@ -25,8 +25,8 @@ namespace Sources.Controllers.Presenters.Abilities
             _sawLauncherAbilityView = sawLauncherAbilityView ??
                                       throw new ArgumentNullException(nameof(sawLauncherAbilityView));
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
-            _sawLauncherAbilityUpgradeMap = sawLauncherAbilityUpgradeMap 
-                ? sawLauncherAbilityUpgradeMap 
+            _sawLauncherAbilityUpgradeMap = sawLauncherAbilityUpgradeMap
+                ? sawLauncherAbilityUpgradeMap
                 : throw new ArgumentNullException(nameof(sawLauncherAbilityUpgradeMap));
         }
 
@@ -67,7 +67,7 @@ namespace Sources.Controllers.Presenters.Abilities
 
         private void ShowSawLauncherViews(int count)
         {
-            for (int i = 0; i < count; i++) 
+            for (int i = 0; i < count; i++)
                 _sawLauncherAbilityView.SawLauncherViews[i].Show();
         }
     }

@@ -12,7 +12,7 @@ namespace Sources.Controllers.Presenters.Characters
         {
             _playerWallet = playerWallet ?? throw new ArgumentNullException(nameof(playerWallet));
         }
-        
+
         public void AddRewardItem(IRewardItemView rewardItemView)
         {
             _playerWallet.AddCoins(rewardItemView.RewardAmount);

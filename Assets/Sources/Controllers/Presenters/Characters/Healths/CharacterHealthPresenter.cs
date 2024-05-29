@@ -11,7 +11,7 @@ namespace Sources.Controllers.Presenters.Characters.Healths
         private readonly ICharacterHealthView _characterHealthView;
 
         public CharacterHealthPresenter(
-            CharacterHealth characterHealth, 
+            CharacterHealth characterHealth,
             ICharacterHealthView characterHealthView)
         {
             _characterHealth = characterHealth ?? throw new ArgumentNullException(nameof(characterHealth));

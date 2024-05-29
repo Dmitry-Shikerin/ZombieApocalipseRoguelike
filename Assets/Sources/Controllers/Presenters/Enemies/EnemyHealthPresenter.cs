@@ -16,7 +16,7 @@ namespace Sources.Controllers.Presenters.Enemies
         }
 
         public float CurrentHealth => _enemyHealth.CurrentHealth;
-        
+
         public void TakeDamage(float damage)
         {
             _enemyHealth.TakeDamage(damage);

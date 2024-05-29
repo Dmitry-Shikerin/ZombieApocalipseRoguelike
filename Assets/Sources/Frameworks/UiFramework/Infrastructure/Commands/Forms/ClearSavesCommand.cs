@@ -15,7 +15,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms
         }
 
         public FormCommandId Id => FormCommandId.ClearSaves;
-        
+
         public void Handle() =>
             _loadService.ClearAll();
     }

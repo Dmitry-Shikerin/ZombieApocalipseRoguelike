@@ -12,9 +12,10 @@ namespace Sources.Presentations.UI.Curtains
     {
         [Required] [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private float _duration = 1f;
-        
-        private readonly TimeSpan _daley = TimeSpan.FromMilliseconds(CurtainConst.Daley);
+
+        private TimeSpan _daley = TimeSpan.FromMilliseconds(CurtainConst.Daley);
         private CancellationTokenSource _cancellationTokenSource;
+
         public bool IsInProgress { get; private set; }
 
         private void Awake()
@@ -25,7 +26,7 @@ namespace Sources.Presentations.UI.Curtains
 
         private void OnEnable() =>
             _cancellationTokenSource = new CancellationTokenSource();
-        
+
         private void OnDisable() =>
             _cancellationTokenSource.Cancel();
 
@@ -55,7 +56,7 @@ namespace Sources.Presentations.UI.Curtains
                         _canvasGroup.alpha, end, Time.deltaTime / _duration);
 
                     await UniTask.Delay(
-                        _daley, ignoreTimeScale:true, cancellationToken: cancellationToken);
+                        _daley, ignoreTimeScale: true, cancellationToken: cancellationToken);
                 }
 
                 _canvasGroup.alpha = end;

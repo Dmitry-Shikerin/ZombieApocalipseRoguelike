@@ -26,17 +26,17 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Base
             CustomCollection<IEnemyView> enemyCollection)
         {
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
-            _explosionBodyBloodySpawnService = explosionBodyBloodySpawnService ?? 
+            _explosionBodyBloodySpawnService = explosionBodyBloodySpawnService ??
                                           throw new ArgumentNullException(nameof(explosionBodyBloodySpawnService));
-            _rewardItemSpawnService = rewardItemSpawnService ?? 
+            _rewardItemSpawnService = rewardItemSpawnService ??
                                       throw new ArgumentNullException(nameof(rewardItemSpawnService));
             _enemyCollection = enemyCollection ?? throw new ArgumentNullException(nameof(enemyCollection));
         }
 
         public EnemyPresenter Create(
-            Enemy enemy, 
-            KillEnemyCounter killEnemyCounter, 
-            IEnemyView enemyView, 
+            Enemy enemy,
+            KillEnemyCounter killEnemyCounter,
+            IEnemyView enemyView,
             IEnemyAnimation enemyAnimation)
         {
             EnemyInitializeState initializeState = new EnemyInitializeState(
@@ -46,8 +46,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Base
             EnemyAttackState attackState = new EnemyAttackState(enemy, enemyView, enemyAnimation);
             EnemyDieState dieState = new EnemyDieState(
                 killEnemyCounter,
-                enemyView, 
-                _explosionBodyBloodySpawnService, 
+                enemyView,
+                _explosionBodyBloodySpawnService,
                 _rewardItemSpawnService,
                 _enemyCollection);
 
@@ -61,22 +61,21 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Base
                         enemyView.CharacterMovementView.Position) > enemyView.StoppingDistance);
             initializeState.AddTransition(toMoveToPlayerTransition);
             attackState.AddTransition(toMoveToPlayerTransition);
-            
+
             FiniteTransitionBase toAttackTransition = new FiniteTransitionBase(
                 attackState, () => Vector3.Distance(
                     enemyView.Position, enemyView.CharacterMovementView.Position) < enemyView.StoppingDistance);
             moveToPlayerState.AddTransition(toAttackTransition);
             initializeState.AddTransition(toAttackTransition);
-            
+
             FiniteTransition toDieTransition = new FiniteTransitionBase(
                 dieState, () => enemy.EnemyHealth.CurrentHealth <= 0);
             attackState.AddTransition(toDieTransition);
             moveToPlayerState.AddTransition(toDieTransition);
-            
+
             return new EnemyPresenter(
                 initializeState,
-                _updateRegister
-            );
+                _updateRegister);
         }
     }
 }

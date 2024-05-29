@@ -11,14 +11,14 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Buttons
 
         public UiButtonFactory(UiButtonPresenterFactory presenterFactory)
         {
-            _presenterFactory = presenterFactory ?? 
+            _presenterFactory = presenterFactory ??
                                 throw new ArgumentNullException(nameof(presenterFactory));
         }
 
         public UiButton Create(UiButton view)
         {
             UiButtonPresenter presenter = _presenterFactory.Create(view);
-            
+
             view.Construct(presenter);
 
             return view;

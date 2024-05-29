@@ -14,7 +14,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.Focuses
         {
             _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
         }
-        
+
         public void Enable()
         {
             if (WebApplication.IsRunningOnWebGL == false)
@@ -22,7 +22,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.Focuses
 
             OnInBackgroundChangeWeb(WebApplication.InBackground);
             OnInBackgroundChangeApp(Application.isFocused);
-            
+
             Application.focusChanged += OnInBackgroundChangeApp;
             WebApplication.InBackgroundChangeEvent += OnInBackgroundChangeWeb;
         }
@@ -31,7 +31,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.Focuses
         {
             if (WebApplication.IsRunningOnWebGL == false)
                 return;
-            
+
             Application.focusChanged -= OnInBackgroundChangeApp;
             WebApplication.InBackgroundChangeEvent -= OnInBackgroundChangeWeb;
         }

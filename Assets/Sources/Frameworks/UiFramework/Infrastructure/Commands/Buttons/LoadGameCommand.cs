@@ -18,8 +18,8 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
         private readonly ISceneService _sceneService;
 
         public LoadGameCommand(
-            ILoadService loadService, 
-            IEntityRepository entityRepository, 
+            ILoadService loadService,
+            IEntityRepository entityRepository,
             ISceneService sceneService)
         {
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
@@ -28,7 +28,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
         }
 
         public ButtonCommandId Id => ButtonCommandId.LoadGame;
-        
+
         public void Handle(IUiButton uiButton)
         {
             if (_loadService.HasKey(ModelId.PlayerWallet) == false)

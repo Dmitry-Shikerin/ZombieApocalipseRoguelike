@@ -10,7 +10,7 @@ namespace Sources.Presentations.Views.Characters.EnemyIndicators
         [SerializeField] private List<EnemyIndicatorArrow> _arrows;
 
         public Vector3 Position => transform.position;
+
         public IReadOnlyList<IEnemyIndicatorArrow> Arrows => _arrows;
-        
     }
 }

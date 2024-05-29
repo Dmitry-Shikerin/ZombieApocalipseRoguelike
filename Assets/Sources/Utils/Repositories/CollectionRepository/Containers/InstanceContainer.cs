@@ -2,6 +2,6 @@
 {
     public class InstanceContainer<T> : IInstanceContainer
     {
-        public T Instance { get ; set ; }
+        public T Instance { get; set; }
     }
 }

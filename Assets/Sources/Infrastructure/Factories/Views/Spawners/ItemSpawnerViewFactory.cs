@@ -12,7 +12,7 @@ namespace Sources.Infrastructure.Factories.Views.Spawners
 
         public ItemSpawnerViewFactory(ItemSpawnerPresenterFactory itemSpawnerPresenterFactory)
         {
-            _itemSpawnerPresenterFactory = itemSpawnerPresenterFactory ?? 
+            _itemSpawnerPresenterFactory = itemSpawnerPresenterFactory ??
                                            throw new ArgumentNullException(nameof(itemSpawnerPresenterFactory));
         }
 
@@ -20,9 +20,9 @@ namespace Sources.Infrastructure.Factories.Views.Spawners
         {
             ItemSpawnerPresenter itemSpawnerPresenter =
                 _itemSpawnerPresenterFactory.Create(itemSpawnerView);
-            
+
             itemSpawnerView.Construct(itemSpawnerPresenter);
-            
+
             return itemSpawnerView;
         }
     }

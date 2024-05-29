@@ -7,8 +7,9 @@
         public const string UiButtonLabel = "<size=24><b><color=#1E90FF><i>UiButton</i></color></b></size>";
         public const string UiAudioSourceLabel = "<size=24><b><color=#FFD700><i>UiAudioSource</i></color></b></size>";
         public const string UiAnimatorLabel = "<size=24><b><color=#FF5555><i>UiAnimator</i></color></b></size>";
-        public const string UiAnimatorControllerLabel = 
+        public const string UiAnimatorControllerLabel =
             "<size=24><b><color=#FF5555><i>UiAnimatorController</i></color></b></size>";
+
         public const string UiTextLabel = "<size=24><b><color=#FF7F50><i>UiText</i></color></b></size>";
     }
 }

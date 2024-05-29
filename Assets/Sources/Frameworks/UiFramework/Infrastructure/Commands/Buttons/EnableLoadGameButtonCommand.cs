@@ -7,7 +7,7 @@ using Sources.InfrastructureInterfaces.Services.LoadServices;
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 {
-    public class EnableLoadGameButtonCommand :  IButtonCommand
+    public class EnableLoadGameButtonCommand : IButtonCommand
     {
         private readonly ILoadService _loadService;
 
@@ -18,11 +18,11 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
         }
 
         public ButtonCommandId Id => ButtonCommandId.EnableLoadGameButton;
-        
+
         public void Handle(IUiButton uiButton)
         {
             uiButton.Show();
-            
+
             if (_loadService.HasKey(ModelId.PlayerWallet) == false)
                 uiButton.Hide();
         }

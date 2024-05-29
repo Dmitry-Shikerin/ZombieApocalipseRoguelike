@@ -29,17 +29,29 @@ namespace Sources.Domain.Models.Spawners
         public event Action CurrentWaveChanged;
 
         public string Id { get; }
+
         public Type Type => GetType();
+
         public IReadOnlyList<int> EnemyInWave { get; }
+
         public IReadOnlyList<int> SpawnDelays { get; }
+
         public IReadOnlyList<int> SumEnemiesInWave { get; }
+
         public int SumEnemies => EnemyInWave.Sum();
+
         public int BossesInLevel { get; }
+
         public int SumAllEnemies => EnemyInWave.Sum() + BossesInLevel;
+
         public int SpawnedBosses { get; set; }
+
         public int SpawnedEnemies { get; set; }
+
         public int CurrentWave { get; private set; }
+
         public bool IsSpawnEnemy => SpawnedEnemies < SumEnemies;
+
         public bool IsSpawnBoss => SpawnedEnemies >= SumEnemies && SpawnedBosses == 0;
 
         public void SetCurrentWave(int killZombies)
@@ -50,8 +62,8 @@ namespace Sources.Domain.Models.Spawners
                 {
                     if (i == SumEnemiesInWave.Count)
                         return;
-                    
-                    if(i + 1 <= CurrentWave)
+
+                    if (i + 1 <= CurrentWave)
                         return;
 
                     CurrentWave = i + 1;
@@ -65,10 +77,9 @@ namespace Sources.Domain.Models.Spawners
         {
             if (SpawnedEnemies != SumEnemiesInWave[CurrentWave])
                 return;
-            
-            await UniTask.WaitUntil(() =>
-                        killEnemyCounter.KillZombies == SumEnemiesInWave[CurrentWave],
-                    cancellationToken: cancellationToken);
+
+            await UniTask.WaitUntil(
+                () => killEnemyCounter.KillZombies == SumEnemiesInWave[CurrentWave], cancellationToken: cancellationToken);
         }
 
         private List<int> FillEnemySums()

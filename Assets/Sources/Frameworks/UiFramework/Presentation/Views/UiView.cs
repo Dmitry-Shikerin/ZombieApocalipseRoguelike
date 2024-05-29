@@ -15,70 +15,79 @@ namespace Sources.Frameworks.UiFramework.Presentation.Views
 {
     public class UiView : PresentableView<UiViewPresenter>, IUiView
     {
-        [DisplayAsString(false)] [HideLabel] [Indent(8)] 
+        [DisplayAsString(false)] [HideLabel] [Indent(8)]
         [SerializeField] private string _label = UiConstant.UiContainerLabel;
         [TitleGroup("Tabs")]
-        [TabGroup("Tabs/Split","Showed Settings")] 
-        [EnumToggleButtons] [HideLabel] [LabelText("Enabled GameObject")] 
+        [TabGroup("Tabs/Split", "Showed Settings")]
+        [EnumToggleButtons] [HideLabel] [LabelText("Enabled GameObject")]
         [SerializeField] private Enable _enabledGameObject;
-        [TabGroup("Tabs/Split","Showed Settings")]
-        [EnumToggleButtons] [HideLabel] [LabelText("Enabled CanvasGroup")] 
-        [SerializeField] private Enable _EnabledCanvasGroup;
-        [TabGroup("Tabs/Split","Type")] [EnumToggleButtons] 
+        [TabGroup("Tabs/Split", "Showed Settings")]
+        [EnumToggleButtons] [HideLabel] [LabelText("Enabled CanvasGroup")]
+        [SerializeField] private Enable _enabledCanvasGroup;
+        [TabGroup("Tabs/Split", "Type")] [EnumToggleButtons]
         [SerializeField] private ContainerType _containerType = ContainerType.Form;
-        [TabGroup("Tabs/Split","Type")] 
-        [EnableIf(nameof(_customFormId), CustomFormId.Default)] 
+        [TabGroup("Tabs/Split", "Type")]
+        [EnableIf(nameof(_customFormId), CustomFormId.Default)]
         [SerializeField] private FormId _formId;
-        [TabGroup("Tabs/Split","Type")] 
-        [EnableIf(nameof(_formId), FormId.Default)] 
+        [TabGroup("Tabs/Split", "Type")]
+        [EnableIf(nameof(_formId), FormId.Default)]
         [SerializeField] private CustomFormId _customFormId = CustomFormId.Default;
-        [TabGroup("Tabs/Split", "OnEnable")] [HideLabel] [LabelText("Enabled Forms")] 
+        [TabGroup("Tabs/Split", "OnEnable")] [HideLabel] [LabelText("Enabled Forms")]
         [SerializeField] private List<FormId> _onEnableEnabledForms;
         [TabGroup("Tabs/Split", "OnEnable")] [HideLabel] [LabelText("Disabled Forms")]
         [SerializeField] private List<FormId> _onEnableDisabledForms;
-        [TabGroup("Tabs/Split", "OnDisable")] [HideLabel] [LabelText("Enabled Forms")] 
+        [TabGroup("Tabs/Split", "OnDisable")] [HideLabel] [LabelText("Enabled Forms")]
         [SerializeField] private List<FormId> _onDisableEnabledForms;
         [TabGroup("Tabs/Split", "OnDisable")] [HideLabel] [LabelText("Disabled Forms")]
         [SerializeField] private List<FormId> _onDisableDisabledForms;
-        [TabGroup("Tabs/Split", "Commands")] 
+        [TabGroup("Tabs/Split", "Commands")]
         [SerializeField] private List<FormCommandId> _enabledFormCommands;
-        [TabGroup("Tabs/Split", "Commands")] 
+        [TabGroup("Tabs/Split", "Commands")]
         [SerializeField] private List<FormCommandId> _disabledFormCommands;
 
         public Enable EnabledGameObject => _enabledGameObject;
-        public Enable EnabledCanvasGroup => _EnabledCanvasGroup;
+
+        public Enable EnabledCanvasGroup => _enabledCanvasGroup;
+
         public ContainerType ContainerType => _containerType;
+
         public IReadOnlyList<FormId> OnEnableEnabledForms => _onEnableEnabledForms;
+
         public IReadOnlyList<FormId> OnEnableDisabledForms => _onEnableDisabledForms;
+
         public IReadOnlyList<FormId> OnDisableEnabledForms => _onDisableEnabledForms;
+
         public IReadOnlyList<FormId> OnDisableDisabledForms => _onDisableDisabledForms;
 
         public IReadOnlyList<FormCommandId> EnabledFormCommands => _enabledFormCommands;
+
         public IReadOnlyList<FormCommandId> DisabledFormCommands => _disabledFormCommands;
 
         public FormId FormId => _formId;
+
         public CustomFormId CustomFormId => _customFormId;
+
         public bool IsActive => gameObject.activeSelf;
 
-        [TabGroup("Tabs/Split","OnEnable")]
+        [TabGroup("Tabs/Split", "OnEnable")]
         [ResponsiveButtonGroup("Tabs/Split/OnEnable/Responsive")]
         [Button(ButtonSizes.Medium)]
         private void AddAllOnEnableEnabledForms() =>
             _onEnableEnabledForms = AddAllForms();
-        
-        [TabGroup("Tabs/Split","OnEnable")]
+
+        [TabGroup("Tabs/Split", "OnEnable")]
         [ResponsiveButtonGroup("Tabs/Split/OnEnable/Responsive")]
         [Button(ButtonSizes.Medium)]
         private void AddAllOnEnableDisabledForms() =>
             _onEnableDisabledForms = AddAllForms();
-        
-        [TabGroup("Tabs/Split","OnDisable")]
+
+        [TabGroup("Tabs/Split", "OnDisable")]
         [ResponsiveButtonGroup("Tabs/Split/OnDisable/Responsive")]
         [Button(ButtonSizes.Medium)]
         private void AddAllOnDisableEnabledForms() =>
             _onDisableEnabledForms = AddAllForms();
-        
-        [TabGroup("Tabs/Split","OnDisable")]
+
+        [TabGroup("Tabs/Split", "OnDisable")]
         [ResponsiveButtonGroup("Tabs/Split/OnDisable/Responsive")]
         [Button(ButtonSizes.Medium)]
         private void AddAllOnDisableDisabledForms() =>

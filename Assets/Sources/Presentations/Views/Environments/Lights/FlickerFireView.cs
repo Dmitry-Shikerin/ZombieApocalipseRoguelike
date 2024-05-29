@@ -12,9 +12,9 @@ namespace Sources.Presentations.Views.Environments.Lights
         [SerializeField] private AnimationCurve _animationCurve;
 
         private CancellationTokenSource _cancellationTokenSource;
-        
+
         private float _currentTime = 0f;
-        
+
         private void OnEnable()
         {
             _cancellationTokenSource = new CancellationTokenSource();

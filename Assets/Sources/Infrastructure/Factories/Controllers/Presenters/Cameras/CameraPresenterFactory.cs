@@ -31,9 +31,9 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Cameras
                 cinemachineCameraView, _cameraService);
             CameraFollowAllMap followAllMapState = new CameraFollowAllMap(
                 cinemachineCameraView, _cameraService);
-            
+
             FuncContextTransition toFollowCharacterState = new FuncContextTransition(
-                followCharacterState, 
+                followCharacterState,
                 context =>
                 {
                     if (context is not ICameraFollowable cameraFollowable)
@@ -46,9 +46,9 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Cameras
                 });
             initializeState.AddTransition(toFollowCharacterState);
             followAllMapState.AddTransition(toFollowCharacterState);
-            
+
             FuncContextTransition toFollowAllMapState = new FuncContextTransition(
-                followAllMapState, 
+                followAllMapState,
                 context =>
                 {
                     if (context is not ICameraFollowable cameraFollowable)
@@ -61,9 +61,9 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Cameras
                 });
             initializeState.AddTransition(toFollowAllMapState);
             followCharacterState.AddTransition(toFollowAllMapState);
-            
+
             return new CameraPresenter(
-                initializeState, 
+                initializeState,
                 _updateRegister,
                 _cameraService);
         }

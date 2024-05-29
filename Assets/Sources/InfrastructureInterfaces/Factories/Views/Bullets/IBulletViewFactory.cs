@@ -7,6 +7,7 @@ namespace Sources.InfrastructureInterfaces.Factories.Views.Bullets
     public interface IBulletViewFactory
     {
         IBulletView Create(IMiniGunView miniGunView);
+
         IBulletView Create(BulletView bulletView, IMiniGunView miniGunView);
     }
 }

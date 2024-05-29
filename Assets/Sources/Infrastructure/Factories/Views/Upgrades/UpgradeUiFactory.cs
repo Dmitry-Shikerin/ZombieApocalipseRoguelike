@@ -21,9 +21,9 @@ namespace Sources.Infrastructure.Factories.Views.Upgrades
         public IUpgradeUi Create(IUpgrader upgrader, UpgradeUi upgradeUi)
         {
             UpgradeUiPresenter upgradeUiPresenter = _presenterFactory.Create(upgrader, upgradeUi);
-            
+
             upgradeUi.Construct(upgradeUiPresenter);
-            
+
             return upgradeUi;
         }
     }

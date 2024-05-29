@@ -13,7 +13,7 @@ namespace Sources.Infrastructure.Factories.Views.Enemies
 
         public EnemyHealthViewFactory(EnemyHealthPresenterFactory enemyHealthPresenterFactory)
         {
-            _enemyHealthPresenterFactory = enemyHealthPresenterFactory ?? 
+            _enemyHealthPresenterFactory = enemyHealthPresenterFactory ??
                                            throw new ArgumentNullException(nameof(enemyHealthPresenterFactory));
         }
 
@@ -21,9 +21,9 @@ namespace Sources.Infrastructure.Factories.Views.Enemies
         {
             EnemyHealthPresenter enemyHealthPresenter =
                 _enemyHealthPresenterFactory.Create(enemyHealth, enemyHealthView);
-            
+
             enemyHealthView.Construct(enemyHealthPresenter);
-            
+
             return enemyHealthView;
         }
     }

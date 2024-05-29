@@ -16,8 +16,8 @@ namespace Sources.Infrastructure.Factories.Domain.Data
         public EnemySpawnerDtoMapper(
             IEnemySpawnerConfigCollectionService enemySpawnerConfigCollectionService)
         {
-            _enemySpawnerConfigCollectionService = 
-                enemySpawnerConfigCollectionService ?? 
+            _enemySpawnerConfigCollectionService =
+                enemySpawnerConfigCollectionService ??
                 throw new ArgumentNullException(nameof(enemySpawnerConfigCollectionService));
         }
 
@@ -52,6 +52,6 @@ namespace Sources.Infrastructure.Factories.Domain.Data
         }
 
         public EnemySpawner MapDtoToModel(EnemySpawnerDto enemySpawnerDto) =>
-            new(enemySpawnerDto);
+            new (enemySpawnerDto);
     }
 }

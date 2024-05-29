@@ -41,11 +41,11 @@ namespace Sources.Controllers.Presenters.Spawners
                 while (cancellationToken.IsCancellationRequested == false)
                 {
                     int index = Random.Range(0, _itemSpawnerView.SpawnPoints.Count);
-                    
+
                     IItemSpawnPoint itemSpawnPoint = _itemSpawnerView.SpawnPoints[index];
                     IFirstAidKitView firstAidKitView = _firstAidKitSpawnService.Spawn(itemSpawnPoint.Position);
                     firstAidKitView.SetHealAmount(FirstAidKitConst.HealAmount);
-                    
+
                     await UniTask.Delay(_delay, cancellationToken: cancellationToken);
                 }
             }

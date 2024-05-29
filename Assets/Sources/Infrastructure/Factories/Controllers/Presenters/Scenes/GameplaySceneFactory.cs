@@ -56,19 +56,19 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             CurtainView curtainView,
             IAudioService audioService,
             IFocusService focusService,
-            IAdvertisingService advertisingService) 
+            IAdvertisingService advertisingService)
         {
             _updateService = updateService ?? throw new ArgumentNullException(nameof(updateService));
             _inputServiceUpdater = inputServiceUpdater ?? throw new ArgumentNullException(nameof(inputServiceUpdater));
             _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
             _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
-            _loadGameplaySceneService = loadGameplaySceneService ?? 
+            _loadGameplaySceneService = loadGameplaySceneService ??
                                         throw new ArgumentNullException(nameof(loadGameplaySceneService));
-            _createGameplaySceneService = createGameplaySceneService ?? 
+            _createGameplaySceneService = createGameplaySceneService ??
                                           throw new ArgumentNullException(nameof(createGameplaySceneService));
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
-            _levelCompletedService = levelCompletedService ?? 
+            _levelCompletedService = levelCompletedService ??
                                      throw new ArgumentNullException(nameof(levelCompletedService));
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _enemyCollection = enemyCollection ?? throw new ArgumentNullException(nameof(enemyCollection));
@@ -78,9 +78,9 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
 
-        public async UniTask<IScene> Create(object payload)
+        public UniTask<IScene> Create(object payload)
         {
-            return new GameplayScene(
+            IScene scene = new GameplayScene(
                 _updateService,
                 _inputServiceUpdater,
                 CreateLoadSceneService(payload),
@@ -95,6 +95,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _audioService,
                 _focusService,
                 _advertisingService);
+
+            return UniTask.FromResult(scene);
         }
 
         private ILoadSceneService CreateLoadSceneService(object payload)
@@ -102,7 +104,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             if (payload == null)
                 return _createGameplaySceneService;
 
-            var canLoad = payload is IScenePayload { CanLoad : true };
+            var canLoad = payload is IScenePayload { CanLoad: true };
 
             if (canLoad == false)
                 return _createGameplaySceneService;

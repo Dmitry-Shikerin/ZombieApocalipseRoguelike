@@ -6,7 +6,7 @@ namespace Sources.PresentationsInterfaces.Views.Enemies.Bosses
     public interface IBossEnemyAnimation : IEnemyAnimation
     {
         event Action ScreamAnimationEnded;
-        
+
         void PlayRun();
     }
 }

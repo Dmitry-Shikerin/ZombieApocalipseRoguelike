@@ -11,7 +11,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Controllers
         private readonly ILeaderBoardElementView _leaderboardElementView;
 
         public LeaderBoardElementPresenter(
-            LeaderBoardPlayer leaderBoardPlayer, 
+            LeaderBoardPlayer leaderBoardPlayer,
             ILeaderBoardElementView leaderboardElementView)
         {
             _leaderBoardPlayer = leaderBoardPlayer ?? throw new ArgumentNullException(nameof(leaderBoardPlayer));

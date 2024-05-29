@@ -8,11 +8,13 @@ namespace Sources.Infrastructure.Factories.Services.Prefabs
     public class PrefabFactory
     {
         private readonly Dictionary<string, Object> _resources = new Dictionary<string, Object>();
-        
-        public T Create<T>(string prefabPath = "") where T : MonoBehaviour => 
+
+        public T Create<T>(string prefabPath = "")
+            where T : MonoBehaviour =>
             Object.Instantiate((T)GetResource(prefabPath, typeof(T)));
 
-        public T Create<T>(Type viewType, string prefabPath = "") where T : Object => 
+        public T Create<T>(Type viewType, string prefabPath = "")
+            where T : Object =>
             Object.Instantiate((T)GetResource(prefabPath, viewType));
 
         private Object GetResource(string prefabPath, Type type)

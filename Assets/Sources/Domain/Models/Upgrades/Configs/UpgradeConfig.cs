@@ -10,12 +10,19 @@ namespace Sources.Domain.Models.Upgrades.Configs
     public class UpgradeConfig : ScriptableObject
     {
         [field: SerializeField] public int MaxLevel { get; private set; }
+
         [field: SerializeField] public int CurrentLevel { get; private set; }
+
         [field: SerializeField] public float StartAmount { get; private set; }
+
         [field: SerializeField] public float AddedAmount { get; private set; }
+
         [field: SerializeField] public List<int> MoneyPerUpgrades { get; private set; }
+
         [field: SerializeField] public Sprite Sprite { get; private set; }
+
         [field: SerializeField] public string Description { get; private set; }
+
         [field: SerializeField] public string Id { get; private set; }
     }
 }

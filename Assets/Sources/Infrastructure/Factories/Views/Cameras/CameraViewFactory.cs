@@ -18,9 +18,9 @@ namespace Sources.Infrastructure.Factories.Views.Cameras
         public ICinemachineCameraView Create(CinemachineCameraView cinemachineCameraView)
         {
             CameraPresenter presenter = _presenterFactory.Create(cinemachineCameraView);
-            
+
             cinemachineCameraView.Construct(presenter);
-            
+
             return cinemachineCameraView;
         }
     }

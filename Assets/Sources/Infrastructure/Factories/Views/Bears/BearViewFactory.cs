@@ -21,21 +21,21 @@ namespace Sources.Infrastructure.Factories.Views.Bears
             BearPresenterFactory bearPresenterFactory)
         {
             _rootGameObject = rootGameObject ?? throw new ArgumentNullException(nameof(rootGameObject));
-            _bearPresenterFactory = bearPresenterFactory ?? 
+            _bearPresenterFactory = bearPresenterFactory ??
                                     throw new ArgumentNullException(nameof(bearPresenterFactory));
         }
 
         public IBearView Create(Bear bear)
         {
             BearView bearView = Object.Instantiate(
-                Resources.Load<BearView>(PrefabPath.Bear), 
-                _rootGameObject.BearSpawnPoint.Position, 
+                Resources.Load<BearView>(PrefabPath.Bear),
+                _rootGameObject.BearSpawnPoint.Position,
                 Quaternion.identity);
-            
+
             BearPresenter bearPresenter = _bearPresenterFactory.Create(bear, bearView, bearView.BearAnimationView);
-            
+
             bearView.Construct(bearPresenter);
-            
+
             return bearView;
         }
     }

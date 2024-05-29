@@ -10,10 +10,10 @@ namespace Sources.Infrastructure.Services.Upgrades
     public class UpgradeConfigCollectionService : IUpgradeConfigCollectionService
     {
         private readonly Dictionary<string, UpgradeConfig> _upgradeConfigs;
-        
+
         public UpgradeConfigCollectionService(UpgradeConfigContainer upgradeConfigCollection)
         {
-            if(upgradeConfigCollection == null)
+            if (upgradeConfigCollection == null)
                 throw new ArgumentNullException(nameof(upgradeConfigCollection));
 
             _upgradeConfigs = upgradeConfigCollection.UpgradeConfigs.ToDictionary(key => key.Id);
@@ -23,7 +23,7 @@ namespace Sources.Infrastructure.Services.Upgrades
         {
             if (_upgradeConfigs.ContainsKey(id) == false)
                 throw new NullReferenceException(nameof(id));
-            
+
             return _upgradeConfigs[id];
         }
     }

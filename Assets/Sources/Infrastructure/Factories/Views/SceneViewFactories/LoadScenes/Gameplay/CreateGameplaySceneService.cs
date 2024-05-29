@@ -142,7 +142,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             EnemySpawner enemySpawner = CreateEnemySpawner(scenePayload.SceneId);
 
             ScoreCounter scoreCounter = CreateScoreCounter();
-            
+
             MiniGun minigun = new MiniGun(miniGunAttackUpgrader, MiniGunConst.AttackDaley);
             CharacterHealth characterHealth = new CharacterHealth(characterHealthUpgrader);
             Character character = new Character(
@@ -190,13 +190,12 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
         private ScoreCounter CreateScoreCounter()
         {
-            
             if (_loadService.HasKey(ModelId.ScoreCounter))
                 return _loadService.Load<ScoreCounter>(ModelId.ScoreCounter);
 
             ScoreCounter scoreCounter = new ScoreCounter(0, ModelId.ScoreCounter);
             _entityRepository.Add(scoreCounter);
-            
+
             return scoreCounter;
         }
 
@@ -245,7 +244,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         {
             if (_loadService.HasKey(sceneId))
                 return _loadService.Load<Level>(sceneId);
-            
+
             Level level = new Level(sceneId, false);
             _entityRepository.Add(level);
 

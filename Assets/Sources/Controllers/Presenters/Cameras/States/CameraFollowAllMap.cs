@@ -17,7 +17,7 @@ namespace Sources.Controllers.Presenters.Cameras.States
             ICinemachineCameraView cinemachineCameraView,
             ICameraService cameraService)
         {
-            _cinemachineCameraView = cinemachineCameraView ?? 
+            _cinemachineCameraView = cinemachineCameraView ??
                                      throw new ArgumentNullException(nameof(cinemachineCameraView));
             _cameraService = cameraService ?? throw new ArgumentNullException(nameof(cameraService));
         }

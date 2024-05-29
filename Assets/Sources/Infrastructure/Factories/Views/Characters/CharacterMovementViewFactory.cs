@@ -13,21 +13,22 @@ namespace Sources.Infrastructure.Factories.Views.Characters
 
         public CharacterMovementViewFactory(CharacterMovementPresenterFactory characterMovementPresenterFactory)
         {
-            _characterMovementPresenterFactory = 
-                characterMovementPresenterFactory 
+            _characterMovementPresenterFactory =
+                characterMovementPresenterFactory
                 ?? throw new ArgumentNullException(nameof(characterMovementPresenterFactory));
         }
 
         public ICharacterMovementView Create(
             CharacterMovement characterMovement,
-            CharacterMovementView characterMovementView, CharacterAnimationView characterAnimationView)
+            CharacterMovementView characterMovementView,
+            CharacterAnimationView characterAnimationView)
         {
-            CharacterMovementPresenter characterMovementPresenter = 
+            CharacterMovementPresenter characterMovementPresenter =
                 _characterMovementPresenterFactory.Create(
                     characterMovement, characterMovementView, characterAnimationView);
-            
+
             characterMovementView.Construct(characterMovementPresenter);
-            
+
             return characterMovementView;
         }
     }

@@ -25,7 +25,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
         {
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
             _inputService = inputService ?? throw new ArgumentNullException(nameof(inputService));
-            _characterMovementService = characterMovementService ?? 
+            _characterMovementService = characterMovementService ??
                                         throw new ArgumentNullException(nameof(characterMovementService));
         }
 
@@ -34,28 +34,28 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
             ICharacterMovementView characterMovementView,
             ICharacterAnimationView characterAnimationView)
         {
-            if (characterMovement == null) 
+            if (characterMovement == null)
                 throw new ArgumentNullException(nameof(characterMovement));
-            
-            if (characterMovementView == null) 
+
+            if (characterMovementView == null)
                 throw new ArgumentNullException(nameof(characterMovementView));
-            
-            if (characterAnimationView == null) 
+
+            if (characterAnimationView == null)
                 throw new ArgumentNullException(nameof(characterAnimationView));
-            
+
             CharacterIdleState idleState = new CharacterIdleState(
-                characterMovement, 
-                characterMovementView, 
-                characterAnimationView, 
-                _inputService, 
+                characterMovement,
+                characterMovementView,
+                characterAnimationView,
+                _inputService,
                 _characterMovementService);
             CharacterMovementState characterMovementState = new CharacterMovementState(
-                characterMovement, 
-                characterAnimationView, 
-                characterMovementView, 
-                _inputService, 
+                characterMovement,
+                characterAnimationView,
+                characterMovementView,
+                _inputService,
                 _characterMovementService);
-            
+
             FuncContextTransition toForwardTransition = new FuncContextTransition(
                 characterMovementState,
                 context =>
@@ -69,7 +69,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
                     return true;
                 });
             idleState.AddTransition(toForwardTransition);
-            
+
             FuncContextTransition toIdleTransition = new FuncContextTransition(
                 idleState,
                 context =>
@@ -83,10 +83,10 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
                     return true;
                 });
             characterMovementState.AddTransition(toIdleTransition);
-            
+
             return new CharacterMovementPresenter(
-                characterMovement, 
-                characterMovementView, 
+                characterMovement,
+                characterMovementView,
                 _updateRegister,
                 _inputService,
                 idleState);

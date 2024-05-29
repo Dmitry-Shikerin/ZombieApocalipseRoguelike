@@ -19,10 +19,10 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
             IUpdateRegister updateRegister,
             IEnemyIndicatorService enemyIndicatorService)
         {
-            _enemyCollection = enemyCollection ?? 
+            _enemyCollection = enemyCollection ??
                                      throw new ArgumentNullException(nameof(enemyCollection));
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
-            _enemyIndicatorService = enemyIndicatorService ?? 
+            _enemyIndicatorService = enemyIndicatorService ??
                                      throw new ArgumentNullException(nameof(enemyIndicatorService));
         }
 

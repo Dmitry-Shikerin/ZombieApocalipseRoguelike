@@ -23,7 +23,7 @@ namespace Sources.Controllers.Presenters.Characters.Movements
             ICharacterMovementView characterMovementView,
             IUpdateRegister updateRegister,
             IInputService inputService,
-            IContextState firstState) 
+            IContextState firstState)
             : base(firstState)
         {
             _characterMovement = characterMovement ?? throw new ArgumentNullException(nameof(characterMovement));
@@ -59,7 +59,7 @@ namespace Sources.Controllers.Presenters.Characters.Movements
         {
             if (propertyChangedEventArgs.PropertyName != nameof(CharacterMovement.Direction))
                 return;
-            
+
             _characterMovementView.Move(_characterMovement.Direction);
         }
     }

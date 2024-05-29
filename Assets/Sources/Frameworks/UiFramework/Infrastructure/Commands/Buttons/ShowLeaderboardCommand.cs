@@ -20,15 +20,15 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
             ILeaderboardInitializeService leaderboardInitializeService,
             IFormService formService)
         {
-            _playerAccountAuthorizeService = playerAccountAuthorizeService ?? 
+            _playerAccountAuthorizeService = playerAccountAuthorizeService ??
                                              throw new ArgumentNullException(nameof(playerAccountAuthorizeService));
-            _leaderboardInitializeService = leaderboardInitializeService ?? 
+            _leaderboardInitializeService = leaderboardInitializeService ??
                                             throw new ArgumentNullException(nameof(leaderboardInitializeService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
 
         public ButtonCommandId Id => ButtonCommandId.Leaderboard;
-        
+
         public void Handle(IUiButton uiButton)
         {
             if (_playerAccountAuthorizeService.IsAuthorized() == false)

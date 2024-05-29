@@ -12,17 +12,17 @@ namespace Sources.Infrastructure.Factories.Views.Musics
 
         public BackgroundMusicViewFactory(BackgroundMusicPresenterFactory backgroundMusicPresenterFactory)
         {
-            _backgroundMusicPresenterFactory = 
-                backgroundMusicPresenterFactory 
+            _backgroundMusicPresenterFactory =
+                backgroundMusicPresenterFactory
                 ?? throw new ArgumentNullException(nameof(backgroundMusicPresenterFactory));
         }
 
         public IBackgroundMusicView Create(BackgroundMusicView backgroundMusicView)
         {
-            BackgroundMusicPresenter backgroundMusicPresenter = 
+            BackgroundMusicPresenter backgroundMusicPresenter =
                 _backgroundMusicPresenterFactory.Create(backgroundMusicView);
             backgroundMusicView.Construct(backgroundMusicPresenter);
-            
+
             return backgroundMusicView;
         }
     }

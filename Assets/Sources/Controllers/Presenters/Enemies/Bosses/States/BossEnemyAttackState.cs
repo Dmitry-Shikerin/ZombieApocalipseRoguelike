@@ -22,10 +22,10 @@ namespace Sources.Controllers.Presenters.Enemies.Bosses.States
             BossEnemy enemy,
             IBossEnemyView enemyView,
             IBossEnemyAnimation enemyAnimation,
-            IEnemyAttackService enemyAttackService) : 
-            base(
-                enemy, 
-                enemyView, 
+            IEnemyAttackService enemyAttackService)
+            : base(
+                enemy,
+                enemyView,
                 enemyAnimation)
         {
             _enemy = enemy ?? throw new ArgumentNullException(nameof(enemy));
@@ -36,7 +36,7 @@ namespace Sources.Controllers.Presenters.Enemies.Bosses.States
         public override void Enter()
         {
             base.Enter();
-            
+
             _cancellationTokenSource = new CancellationTokenSource();
             _massAttackDelay = TimeSpan.FromSeconds(EnemyConst.MassAttackAbilityDelay);
 
@@ -57,7 +57,7 @@ namespace Sources.Controllers.Presenters.Enemies.Bosses.States
                 while (cancellationToken.IsCancellationRequested == false)
                 {
                     await UniTask.Delay(_massAttackDelay, cancellationToken: cancellationToken);
-                    
+
                     ApplyMassAttack();
                 }
             }

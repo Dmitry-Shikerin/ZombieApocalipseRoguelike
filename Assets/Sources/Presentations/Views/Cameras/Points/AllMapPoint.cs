@@ -7,8 +7,9 @@ namespace Sources.Presentations.Views.Cameras.Points
     public class AllMapPoint : View, ICameraFollowable
     {
         [SerializeField] private FollowableId _followableId = FollowableId.AllMap;
-        
+
         public FollowableId Id => _followableId;
+
         public Transform Transform => transform;
     }
 }

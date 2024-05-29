@@ -11,11 +11,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Spawners
 
         public ItemSpawnerPresenterFactory(IFirstAidKitSpawnService firstAidKitSpawnService)
         {
-            _firstAidKitSpawnService = firstAidKitSpawnService ?? 
+            _firstAidKitSpawnService = firstAidKitSpawnService ??
                                        throw new ArgumentNullException(nameof(firstAidKitSpawnService));
         }
 
         public ItemSpawnerPresenter Create(IItemSpawnerView itemSpawnerView) =>
-            new(itemSpawnerView, _firstAidKitSpawnService);
+            new (itemSpawnerView, _firstAidKitSpawnService);
     }
 }

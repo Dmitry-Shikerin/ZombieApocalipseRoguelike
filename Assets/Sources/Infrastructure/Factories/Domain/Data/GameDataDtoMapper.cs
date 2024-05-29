@@ -11,11 +11,11 @@ namespace Sources.Infrastructure.Factories.Domain.Data
             return new GameDataDto()
             {
                 Id = gameData.Id,
-                WasLaunched = gameData.WasLaunched
+                WasLaunched = gameData.WasLaunched,
             };
         }
 
         public GameData MapDtoToModel(GameDataDto gameDataDto) =>
-            new(gameDataDto);
+            new (gameDataDto);
     }
 }

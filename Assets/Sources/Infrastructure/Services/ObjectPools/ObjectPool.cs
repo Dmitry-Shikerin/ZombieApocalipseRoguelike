@@ -11,7 +11,7 @@ namespace Sources.Infrastructure.Services.ObjectPools
     {
         private readonly Queue<T> _objects = new Queue<T>();
         private readonly Transform _parent = new GameObject($"Pool of {typeof(T).Name}").transform;
-        
+
         public event Action<int> ObjectCountChanged;
 
         public TType Get<TType>()

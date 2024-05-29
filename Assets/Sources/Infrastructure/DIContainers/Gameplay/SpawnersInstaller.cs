@@ -15,10 +15,10 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
                 .Bind<EnemySpawnerConfigContainer>()
                 .FromResource("Configs/EnemySpawners/Containers/EnemySpawnerConfigContainer")
                 .AsSingle();
-            
+
             Container.Bind<IEnemySpawnerConfigCollectionService>()
                 .To<EnemySpawnerConfigCollectionService>().AsSingle();
-            
+
             Container.Bind<EnemySpawnPresenterFactory>().AsSingle();
             Container.Bind<EnemySpawnViewFactory>().AsSingle();
 

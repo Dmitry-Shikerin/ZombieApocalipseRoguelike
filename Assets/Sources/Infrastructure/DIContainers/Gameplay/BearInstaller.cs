@@ -11,7 +11,7 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
         public override void InstallBindings()
         {
             Container.Bind<IBearMovementService>().To<BearMovementService>().AsSingle();
-            
+
             Container.Bind<BearPresenterFactory>().AsSingle();
             Container.Bind<BearViewFactory>().AsSingle();
         }

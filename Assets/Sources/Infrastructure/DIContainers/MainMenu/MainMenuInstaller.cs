@@ -83,7 +83,7 @@ namespace Sources.Infrastructure.DIContainers.MainMenu
             Container.Bind<CreateMainMenuSceneService>().AsSingle();
             Container.Bind<LoadMainMenuSceneService>().AsSingle();
         }
-        
+
         private void BindLevelAvailability()
         {
             Container.Bind<LevelAvailabilityPresenterFactory>().AsSingle();

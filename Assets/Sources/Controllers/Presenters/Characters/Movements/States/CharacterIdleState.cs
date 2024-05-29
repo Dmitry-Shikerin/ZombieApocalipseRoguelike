@@ -11,7 +11,7 @@ namespace Sources.Controllers.Presenters.Characters.Movements.States
     public class CharacterIdleState : ContextStateBase
     {
         private const float Speed = 0;
-        
+
         private readonly CharacterMovement _characterMovement;
         private readonly ICharacterAnimationView _characterAnimationView;
         private readonly IInputService _inputService;
@@ -26,12 +26,12 @@ namespace Sources.Controllers.Presenters.Characters.Movements.States
             ICharacterMovementService characterMovementService)
         {
             _characterMovement = characterMovement ?? throw new ArgumentNullException(nameof(characterMovement));
-            _characterAnimationView = characterAnimationView ?? 
+            _characterAnimationView = characterAnimationView ??
                                    throw new ArgumentNullException(nameof(characterAnimationView));
             _inputService = inputService ?? throw new ArgumentNullException(nameof(inputService));
-            _movementService = characterMovementService ?? 
+            _movementService = characterMovementService ??
                                         throw new ArgumentNullException(nameof(characterMovementService));
-            _characterMovementView = characterMovementView ?? 
+            _characterMovementView = characterMovementView ??
                                      throw new ArgumentNullException(nameof(characterMovementView));
         }
 
@@ -55,6 +55,5 @@ namespace Sources.Controllers.Presenters.Characters.Movements.States
             {
             }
         }
-
     }
 }

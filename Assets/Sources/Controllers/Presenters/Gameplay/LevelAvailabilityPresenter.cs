@@ -16,13 +16,13 @@ namespace Sources.Controllers.Presenters.Gameplay
         private readonly ISceneService _sceneService;
 
         public LevelAvailabilityPresenter(
-            LevelAvailability levelAvailability, 
+            LevelAvailability levelAvailability,
             ILevelAvailabilityView levelAvailabilityView,
             ISceneService sceneService)
         {
-            _levelAvailability = levelAvailability ?? 
+            _levelAvailability = levelAvailability ??
                                  throw new ArgumentNullException(nameof(levelAvailability));
-            _levelAvailabilityView = levelAvailabilityView ?? 
+            _levelAvailabilityView = levelAvailabilityView ??
                                      throw new ArgumentNullException(nameof(levelAvailabilityView));
             _sceneService = sceneService ?? throw new ArgumentNullException(nameof(sceneService));
 
@@ -51,14 +51,14 @@ namespace Sources.Controllers.Presenters.Gameplay
 
                 if (_levelAvailability.Levels[i].IsCompleted == false)
                     continue;
-                
+
                 SetAvailableLevel(i);
 
                 int correctAvailableLevels = _levelAvailabilityView.Levels.Count - 1;
-                
-                if(i == correctAvailableLevels)
+
+                if (i == correctAvailableLevels)
                         return;
-                    
+
                 int correctIndex = i + 1;
                 SetAvailableLevel(correctIndex);
             }
@@ -116,11 +116,11 @@ namespace Sources.Controllers.Presenters.Gameplay
         private void ShowSecondLevel() =>
             _sceneService.ChangeSceneAsync(
                 ModelId.Gameplay2, new ScenePayload(ModelId.Gameplay2, false, false));
-        
+
         private void ShowThirdLevel() =>
             _sceneService.ChangeSceneAsync(
                 ModelId.Gameplay3, new ScenePayload(ModelId.Gameplay3, false, false));
-        
+
         private void ShowFourthLevel() =>
             _sceneService.ChangeSceneAsync(
                 ModelId.Gameplay4, new ScenePayload(ModelId.Gameplay4, false, false));

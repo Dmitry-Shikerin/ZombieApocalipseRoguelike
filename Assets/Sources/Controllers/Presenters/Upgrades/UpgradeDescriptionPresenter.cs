@@ -12,7 +12,7 @@ namespace Sources.Controllers.Presenters.Upgrades
         private readonly ILocalizationService _localizationService;
 
         public UpgradeDescriptionPresenter(
-            IUpgrader upgrader, 
+            IUpgrader upgrader,
             IUpgradeDescriptionView view,
             ILocalizationService localizationService)
         {

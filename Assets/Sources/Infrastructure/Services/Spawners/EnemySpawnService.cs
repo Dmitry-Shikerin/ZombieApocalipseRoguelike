@@ -26,15 +26,15 @@ namespace Sources.Infrastructure.Services.Spawners
         public IEnemyView Spawn(KillEnemyCounter killEnemyCounter, Vector3 position)
         {
             Enemy enemy = new Enemy(new EnemyHealth(EnemyConst.Health), new EnemyAttacker(EnemyConst.Damage));
-            
-            IEnemyView enemyView = SpawnFromPool(enemy, killEnemyCounter) ?? 
+
+            IEnemyView enemyView = SpawnFromPool(enemy, killEnemyCounter) ??
                                    _enemyViewFactory.Create(enemy, killEnemyCounter);
-            
+
             enemyView.DisableNavmeshAgent();
             enemyView.SetPosition(position);
             enemyView.EnableNavmeshAgent();
             enemyView.Show();
-            
+
             return enemyView;
         }
 
@@ -44,7 +44,7 @@ namespace Sources.Infrastructure.Services.Spawners
 
             if (enemyView == null)
                 return null;
-            
+
             return _enemyViewFactory.Create(enemy, killEnemyCounter, enemyView);
         }
     }

@@ -11,11 +11,11 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Controllers.Bu
 
         public UiButtonPresenterFactory(IUiButtonService uiButtonService)
         {
-            _uiButtonService = uiButtonService ?? 
+            _uiButtonService = uiButtonService ??
                                    throw new ArgumentNullException(nameof(uiButtonService));
         }
 
         public UiButtonPresenter Create(UiButton view) =>
-            new(view, _uiButtonService);
+            new (view, _uiButtonService);
     }
 }

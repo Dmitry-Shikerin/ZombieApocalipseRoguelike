@@ -13,10 +13,10 @@ namespace Sources.Infrastructure.Services.EnemySpawners
 
         public EnemySpawnerConfigCollectionService(EnemySpawnerConfigContainer enemySpawnerConfigContainer)
         {
-            if(enemySpawnerConfigContainer == null)
+            if (enemySpawnerConfigContainer == null)
                 throw new ArgumentNullException(nameof(enemySpawnerConfigContainer));
-            
-            if(enemySpawnerConfigContainer.Configs.Count <= 0)
+
+            if (enemySpawnerConfigContainer.Configs.Count <= 0)
                 throw new IndexOutOfRangeException(nameof(enemySpawnerConfigContainer));
 
             _spawnerConfigs = enemySpawnerConfigContainer.Configs.ToDictionary(key => key.SceneId);
@@ -24,9 +24,9 @@ namespace Sources.Infrastructure.Services.EnemySpawners
 
         public EnemySpawnerConfig Get(string id)
         {
-            if(_spawnerConfigs.ContainsKey(id) == false)
+            if (_spawnerConfigs.ContainsKey(id) == false)
                 throw new KeyNotFoundException(nameof(id));
-            
+
             return _spawnerConfigs[id];
         }
     }

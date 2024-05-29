@@ -10,15 +10,21 @@ namespace Sources.Infrastructure.Services.PauseServices
     public class PauseService : IPauseService
     {
         public event Action PauseActivated;
+
         public event Action ContinueActivated;
+
         public event Action PauseSoundActivated;
+
         public event Action ContinueSoundActivated;
-        
+
         public int PauseListenersCount { get; private set; }
+
         public int SoundPauseListenersCount { get; private set; }
+
         public bool IsPaused { get; private set; }
+
         public bool IsSoundPaused { get; private set; }
-        
+
         public void ContinueSound()
         {
             SoundPauseListenersCount--;
@@ -51,7 +57,7 @@ namespace Sources.Infrastructure.Services.PauseServices
         public void PauseSound()
         {
             SoundPauseListenersCount++;
-            
+
             if (SoundPauseListenersCount < 0)
                 throw new IndexOutOfRangeException(nameof(SoundPauseListenersCount));
 
@@ -79,7 +85,7 @@ namespace Sources.Infrastructure.Services.PauseServices
             }
             while (IsPaused);
         }
-        
+
         public async UniTask SoundPauseYield(CancellationToken cancellationToken)
         {
             do

@@ -7,6 +7,7 @@ namespace Sources.InfrastructureInterfaces.Factories.Views.ExplosionBodyBloodyVi
     public interface IExplosionBodyBloodyViewFactory
     {
         IExplosionBodyBloodyView Create(ExplosionBodyBloodyView explosionBodyBloodyView, Vector3 position);
+
         IExplosionBodyBloodyView Create(Vector3 position);
     }
 }

@@ -8,6 +8,7 @@ namespace Sources.InfrastructureInterfaces.Factories.Views.Enemies
     public interface IEnemyViewFactory
     {
         public IEnemyView Create(Enemy enemy, KillEnemyCounter killEnemyCounter);
+
         public IEnemyView Create(Enemy enemy, KillEnemyCounter killEnemyCounter, EnemyView enemyView);
     }
 }

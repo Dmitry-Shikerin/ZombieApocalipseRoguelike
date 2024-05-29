@@ -15,17 +15,17 @@ namespace Sources.Infrastructure.Factories.Views.Upgrades
 
         public UpgradeViewFactory(UpgradePresenterFactory upgradePresenterFactory)
         {
-            _upgradePresenterFactory = upgradePresenterFactory ?? 
+            _upgradePresenterFactory = upgradePresenterFactory ??
                                        throw new ArgumentNullException(nameof(upgradePresenterFactory));
         }
 
         public IUpgradeView Create(Upgrader upgrader, PlayerWallet playerWallet, UpgradeView upgradeView)
         {
-            UpgradePresenter upgradePresenter = 
+            UpgradePresenter upgradePresenter =
                 _upgradePresenterFactory.Create(upgrader, playerWallet, upgradeView);
-            
+
             upgradeView.Construct(upgradePresenter);
-            
+
             return upgradeView;
         }
     }

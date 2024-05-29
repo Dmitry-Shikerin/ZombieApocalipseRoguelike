@@ -5,6 +5,7 @@ namespace Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.PlayerAccount
     public interface IPlayerAccountAuthorizeService
     {
         bool IsAuthorized();
+
         void Authorize(Action onSuccessCallback);
     }
 }

@@ -10,23 +10,27 @@ using UnityEngine;
 
 namespace Sources.Presentations.UI.Huds
 {
-    public class MainMenuHud: View, IHud
+    public class MainMenuHud : View, IHud
     {
-        [FoldoutGroup("UiCollector")] [Required] 
+        [FoldoutGroup("UiCollector")] [Required]
         [SerializeField] private UiCollector _uiCollector;
-        [FoldoutGroup("LeaderBoardElementViews")] [Required] 
+        [FoldoutGroup("LeaderBoardElementViews")] [Required]
         [SerializeField] private List<LeaderBoardElementView> _leaderBoardElementViews;
-        [FoldoutGroup("Settings")] [Required] 
+        [FoldoutGroup("Settings")] [Required]
         [SerializeField] private VolumeView _volumeView;
-        [FoldoutGroup("LevelAvailability")] [Required] 
+        [FoldoutGroup("LevelAvailability")] [Required]
         [SerializeField] private LevelAvailabilityView _levelAvailabilityView;
-        [FoldoutGroup("BackgroundMusic")] [Required] 
+        [FoldoutGroup("BackgroundMusic")] [Required]
         [SerializeField] private BackgroundMusicView _backgroundMusicView;
 
         public UiCollector UiCollector => _uiCollector;
+
         public IReadOnlyList<LeaderBoardElementView> LeaderBoardElementViews => _leaderBoardElementViews;
+
         public VolumeView VolumeView => _volumeView;
+
         public LevelAvailabilityView LevelAvailabilityView => _levelAvailabilityView;
+
         public BackgroundMusicView BackgroundMusicView => _backgroundMusicView;
     }
 }

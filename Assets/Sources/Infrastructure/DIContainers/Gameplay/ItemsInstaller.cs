@@ -18,10 +18,10 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
         {
             Container.Bind<IObjectPool<FirstAidKitView>>().To<ObjectPool<FirstAidKitView>>().AsSingle();
             Container.Bind<IObjectPool<RewardItemView>>().To<ObjectPool<RewardItemView>>().AsSingle();
-            
+
             Container.Bind<IFirstAidKitSpawnService>().To<FirstAidKitSpawnService>().AsSingle();
             Container.Bind<IRewardItemSpawnService>().To<RewardItemSpawnService>().AsSingle();
-            
+
             Container.Bind<IFirstAidKitViewFactory>().To<FirstAidKitViewFactory>().AsSingle();
             Container.Bind<IRewardItemViewFactory>().To<RewardItemViewFactory>().AsSingle();
         }

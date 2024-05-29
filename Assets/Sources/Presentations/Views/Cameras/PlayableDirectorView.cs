@@ -7,15 +7,10 @@ namespace Sources.Presentations.Views.Cameras
     public class PlayableDirectorView : View, IPlayableDirectorView
     {
         [Required] [SerializeField] private PlayableDirector _playableDirector;
-        
+
         public void SetPlayable(PlayableAsset playable)
         {
-             _playableDirector.playableAsset = playable;    
+             _playableDirector.playableAsset = playable;
         }
-    }
-
-    public interface IPlayableDirectorView
-    {
-        void SetPlayable(PlayableAsset playable);
     }
 }

@@ -7,9 +7,9 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Handlers
 {
     public class GameplayUiViewCommandHandler : IUiViewCommandHandler
     {
-        private readonly Dictionary<FormCommandId, IViewCommand> _commands = 
+        private readonly Dictionary<FormCommandId, IViewCommand> _commands =
             new Dictionary<FormCommandId, IViewCommand>();
-        
+
         public GameplayUiViewCommandHandler(
             PauseCommand pauseCommand,
             UnPauseCommand unPauseCommand,
@@ -28,9 +28,9 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms.Handlers
 
         public void Handle(FormCommandId formCommandId)
         {
-            if(_commands.ContainsKey(formCommandId) == false)
+            if (_commands.ContainsKey(formCommandId) == false)
                 throw new KeyNotFoundException(nameof(formCommandId));
-            
+
             _commands[formCommandId].Handle();
         }
     }

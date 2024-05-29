@@ -12,7 +12,9 @@ namespace Sources.Domain.Models.Payloads
         }
 
         public string SceneId { get; }
+
         public bool CanLoad { get; }
+
         public bool CanFromGameplay { get; }
     }
 }

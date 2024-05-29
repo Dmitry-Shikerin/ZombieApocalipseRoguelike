@@ -85,22 +85,22 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _uiCollectorFactory = uiCollectorFactory ?? throw new ArgumentNullException(nameof(uiCollectorFactory));
-            _characterViewFactory = characterViewFactory ?? 
+            _characterViewFactory = characterViewFactory ??
                                     throw new ArgumentNullException(nameof(characterViewFactory));
             _bearViewFactory = bearViewFactory ?? throw new ArgumentNullException(nameof(bearViewFactory));
             _upgradeUiFactory = upgradeUiFactory ?? throw new ArgumentNullException(nameof(upgradeUiFactory));
-            _rootGameObject = rootGameObject 
-                ? rootGameObject 
+            _rootGameObject = rootGameObject
+                ? rootGameObject
                 : throw new ArgumentNullException(nameof(rootGameObject));
-            _enemySpawnViewFactory = enemySpawnViewFactory ?? 
+            _enemySpawnViewFactory = enemySpawnViewFactory ??
                                      throw new ArgumentNullException(nameof(enemySpawnViewFactory));
-            _itemSpawnerViewFactory = itemSpawnerViewFactory ?? 
+            _itemSpawnerViewFactory = itemSpawnerViewFactory ??
                                       throw new ArgumentNullException(nameof(itemSpawnerViewFactory));
-            _upgradeCollection = upgradeCollection ?? 
+            _upgradeCollection = upgradeCollection ??
                                         throw new ArgumentNullException(nameof(upgradeCollection));
-            _killEnemyCounterViewFactory = killEnemyCounterViewFactory ?? 
+            _killEnemyCounterViewFactory = killEnemyCounterViewFactory ??
                                            throw new ArgumentNullException(nameof(killEnemyCounterViewFactory));
-            _backgroundMusicViewFactory = backgroundMusicViewFactory ?? 
+            _backgroundMusicViewFactory = backgroundMusicViewFactory ??
                                           throw new ArgumentNullException(nameof(backgroundMusicViewFactory));
             _gameOverService = gameOverService ?? throw new ArgumentNullException(nameof(gameOverService));
             _cameraViewFactory = cameraViewFactory ?? throw new ArgumentNullException(nameof(cameraViewFactory));
@@ -108,34 +108,34 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             _volumeViewFactory = volumeViewFactory ?? throw new ArgumentNullException(nameof(volumeViewFactory));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _saveService = saveService ?? throw new ArgumentNullException(nameof(saveService));
-            _levelCompletedService = levelCompletedService ?? 
+            _levelCompletedService = levelCompletedService ??
                                      throw new ArgumentNullException(nameof(levelCompletedService));
             _tutorialService = tutorialService ?? throw new ArgumentNullException(nameof(tutorialService));
             _advertisingService = advertisingService ?? throw new ArgumentNullException(nameof(advertisingService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _scoreCounterViewFactory = scoreCounterViewFactory ?? throw new ArgumentNullException(nameof(scoreCounterViewFactory));
-            _upgradeControllerViewFactory = upgradeControllerViewFactory ?? 
+            _upgradeControllerViewFactory = upgradeControllerViewFactory ??
                                             throw new ArgumentNullException(nameof(upgradeControllerViewFactory));
         }
 
         public void Load(IScenePayload scenePayload)
         {
             GameModels gameModels = LoadModels(scenePayload);
-            
+
             _advertisingService.Construct(gameModels.PlayerWallet);
-            
+
             _levelCompletedService.Register(gameModels.KillEnemyCounter, gameModels.EnemySpawner);
 
             SavedLevel savedLevel = gameModels.SavedLevel;
             gameModels.SavedLevel.SavedLevelId = scenePayload.SceneId;
-            
+
             _tutorialService.Construct(gameModels.Tutorial, savedLevel);
 
             _volumeService.Register(gameModels.Volume);
             _volumeViewFactory.Create(gameModels.Volume, _gameplayHud.VolumeView);
-            
+
             _saveService.Register(gameModels.EnemySpawner);
-            
+
             for (int i = 0; i < _gameplayHud.NotAvailabilityUpgradeUis.Count; i++)
                 _upgradeUiFactory.Create(_upgradeCollection[i], _gameplayHud.NotAvailabilityUpgradeUis[i]);
 
@@ -150,31 +150,31 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IBearView bearView = _bearViewFactory.Create(gameModels.Bear);
             bearView.SetTargetFollow(characterView.CharacterMovementView);
 
-            _gameOverService.Register(gameModels.CharacterHealth);;
+            _gameOverService.Register(gameModels.CharacterHealth);
 
             EnemySpawnerView enemySpawnView = _rootGameObject.EnemySpawnerView;
             enemySpawnView.SetCharacterView(characterView);
             _enemySpawnViewFactory.Create(
                 gameModels.EnemySpawner, gameModels.KillEnemyCounter, enemySpawnView);
             _itemSpawnerViewFactory.Create(_rootGameObject.ItemSpawnerView);
-            
+
             _killEnemyCounterViewFactory.Create(
                 gameModels.KillEnemyCounter, gameModels.EnemySpawner, _gameplayHud.KillEnemyCounterView);
-            
+
             _backgroundMusicViewFactory.Create(_gameplayHud.BackgroundMusicView);
 
             _cameraService.Add(characterView);
             _cameraService.Add(_rootGameObject.AllMapPoint);
             _cameraService.SetFollower(FollowableId.Character);
             _cameraViewFactory.Create(_gameplayHud.CinemachineCameraView);
-            
+
             _uiCollectorFactory.Create();
             _formService.Show(FormId.Hud);
-            
+
             _scoreCounterViewFactory.Create(
-                gameModels.ScoreCounter, 
-                gameModels.KillEnemyCounter, 
-                gameModels.Level, 
+                gameModels.ScoreCounter,
+                gameModels.KillEnemyCounter,
+                gameModels.Level,
                 gameModels.CharacterHealth,
                 _gameplayHud.ScoreCounterView);
         }

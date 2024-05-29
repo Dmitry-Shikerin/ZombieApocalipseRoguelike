@@ -9,7 +9,7 @@ namespace Sources.Presentations.Views.Characters
     public class CharacterWalletView : PresentableView<CharacterWalletPresenter>, ICharacterWalletView
     {
         [SerializeField] private RewardItemTrigger _rewardItemTrigger;
-        
+
         public Vector3 Position => transform.position;
 
         protected override void OnAfterEnable() =>

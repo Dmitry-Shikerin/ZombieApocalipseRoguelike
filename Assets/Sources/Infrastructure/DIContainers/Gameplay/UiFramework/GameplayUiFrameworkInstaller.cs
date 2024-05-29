@@ -13,10 +13,10 @@ namespace Sources.Infrastructure.DIContainers.Gameplay.UiFramework
         public override void InstallBindings()
         {
             Container.Bind<IButtonCommandHandler>().To<GameplayButtonCommandHandler>().AsSingle();
-            
+
             Container.Bind<ShowFormCommand>().AsSingle();
             Container.Bind<CompleteTutorialCommand>().AsSingle();
-            Container.Bind<LoadMainMenuSceneCommand>().AsSingle(); 
+            Container.Bind<LoadMainMenuSceneCommand>().AsSingle();
             Container.Bind<NewGameCommand>().AsSingle();
             Container.Bind<LoadGameCommand>().AsSingle();
             Container.Bind<ShowLeaderboardCommand>().AsSingle();
@@ -27,9 +27,9 @@ namespace Sources.Infrastructure.DIContainers.Gameplay.UiFramework
             Container.Bind<SetCharacterCameraFollowCommand>().AsSingle();
             Container.Bind<ShowRewardedAdvertisingButtonCommand>().AsSingle();
             Container.Bind<ClearSavesButtonCommand>().AsSingle();
-            
+
             Container.Bind<IUiViewCommandHandler>().To<GameplayUiViewCommandHandler>().AsSingle();
-            
+
             Container.Bind<UnPauseCommand>().AsSingle();
             Container.Bind<PauseCommand>().AsSingle();
             Container.Bind<SaveVolumeCommand>().AsSingle();

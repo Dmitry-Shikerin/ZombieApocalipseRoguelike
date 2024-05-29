@@ -13,7 +13,7 @@ namespace Sources.Infrastructure.Factories.Views.Commons
 
         public HealthUiTextViewFactory(HealthUiTextPresenterFactory healthUiTextViewFactory)
         {
-            _healthUiTextViewFactory = healthUiTextViewFactory ?? 
+            _healthUiTextViewFactory = healthUiTextViewFactory ??
                                        throw new ArgumentNullException(nameof(healthUiTextViewFactory));
         }
 
@@ -22,7 +22,7 @@ namespace Sources.Infrastructure.Factories.Views.Commons
             HealthUiTextPresenter presenter = _healthUiTextViewFactory.Create(health, healthUiText);
 
             healthUiText.Construct(presenter);
-            
+
             return healthUiText;
         }
     }

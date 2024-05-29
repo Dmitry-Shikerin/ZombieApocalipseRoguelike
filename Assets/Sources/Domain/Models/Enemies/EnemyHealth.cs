@@ -15,9 +15,11 @@ namespace Sources.Domain.Models.Enemies
         }
 
         public event Action HealthChanged;
+
         public event Action<float> DamageReceived;
 
         public float MaxHealth { get; }
+
         public float CurrentHealth
         {
             get => _currentHealth;

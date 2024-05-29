@@ -8,9 +8,11 @@
             Name = name;
             Score = score;
         }
-        
+
         public int Rank { get; }
+
         public string Name { get; }
+
         public int Score { get; }
     }
 }

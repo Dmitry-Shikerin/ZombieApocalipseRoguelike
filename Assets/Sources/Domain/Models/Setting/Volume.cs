@@ -30,6 +30,7 @@ namespace Sources.Domain.Models.Setting
         }
 
         public event Action MusicVolumeChanged;
+
         public event Action MiniGunVolumeChanged;
 
         public float MusicMusicValue
@@ -41,7 +42,7 @@ namespace Sources.Domain.Models.Setting
                 MusicVolumeChanged?.Invoke();
             }
         }
-        
+
         public float MiniGunVolumeValue
         {
             get => _miniGunVolumeValue;
@@ -53,6 +54,7 @@ namespace Sources.Domain.Models.Setting
         }
 
         public string Id { get; }
+
         public Type Type => GetType();
     }
 }

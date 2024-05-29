@@ -14,9 +14,9 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
         {
             Container.Bind<ICharacterMovementService>().To<CharacterMovementService>().AsSingle();
             Container.Bind<IEnemyIndicatorService>().To<EnemyIndicatorService>().AsSingle();
-            
+
             Container.Bind<CharacterViewFactory>().AsSingle();
-            
+
             Container.Bind<CharacterMovementPresenterFactory>().AsSingle();
             Container.Bind<CharacterMovementViewFactory>().AsSingle();
 

@@ -29,12 +29,12 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades.Contr
             IFormService formService,
             IUpgradeService upgradeService)
         {
-            _upgradersCollection = upgradersCollection ?? 
+            _upgradersCollection = upgradersCollection ??
                                    throw new ArgumentNullException(nameof(upgradersCollection));
-            _upgradeViewFactory = upgradeViewFactory ?? 
+            _upgradeViewFactory = upgradeViewFactory ??
                                   throw new ArgumentNullException(nameof(upgradeViewFactory));
             _upgradeUiFactory = upgradeUiFactory ?? throw new ArgumentNullException(nameof(upgradeUiFactory));
-            _upgradeDescriptionViewFactory = upgradeDescriptionViewFactory 
+            _upgradeDescriptionViewFactory = upgradeDescriptionViewFactory
                                              ?? throw new ArgumentNullException(nameof(upgradeDescriptionViewFactory));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
@@ -49,7 +49,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades.Contr
             return new UpgradeControllerPresenter(
                 upgradeController,
                 characterHealth,
-                playerWallet, 
+                playerWallet,
                 upgradeControllerView,
                 _upgradersCollection,
                 _upgradeViewFactory,

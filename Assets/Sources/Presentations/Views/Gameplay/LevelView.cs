@@ -12,8 +12,9 @@ namespace Sources.Presentations.Views.Gameplay
     {
         [Required] [SerializeField] private ButtonView _buttonView;
         [Required] [SerializeField] private ImageView _imageView;
-        
+
         public IButtonView ButtonView => _buttonView;
+
         public IImageView ImageView => _imageView;
     }
 }

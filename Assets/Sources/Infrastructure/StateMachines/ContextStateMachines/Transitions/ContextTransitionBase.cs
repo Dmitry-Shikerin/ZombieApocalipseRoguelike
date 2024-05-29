@@ -11,7 +11,7 @@ namespace Sources.Infrastructure.StateMachines.ContextStateMachines.Transitions
         {
             NextState = nextState ?? throw new ArgumentNullException(nameof(nextState));
         }
-        
+
         public IContextState NextState { get; }
 
         public abstract bool CanTransit(IContext context);

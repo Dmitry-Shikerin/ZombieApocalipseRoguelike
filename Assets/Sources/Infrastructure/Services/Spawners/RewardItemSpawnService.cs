@@ -14,7 +14,7 @@ namespace Sources.Infrastructure.Services.Spawners
         private readonly IRewardItemViewFactory _viewFactory;
 
         public RewardItemSpawnService(
-            IObjectPool<RewardItemView> objectPool, 
+            IObjectPool<RewardItemView> objectPool,
             IRewardItemViewFactory viewFactory)
         {
             _objectPool = objectPool ?? throw new ArgumentNullException(nameof(objectPool));
@@ -27,10 +27,10 @@ namespace Sources.Infrastructure.Services.Spawners
             rewardItemView.SetRewardAmount(amount);
             rewardItemView.SetPosition(position);
             rewardItemView.Show();
-            
+
             return rewardItemView;
         }
-        
+
         private RewardItemView SpawnFromPool()
         {
             RewardItemView rewardItemView = _objectPool.Get<RewardItemView>();

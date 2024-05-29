@@ -13,17 +13,17 @@ namespace Sources.Infrastructure.Factories.Views.Characters
 
         public CharacterHealthViewFactory(CharacterHealthPresenterFactory characterHealthPresenterFactory)
         {
-            _characterHealthPresenterFactory = characterHealthPresenterFactory ?? 
+            _characterHealthPresenterFactory = characterHealthPresenterFactory ??
                                                throw new ArgumentNullException(nameof(characterHealthPresenterFactory));
         }
 
         public ICharacterHealthView Create(CharacterHealth characterHealth, CharacterHealthView characterHealthView)
         {
-            CharacterHealthPresenter characterHealthPresenter = 
+            CharacterHealthPresenter characterHealthPresenter =
                 _characterHealthPresenterFactory.Create(characterHealth, characterHealthView);
-            
+
             characterHealthView.Construct(characterHealthPresenter);
-            
+
             return characterHealthView;
         }
     }

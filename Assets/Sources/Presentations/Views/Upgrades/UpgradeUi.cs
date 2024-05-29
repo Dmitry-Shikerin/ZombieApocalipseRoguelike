@@ -16,6 +16,7 @@ namespace Sources.Presentations.Views.Upgrades
         [Required] [SerializeField] private ImageView _abilityImageView;
 
         public IReadOnlyList<IImageView> LevelImageViews => _imageViews;
+
         public IImageView AbilityImageView => _abilityImageView;
 
         public void SetPriceNextUpgrade(string text) =>

@@ -57,24 +57,43 @@ namespace Sources.Domain.Models.Gameplay
         }
 
         public Upgrader BearMassAttackUpgrader { get; }
+
         public Upgrader BearAttackUpgrader { get; }
+
         public Upgrader CharacterHealthUpgrader { get; }
+
         public Upgrader SawLauncherUpgrader { get; }
+
         public Upgrader SawLauncherAbilityUpgrader { get; }
+
         public Upgrader MiniGunAttackUpgrader { get; }
+
         public MiniGun MiniGun { get; }
+
         public CharacterHealth CharacterHealth { get; }
+
         public PlayerWallet PlayerWallet { get; }
+
         public Volume Volume { get; }
+
         public Level Level { get; }
+
         public Character Character { get; }
+
         public BearAttacker BearAttacker { get; }
+
         public Bear Bear { get; }
+
         public KillEnemyCounter KillEnemyCounter { get; }
+
         public EnemySpawner EnemySpawner { get; }
+
         public SavedLevel SavedLevel { get; }
+
         public Tutorial Tutorial { get; }
+
         public ScoreCounter ScoreCounter { get; }
+
         public UpgradeController UpgradeController { get; }
     }
 }

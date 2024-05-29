@@ -27,8 +27,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Weapons
         public MiniGunPresenter Create(MiniGun miniGun, IMiniGunView miniGunView)
         {
             return new MiniGunPresenter(
-                miniGun, 
-                miniGunView, 
+                miniGun,
+                miniGunView,
                 _bulletSpawnService,
                 _volumeService,
                 _pauseService);

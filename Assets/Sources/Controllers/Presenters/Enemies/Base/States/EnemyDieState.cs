@@ -19,28 +19,28 @@ namespace Sources.Controllers.Presenters.Enemies.Base.States
 
         public EnemyDieState(
             KillEnemyCounter killEnemyCounter,
-            IEnemyView enemyView, 
+            IEnemyView enemyView,
             IExplosionBodyBloodySpawnService explosionBodyBloodySpawnService,
             IRewardItemSpawnService rewardItemSpawnService,
             CustomCollection<IEnemyView> enemyCollection)
         {
             _killEnemyCounter = killEnemyCounter ?? throw new ArgumentNullException(nameof(killEnemyCounter));
             _enemyView = enemyView ?? throw new ArgumentNullException(nameof(enemyView));
-            _explosionBodyBloodySpawnService = explosionBodyBloodySpawnService ?? 
+            _explosionBodyBloodySpawnService = explosionBodyBloodySpawnService ??
                                           throw new ArgumentNullException(nameof(explosionBodyBloodySpawnService));
-            _rewardItemSpawnService = rewardItemSpawnService ?? 
+            _rewardItemSpawnService = rewardItemSpawnService ??
                                       throw new ArgumentNullException(nameof(rewardItemSpawnService));
             _enemyCollection = enemyCollection ?? throw new ArgumentNullException(nameof(enemyCollection));
         }
 
         public override void Enter()
         {
-            if(_enemyView == null)
+            if (_enemyView == null)
                 return;
-            
+
             Vector3 spawnPosition = _enemyView.Position;
             spawnPosition.y += 1f;
-            
+
             _killEnemyCounter.IncreaseKillCount();
             _explosionBodyBloodySpawnService.Spawn(spawnPosition);
             _rewardItemSpawnService.Spawn(_enemyView.Position, RewardItemConst.Amount);

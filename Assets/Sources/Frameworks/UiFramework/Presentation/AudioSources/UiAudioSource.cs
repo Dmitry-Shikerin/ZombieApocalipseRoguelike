@@ -13,9 +13,9 @@ namespace Sources.Frameworks.UiFramework.Presentation.AudioSources
         [DisplayAsString(false)] [HideLabel]
         [SerializeField] private string _lebel = UiConstant.UiAudioSourceLabel;
         [SerializeField] private AudioSourceId _audioSourceId;
-        
+
         private AudioSource _audioSource;
-        
+
         public AudioSourceId AudioSourceId => _audioSourceId;
 
         private void Awake() =>

@@ -14,7 +14,7 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
     public class BearAttackState : FiniteState
     {
         private const float FindRadius = 2f;
-        
+
         private readonly BearAttacker _bearAttacker;
         private readonly IBearView _bearView;
         private readonly IBearAnimationView _bearAnimationView;
@@ -56,14 +56,14 @@ namespace Sources.Controllers.Presenters.Bears.Movements.States
                 .Take(_bearAttacker.UnitsPerAttack)
                 .ToList()
                 .ForEach(health => health.TakeDamage(_bearAttacker.Damage));
-            
+
             if (_bearView.TargetEnemyHealth.CurrentHealth <= 0)
                 _bearView.SetTarget(null);
         }
 
         private void ChangeLookDirection()
         {
-            if(_bearView.TargetEnemyHealth == null)
+            if (_bearView.TargetEnemyHealth == null)
                 return;
 
             float angle = _bearMovementService.GetAngleRotation(

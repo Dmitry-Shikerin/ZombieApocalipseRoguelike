@@ -18,7 +18,7 @@ namespace Sources.Controllers.Presenters.Enemies.Base.States
         private readonly CustomCollection<IEnemyView> _enemyCollection;
 
         public EnemyInitializeState(
-            Enemy enemy, 
+            Enemy enemy,
             IEnemyAnimation enemyAnimation,
             IEnemyView enemyView,
             CustomCollection<IEnemyView> enemyCollection)
@@ -40,12 +40,12 @@ namespace Sources.Controllers.Presenters.Enemies.Base.States
         private void ChangeSkin()
         {
             IEnemySkin skin = _enemyView.Skins.GetRandomItem();
-            
+
             _enemyView.Skins
                 .Except(new List<IEnemySkin>() { skin })
                 .ToList()
                 .ForEach(concreteSkin => concreteSkin.Hide());
-            
+
             skin.Show();
         }
     }

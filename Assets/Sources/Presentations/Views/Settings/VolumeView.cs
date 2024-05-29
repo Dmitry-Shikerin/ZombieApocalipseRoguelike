@@ -13,6 +13,7 @@ namespace Sources.Presentations.Views.Settings
         [Required] [SerializeField] private SliderView _miniGunVolumeSlider;
 
         public ISliderView MusicVolumeSlider => _musicVolumeSlider;
+
         public ISliderView MiniGunVolumeSlider => _miniGunVolumeSlider;
     }
 }

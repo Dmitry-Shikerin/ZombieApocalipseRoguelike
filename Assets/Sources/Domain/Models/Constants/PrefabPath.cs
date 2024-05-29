@@ -7,7 +7,7 @@
         public const string Enemy = "Views/EnemyView";
         public const string BossEnemy = "Views/BossEnemyView";
         public const string ExplosionBodyBloody = "Views/ExplosionBodyBloodyView";
-        public const string FirstAidKit = "Views/FirstAidKitView"; 
+        public const string FirstAidKit = "Views/FirstAidKitView";
         public const string RewardItem = "Views/RewardItemView";
         public const string Bear = "Views/BearView";
         public const string Character = "Views/CharacterView";

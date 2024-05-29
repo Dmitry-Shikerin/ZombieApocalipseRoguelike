@@ -21,9 +21,9 @@ namespace Sources.Infrastructure.Factories.Views.Players
         {
             PlayerWalletPresenter playerWalletPresenter =
                 _playerWalletPresenterFactory.Create(playerWallet, playerWalletView);
-            
+
             playerWalletView.Construct(playerWalletPresenter);
-            
+
             return playerWalletView;
         }
     }

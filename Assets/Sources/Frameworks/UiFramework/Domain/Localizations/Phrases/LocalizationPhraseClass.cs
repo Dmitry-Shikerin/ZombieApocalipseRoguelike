@@ -13,7 +13,7 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Phrases
         [SerializeField] private string _textId;
         [FoldoutGroup("Russian")] [EnumToggleButtons]
         [SerializeField] private Enable _editRussian;
-        [FoldoutGroup("Russian")][TextArea(1, 20)] 
+        [FoldoutGroup("Russian")][TextArea(1, 20)]
         [EnableIf("_editRussian", Enable.Enable)]
         [SerializeField] private string _russian;
         [FoldoutGroup("English")] [EnumToggleButtons]

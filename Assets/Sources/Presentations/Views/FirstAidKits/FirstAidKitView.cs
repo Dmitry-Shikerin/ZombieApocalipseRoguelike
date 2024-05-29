@@ -7,19 +7,19 @@ namespace Sources.Presentations.Views.FirstAidKits
 {
     public class FirstAidKitView : View, IFirstAidKitView
     {
-        public int HealAmount { get; private set; }
-        
-        private readonly IPoolableObjectDestroyerService _poolableObjectDestroyerService = 
+        private readonly IPoolableObjectDestroyerService _poolableObjectDestroyerService =
             new PoolableObjectDestroyerService();
-        
+
+        public int HealAmount { get; private set; }
+
         public override void Destroy() =>
             _poolableObjectDestroyerService.Destroy(this);
 
         public void SetHealAmount(int healAmount)
         {
-            if(healAmount < 0)
+            if (healAmount < 0)
                 throw new ArgumentOutOfRangeException(nameof(healAmount));
-            
+
             HealAmount = healAmount;
         }
     }

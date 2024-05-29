@@ -24,17 +24,17 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             IEntityRepository entityRepository,
             ILoadService loadService,
             MainMenuHud mainMenuHud,
-            VolumeViewFactory volumeViewFactory, 
+            VolumeViewFactory volumeViewFactory,
             IVolumeService volumeService,
-            BackgroundMusicViewFactory backgroundMusicViewFactory, 
+            BackgroundMusicViewFactory backgroundMusicViewFactory,
             LevelAvailabilityViewFactory levelAvailabilityViewFactory,
             UiCollectorFactory uiCollectorFactory,
-            IFormService formService) 
+            IFormService formService)
             : base(
-                mainMenuHud, 
-                volumeViewFactory, 
-                volumeService, 
-                backgroundMusicViewFactory, 
+                mainMenuHud,
+                volumeViewFactory,
+                volumeService,
+                backgroundMusicViewFactory,
                 levelAvailabilityViewFactory,
                 uiCollectorFactory,
                 formService)
@@ -45,18 +45,18 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
         protected override MainMenuModels LoadModels(IScenePayload scenePayload)
         {
             Tutorial tutorial = _loadService.Load<Tutorial>(ModelId.Tutorial);
-            
+
             Volume volume = _loadService.Load<Volume>(ModelId.Volume);
-            
+
             GameData gameData = _loadService.Load<GameData>(ModelId.GameData);
-            
+
             SavedLevel savedLevel = _loadService.Load<SavedLevel>(ModelId.SavedLevel);
-            
+
             Level firstLevel = _loadService.Load<Level>(ModelId.Gameplay);
             Level secondLevel = _loadService.Load<Level>(ModelId.Gameplay2);
             Level thirdLevel = _loadService.Load<Level>(ModelId.Gameplay3);
             Level fourthLevel = _loadService.Load<Level>(ModelId.Gameplay4);
-            
+
             LevelAvailability levelAvailability = new LevelAvailability(
                 new List<Level>()
                 {
@@ -65,10 +65,10 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
                     thirdLevel,
                     fourthLevel,
                 });
-            
+
             return new MainMenuModels(
                 volume,
-                firstLevel, 
+                firstLevel,
                 secondLevel,
                 thirdLevel,
                 fourthLevel,

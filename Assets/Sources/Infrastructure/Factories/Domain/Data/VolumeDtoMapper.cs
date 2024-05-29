@@ -17,6 +17,6 @@ namespace Sources.Infrastructure.Factories.Domain.Data
         }
 
         public Volume MapDtoToModel(VolumeDto volumeDto) =>
-            new(volumeDto);
+            new (volumeDto);
     }
 }

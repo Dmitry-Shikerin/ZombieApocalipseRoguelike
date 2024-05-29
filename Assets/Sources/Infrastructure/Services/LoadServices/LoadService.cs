@@ -24,8 +24,8 @@ namespace Sources.Infrastructure.Services.LoadServices
             _dataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
             _mapperCollector = mapperCollector ?? throw new ArgumentNullException(nameof(mapperCollector));
         }
-        
-        public T Load<T>(string id) 
+
+        public T Load<T>(string id)
             where T : class, IEntity
         {
             object dto = _dataService.LoadData(id, ModelId.DtoTypes[id]);
@@ -34,7 +34,7 @@ namespace Sources.Infrastructure.Services.LoadServices
 
             if (model is not T concrete)
                 throw new InvalidCastException(nameof(T));
-            
+
             _entityRepository.Add(model);
 
             return concrete;

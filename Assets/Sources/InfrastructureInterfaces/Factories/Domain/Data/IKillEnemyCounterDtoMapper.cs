@@ -6,6 +6,7 @@ namespace Sources.InfrastructureInterfaces.Factories.Domain.Data
     public interface IKillEnemyCounterDtoMapper
     {
         KillEnemyCounterDto MapModelToDto(KillEnemyCounter killEnemyCounter);
+
         KillEnemyCounter MapDtoToModel(KillEnemyCounterDto killEnemyCounterDto);
     }
 }

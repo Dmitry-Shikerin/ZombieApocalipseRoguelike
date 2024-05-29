@@ -7,7 +7,7 @@ namespace Sources.Domain.Models.Data
     {
         [JsonProperty("id")]
         public string Id { get; set; }
-        
+
         [JsonProperty("killZombies")]
         public int KillZombies { get; set; }
     }

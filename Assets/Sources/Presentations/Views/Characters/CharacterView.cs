@@ -19,13 +19,21 @@ namespace Sources.Presentations.Views.Characters
         [Required] [SerializeField] private EnemyIndicatorView _enemyIndicatorView;
 
         public FollowableId Id => _followableId;
+
         public CharacterMovementView CharacterMovementView => _characterMovementView;
+
         public CharacterAnimationView CharacterAnimationView => _characterAnimationView;
+
         public MiniGunView MiniGunView => _miniGunView;
+
         public CharacterAttackerView CharacterAttackerView => _characterAttackerView;
+
         public CharacterHealthView CharacterHealthView => _characterHealthView;
+
         public CharacterWalletView CharacterWalletView => _characterWalletView;
+
         public EnemyIndicatorView EnemyIndicatorView => _enemyIndicatorView;
+
         public Transform Transform => transform;
     }
 }

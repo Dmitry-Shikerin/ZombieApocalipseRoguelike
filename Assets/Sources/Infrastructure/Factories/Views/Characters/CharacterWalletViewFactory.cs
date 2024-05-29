@@ -19,11 +19,11 @@ namespace Sources.Infrastructure.Factories.Views.Characters
 
         public ICharacterWalletView Create(PlayerWallet playerWallet, CharacterWalletView characterWalletView)
         {
-            CharacterWalletPresenter characterWalletPresenter = 
+            CharacterWalletPresenter characterWalletPresenter =
                 _characterWalletPresenterFactory.Create(playerWallet);
-            
+
             characterWalletView.Construct(characterWalletPresenter);
-            
+
             return characterWalletView;
         }
     }

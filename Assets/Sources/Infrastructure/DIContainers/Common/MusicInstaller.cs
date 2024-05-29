@@ -12,7 +12,7 @@ namespace Sources.Infrastructure.DIContainers.Common
         {
             Container.Bind<BackgroundMusicPresenterFactory>().AsSingle();
             Container.Bind<BackgroundMusicViewFactory>().AsSingle();
-            
+
             Container.Bind<VolumePresenterFactory>().AsSingle();
             Container.Bind<VolumeViewFactory>().AsSingle();
         }

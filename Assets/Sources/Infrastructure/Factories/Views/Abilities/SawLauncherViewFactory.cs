@@ -13,19 +13,19 @@ namespace Sources.Infrastructure.Factories.Views.Abilities
 
         public SawLauncherViewFactory(SawLauncherPresenterFactory sawLauncherPresenterFactory)
         {
-            _sawLauncherPresenterFactory = sawLauncherPresenterFactory ?? 
+            _sawLauncherPresenterFactory = sawLauncherPresenterFactory ??
                                            throw new ArgumentNullException(nameof(sawLauncherPresenterFactory));
         }
-        
+
         public ISawLauncherView Create(
             SawLauncher sawLauncher,
             SawLauncherView sawLauncherView)
         {
             SawLauncherPresenter sawLauncherPresenter =
                 _sawLauncherPresenterFactory.Create(sawLauncher);
-            
+
             sawLauncherView.Construct(sawLauncherPresenter);
-            
+
             return sawLauncherView;
         }
     }

@@ -13,7 +13,7 @@ namespace Sources.PresentationsInterfaces.Views.ObjectPools
 
             return this;
         }
-        
+
         public void ReturnToPool() =>
             _pool.Return(this);
     }

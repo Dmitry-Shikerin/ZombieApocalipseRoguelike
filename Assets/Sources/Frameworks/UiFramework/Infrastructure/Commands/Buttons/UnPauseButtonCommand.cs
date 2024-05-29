@@ -16,7 +16,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
         }
 
         public ButtonCommandId Id => ButtonCommandId.UnPause;
-        
+
         public void Handle(IUiButton uiButton) =>
             _pauseService.Continue();
     }

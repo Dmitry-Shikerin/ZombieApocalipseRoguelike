@@ -16,7 +16,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms
         }
 
         public FormCommandId Id => FormCommandId.SetAllMapCameraFollow;
-        
+
         public void Handle() =>
             _cameraService.SetFollower(FollowableId.AllMap);
     }

@@ -23,7 +23,7 @@ namespace Sources.Infrastructure.Services.GameOvers
         {
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
-            _interstitialAdService = interstitialAdService ?? 
+            _interstitialAdService = interstitialAdService ??
                                      throw new ArgumentNullException(nameof(interstitialAdService));
         }
 
@@ -45,7 +45,7 @@ namespace Sources.Infrastructure.Services.GameOvers
         {
             if (_isGameOver)
                 return;
-            
+
             _isGameOver = true;
             _loadService.ClearAll();
             _formService.Show(FormId.GameOver);

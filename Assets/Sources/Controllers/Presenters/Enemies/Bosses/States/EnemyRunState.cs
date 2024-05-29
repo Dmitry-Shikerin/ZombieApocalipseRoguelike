@@ -12,11 +12,11 @@ namespace Sources.Controllers.Presenters.Enemies.Bosses.States
         private readonly IBossEnemyAnimation _bossEnemyAnimation;
 
         public EnemyRunState(
-            BossEnemy enemy, 
-            IBossEnemyView enemyView, 
-            IBossEnemyAnimation enemyAnimation) 
-            : base( 
-                enemyView, 
+            BossEnemy enemy,
+            IBossEnemyView enemyView,
+            IBossEnemyAnimation enemyAnimation)
+            : base(
+                enemyView,
                 enemyAnimation)
         {
             _bossEnemy = enemy ?? throw new ArgumentNullException(nameof(enemy));
@@ -27,7 +27,7 @@ namespace Sources.Controllers.Presenters.Enemies.Bosses.States
         public override void Enter()
         {
             base.Enter();
-            
+
             _bossEnemyView.SetAgentSpeed(_bossEnemy.RunSpeed);
             _bossEnemyAnimation.PlayRun();
         }

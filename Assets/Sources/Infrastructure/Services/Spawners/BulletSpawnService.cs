@@ -24,11 +24,11 @@ namespace Sources.Infrastructure.Services.Spawners
         public IBulletView Spawn(IMiniGunView miniGunView)
         {
             IBulletView bulletView = SpawnFromPool(miniGunView) ?? _bulletViewFactory.Create(miniGunView);
-            
+
             bulletView.SetPosition(miniGunView.BulletSpawnPoint.Transform.position);
             bulletView.SetRotation(miniGunView.BulletSpawnPoint.Transform.rotation);
             bulletView.Show();
-            
+
             return bulletView;
         }
 
@@ -38,7 +38,7 @@ namespace Sources.Infrastructure.Services.Spawners
 
             if (bulletView == null)
                 return null;
-            
+
             return _bulletViewFactory.Create(bulletView, miniGunView);
         }
     }

@@ -11,11 +11,11 @@ namespace Sources.Infrastructure.Factories.Domain.Data
             return new LevelDto()
             {
                 Id = level.Id,
-                IsCompleted = level.IsCompleted
+                IsCompleted = level.IsCompleted,
             };
         }
 
         public Level MapDtoToModel(LevelDto levelDto) =>
-            new(levelDto);
+            new (levelDto);
     }
 }

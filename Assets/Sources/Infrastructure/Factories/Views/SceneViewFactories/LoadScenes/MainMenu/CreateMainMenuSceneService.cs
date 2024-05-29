@@ -50,7 +50,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             _entityRepository.Add(tutorial);
 
             Volume volume = CreateVolume();
-            
+
             GameData gameData = new GameData(ModelId.GameData, true);
             _entityRepository.Add(gameData);
 
@@ -96,7 +96,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
 
             Volume volume = new Volume();
             _entityRepository.Add(volume);
-            
+
             return volume;
         }
     }

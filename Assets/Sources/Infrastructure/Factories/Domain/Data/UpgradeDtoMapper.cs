@@ -15,8 +15,8 @@ namespace Sources.Infrastructure.Factories.Domain.Data
 
         public UpgradeDtoMapper(IUpgradeConfigCollectionService upgradeConfigCollectionService)
         {
-            _upgradeConfigCollectionService = 
-                upgradeConfigCollectionService ?? 
+            _upgradeConfigCollectionService =
+                upgradeConfigCollectionService ??
                 throw new ArgumentNullException(nameof(upgradeConfigCollectionService));
         }
 
@@ -26,7 +26,7 @@ namespace Sources.Infrastructure.Factories.Domain.Data
                 upgrader.MoneyPerUpgrades
                     .Select(money => new MoneyPerUpgradeDto() { MoneyPerUpgrade = money, })
                     .ToArray();
-            
+
             return new UpgradeDto()
             {
                 StartAmount = upgrader.StartAmount,
@@ -41,7 +41,7 @@ namespace Sources.Infrastructure.Factories.Domain.Data
         public UpgradeDto MapIdToDto(string id)
         {
             UpgradeConfig upgradeConfig = _upgradeConfigCollectionService.GetConfig(id);
-            
+
             MoneyPerUpgradeDto[] moneyPerUpgrades =
                 upgradeConfig.MoneyPerUpgrades
                     .Select(money => new MoneyPerUpgradeDto() { MoneyPerUpgrade = money, })

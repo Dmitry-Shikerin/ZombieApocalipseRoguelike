@@ -7,6 +7,7 @@ namespace Sources.PresentationsInterfaces.Views.Cameras.Points
     public interface ICameraFollowable : IContext
     {
         FollowableId Id { get; }
+
         Transform Transform { get; }
     }
 }

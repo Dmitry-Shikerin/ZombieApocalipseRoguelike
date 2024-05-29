@@ -37,10 +37,10 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
                     .ToDictionary(phrase => phrase.LocalizationId, phrase => phrase.Turkish),
             };
         }
-        
+
         public void Translate()
         {
-            if(WebApplication.IsRunningOnWebGL)
+            if (WebApplication.IsRunningOnWebGL)
                 ChangeSdcLanguage();
             else
                 ChangeCollectorLanguage();
@@ -48,9 +48,9 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
 
         public string GetText(string key)
         {
-            if(_currentLanguageDictionary.ContainsKey(key) == false)
+            if (_currentLanguageDictionary.ContainsKey(key) == false)
                 throw new KeyNotFoundException(nameof(key));
-            
+
             return _currentLanguageDictionary[key];
         }
 
@@ -68,7 +68,6 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
                     if (textView is MonoBehaviour concrete)
                         throw new NullReferenceException(nameof(concrete.gameObject.name));
                 }
-                    
 
                 if (_currentLanguageDictionary.ContainsKey(textView.Id) == false)
                     throw new KeyNotFoundException(nameof(textView.Id));
@@ -97,7 +96,7 @@ namespace Sources.Frameworks.UiFramework.Services.Localizations
 
             TranslateViews(key);
         }
-        
+
         private void ChangeSdcLanguage()
         {
             if (WebApplication.IsRunningOnWebGL == false)

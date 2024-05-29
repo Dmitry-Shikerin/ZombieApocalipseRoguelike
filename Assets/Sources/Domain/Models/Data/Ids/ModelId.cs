@@ -26,7 +26,7 @@ namespace Sources.Domain.Models.Data.Ids
         public const string Gameplay3 = "GamePlay3";
         public const string Gameplay4 = "GamePlay4";
 
-        public static IReadOnlyList<string> DeletedModelsIds = new List<string>()
+        public static IReadOnlyList<string> DeletedModelsIds { get; } = new List<string>()
         {
             GameplayEnemySpawner,
             SawLauncherAbilityUpgrader,
@@ -38,8 +38,8 @@ namespace Sources.Domain.Models.Data.Ids
             BearMassAttackUpgrader,
             KillEnemyCounter,
         };
-        
-        public static IReadOnlyList<string> ModelsIds = new List<string>()
+
+        public static IReadOnlyList<string> ModelsIds { get; } = new List<string>()
         {
             ScoreCounter,
             GameplayEnemySpawner,
@@ -61,7 +61,7 @@ namespace Sources.Domain.Models.Data.Ids
             Tutorial,
         };
 
-        public static IReadOnlyDictionary<string, Type> DtoTypes = new Dictionary<string, Type>()
+        public static IReadOnlyDictionary<string, Type> DtoTypes { get; } = new Dictionary<string, Type>()
         {
             [ScoreCounter] = typeof(ScoreCounterDto),
             [GameplayEnemySpawner] = typeof(EnemySpawnerDto),

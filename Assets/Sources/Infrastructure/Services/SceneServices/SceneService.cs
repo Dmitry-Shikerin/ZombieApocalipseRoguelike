@@ -16,22 +16,22 @@ namespace Sources.Infrastructure.Services.SceneServices
 
         private readonly SceneStateMachine _stateMachine;
         private readonly IReadOnlyDictionary<string, Func<object, SceneContext, UniTask<IScene>>> _sceneFactories;
-        
+
         public SceneService(IReadOnlyDictionary<string, Func<object, SceneContext, UniTask<IScene>>> sceneFactories)
         {
             _stateMachine = new SceneStateMachine();
             _sceneFactories = sceneFactories ?? throw new ArgumentNullException(nameof(sceneFactories));
         }
-        
+
         public void AddBeforeSceneChangeHandler(Func<string, UniTask> handler) =>
             _enteringHandlers.Add(handler);
-        
+
         public void AddAfterSceneChangeHandler(Func<UniTask> handler) =>
             _exitingHandlers.Add(handler);
-        
+
         public void RemoveBeforeSceneChangeHandler(Func<string, UniTask> handler) =>
             _enteringHandlers.Remove(handler);
-        
+
         public void RemoveAfterSceneChangeHandler(Func<UniTask> handler) =>
             _exitingHandlers.Remove(handler);
 

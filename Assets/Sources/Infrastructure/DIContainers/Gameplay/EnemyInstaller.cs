@@ -29,16 +29,16 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<CustomCollection<IEnemyView>>().AsSingle();
-            
+
             Container.Bind<IObjectPool<EnemyView>>().To<ObjectPool<EnemyView>>().AsSingle();
             Container.Bind<IObjectPool<BossEnemyView>>().To<ObjectPool<BossEnemyView>>().AsSingle();
             Container.Bind<IObjectPool<ExplosionBodyBloodyView>>().To<ObjectPool<ExplosionBodyBloodyView>>().AsSingle();
-            
+
             Container.Bind<IExplosionBodyBloodySpawnService>().To<ExplosionBodyBloodySpawnService>().AsSingle();
             Container.Bind<IEnemySpawnService>().To<EnemySpawnService>().AsSingle();
             Container.Bind<IBossEnemySpawnService>().To<BossEnemySpawnService>().AsSingle();
             Container.Bind<IEnemyAttackService>().To<EnemyAttackService>().AsSingle();
-            
+
             Container.Bind<HealthUiPresenterFactory>().AsSingle();
             Container.Bind<HealthUiFactory>().AsSingle();
 
@@ -47,7 +47,7 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
 
             Container.Bind<BossEnemyPresenterFactory>().AsSingle();
             Container.Bind<IBossEnemyViewFactory>().To<BossEnemyViewFactory>().AsSingle();
-            
+
             Container.Bind<EnemyHealthPresenterFactory>().AsSingle();
             Container.Bind<EnemyHealthViewFactory>().AsSingle();
             Container.Bind<EnemyPresenterFactory>().AsSingle();

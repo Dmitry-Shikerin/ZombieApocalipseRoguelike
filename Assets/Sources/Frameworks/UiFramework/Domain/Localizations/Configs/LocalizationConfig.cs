@@ -9,8 +9,8 @@ using UnityEngine;
 namespace Sources.Frameworks.UiFramework.Domain.Localizations.Configs
 {
     [CreateAssetMenu(
-        fileName = "LocalizationConfigSecond", 
-        menuName = "Configs/LocalizationConfigSecond", 
+        fileName = "LocalizationConfigSecond",
+        menuName = "Configs/LocalizationConfigSecond",
         order = 51)]
     public class LocalizationConfig : ScriptableObject
     {
@@ -18,26 +18,27 @@ namespace Sources.Frameworks.UiFramework.Domain.Localizations.Configs
         [SerializeField] private List<LocalizationPhrase> _localizationPhrases;
         [ValueDropdown("GetDropdownValues")]
         [SerializeField] private StringPhraseSerializedDictionary _localizationPhrase;
-        
+
         public List<string> LocalizationIds => _localizationIds;
+
         public List<LocalizationPhrase> LocalizationPhrases => _localizationPhrases;
-        
+
         [Button]
         private void AddAllPhrases()
         {
             _localizationPhrases.Clear();
-                TextExtension
-                    .FindAllLocalizationPhrases()
-                    .ForEach(phrase => _localizationPhrases.Add(phrase));
+            TextExtension
+                .FindAllLocalizationPhrases()
+                .ForEach(phrase => _localizationPhrases.Add(phrase));
         }
-        
+
         [Button]
         private void FillIds()
         {
             _localizationIds.Clear();
             _localizationPhrases.ForEach(phrase => _localizationIds.Add(phrase.LocalizationId));
         }
-        
+
         [Button]
         private void CreateLocalizationPhrase() =>
             TextExtension.CreateLocalizationPhrase();

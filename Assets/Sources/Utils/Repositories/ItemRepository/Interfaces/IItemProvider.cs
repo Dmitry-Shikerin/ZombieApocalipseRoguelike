@@ -5,6 +5,7 @@ namespace Sources.Utils.Repositories.ItemRepository.Interfaces
     public interface IItemProvider<T1>
     {
         public int Count { get; }
+
         public IReadOnlyCollection<T1> Collection { get; }
 
         public T2 Get<T2>()

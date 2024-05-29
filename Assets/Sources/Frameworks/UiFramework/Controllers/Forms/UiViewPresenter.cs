@@ -36,7 +36,7 @@ namespace Sources.Frameworks.UiFramework.Controllers.Forms
         public override void Disable()
         {
             _uiViewService.Handle(_uiView.DisabledFormCommands);
-            
+
             foreach (FormId formId in _uiView.OnDisableEnabledForms)
                 _formService.Show(formId);
             foreach (FormId formId in _uiView.OnDisableDisabledForms)

@@ -32,7 +32,7 @@ namespace Sources.Infrastructure.Factories.Views.Bullets
         {
             bulletView.Construct(miniGunView);
             bulletView.SetParent(null);
-            
+
             return bulletView;
         }
 

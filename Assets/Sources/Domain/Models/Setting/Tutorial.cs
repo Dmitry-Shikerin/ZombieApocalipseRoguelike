@@ -24,7 +24,9 @@ namespace Sources.Domain.Models.Setting
         }
 
         public bool HasCompleted { get; set; }
+
         public string Id { get; }
+
         public Type Type => GetType();
     }
 }

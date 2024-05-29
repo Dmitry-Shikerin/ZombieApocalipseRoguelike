@@ -22,7 +22,7 @@ namespace Sources.Infrastructure.Factories.Views.InterstitialShowers
         {
             InterstitialShowerPresenter presenter = _presenterFactory.Create(
                 enemySpawner, upgradeController, view);
-            
+
             view.Construct(presenter);
 
             return view;

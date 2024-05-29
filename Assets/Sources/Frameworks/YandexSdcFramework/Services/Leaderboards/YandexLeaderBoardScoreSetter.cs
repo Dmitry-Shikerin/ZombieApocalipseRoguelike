@@ -14,7 +14,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Services.Leaderboards
 
             if (PlayerAccount.IsAuthorized == false)
                 return;
-            
+
             Leaderboard.GetPlayerEntry(LeaderBoardNameConst.Leaderboard, result =>
             {
                 if (result.score < score)

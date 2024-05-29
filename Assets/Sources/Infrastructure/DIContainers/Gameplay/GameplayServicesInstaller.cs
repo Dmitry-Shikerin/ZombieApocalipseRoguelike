@@ -22,7 +22,7 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
             Container.Bind<ILevelCompletedService>().To<LevelCompletedService>().AsSingle();
             Container.Bind<ITutorialService>().To<TutorialService>().AsSingle();
             Container.Bind<IGameOverService>().To<GameOverService>().AsSingle();
-            
+
             Container.Bind<KillEnemyCounterPresenterFactory>().AsSingle();
             Container.Bind<KillEnemyCounterViewFactory>().AsSingle();
             Container.Bind<InterstitialShowerPresenterFactory>().AsSingle();

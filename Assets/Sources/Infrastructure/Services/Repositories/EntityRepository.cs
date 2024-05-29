@@ -10,12 +10,12 @@ namespace Sources.Infrastructure.Services.Repositories
         private readonly Dictionary<string, IEntity> _entities = new Dictionary<string, IEntity>();
 
         public IReadOnlyDictionary<string, IEntity> Entities => _entities;
-        
+
         public void Add(IEntity entity)
         {
             if (_entities.ContainsKey(entity.Id))
                 throw new InvalidOperationException($"Entity {entity.Id} with this Id already exists");
-            
+
             _entities[entity.Id] = entity;
         }
 
@@ -27,14 +27,15 @@ namespace Sources.Infrastructure.Services.Repositories
             return _entities[id];
         }
 
-        public T Get<T>(string id) where T : class, IEntity
+        public T Get<T>(string id)
+            where T : class, IEntity
         {
-            if (_entities.ContainsKey(id) == false) 
+            if (_entities.ContainsKey(id) == false)
                 throw new InvalidOperationException($"Entity {id} with this Id does not exist");
 
-            if(_entities[id] is not T concreteEntity)
+            if (_entities[id] is not T concreteEntity)
                 throw new InvalidCastException($"Entity {id} with this Id does not exist");
-            
+
             return concreteEntity;
         }
 

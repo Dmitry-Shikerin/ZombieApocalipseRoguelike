@@ -19,9 +19,9 @@ namespace Sources.Infrastructure.Factories.Views.Gameplay
         }
 
         public IScoreCounterView Create(
-            ScoreCounter scoreCounter, 
-            IKillEnemyCounter killEnemyCounter, 
-            ILevel level, 
+            ScoreCounter scoreCounter,
+            IKillEnemyCounter killEnemyCounter,
+            ILevel level,
             ICharacterHealth characterHealth,
             ScoreCounterView view)
         {

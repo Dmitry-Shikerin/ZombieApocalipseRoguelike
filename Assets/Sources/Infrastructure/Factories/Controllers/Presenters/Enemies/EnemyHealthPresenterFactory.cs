@@ -7,6 +7,6 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Enemies
     public class EnemyHealthPresenterFactory
     {
         public EnemyHealthPresenter Create(EnemyHealth enemyHealth, IEnemyHealthView enemyHealthView) =>
-            new(enemyHealth, enemyHealthView);
+            new (enemyHealth, enemyHealthView);
     }
 }

@@ -10,8 +10,9 @@ namespace Sources.Domain.Models.Bears
         {
             BearAttacker = bearAttacker ?? throw new ArgumentNullException(nameof(bearAttacker));
         }
-        
+
         public BearAttacker BearAttacker { get; }
+
         public Vector3 Position { get; set; }
     }
 }

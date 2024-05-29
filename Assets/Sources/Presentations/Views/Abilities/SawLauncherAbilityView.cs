@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Sources.Presentations.Views.Abilities
 {
-    public class SawLauncherAbilityView : PresentableView<SawLauncherAbilityPresenter>, 
+    public class SawLauncherAbilityView : PresentableView<SawLauncherAbilityPresenter>,
         ISawLauncherAbilityView
     {
         [SerializeField] private List<SawLauncherView> _sawLauncherViews;
-        
+
         private Transform _targetTransform;
 
         public IReadOnlyList<SawLauncherView> SawLauncherViews => _sawLauncherViews;

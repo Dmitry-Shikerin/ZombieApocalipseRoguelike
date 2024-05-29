@@ -24,7 +24,9 @@ namespace Sources.Domain.Models.Gameplay
         public event Action KillZombiesCountChanged;
 
         public int KillZombies { get; private set; }
+
         public string Id { get; }
+
         public Type Type => GetType();
 
         public void IncreaseKillCount()

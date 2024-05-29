@@ -14,15 +14,17 @@ namespace Sources.Presentations.Views.Bears
         [Required] [SerializeField] private BearAnimationView _bearAnimationView;
 
         public BearAnimationView BearAnimationView => _bearAnimationView;
+
         public IEnemyHealthView TargetEnemyHealth { get; private set; }
+
         public ICharacterMovementView CharacterMovementView { get; private set; }
-        
+
         public void SetTarget(IEnemyHealthView enemyHealthView) =>
             TargetEnemyHealth = enemyHealthView;
 
         public void SetTargetFollow(ICharacterMovementView characterMovementView) =>
             CharacterMovementView = characterMovementView;
-        
+
         public void SetLookRotation(float angle)
         {
             transform.rotation = Quaternion.RotateTowards(

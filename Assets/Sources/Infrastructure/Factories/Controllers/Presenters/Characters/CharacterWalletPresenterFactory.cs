@@ -7,7 +7,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Characters
     {
         public CharacterWalletPresenter Create(PlayerWallet playerWallet)
         {
-            return new CharacterWalletPresenter(playerWallet); 
+            return new CharacterWalletPresenter(playerWallet);
         }
     }
 }

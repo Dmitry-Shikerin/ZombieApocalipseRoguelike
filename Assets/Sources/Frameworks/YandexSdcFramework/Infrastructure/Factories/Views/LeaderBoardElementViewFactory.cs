@@ -23,7 +23,7 @@ namespace Sources.Frameworks.YandexSdcFramework.Infrastructure.Factories.Views
         {
             if (leaderBoardPlayer == null)
                 throw new ArgumentNullException(nameof(leaderBoardPlayer));
-            
+
             if (leaderBoardElementView == null)
                 throw new ArgumentNullException(nameof(leaderBoardElementView));
 

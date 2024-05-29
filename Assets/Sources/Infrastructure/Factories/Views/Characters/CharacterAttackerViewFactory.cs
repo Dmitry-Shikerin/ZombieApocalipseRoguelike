@@ -13,7 +13,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
 
         public CharacterAttackerViewFactory(CharacterAttackerPresenterFactory characterAttackerPresenterFactory)
         {
-            _characterAttackerPresenterFactory = 
+            _characterAttackerPresenterFactory =
                 characterAttackerPresenterFactory ??
                 throw new ArgumentNullException(nameof(characterAttackerPresenterFactory));
         }
@@ -22,11 +22,11 @@ namespace Sources.Infrastructure.Factories.Views.Characters
             CharacterAttacker characterAttacker,
             CharacterAttackerView characterAttackerView)
         {
-            CharacterAttackerPresenter characterAttackerPresenter = 
+            CharacterAttackerPresenter characterAttackerPresenter =
                 _characterAttackerPresenterFactory.Create(characterAttacker);
-            
+
             characterAttackerView.Construct(characterAttackerPresenter);
-            
+
             return characterAttackerView;
         }
     }

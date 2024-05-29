@@ -13,16 +13,16 @@ namespace Sources.Infrastructure.Factories.Views.Weapons
 
         public MiniGunViewFactory(MiniGunPresenterFactory miniGunPresenterFactory)
         {
-            _miniGunPresenterFactory = miniGunPresenterFactory ?? 
+            _miniGunPresenterFactory = miniGunPresenterFactory ??
                                        throw new ArgumentNullException(nameof(miniGunPresenterFactory));
         }
 
         public IMiniGunView Create(MiniGun miniGun, MiniGunView miniGunView)
         {
             MiniGunPresenter miniGunPresenter = _miniGunPresenterFactory.Create(miniGun, miniGunView);
-            
-            miniGunView.Construct(miniGunPresenter); 
-            
+
+            miniGunView.Construct(miniGunPresenter);
+
             return miniGunView;
         }
     }

@@ -6,6 +6,7 @@ namespace Sources.InfrastructureInterfaces.Factories.Domain.Data
     public interface IScoreCounterDtoMapper
     {
         ScoreCounterDto MapModelToDto(ScoreCounter scoreCounter);
+
         ScoreCounter MapDtoToModel(ScoreCounterDto scoreCount);
     }
 }

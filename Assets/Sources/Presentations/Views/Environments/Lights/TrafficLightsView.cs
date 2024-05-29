@@ -12,12 +12,12 @@ namespace Sources.Presentations.Views.Environments.Lights
     public class TrafficLightsView : View
     {
         [Required] [SerializeField] private List<TrafficLight> _trafficLights;
-        
+
         private TimeSpan _blinkDelayTimeSpan = TimeSpan.FromSeconds(TrafficLightConst.BlinkDelay);
         private TimeSpan _hideDelayTimeSpan = TimeSpan.FromSeconds(TrafficLightConst.HideDelay);
 
         private CancellationTokenSource _cancellationTokenSource;
-        
+
         private void OnEnable()
         {
             _cancellationTokenSource = new CancellationTokenSource();
@@ -52,7 +52,7 @@ namespace Sources.Presentations.Views.Environments.Lights
                     .ForEach(trafficLight => trafficLight.Hide());
 
                 trafficLight.Show();
-                        
+
                 await UniTask.Delay(_hideDelayTimeSpan, cancellationToken: cancellationToken);
             }
         }
@@ -63,12 +63,12 @@ namespace Sources.Presentations.Views.Environments.Lights
             {
                 foreach (TrafficLight trafficLight in _trafficLights)
                     trafficLight.Show();
-                    
+
                 await UniTask.Delay(_blinkDelayTimeSpan, cancellationToken: cancellationToken);
-                    
+
                 foreach (TrafficLight trafficLight in _trafficLights)
                     trafficLight.Hide();
-                    
+
                 await UniTask.Delay(_blinkDelayTimeSpan, cancellationToken: cancellationToken);
             }
         }

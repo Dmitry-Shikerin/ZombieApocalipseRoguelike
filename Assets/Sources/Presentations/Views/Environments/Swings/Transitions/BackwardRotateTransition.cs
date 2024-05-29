@@ -10,13 +10,13 @@ namespace Sources.Presentations.Views.Environments.Swings.Transitions
     public class BackwardRotateTransition : ConditionTask
     {
         private const float TargetAngle = 0;
-        
+
         private Transform _transform;
 
         protected override string OnInit()
         {
             _transform = blackboard.GetVariableValue<Transform>("_transform");
-            
+
             return null;
         }
 

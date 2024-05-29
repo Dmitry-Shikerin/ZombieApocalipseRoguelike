@@ -15,7 +15,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms
         }
 
         public FormCommandId Id => FormCommandId.UnPause;
-        
+
         public void Handle() =>
             _pauseService.Continue();
     }

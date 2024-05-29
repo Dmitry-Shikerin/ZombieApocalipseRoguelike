@@ -17,7 +17,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Buttons
 
         [TabGroup("Ids")] [SerializeField]
         private FormId _formId;
-        
+
         [TabGroup("Settings")] [SerializeField]
         private UseButtonType _useButtonType;
 
@@ -28,16 +28,21 @@ namespace Sources.Frameworks.UiFramework.Presentation.Buttons
         private List<ButtonCommandId> _onClickCommandId;
 
         [TabGroup("Commands")] [SerializeField]
-        private List<ButtonCommandId> enableCommandId;
+        private List<ButtonCommandId> _enableCommandId;
 
         [TabGroup("Commands")] [SerializeField]
         private List<ButtonCommandId> _disableCommandId;
 
         public float Delay => _delay;
+
         public List<ButtonCommandId> OnClickCommandId => _onClickCommandId;
-        public List<ButtonCommandId> EnableCommandId => enableCommandId;
+
+        public List<ButtonCommandId> EnableCommandId => _enableCommandId;
+
         public List<ButtonCommandId> DisableCommandId => _disableCommandId;
+
         public UseButtonType UseButtonType => _useButtonType;
+
         public FormId FormId => _formId;
     }
 }

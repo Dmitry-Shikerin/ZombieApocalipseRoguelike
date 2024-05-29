@@ -17,7 +17,7 @@ namespace Sources.Infrastructure.Factories.Views.FirstAidKitViewFactory
 
         public FirstAidKitViewFactory(IObjectPool<FirstAidKitView> firstAidKitViewPool)
         {
-            _firstAidKitViewPool = firstAidKitViewPool ?? 
+            _firstAidKitViewPool = firstAidKitViewPool ??
                                    throw new ArgumentNullException(nameof(firstAidKitViewPool));
         }
 
@@ -25,19 +25,19 @@ namespace Sources.Infrastructure.Factories.Views.FirstAidKitViewFactory
         {
             FirstAidKitView firstAidKitView = CreateView();
             firstAidKitView.SetPosition(position);
-            
+
             return firstAidKitView;
         }
 
         private FirstAidKitView CreateView()
         {
-            FirstAidKitView firstAidKitView = 
+            FirstAidKitView firstAidKitView =
                 Object.Instantiate(Resources.Load<FirstAidKitView>(PrefabPath.FirstAidKit));
 
             firstAidKitView
                 .AddComponent<PoolableObject>()
                 .SetPool(_firstAidKitViewPool);
-            
+
             return firstAidKitView;
         }
     }

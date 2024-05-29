@@ -27,13 +27,21 @@ namespace Sources.Domain.Models.Gameplay
         }
 
         public Volume Volume { get; }
+
         public Level FirstLevel { get; }
+
         public Level SecondLevel { get; }
+
         public Level ThirdLevel { get; }
+
         public Level FourthLevel { get; }
+
         public LevelAvailability LevelAvailability { get; }
+
         public GameData GameData { get; }
+
         public SavedLevel SavedLevel { get; }
+
         public Tutorial Tutorial { get; }
     }
 }

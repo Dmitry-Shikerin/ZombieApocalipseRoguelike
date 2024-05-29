@@ -10,10 +10,10 @@ namespace Sources.Presentations.UI.Buttons
         private void Awake() =>
             _audioSource.loop = false;
 
-        protected void OnEnable() =>
+        private void OnEnable() =>
             AddClickListener(OnClick);
 
-        protected void OnDisable() =>
+        private void OnDisable() =>
             RemoveClickListener(OnClick);
 
         private void OnClick() =>

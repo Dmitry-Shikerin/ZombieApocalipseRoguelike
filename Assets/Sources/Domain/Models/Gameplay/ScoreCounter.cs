@@ -11,7 +11,7 @@ namespace Sources.Domain.Models.Gameplay
             TotalScore = dto.TotalScore;
             Id = dto.Id;
         }
-        
+
         public ScoreCounter(int totalScore, string id)
         {
             TotalScore = totalScore;
@@ -19,21 +19,24 @@ namespace Sources.Domain.Models.Gameplay
         }
 
         public int TotalScore { get; private set; }
+
         public int CurrentScore { get; private set; }
+
         public string Id { get; }
+
         public Type Type => GetType();
 
         public void SetCurrentScore(int score)
         {
-            if(score < 0)
+            if (score < 0)
                 throw new ArgumentOutOfRangeException(nameof(score), "Score must be positive");
-            
+
             CurrentScore = score;
         }
 
         public void AddTotalScore()
         {
-            if(CurrentScore < 0)
+            if (CurrentScore < 0)
                 throw new ArgumentOutOfRangeException(nameof(CurrentScore), "Score must be positive");
 
             TotalScore += CurrentScore;

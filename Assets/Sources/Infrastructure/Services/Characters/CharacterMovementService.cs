@@ -10,7 +10,7 @@ namespace Sources.Infrastructure.Services.Characters
     {
         private const float Delta = 1;
         private const float Scalar = 2;
-        
+
         public void SetSpeed(CharacterMovement characterMovement, float speed, float deltaTime)
         {
             characterMovement.Speed = Mathf.MoveTowards(
@@ -38,9 +38,9 @@ namespace Sources.Infrastructure.Services.Characters
         }
 
         public void SetAnimationDirection(
-            CharacterMovement characterMovement, 
-            Vector3 movementDirection, 
-            float angleRotation, 
+            CharacterMovement characterMovement,
+            Vector3 movementDirection,
+            float angleRotation,
             float deltaTime)
         {
             Vector3 direction = Quaternion.Euler(0, -angleRotation, 0) * movementDirection;

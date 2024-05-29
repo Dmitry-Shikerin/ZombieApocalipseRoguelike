@@ -9,7 +9,7 @@ namespace Sources.Presentations.Views.Cameras
     public class CinemachineCameraView : PresentableView<CameraPresenter>, ICinemachineCameraView
     {
         [Required] [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
-        
+
         public void Follow(Transform target) =>
             _cinemachineVirtualCamera.Follow = target;
     }

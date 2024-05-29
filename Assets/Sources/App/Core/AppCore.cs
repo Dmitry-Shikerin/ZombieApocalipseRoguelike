@@ -21,7 +21,7 @@ namespace Sources.App.Core
                     ModelId.MainMenu,
                     new ScenePayload(ModelId.MainMenu, false, false));
             }
-            catch(ArgumentNullException)
+            catch (ArgumentNullException)
             {
             }
             catch (OperationCanceledException)

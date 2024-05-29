@@ -14,7 +14,7 @@ namespace Sources.Presentations.UI.Images
         [Required] [SerializeField] private Image _image;
 
         public float FillAmount => _image.fillAmount;
-        
+
         public void SetSprite(Sprite sprite) =>
             _image.sprite = sprite;
 
@@ -24,10 +24,10 @@ namespace Sources.Presentations.UI.Images
         public UniTask FillMoveTowardsAsync(float duration, CancellationToken cancellationToken) =>
             UniTask.CompletedTask;
 
-        public void ShowImage() => 
+        public void ShowImage() =>
             _image.fillAmount = ImageConst.Max;
 
-        public void HideImage() => 
+        public void HideImage() =>
             _image.fillAmount = 0f;
     }
 }

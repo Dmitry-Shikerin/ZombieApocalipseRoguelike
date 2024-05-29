@@ -41,12 +41,12 @@ namespace Sources.Controllers.Presenters.Upgrades.Controllers
             _upgradeController = upgradeController ?? throw new ArgumentNullException(nameof(upgradeController));
             _characterHealth = characterHealth ?? throw new ArgumentNullException(nameof(characterHealth));
             _playerWallet = playerWallet ?? throw new ArgumentNullException(nameof(playerWallet));
-            _upgradeControllerView = upgradeControllerView ?? 
+            _upgradeControllerView = upgradeControllerView ??
                                      throw new ArgumentNullException(nameof(upgradeControllerView));
             _upgradeCollection = upgradeCollection ?? throw new ArgumentNullException(nameof(upgradeCollection));
             _upgradeViewFactory = upgradeViewFactory ?? throw new ArgumentNullException(nameof(upgradeViewFactory));
             _upgradeUiFactory = upgradeUiFactory ?? throw new ArgumentNullException(nameof(upgradeUiFactory));
-            _upgradeDescriptionViewFactory = upgradeDescriptionViewFactory ?? 
+            _upgradeDescriptionViewFactory = upgradeDescriptionViewFactory ??
                                              throw new ArgumentNullException(nameof(upgradeDescriptionViewFactory));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
@@ -67,7 +67,7 @@ namespace Sources.Controllers.Presenters.Upgrades.Controllers
             {
                 if (_characterHealth.IsDied)
                     return;
-                
+
                 if (_formService.IsActive(FormId.Upgrade))
                     return;
 

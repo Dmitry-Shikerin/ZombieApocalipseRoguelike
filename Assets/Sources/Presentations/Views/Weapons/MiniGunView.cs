@@ -16,21 +16,22 @@ namespace Sources.Presentations.Views.Weapons
         [Required] [SerializeField] private ParticleSystem _fireParticleSystem;
         [Required] [SerializeField] private AudioSourceView _shootAudioSource;
         [Required] [SerializeField] private AudioSourceView _endShootAudioSource;
-         
+
         public IBulletSpawnPoint BulletSpawnPoint => _miniGunBulletSpawnPoint;
+
+        public IAudioSourceView ShootAudioSource => _shootAudioSource;
+
+        public IAudioSourceView EndShootAudioSource => _endShootAudioSource;
 
         public void DealDamage(IEnemyHealthView enemyHealthView) =>
             Presenter.DealDamage(enemyHealthView);
-
-        public IAudioSourceView ShootAudioSource => _shootAudioSource;
-        public IAudioSourceView EndShootAudioSource => _endShootAudioSource;
 
         public void PlayFireParticles()
         {
             _bulletParticleSystem.Play();
             _fireParticleSystem.Play();
         }
-        
+
         public void StopFireParticles()
         {
             _bulletParticleSystem.Stop();

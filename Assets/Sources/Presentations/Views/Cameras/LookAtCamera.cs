@@ -3,7 +3,7 @@
 namespace Sources.Presentations.Views.Cameras
 {
     public class LookAtCamera : View
-    { 
+    {
         private Camera _mainCamera;
 
         private void Start() =>

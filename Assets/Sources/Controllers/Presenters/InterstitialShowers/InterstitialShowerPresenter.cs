@@ -21,11 +21,9 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
 
         private CancellationTokenSource _cancellationTokenSource;
         private TimeSpan _timerTimeSpan = TimeSpan.FromSeconds(AdvertisingConst.Delay);
-        
-        private bool _canCancelled;
 
         public InterstitialShowerPresenter(
-            IEnemySpawner enemySpawner, 
+            IEnemySpawner enemySpawner,
             IUpgradeController upgradeController,
             IInterstitialShowerView view,
             IInterstitialAdService interstitialAdService,
@@ -38,7 +36,7 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
                                      throw new ArgumentNullException(nameof(interstitialAdService));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
         }
-        
+
         private bool CanShow => _enemySpawner.CurrentWave < _enemySpawner.EnemyInWave.Count;
 
         public override void Enable()
@@ -64,9 +62,9 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
 
         private void OnCurrentWaveChanged()
         {
-            if(CanShow == false)
+            if (CanShow == false)
                 return;
-            
+
             ShowInterstitialAsync(_cancellationTokenSource.Token);
         }
 
@@ -94,27 +92,26 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
             }
             catch (OperationCanceledException)
             {
-                
             }
         }
-        
+
         private async UniTask ShowTimerAsync(CancellationToken cancellationToken)
         {
-            for (int i = 3; i > 0 ; i--)
+            for (int i = 3; i > 0; i--)
             {
                 _view.TimerText.SetText($"{i}");
                 await UniTask.Delay(_timerTimeSpan, cancellationToken: cancellationToken);
             }
-        
+
             _interstitialAdService.ShowInterstitial();
         }
-        
+
         private void DisableTimer()
         {
             _formService.Hide(FormId.ShowAd);
             _view.TimerText.Disable();
         }
-        
+
         private void EnableTimer()
         {
             _formService.Show(FormId.ShowAd);

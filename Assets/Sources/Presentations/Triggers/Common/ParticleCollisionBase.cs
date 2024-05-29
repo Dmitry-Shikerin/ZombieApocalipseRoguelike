@@ -8,7 +8,7 @@ namespace Sources.Presentations.Triggers.Common
     public class ParticleCollisionBase<T> : View, IEnteredTrigger<T>
     {
         public event Action<T> Entered;
-        
+
         private void OnParticleCollision(GameObject other)
         {
             if (other.TryGetComponent(out T component))

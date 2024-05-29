@@ -13,7 +13,7 @@ namespace Sources.Frameworks.UiFramework.Services.AudioSources
     {
         private readonly IVolumeService _volumeService;
         private readonly Dictionary<AudioSourceId, IUiAudioSource> _audioSources;
-        
+
         public AudioService(
             UiCollector uiCollector,
             IVolumeService volumeService)
@@ -40,9 +40,9 @@ namespace Sources.Frameworks.UiFramework.Services.AudioSources
 
         public void Play(AudioSourceId id)
         {
-            if(_audioSources.ContainsKey(id) == false)
+            if (_audioSources.ContainsKey(id) == false)
                 throw new KeyNotFoundException(id.ToString());
-            
+
             _audioSources[id].Play();
         }
     }

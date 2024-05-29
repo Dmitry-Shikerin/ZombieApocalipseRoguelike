@@ -7,6 +7,6 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Settings
     public class VolumePresenterFactory
     {
         public VolumePresenter Create(Volume volume, IVolumeView volumeView) =>
-            new(volume, volumeView);
+            new (volume, volumeView);
     }
 }

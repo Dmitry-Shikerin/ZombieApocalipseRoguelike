@@ -15,24 +15,6 @@ namespace Sources.Infrastructure.StateMachines.ContextStateMachines
             _currentState = firstState ?? throw new ArgumentNullException(nameof(firstState));
         }
 
-        protected void Run()
-        {
-            if(_isRunning)
-                return;
-            
-            _currentState.Enter();
-            _isRunning = true;
-        }
-
-        protected void Stop()
-        {
-            if(_isRunning == false)
-                return;
-            
-            _currentState?.Exit();
-            _isRunning = false;
-        }
-
         public void ChangeState(IContextState state)
         {
             _currentState?.Exit();
@@ -40,11 +22,28 @@ namespace Sources.Infrastructure.StateMachines.ContextStateMachines
             _currentState?.Enter();
         }
 
-        public void Apply(IContext context) => 
+        public void Apply(IContext context) =>
             _currentState?.Apply(context, this);
 
-        protected void Update(float deltaTime) => 
-            _currentState?.Update(deltaTime);
+        protected void Run()
+        {
+            if (_isRunning)
+                return;
 
+            _currentState.Enter();
+            _isRunning = true;
+        }
+
+        protected void Stop()
+        {
+            if (_isRunning == false)
+                return;
+
+            _currentState?.Exit();
+            _isRunning = false;
+        }
+
+        protected void Update(float deltaTime) =>
+            _currentState?.Update(deltaTime);
     }
 }

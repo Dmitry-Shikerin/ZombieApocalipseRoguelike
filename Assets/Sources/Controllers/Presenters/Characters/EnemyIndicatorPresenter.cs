@@ -26,7 +26,7 @@ namespace Sources.Controllers.Presenters.Characters
             _enemyCollection = enemyCollection ??
                                      throw new ArgumentNullException(nameof(enemyCollection));
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
-            _enemyIndicatorService = enemyIndicatorService ?? 
+            _enemyIndicatorService = enemyIndicatorService ??
                                      throw new ArgumentNullException(nameof(enemyIndicatorService));
         }
 
@@ -62,8 +62,8 @@ namespace Sources.Controllers.Presenters.Characters
         private void ShowViews()
         {
             if (CanAvailableArrows == false)
-                return; 
-            
+                return;
+
             for (int i = 0; i < _enemyCollection.Count; i++)
                 _enemyIndicatorView.Arrows[i].Show();
         }
@@ -71,23 +71,23 @@ namespace Sources.Controllers.Presenters.Characters
         private void ChangeArrowPositions()
         {
             if (CanAvailableArrows == false)
-                return; 
-            
+                return;
+
             if (_enemyCollection.Count == 0)
                 return;
-            
+
             for (int i = 0; i < _enemyCollection.Count; i++)
             {
-                if(_enemyCollection[i] == null)
+                if (_enemyCollection[i] == null)
                     return;
-                
-                if(_enemyIndicatorView.Arrows[i] == null)
+
+                if (_enemyIndicatorView.Arrows[i] == null)
                     return;
-                
-                float angle =_enemyIndicatorService.GetAngleRotation(
+
+                float angle = _enemyIndicatorService.GetAngleRotation(
                     _enemyIndicatorView.Position, _enemyCollection[i].Position);
                 float correctionXAngle = 90;
-                
+
                 _enemyIndicatorView.Arrows[i].SetAngleEuler(new Vector3(correctionXAngle, angle, 0));
             }
         }

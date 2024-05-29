@@ -6,7 +6,9 @@ namespace Sources.PresentationsInterfaces.Views.Upgrades.Controllers
     public interface IUpgradeControllerView
     {
         IReadOnlyList<UpgradeView> UpgradeViews { get; }
+
         IReadOnlyList<UpgradeUi> UpgradeUis { get; }
+
         IReadOnlyList<UpgradeDescriptionView> UpgradeDescriptionViews { get; }
     }
 }

@@ -16,6 +16,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Forms
         }
 
         public FormCommandId Id => FormCommandId.SetCharacterCameraFollow;
+
         public void Handle() =>
             _cameraService.SetFollower(FollowableId.Character);
     }

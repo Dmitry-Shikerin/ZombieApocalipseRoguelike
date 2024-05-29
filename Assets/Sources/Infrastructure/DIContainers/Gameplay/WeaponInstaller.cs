@@ -22,11 +22,11 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
                 .Bind<SawLauncherAbilityUpgradeMap>()
                 .FromResource("Configs/Upgrades/SawLauncherAbilityUpgradeMap")
                 .AsSingle();
-            
+
             Container.Bind<IObjectPool<BulletView>>().To<ObjectPool<BulletView>>().AsSingle();
-            
+
             Container.Bind<IBulletSpawnService>().To<BulletSpawnService>().AsSingle();
-            
+
             Container.Bind<MiniGunPresenterFactory>().AsSingle();
             Container.Bind<MiniGunViewFactory>().AsSingle();
 

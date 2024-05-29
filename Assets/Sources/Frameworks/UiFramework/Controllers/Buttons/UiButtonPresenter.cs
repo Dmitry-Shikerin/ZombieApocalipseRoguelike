@@ -46,9 +46,12 @@ namespace Sources.Frameworks.UiFramework.Controllers.Buttons
             try
             {
                 if (_view.UseButtonType == UseButtonType.Delayed)
-                    await UniTask.Delay(TimeSpan.FromMilliseconds(_view.Delay),
+                {
+                    await UniTask.Delay(
+                        TimeSpan.FromMilliseconds(_view.Delay),
                         cancellationToken: _cancellationTokenSource.Token,
                         ignoreTimeScale: true);
+                }
 
                 _uiButtonService.Handle(_view.OnClickCommandId, _view);
             }

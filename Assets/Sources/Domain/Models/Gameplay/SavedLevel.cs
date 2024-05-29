@@ -12,7 +12,7 @@ namespace Sources.Domain.Models.Gameplay
             IsSaved = savedLevelDto.IsSaved;
             SavedLevelId = savedLevelDto.SavedLevelId;
         }
-        
+
         public SavedLevel(
             string id,
             bool isSaved,
@@ -24,8 +24,11 @@ namespace Sources.Domain.Models.Gameplay
         }
 
         public string Id { get; }
+
         public Type Type => GetType();
+
         public bool IsSaved { get; set; }
+
         public string SavedLevelId { get; set; }
     }
 }

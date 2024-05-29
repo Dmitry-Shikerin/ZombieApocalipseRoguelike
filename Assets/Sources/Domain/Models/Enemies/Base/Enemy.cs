@@ -13,7 +13,9 @@ namespace Sources.Domain.Models.Enemies.Base
         }
 
         public bool IsInitialized { get; set; }
+
         public EnemyHealth EnemyHealth { get; set; }
+
         public EnemyAttacker EnemyAttacker { get; }
     }
 }

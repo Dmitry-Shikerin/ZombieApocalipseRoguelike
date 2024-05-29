@@ -30,7 +30,7 @@ namespace Sources.Controllers.Presenters.Common
         {
             float percent = _health.CurrentHealth.FloatToPercent(_health.MaxHealth);
             float fillAmount = percent * MathConst.UnitMultiplier;
-            
+
             _healthUi.HealthImage.SetFillAmount(fillAmount);
         }
     }

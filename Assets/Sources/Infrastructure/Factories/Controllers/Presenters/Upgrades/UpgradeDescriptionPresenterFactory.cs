@@ -12,11 +12,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades
 
         public UpgradeDescriptionPresenterFactory(ILocalizationService localizationService)
         {
-            _localizationService = localizationService ?? 
+            _localizationService = localizationService ??
                                    throw new ArgumentNullException(nameof(localizationService));
         }
 
         public UpgradeDescriptionPresenter Create(IUpgrader upgrader, IUpgradeDescriptionView view) =>
-            new(upgrader, view, _localizationService);
+            new (upgrader, view, _localizationService);
     }
 }

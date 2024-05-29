@@ -13,7 +13,7 @@ namespace Sources.Infrastructure.Factories.Views.Gameplay
 
         public LevelAvailabilityViewFactory(LevelAvailabilityPresenterFactory presenterFactory)
         {
-            _presenterFactory = presenterFactory ?? 
+            _presenterFactory = presenterFactory ??
                                 throw new ArgumentNullException(nameof(presenterFactory));
         }
 
@@ -22,9 +22,9 @@ namespace Sources.Infrastructure.Factories.Views.Gameplay
             LevelAvailabilityView levelAvailabilityView)
         {
             LevelAvailabilityPresenter presenter = _presenterFactory.Create(levelAvailability, levelAvailabilityView);
-            
+
             levelAvailabilityView.Construct(presenter);
-            
+
             return levelAvailabilityView;
         }
     }

@@ -13,6 +13,7 @@ namespace Sources.Presentations.UI.AudioSources
         [SerializeField] private AudioListener _audioListener;
 
         public bool IsPlaying => _audioSource.isPlaying;
+
         public float Time => _audioSource.time;
 
         public void SetTime(float time) =>

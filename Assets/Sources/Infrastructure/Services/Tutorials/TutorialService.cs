@@ -28,8 +28,8 @@ namespace Sources.Infrastructure.Services.Tutorials
         {
             if (_tutorial.HasCompleted)
                 return;
-            
-            if(_savedLevel.SavedLevelId != ModelId.Gameplay)
+
+            if (_savedLevel.SavedLevelId != ModelId.Gameplay)
                 return;
 
             _formService.Show(FormId.GreetingTutorial);

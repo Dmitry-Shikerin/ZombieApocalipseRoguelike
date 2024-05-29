@@ -12,11 +12,11 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades
 
         public UpgradeUiPresenterFactory(IUpgradeConfigCollectionService upgradeConfigCollectionService)
         {
-            _upgradeConfigCollectionService = upgradeConfigCollectionService ?? 
+            _upgradeConfigCollectionService = upgradeConfigCollectionService ??
                                        throw new ArgumentNullException(nameof(upgradeConfigCollectionService));
         }
 
         public UpgradeUiPresenter Create(IUpgrader upgrader,  IUpgradeUi upgradeUi) =>
-            new(upgrader, upgradeUi, _upgradeConfigCollectionService);
+            new (upgrader, upgradeUi, _upgradeConfigCollectionService);
     }
 }

@@ -6,7 +6,7 @@ namespace Sources.Presentations
     [RequireComponent(typeof(MeshRenderer))]
     public class MeshCombiner : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
             CombineInstance[] combine = new CombineInstance[meshFilters.Length];

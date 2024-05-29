@@ -30,10 +30,10 @@ namespace Sources.Infrastructure.Services.LevelCompleteds
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _entityRepository = entityRepository ?? throw new ArgumentNullException(nameof(entityRepository));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
-            _interstitialAdService = interstitialAdService ?? 
+            _interstitialAdService = interstitialAdService ??
                                      throw new ArgumentNullException(nameof(interstitialAdService));
         }
-        
+
         private bool IsCompleted => _killEnemyCounter.KillZombies >= _enemySpawner.SumAllEnemies;
 
         public void Enable() =>

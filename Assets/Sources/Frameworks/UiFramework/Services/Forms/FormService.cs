@@ -31,9 +31,9 @@ namespace Sources.Frameworks.UiFramework.Services.Forms
             if (_forms.ContainsKey(formId) == false)
                 throw new KeyNotFoundException(nameof(formId));
 
-            if(_forms[formId] == null)
+            if (_forms[formId] == null)
                 return;
-            
+
             _forms[formId].Hide();
         }
 

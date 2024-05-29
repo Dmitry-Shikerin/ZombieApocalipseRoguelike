@@ -16,6 +16,6 @@ namespace Sources.Infrastructure.Factories.Domain.Data
         }
 
         public KillEnemyCounter MapDtoToModel(KillEnemyCounterDto killEnemyCounterDto) =>
-            new(killEnemyCounterDto);
+            new (killEnemyCounterDto);
     }
 }

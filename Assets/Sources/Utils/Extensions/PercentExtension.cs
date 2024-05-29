@@ -18,7 +18,7 @@ namespace Sources.Utils.Extensions
 
             return currentPercents;
         }
-        
+
         public static int IntToPercent(this int value, int max) =>
             (int)FloatToPercent((int)value, (int)max);
 

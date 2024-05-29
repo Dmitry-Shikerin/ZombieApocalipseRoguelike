@@ -43,7 +43,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _focusService = focusService ?? throw new ArgumentNullException(nameof(focusService));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
-        
+
         public async void Enter(object payload = null)
         {
             await Initialize(payload as IScenePayload);
@@ -79,18 +79,20 @@ namespace Sources.Controllers.Presenters.Scenes
         {
             if (payload.CanFromGameplay)
                  return;
-            
+
             _sdcInitializeService.EnableCallbackLogging();
             await _sdcInitializeService.Initialize();
         }
 
-        private async UniTask GameReady(IScenePayload payload)
+        private UniTask GameReady(IScenePayload payload)
         {
             if (payload.CanFromGameplay)
-                return;
+                return UniTask.CompletedTask;
 
             _stickyService.ShowSticky();
             _sdcInitializeService.GameReady();
+
+            return UniTask.CompletedTask;
         }
     }
 }

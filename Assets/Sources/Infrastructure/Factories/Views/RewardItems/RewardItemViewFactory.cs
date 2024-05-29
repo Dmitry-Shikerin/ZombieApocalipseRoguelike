@@ -23,7 +23,7 @@ namespace Sources.Infrastructure.Factories.Views.RewardItems
         public IRewardItemView Create(Vector3 position, int amount)
         {
             RewardItemView rewardItemView = CreateView();
-            
+
             return rewardItemView;
         }
 

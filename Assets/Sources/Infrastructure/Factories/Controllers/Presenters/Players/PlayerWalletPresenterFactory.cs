@@ -7,6 +7,6 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Players
     public class PlayerWalletPresenterFactory
     {
         public PlayerWalletPresenter Create(IPlayerWallet playerWallet, IPlayerWalletView playerWalletView) =>
-            new(playerWallet, playerWalletView);
+            new (playerWallet, playerWalletView);
     }
 }

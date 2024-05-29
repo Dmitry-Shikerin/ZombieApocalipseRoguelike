@@ -9,7 +9,7 @@ namespace Sources.Infrastructure.StateMachines.FiniteStateMachines.Transitions
 
         public FiniteTransitionBase(
             FiniteState nextState,
-            Func<bool> condition) 
+            Func<bool> condition)
             : base(nextState)
         {
             _condition = condition ?? throw new ArgumentNullException(nameof(condition));

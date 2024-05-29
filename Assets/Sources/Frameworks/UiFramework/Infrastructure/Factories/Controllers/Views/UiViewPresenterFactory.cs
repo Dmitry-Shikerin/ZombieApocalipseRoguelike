@@ -12,7 +12,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Controllers.Vi
         private readonly IFormService _formService;
 
         public UiViewPresenterFactory(
-            IUiViewService uiViewService, 
+            IUiViewService uiViewService,
             IFormService formService)
         {
             _uiViewService = uiViewService ?? throw new ArgumentNullException(nameof(uiViewService));
@@ -20,6 +20,6 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Controllers.Vi
         }
 
         public UiViewPresenter Create(UiView view) =>
-            new(view, _uiViewService, _formService);
+            new (view, _uiViewService, _formService);
     }
 }

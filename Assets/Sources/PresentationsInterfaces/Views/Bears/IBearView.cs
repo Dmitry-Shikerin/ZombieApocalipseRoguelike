@@ -9,6 +9,7 @@ namespace Sources.PresentationsInterfaces.Views.Bears
         IEnemyHealthView TargetEnemyHealth { get; }
 
         void SetTarget(IEnemyHealthView enemyHealthView);
+
         void SetLookRotation(float angle);
     }
 }

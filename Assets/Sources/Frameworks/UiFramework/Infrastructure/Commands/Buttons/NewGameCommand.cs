@@ -21,16 +21,16 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
         }
 
         public ButtonCommandId Id => ButtonCommandId.NewGame;
-        
+
         public void Handle(IUiButton uiButton)
         {
             if (_loadService.HasKey(ModelId.PlayerWallet))
             {
                 _formService.Show(FormId.WarningNewGame);
-                
+
                 return;
             }
-            
+
             _formService.Show(FormId.NewGame);
         }
     }

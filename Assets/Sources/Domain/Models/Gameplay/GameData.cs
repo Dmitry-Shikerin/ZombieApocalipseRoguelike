@@ -11,7 +11,7 @@ namespace Sources.Domain.Models.Gameplay
             Id = gameDataDto.Id;
             WasLaunched = gameDataDto.WasLaunched;
         }
-        
+
         public GameData(string id, bool wasLaunched)
         {
             Id = id;
@@ -19,7 +19,9 @@ namespace Sources.Domain.Models.Gameplay
         }
 
         public string Id { get; }
+
         public Type Type => GetType();
+
         public bool WasLaunched { get; private set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
         }
 
         public ButtonCommandId Id => ButtonCommandId.SetAllMapCameraFollow;
-        
+
         public void Handle(IUiButton uiButton) =>
             _cameraService.SetFollower(FollowableId.AllMap);
     }

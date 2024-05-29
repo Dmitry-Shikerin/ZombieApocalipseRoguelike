@@ -7,10 +7,13 @@ namespace Sources.PresentationsInterfaces.Views.Enemies
     public interface IEnemyViewBase : INavMeshAgent, ICharacterFollower
     {
         IReadOnlyList<IEnemySkin> Skins { get; }
+
         ICharacterHealthView CharacterHealthView { get; }
-        
+
         void SetCharacterHealth(ICharacterHealthView characterHealthView);
+
         void EnableNavmeshAgent();
+
         void DisableNavmeshAgent();
     }
 }

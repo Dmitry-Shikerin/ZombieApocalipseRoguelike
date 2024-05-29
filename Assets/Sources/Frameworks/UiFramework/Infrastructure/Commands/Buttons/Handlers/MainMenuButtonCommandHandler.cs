@@ -10,7 +10,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
     {
         private readonly Dictionary<ButtonCommandId, IButtonCommand> _commands =
             new Dictionary<ButtonCommandId, IButtonCommand>();
-        
+
         public MainMenuButtonCommandHandler(
             ShowFormCommand showFormCommand,
             LoadGameCommand loadGameCommand,
@@ -28,7 +28,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
             _commands[clearSavesButtonCommand.Id] = clearSavesButtonCommand;
             _commands[playerAccountAuthorizeButtonCommand.Id] = playerAccountAuthorizeButtonCommand;
         }
-        
+
         public void Handle(IUiButton uiButton, ButtonCommandId buttonCommandId)
         {
             if (_commands.ContainsKey(buttonCommandId) == false)

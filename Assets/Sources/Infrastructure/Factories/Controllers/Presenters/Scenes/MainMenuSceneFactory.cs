@@ -42,25 +42,25 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             IAudioService audioService,
             IFocusService focusService)
         {
-            _createMainMenuSceneService = createMainMenuSceneService ?? 
+            _createMainMenuSceneService = createMainMenuSceneService ??
                                           throw new ArgumentNullException(nameof(createMainMenuSceneService));
-            _loadMainMenuSceneService = loadMainMenuSceneService ?? 
+            _loadMainMenuSceneService = loadMainMenuSceneService ??
                                         throw new ArgumentNullException(nameof(loadMainMenuSceneService));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _localizationService = localizationService ??
                                    throw new ArgumentNullException(nameof(localizationService));
-            _sdcInitializeService = sdcInitializeService ?? 
+            _sdcInitializeService = sdcInitializeService ??
                                     throw new ArgumentNullException(nameof(sdcInitializeService));
             _stickyService = stickyService ?? throw new ArgumentNullException(nameof(stickyService));
             _audioService = audioService ?? throw new ArgumentNullException(nameof(audioService));
             _focusService = focusService ?? throw new ArgumentNullException(nameof(focusService));
             _curtainView = curtainView ? curtainView : throw new ArgumentNullException(nameof(curtainView));
         }
-        
-        public async UniTask<IScene> Create(object payload)
+
+        public UniTask<IScene> Create(object payload)
         {
-            return new MainMenuScene(
+            IScene scene = new MainMenuScene(
                 CreateLoadSceneService(payload),
                 _volumeService,
                 _localizationService,
@@ -69,8 +69,10 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _stickyService,
                 _audioService,
                 _focusService);
+
+            return UniTask.FromResult(scene);
         }
-        
+
         private ILoadSceneService CreateLoadSceneService(object payload)
         {
             if (_loadService.HasKey(ModelId.GameData) == false)

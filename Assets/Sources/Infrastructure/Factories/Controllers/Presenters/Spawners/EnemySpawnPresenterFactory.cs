@@ -17,13 +17,13 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Spawners
             IBossEnemySpawnService bossEnemySpawnService)
         {
             _enemySpawnService = enemySpawnService ?? throw new ArgumentNullException(nameof(enemySpawnService));
-            _bossEnemySpawnService = bossEnemySpawnService ?? 
+            _bossEnemySpawnService = bossEnemySpawnService ??
                                      throw new ArgumentNullException(nameof(bossEnemySpawnService));
         }
 
         public EnemySpawnerPresenter Create(
-            EnemySpawner enemySpawner, 
-            KillEnemyCounter killEnemyCounter, 
+            EnemySpawner enemySpawner,
+            KillEnemyCounter killEnemyCounter,
             IEnemySpawnerView enemySpawnerView)
         {
             return new EnemySpawnerPresenter(

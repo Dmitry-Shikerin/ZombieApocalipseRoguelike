@@ -19,7 +19,7 @@ namespace Sources.Domain.Models.Characters
             get => _speed;
             set => SetField(ref _speed, value);
         }
-        
+
         public Vector2 AnimationDirection { get; set; }
     }
 }

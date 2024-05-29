@@ -43,10 +43,8 @@ namespace Sources.Controllers.Presenters.Spawners
             Spawn(_cancellationTokenSource.Token);
         }
 
-        public override void Disable()
-        {
+        public override void Disable() =>
             _cancellationTokenSource.Cancel();
-        }
 
         private async void Spawn(CancellationToken cancellationToken)
         {
@@ -59,7 +57,7 @@ namespace Sources.Controllers.Presenters.Spawners
                         _enemySpawner.SetCurrentWave(_killEnemyCounter.KillZombies);
                         SpawnEnemy(spawnPoint.Position, _enemySpawnerView.CharacterView);
                         SpawnBoss(spawnPoint.Position, _enemySpawnerView.CharacterView);
-                        
+
                         await _enemySpawner.WaitWave(_killEnemyCounter, cancellationToken);
                         await UniTask.Delay(
                             TimeSpan.FromSeconds(
@@ -72,12 +70,12 @@ namespace Sources.Controllers.Presenters.Spawners
             {
             }
         }
-        
+
         private void SpawnEnemy(Vector3 position, CharacterView characterView)
         {
             if (_enemySpawner.IsSpawnEnemy == false)
                   return;
-            
+
             IEnemyView enemyView = _enemySpawnService.Spawn(_killEnemyCounter, position);
             enemyView.SetCharacterHealth(characterView.CharacterHealthView);
             enemyView.SetTargetFollow(characterView.CharacterMovementView);
@@ -89,7 +87,7 @@ namespace Sources.Controllers.Presenters.Spawners
         {
             if (_enemySpawner.IsSpawnBoss == false)
                 return;
-            
+
             IBossEnemyView bossEnemyView = _bossEnemySpawnService.Spawn(_killEnemyCounter, position);
             bossEnemyView.SetCharacterHealth(characterView.CharacterHealthView);
             bossEnemyView.SetTargetFollow(characterView.CharacterMovementView);

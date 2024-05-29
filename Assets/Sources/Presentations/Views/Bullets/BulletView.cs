@@ -14,9 +14,9 @@ namespace Sources.Presentations.Views.Bullets
     {
         [Required] [SerializeField] private EnemyHealthParticleCollision _enemyHealthParticleCollision;
 
-        private IPoolableObjectDestroyerService _poolableObjectDestroyerService = 
+        private IPoolableObjectDestroyerService _poolableObjectDestroyerService =
             new PoolableObjectDestroyerService();
-        
+
         private IMiniGunView _miniGunView;
 
         private void OnEnable() =>

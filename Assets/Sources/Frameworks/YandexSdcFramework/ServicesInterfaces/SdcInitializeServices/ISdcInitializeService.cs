@@ -5,7 +5,9 @@ namespace Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitialize
     public interface ISdcInitializeService
     {
         void GameReady();
+
         void EnableCallbackLogging();
+
         UniTask Initialize();
     }
 }

@@ -18,21 +18,21 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Gameplay
             ILeaderBoardScoreSetter leaderBoardScoreSetter,
             ILoadService loadService)
         {
-            _leaderBoardScoreSetter = leaderBoardScoreSetter ?? 
+            _leaderBoardScoreSetter = leaderBoardScoreSetter ??
                                       throw new ArgumentNullException(nameof(leaderBoardScoreSetter));
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
         }
 
         public ScoreCounterPresenter Create(
-            ScoreCounter scoreCounter, 
-            IKillEnemyCounter killEnemyCounter, 
-            ILevel level, 
+            ScoreCounter scoreCounter,
+            IKillEnemyCounter killEnemyCounter,
+            ILevel level,
             ICharacterHealth characterHealth,
             IScoreCounterView view)
         {
             return new ScoreCounterPresenter(
-                scoreCounter, 
-                killEnemyCounter, 
+                scoreCounter,
+                killEnemyCounter,
                 level,
                 characterHealth,
                 view,

@@ -9,16 +9,17 @@ namespace Sources.Domain.Models.Bears.Attacks
         private readonly Upgrader _massAttackUpgrader;
 
         public BearAttacker(
-            Upgrader bearAttackUpgrader, 
+            Upgrader bearAttackUpgrader,
             Upgrader bearMassAttackUpgrader)
         {
-            _attackUpgrader = bearAttackUpgrader ?? 
+            _attackUpgrader = bearAttackUpgrader ??
                                  throw new ArgumentNullException(nameof(bearAttackUpgrader));
             _massAttackUpgrader = bearMassAttackUpgrader ??
                                      throw new ArgumentNullException(nameof(bearMassAttackUpgrader));
         }
 
         public float Damage => _attackUpgrader.CurrentAmount;
+
         public int UnitsPerAttack => (int)_massAttackUpgrader.CurrentAmount;
     }
 }

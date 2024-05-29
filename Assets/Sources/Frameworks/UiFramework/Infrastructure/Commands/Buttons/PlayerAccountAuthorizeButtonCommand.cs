@@ -21,13 +21,13 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
             _playerAccountAuthorizeService = playerAccountAuthorizeService ??
                                              throw new ArgumentNullException(nameof(playerAccountAuthorizeService));
         }
-        
+
         public ButtonCommandId Id => ButtonCommandId.PlayerAccountAuthorize;
-        
+
         public void Handle(IUiButton uiButton)
         {
             uiButton.Disable();
-            
+
             _playerAccountAuthorizeService.Authorize(() =>
             {
                 uiButton.Enable();

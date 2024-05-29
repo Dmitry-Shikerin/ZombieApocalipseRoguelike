@@ -18,7 +18,7 @@ namespace Sources.Controllers.Presenters.Gameplay
             IEnemySpawner enemySpawner,
             IKillEnemyCounterView killEnemyCounterView)
         {
-            _killEnemyCounter = killEnemyCounter ?? 
+            _killEnemyCounter = killEnemyCounter ??
                                 throw new ArgumentNullException(nameof(killEnemyCounter));
             _enemySpawner = enemySpawner ?? throw new ArgumentNullException(nameof(enemySpawner));
             _killEnemyCounterView = killEnemyCounterView ??

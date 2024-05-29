@@ -16,6 +16,6 @@ namespace Sources.Infrastructure.Factories.Domain.Data
         }
 
         public ScoreCounter MapDtoToModel(ScoreCounterDto scoreCount) =>
-            new(scoreCount);
+            new (scoreCount);
     }
 }

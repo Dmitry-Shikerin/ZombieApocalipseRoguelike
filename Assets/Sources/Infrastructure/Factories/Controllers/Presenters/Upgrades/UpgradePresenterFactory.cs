@@ -8,6 +8,6 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades
     public class UpgradePresenterFactory
     {
         public UpgradePresenter Create(Upgrader upgrader, PlayerWallet playerWallet, IUpgradeView upgradeView) =>
-            new(upgrader, playerWallet, upgradeView);
+            new (upgrader, playerWallet, upgradeView);
     }
 }

@@ -24,7 +24,9 @@ namespace Sources.Domain.Models.Players
         public event Action CoinsChanged;
 
         public string Id { get; }
+
         public Type Type => GetType();
+
         public int Coins { get; private set; }
 
         public void AddCoins(int amount)
@@ -37,7 +39,7 @@ namespace Sources.Domain.Models.Players
         {
             if (Coins < amount)
                 return false;
-            
+
             Coins -= amount;
             CoinsChanged?.Invoke();
             return true;

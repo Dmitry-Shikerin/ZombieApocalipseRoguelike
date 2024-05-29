@@ -11,16 +11,16 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Factories.Views.Forms
 
         public UiViewFactory(UiViewPresenterFactory presenterFactory)
         {
-            _presenterFactory = presenterFactory ?? 
+            _presenterFactory = presenterFactory ??
                                 throw new ArgumentNullException(nameof(presenterFactory));
         }
 
         public UiView Create(UiView view)
         {
             UiViewPresenter presenter = _presenterFactory.Create(view);
-            
-            view.Construct(presenter);   
-            
+
+            view.Construct(presenter);
+
             return view;
         }
     }

@@ -23,9 +23,9 @@ namespace Sources.Infrastructure.Services.Enemies
         {
             IReadOnlyList<CharacterHealthView> characterHealthViews =
                 _overlapService.OverlapSphere<CharacterHealthView>(
-                    position, 
-                    EnemyConst.MassAttackRadius, 
-                    Layer.Character, 
+                    position,
+                    EnemyConst.MassAttackRadius,
+                    Layer.Character,
                     Layer.Default);
 
             if (characterHealthViews.Count == 0)

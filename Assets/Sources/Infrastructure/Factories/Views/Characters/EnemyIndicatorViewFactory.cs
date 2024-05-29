@@ -19,7 +19,7 @@ namespace Sources.Infrastructure.Factories.Views.Characters
         {
             EnemyIndicatorPresenter presenter = _presenterFactory.Create(view);
             view.Construct(presenter);
-            
+
             return view;
         }
     }

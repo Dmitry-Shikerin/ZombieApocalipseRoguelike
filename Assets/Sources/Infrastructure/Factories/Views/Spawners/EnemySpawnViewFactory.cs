@@ -14,20 +14,20 @@ namespace Sources.Infrastructure.Factories.Views.Spawners
 
         public EnemySpawnViewFactory(EnemySpawnPresenterFactory enemySpawnPresenterFactory)
         {
-            _enemySpawnPresenterFactory = enemySpawnPresenterFactory ?? 
+            _enemySpawnPresenterFactory = enemySpawnPresenterFactory ??
                                           throw new ArgumentNullException(nameof(enemySpawnPresenterFactory));
         }
 
         public IEnemySpawnerView Create(
-            EnemySpawner enemySpawner, 
-            KillEnemyCounter killEnemyCounter, 
+            EnemySpawner enemySpawner,
+            KillEnemyCounter killEnemyCounter,
             EnemySpawnerView enemySpawnerView)
         {
             EnemySpawnerPresenter enemySpawnerPresenter =
-                _enemySpawnPresenterFactory.Create(enemySpawner,killEnemyCounter, enemySpawnerView);
-            
+                _enemySpawnPresenterFactory.Create(enemySpawner, killEnemyCounter, enemySpawnerView);
+
             enemySpawnerView.Construct(enemySpawnerPresenter);
-            
+
             return enemySpawnerView;
         }
     }

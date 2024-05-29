@@ -9,7 +9,9 @@ namespace Sources.Utils.CustomCollections
         private List<T> _collection = new List<T>();
 
         public event Action CountChanged;
+
         public event Action Added;
+
         public event Action Removed;
 
         public int Count => _collection.Count;
@@ -34,9 +36,9 @@ namespace Sources.Utils.CustomCollections
         public void Clear() =>
             _collection.Clear();
 
-        public bool Contains(T item) => 
+        public bool Contains(T item) =>
             _collection.Contains(item);
-        
+
         public IEnumerator<T> GetEnumerator() =>
             _collection.GetEnumerator();
 

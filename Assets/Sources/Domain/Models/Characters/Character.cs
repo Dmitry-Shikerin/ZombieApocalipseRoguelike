@@ -28,11 +28,17 @@ namespace Sources.Domain.Models.Characters
         }
 
         public PlayerWallet PlayerWallet { get; }
+
         public CharacterHealth CharacterHealth { get; }
+
         public CharacterMovement CharacterMovement { get; }
+
         public CharacterAttacker CharacterAttacker { get; }
+
         public MiniGun MiniGun { get; }
+
         public SawLauncherAbility SawLauncherAbility { get; }
+
         public IReadOnlyList<SawLauncher> SawLaunchers { get; }
     }
 }

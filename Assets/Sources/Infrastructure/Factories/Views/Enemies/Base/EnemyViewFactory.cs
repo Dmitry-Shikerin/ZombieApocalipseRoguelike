@@ -34,7 +34,7 @@ namespace Sources.Infrastructure.Factories.Views.Enemies.Base
             _enemyPresenterFactory = enemyPresenterFactory ??
                                      throw new ArgumentNullException(nameof(enemyPresenterFactory));
             _enemyPool = enemyPool ?? throw new ArgumentNullException(nameof(enemyPool));
-            _enemyHealthViewFactory = enemyHealthViewFactory ?? 
+            _enemyHealthViewFactory = enemyHealthViewFactory ??
                                       throw new ArgumentNullException(nameof(enemyHealthViewFactory));
             _healthUiFactory = healthUiFactory ?? throw new ArgumentNullException(nameof(healthUiFactory));
             _healthUiTextViewFactory = healthUiTextViewFactory ??
@@ -44,7 +44,7 @@ namespace Sources.Infrastructure.Factories.Views.Enemies.Base
         public IEnemyView Create(Enemy enemy, KillEnemyCounter killEnemyCounter)
         {
             EnemyView enemyView = CreateView();
-            
+
             return Create(enemy, killEnemyCounter, enemyView);
         }
 
@@ -52,13 +52,13 @@ namespace Sources.Infrastructure.Factories.Views.Enemies.Base
         {
             EnemyPresenter enemyPresenter = _enemyPresenterFactory.Create(
                 enemy, killEnemyCounter, enemyView, enemyView.EnemyAnimation);
-            
+
             enemyView.Construct(enemyPresenter);
-            
+
             _enemyHealthViewFactory.Create(enemy.EnemyHealth, enemyView.EnemyHealthView);
             _healthUiFactory.Create(enemy.EnemyHealth, enemyView.HealthUi);
             _healthUiTextViewFactory.Create(enemy.EnemyHealth, enemyView.HealthUiText);
-            
+
             return enemyView;
         }
 

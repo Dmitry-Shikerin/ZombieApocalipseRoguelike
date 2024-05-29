@@ -16,6 +16,7 @@ namespace Sources.Presentations.Views.Gameplay
         [SerializeField] private List<SliderView> _waveSeparators;
 
         public IReadOnlyList<ISliderView> WaveSeparators => _waveSeparators;
+
         public IImageView KillEnemyBar => _killEnemyBarImageView;
     }
 }

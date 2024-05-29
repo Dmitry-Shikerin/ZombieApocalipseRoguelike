@@ -12,7 +12,9 @@ namespace Sources.Presentations.Views.Upgrades.Controllers
         [SerializeField] private List<UpgradeDescriptionView> _upgradeUisDescriptionViews;
 
         public IReadOnlyList<UpgradeUi> UpgradeUis => _upgradeUis;
+
         public IReadOnlyList<UpgradeView> UpgradeViews => _upgradeViews;
+
         public IReadOnlyList<UpgradeDescriptionView> UpgradeDescriptionViews => _upgradeUisDescriptionViews;
     }
 }

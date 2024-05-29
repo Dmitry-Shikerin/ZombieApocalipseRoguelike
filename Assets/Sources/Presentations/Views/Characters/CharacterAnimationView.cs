@@ -8,7 +8,7 @@ namespace Sources.Presentations.Views.Characters
     {
         private static int s_positionX = Animator.StringToHash("PositionX");
         private static int s_positionZ = Animator.StringToHash("PositionZ");
-        
+
         public void SetDirection(Vector2 position)
         {
             Animator.SetFloat(s_positionX, position.x);

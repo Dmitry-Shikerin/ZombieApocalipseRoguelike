@@ -17,19 +17,21 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class UiText : View, IUiText
     {
-        [DisplayAsString(false)] [HideLabel] 
+        [DisplayAsString(false)] [HideLabel]
         [SerializeField] private string _label = UiConstant.UiTextLabel;
         [SerializeField] private TextMeshProUGUI _tmpText;
-        [TabGroup("Settings")] 
+        [TabGroup("Settings")]
         [SerializeField] private TextViewType _textViewType;
         [TabGroup("Ids")]
         [SerializeField] private string _textId;
         [TabGroup("Ids")] [ValueDropdown("GetDropdownValues")]
         [SerializeField] private string _localizationId;
-        
+
         public TextViewType TextViewType => _textViewType;
-        public bool IsHide { get; private set; }
+
         public string Id => _textId;
+
+        public bool IsHide { get; private set; }
 
         private void Awake()
         {
@@ -85,15 +87,15 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
         private void AddTextId()
         {
             var localizationIds = TextExtension.GetTranslateId();
-        
-            if(localizationIds.Contains(_textId))
+
+            if (localizationIds.Contains(_textId))
                 return;
-            
+
             localizationIds.Add(_textId);
-            
-            _textId = "";
+
+            _textId = " ";
         }
-        
+
         [UsedImplicitly]
         private List<string> GetDropdownValues() =>
             TextExtension.GetTranslateId();

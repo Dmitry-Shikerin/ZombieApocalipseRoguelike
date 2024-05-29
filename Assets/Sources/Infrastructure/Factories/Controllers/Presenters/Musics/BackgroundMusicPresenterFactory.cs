@@ -20,15 +20,15 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Musics
         {
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _pauseService = pauseService ?? throw new ArgumentNullException(nameof(pauseService));
-            _audioClipCollection = audioClipCollection 
-                ? audioClipCollection 
+            _audioClipCollection = audioClipCollection
+                ? audioClipCollection
                 : throw new ArgumentNullException(nameof(audioClipCollection));
         }
 
         public BackgroundMusicPresenter Create(IBackgroundMusicView backgroundMusicView)
         {
             return new BackgroundMusicPresenter(
-                _audioClipCollection, 
+                _audioClipCollection,
                 backgroundMusicView,
                 _volumeService,
                 _pauseService);

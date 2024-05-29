@@ -22,7 +22,7 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
         [Required][SerializeField] private GameplayHud _gameplayHud;
         [Required] [SerializeField] private RootGameObject _rootGameObject;
         [Required] [SerializeField] private ContainerView _containerView;
-        
+
         public override void InstallBindings()
         {
             Container
@@ -33,13 +33,13 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
                 .Bind<LocalizationConfig>()
                 .FromResource("Configs/Localizations/LocalizationConfig")
                 .AsSingle();
-            
+
             Container.BindInterfacesAndSelfTo<GameplayHud>().FromInstance(_gameplayHud).AsSingle();
             Container.Bind<UiCollector>().FromInstance(_gameplayHud.UiCollector).AsSingle();
             Container.Bind<RootGameObject>().FromInstance(_rootGameObject).AsSingle();
             Container.Bind<ContainerView>().FromInstance(_containerView).AsSingle();
             Container.BindInterfacesAndSelfTo<GameplaySceneFactory>().AsSingle();
-            
+
             BindServices();
         }
 

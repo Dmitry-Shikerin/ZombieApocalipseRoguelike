@@ -12,8 +12,8 @@ namespace Sources.Controllers.Presenters.Enemies.Base.States
         private readonly IEnemyAnimation _enemyAnimation;
 
         public EnemyAttackState(
-            Enemy enemy, 
-            IEnemyView enemyView, 
+            Enemy enemy,
+            IEnemyView enemyView,
             IEnemyAnimation enemyAnimation)
         {
             _enemy = enemy ?? throw new ArgumentNullException(nameof(enemy));

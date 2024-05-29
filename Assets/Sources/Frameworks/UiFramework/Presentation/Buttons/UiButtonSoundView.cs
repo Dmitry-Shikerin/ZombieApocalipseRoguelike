@@ -12,13 +12,13 @@ namespace Sources.Frameworks.UiFramework.Presentation.Buttons
         private void Awake() =>
             _audioSource.loop = false;
 
-        protected void OnEnable()
+        private void OnEnable()
         {
             AddClickListener(OnClick);
             OnAfterEnable();
         }
 
-        protected void OnDisable()
+        private void OnDisable()
         {
             RemoveClickListener(OnClick);
             OnAfterDisable();

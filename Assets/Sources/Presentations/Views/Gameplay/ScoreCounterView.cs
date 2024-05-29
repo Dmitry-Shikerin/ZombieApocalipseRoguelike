@@ -10,8 +10,8 @@ namespace Sources.Presentations.Views.Gameplay
 {
     public class ScoreCounterView : PresentableView<ScoreCounterPresenter>, IScoreCounterView
     {
-[Required] [SerializeField] private List<UiText> _texts;
-        
+        [Required] [SerializeField] private List<UiText> _texts;
+
         public IReadOnlyList<IUiText> Texts => _texts;
     }
 }

@@ -31,13 +31,13 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Bosses
             IEnemyAttackService enemyAttackService)
         {
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
-            _explosionBodyBloodySpawnService = explosionBodyBloodySpawnService ?? 
+            _explosionBodyBloodySpawnService = explosionBodyBloodySpawnService ??
                                                throw new ArgumentNullException(nameof(explosionBodyBloodySpawnService));
-            _rewardItemSpawnService = rewardItemSpawnService ?? 
+            _rewardItemSpawnService = rewardItemSpawnService ??
                                       throw new ArgumentNullException(nameof(rewardItemSpawnService));
-            _enemyCollection = enemyCollection ?? 
+            _enemyCollection = enemyCollection ??
                                throw new ArgumentNullException(nameof(enemyCollection));
-            _enemyAttackService = enemyAttackService ?? 
+            _enemyAttackService = enemyAttackService ??
                                   throw new ArgumentNullException(nameof(enemyAttackService));
         }
 
@@ -54,30 +54,30 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Bosses
             BossEnemyAttackState attackState = new BossEnemyAttackState(
                 bossEnemy, bossEnemyView, bossEnemyAnimation, _enemyAttackService);
             EnemyDieState dieState = new EnemyDieState(
-                killEnemyCounter, 
-                bossEnemyView, 
-                _explosionBodyBloodySpawnService, 
+                killEnemyCounter,
+                bossEnemyView,
+                _explosionBodyBloodySpawnService,
                 _rewardItemSpawnService,
                 _enemyCollection);
             EnemyRunState enemyRunState = new EnemyRunState(bossEnemy, bossEnemyView, bossEnemyAnimation);
-            
+
             FiniteTransition toMoveToPlayerTransition = new FiniteTransitionBase(
                 moveToPlayerState,
                 () =>
                     bossEnemy.IsInitialized &&
                     bossEnemyView.CharacterMovementView != null &&
                     Vector3.Distance(
-                        bossEnemyView.Position, 
-                        bossEnemyView.CharacterMovementView.Position) > bossEnemyView.StoppingDistance 
+                        bossEnemyView.Position,
+                        bossEnemyView.CharacterMovementView.Position) > bossEnemyView.StoppingDistance
                     && bossEnemy.IsRun == false);
             initializeState.AddTransition(toMoveToPlayerTransition);
             attackState.AddTransition(toMoveToPlayerTransition);
             enemyRunState.AddTransition(toMoveToPlayerTransition);
-            
+
             FiniteTransitionBase toAttackTransition = new FiniteTransitionBase(
                 attackState, () => Vector3.Distance(
-                    bossEnemyView.Position, 
-                    bossEnemyView.CharacterMovementView.Position) 
+                    bossEnemyView.Position,
+                    bossEnemyView.CharacterMovementView.Position)
                                    < bossEnemyView.StoppingDistance);
             moveToPlayerState.AddTransition(toAttackTransition);
             initializeState.AddTransition(toAttackTransition);
@@ -85,12 +85,12 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Enemies.Bosses
 
             FiniteTransition toRunTransition = new FiniteTransitionBase(enemyRunState, () => bossEnemy.IsRun);
             moveToPlayerState.AddTransition(toRunTransition);
-            
+
             FiniteTransition toDieTransition = new FiniteTransitionBase(
                 dieState, () => bossEnemy.EnemyHealth.CurrentHealth <= 0);
             attackState.AddTransition(toDieTransition);
             moveToPlayerState.AddTransition(toDieTransition);
-            
+
             return new EnemyPresenter(initializeState, _updateRegister);
         }
     }

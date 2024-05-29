@@ -46,21 +46,21 @@ namespace Sources.Infrastructure.Factories.Views.Characters
         {
             _gameplayHud = gameplayHud ? gameplayHud : throw new ArgumentNullException(nameof(gameplayHud));
             _rootGameObject = rootGameObject ?? throw new ArgumentNullException(nameof(rootGameObject));
-            _characterMovementViewFactory = characterMovementViewFactory 
+            _characterMovementViewFactory = characterMovementViewFactory
                                             ?? throw new ArgumentNullException(nameof(characterMovementViewFactory));
             _characterAttackerViewFactory = characterAttackerViewFactory ??
                                             throw new ArgumentNullException(nameof(characterAttackerViewFactory));
             _miniGunViewFactory = miniGunViewFactory ?? throw new ArgumentNullException(nameof(miniGunViewFactory));
             _sawLauncherAbilityViewFactory = sawLauncherAbilityViewFactory ??
                                              throw new ArgumentNullException(nameof(sawLauncherAbilityViewFactory));
-            _sawLauncherViewFactory = sawLauncherViewFactory ?? 
+            _sawLauncherViewFactory = sawLauncherViewFactory ??
                                       throw new ArgumentNullException(nameof(sawLauncherViewFactory));
             _characterHealthViewFactory = characterHealthViewFactory ??
                                           throw new ArgumentNullException(nameof(characterHealthViewFactory));
             _healthUiFactory = healthUiFactory ?? throw new ArgumentNullException(nameof(healthUiFactory));
-            _characterWalletViewFactory = characterWalletViewFactory ?? 
+            _characterWalletViewFactory = characterWalletViewFactory ??
                                           throw new ArgumentNullException(nameof(characterWalletViewFactory));
-            _playerWalletViewFactory = playerWalletViewFactory ?? 
+            _playerWalletViewFactory = playerWalletViewFactory ??
                                        throw new ArgumentNullException(nameof(playerWalletViewFactory));
             _enemyIndicatorViewFactory = enemyIndicatorViewFactory ??
                                          throw new ArgumentNullException(nameof(enemyIndicatorViewFactory));
@@ -68,15 +68,15 @@ namespace Sources.Infrastructure.Factories.Views.Characters
 
         public CharacterView Create(Character character)
         {
-            CharacterView characterView = 
+            CharacterView characterView =
                 Object.Instantiate(
                     Resources.Load<CharacterView>(PrefabPath.Character),
-                    _rootGameObject.CharacterSpawnPoint.Position, 
+                    _rootGameObject.CharacterSpawnPoint.Position,
                     Quaternion.identity);
-            
+
             _characterMovementViewFactory.Create(
-                character.CharacterMovement, 
-                characterView.CharacterMovementView, 
+                character.CharacterMovement,
+                characterView.CharacterMovementView,
                 characterView.CharacterAnimationView);
             _characterAttackerViewFactory.Create(character.CharacterAttacker, characterView.CharacterAttackerView);
             _miniGunViewFactory.Create(character.MiniGun, characterView.MiniGunView);
@@ -95,10 +95,10 @@ namespace Sources.Infrastructure.Factories.Views.Characters
 
             _sawLauncherAbilityViewFactory.Create(character.SawLauncherAbility, sawLauncherAbilityView);
 
-            foreach (PlayerWalletView playerWalletView in _gameplayHud.PlayerWalletViews) 
+            foreach (PlayerWalletView playerWalletView in _gameplayHud.PlayerWalletViews)
                 _playerWalletViewFactory.Create(character.PlayerWallet, playerWalletView);
-            
-            _characterWalletViewFactory.Create(character.PlayerWallet,characterView.CharacterWalletView);
+
+            _characterWalletViewFactory.Create(character.PlayerWallet, characterView.CharacterWalletView);
 
             _enemyIndicatorViewFactory.Create(characterView.EnemyIndicatorView);
 

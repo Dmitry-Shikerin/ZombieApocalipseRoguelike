@@ -10,10 +10,10 @@ namespace Sources.Presentations.Views.Environments.Lights
     public class BrokenLightView : View
     {
         [Required] [SerializeField] private Light _light;
-        
-        private readonly TimeSpan _firstDelay = TimeSpan.FromSeconds(BrokenLightConst.FirstDelay);
-        private readonly TimeSpan _secondDelay = TimeSpan.FromSeconds(BrokenLightConst.SecondDelay);
-        
+
+        private TimeSpan _firstDelay = TimeSpan.FromSeconds(BrokenLightConst.FirstDelay);
+        private TimeSpan _secondDelay = TimeSpan.FromSeconds(BrokenLightConst.SecondDelay);
+
         private CancellationTokenSource _cancellationTokenSource;
 
         private void OnEnable()

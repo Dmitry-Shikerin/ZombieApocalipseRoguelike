@@ -12,7 +12,7 @@ namespace Sources.Frameworks.UiFramework.Extensions
         public static List<string> GetTranslateId()
         {
 #if UNITY_EDITOR
-            
+
             return AssetDatabase
                 .FindAssets("t:LocalizationConfig")
                 .Select(path => AssetDatabase.GUIDToAssetPath(path))
@@ -20,8 +20,9 @@ namespace Sources.Frameworks.UiFramework.Extensions
                 .ToList()
                 .FirstOrDefault()
                 .LocalizationIds;
-#endif
+#else
             return new List<string>();
+#endif
         }
 
         public static List<LocalizationPhrase> FindAllLocalizationPhrases()
@@ -32,17 +33,17 @@ namespace Sources.Frameworks.UiFramework.Extensions
                 .Select(path => AssetDatabase.GUIDToAssetPath(path))
                 .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationPhrase>(path))
                 .ToList();
-#endif
+#else
             return new List<LocalizationPhrase>();
+#endif
         }
 
         public static void CreateLocalizationPhrase()
         {
 #if UNITY_EDITOR
             LocalizationPhrase phrase = ScriptableObject.CreateInstance<LocalizationPhrase>();
-            
-            AssetDatabase.CreateAsset(phrase, 
-                "Assets/Resources/Configs/Localizations/LocalizationPhrase.asset");
+
+            AssetDatabase.CreateAsset(phrase, "Assets/Resources/Configs/Localizations/LocalizationPhrase.asset");
             AssetDatabase.SaveAssets();
 #endif
         }

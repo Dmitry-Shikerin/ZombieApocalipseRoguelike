@@ -49,6 +49,9 @@ namespace Sources.Controllers.Presenters.Weapons
             _pauseService.ContinueActivated -= ContinueActivated;
         }
 
+        public void DealDamage(IEnemyHealthView enemyHealthView) =>
+              enemyHealthView.TakeDamage(_miniGun.Damage);
+
         private void ContinueActivated()
         {
             _miniGunView.ShootAudioSource.UnPause();
@@ -69,9 +72,9 @@ namespace Sources.Controllers.Presenters.Weapons
 
         private void OnAttackEnded()
         {
-            if(_miniGun.IsShooting == false)
+            if (_miniGun.IsShooting == false)
                 return;
-            
+
             _miniGun.IsShooting = false;
             _miniGunView.ShootAudioSource.Stop();
             _miniGunView.EndShootAudioSource.Play();
@@ -80,18 +83,15 @@ namespace Sources.Controllers.Presenters.Weapons
         private void OnAttack()
         {
             _bulletSpawnService.Spawn(_miniGunView);
-            
+
             if (_miniGun.IsShooting == false)
             {
                 _miniGunView.EndShootAudioSource.Stop();
                 _miniGunView.ShootAudioSource.Play();
                 _miniGun.IsShooting = true;
             }
-            
+
             _miniGunView.PlayFireParticles();
         }
-
-        public void DealDamage(IEnemyHealthView enemyHealthView) =>
-            enemyHealthView.TakeDamage(_miniGun.Damage);
     }
 }

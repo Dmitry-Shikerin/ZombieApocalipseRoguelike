@@ -12,6 +12,7 @@ namespace Sources.Domain.Models.Gameplay
             Id = levelDto.Id;
             IsCompleted = levelDto.IsCompleted;
         }
+
         public Level(
             string id,
             bool isCompleted)
@@ -21,9 +22,11 @@ namespace Sources.Domain.Models.Gameplay
         }
 
         public event Action Completed;
-        
+
         public bool IsCompleted { get; private set; }
+
         public string Id { get; }
+
         public Type Type => GetType();
 
         public void Complete()

@@ -8,7 +8,7 @@ namespace Sources.Controllers.Presenters.Enemies.Base.States
     {
         private readonly IEnemyView _enemyView;
         private readonly IEnemyAnimation _enemyAnimation;
-        
+
         public EnemyMoveToPlayerState(IEnemyView enemyView, IEnemyAnimation enemyAnimation)
         {
             _enemyView = enemyView ?? throw new ArgumentNullException(nameof(enemyView));

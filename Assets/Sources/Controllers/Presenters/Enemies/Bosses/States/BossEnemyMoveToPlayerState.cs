@@ -18,14 +18,14 @@ namespace Sources.Controllers.Presenters.Enemies.Bosses.States
         private CancellationTokenSource _cancellationTokenSource;
         private TimeSpan _runDelay;
         private TimeSpan _massAttackDelay;
-        
+
         public BossEnemyMoveToPlayerState(
-            BossEnemy enemy, 
-            IBossEnemyView enemyView, 
+            BossEnemy enemy,
+            IBossEnemyView enemyView,
             IBossEnemyAnimation enemyAnimation,
-            IEnemyAttackService enemyAttackService) 
+            IEnemyAttackService enemyAttackService)
             : base(
-                enemyView, 
+                enemyView,
                 enemyAnimation)
         {
             _enemy = enemy ?? throw new ArgumentNullException(nameof(enemy));
@@ -36,11 +36,11 @@ namespace Sources.Controllers.Presenters.Enemies.Bosses.States
         public override void Enter()
         {
             base.Enter();
-            
+
             _cancellationTokenSource = new CancellationTokenSource();
             _runDelay = TimeSpan.FromSeconds(EnemyConst.RunDelay);
             _massAttackDelay = TimeSpan.FromSeconds(EnemyConst.MassAttackAbilityDelay);
-            
+
             _enemy.IsRun = false;
             _enemyView.SetAgentSpeed(_enemy.WalkSpeed);
             StartRunTimer(_cancellationTokenSource.Token);
@@ -57,7 +57,7 @@ namespace Sources.Controllers.Presenters.Enemies.Bosses.States
                 while (cancellationToken.IsCancellationRequested == false)
                 {
                     await UniTask.Delay(_runDelay, cancellationToken: cancellationToken);
-                    
+
                     _enemy.IsRun = true;
                 }
             }
@@ -65,7 +65,7 @@ namespace Sources.Controllers.Presenters.Enemies.Bosses.States
             {
             }
         }
-        
+
         private async void StartMassAttackTimer(CancellationToken cancellationToken)
         {
             try
@@ -73,7 +73,7 @@ namespace Sources.Controllers.Presenters.Enemies.Bosses.States
                 while (cancellationToken.IsCancellationRequested == false)
                 {
                     await UniTask.Delay(_massAttackDelay, cancellationToken: cancellationToken);
-                    
+
                     _enemyView.PlayMassAttackParticle();
                     _enemyAttackService.TryAttack(_enemyView.Position, EnemyConst.MassAttackDamage);
                 }

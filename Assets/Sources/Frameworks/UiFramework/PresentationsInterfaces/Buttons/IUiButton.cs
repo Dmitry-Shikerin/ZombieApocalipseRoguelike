@@ -9,10 +9,15 @@ namespace Sources.Frameworks.UiFramework.PresentationsInterfaces.Buttons
     public interface IUiButton : IButtonView
     {
         float Delay { get; }
+
         List<ButtonCommandId> OnClickCommandId { get; }
+
         List<ButtonCommandId> EnableCommandId { get; }
+
         List<ButtonCommandId> DisableCommandId { get; }
+
         UseButtonType UseButtonType { get; }
+
         FormId FormId { get; }
     }
 }

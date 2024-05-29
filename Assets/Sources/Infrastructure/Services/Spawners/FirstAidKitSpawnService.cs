@@ -20,16 +20,17 @@ namespace Sources.Infrastructure.Services.Spawners
             _objectPool = objectPool ?? throw new ArgumentNullException(nameof(objectPool));
             _viewFactory = viewFactory ?? throw new ArgumentNullException(nameof(viewFactory));
         }
+
         public IFirstAidKitView Spawn(Vector3 position)
         {
             IFirstAidKitView view = SpawnFromPool(position) ?? _viewFactory.Create(position);
-            
+
             view.SetPosition(position);
             view.Show();
-            
+
             return view;
         }
-        
+
         private FirstAidKitView SpawnFromPool(Vector3 position)
         {
             FirstAidKitView firstAidKitView = _objectPool.Get<FirstAidKitView>();

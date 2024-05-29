@@ -21,29 +21,29 @@ namespace Sources.Infrastructure.Factories.Views.ExplosionBodyBloodyViews
         }
 
         public IExplosionBodyBloodyView Create(
-            ExplosionBodyBloodyView explosionBodyBloodyView, 
+            ExplosionBodyBloodyView explosionBodyBloodyView,
             Vector3 position)
         {
             return explosionBodyBloodyView;
         }
-        
+
         public IExplosionBodyBloodyView Create(Vector3 position)
         {
             ExplosionBodyBloodyView explosionBodyBloodyView = CreateView();
-            
+
             return explosionBodyBloodyView;
         }
 
         private ExplosionBodyBloodyView CreateView()
         {
-            ExplosionBodyBloodyView explosionBodyBloodyView = 
+            ExplosionBodyBloodyView explosionBodyBloodyView =
                 Object.Instantiate(
                     Resources.Load<ExplosionBodyBloodyView>(PrefabPath.ExplosionBodyBloody));
 
             explosionBodyBloodyView
                 .AddComponent<PoolableObject>()
                 .SetPool(_objectPool);
-            
+
             return explosionBodyBloodyView;
         }
     }

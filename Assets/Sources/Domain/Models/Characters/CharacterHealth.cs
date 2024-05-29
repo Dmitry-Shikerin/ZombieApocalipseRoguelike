@@ -18,12 +18,14 @@ namespace Sources.Domain.Models.Characters
         }
 
         public event Action HealthChanged;
+
         public event Action<float> DamageReceived;
+
         public event Action CharacterDie;
 
         public float MaxHealth => _healthUpgrader.CurrentAmount;
-        public bool IsDied { get; private set; }
 
+        public bool IsDied { get; private set; }
 
         public float CurrentHealth
         {
@@ -38,9 +40,9 @@ namespace Sources.Domain.Models.Characters
 
         public void TakeDamage(float damage)
         {
-            if(CurrentHealth <= 0)
+            if (CurrentHealth <= 0)
                 return;
-            
+
             CurrentHealth -= damage;
             DamageReceived?.Invoke(damage);
 

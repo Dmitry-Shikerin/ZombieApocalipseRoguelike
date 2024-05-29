@@ -12,11 +12,12 @@ namespace Sources.Presentations.Views.Spawners
         [SerializeField] private List<EnemySpawnPoint> _spawnPoints;
 
         public IReadOnlyList<IEnemySpawnPoint> SpawnPoints => _spawnPoints;
+
         public CharacterView CharacterView { get; private set; }
 
         public void SetCharacterView(CharacterView characterView)
         {
-            CharacterView = characterView ? characterView : 
+            CharacterView = characterView ? characterView :
                 throw new ArgumentNullException(nameof(characterView));
         }
     }

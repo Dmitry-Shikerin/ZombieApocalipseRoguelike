@@ -10,7 +10,7 @@ namespace Sources.Infrastructure.StateMachines.FiniteStateMachines.States
         public virtual void Enter()
         {
         }
-        
+
         public virtual void Exit()
         {
         }
@@ -30,11 +30,12 @@ namespace Sources.Infrastructure.StateMachines.FiniteStateMachines.States
             nextState = default;
 
             foreach (IFiniteTransition transition in _transitions)
+            {
                 if (transition.CanMoveNextState(out nextState))
                     return true;
+            }
 
             return false;
         }
-
     }
 }

@@ -48,23 +48,23 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         private readonly CustomCollection<Upgrader> _upgradeCollection;
 
         public LoadGameplaySceneService(
-            GameplayHud gameplayHud, 
-            UiCollectorFactory uiCollectorFactory, 
-            CharacterViewFactory characterViewFactory, 
-            BearViewFactory bearViewFactory, 
-            IUpgradeUiFactory upgradeUiFactory, 
-            ILoadService loadService, 
-            IEntityRepository entityRepository, 
-            RootGameObject rootGameObject, 
-            EnemySpawnViewFactory enemySpawnViewFactory, 
-            ItemSpawnerViewFactory itemSpawnerViewFactory, 
-            CustomCollection<Upgrader> upgradeCollection, 
-            KillEnemyCounterViewFactory killEnemyCounterViewFactory, 
-            BackgroundMusicViewFactory backgroundMusicViewFactory, 
-            IGameOverService gameOverService, 
-            CameraViewFactory cameraViewFactory, 
-            ICameraService cameraService, 
-            VolumeViewFactory volumeViewFactory, 
+            GameplayHud gameplayHud,
+            UiCollectorFactory uiCollectorFactory,
+            CharacterViewFactory characterViewFactory,
+            BearViewFactory bearViewFactory,
+            IUpgradeUiFactory upgradeUiFactory,
+            ILoadService loadService,
+            IEntityRepository entityRepository,
+            RootGameObject rootGameObject,
+            EnemySpawnViewFactory enemySpawnViewFactory,
+            ItemSpawnerViewFactory itemSpawnerViewFactory,
+            CustomCollection<Upgrader> upgradeCollection,
+            KillEnemyCounterViewFactory killEnemyCounterViewFactory,
+            BackgroundMusicViewFactory backgroundMusicViewFactory,
+            IGameOverService gameOverService,
+            CameraViewFactory cameraViewFactory,
+            ICameraService cameraService,
+            VolumeViewFactory volumeViewFactory,
             IVolumeService volumeService,
             ISaveService saveService,
             ILevelCompletedService levelCompletedService,
@@ -72,23 +72,23 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             IAdvertisingService advertisingService,
             IFormService formService,
             ScoreCounterViewFactory scoreCounterViewFactory,
-            UpgradeControllerViewFactory upgradeControllerViewFactory) 
+            UpgradeControllerViewFactory upgradeControllerViewFactory)
             : base(
-                gameplayHud, 
-                uiCollectorFactory, 
-                characterViewFactory, 
-                bearViewFactory, 
-                upgradeUiFactory, 
-                rootGameObject, 
-                enemySpawnViewFactory, 
+                gameplayHud,
+                uiCollectorFactory,
+                characterViewFactory,
+                bearViewFactory,
+                upgradeUiFactory,
+                rootGameObject,
+                enemySpawnViewFactory,
                 itemSpawnerViewFactory,
-                upgradeCollection, 
-                killEnemyCounterViewFactory, 
-                backgroundMusicViewFactory, 
-                gameOverService, 
-                cameraViewFactory, 
-                cameraService, 
-                volumeViewFactory, 
+                upgradeCollection,
+                killEnemyCounterViewFactory,
+                backgroundMusicViewFactory,
+                gameOverService,
+                cameraViewFactory,
+                cameraService,
+                volumeViewFactory,
                 volumeService,
                 saveService,
                 levelCompletedService,
@@ -106,17 +106,17 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
         protected override GameModels LoadModels(IScenePayload scenePayload)
         {
             _loadService.LoadAll();
-            
+
             Tutorial tutorial = _entityRepository.Get<Tutorial>(ModelId.Tutorial);
-            
+
             Volume volume = _entityRepository.Get<Volume>(ModelId.Volume);
 
             Level level = _entityRepository.Get<Level>(scenePayload.SceneId);
-            
+
             SavedLevel savedLevel = _entityRepository.Get<SavedLevel>(ModelId.SavedLevel);
-            
+
             PlayerWallet playerWallet = _entityRepository.Get<PlayerWallet>(ModelId.PlayerWallet);
-            
+
             Upgrader sawLauncherAbilityUpgrader = _entityRepository.Get<Upgrader>(ModelId.SawLauncherAbilityUpgrader);
             _upgradeCollection.Add(sawLauncherAbilityUpgrader);
             Upgrader bearMassAttackUpgrader = _entityRepository.Get<Upgrader>(ModelId.BearMassAttackUpgrader);
@@ -136,7 +136,7 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
             EnemySpawner enemySpawner = _entityRepository.Get<EnemySpawner>(ModelId.GameplayEnemySpawner);
 
             ScoreCounter scoreCounter = _entityRepository.Get<ScoreCounter>(ModelId.ScoreCounter);
-            
+
             MiniGun miniGun = new MiniGun(miniGunAttackUpgrader, WeaponConst.AttackCooldown);
 
             CharacterHealth characterHealth = new CharacterHealth(characterHealthUpgrader);
@@ -158,7 +158,6 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.G
 
             BearAttacker bearAttacker = new BearAttacker(bearAttackUpgrader, bearMassAttackUpgrader);
             Bear bear = new Bear(bearAttacker);
-
 
             return new GameModels(
                 bearMassAttackUpgrader,

@@ -15,7 +15,7 @@ namespace Sources.Infrastructure.Services.Upgrades
         {
             if (availableUpgradesCount >= UpgradeConst.MaxLevel)
                 return UpgradeConst.MaxLevel;
-            
+
             var count = upgraders.Count(upgrader => upgrader.CurrentLevel == UpgradeConst.MaxLevel);
 
             if (count >= 4 && availableUpgradesCount > 0)
@@ -23,19 +23,19 @@ namespace Sources.Infrastructure.Services.Upgrades
 
             throw new IndexOutOfRangeException();
         }
-        
+
         public IReadOnlyList<Upgrader> GetAvailableUpgrades(
-            IPlayerWallet playerWallet, 
+            IPlayerWallet playerWallet,
             ICustomCollection<Upgrader> upgradeCollection)
         {
             List<Upgrader> availableUpgraders = new List<Upgrader>();
 
             foreach (Upgrader upgrader in upgradeCollection)
             {
-                if(upgrader.CurrentLevel == UpgradeConst.MaxLevel)
+                if (upgrader.CurrentLevel == UpgradeConst.MaxLevel)
                     continue;
-                
-                if(upgrader.MoneyPerUpgrades[upgrader.CurrentLevel] <= playerWallet.Coins)
+
+                if (upgrader.MoneyPerUpgrades[upgrader.CurrentLevel] <= playerWallet.Coins)
                     availableUpgraders.Add(upgrader);
             }
 

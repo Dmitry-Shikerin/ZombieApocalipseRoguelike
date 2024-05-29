@@ -11,7 +11,7 @@ namespace Sources.Infrastructure.DIContainers.Common
         public override void InstallBindings()
         {
             Container.Bind<IMapperCollector>().To<MapperCollector>().AsSingle();
-            
+
             Container.Bind<IUpgradeDtoMapper>().To<UpgradeDtoMapper>().AsSingle();
             Container.Bind<IPlayerWalletDtoMapper>()
                 .To<PlayerWalletDtoMapper>().AsSingle();

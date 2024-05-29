@@ -22,19 +22,19 @@ namespace Sources.Infrastructure.StateMachines.ContextStateMachines.States
         {
         }
 
-        public void AddTransition(IContextTransition transition) => 
+        public void AddTransition(IContextTransition transition) =>
             _transitions.Add(transition);
 
-        public void RemoveTransition(IContextTransition transition) => 
+        public void RemoveTransition(IContextTransition transition) =>
             _transitions.Remove(transition);
 
         public void Apply(IContext context, IContextStateChanger contextStateChanger)
         {
             foreach (IContextTransition transition in _transitions)
             {
-                if(transition.CanTransit(context) == false)
+                if (transition.CanTransit(context) == false)
                     continue;
-                
+
                 contextStateChanger.ChangeState(transition.NextState);
                 transition.NextState.Apply(context, contextStateChanger);
             }

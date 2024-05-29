@@ -9,6 +9,7 @@ namespace Sources.Utils.Repositories.ItemRepository
         private readonly Dictionary<Type, T1> _repositoryes = new ();
 
         public int Count => _repositoryes.Count;
+
         public IReadOnlyCollection<T1> Collection => _repositoryes.Values;
 
         public T2 Get<T2>()

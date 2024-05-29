@@ -9,7 +9,7 @@ namespace Sources.Infrastructure.Services.LoadServices.Data
     public class PlayerPrefsDataService : IDataService
     {
         public T LoadData<T>(string key)
-            where T : IDto => 
+            where T : IDto =>
             (T)LoadData(key, typeof(T));
 
         public object LoadData(string key, Type dtoType)
@@ -19,16 +19,16 @@ namespace Sources.Infrastructure.Services.LoadServices.Data
             if (string.IsNullOrEmpty(json))
                 throw new NullReferenceException(nameof(key));
 
-            return JsonConvert.DeserializeObject(json, dtoType) ?? 
+            return JsonConvert.DeserializeObject(json, dtoType) ??
                    throw new NullReferenceException(nameof(json));
         }
 
         public void SaveData<T>(T dataModel, string key)
             where T : IDto
         {
-            string json = JsonConvert.SerializeObject(dataModel) ?? 
+            string json = JsonConvert.SerializeObject(dataModel) ??
                           throw new NullReferenceException(nameof(dataModel));
-            
+
             PlayerPrefs.SetString(key, json);
         }
 

@@ -17,7 +17,7 @@ namespace Sources.Infrastructure.Factories.Views.Upgrades.Controllers
         {
             _presenterFactory = presenterFactory ?? throw new ArgumentNullException(nameof(presenterFactory));
         }
-        
+
         public IUpgradeControllerView Create(
             UpgradeController upgradeController,
             ICharacterHealth characterHealth,
@@ -27,7 +27,7 @@ namespace Sources.Infrastructure.Factories.Views.Upgrades.Controllers
             UpgradeControllerPresenter presenter = _presenterFactory.Create(
                 upgradeController, characterHealth, playerWallet, upgradeControllerView);
             upgradeControllerView.Construct(presenter);
-            
+
             return upgradeControllerView;
         }
     }

@@ -13,9 +13,9 @@ namespace Sources.Controllers.Presenters.Cameras
         private readonly ICameraService _cameraService;
 
         public CameraPresenter(
-            IContextState firstState, 
-            IUpdateRegister updateRegister, 
-            ICameraService cameraService) 
+            IContextState firstState,
+            IUpdateRegister updateRegister,
+            ICameraService cameraService)
             : base(firstState)
         {
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));

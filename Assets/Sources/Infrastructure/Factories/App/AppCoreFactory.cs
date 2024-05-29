@@ -22,12 +22,11 @@ namespace Sources.Infrastructure.Factories.App
             AppCore appCore = new GameObject(nameof(AppCore)).AddComponent<AppCore>();
 
             ProjectContext projectContext = Object.FindObjectOfType<ProjectContext>();
-            
+
             CurtainView curtainView =
                 Object.Instantiate(Resources.Load<CurtainView>(PrefabPath.Curtain)) ??
                 throw new NullReferenceException(nameof(CurtainView));
             projectContext.Container.Bind<CurtainView>().FromInstance(curtainView);
-            //TODO потом убрать
             curtainView.Hide();
 
             Dictionary<string, Func<object, SceneContext, UniTask<IScene>>> sceneFactories =
@@ -48,14 +47,13 @@ namespace Sources.Infrastructure.Factories.App
             sceneFactories[ModelId.Gameplay4] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
 
-            
             sceneService.AddBeforeSceneChangeHandler(async _ => await curtainView.ShowCurtain());
-            
-            sceneService.AddBeforeSceneChangeHandler(async sceneName => 
+
+            sceneService.AddBeforeSceneChangeHandler(async sceneName =>
                 await projectContext.Container.Resolve<ISceneLoaderService>().LoadSceneAsync(sceneName));
-            
+
             appCore.Construct(sceneService);
-            
+
             return appCore;
         }
     }

@@ -9,12 +9,8 @@ namespace Sources.Presentations.Views.Enemies.Bosses
     public class BossEnemyAnimation : EnemyAnimation, IBossEnemyAnimation
     {
         private static int s_isRun = Animator.StringToHash("IsRun");
-        
-        public event Action Attacking;
-        public event Action ScreamAnimationEnded;
 
-        protected override void OnAfterAwake() =>
-            StoppingAnimations.Add(StopRun);
+        public event Action ScreamAnimationEnded;
 
         public void PlayRun()
         {
@@ -22,18 +18,17 @@ namespace Sources.Presentations.Views.Enemies.Bosses
             Animator.SetBool(s_isRun, true);
         }
 
+        protected override void OnAfterAwake() =>
+            StoppingAnimations.Add(StopRun);
+
         private void StopRun()
         {
-            if(Animator.GetBool(s_isRun) == false)
+            if (Animator.GetBool(s_isRun) == false)
                 return;
-            
+
             Animator.SetBool(s_isRun, false);
         }
-        
-        [UsedImplicitly]
-        private void OnAttack() =>
-            Attacking?.Invoke();
-        
+
         [UsedImplicitly]
         private void OnScreamAnimationEnded() =>
             ScreamAnimationEnded?.Invoke();

@@ -11,7 +11,7 @@ namespace Sources.Presentations.Views.Characters
         [SerializeField] private float _maxDegreesRotationDelta = 11f;
 
         public Vector3 Position => transform.position;
-        
+
         public void SetLookRotation(float angle)
         {
             transform.rotation = Quaternion.RotateTowards(

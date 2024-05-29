@@ -8,7 +8,7 @@ namespace Sources.Infrastructure.StateMachines.ContextStateMachines.Transitions
     {
         private readonly Func<IContext, bool> _condition;
 
-        public FuncContextTransition(IContextState nextState, Func<IContext , bool> condition) 
+        public FuncContextTransition(IContextState nextState, Func<IContext, bool> condition)
             : base(nextState)
         {
             _condition = condition ?? throw new ArgumentNullException(nameof(condition));

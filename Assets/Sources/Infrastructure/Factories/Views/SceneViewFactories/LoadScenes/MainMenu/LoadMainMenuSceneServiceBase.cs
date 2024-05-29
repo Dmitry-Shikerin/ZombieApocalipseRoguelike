@@ -35,9 +35,9 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
             _mainMenuHud = mainMenuHud ? mainMenuHud : throw new ArgumentNullException(nameof(mainMenuHud));
             _volumeViewFactory = volumeViewFactory ?? throw new ArgumentNullException(nameof(volumeViewFactory));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
-            _backgroundMusicViewFactory = backgroundMusicViewFactory ?? 
+            _backgroundMusicViewFactory = backgroundMusicViewFactory ??
                                           throw new ArgumentNullException(nameof(backgroundMusicViewFactory));
-            _levelAvailabilityViewFactory = levelAvailabilityViewFactory ?? 
+            _levelAvailabilityViewFactory = levelAvailabilityViewFactory ??
                                             throw new ArgumentNullException(nameof(levelAvailabilityViewFactory));
             _uiCollectorFactory = uiCollectorFactory ?? throw new ArgumentNullException(nameof(uiCollectorFactory));
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
@@ -46,20 +46,20 @@ namespace Sources.Infrastructure.Factories.Views.SceneViewFactories.LoadScenes.M
         public void Load(IScenePayload scenePayload)
         {
             MainMenuModels models = LoadModels(scenePayload);
-            
+
             SavedLevel savedLevel = models.SavedLevel;
-            
+
             _volumeViewFactory.Create(models.Volume, _mainMenuHud.VolumeView);
             _volumeService.Register(models.Volume);
-            
+
             _backgroundMusicViewFactory.Create(_mainMenuHud.BackgroundMusicView);
-            
+
             _levelAvailabilityViewFactory.Create(models.LevelAvailability, _mainMenuHud.LevelAvailabilityView);
-            
+
             _uiCollectorFactory.Create();
             _formService.Show(FormId.Hud);
         }
-        
+
         protected abstract MainMenuModels LoadModels(IScenePayload scenePayload);
     }
 }

@@ -6,7 +6,6 @@ using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.AdvertisingServic
 
 namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
 {
-    //TODO возможно это не команда а стратегия
     public class ShowRewardedAdvertisingButtonCommand : IButtonCommand
     {
         private readonly IVideoAdService _videoAdService;
@@ -17,7 +16,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons
         }
 
         public ButtonCommandId Id => ButtonCommandId.ShowRewardedAdvertising;
-        
+
         public void Handle(IUiButton uiButton)
         {
             uiButton.Disable();

@@ -15,13 +15,13 @@ namespace Sources.Infrastructure.StateMachines.FiniteStateMachines
         protected void Update(float deltaTime)
         {
             _currentState.Update(deltaTime);
-            
+
             if (_currentState.TryGetNextState(out FiniteState nextState) == false)
                 return;
-            
+
             MoveNextState(nextState);
         }
-        
+
         private void MoveNextState(FiniteState nextState)
         {
             _currentState?.Exit();

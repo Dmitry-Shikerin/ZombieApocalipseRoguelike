@@ -46,12 +46,12 @@ namespace Sources.Controllers.Presenters.Common
 
                 _healthUiText.DamageTexts.ForEach(text => text.SetIsHide(true));
                 _healthUiText.DamageTexts.ForEach(text => text.SetTextColor(Color.clear));
-                
+
                 _cancellationTokenSource = new CancellationTokenSource();
                 uiText = _healthUiText.DamageTexts
                     .FirstOrDefault(text => text.IsHide);
             }
-            
+
             uiText.SetTextColor(Color.red);
             uiText.SetIsHide(false);
             uiText.SetText(damage.ToString());

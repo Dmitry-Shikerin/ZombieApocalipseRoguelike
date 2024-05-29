@@ -9,10 +9,10 @@ namespace Sources.Presentations.Views.ExplosionBodyBloodies
     public class ExplosionBodyBloodyView : View, IExplosionBodyBloodyView
     {
         [Required] [SerializeField] private ParticleSystem _particleSystem;
-        
-        private readonly IPoolableObjectDestroyerService _poolableObjectDestroyerService = 
+
+        private IPoolableObjectDestroyerService _poolableObjectDestroyerService =
             new PoolableObjectDestroyerService();
-        
+
         private void OnEnable() =>
             _particleSystem.Play();
 

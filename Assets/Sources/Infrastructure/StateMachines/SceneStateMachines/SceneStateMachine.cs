@@ -12,7 +12,7 @@ namespace Sources.Infrastructure.StateMachines.SceneStateMachines
         {
             if (state == null)
                 throw new ArgumentNullException(nameof(state));
-            
+
             Exit();
             _currentState = state;
             _currentState?.Enter(payload);

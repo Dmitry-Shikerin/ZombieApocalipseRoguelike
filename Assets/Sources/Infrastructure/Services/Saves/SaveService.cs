@@ -13,9 +13,9 @@ namespace Sources.Infrastructure.Services.Saves
     public class SaveService : ISaveService
     {
         private readonly ILoadService _loadService;
-        private readonly IFormService _formService; 
+        private readonly IFormService _formService;
         private readonly TimeSpan _showedFormDelay = TimeSpan.FromSeconds(SaveConst.ShowedFormDelay);
-        
+
         private IEnemySpawner _enemySpawner;
         private CancellationTokenSource _cancellationTokenSource;
 

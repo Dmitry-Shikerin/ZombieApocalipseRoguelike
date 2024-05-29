@@ -10,7 +10,7 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
     {
         private readonly Dictionary<ButtonCommandId, IButtonCommand> _commands =
             new Dictionary<ButtonCommandId, IButtonCommand>();
-        
+
         public GameplayButtonCommandHandler(
             ShowFormCommand showFormCommand,
             CompleteTutorialCommand completeTutorialCommand,
@@ -39,7 +39,6 @@ namespace Sources.Frameworks.UiFramework.Infrastructure.Commands.Buttons.Handler
                 throw new KeyNotFoundException(nameof(buttonCommandId));
 
             _commands[buttonCommandId].Handle(uiButton);
-
         }
     }
 }

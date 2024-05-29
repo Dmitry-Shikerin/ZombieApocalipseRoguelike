@@ -17,8 +17,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Abilities
             SawLauncherAbilityUpgradeMap sawLauncherAbilityUpgradeMap)
         {
             _updateRegister = updateRegister ?? throw new ArgumentNullException(nameof(updateRegister));
-            _sawLauncherAbilityUpgradeMap = sawLauncherAbilityUpgradeMap 
-                ? sawLauncherAbilityUpgradeMap 
+            _sawLauncherAbilityUpgradeMap = sawLauncherAbilityUpgradeMap
+                ? sawLauncherAbilityUpgradeMap
                 : throw new ArgumentNullException(nameof(sawLauncherAbilityUpgradeMap));
         }
 
@@ -27,7 +27,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Abilities
             ISawLauncherAbilityView sawLauncherAbilityView)
         {
             return new SawLauncherAbilityPresenter(
-                sawLauncherAbility, 
+                sawLauncherAbility,
                 sawLauncherAbilityView,
                 _updateRegister,
                 _sawLauncherAbilityUpgradeMap);

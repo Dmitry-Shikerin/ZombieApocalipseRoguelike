@@ -24,9 +24,9 @@ namespace Sources.Infrastructure.Factories.Views.Gameplay
         {
             KillEnemyCounterPresenter killEnemyCounterPresenter =
                 _presenterFactory.Create(killEnemyCounter, enemySpawner, killEnemyCounterView);
-            
+
             killEnemyCounterView.Construct(killEnemyCounterPresenter);
-            
+
             return killEnemyCounterView;
         }
     }

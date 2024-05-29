@@ -11,14 +11,14 @@ namespace Sources.Infrastructure.Services.Cameras
         private Dictionary<FollowableId, ICameraFollowable> _cameraTargets = new Dictionary<FollowableId, ICameraFollowable>();
 
         public event Action FollowableChanged;
-        
+
         public ICameraFollowable CurrentFollower { get; private set; }
 
         public void SetFollower(FollowableId id)
         {
             if (_cameraTargets.ContainsKey(id) == false)
                 throw new InvalidOperationException(nameof(id));
-            
+
             CurrentFollower = _cameraTargets[id];
             FollowableChanged?.Invoke();
         }
@@ -27,7 +27,7 @@ namespace Sources.Infrastructure.Services.Cameras
         {
             if (_cameraTargets.ContainsKey(cameraFollowable.Id))
                 throw new InvalidOperationException(nameof(cameraFollowable.Id));
-            
+
             _cameraTargets[cameraFollowable.Id] = cameraFollowable;
         }
 

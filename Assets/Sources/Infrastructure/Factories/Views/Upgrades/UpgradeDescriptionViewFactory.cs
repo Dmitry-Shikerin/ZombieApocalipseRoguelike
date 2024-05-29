@@ -14,7 +14,7 @@ namespace Sources.Infrastructure.Factories.Views.Upgrades
 
         public UpgradeDescriptionViewFactory(UpgradeDescriptionPresenterFactory presenterFactory)
         {
-            _presenterFactory = presenterFactory ?? 
+            _presenterFactory = presenterFactory ??
                                 throw new ArgumentNullException(nameof(presenterFactory));
         }
 
@@ -22,7 +22,7 @@ namespace Sources.Infrastructure.Factories.Views.Upgrades
         {
             UpgradeDescriptionPresenter presenter = _presenterFactory.Create(upgrader, view);
             view.Construct(presenter);
-            
+
             return view;
         }
     }

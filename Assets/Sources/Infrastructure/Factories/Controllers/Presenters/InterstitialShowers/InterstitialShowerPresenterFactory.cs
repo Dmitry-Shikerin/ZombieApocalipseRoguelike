@@ -25,17 +25,17 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.InterstitialSh
             _formService = formService ?? throw new ArgumentNullException(nameof(formService));
             _upgradeService = upgradeService ?? throw new ArgumentNullException(nameof(upgradeService));
         }
-        
+
         public InterstitialShowerPresenter Create(
-            IEnemySpawner enemySpawner, 
+            IEnemySpawner enemySpawner,
             IUpgradeController upgradeController,
             IInterstitialShowerView view)
         {
             return new InterstitialShowerPresenter(
-                enemySpawner, 
+                enemySpawner,
                 upgradeController,
-                view, 
-                _interstitialAdService, 
+                view,
+                _interstitialAdService,
                 _formService);
         }
     }
