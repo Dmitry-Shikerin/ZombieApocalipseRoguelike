@@ -4,5 +4,6 @@
     {
         public const int ScullsAmount = 15;
         public const float Delay = 1.2f;
+        public const int TimeCount = 3;
     }
 }

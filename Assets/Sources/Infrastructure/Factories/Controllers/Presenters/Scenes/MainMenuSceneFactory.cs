@@ -24,7 +24,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
         private readonly IVolumeService _volumeService;
         private readonly ILoadService _loadService;
         private readonly ILocalizationService _localizationService;
-        private readonly ISdcInitializeService _sdcInitializeService;
+        private readonly ISdkInitializeService _sdkInitializeService;
         private readonly IStickyService _stickyService;
         private readonly IAudioService _audioService;
         private readonly IFocusService _focusService;
@@ -37,7 +37,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             ILoadService loadService,
             ILocalizationService localizationService,
             CurtainView curtainView,
-            ISdcInitializeService sdcInitializeService,
+            ISdkInitializeService sdkInitializeService,
             IStickyService stickyService,
             IAudioService audioService,
             IFocusService focusService)
@@ -50,8 +50,8 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
             _loadService = loadService ?? throw new ArgumentNullException(nameof(loadService));
             _localizationService = localizationService ??
                                    throw new ArgumentNullException(nameof(localizationService));
-            _sdcInitializeService = sdcInitializeService ??
-                                    throw new ArgumentNullException(nameof(sdcInitializeService));
+            _sdkInitializeService = sdkInitializeService ??
+                                    throw new ArgumentNullException(nameof(sdkInitializeService));
             _stickyService = stickyService ?? throw new ArgumentNullException(nameof(stickyService));
             _audioService = audioService ?? throw new ArgumentNullException(nameof(audioService));
             _focusService = focusService ?? throw new ArgumentNullException(nameof(focusService));
@@ -65,7 +65,7 @@ namespace Sources.Infrastructure.Factories.Controllers.Presenters.Scenes
                 _volumeService,
                 _localizationService,
                 _curtainView,
-                _sdcInitializeService,
+                _sdkInitializeService,
                 _stickyService,
                 _audioService,
                 _focusService);

@@ -18,9 +18,9 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
         private readonly IInterstitialShowerView _view;
         private readonly IInterstitialAdService _interstitialAdService;
         private readonly IFormService _formService;
+        private readonly TimeSpan _timerTimeSpan = TimeSpan.FromSeconds(AdvertisingConst.Delay);
 
         private CancellationTokenSource _cancellationTokenSource;
-        private TimeSpan _timerTimeSpan = TimeSpan.FromSeconds(AdvertisingConst.Delay);
 
         public InterstitialShowerPresenter(
             IEnemySpawner enemySpawner,
@@ -88,7 +88,7 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
         {
             try
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: cancellationToken);
+                await UniTask.Delay(_timerTimeSpan, cancellationToken: cancellationToken);
             }
             catch (OperationCanceledException)
             {
@@ -97,7 +97,7 @@ namespace Sources.Controllers.Presenters.InterstitialShowers
 
         private async UniTask ShowTimerAsync(CancellationToken cancellationToken)
         {
-            for (int i = 3; i > 0; i--)
+            for (int i = AdvertisingConst.TimeCount; i > 0; i--)
             {
                 _view.TimerText.SetText($"{i}");
                 await UniTask.Delay(_timerTimeSpan, cancellationToken: cancellationToken);

@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Domain.Models.AudioSources;
+using Sources.Domain.Models.Constants;
 using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Frameworks.UiFramework.Domain.Localizations.Configs;
@@ -46,16 +47,16 @@ namespace Sources.Infrastructure.DIContainers.MainMenu
             Container.BindInterfacesAndSelfTo<MainMenuSceneFactory>().AsSingle();
             Container
                 .Bind<UpgradeConfigContainer>()
-                .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer")
+                .FromResource(PrefabPath.UpgradeConfigContainer)
                 .AsSingle();
             Container
                 .Bind<LocalizationConfig>()
-                .FromResource("Configs/Localizations/LocalizationConfig")
+                .FromResource(PrefabPath.LocalizationConfig)
                 .AsSingle();
-            Container.Bind<AudioClipCollection>().FromResource("Configs/MainMenuAudioClipContainer").AsSingle();
+            Container.Bind<AudioClipCollection>().FromResource(PrefabPath.MainMenuAudioClipContainer).AsSingle();
             Container
                 .Bind<EnemySpawnerConfigContainer>()
-                .FromResource("Configs/EnemySpawners/Containers/EnemySpawnerConfigContainer")
+                .FromResource(PrefabPath.EnemySpawnerConfigContainer)
                 .AsSingle();
 
             BindServices();
@@ -71,7 +72,7 @@ namespace Sources.Infrastructure.DIContainers.MainMenu
             Container.Bind<ILeaderboardInitializeService>().To<YandexLeaderboardInitializeService>().AsSingle();
             Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
             Container.Bind<IPlayerAccountAuthorizeService>().To<PlayerAccountAuthorizeService>().AsSingle();
-            Container.Bind<ISdcInitializeService>().To<SdcInitializeService>().AsSingle();
+            Container.Bind<ISdkInitializeService>().To<SdkInitializeService>().AsSingle();
             Container.Bind<IStickyService>().To<StickyService>().AsSingle();
             Container.Bind<IFocusService>().To<FocusService>().AsSingle();
             Container.Bind<LeaderBoardElementViewFactory>().AsSingle();

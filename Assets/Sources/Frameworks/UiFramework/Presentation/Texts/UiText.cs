@@ -26,6 +26,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
         [SerializeField] private string _textId;
         [TabGroup("Ids")] [ValueDropdown("GetDropdownValues")]
         [SerializeField] private string _localizationId;
+        [SerializeField] private float _clearColorDelta = 0.01f;
 
         public TextViewType TextViewType => _textViewType;
 
@@ -55,7 +56,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
                 while (_tmpText.color.a > 0)
                 {
                     _tmpText.color = Vector4.MoveTowards(
-                        _tmpText.color, Vector4.zero, 0.01f);
+                        _tmpText.color, Vector4.zero, _clearColorDelta);
 
                     await UniTask.Yield(cancellationToken);
                 }
@@ -93,7 +94,7 @@ namespace Sources.Frameworks.UiFramework.Presentation.Texts
 
             localizationIds.Add(_textId);
 
-            _textId = " ";
+            _textId = string.Empty;
         }
 
         [UsedImplicitly]

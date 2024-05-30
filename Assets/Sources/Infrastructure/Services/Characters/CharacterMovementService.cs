@@ -10,6 +10,7 @@ namespace Sources.Infrastructure.Services.Characters
     {
         private const float Delta = 1;
         private const float Scalar = 2;
+        private const float MinReactionDistance = 0.7f;
 
         public void SetSpeed(CharacterMovement characterMovement, float speed, float deltaTime)
         {
@@ -31,7 +32,7 @@ namespace Sources.Infrastructure.Services.Characters
             lookDirection.y = characterPosition.y;
             float distance = lookDirection.magnitude;
 
-            if (distance < 0.7f)
+            if (distance < MinReactionDistance)
                 throw new InvalidOperationException(nameof(distance));
 
             return Vector3.SignedAngle(Vector3.forward, lookDirection, Vector3.up);

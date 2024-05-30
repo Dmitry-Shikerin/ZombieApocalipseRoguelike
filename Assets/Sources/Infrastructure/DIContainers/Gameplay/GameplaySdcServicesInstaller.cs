@@ -22,7 +22,7 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
             Container.Bind<ILeaderboardInitializeService>().To<YandexLeaderboardInitializeService>().AsSingle();
             Container.Bind<ILeaderBoardScoreSetter>().To<YandexLeaderBoardScoreSetter>().AsSingle();
             Container.Bind<IPlayerAccountAuthorizeService>().To<PlayerAccountAuthorizeService>().AsSingle();
-            Container.Bind<ISdcInitializeService>().To<SdcInitializeService>().AsSingle();
+            Container.Bind<ISdkInitializeService>().To<SdkInitializeService>().AsSingle();
             Container.Bind<IStickyService>().To<StickyService>().AsSingle();
         }
     }

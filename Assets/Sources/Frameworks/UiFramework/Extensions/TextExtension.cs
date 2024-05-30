@@ -19,7 +19,7 @@ namespace Sources.Frameworks.UiFramework.Extensions
                 .Select(path => AssetDatabase.LoadAssetAtPath<LocalizationConfig>(path))
                 .ToList()
                 .FirstOrDefault()
-                .LocalizationIds;
+                ?.LocalizationIds;
 #else
             return new List<string>();
 #endif

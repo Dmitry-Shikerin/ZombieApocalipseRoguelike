@@ -2,10 +2,16 @@ using Sources.App.Core;
 using Sources.Infrastructure.Factories.App;
 using UnityEngine;
 
-public class Bootstrapper : MonoBehaviour
+namespace Sources.App.Bootstrap
 {
-    private AppCore _appCore;
+    public class Bootstrapper : MonoBehaviour
+    {
+        private void Awake()
+        {
+            AppCore appCore = FindObjectOfType<AppCore>();
 
-    private void Awake() =>
-        _appCore = FindObjectOfType<AppCore>() ?? new AppCoreFactory().Create();
+            if (appCore == null)
+                new AppCoreFactory().Create();
+        }
+    }
 }

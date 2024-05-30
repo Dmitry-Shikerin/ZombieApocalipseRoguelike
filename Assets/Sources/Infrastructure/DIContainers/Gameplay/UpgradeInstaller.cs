@@ -1,4 +1,5 @@
-﻿using Sources.Domain.Models.Upgrades;
+﻿using Sources.Domain.Models.Constants;
+using Sources.Domain.Models.Upgrades;
 using Sources.Domain.Models.Upgrades.Configs.Containers;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Upgrades.Controllers;
@@ -18,7 +19,7 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
         {
             Container
                 .Bind<UpgradeConfigContainer>()
-                .FromResource("Configs/Upgrades/Containers/UpgradeConfigContainer")
+                .FromResource(PrefabPath.UpgradeConfigContainer)
                 .AsSingle();
 
             Container.Bind<IUpgradeConfigCollectionService>().To<UpgradeConfigCollectionService>().AsSingle();

@@ -9,6 +9,10 @@ namespace Sources.Infrastructure.Services.PauseServices
 {
     public class PauseService : IPauseService
     {
+        private const float Delay = 0.05f;
+        
+        private readonly TimeSpan _daley = TimeSpan.FromSeconds(Delay);
+        
         public event Action PauseActivated;
 
         public event Action ContinueActivated;
@@ -90,8 +94,7 @@ namespace Sources.Infrastructure.Services.PauseServices
         {
             do
             {
-                await UniTask.Delay(
-                    TimeSpan.FromSeconds(0.05f), ignoreTimeScale: true, cancellationToken: cancellationToken);
+                await UniTask.Delay(_daley, ignoreTimeScale: true, cancellationToken: cancellationToken);
             }
             while (IsSoundPaused);
         }

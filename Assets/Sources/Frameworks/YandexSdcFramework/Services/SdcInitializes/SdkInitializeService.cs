@@ -5,7 +5,7 @@ using Sources.Frameworks.YandexSdcFramework.ServicesInterfaces.SdcInitializeServ
 
 namespace Sources.Frameworks.YandexSdcFramework.Services.SdcInitializes
 {
-    public class SdcInitializeService : ISdcInitializeService
+    public class SdkInitializeService : ISdkInitializeService
     {
         public void GameReady()
         {

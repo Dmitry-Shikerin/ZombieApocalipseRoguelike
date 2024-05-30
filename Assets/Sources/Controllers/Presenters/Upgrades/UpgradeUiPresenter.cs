@@ -1,4 +1,5 @@
 ﻿using System;
+using Sources.Domain.Models.Constants;
 using Sources.DomainInterfaces.Models.Upgrades;
 using Sources.InfrastructureInterfaces.Services.Upgrades;
 using Sources.PresentationsInterfaces.UI.Images;
@@ -45,7 +46,7 @@ namespace Sources.Controllers.Presenters.Upgrades
         {
             if (_upgrader.CurrentLevel == _upgrader.MaxLevel)
             {
-                _upgradeUi.SetPriceNextUpgrade("Max");
+                _upgradeUi.SetPriceNextUpgrade(UpgradeConst.Max);
 
                 return;
             }

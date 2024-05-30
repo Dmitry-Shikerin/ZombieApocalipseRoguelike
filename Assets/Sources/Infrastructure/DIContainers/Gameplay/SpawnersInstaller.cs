@@ -1,4 +1,5 @@
-﻿using Sources.Domain.Models.Spawners.Configs.Containers;
+﻿using Sources.Domain.Models.Constants;
+using Sources.Domain.Models.Spawners.Configs.Containers;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Spawners;
 using Sources.Infrastructure.Factories.Views.Spawners;
 using Sources.Infrastructure.Services.EnemySpawners;
@@ -13,7 +14,7 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
         {
             Container
                 .Bind<EnemySpawnerConfigContainer>()
-                .FromResource("Configs/EnemySpawners/Containers/EnemySpawnerConfigContainer")
+                .FromResource(PrefabPath.EnemySpawnerConfigContainer)
                 .AsSingle();
 
             Container.Bind<IEnemySpawnerConfigCollectionService>()

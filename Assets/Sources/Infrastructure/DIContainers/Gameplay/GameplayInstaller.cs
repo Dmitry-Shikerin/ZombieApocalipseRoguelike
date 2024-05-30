@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using Sources.Domain.Models.AudioSources;
+using Sources.Domain.Models.Constants;
 using Sources.Frameworks.UiFramework.Domain.Localizations.Configs;
 using Sources.Frameworks.UiFramework.Presentation.Views;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Scenes;
@@ -27,11 +28,11 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
         {
             Container
                 .Bind<AudioClipCollection>()
-                .FromResource("Configs/GameplayAudioClipContainer")
+                .FromResource(PrefabPath.GameplayAudioClipContainer)
                 .AsSingle();
             Container
                 .Bind<LocalizationConfig>()
-                .FromResource("Configs/Localizations/LocalizationConfig")
+                .FromResource(PrefabPath.LocalizationConfig)
                 .AsSingle();
 
             Container.BindInterfacesAndSelfTo<GameplayHud>().FromInstance(_gameplayHud).AsSingle();

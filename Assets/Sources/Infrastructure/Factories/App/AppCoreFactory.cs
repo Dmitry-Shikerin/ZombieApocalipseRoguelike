@@ -38,8 +38,6 @@ namespace Sources.Infrastructure.Factories.App
                 sceneContext.Container.Resolve<MainMenuSceneFactory>().Create(payload);
             sceneFactories[ModelId.Gameplay] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
-            sceneFactories["TestGameplay"] = (payload, sceneContext) =>
-                sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
             sceneFactories[ModelId.Gameplay2] = (payload, sceneContext) =>
                 sceneContext.Container.Resolve<GameplaySceneFactory>().Create(payload);
             sceneFactories[ModelId.Gameplay3] = (payload, sceneContext) =>

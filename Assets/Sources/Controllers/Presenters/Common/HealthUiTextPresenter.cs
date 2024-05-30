@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading;
 using Sirenix.Utilities;
+using Sources.Domain.Models.Constants;
 using Sources.DomainInterfaces.Models.Healths;
 using Sources.PresentationsInterfaces.UI.Texts;
 using Sources.PresentationsInterfaces.Views.Common;
-using UnityEngine;
 
 namespace Sources.Controllers.Presenters.Common
 {
@@ -45,14 +45,14 @@ namespace Sources.Controllers.Presenters.Common
                 _cancellationTokenSource.Cancel();
 
                 _healthUiText.DamageTexts.ForEach(text => text.SetIsHide(true));
-                _healthUiText.DamageTexts.ForEach(text => text.SetTextColor(Color.clear));
+                _healthUiText.DamageTexts.ForEach(text => text.SetTextColor(DamageTextConst.HiddenColor));
 
                 _cancellationTokenSource = new CancellationTokenSource();
                 uiText = _healthUiText.DamageTexts
                     .FirstOrDefault(text => text.IsHide);
             }
 
-            uiText.SetTextColor(Color.red);
+            uiText.SetTextColor(DamageTextConst.ShowedColor);
             uiText.SetIsHide(false);
             uiText.SetText(damage.ToString());
             uiText.SetClearColorAsync(_cancellationTokenSource.Token);

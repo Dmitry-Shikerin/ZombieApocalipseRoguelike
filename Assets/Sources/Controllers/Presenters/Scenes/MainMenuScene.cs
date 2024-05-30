@@ -18,7 +18,7 @@ namespace Sources.Controllers.Presenters.Scenes
         private readonly ILoadSceneService _loadSceneService;
         private readonly IVolumeService _volumeService;
         private readonly ILocalizationService _localizationService;
-        private readonly ISdcInitializeService _sdcInitializeService;
+        private readonly ISdkInitializeService _sdkInitializeService;
         private readonly IStickyService _stickyService;
         private readonly IAudioService _audioService;
         private readonly IFocusService _focusService;
@@ -29,7 +29,7 @@ namespace Sources.Controllers.Presenters.Scenes
             IVolumeService volumeService,
             ILocalizationService localizationService,
             CurtainView curtainView,
-            ISdcInitializeService sdcInitializeService,
+            ISdkInitializeService sdkInitializeService,
             IStickyService stickyService,
             IAudioService audioService,
             IFocusService focusService)
@@ -37,7 +37,7 @@ namespace Sources.Controllers.Presenters.Scenes
             _loadSceneService = loadSceneService ?? throw new ArgumentNullException(nameof(loadSceneService));
             _volumeService = volumeService ?? throw new ArgumentNullException(nameof(volumeService));
             _localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
-            _sdcInitializeService = sdcInitializeService ?? throw new ArgumentNullException(nameof(sdcInitializeService));
+            _sdkInitializeService = sdkInitializeService ?? throw new ArgumentNullException(nameof(sdkInitializeService));
             _stickyService = stickyService ?? throw new ArgumentNullException(nameof(stickyService));
             _audioService = audioService ?? throw new ArgumentNullException(nameof(audioService));
             _focusService = focusService ?? throw new ArgumentNullException(nameof(focusService));
@@ -80,8 +80,8 @@ namespace Sources.Controllers.Presenters.Scenes
             if (payload.CanFromGameplay)
                  return;
 
-            _sdcInitializeService.EnableCallbackLogging();
-            await _sdcInitializeService.Initialize();
+            _sdkInitializeService.EnableCallbackLogging();
+            await _sdkInitializeService.Initialize();
         }
 
         private UniTask GameReady(IScenePayload payload)
@@ -90,7 +90,7 @@ namespace Sources.Controllers.Presenters.Scenes
                 return UniTask.CompletedTask;
 
             _stickyService.ShowSticky();
-            _sdcInitializeService.GameReady();
+            _sdkInitializeService.GameReady();
 
             return UniTask.CompletedTask;
         }

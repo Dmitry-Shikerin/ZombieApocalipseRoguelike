@@ -1,4 +1,5 @@
-﻿using Sources.Domain.Models.Upgrades.Configs;
+﻿using Sources.Domain.Models.Constants;
+using Sources.Domain.Models.Upgrades.Configs;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Abilities;
 using Sources.Infrastructure.Factories.Controllers.Presenters.Weapons;
 using Sources.Infrastructure.Factories.Views.Abilities;
@@ -20,7 +21,7 @@ namespace Sources.Infrastructure.DIContainers.Gameplay
         {
             Container
                 .Bind<SawLauncherAbilityUpgradeMap>()
-                .FromResource("Configs/Upgrades/SawLauncherAbilityUpgradeMap")
+                .FromResource(PrefabPath.SawLauncherAbilityUpgradeMap)
                 .AsSingle();
 
             Container.Bind<IObjectPool<BulletView>>().To<ObjectPool<BulletView>>().AsSingle();

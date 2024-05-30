@@ -39,7 +39,7 @@ namespace Sources.Controllers.Presenters.Enemies.Base.States
                 return;
 
             Vector3 spawnPosition = _enemyView.Position;
-            spawnPosition.y += 1f;
+            spawnPosition.y += RewardItemConst.AdjustedSpawnPosition;
 
             _killEnemyCounter.IncreaseKillCount();
             _explosionBodyBloodySpawnService.Spawn(spawnPosition);

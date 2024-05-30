@@ -12,5 +12,11 @@
         public const string Bear = "Views/BearView";
         public const string Character = "Views/CharacterView";
         public const string SawLauncherAbility = "Views/SawLauncherAbilityView";
+        public const string GameplayAudioClipContainer = "Configs/GameplayAudioClipContainer";
+        public const string MainMenuAudioClipContainer = "Configs/MainMenuAudioClipContainer";
+        public const string LocalizationConfig = "Configs/Localizations/LocalizationConfig";
+        public const string EnemySpawnerConfigContainer = "Configs/Spawners/Containers/EnemySpawnerConfigContainer";
+        public const string UpgradeConfigContainer = "Configs/Upgrades/Containers/UpgradeConfigContainer";
+        public const string SawLauncherAbilityUpgradeMap = "Configs/Upgrades/SawLauncherAbilityUpgradeMap";
     }
 }

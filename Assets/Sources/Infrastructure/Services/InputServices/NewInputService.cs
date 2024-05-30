@@ -62,7 +62,8 @@ namespace Sources.Infrastructure.Services.InputServices
             lookDirection = Vector3.zero;
             Ray cameraPosition = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(cameraPosition, out RaycastHit raycastHit, float.MaxValue, Layer.Plane) == false)
+            if (Physics.Raycast(
+                    cameraPosition, out RaycastHit raycastHit, float.MaxValue, Layer.Plane) == false)
                 return false;
 
             lookDirection = raycastHit.point;
