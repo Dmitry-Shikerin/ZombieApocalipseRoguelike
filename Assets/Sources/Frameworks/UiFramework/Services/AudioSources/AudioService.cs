@@ -32,18 +32,18 @@ namespace Sources.Frameworks.UiFramework.Services.AudioSources
         public void Exit() =>
             _volumeService.MusicVolumeChanged -= OnVolumeChanged;
 
-        private void OnVolumeChanged()
-        {
-            foreach (IUiAudioSource audioSource in _audioSources.Values)
-                audioSource.SetVolume(_volumeService.MusicVolume);
-        }
-
         public void Play(AudioSourceId id)
         {
             if (_audioSources.ContainsKey(id) == false)
                 throw new KeyNotFoundException(id.ToString());
 
             _audioSources[id].Play();
+        }
+
+        private void OnVolumeChanged()
+        {
+            foreach (IUiAudioSource audioSource in _audioSources.Values)
+                audioSource.SetVolume(_volumeService.MusicVolume);
         }
     }
 }
